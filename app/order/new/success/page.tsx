@@ -21,6 +21,7 @@ export default function SuccessfulOrder() {
       <div className="flex flex-col gap-5 justify-center items-center">
       <p className="w-64">Your order will be delivered at <strong> order destination </strong></p>
       <Link href="/track/253"><Button className="border border-slate-300 h-14 w-60 flex gap-4">Track your package</Button></Link>
+      <Link href="/"><Button className="border border-slate-300 h-14 w-60 flex gap-4" variant='outline'>Home Page</Button></Link>
       
       
 
