@@ -1,14 +1,9 @@
-
-import {Progress} from "@/components/ui/progress";
-
-
-
 import { MdDeliveryDining } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineSchedule } from "react-icons/ai";
 
 
-export default function TrackDelivery () {
+export default function Order () {
     return (
         <main className="flex min-h-screen flex-col items-center gap-10 ">
         <div className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
