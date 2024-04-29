@@ -1,9 +1,11 @@
 import { MdDeliveryDining } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineSchedule } from "react-icons/ai";
+import Link from "next/link";
 
 
 export default function Order () {
+
     return (
         <main className="flex min-h-screen flex-col items-center gap-10 ">
         <div className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
@@ -14,7 +16,8 @@ export default function Order () {
            
            <div className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px]">
             <div className="flex gap-6">
-               <div className="flex flex-col justify-center items-center border border-slate-300 w-40 h-32 mt-10 rounded-xl">
+               <Link href='/order/new'>
+               <div className="flex flex-col justify-center items-center border border-slate-300 w-40 h-32 mt-10 rounded-xl bg-[#f7e7a1] hover:bg-[#f7e490] cursor-pointer">
                     <span className="text-4xl">
                         <MdDeliveryDining/>
                     </span>
@@ -27,8 +30,9 @@ export default function Order () {
                         </p>
                     </span>
                </div>
-
-               <div className="flex flex-col justify-center items-center border border-slate-300 w-40 h-32 mt-10 rounded-xl">
+               </Link>
+               <Link href="/order/new">
+               <div className="flex flex-col justify-center items-center border border-slate-300 w-40 h-32 mt-10 rounded-xl bg-blue-100 hover:bg-[#c6deff] cursor-pointer">
                     <span className="text-4xl">
                         <TbTruckDelivery/>
                     </span>
@@ -41,9 +45,10 @@ export default function Order () {
                         </p>
                     </span>
                </div>
-            
+               </Link>
             </div>
-            <div className="flex flex-col justify-center items-center border border-slate-300 w-[340px] h-32  rounded-xl">
+            <Link href="/order/custom-order">
+            <div className="flex flex-col justify-center items-center border border-slate-300 w-[340px] h-32  rounded-xl bg-teal-100 hover:bg-[#baffed]">
                     <span className="text-4xl">
                         <AiOutlineSchedule/>
                     </span>
@@ -56,6 +61,7 @@ export default function Order () {
                         </p>
                     </span>
                </div>
+               </Link>
             </div> 
         </main>
     )

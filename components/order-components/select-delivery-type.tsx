@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import {
   Select,
   SelectContent,
@@ -10,17 +8,20 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+
+
 export function SelectDeliveryType() {
+    
   return (
     <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+      <SelectTrigger className="w-full h-14">
+        <SelectValue placeholder="Same day" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectItem value="same day">Same day</SelectItem>
-          <SelectItem value="tomorrow">Tomorrow</SelectItem>
-          <SelectItem value="custom">Custom</SelectItem>
+          <SelectItem value="tomorrow">Next day</SelectItem>
+          
         </SelectGroup>
       </SelectContent>
     </Select>
