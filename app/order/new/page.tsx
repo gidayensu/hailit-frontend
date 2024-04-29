@@ -2,6 +2,7 @@
 import { SelectDeliveryType } from "@/components/order-components/select-delivery-type";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function NewOrder() {
   return (
@@ -71,7 +72,7 @@ export default function NewOrder() {
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className="mb-4 text-lg font-medium">Additional Information</h3>
-                <Input  type="text" className="h-32"/>
+                <Textarea  className="h-32"/>
             </div>
             
 

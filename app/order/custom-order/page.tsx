@@ -14,19 +14,19 @@ export default function CustomOrder() {
           <p className="text-lg">Schedule your order</p>
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] p-10">
+        <div className="flex flex-col justify-center items-center bg-white w-full -mt-20 rounded-tr-[50px] p-10">
           
           <form className="w-full space-y-6">
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Pickup Date</h3>
+                <h3 className="text-md font-medium">Pickup Date</h3>
                 <SelectDate />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Delivery Type</h3>
+                <h3 className="text-md font-medium">Delivery Type</h3>
                 <SelectDeliveryType />
             </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Pickup Location</h3>
+                <h3 className="text-md font-medium">Pickup Location</h3>
                 <Input
                   type="text"
                   placeholder="Enter location for pickup"
@@ -34,7 +34,7 @@ export default function CustomOrder() {
                 />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Pickup Contact</h3>
+                <h3 className="text-md font-medium">Pickup Contact</h3>
                 <Input
                   type="text"
                   placeholder="Enter number to call for pickup"
@@ -43,7 +43,7 @@ export default function CustomOrder() {
             
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">
+              <h3 className="text-md font-medium">
                 Destination / Drop off
               </h3>
               <Input
@@ -53,7 +53,7 @@ export default function CustomOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">Sender Number</h3>
+              <h3 className="text-md font-medium">Sender Number</h3>
               <Input
                 type="number"
                 placeholder="Enter number of sender"
@@ -61,7 +61,7 @@ export default function CustomOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">Receiver Number</h3>
+              <h3 className="text-md font-medium">Receiver Number</h3>
               <Input
                 type="number"
                 placeholder="Enter number of recipient"
@@ -69,11 +69,11 @@ export default function CustomOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Upload Product Image (optional)</h3>
+                <h3 className="text-md font-medium">Upload Product Image (optional)</h3>
                 <Input id="picture" type="file" />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Additional Information</h3>
+                <h3 className="text-md font-medium">Additional Information</h3>
                 <Input  type="text" className="h-32"/>
             </div>
             
