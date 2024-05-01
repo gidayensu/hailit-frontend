@@ -19,7 +19,7 @@ export default function Profile() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center gap-10 ">
+      <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <div className="flex  items-center justify-center gap-5 w-full h-80 bg-slate-800  p-4 text-white ">
           <div className="flex items-center justify-center">
             <span className="bg-gradient-to-r from-cyan-500 to-blue-500 w-28 h-28 rounded-full"></span>
