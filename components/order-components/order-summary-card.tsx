@@ -31,7 +31,7 @@ export default function OrderSummaryCard () {
           />
           <span className="flex items-center gap-2 -ml-3">
             <MdOutlineLocationOn className="text-2xl" />
-            <p className="font-bold">Pickup Location</p>
+            <p className="font-bold">Ama Saman Station</p>
           </span>
         </div>
 

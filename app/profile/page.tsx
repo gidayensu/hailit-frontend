@@ -54,14 +54,14 @@ export default function Profile() {
             </span>
           </div>
             {currentDeliveries && 
-            <div className="w-full">
+            <div className="flex flex-col w-full gap-4">
             <OrderSummaryCard/>       
             <OrderSummaryCard/>       
             <OrderSummaryCard/>       
             </div>}
 
             {!currentDeliveries && 
-            <div className="w-full">
+            <div className="flex flex-col w-full gap-4">
             <OrderSummaryCard/>       
                   
             </div>}
