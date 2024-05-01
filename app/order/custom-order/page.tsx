@@ -1,9 +1,12 @@
 "use client";
 
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SelectDate } from "@/components/order-components/select-date";
 import { SelectDeliveryType } from "@/components/order-components/select-delivery-type";
+
+
 
 export default function CustomOrder() {
   return (
@@ -74,7 +77,7 @@ export default function CustomOrder() {
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className="text-md font-medium">Additional Information</h3>
-                <Input  type="text" className="h-32"/>
+                <Textarea  className="h-32"/>
             </div>
             
 
