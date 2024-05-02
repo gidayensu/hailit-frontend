@@ -3,28 +3,30 @@ import { SelectDeliveryType } from "@/components/order-components/select-deliver
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import MidContent from "@/components/common/mid-content";
+import TopContent from "@/components/common/top-content";
 
 export default function NewOrder() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
-        <div className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
+        <TopContent className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
           <span className="text-5xl font-bold ">Delivery details</span>
           <p className="text-lg">Enter details of your package</p>
-        </div>
+        </TopContent>
 
-        <div className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] p-10">
+        <MidContent className=" p-10 mb-20">
           <form className="w-full space-y-6">
 
              <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Delivery Type</h3>
+                <h3 className=" text-md font-medium">Delivery Type</h3>
                 <SelectDeliveryType
                 />
             
             </div>
 
               <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Pickup Location</h3>
+                <h3 className=" text-md font-medium">Pickup Location</h3>
                 <Input
                   type="text"
                   placeholder="Enter location for pickup"
@@ -32,7 +34,7 @@ export default function NewOrder() {
                 />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Pickup Contact</h3>
+                <h3 className=" text-md font-medium">Pickup Contact</h3>
                 <Input
                   type="text"
                   placeholder="Enter number to call for pickup"
@@ -41,7 +43,7 @@ export default function NewOrder() {
             
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">
+              <h3 className=" text-md font-medium">
                 Destination / Drop off
               </h3>
               <Input
@@ -51,7 +53,7 @@ export default function NewOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">Sender Number</h3>
+              <h3 className=" text-md font-medium">Sender Number</h3>
               <Input
                 type="number"
                 placeholder="Enter number of sender"
@@ -59,7 +61,7 @@ export default function NewOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <h3 className="mb-4 text-lg font-medium">Receiver Number</h3>
+              <h3 className=" text-md font-medium">Receiver Number</h3>
               <Input
                 type="number"
                 placeholder="Enter number of recipient"
@@ -67,11 +69,11 @@ export default function NewOrder() {
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Upload Product Image (optional)</h3>
+                <h3 className=" text-md font-medium">Upload Product Image (optional)</h3>
                 <Input id="picture" type="file" />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
-                <h3 className="mb-4 text-lg font-medium">Additional Information</h3>
+                <h3 className=" text-md font-medium">Additional Information</h3>
                 <Textarea  className="h-32"/>
             </div>
             
@@ -80,8 +82,9 @@ export default function NewOrder() {
               Proceed
             </Button>
           </form>
-        </div>
+        </MidContent>
       </main>
     </>
   );
 }
+

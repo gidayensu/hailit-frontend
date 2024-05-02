@@ -1,5 +1,4 @@
 import { Separator } from "@/components/ui/separator";
-import { Progress } from "@/components/ui/progress";
 import { UserAvatar } from "@/components/common/user-avatar";
 import { PiPackageThin } from "react-icons/pi";
 import { CiDeliveryTruck } from "react-icons/ci";
@@ -7,72 +6,70 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
 
+
+import TopContent from "@/components/common/top-content";
+import MidContent from "@/components/common/mid-content";
+
 export default function TrackDelivery() {
     const status = 'delivered'
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 mb-5">
-      <div className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
+      <TopContent className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
         <span className="text-5xl font-bold ">Package</span>
         <p className="text-3xl">#235-ASF5</p>
-      </div>
+      </TopContent>
 
-      <div className="flex flex-col items-center gap-10 bg-white w-full -mt-20 rounded-tr-[50px]">
-        <div className="flex text-sm w-[300px] items-center justify-center mt-10 gap-1">
-          <div className="flex flex-col gap-2 w-full items-start ">
-          <div className="flex gap-1 items-center justify-center">
-            <div className="bg-slate-800 h-10 w-10 rounded-full flex items-center justify-center">
-                  <PiPackageThin className="text-[20px] text-slate-50" />
+      <MidContent className="">
+        <div className="flex text-sm w-[300px] items-center justify-center mt-10 ">
+        <div className="flex flex-col gap-2 w-full items-start ">
+          <div className="flex gap-2 items-center justify-start w-[82px] ">
+            <div className="bg-slate-800 dark:bg-slate-50 h-10 w-10 rounded-full flex items-center justify-center">
+                  <PiPackageThin className="text-[20px] text-slate-50 dark:text-[#1e1e1e]" />
             </div>
-                <Progress
-                  value={100}
-                  className="w-12 h-2 border border-slate-800"
-                />
+                <Separator className="w-1/3 bg-slate-800 dark:bg-slate-50"/>
           </div>
           
             <p className="-ml-1">Booked</p>
             
           </div>
           <div className="flex flex-col gap-2 w-full items-start ">
-          <div className="flex gap-1 items-center justify-center">
-            <div className="border border-slate-400 h-10 w-10 rounded-full flex items-center justify-center">
-                  <PiPackageThin className="text-[20px] text-slate-50" />
+          <div className="flex gap-2 items-center justify-start w-[82px] ">
+            <div className="bg-slate-800 dark:bg-slate-50 h-10 w-10 rounded-full flex items-center justify-center">
+                  <PiPackageThin className="text-[20px] text-slate-50 dark:text-[#1e1e1e]" />
             </div>
-                <Progress
-                  value={0}
-                  className="w-12 h-2 border border-slate-800"
-                />
+                <Separator className="w-1/3 bg-slate-800 dark:bg-slate-50"/>
           </div>
           
-            <p className="-ml-1">Pickup</p>
+            <p className="-ml-1">Booked</p>
             
           </div>
-
           <div className="flex flex-col gap-2 w-full items-start ">
-          <div className="flex gap-1 items-center justify-center">
-            <div className="border border-slate-400 h-10 w-10 rounded-full flex items-center justify-center">
-                  <PiPackageThin className="text-[20px] text-slate-50" />
+          <div className="flex gap-2 items-center justify-start w-[82px] ">
+            <div className="bg-slate-800 dark:bg-slate-50 h-10 w-10 rounded-full flex items-center justify-center">
+                  <PiPackageThin className="text-[20px] text-slate-50 dark:text-[#1e1e1e]" />
             </div>
-                <Progress
-                  value={0}
-                  className="w-12 h-2 border border-slate-800"
-                />
+                <Separator className="w-1/3 bg-slate-800 dark:bg-slate-50"/>
           </div>
           
-            <p className="-ml-4">On the way</p>
-                        
+            <p className="-ml-1">Booked</p>
+            
           </div>
-
+          
           <div className="flex flex-col gap-2 w-full items-start ">
-          <div className="flex gap-1 items-center justify-center">
-            <div className="border border-slate-400 h-10 w-10 rounded-full flex items-center justify-center">
-                  <PiPackageThin className="text-[20px] text-slate-50" />
+          <div className="flex gap-2 items-center justify-start w-[82px] ">
+            <div className="bg-slate-800 dark:bg-slate-50 h-10 w-10 rounded-full flex items-center justify-center">
+                  <PiPackageThin className="text-[20px] text-slate-50 dark:text-[#1e1e1e]" />
             </div>
                 
           </div>
           
-            <p className="-ml-3">Delivered</p>
-                        
-          </div>      
+            <p className="-ml-1">Booked</p>
+            
+          </div>
+
+          
+        
+
 
        
         </div>
@@ -156,7 +153,7 @@ export default function TrackDelivery() {
           </div>
         </div>
         </div>
-      </div>
+      </MidContent>
     </main>
   );
 }

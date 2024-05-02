@@ -13,7 +13,7 @@ export function BottomBar() {
   console.log('path order', path==='/order')
   
   return (
-    <div className="fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 border-t-2 border-t-slate-500 dark:border-t-2 dark:border-t-slate-400 gap-10 w-full bg-white dark:bg-slate-800 ">
+    <div className="fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 border-t-2 border-t-slate-500 dark:border-t-2 dark:border-t-slate-400 gap-10 w-full bg-white dark:bg-[#121212] ">
     
         <Link href='/'>
         <div className="flex flex-col justify-center items-center">

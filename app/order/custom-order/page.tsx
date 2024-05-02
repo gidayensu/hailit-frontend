@@ -5,19 +5,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SelectDate } from "@/components/order-components/select-date";
 import { SelectDeliveryType } from "@/components/order-components/select-delivery-type";
-
+import TopContent from "@/components/common/top-content";
+import MidContent from "@/components/common/mid-content";
 
 
 export default function CustomOrder() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
-        <div className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
+        <TopContent className="">
           <span className="text-5xl font-bold">Custom Order</span>
           <p className="text-lg">Schedule your order</p>
-        </div>
+        </TopContent>
 
-        <div className="flex flex-col justify-center items-center bg-white w-full -mt-20 rounded-tr-[50px] p-10">
+        <MidContent className=" p-10 mb-20">
           
           <form className="w-full space-y-6">
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -81,11 +82,11 @@ export default function CustomOrder() {
             </div>
             
 
-            <Button type="submit" className="w-full h-14">
+            <Button variant='default' type="submit" className="w-full h-14">
               Proceed
             </Button>
           </form>
-        </div>
+        </MidContent>
       </main>
     </>
   );
