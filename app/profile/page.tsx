@@ -58,14 +58,17 @@ export default function Profile() {
           </div>
             {currentDeliveries && 
             <div className="flex flex-col w-full gap-4">
-            <OrderSummaryCard/>       
-            <OrderSummaryCard/>       
-            <OrderSummaryCard/>       
+            <OrderSummaryCard deliveryStatus="Delivering"/>
+            <OrderSummaryCard deliveryStatus="Delivered"/>       
+            <OrderSummaryCard deliveryStatus="Picked up"/>       
+            <OrderSummaryCard deliveryStatus="Cancelled"/> 
+            
             </div>}
 
             {!currentDeliveries && 
             <div className="flex flex-col w-full gap-4">
-            <OrderSummaryCard/>       
+            <OrderSummaryCard deliveryStatus="Delivered"/>
+            <OrderSummaryCard deliveryStatus="Cancelled"/>        
                   
             </div>}
             

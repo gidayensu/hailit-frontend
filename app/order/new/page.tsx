@@ -11,7 +11,7 @@ export default function NewOrder() {
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
         <TopContent className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-          <span className="text-5xl font-bold ">Delivery details</span>
+          <span className="text-5xl font-bold ">Package details</span>
           <p className="text-lg">Enter details of your package</p>
         </TopContent>
 
