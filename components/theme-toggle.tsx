@@ -29,8 +29,8 @@ export function ThemeToggle() {
   return (
 
        
-        <Button size="icon" variant='outline' onClick={theme} className="border-none absolute bg-none">
-          <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Button size="icon" variant='empty' onClick={theme} className="border-none  bg-inherit w-full fixed">
+          <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-white" />
           <MoonIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         </Button>
         
