@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Map, Marker } from "pigeon-maps";
 import { Input } from "./ui/input";
 
+type UserLocation = [number, number] | null;
 export default function MyMap() {
-  const [userLocation, setUserLocation] = useState(null); // Initialize as null
+  const [userLocation, setUserLocation] = useState<UserLocation>(null); // Initialize as null
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
