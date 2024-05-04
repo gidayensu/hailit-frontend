@@ -7,7 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export async function fetchMapData(searchQuery: string): Promise<GeoData | null> {
-  const url = `https://nominatim.openstreetmap.org/search.php?q=${searchQuery}+Ghana&format=jsonv2`;
+  
+  const url = `https://nominatim.openstreetmap.org/search.php?street=${searchQuery}&country=Ghana&format=jsonv2`;
 
   try {
     const response = await fetch(url);
@@ -16,37 +17,31 @@ export async function fetchMapData(searchQuery: string): Promise<GeoData | null>
       throw new Error(`Error fetching map data: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log('data:', data)
+    const results = await response.json();
+    const returnedResults = results.filter((result:any)=>result.display_name !== 'Ghana');
 
-    // // Validate response data (optional):
+    
     // if (!Array.isArray(data) || data.length === 0) {
     //   console.warn(`No results found for search query: "${searchQuery}"`);
-    //   return null;  // Indicate no results found
+    //   return null;  
     // }
 
-    // Extract relevant data (assuming first result is desired):
-    const firstResult = data[0];
-    return {
-      latitude: parseFloat(firstResult.lat),
-      longitude: parseFloat(firstResult.lon),
-      displayName: firstResult.display_name,
-      // Add other relevant properties as needed
-    };
+    
+    
+    return returnedResults;
   } catch (error) {
     console.error('Error fetching map data:', error);
-    return null;  // Indicate error
+    return null; 
   }
 }
 
-// Interface for expected data structure:
+
 
 
 export async function reverseMapSearch(lat: string|number, lon:string|number): Promise<GeoData | null> {
-  console.log('this runs')
+  
   const url = `https://nominatim.openstreetmap.org/reverse.php?lat=${lat}&lon=${lon}&zoom=18&format=jsonv2`
-  console.log('url:::', url)
-  console.log('this is latitude:', lat)
+  
   try {
     const response = await fetch(url);
   
