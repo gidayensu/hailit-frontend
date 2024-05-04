@@ -40,7 +40,10 @@ export default function MyMap() {
     return locationName;
   };
 
-  const windowHeight = window.innerHeight; //determine the height of the screen/window
+  let windowHeight;
+if (typeof window !== 'undefined') {
+  windowHeight = window.innerHeight;
+} //determine the height of the screen/window
 
   //get the current location point of the user and determine the name of the user's location
   useEffect(() => {
