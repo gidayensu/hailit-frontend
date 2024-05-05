@@ -17,7 +17,24 @@ export default function NewOrder() {
 
         <MidContent className=" p-10 mb-20">
           <form className="w-full space-y-6">
-
+          <div className="flex gap-5 w-full">
+              <div className="flex flex-col justify-center items-center gap-2">
+                <div className="w-16 h-16 border rounded-lg"></div>
+                <p className="text-[12px]">Fastest</p>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <div className="w-16 h-16 border rounded-lg"></div>
+                <p className="text-[12px]">Motor</p>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <div className="w-16 h-16 border rounded-lg"></div>
+                <p className="text-[12px]">Car</p>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2">
+                <div className="w-16 h-16 border rounded-lg"></div>
+                <p className="text-[12px]">Intercity</p>
+              </div>
+            </div>
              <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-md font-medium">Delivery Type</h3>
                 <SelectDeliveryType

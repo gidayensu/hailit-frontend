@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Map, Marker } from "pigeon-maps";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { FaMapPin } from "react-icons/fa";
 import { fetchMapData, reverseMapSearch } from "@/lib/utils";
 
-import { Separator } from "./ui/separator";
-import { Skeleton } from "./ui/skeleton";
+import { Separator } from "../ui/separator";
+import { Skeleton } from "../ui/skeleton";
 
 type UserLocation = [number, number] | null;
 type UserLocationName = any;
@@ -33,10 +33,10 @@ export default function MyMap() {
     latitude: string | number,
     longitude: string | number
   ) => {
-    const locationData = await reverseMapSearch(latitude, longitude);
+    // const locationData = await reverseMapSearch(latitude, longitude);
 
-    const locationName = locationData?.displayName;
-    
+    // const locationName = locationData?.displayName;
+    const locationName = ''
     return locationName;
   };
 

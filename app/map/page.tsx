@@ -1,5 +1,5 @@
 'use client'
-import MyMap from '@/components/Map'
+import MyMap from '@/components/maps/Map'
 
 export default function Map(){
     return (
