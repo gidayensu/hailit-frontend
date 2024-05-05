@@ -33,10 +33,10 @@ export default function MyMap() {
     latitude: string | number,
     longitude: string | number
   ) => {
-    // const locationData = await reverseMapSearch(latitude, longitude);
+    const locationData = await reverseMapSearch(latitude, longitude);
 
-    // const locationName = locationData?.displayName;
-    const locationName = ''
+     const locationName = locationData?.displayName;
+    // const locationName = ''
     return locationName;
   };
 

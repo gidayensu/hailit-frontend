@@ -14,10 +14,10 @@ export function BottomBar() {
   const lightThemeClass = "h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0";
   const darkThemeClass = "absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100";
   const textClass = "text-[12px] font-bold";
-  const divClass = "flex flex-col justify-center items-center";
+  const divClass = "flex flex-col justify-center items-center ";
 
   return (
-    <main className="fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 border-t-2 border-t-slate-500 dark:border-t-2 dark:border-t-slate-400 gap-10 w-full bg-white dark:bg-[#121212] ">
+    <main className="fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-[#1e1e1e] ">
     
         <Link href='/'>
         <div className={divClass}>
@@ -31,7 +31,7 @@ export function BottomBar() {
         </div>
         </Link>
 
-        <Link href='/order'>
+        <Link href='/order/new'>
         <div className={divClass}>
         <Button variant={path.startsWith('/order') ? 'default' : 'secondary'}   className= "border-none">
           <LuPlus className={lightThemeClass} />
