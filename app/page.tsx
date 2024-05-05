@@ -71,7 +71,7 @@ export default function Home() {
               <div className="flex flex-col justify-center items-center gap-2 bg-white">
               <div className="flex flex-col items-center justify-center w-[113px] h-[90px] border rounded-lg p-3">
                 <RiTimer2Fill className="text-xl mb-2"/>
-                <p className="font-bold text-[11px]">Deliver Morro'</p>
+                <p className="font-bold text-[11px]">Deliver Morro&apos</p>
                 <p className="text-[14px]">from <strong>GHS 20</strong></p>
                 </div>
                 
