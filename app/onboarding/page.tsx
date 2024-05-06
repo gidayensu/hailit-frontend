@@ -4,9 +4,10 @@ import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 
 import { Separator } from "@/components/ui/separator";
-import { FiCheck } from "react-icons/fi";
+import { Input } from "@/components/ui/input";
+import { FiArrowLeft, FiCheck } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import userAnimation from "@/public/animations/user-animation.json"
+import customerAnimation from "@/public/animations/customer-animation.json"
 import riderAnimation from "@/public/animations/rider-animation.json"
 
 
@@ -40,23 +41,46 @@ export default function Onboarding (){
     })
 
     
-    const onBoardingStageHandler = (stage:'first' | 'second' | 'third')=> {
+    const onBoardingStageHandler = (stage:'first' | 'second' | 'third', prev:boolean)=> {
        
-        stage === 'first' ?
+        switch (stage) {
+        case  'first' :
+            if(!prev){
             setOnBoardingStage((prevState)=> ({
-                ...prevState, stageTwo: false
-            }))
-            :
-        
-        stage === 'second' ?
-            setOnBoardingStage((prevState)=> ({
-                ...prevState, stageTwo: true, stageThree: false
-            }))
-            :
+                        ...prevState, stageOne:true, stageTwo: true
+                        
+                    }))
+                } else {
+                    setOnBoardingStage((prevState)=> ({
+                        ...prevState, stageOne:true, stageTwo: false
+                        
+                    }))        
+                }
             
-            setOnBoardingStage((prevState)=> ({
-                ...prevState, stageThree: true
-            })) 
+            break;
+
+        case 'second' :
+            if(!prev){
+                setOnBoardingStage((prevState)=> ({
+                            ...prevState, stageOne:true, stageTwo: true, stageThree: true
+                            
+                        }))
+                    } else {
+                        setOnBoardingStage((prevState)=> ({
+                            ...prevState, stageOne:true, stageTwo: true, stageThree: false
+                            
+                        }))        
+                    }
+                
+
+            break;
+
+        case 'third' :
+            
+            router.push('/')
+            
+            break;
+       }
             
     }
 
@@ -74,6 +98,9 @@ export default function Onboarding (){
             dispatcher: true
         }))
     }
+
+    const inputAndLabeClass = 'w-full max-w-sm items-center';
+    const labelClass = "text-md font-medium mb-2";
 
     return(
         <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20 dark:bg-[#1e1e1e]">
@@ -97,26 +124,32 @@ export default function Onboarding (){
             {
                 onBoardingStage.stageOne && !onBoardingStage.stageTwo && !onBoardingStage.stageThree && (
                     <>
-                    <div className="grid grid-rows-4 grid-cols-1 w-full min-h-[400px] p-5 gap-5  justify-between">
-                        <div className="flex gap-4 p2 row-start-2 row-end-4">
-                            <div className="w-1/2 ">
-                                <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : 'bg-white'}`}>
+                    <div className="grid  grid-cols-1 w-full min-h-[300px] p-5 gap-2 justify-between -mt-3">
+                        <span className="flex flex-col items-start justify-start p-5 gap-2">
+                            <p className="font-bold text-2xl">Do you want to be a customer or a dispatcher? </p>
+                            <p>Hailit gives you a wholesome delivery experience!  </p>
+                        </span>
+                        <div className="flex gap-4 p-2 -mt-4 ">
+                            <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 ">
+                                <p>Customer</p>
+                                <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl  shadow-sm hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : 'bg-white'}`}>
                                 <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
-                                    <Lottie animationData={userAnimation} className="mt-4 object-contain"/>
+                                    <Lottie animationData={customerAnimation} className="mt-8 w-32 object-contain"/>
                                 </div>
-                                <span className={`flex items-center justify-center -mt-4  border border-rose-500  dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500'}`}>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500   h-8 w-8 rounded-full    ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
                                     <FiCheck/>
 
                                 </span>
                                     
                                 </div>
                             </div>
-                            <div className="w-1/2">
-                            <div onClick={()=>selectedUserRoleHandler('dispatcher')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.dispatcher ? 'bg-blue-500' : 'bg-white'}`}>
+                            <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 ">
+                                <p>Dispatcher</p>
+                            <div onClick={()=>selectedUserRoleHandler('dispatcher')} className={`flex flex-col items-center w-full h-52 rounded-xl shadow-sm  hover:bg-blue-500 ${selectedUserRole.dispatcher ? 'bg-blue-500' : 'bg-white'}`}>
                                 <div className="flex items-center justify-center w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
                                     <Lottie animationData={riderAnimation} className="w-96 object-contain -ml-8" />
                                 </div>
-                                <span className={`flex items-center justify-center -mt-4  border border-rose-500  dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500 h-8 w-8 rounded-full   ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
                                     <FiCheck/>
 
                                 </span>
@@ -125,32 +158,84 @@ export default function Onboarding (){
                             </div>
                             
                         </div>
-                        
+                        <Button className="w-full bottom-0 row-start-6" onClick={()=>{onBoardingStageHandler('first', false)}}>Next</Button>    
                     </div>
-                    <Button className="w-full bottom-0 row-start-7" onClick={()=>{onBoardingStageHandler('second')}}>Next</Button>
+                    
                     </>
                 )
             }
                 {/* Onboarding stage 2 */}
 {
                 onBoardingStage.stageOne && onBoardingStage.stageTwo && !onBoardingStage.stageThree &&(
-                    <div className="w-full">
-                        <div className="w-full p-5 flex items-center justify-center gap-4">
+                    <div className="grid  grid-cols-1 w-full min-h-[300px] p-5 gap-2 justify-between -mt-3">
+                        <span className="flex flex-col items-start justify-start p-5 gap-2">
+                            <p className="font-bold text-2xl">Enter your details </p>
+                            <p>Send packages with ease using Hailit  </p>
+                        </span>
+                        <form className="w-full space-y-6 p-5 -mt-5">
+                <div className="grid grid-cols-2 gap-4">
+                    <div className={inputAndLabeClass}>
+                        <h3 className="text-md font-medium mb-2">First Name</h3>
+                        <Input  type="text" placeholder="First Name" className="h-14" />
+                    </div>
+                    <div className={inputAndLabeClass}>
+                        <h3 className={labelClass}>Last Name</h3>
+                        <Input  type="text" placeholder="Last Name" className="h-14" />
+                    </div>
+              </div>
+                <div className={inputAndLabeClass}>
+                        <h3 className={labelClass}>Email</h3>
+                        <Input  type="email" placeholder="email@example.com" className="h-14" />
+                </div>
+                <div className={inputAndLabeClass}>
+                        <h3 className={labelClass}>Phone Number</h3>
+                        <Input  type="number" placeholder="024 123 4567" className="h-14" />
+                    </div>
+                <div>
+                
+              </div>
 
-                        
-                        <Button variant={'outline'} className="w-full" onClick={()=>{onBoardingStageHandler('first')}}>Previous</Button>
-                        <Button className="w-full" onClick={()=>{onBoardingStageHandler('third')}}>Next</Button>
+              
+            </form>
+
+                        <div className="w-full p-5 flex items-center justify-center gap-4 -mt-10">
+                        <Button variant={'outline'} className="w-1/3" onClick={()=>{onBoardingStageHandler('first', true)}}><FiArrowLeft/></Button>
+                        <Button className="w-full" onClick={()=>{onBoardingStageHandler('second', false)}}>Next</Button>
                         </div>
                     </div>
+                    
+                        
+                    
                 )
             }
             {/* Onboarding stage 3 */}
 {
                 onBoardingStage.stageOne && onBoardingStage.stageTwo && onBoardingStage.stageThree && (
-                    <div className="w-full">
+                    <div className="grid  grid-cols-1 w-full min-h-[300px] p-5 gap-2 justify-between -mt-3">
+                        <span className="flex flex-col items-start justify-start p-5 gap-2">
+                            <p className="font-bold text-2xl">Set your password </p>
+                            <p>Hailit is secure and safe!  </p>
+                        </span>
+                        <form className="w-full space-y-6 p-5"
+            >
+                
+                <div className={inputAndLabeClass}>
+                        <h3 className={labelClass}>Password</h3>
+                        <Input  type="password" placeholder="********" className="h-14" />
+                </div>
+                <div className={inputAndLabeClass}>
+                        <h3 className={labelClass}>Confirm Password</h3>
+                        <Input  type="password" placeholder="********" className="h-14" />
+                    </div>
+                <div>
+                
+              </div>
+
+              
+            </form>
                         <div className="w-full p-5 flex items-center justify-center gap-4">
-                        <Button variant={'outline'} className="w-full" onClick={()=>{onBoardingStageHandler('second')}}>Previous</Button>
-                        <Button className="w-full" onClick={()=>{onBoardingStageHandler('third')}}>Complete</Button>
+                        <Button variant={'outline'} className="w-1/3" onClick={()=>{onBoardingStageHandler('second', true)}}><FiArrowLeft/></Button>
+                        <Button className="w-full" onClick={()=>{onBoardingStageHandler('third', false)}}>Complete</Button>
                         </div>
                     </div>
                 )
