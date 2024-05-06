@@ -41,6 +41,7 @@ export default function Onboarding (){
 
     
     const onBoardingStageHandler = (stage:'first' | 'second' | 'third')=> {
+       
         stage === 'first' ?
             setOnBoardingStage((prevState)=> ({
                 ...prevState, stageTwo: false
@@ -76,7 +77,7 @@ export default function Onboarding (){
 
     return(
         <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20 dark:bg-[#1e1e1e]">
-            
+            {/* Onboarding stages 1 - 3 starts here */}
             <div className="flex items-center justify-center">
                 
                     <div className={`flex items-center justify-center h-10 w-10 border-2 border-slate-800 rounded-full text-sm ${onBoardingStage.stageOne ? 'bg-blue-500 text-white border-white': 'border-opacity-50'}`}>
@@ -92,13 +93,14 @@ export default function Onboarding (){
                     </div>
             </div>
 
+                {/* Onboarding stage 1 */}
             {
                 onBoardingStage.stageOne && !onBoardingStage.stageTwo && !onBoardingStage.stageThree && (
                     <>
                     <div className="grid grid-rows-4 grid-cols-1 w-full min-h-[400px] p-5 gap-5  justify-between">
                         <div className="flex gap-4 p2 row-start-2 row-end-4">
                             <div className="w-1/2 ">
-                                <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : ''}`}>
+                                <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : 'bg-white'}`}>
                                 <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
                                     <Lottie animationData={userAnimation} className="mt-4 object-contain"/>
                                 </div>
@@ -121,6 +123,7 @@ export default function Onboarding (){
                                     
                                 </div>
                             </div>
+                            
                         </div>
                         
                     </div>
@@ -128,7 +131,7 @@ export default function Onboarding (){
                     </>
                 )
             }
-
+                {/* Onboarding stage 2 */}
 {
                 onBoardingStage.stageOne && onBoardingStage.stageTwo && !onBoardingStage.stageThree &&(
                     <div className="w-full">
@@ -141,7 +144,7 @@ export default function Onboarding (){
                     </div>
                 )
             }
-
+            {/* Onboarding stage 3 */}
 {
                 onBoardingStage.stageOne && onBoardingStage.stageTwo && onBoardingStage.stageThree && (
                     <div className="w-full">
@@ -155,3 +158,4 @@ export default function Onboarding (){
         </main>
     )
 }
+
