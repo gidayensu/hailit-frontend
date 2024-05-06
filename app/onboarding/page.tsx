@@ -1,15 +1,24 @@
 'use client'
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Lottie from "lottie-react";
 
 import { Separator } from "@/components/ui/separator";
 import { FiCheck } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import userAnimation from "@/public/animations/user-animation.json"
+import riderAnimation from "@/public/animations/rider-animation.json"
+
 
 type Onboarding = {
     stageOne : boolean,
     stageTwo: boolean,
     stageThree: boolean
+}
+
+type SelectedUserRole = {
+    customer: boolean,
+    dispatcher: boolean
 }
 export default function Onboarding (){
     const router = useRouter();
@@ -19,13 +28,18 @@ export default function Onboarding (){
         router.push('/')
     }
 
-
     const [onBoardingStage, setOnBoardingStage] = useState<Onboarding>({
         stageOne: true,
         stageTwo: false,
         stageThree: false
     });
+    
+    const [selectedUserRole, setSelectedUserRole] = useState<SelectedUserRole>({
+        customer: false,
+        dispatcher: false
+    })
 
+    
     const onBoardingStageHandler = (stage:'first' | 'second' | 'third')=> {
         stage === 'first' ?
             setOnBoardingStage((prevState)=> ({
@@ -45,12 +59,24 @@ export default function Onboarding (){
             
     }
 
+    const selectedUserRoleHandler = (userRole: 'customer' | 'dispatcher')=> {
+        userRole === 'customer' ?
+        setSelectedUserRole(()=> ({
+            customer: true,
+            dispatcher: false
+        }))
+
+        :
+
+        setSelectedUserRole(()=> ({
+            customer: false,
+            dispatcher: true
+        }))
+    }
 
     return(
-        <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20">
-            <div className="text-lg">
-                <p>Welcome!</p>
-            </div>
+        <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20 dark:bg-[#1e1e1e]">
+            
             <div className="flex items-center justify-center">
                 
                     <div className={`flex items-center justify-center h-10 w-10 border-2 border-slate-800 rounded-full text-sm ${onBoardingStage.stageOne ? 'bg-blue-500 text-white border-white': 'border-opacity-50'}`}>
@@ -69,16 +95,30 @@ export default function Onboarding (){
             {
                 onBoardingStage.stageOne && !onBoardingStage.stageTwo && !onBoardingStage.stageThree && (
                     <>
-                    <div className="grid grid-rows-4 grid-cols-1 border border-red-500 w-full min-h-[400px] p-5 gap-5  justify-between">
-                        <div className="flex gap-4 p2 row-start-2 row-end-4 border border-green-500">
+                    <div className="grid grid-rows-4 grid-cols-1 w-full min-h-[400px] p-5 gap-5  justify-between">
+                        <div className="flex gap-4 p2 row-start-2 row-end-4">
                             <div className="w-1/2 ">
-                                <div className="w-full h-52 border border-blue-500">
-                                    s
+                                <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : ''}`}>
+                                <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
+                                    <Lottie animationData={userAnimation} className="mt-4 object-contain"/>
+                                </div>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500 bg-white dark:text-blue-500 h-8 w-8 rounded-full hover:bg-rose-500 hover:text-white dark:bg-slate-50 ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500'}`}>
+                                    <FiCheck/>
+
+                                </span>
+                                    
                                 </div>
                             </div>
                             <div className="w-1/2">
-                                <div className="w-full h-52 border border-blue-500">
-                                    s
+                            <div onClick={()=>selectedUserRoleHandler('dispatcher')} className={`flex flex-col items-center w-full h-52 rounded-xl border border-blue-500 hover:bg-blue-500 ${selectedUserRole.dispatcher ? 'bg-blue-500' : ''}`}>
+                                <div className="flex items-center justify-center w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
+                                    <Lottie animationData={riderAnimation} className="w-96 object-contain -ml-8" />
+                                </div>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500 bg-white dark:text-blue-500 h-8 w-8 rounded-full hover:bg-rose-500 hover:text-white dark:bg-slate-50 ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500'}`}>
+                                    <FiCheck/>
+
+                                </span>
+                                    
                                 </div>
                             </div>
                         </div>
