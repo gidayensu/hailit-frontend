@@ -104,7 +104,7 @@ export default function Onboarding (){
                                 <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
                                     <Lottie animationData={userAnimation} className="mt-4 object-contain"/>
                                 </div>
-                                <span className={`flex items-center justify-center -mt-4  border border-rose-500 bg-white dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500'}`}>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500  dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500'}`}>
                                     <FiCheck/>
 
                                 </span>
@@ -116,7 +116,7 @@ export default function Onboarding (){
                                 <div className="flex items-center justify-center w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
                                     <Lottie animationData={riderAnimation} className="w-96 object-contain -ml-8" />
                                 </div>
-                                <span className={`flex items-center justify-center -mt-4  border border-rose-500 bg-white dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
+                                <span className={`flex items-center justify-center -mt-4  border border-rose-500  dark:text-blue-500 h-8 w-8 rounded-full   dark:bg-slate-50 ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
                                     <FiCheck/>
 
                                 </span>
