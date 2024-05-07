@@ -15,7 +15,7 @@ export default function NewOrder() {
           <p className="text-lg">Enter details of your package</p>
         </TopContent>
 
-        <MidContent className=" p-10 mb-20">
+        <MidContent className="flex flex-col justify-start items-center p-10 mb-20">
           <form className="w-full space-y-6">
           <div className="flex gap-5 w-full">
               <div className="flex flex-col justify-center items-center gap-2">

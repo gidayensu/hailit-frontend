@@ -14,10 +14,10 @@ export default function TrackDelivery() {
     <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
       <TopContent className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
         <span className="text-5xl font-bold ">#235-ASF5</span>
-        <p className="text-lg font-bold">Food - Same Day - 12th May, 2024</p>
+        <p className="text-lg font-bold">12th May, 2024</p>
       </TopContent>
 
-      <MidContent className="space-y-2 p-5">
+      <MidContent className="flex flex-col justify-start items-center space-y-2 p-5">
 
         {/* T Status */}
         <div className="flex flex-col gap-2 mt-5">

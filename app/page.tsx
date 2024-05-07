@@ -1,6 +1,7 @@
-//next 
+'use client'
+//next + react
 import Link from "next/link";
-
+import { useState } from "react";
 //ui components + icons
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
@@ -16,15 +17,21 @@ import { AccountAccess } from "@/components/common/account-access";
 
 import Image from "next/image";
 
-type UserRole = 'vendor' | 'admin' | 'client' | 'dispatcher'
+type UserRole = 'vendor' | 'admin' | 'client' | 'dispatcher';
+type Deliveries = boolean;
 export default function Home() {
+  const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
+
+    const handleSelectedDeliveries = (status: boolean)=> {
+        setCurrentDeliveries(status)
+    }
   const userRole:UserRole = 'vendor';
   return (
     <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-[#121212] relative mb-20 ">
       {
         userRole==='vendor' && 
         <>
-        
+      {/* Location */}
         
           <div className=" flex flex-col items-center justify-center w-5/6 h-24 bg-gradient-to-r from-blue-700 to-blue-500 mt-10 rounded-lg text-white gap-1">
             <p className="flex items-center justify-center text-[14px] w-44 h-7 text-center">Pickup Location</p>
@@ -39,11 +46,11 @@ export default function Home() {
             </div>
           </div>
           
+          {/* Send a package */}
           
-          <div className="mt-5 flex flex-col w-full items-center justify-center  rounded-2xl gap-2">
-            
-  
-              
+          <div className="mt-5 flex flex-col w-full rounded-2xl gap-2">
+          <h2 className="font-bold text-xl ml-8"> Send a Package</h2>
+             <div className="flex flex-col w-full items-center justify-center gap-2">
             <Link href="/order/new">
             <Container className="flex justify-start items-center gap-3 w-[320px] h-32  rounded-xl  cursor-pointer">
                     <Image
@@ -66,6 +73,7 @@ export default function Home() {
                     
                </Container>
                </Link>
+                      </div>          
           </div>
           <div className="flex items-center justify-center gap-1 w-full">
               <div className="flex flex-col justify-center items-center gap-2 ">
@@ -94,16 +102,36 @@ export default function Home() {
               </div>
               
             </div>
+          {/* Previous Orders  */}
+          <div className="flex flex-col w-full p-7 rounded-2xl gap-2">
+          <h2 className="font-bold text-xl"> Your Deliveries</h2>
+          <div className="flex justify-between items-center w-full h-10 bg-white dark:bg-[#1e1e1e] border border-blue-500   rounded-xl p-2 gap-3 text-[13px] mb-4">
+            <span className={`flex items-center justify-center ${currentDeliveries ? 'bg-blue-500 text-white' : ' dark:bg-[#1e1e1e] dark:opacity-50'}  text-blue-500 dark:text-slate-100 w-1/2 h-8 -ml-1 text-center rounded-lg`}
+            onClick={()=>handleSelectedDeliveries(true)}
+            >
+              Current 
+            </span>
+            <span className={`flex items-center justify-center ${currentDeliveries ?  ' dark:bg-[#1e1e1e] dark:opacity-50' : 'text-white bg-blue-500'} text-blue-500 dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg`}
+            onClick={()=>handleSelectedDeliveries(false)}>
+              Previous
+            </span>
+          </div>
           
-          <div className="flex flex-col w-full p-5 rounded-2xl gap-2">
-            <p className="font-bold text-xl"> TODAY</p>
+            
+            { currentDeliveries &&(
+              <>
+            
           <OrderSummaryLessDetail deliveryStatus="Booked"/>
             <OrderSummaryLessDetail deliveryStatus="Picked up"/>
-            <p className="font-bold mt-4 text-xl "> THIS WEEK</p>
+            
             <OrderSummaryLessDetail deliveryStatus="Delivering"/>
-            <p className="font-bold mt-4 text-xl"> LONG TIME AGO</p>
+            </>
+            )}
+            {!currentDeliveries && (
+              <>
             <OrderSummaryLessDetail deliveryStatus="Delivered"/>
             <OrderSummaryLessDetail deliveryStatus="Cancelled"/>
+            </>)}
           </div>
           
         </>

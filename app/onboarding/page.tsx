@@ -108,7 +108,7 @@ export default function Onboarding (){
     const labelClass = "text-md font-medium mb-2";
 
     return(
-        <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20 dark:bg-[#1e1e1e]">
+        <main className="flex flex-col  items-center w-full max-h-screen p-5 bg-slate-50 mb-20 dark:bg-[#121212]">
             {/* Onboarding stages 1 - 3 starts here */}
             <div className="flex items-center justify-center">
                 
@@ -138,7 +138,7 @@ export default function Onboarding (){
                             <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 ">
                                 <p>Customer</p>
                                 <div onClick={()=>selectedUserRoleHandler('customer')} className={`flex flex-col items-center w-full h-52 rounded-xl  shadow-sm hover:bg-blue-500 ${selectedUserRole.customer ? 'bg-blue-500' : 'bg-white'}`}>
-                                <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
+                                <div className="w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#1e1e1e] object-contain">
                                     <Lottie animationData={customerAnimation} className="mt-8 w-32 object-contain"/>
                                 </div>
                                 <span className={`flex items-center justify-center -mt-4  border border-rose-500   h-8 w-8 rounded-full    ${selectedUserRole.customer ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
@@ -151,7 +151,7 @@ export default function Onboarding (){
                             <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 ">
                                 <p>Dispatcher</p>
                             <div onClick={()=>selectedUserRoleHandler('dispatcher')} className={`flex flex-col items-center w-full h-52 rounded-xl shadow-sm  hover:bg-blue-500 ${selectedUserRole.dispatcher ? 'bg-blue-500' : 'bg-white'}`}>
-                                <div className="flex items-center justify-center w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#121212] object-contain">
+                                <div className="flex items-center justify-center w-full h-44 rounded-xl border border-blue-500 bg-white dark:bg-[#1e1e1e] object-contain">
                                     <Lottie animationData={riderAnimation} className="w-96 object-contain -ml-8" />
                                 </div>
                                 <span className={`flex items-center justify-center -mt-4  border border-rose-500 h-8 w-8 rounded-full   ${selectedUserRole.dispatcher ? 'bg-rose-500 text-white' : 'text-rose-500 bg-white'}`}>
@@ -177,11 +177,11 @@ export default function Onboarding (){
                             <p className="font-bold text-2xl">Enter your details </p>
                             <p>Send packages with ease using Hailit  </p>
                         </span>
-                        <form action="w-full space-y-6 p-5">
+                        <form action="w-full space-y-6">
                             <CustomerProfileForm/>
                         </form>
                         
-                        <div className="w-full p-5 flex items-center justify-center gap-4 -mt-10">
+                        <div className="w-full p-5 flex items-center justify-center gap-4 ">
                         <Button variant={'outline'} className="w-1/3" onClick={()=>{onBoardingStageHandler('first', true)}}><FiArrowLeft/></Button>
                         <Button className="w-full" onClick={()=>{onBoardingStageHandler('second', false)}}>Next</Button>
                         </div>
