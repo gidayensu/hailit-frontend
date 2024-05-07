@@ -1,8 +1,13 @@
 'use client'
+//packages + react + next
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 
+//main components
+import CustomerProfileForm from "@/components/forms/customer-profile";
+
+//ui related components + icons
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { FiArrowLeft, FiCheck } from "react-icons/fi";
@@ -172,32 +177,10 @@ export default function Onboarding (){
                             <p className="font-bold text-2xl">Enter your details </p>
                             <p>Send packages with ease using Hailit  </p>
                         </span>
-                        <form className="w-full space-y-6 p-5 -mt-5">
-                <div className="grid grid-cols-2 gap-4">
-                    <div className={inputAndLabeClass}>
-                        <h3 className="text-md font-medium mb-2">First Name</h3>
-                        <Input  type="text" placeholder="First Name" className="h-14" />
-                    </div>
-                    <div className={inputAndLabeClass}>
-                        <h3 className={labelClass}>Last Name</h3>
-                        <Input  type="text" placeholder="Last Name" className="h-14" />
-                    </div>
-              </div>
-                <div className={inputAndLabeClass}>
-                        <h3 className={labelClass}>Email</h3>
-                        <Input  type="email" placeholder="email@example.com" className="h-14" />
-                </div>
-                <div className={inputAndLabeClass}>
-                        <h3 className={labelClass}>Phone Number</h3>
-                        <Input  type="number" placeholder="024 123 4567" className="h-14" />
-                    </div>
-                <div>
-                
-              </div>
-
-              
-            </form>
-
+                        <form action="w-full space-y-6 p-5">
+                            <CustomerProfileForm/>
+                        </form>
+                        
                         <div className="w-full p-5 flex items-center justify-center gap-4 -mt-10">
                         <Button variant={'outline'} className="w-1/3" onClick={()=>{onBoardingStageHandler('first', true)}}><FiArrowLeft/></Button>
                         <Button className="w-full" onClick={()=>{onBoardingStageHandler('second', false)}}>Next</Button>
@@ -216,8 +199,7 @@ export default function Onboarding (){
                             <p className="font-bold text-2xl">Set your password </p>
                             <p>Hailit is secure and safe!  </p>
                         </span>
-                        <form className="w-full space-y-6 p-5"
-            >
+                        <form className="w-full space-y-6 p-5">
                 
                 <div className={inputAndLabeClass}>
                         <h3 className={labelClass}>Password</h3>

@@ -1,12 +1,18 @@
+//next 
 import Link from "next/link";
+
+//ui components + icons
 import { Button } from "@/components/ui/button";
-import { AccountAccess } from "@/components/common/account-access";
+import Container from "@/components/ui/container";
 import { FcGoogle } from "react-icons/fc";
 import { FaChevronDown } from "react-icons/fa6";
-import OrderSummaryLessDetail from "@/components/order-components/order-summary-less-detail";
+
 import { RiTimerFlashFill, RiTimer2Fill, RiCalendarScheduleFill } from "react-icons/ri";
-import TopContent from "@/components/common/top-content";
-import MidContent from "@/components/common/mid-content";
+
+//main components
+import OrderSummaryLessDetail from "@/components/order-components/order-summary-less-detail";
+import { AccountAccess } from "@/components/common/account-access";
+
 
 import Image from "next/image";
 
@@ -39,7 +45,7 @@ export default function Home() {
   
               
             <Link href="/order/new">
-            <div className="flex justify-start items-center gap-3 border border-slate-300 w-[320px] h-32  rounded-xl bg-white hover:bg-[#baffed] dark:border-slate-100 dark:border-opacity-20 dark:bg-[rgb(30,30,30)] dark:hover:border-[#baffed] dark:text-slate-100  cursor-pointer">
+            <Container className="flex justify-start items-center gap-3 w-[320px] h-32  rounded-xl  cursor-pointer">
                     <Image
                       src='https://i.ibb.co/0rQk9tY/parcel-Image.png'
                       width={90}
@@ -58,32 +64,32 @@ export default function Home() {
                         </p>
                     </span>
                     
-               </div>
+               </Container>
                </Link>
           </div>
           <div className="flex items-center justify-center gap-1 w-full">
-              <div className="flex flex-col justify-center items-center gap-2 bg-white  dark:bg-[#1e1e1e]">
-              <div className="flex flex-col items-center justify-center w-[102px] h-[90px] border  dark:border-slate-50 rounded-lg p-3 dark:border-opacity-20">
+              <div className="flex flex-col justify-center items-center gap-2 ">
+              <Container className="flex flex-col items-center justify-center w-[102px] h-[90px]  rounded-lg p-3">
                 <RiTimerFlashFill className="text-xl mb-2  text-blue-600"/>
                 <p className="font-bold text-[9px] ">Deliver Today</p>
                 <p className="text-[12px]">from <strong>GHS 30</strong></p>
-                </div>
+                </Container>
                 
               </div>
-              <div className="flex flex-col justify-center items-center gap-2 bg-white dark:bg-[#1e1e1e]">
-              <div className="flex flex-col items-center justify-center w-[102px] h-[90px] border dark:border-slate-50 dark:border-opacity-20 rounded-lg p-3">
+              <div className="flex flex-col justify-center items-center gap-2 ">
+              <Container className="flex flex-col items-center justify-center w-[102px] h-[90px]  rounded-lg p-3">
                 <RiTimer2Fill className="text-xl mb-2 text-blue-600"/>
                 <p className="font-bold text-[9px]">Deliver Morro</p>
                 <p className="text-[12px]">from <strong>GHS 20</strong></p>
-                </div>
+                </Container>
                 
               </div>
-              <div className="flex flex-col justify-center items-center gap-2 bg-white dark:bg-[#1e1e1e]">
-              <div className="flex flex-col items-center justify-center w-[102px] h-[90px] border dark:border-slate-50  dark:border-opacity-20 rounded-lg p-3">
+              <div className="flex flex-col justify-center items-center gap-2 ">
+              <Container className="flex flex-col items-center justify-center w-[102px] h-[90px]  rounded-lg p-3">
                 <RiCalendarScheduleFill className="text-xl mb-2 text-blue-600"/>
                 <p className="font-bold text-[9px]">Schedule</p>
                 <p className="text-[12px]">from <strong>GHS 20</strong></p>
-                </div>
+                </Container>
                 
               </div>
               

@@ -1,9 +1,14 @@
 "use client";
+
+//next and react
 import { useState } from "react";
 import Link from "next/link";
 
+//ui + icons
 import { Button } from "@/components/ui/button";
 
+
+//main components
 import OrderSummaryCard from "@/components/order-components/order-summary-card";
 import TopContent from "@/components/common/top-content";
 import MidContent from "@/components/common/mid-content";
@@ -58,17 +63,17 @@ export default function Profile() {
           </div>
             {currentDeliveries && 
             <div className="flex flex-col w-full gap-4">
-            <OrderSummaryCard deliveryStatus="Delivering"/>
-            <OrderSummaryCard deliveryStatus="Delivered"/>       
-            <OrderSummaryCard deliveryStatus="Picked up"/>       
-            <OrderSummaryCard deliveryStatus="Cancelled"/> 
+            <OrderSummaryCard deliveryStatus="SAME DAY"/>
+            <OrderSummaryCard deliveryStatus="INTERCITY"/>       
+            <OrderSummaryCard deliveryStatus="NEXT DAY"/>       
+            <OrderSummaryCard deliveryStatus="SCHEDULED"/> 
             
             </div>}
 
             {!currentDeliveries && 
             <div className="flex flex-col w-full gap-4">
-            <OrderSummaryCard deliveryStatus="Delivered"/>
-            <OrderSummaryCard deliveryStatus="Cancelled"/>        
+            <OrderSummaryCard deliveryStatus="INTERCITY"/>
+            <OrderSummaryCard deliveryStatus="SCHEDULED"/>        
                   
             </div>}
             
