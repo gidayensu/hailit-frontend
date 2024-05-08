@@ -104,7 +104,7 @@ export default function Onboarding (){
         }))
     }
 
-    const inputAndLabeClass = 'w-full max-w-sm items-center';
+    const inputAndLabelDivClass = 'w-full max-w-sm items-center';
     const labelClass = "text-md font-medium mb-2";
 
     return(
@@ -201,11 +201,11 @@ export default function Onboarding (){
                         </span>
                         <form className="w-full space-y-6 p-5">
                 
-                <div className={inputAndLabeClass}>
+                <div className={inputAndLabelDivClass}>
                         <h3 className={labelClass}>Password</h3>
                         <Input  type="password" placeholder="********" className="h-14" />
                 </div>
-                <div className={inputAndLabeClass}>
+                <div className={inputAndLabelDivClass}>
                         <h3 className={labelClass}>Confirm Password</h3>
                         <Input  type="password" placeholder="********" className="h-14" />
                     </div>
