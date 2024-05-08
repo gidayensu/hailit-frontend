@@ -4,7 +4,7 @@ export default function PrivacyPolicy() {
       <div className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
         <p className="mb-4">
-          Welcome to Hailit Inc.'s Privacy Policy. Your privacy is important to
+          Welcome to Hailit Inc.&#39;s Privacy Policy. Your privacy is important to
           us. This Privacy Policy explains how we collect, use, disclose, and
           safeguard your information when you use our services, including our
           website and mobile applications.
