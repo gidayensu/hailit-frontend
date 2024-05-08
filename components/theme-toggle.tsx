@@ -20,7 +20,7 @@ export function ThemeToggle() {
     
     const preferredTheme = localStorage.getItem('theme') || systemTheme;
       setCurrentTheme(preferredTheme)
-  }, [])
+  }, [mainTheme])
   const iconOutlineClass = "text-2xl group-hover:opacity-0";
   const iconFillClass =
     "text-2xl opacity-0 absolute top-0 left-0  group-hover:opacity-100";
