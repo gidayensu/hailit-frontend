@@ -25,7 +25,7 @@ export function BottomBar() {
           <LuHome className={lightThemeClass} />
           <LuHome className={darkThemeClass} />
         </Button>
-        <p className={`${textClass} ${path === '/' ? 'text-blue-700' : ''}` }>
+        <p className={`${textClass} ${path === '/' ? 'text-blue-700 dark:text-white' : ''}` }>
           Home
         </p>
         </div>
@@ -37,7 +37,7 @@ export function BottomBar() {
           <LuPlus className={lightThemeClass} />
           <LuPlus className={darkThemeClass} />
         </Button>
-        <p className={`${textClass} ${path.startsWith('/order') ? 'text-blue-700' : ''}` }>
+        <p className={`${textClass} ${path.startsWith('/order') ? 'text-blue-700 dark:text-white' : ''}` }>
           New Delivery
         </p>
         </div>
