@@ -31,6 +31,7 @@ import { PiUserCircle, PiUserCircleFill } from "react-icons/pi";
 //main components
 import TopContent from "@/components/common/top-content";
 import MidContent from "@/components/common/mid-content";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type CurrentTheme = string | undefined
 export default function Profile() {
@@ -96,25 +97,16 @@ export default function Profile() {
               <FiChevronRight />
             </div>
             
-            {currentTheme === 'light' && (
+            
             <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
               <span className={iconsAndTextSpanClass}>
-                <MdOutlineDarkMode className={iconOutlineClass} />
-                <MdDarkMode className={iconFillClass} />
-                <p className = {iconTextClass}> Dark mode </p>
+                <ThemeToggle/>
+                <p className = {iconTextClass}> Change theme </p>
               </span>
               <FiChevronRight />
-            </div>)}
+            </div>
 
-            {currentTheme === 'dark' && (
-            <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
-              <span className={iconsAndTextSpanClass}>
-                <MdOutlineLightMode className={iconOutlineClass} />
-                <MdLightMode className={iconFillClass} />
-                <p className = {iconTextClass}> Light mode </p>
-              </span>
-              <FiChevronRight />
-            </div>)}
+            
 
             <div className={iconsAndTextDivClass}>
               <span className={iconsAndTextSpanClass}>
