@@ -2,6 +2,8 @@
 //next + react
 import Link from "next/link";
 import { useState } from "react";
+import { useTheme } from "next-themes";
+
 //ui components + icons
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
@@ -19,7 +21,10 @@ import Image from "next/image";
 
 type UserRole = 'vendor' | 'admin' | 'client' | 'dispatcher';
 type Deliveries = boolean;
+
 export default function Home() {
+  
+  
   const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
 
     const handleSelectedDeliveries = (status: boolean)=> {
