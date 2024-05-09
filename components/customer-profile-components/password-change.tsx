@@ -7,8 +7,11 @@ export default function ChangePassword() {
   return (
     <form className="w-full space-y-6 p-5">
       <div>
-      <h3 className='font-bold text-lg mb-2'>Change your Password</h3>
-      <p className="text-[14px] ">Use a strong password with a mix of symbols, uppercase, lowercase, and numbers</p>
+        <h3 className="font-bold text-lg mb-2">Change your Password</h3>
+        <p className="text-[14px] ">
+          Use a strong password with a mix of symbols, uppercase, lowercase, and
+          numbers
+        </p>
       </div>
       <div className={inputAndLabelDivClass}>
         <h3 className={labelClass}>Old Password</h3>
@@ -22,9 +25,8 @@ export default function ChangePassword() {
         <h3 className={labelClass}>Confirm New Password</h3>
         <Input type="password" placeholder="********" className="h-14" />
       </div>
-      
-      <Button className="w-full h-12" >Save</Button>
-      
+
+      <Button className="w-full h-12">Save</Button>
     </form>
   );
 }

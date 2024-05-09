@@ -6,13 +6,18 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 //ui + icons
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { FiChevronRight } from "react-icons/fi";
-import { AiFillSecurityScan, AiOutlineSecurityScan } from "react-icons/ai";
+import { RiFileListFill, RiFileListLine } from "react-icons/ri";
 import { MdFeedback, MdOutlineFeedback } from "react-icons/md";
 import { IoIosHelpCircle, IoIosHelpCircleOutline } from "react-icons/io";
+import {
+  MdSportsMotorsports,
+  MdOutlineSportsMotorsports,
+} from "react-icons/md";
 import {
   IoDocumentText,
   IoDocumentTextOutline,
@@ -39,6 +44,7 @@ export default function Profile() {
   const { theme, setTheme, systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
 
+  //setting current theme. Not using useEffect result in hydration errors
   useEffect(() => {
     const preferredTheme: CurrentTheme =
       localStorage.getItem("theme") || systemTheme || theme;
@@ -49,6 +55,8 @@ export default function Profile() {
     setCurrentTheme(theme === "dark" ? "light" : "dark");
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  //repeated classes
   const iconsAndTextMainContainerClass = "flex flex-col gap-2";
   const iconsAndTextDivClass =
     "flex justify-between items-center p-2 font-bold group hover:bg-blue-500 hover:text-white rounded-md";
@@ -58,6 +66,7 @@ export default function Profile() {
   const iconFillClass =
     "text-2xl opacity-0 absolute top-0 left-0  group-hover:opacity-100";
   const iconTextClass = "text-sm";
+  const dialogContentClass = "max-w-[350px] sm:max-w-[425px]";
 
   return (
     <>
@@ -79,9 +88,21 @@ export default function Profile() {
         </TopContent>
 
         <MidContent className="flex flex-col gap-3 bg-white w-full -mt-20 rounded-tr-[50px] p-5">
+          {/* Account section */}
           <h2 className="font-bold text-md"> Account</h2>
 
           <div className={iconsAndTextMainContainerClass}>
+            <Link href={"/profile/edit-profile"}>
+              <div className={iconsAndTextDivClass}>
+                <span className={iconsAndTextSpanClass}>
+                  <RiFileListLine className={iconOutlineClass} />
+                  <RiFileListFill className={iconFillClass} />
+                  <p className={iconTextClass}>Orders</p>
+                </span>
+                <FiChevronRight />
+              </div>
+            </Link>
+
             <Link href={"/profile/edit-profile"}>
               <div className={iconsAndTextDivClass}>
                 <span className={iconsAndTextSpanClass}>
@@ -92,6 +113,7 @@ export default function Profile() {
                 <FiChevronRight />
               </div>
             </Link>
+
             <Dialog>
               <DialogTrigger className={iconsAndTextDivClass}>
                 <span className={iconsAndTextSpanClass}>
@@ -101,20 +123,28 @@ export default function Profile() {
                 </span>
                 <FiChevronRight />
               </DialogTrigger>
-              <DialogContent className="max-w-[350px] sm:max-w-[425px]">
+              <DialogContent className={dialogContentClass}>
                 <ChangePassword />
               </DialogContent>
             </Dialog>
 
-            <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
-              <span className={iconsAndTextSpanClass}>
-                <ThemeToggle />
-                <p className={iconTextClass}>
-                  {currentTheme === "light" ? "Dark mode" : "Light mode"}
-                </p>
-              </span>
-              <FiChevronRight />
-            </div>
+            <Dialog>
+              <DialogTrigger className={iconsAndTextDivClass}>
+                <span className={iconsAndTextSpanClass}>
+                  <MdOutlineSportsMotorsports
+                    className={`${iconOutlineClass} -scale-x-100`}
+                  />
+                  <MdSportsMotorsports
+                    className={`${iconFillClass} -scale-x-100`}
+                  />
+                  <p className={iconTextClass}> Switch to Rider </p>
+                </span>
+                <FiChevronRight />
+              </DialogTrigger>
+              <DialogContent className={dialogContentClass}>
+                <ChangePassword />
+              </DialogContent>
+            </Dialog>
 
             <div className={iconsAndTextDivClass}>
               <span className={iconsAndTextSpanClass}>
@@ -125,22 +155,34 @@ export default function Profile() {
               <FiChevronRight />
             </div>
           </div>
+          
+          {/* General Section */}
           <h2 className="font-bold text-md mt-2"> General</h2>
+          <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
+            <span className={iconsAndTextSpanClass}>
+              <ThemeToggle />
+              <p className={iconTextClass}>
+                {currentTheme === "light" ? "Dark mode" : "Light mode"}
+              </p>
+            </span>
+            <FiChevronRight />
+          </div>
+
           <div className={iconsAndTextMainContainerClass}>
             <Dialog>
-            <DialogTrigger className={iconsAndTextDivClass}>
-              <span className={iconsAndTextSpanClass}>
-                <IoDocumentTextOutline className={iconOutlineClass} />
-                <IoDocumentText className={iconFillClass} />
-                <p className={iconTextClass}> Privacy policy </p>
-              </span>
-              <FiChevronRight />
-            </DialogTrigger>
-            <DialogContent className="max-w-[350px] sm:max-w-[425px]">
-              <ScrollArea className="h-80 max-w-[300px] rounded-md">
-                  <PrivacyPolicy/>
-              </ScrollArea>
-            </DialogContent>
+              <DialogTrigger className={iconsAndTextDivClass}>
+                <span className={iconsAndTextSpanClass}>
+                  <IoDocumentTextOutline className={iconOutlineClass} />
+                  <IoDocumentText className={iconFillClass} />
+                  <p className={iconTextClass}> Privacy policy </p>
+                </span>
+                <FiChevronRight />
+              </DialogTrigger>
+              <DialogContent className={dialogContentClass}>
+                <ScrollArea className="max-h-[500px] max-w-[300px]  rounded-md">
+                  <PrivacyPolicy />
+                </ScrollArea>
+              </DialogContent>
             </Dialog>
 
             <Dialog>
@@ -152,7 +194,7 @@ export default function Profile() {
                 </span>
                 <FiChevronRight />
               </DialogTrigger>
-              <DialogContent className="max-w-[350px] sm:max-w-[425px]">
+              <DialogContent className={dialogContentClass}>
                 <Feedback />
               </DialogContent>
             </Dialog>
@@ -166,10 +208,11 @@ export default function Profile() {
                 </span>
                 <FiChevronRight />
               </DialogTrigger>
-              <DialogContent className="max-w-[350px] sm:max-w-[425px]">
+              <DialogContent className={dialogContentClass}>
                 <CustomerHelp />
               </DialogContent>
             </Dialog>
+
             <Dialog>
               <DialogTrigger className={iconsAndTextDivClass}>
                 <span className={iconsAndTextSpanClass}>
@@ -179,10 +222,11 @@ export default function Profile() {
                 </span>
                 <FiChevronRight />
               </DialogTrigger>
-              <DialogContent className="max-w-[350px] sm:max-w-[425px]">
-                <ShareHailit/>
+              <DialogContent className={dialogContentClass}>
+                <ShareHailit />
               </DialogContent>
             </Dialog>
+
           </div>
         </MidContent>
       </main>
