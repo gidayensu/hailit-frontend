@@ -55,9 +55,9 @@ export default function Profile() {
   const {authenticationState} = useAppSelector((state)=>state.auth);
   const {first_name, email, last_name, onboard} = useAppSelector((state)=>state.user);
 
-  // if(authenticationState && !onboard) {
-  //   router.push('/onboarding')
-  // }
+  if(authenticationState && !onboard) {
+    router.push('/onboarding')
+  }
 
   //setting theme
   const { theme, setTheme, systemTheme } = useTheme();
@@ -72,7 +72,7 @@ export default function Profile() {
 
   }  
 
-  console.log(first_name, email, last_name, onboard)
+  console.log(onboard)
   
   //setting current theme. Not using useEffect result in hydration errors
   useEffect(() => {

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
-import { useAppSelector } from "@/lib/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { setBoardingCompletion } from "@/lib/store/userSlice";
 
 
 //main components
@@ -30,15 +31,12 @@ type SelectedUserRole = {
 };
 export default function Onboarding() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {authenticationState} = useAppSelector((state)=>state.auth);
   const {onboard} = useAppSelector((state)=>state.user)
 
-  //redirect to homepage if user is not logged in or onboarding has taken place  
-  // if(!authenticationState || onboard) {
-  //   router.push('/')
-  //   return null
-  // }
+  
   const [onBoardingStage, setOnBoardingStage] = useState<Onboarding>({
     stageOne: true,
     stageTwo: false,
@@ -50,6 +48,10 @@ export default function Onboarding() {
     dispatcher: false,
   });
 
+  const handleOnboardingCompletion = ()=> {
+    dispatch(setBoardingCompletion(true))
+
+  }
   const onBoardingStageHandler = (
     stage: "first" | "second" | "third",
     prev: boolean
@@ -80,6 +82,7 @@ export default function Onboarding() {
             stageTwo: true,
             stageThree: true,
           }));
+          
         } else {
           setOnBoardingStage((prevState) => ({
             ...prevState,
@@ -87,12 +90,14 @@ export default function Onboarding() {
             stageTwo: true,
             stageThree: false,
           }));
+          
         }
 
         break;
 
       case "third":
         router.push("/");
+        dispatch(setBoardingCompletion(true));
 
         break;
     }
@@ -202,7 +207,7 @@ export default function Onboarding() {
                 <p>Hailit gives you a wholesome delivery experience! </p>
               </div>
               <div className="flex gap-4 p-2 -mt-4 ">
-                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 ">
+                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 cursor-pointer">
                   <p>Customer</p>
                   <div
                     onClick={() => selectedUserRoleHandler("customer")}
@@ -220,10 +225,10 @@ export default function Onboarding() {
                       className={`flex items-center justify-center -mt-4  border border-rose-500   h-8 w-8 rounded-full    ${
                         selectedUserRole.customer
                           ? "bg-rose-500 text-white"
-                          : "text-rose-500 bg-white hidden"
+                          : "text-rose-500 bg-white"
                       }`}
                     >
-                      <FiCheck />
+                      <FiCheck className={`${!selectedUserRole.customer && 'hidden'}`} />
                     </span>
                   </div>
                 </div>
@@ -231,7 +236,7 @@ export default function Onboarding() {
                   <p>Dispatcher</p>
                   <div
                     onClick={() => selectedUserRoleHandler("dispatcher")}
-                    className={`flex flex-col items-center w-full h-52 rounded-xl shadow-sm  hover:bg-blue-500 ${
+                    className={`flex flex-col items-center w-full h-52 rounded-xl shadow-sm  hover:bg-blue-500 cursor-pointer ${
                       selectedUserRole.dispatcher ? "bg-blue-500" : "bg-white"
                     }`}
                   >
@@ -245,10 +250,10 @@ export default function Onboarding() {
                       className={`flex items-center justify-center -mt-4  border border-rose-500 h-8 w-8 rounded-full   ${
                         selectedUserRole.dispatcher
                           ? "bg-rose-500 text-white"
-                          : "text-rose-500 bg-white hidden"
+                          : "text-rose-500 bg-white "
                       }`}
                     >
-                      <FiCheck />
+                      <FiCheck className={`${!selectedUserRole.dispatcher && 'hidden'}`} />
                     </span>
                   </div>
                 </div>
