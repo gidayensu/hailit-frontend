@@ -39,7 +39,7 @@ export default function OrderSummaryLessDetail({
 
   //setting other icon colors
   switch (packageType) {
-    case("Parcel"): {
+    case("Gadgets"): {
       deliveryTypeIcon = <PiMonitorFill className="text-teal-400 dark:text-teal-500"/> 
       deliveryTypeIconBgClass = "bg-teal-100 dark:bg-teal-200" 
     }

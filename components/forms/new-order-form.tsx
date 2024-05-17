@@ -22,6 +22,7 @@ export default function NewOrderForm() {
   const iconOutlineClass = "text-3xl group-hover:opacity-0";
   const iconFillClass = "text-3xl opacity-0 absolute group-hover:opacity-100 ";
   const iconTextClass = "text-[13px] group-hover:text-white";
+
   return (
     <div className="flex flex-col gap-4 md:justify-center md:items-center">
       <div className=" w-full grid w-full max-w-sm items-center gap-1.5 md:justify-center md:items-center">
@@ -123,6 +124,14 @@ export default function NewOrderForm() {
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Receiver Number</h3>
+        <Input
+          type="number"
+          placeholder="Enter number of recipient"
+          className="h-14"
+        />
+      </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <h3 className=" text-[14px] font-bold">Package value (in cedis)</h3>
         <Input
           type="number"
           placeholder="Enter number of recipient"

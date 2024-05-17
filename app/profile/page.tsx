@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 
 //ui + icons
 import { ScrollArea } from "@/components/ui/scroll-area";
-
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { FiChevronRight } from "react-icons/fi";
