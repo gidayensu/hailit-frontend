@@ -8,7 +8,7 @@ export type Inputs = {
 };
 
 export const supabaseProjectId = process.env.NEXT_PUBLIC_SUPABASE_ID;
-export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 export const publicAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 export const supabase = createClient(supabaseUrl, publicAnonKey);
