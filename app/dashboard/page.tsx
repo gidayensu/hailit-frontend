@@ -14,6 +14,7 @@ import Container from "@/components/ui/container";
 
 //main components
 import { RecentTripTable } from "@/components/dashboard-components/recent-trips";
+import { AllTripsTable } from "@/components/dashboard-components/all-trips";
 import TrackOrder from "@/components/dashboard-components/track-order";
 import CustomerProfile from "@/components/forms/customer-profile";
 import { Button } from "@/components/ui/button";
@@ -177,7 +178,7 @@ export default function Dashboard () {
 
           {activeSection === "Orders" &&
           <section>
-            <RecentTripTable />
+            <AllTripsTable />
           </section>
           }
 
@@ -226,7 +227,7 @@ export default function Dashboard () {
     );
 }
 
-export const DashboardSections = ({children, dashMin, sectionName, activeSection, onClickFunc}:{children: React.ReactNode, dashMin: boolean, sectionName: string, activeSection: string, onClickFunc: (section:string)=>void})=> {
+function DashboardSections ({children, dashMin, sectionName, activeSection, onClickFunc}:{children: React.ReactNode, dashMin: boolean, sectionName: string, activeSection: string, onClickFunc: (section:string)=>void}) {
     return (
     <div onClick={()=>onClickFunc(sectionName)} className={`flex h-10 p-2  items-center w-full hover:text-blue-500 hover:bg-white rounded-md text-sm ${ dashMin ? "justify-center" : "md:justify-between justify-center"}  cursor-pointer ${activeSection === sectionName ? 'bg-white text-blue-500': ''}`} >
           <div className="flex items-center justify-center gap-2 ">
