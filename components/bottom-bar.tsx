@@ -1,14 +1,17 @@
 "use client";
+// next
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
+
+//ui + icons
 import { LuHome, LuUser, LuPlus } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 
 export function BottomBar() {
   const path = usePathname();
 
-  const mdOrLargerClass = "";
+  
   const lightThemeClass =
     "h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0";
   const darkThemeClass =
@@ -16,7 +19,7 @@ export function BottomBar() {
   const textClass = "text-[12px] ";
   const divClass = "flex flex-col justify-center items-center ";
 
-  return (
+  return (!path.startsWith('/dashboard') && (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-[#1e1e1e] font-medium">
       <Link href="/">
         <div className={divClass}>
@@ -76,5 +79,5 @@ export function BottomBar() {
         </div>
       </Link>
     </nav>
-  );
+)  );
 }

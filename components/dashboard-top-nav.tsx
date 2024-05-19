@@ -6,12 +6,11 @@ import { useTheme } from "next-themes";
 import type { CurrentTheme } from "@/app/profile/page";
 import { ThemeToggle } from "./theme-toggle";
 import { RiNotification3Line } from "react-icons/ri";
-import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 
 
-export function TopBar() {
-  const { theme, setTheme, systemTheme } = useTheme();
+export default function DashboardTopNav () {
+    const { theme, setTheme, systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
 
   //setting current theme. Not using useEffect result in hydration errors
@@ -36,72 +35,29 @@ export function TopBar() {
 
   const divClass = "flex flex-col justify-center items-center";
 
-  return (
-    
-    <nav className={`hidden md:flex  left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'justify-between': 'justify-center'}  items-center p-4 h-20 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
-      {path !== '/dashboard' && (
-        <>
-      <Link href="/">
-        <div className={divClass}>
-          <Button
-            variant={path === "/" ? "default" : "secondary"}
-            className="border-none font-bold"
-          >
-            Home
-          </Button>
-        </div>
-      </Link>
+    return (
+        <nav className={`flex  left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'justify-between': 'justify-center'}  items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
 
-      <Link href="/order/new">
-        <div className={divClass}>
-          <Button
-            variant={path.startsWith("/order") ? "default" : "secondary"}
-            className="border-none font-bold"
-          >
-            New Delivery
-          </Button>
-        </div>
-      </Link>
-
-      <Link href="/profile">
-        {" "}
-        <div className={divClass}>
-          <Button
-            variant={path.startsWith("/profile") ? "default" : "secondary"}
-            className="border-none font-bold"
-          >
-            Profile
-          </Button>
-        </div>
-      </Link>
-      <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
-        <span className={iconsAndTextSpanClass}>
-          <ThemeToggle />
-          <p className={iconTextClass}>
-            {currentTheme === "light" ? "Dark mode" : "Light mode"}
-          </p>
-        </span>
-      </div>
-      </>)
-      
-}  
-{/* {
-        path.startsWith('/dashboard') && (
-    <>
-    <section className="w-full text-2xl ml-10 cursor-pointer" >
+        
+        <section className="hidden md:block w-full text-2xl ml-10 cursor-pointer" >
         <Link href={'/dashboard'}>
           <p>Hailit</p>
         </Link>
         
       </section>
+      <div className={`#{iconsAndTextDivClass}  md:hidden`}>
+          <span className={iconsAndTextSpanClass}>
+          <RiNotification3Line className="text-2xl"/>
+          </span>
+        </div>
       <section className="w-full">
-      <Input className="flex items-center justify-center border-2  border-black dark:border-white rounded-full  h-12 font-light "  placeholder="Enter Trip ID to search "/>
+      <Input className="flex items-center justify-center border-2  border-black dark:border-white rounded-full md:w-full w-[200px] md:h-12 h-10 font-light "  placeholder="Enter Trip ID to search "/>
       
 
       </section>
       
       <section className="flex gap-2 justify-end items-center w-full ">
-          <div className="flex items-center  w-full  justify-end rounded-full h-12 gap-2">
+          <div className="hidden md:flex items-center  w-full  justify-end rounded-full h-12 gap-2">
                 <div className="flex items-center justify-center border-none bg-black dark:bg-white dark:text-[#1e1e1e] text-white rounded-full  md:h-12 md:w-12 sm:h-8 sm:w-8 -ml-1">
                   <p>J</p>
                 </div>
@@ -115,7 +71,7 @@ export function TopBar() {
                 </div>
           </div>
           
-          <div className={iconsAndTextDivClass}>
+          <div className={`#{iconsAndTextDivClass} hidden md:block`}>
           <span className={iconsAndTextSpanClass}>
           <RiNotification3Line className="text-2xl"/>
           </span>
@@ -126,9 +82,6 @@ export function TopBar() {
           </span>
         </div>
       </section>
-    </>              
-        )
-      } */}
-        </nav>
-  );
+      </nav>
+    )
 }

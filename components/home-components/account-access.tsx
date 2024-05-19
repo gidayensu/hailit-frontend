@@ -22,6 +22,8 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/authSlice";
 import { setUserState } from "@/lib/store/userSlice";
 
+//react
+import { useState, useEffect } from "react";
 
 //react-hook-forms
 import {useForm, SubmitHandler} from 'react-hook-form';
@@ -34,24 +36,44 @@ import type { Inputs } from "@/lib/supabaseAuth";
 
 
 export default function AccountAccess() {
+  //set data fetch error to display error message
+  const [dataFetchError, setDataFetchError] = useState<boolean>(false);
+  const [formSubmissionLoading, setFormSubmissionLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDataFetchError(false);
+    }, 2000);
+
+    return () => clearTimeout(timeoutId); // Cleanup function
+  }, [dataFetchError]);
+
   const router = useRouter();
+
+  
   const {register, handleSubmit} = useForm<Inputs>();
   const onSignUpSubmit: SubmitHandler<Inputs> = (data)=> {
     supabaseSignUp(data)
   }
-
+  
+  //signin form submission
   const onSignInSubmit:SubmitHandler<Inputs> = async (data)=> {
+    setFormSubmissionLoading(true)
     const signInData= await supabaseSignIn(data);
+    if (signInData.error) {
+      setFormSubmissionLoading(false)
+      setDataFetchError(true)
+    }
     
     if (signInData.user) {
-        
-        dispatch(setAuthState(true))
-        
-        dispatch(setUserState({
-          user_id: signInData.user[0].user_id,
-          first_name: signInData.user[0].first_name,
-          last_name: signInData.user[0].last_name,
+      setFormSubmissionLoading(false)
+      dispatch(setAuthState(true))
+      
+      dispatch(setUserState({
+        user_id: signInData.user[0].user_id,
+        first_name: signInData.user[0].first_name,
+        last_name: signInData.user[0].last_name,
           email: signInData.user[0].email,
           onboard: signInData.user[0].onboard
       
@@ -146,7 +168,12 @@ export default function AccountAccess() {
                   {...register("password")}
                   />
                 </div>
-                <Button className="w-full h-12" type="submit">Login</Button>
+                <Button className="w-full h-12" type="submit">{formSubmissionLoading ? 'Loading...' : 'Login'}</Button>
+                {dataFetchError && (
+                  <div className="flex items-center justify-center w-full  text-red-500">
+                      <p>Error Occurred!</p>
+                  </div>
+                )}
                 </form>
               </CardContent>
  
