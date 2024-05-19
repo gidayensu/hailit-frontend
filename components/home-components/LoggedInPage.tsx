@@ -105,7 +105,7 @@ export default function LoggedInHome () {
               </span>
             </div>
 
-            {currentDeliveries && (
+            {/* {currentDeliveries && (
               <>
                 <OrderSummaryLessDetail deliveryStatus="Booked" />
                 <OrderSummaryLessDetail deliveryStatus="Picked up" />
@@ -118,7 +118,7 @@ export default function LoggedInHome () {
                 <OrderSummaryLessDetail deliveryStatus="Delivered" />
                 <OrderSummaryLessDetail deliveryStatus="Cancelled" />
               </>
-            )}
+            )} */}
           </div>
 
       </>
