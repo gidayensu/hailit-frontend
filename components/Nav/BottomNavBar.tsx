@@ -40,7 +40,7 @@ export function BottomNavBar() {
         </div>
       </Link>
 
-      <Link href="/order/new">
+      <Link href="/order/">
         <div className={divClass}>
           <Button
             variant={path.startsWith("/order") ? "default" : "secondary"}
