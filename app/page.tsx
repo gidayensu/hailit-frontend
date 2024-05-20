@@ -4,20 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 
-//ui components + icons
-import { FaMotorcycle } from "react-icons/fa";
-import Container from "@/components/ui/container";
-import { BsFillPinMapFill } from "react-icons/bs";
-import { RiTreasureMapFill } from "react-icons/ri";
-import { AiFillCar } from "react-icons/ai";
-import { RiMapPinRangeLine, RiCaravanFill } from "react-icons/ri";
-
-
-import {
-  RiTimerFlashFill,
-  RiTimer2Fill,
-  RiCalendarScheduleFill,
-} from "react-icons/ri";
 
 //main components
 import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
