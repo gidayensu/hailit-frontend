@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa";
-import { SelectIssue } from "./SelectHelpIssue";
+import { SelectHelpIssue } from "./SelectHelpIssue";
 import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
 
@@ -21,7 +21,7 @@ export default function CustomerHelp() {
         </div>
         <div className={inputAndLabelDivClass}>
           <h3 className={labelClass}>Select Issue</h3>
-          <SelectIssue />
+          <SelectHelpIssue />
         </div>
         <div className={inputAndLabelDivClass}>
           <h3 className={labelClass}>Subject</h3>
