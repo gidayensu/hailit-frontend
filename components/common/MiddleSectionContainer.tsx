@@ -1,4 +1,4 @@
-//previous dark background: bg-[#242323]
+
 export default function MiddleSectionContainer({
   children,
   className,

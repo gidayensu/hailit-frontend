@@ -9,7 +9,7 @@ import { setBoardingCompletion } from "@/lib/store/userSlice";
 
 
 //main components
-import CustomerProfileForm from "@/components/Forms/CustomerProfile";
+import CustomerProfile from "@/components/Forms/CustomerProfile";
 
 //ui related components + icons
 import { Separator } from "@/components/ui/separator";
@@ -282,7 +282,7 @@ export default function Onboarding() {
               <p>Send packages with ease using Hailit </p>
             </span>
             <form className="w-full space-y-6 p-3 md:flex md:flex-col md:items-center md:justify-center">
-              <CustomerProfileForm />
+              <CustomerProfile />
             </form>
 
             
