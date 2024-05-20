@@ -13,7 +13,7 @@ type UserLocation = [number, number] | null;
 type UserLocationName = any;
 type MapBoundaryChange = boolean;
 
-export default function MyMap() {
+export default function LocationMap() {
   const [userLocation, setUserLocation] = useState<UserLocation>(null); // Initialize as null
   const [userLocationName, setUserLocationName] =
     useState<UserLocationName>(null);

@@ -8,7 +8,7 @@ import Link from "next/link";
 import { LuHome, LuUser, LuPlus } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 
-export function BottomBar() {
+export function BottomNavBar() {
   const path = usePathname();
 
   

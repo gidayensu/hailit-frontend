@@ -5,29 +5,24 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 
 //main components
-import OrderSummaryLessDetail from "./order-summary-less-detail"
+import OrderSummaryMin from "./OrderSummaryMin"
 
 export function ReOrder() {
   
   return (
-    <Drawer>
+    <Drawer> 
       <DrawerTrigger asChild>
         <Button variant="outline" className="w-full">Reorder</Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className=" flex items-center justify-center">
         
-          <DrawerHeader>
-            <DrawerTitle className="md:ml-96" >Reorder Trip</DrawerTitle>
-          </DrawerHeader>
-          <div className=" pb-0 md:px-96">
+          
+          <div className="md:flex md:flex-col md:justify-center  pb-0  md:w-[400px]">
           <div className="grid grid-cols-2 justify-between px-5 mb-4 gap-7">
                 <div className="flex flex-col justify-start items-start">
                     <span className="flex justify-center items-center gap-1 font-bold text-lg">
@@ -52,7 +47,7 @@ export function ReOrder() {
             </div>
             <div className="flex items-center justify-center space-x-2 px-4">
             
-            <OrderSummaryLessDetail deliveryStatus="Yet to Book" packageType="Gadgets"/>
+            <OrderSummaryMin deliveryStatus="Yet to Book" packageType="Gadgets"/>
               
             
           </div>

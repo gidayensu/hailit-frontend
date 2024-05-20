@@ -14,6 +14,7 @@ import {
 import Container from "../ui/container";
 
 import { FaFacebook } from "react-icons/fa";
+
 export default function ShareHailit() {
   const shareUrl = "https://hailit-frontend.vercel.app";
   const title = "Hailit";

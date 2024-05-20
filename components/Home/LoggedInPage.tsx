@@ -4,7 +4,7 @@ import Image from "next/image";
 import Container from "../ui/container";
 import { FaChevronDown } from "react-icons/fa6";
 import { RiTimerFlashFill, RiTimer2Fill, RiCalendarScheduleFill } from "react-icons/ri";
-import OrderSummaryLessDetail from "../order-components/order-summary-less-detail";
+import OrderSummaryMin from "../Order/OrderSummaryMin";
 
 export default function LoggedInHome () {
     const [currentDeliveries, setCurrentDeliveries] = useState<boolean>(true);
@@ -107,16 +107,16 @@ export default function LoggedInHome () {
 
             {/* {currentDeliveries && (
               <>
-                <OrderSummaryLessDetail deliveryStatus="Booked" />
-                <OrderSummaryLessDetail deliveryStatus="Picked up" />
+                <OrderSummaryMin deliveryStatus="Booked" />
+                <OrderSummaryMin deliveryStatus="Picked up" />
 
-                <OrderSummaryLessDetail deliveryStatus="Delivering" />
+                <OrderSummaryMin deliveryStatus="Delivering" />
               </>
             )}
             {!currentDeliveries && (
               <>
-                <OrderSummaryLessDetail deliveryStatus="Delivered" />
-                <OrderSummaryLessDetail deliveryStatus="Cancelled" />
+                <OrderSummaryMin deliveryStatus="Delivered" />
+                <OrderSummaryMin deliveryStatus="Cancelled" />
               </>
             )} */}
           </div>

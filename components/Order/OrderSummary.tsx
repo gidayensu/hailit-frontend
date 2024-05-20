@@ -13,7 +13,7 @@ type DeliveryStatus =
   | "SAME DAY"
   | "GHS 40";
 
-export default function OrderSummaryCard({
+export default function OrderSummary({
   deliveryStatus,
 }: {
   deliveryStatus: DeliveryStatus;

@@ -4,18 +4,21 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { Button } from "../ui/button";
 import Container from "../ui/container";
 import { GoChecklist, GoX } from "react-icons/go";
-import { GrFormCheckmark } from "react-icons/gr";
 import { TbArrowsExchange } from "react-icons/tb";
 import {  PiArticle, PiCodesandboxLogo } from "react-icons/pi";
-import { PiReceiptDuotone } from "react-icons/pi";
+import { PiReceipt } from "react-icons/pi";
 import { LiaMotorcycleSolid } from "react-icons/lia";
 import { Separator } from "../ui/separator";
+import { LuUser } from "react-icons/lu";
+import OrderSummary from "../Order/OrderSummary";
+import OrderStatusElement from "./OrderStatusElement";
+
 
 // type OrderStatus = "Booked" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
-type OrderStatus = string;
+export type OrderStatus = string;
 export default function TrackOrder () {
     const currentOrderStatus:OrderStatus = "Cancelled"
-    let currentOrderStage = 1;
+    let currentOrderStage = 4;
     currentOrderStatus === "Booked" ? currentOrderStage : currentOrderStatus === "Picked Up" ? currentOrderStage = 2 : currentOrderStatus === "In Transit" ? currentOrderStage = 3 : currentOrderStatus === "Delivered" ? currentOrderStage = 4 : currentOrderStage
     return (
       <main className="flex flex-col gap-5">
@@ -52,7 +55,7 @@ export default function TrackOrder () {
             <h3 className="text-[12px] text-slate-400 -mt-3">
               Current Order Status
             </h3>
-            {/* booked */}
+            {/* booked */} 
 
             <div className="flex">
               <OrderStatusElement
@@ -85,7 +88,7 @@ export default function TrackOrder () {
                   currentOrderStage={currentOrderStage}
                   orderStage={4}
                 >
-                  <GoChecklist className="text-3xl" />
+                  <GoChecklist className={`text-3xl ${currentOrderStage === 4 ? 'text-green-500' : '' } `} />
                 </OrderStatusElement>
               )}
 
@@ -110,8 +113,8 @@ export default function TrackOrder () {
                   Payment Details
                 </h3>
               </div>
-              <Button variant={'empty'}  className="space-x-1 bg-black text-white  dark:border dark:border-slate-300 dark:text-white dark:bg-transparent">
-                <PiReceiptDuotone className="text-xl "/>
+              <Button variant={'empty'}  className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white">
+                <PiReceipt className="text-xl "/>
                 <p>Invoice</p>
                 </Button>
             </div>
@@ -150,9 +153,9 @@ export default function TrackOrder () {
                   Rider Details
                 </h3>
               </div>
-              <Button variant={'empty'}  className="space-x-1 bg-black text-white  dark:border dark:border-slate-300 dark:text-white dark:bg-transparent">
+              <Button variant={'empty'}  className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white">
                 <TbArrowsExchange className="text-xl "/>
-                <p>Change</p>
+                <p>Assign</p>
                 </Button>
             </div>
           </Container>
@@ -160,48 +163,57 @@ export default function TrackOrder () {
 
         <article className="flex flex-col lg:flex-row w-full gap-4">
           {/* PACKAGE DETAILS */}
-          <Container className="flex flex-col  w-full lg:w-4/6  h-52 rounded-lg p-3 gap-2">
-            <h3 className="font-bold">Package</h3>
-            <h3 className="text-[12px] text-slate-400 -mt-3">Rider Details</h3>
+          <Container className="flex flex-col  w-full lg:w-2/6  h-52 rounded-lg p-3 gap-2">
+            <h3 className="font-bold">Map</h3>
+            <h3 className="text-[12px] text-slate-400 -mt-3">Package Details</h3>
+            
           </Container>
+          <div className="flex flex-col  w-full lg:w-2/6  h-52 rounded-lg p-3 gap-2">
+            <h3 className="font-bold">Package</h3>
+            <h3 className="text-[12px] text-slate-400 -mt-3">Package Details</h3>
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+          
+          <OrderSummary deliveryStatus="INTERCITY" />
+        </div>
+          </div>
           <Container className="flex flex-col  w-full lg:w-2/6 h-52 rounded-lg p-3 gap-2">
-            <h3 className="font-bold">Client</h3>
-            <h3 className="text-[12px] text-slate-400 -mt-3">Client Details</h3>
+          <div className="flex justify-between">
+              <div className="">
+                <h3 className="font-bold">CLIENT</h3>
+                <h3 className="text-[12px] text-slate-400 -mt-1">
+                  Client Details
+                </h3>
+              </div>
+              <Button variant={'empty'}  className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white">
+                <LuUser className="text-xl "/>
+                <p>View</p>
+                </Button>
+            </div>
+            <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+                    <div className="flex w-full items-start justify-between text-[12px]">
+                        <div className="space-y-1">
+                            <ul>Name</ul>
+                            <ul>Email</ul>
+                            <ul>Phone</ul>
+                            <ul>Address</ul>
+                            <ul>Delivery Count</ul>
+                        </div>
+                        <div className="space-y-1 text-right font-semibold">
+                            <ul>Johnson Asomani</ul>
+                            <ul>salu@gmail.salu</ul>
+                            <ul>000000000</ul>
+                            <ul>BA Block 2 House 9</ul>
+                            <ul>17</ul>
+                        </div>
+                    </div>
+
+                    
+            </div>
           </Container>
         </article>
-        {/* PACKAGE DETAILS */}
-        <article></article>
-        {/* TIMELINE */}
-        <article></article>
-        {/* CUSTOMER DETAIL */}
-      </main>
+        
+      </main> 
     );
 }
 
 
-export const OrderStatusElement = ({orderStatus, orderStage, currentOrderStage, children}: {orderStatus: OrderStatus, orderStage:number, currentOrderStage:number, children:React.ReactNode})=> {
-    return(
-        <div className="flex flex-col items-center justify-center w-1/4 gap-4 relative">
-                        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${currentOrderStage < orderStage ? 'bg-gray-300' : 'bg-black dark:bg-slate-50'} ${ orderStage === 0 ? 'bg-red-500' : ''} `}>
-                            { (orderStatus === "Booked" || orderStatus === "In Transit" || orderStatus === "Picked Up")  &&
-                                
-                                <div>
-                                <div className={`absolute w-full h-1 ${currentOrderStage < orderStage ? 'bg-gray-300' : 'bg-black dark:bg-slate-50'}`}>
-                                        <p></p>
-                                </div>
-                            </div>
-                            }
-                            {currentOrderStage < orderStage || orderStage === 0 ? <GoX className="text-white dark:text-[#1e1e1e] text-lg z-10"/> : <GrFormCheckmark className="text-white text-lg z-10 dark:text-[#1e1e1e]"/>}
-                            
-                        </div>
-
-                    <div className={`flex flex-col items-center justify-center ${currentOrderStage < orderStage ? 'text-gray-300' : 'text-black dark:text-slate-50'}`}>
-                        {children}
-                        <div className="flex flex-col items-center justify-center w-full gap-1" >
-                            <p className={`text-sm font-semibold ${orderStage === 0 ? 'text-red-500': ''}`}>{orderStatus}</p>
-                            
-                        </div>
-                    </div>
-                    </div>
-    )
-}

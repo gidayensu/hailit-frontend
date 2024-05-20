@@ -1,8 +1,8 @@
 'use client'
-import MyMap from '@/components/maps/Map'
+import LocationMap from '@/components/Maps/Map'
 
 export default function Map(){
     return (
-        <MyMap/>
+        <LocationMap/>
     )
 }

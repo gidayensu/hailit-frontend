@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import type { CurrentTheme } from "@/app/profile/page";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "../Theme/ThemeToggle";
 import { RiNotification3Line } from "react-icons/ri";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
 
 export default function DashboardTopNav () {
@@ -36,9 +36,9 @@ export default function DashboardTopNav () {
   const divClass = "flex flex-col justify-center items-center";
 
     return (
-        <nav className={`flex  left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'justify-between': 'justify-center'}  items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
+        <nav className={`flex  w-6/6 left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'justify-between': 'justify-center'}  items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
 
-        
+      
         <section className="hidden md:block w-full text-2xl ml-10 cursor-pointer" >
         <Link href={'/dashboard'}>
           <p>Hailit</p>

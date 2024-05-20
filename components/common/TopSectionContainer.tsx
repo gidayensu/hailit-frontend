@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TopContent({
+export default function TopSectionContainer({
   className,
   children,
 }: {

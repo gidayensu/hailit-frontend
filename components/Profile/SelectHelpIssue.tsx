@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectIssue() {
+export function SelectHelpIssue() {
   return (
     <Select>
       <SelectTrigger className="w-full h-14">

@@ -25,7 +25,7 @@ type PackageType = | "Gadgets"
 | "Food"
 | "Fragile"
 | "Others";
-export default function OrderSummaryLessDetail({
+export default function OrderSummaryMin({
   deliveryStatus,
   packageType
 }: {

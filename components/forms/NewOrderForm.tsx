@@ -1,5 +1,5 @@
 //main components
-import { SelectDeliveryType } from "@/components/order-components/select-delivery-type";
+import { SelectDeliveryType } from "@/components/Order/SelectDeliveryType";
 //ui
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,7 +25,7 @@ export default function NewOrderForm() {
 
   return (
     <div className="flex flex-col gap-4 md:justify-center md:items-center">
-      <div className=" w-full grid w-full max-w-sm items-center gap-1.5 md:justify-center md:items-center">
+      <div className=" grid w-full max-w-sm items-center gap-1.5 md:justify-center md:items-center">
         <span className="flex items-start justify-start">
 
         <h3 className=" text-[14px] font-bold ">Package Type</h3>

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { TbRoute, TbUser, TbLayoutDashboard } from "react-icons/tb";
 
 import {  RiFileListLine } from "react-icons/ri";
-import { RiNotification3Line } from "react-icons/ri";
+
 
 
 
@@ -26,7 +26,7 @@ export function DashboardBottomNav({activeSection, onClickFunc}: {activeSection:
   const divClass = "flex flex-col justify-center items-center ";
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-1 md:gap-5 w-full bg-white dark:bg-[#1e1e1e] font-medium"
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-3 md:gap-5 w-full bg-white dark:bg-[#1e1e1e] font-medium"
     >
       
         <div className={divClass}>

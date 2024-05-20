@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa";
-import { SelectIssue } from "./select-issue";
+import { SelectIssue } from "./SelectHelpIssue";
 import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
 

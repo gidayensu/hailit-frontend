@@ -18,7 +18,7 @@ import {
 } from "react-icons/ri";
 
 //main components
-import OrderSummaryLessDetail from "@/components/order-components/order-summary-less-detail";
+import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 
 
 import Image from "next/image";
@@ -152,16 +152,16 @@ export default function Home() {
 
             {currentDeliveries && (
               <>
-                <OrderSummaryLessDetail deliveryStatus="Booked" packageType="Gadgets"/>
-                <OrderSummaryLessDetail deliveryStatus="Picked up" packageType="Parcel"/>
+                <OrderSummaryMin deliveryStatus="Booked" packageType="Gadgets"/>
+                <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel"/>
 
-                <OrderSummaryLessDetail deliveryStatus="Delivering" packageType="Others"/>
+                <OrderSummaryMin deliveryStatus="Delivering" packageType="Others"/>
               </>
             )}
             {!currentDeliveries && (
               <>
-                <OrderSummaryLessDetail deliveryStatus="Delivered" packageType="Food" />
-                <OrderSummaryLessDetail deliveryStatus="Cancelled" packageType="Fragile"/>
+                <OrderSummaryMin deliveryStatus="Delivered" packageType="Food" />
+                <OrderSummaryMin deliveryStatus="Cancelled" packageType="Fragile"/>
               </>
             )}
           </div>      

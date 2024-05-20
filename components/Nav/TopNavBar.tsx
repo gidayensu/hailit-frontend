@@ -4,13 +4,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import type { CurrentTheme } from "@/app/profile/page";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "../Theme/ThemeToggle";
 import { RiNotification3Line } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
 
-export function TopBar() {
+export function TopNavBar() {
   const { theme, setTheme, systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
 
@@ -38,7 +38,7 @@ export function TopBar() {
 
   return (
     
-    <nav className={`hidden md:flex  left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'justify-between': 'justify-center'}  items-center p-4 h-20 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
+    <nav className={`hidden   left-0 right-0 top-auto z-40 ${path.startsWith('/dashboard') ? 'hidden': 'md:flex justify-center'}  items-center p-4 h-20 shadow-md gap-10 w-full bg-white dark:bg-[#121212] font-bold`}>
       {path !== '/dashboard' && (
         <>
       <Link href="/">

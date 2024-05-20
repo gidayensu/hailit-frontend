@@ -8,7 +8,7 @@ import { setBoardingCompletion } from "@/lib/store/userSlice";
 
 
 //main components
-import CustomerProfileForm from "@/components/forms/customer-profile";
+import CustomerProfileForm from "@/components/Forms/CustomerProfile";
 
 //ui related components + icons
 import { Separator } from "@/components/ui/separator";

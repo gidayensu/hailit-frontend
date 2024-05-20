@@ -30,7 +30,7 @@ import {
         pickupContact: "0242223344",
         dropOff: "Takoradi",
         dropOffContact: "0245566778",
-        deliveredOn: "2024-02-12",
+        deliveredOn: "---",
         amount: "GHS 300.00",
         paymentStatus: "Unpaid",
         paymentMethod: "Mobile Money",
@@ -48,7 +48,7 @@ import {
         amount: "GHS 150.00",
         paymentStatus: "Paid",
         paymentMethod: "Cash",
-        deliveryStatus: "Booked",
+        deliveryStatus: "Delivered",
     },
     {
         tripId: "INV004",
@@ -62,7 +62,7 @@ import {
         amount: "GHS 400.00",
         paymentStatus: "Paid",
         paymentMethod: "Credit Card",
-        deliveryStatus: "Booked",
+        deliveryStatus: "Delivered",
     },
     {
         tripId: "INV005",
@@ -86,7 +86,7 @@ import {
         pickupContact: "0241122334",
         dropOff: "Hohoe",
         dropOffContact: "0244433221",
-        deliveredOn: "2024-06-12",
+        deliveredOn: "---",
         amount: "GHS 320.00",
         paymentStatus: "Paid",
         paymentMethod: "Credit Card",
@@ -100,7 +100,7 @@ import {
         pickupContact: "0245566778",
         dropOff: "Sunyani",
         dropOffContact: "0249988776",
-        deliveredOn: "2024-07-17",
+        deliveredOn: "---",
         amount: "GHS 210.00",
         paymentStatus: "Paid",
         paymentMethod: "Mobile Money",
@@ -117,16 +117,16 @@ import {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Trip id</TableHead>
-            <TableHead>Ordered by</TableHead>
+            
             <TableHead>Booked On</TableHead>
             <TableHead>Pickup</TableHead>
-            <TableHead>Pickup Contact</TableHead>
+            
             <TableHead>Drop off</TableHead>
-            <TableHead>Drop off Contact</TableHead>
+            
             <TableHead>Delivered On</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead >Payment Status</TableHead>
-            <TableHead >Payment Method</TableHead>
+            
             <TableHead >Delivery Status</TableHead>
           </TableRow>
         </TableHeader>
@@ -134,12 +134,12 @@ import {
           {trips.map((trip) => (
             <TableRow key={trip.tripId}>
               <TableCell className="font-medium">{trip.tripId}</TableCell>
-              <TableCell>{trip.orderedBy}</TableCell>
+              
               <TableCell>{trip.bookedOn}</TableCell>
               <TableCell>{trip.pickup}</TableCell>
-              <TableCell >{trip.pickupContact}</TableCell>
+              
               <TableCell>{trip.dropOff}</TableCell>
-              <TableCell>{trip.dropOffContact}</TableCell>
+              
               <TableCell>{trip.deliveredOn}</TableCell>
               <TableCell>{trip.amount}</TableCell>
               <TableCell className="">
@@ -149,7 +149,7 @@ import {
                     </p>
                 </div>
                 </TableCell>
-              <TableCell>{trip.paymentMethod}</TableCell>
+              
               <TableCell><div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.deliveryStatus === "Delivered"
                 ? "  bg-green-500"
                 : trip.deliveryStatus === "Picked Up"
