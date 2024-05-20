@@ -72,7 +72,7 @@ export default function TrackDelivery() {
 
               <span>
                 <p className="font-bold text-sm">Samson Ayeni</p>
-                <p className="font-bold text-[10px]">Your Courier</p>
+                <p className="font-bold text-[10px]">M</p>
               </span>
             </div>
             <div className="flex justify-center items-center gap-2">

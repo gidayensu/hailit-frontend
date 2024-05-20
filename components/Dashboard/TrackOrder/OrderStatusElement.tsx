@@ -1,4 +1,4 @@
-import type { OrderStatus } from "../TrackOrder";
+import type { OrderStatus } from "./TrackOrder";
 import { GrFormCheckmark } from "react-icons/gr";
 import { GoX } from "react-icons/go";
 

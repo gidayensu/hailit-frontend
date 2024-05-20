@@ -1,23 +1,29 @@
 //ui + icons
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
-import { Button } from "../ui/button";
-import Container from "../ui/container";
+import { Button } from "../../ui/button";
+import Container from "../../ui/container";
 import { GoChecklist, GoX } from "react-icons/go";
 import { TbArrowsExchange } from "react-icons/tb";
 import { PiArticle, PiCodesandboxLogo } from "react-icons/pi";
 import { PiReceipt } from "react-icons/pi";
 import { LiaMotorcycleSolid } from "react-icons/lia";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 import { LuUser } from "react-icons/lu";
-import OrderSummary from "../Order/OrderSummary";
-import OrderStatusElement from "./TrackOrder/OrderStatusElement";
+import OrderSummary from "../../Order/OrderSummary";
+import OrderStatusElement from "./OrderStatusElement";
 
 // type OrderStatus = "Booked" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 export type OrderStatus = string;
+
 export default function TrackOrder() {
+
   const currentOrderStatus: OrderStatus = "Cancelled";
+  
+  const paymentStatus = 'Paid'
+
   let currentOrderStage = 4;
+
   currentOrderStatus === "Booked"
     ? currentOrderStage
     : currentOrderStatus === "Picked Up"
@@ -131,29 +137,31 @@ export default function TrackOrder() {
               <p>Invoice</p>
             </Button>
           </div>
-          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
-            <div className="flex w-full items-start justify-between text-[12px]">
+          <div className="w-full flex flex-col items-start justify-between h-3/5 rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+            <div className="flex w-full items-start justify-between text-sm">
               <div className="spacey-y-2">
                 <ul>Bill amount</ul>
                 <ul>Discount(0%)</ul>
-                <ul>VAT</ul>
-                <ul>NHIL + GETFUND</ul>
-                <ul>COVID Levy</ul>
+                <ul>Service Fee</ul>
+                
               </div>
               <div className="spacey-y-2 text-right font-semibold">
                 <ul>34.2</ul>
                 <ul>0</ul>
                 <ul>10</ul>
-                <ul>15</ul>
-                <ul>17</ul>
+                
               </div>
             </div>
 
             <Separator className="dark:bg-slate-50" />
-            <div className="flex w-full items-start justify-between text-[12px] font-bold mt-1">
+            <div className="flex w-full items-start justify-between text-sm font-bold mt-1">
               <p>Total</p>
-              <p>76.2</p>
+              <p>44.2</p>
             </div>
+          </div>
+          <div className=" flex justify-between text-sm px-1 font-semibold">
+            <p>Payment status</p>
+            <p className={`${paymentStatus === "Paid" ? 'text-green-500': 'text-red-500'}`}>{paymentStatus}</p>
           </div>
         </Container>
         {/* RIDER */}
@@ -206,7 +214,7 @@ export default function TrackOrder() {
             </Button>
           </div>
           <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
-            <div className="flex w-full items-start justify-between text-[12px]">
+            <div className="flex w-full items-start justify-between text-sm">
               <div className="space-y-1">
                 <ul>Name</ul>
                 <ul>Email</ul>

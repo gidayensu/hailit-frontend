@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import DashboardSideBar from "@/components/Dashboard/DashboardSideBar";
 import { RecentTripTable } from "@/components/Dashboard/RecentTripTable";
 import { AllTripsTable } from "@/components/Dashboard/AllTripsTable";
-import TrackOrder from "@/components/Dashboard/TrackOrder";
+import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrder";
 import Overview from "@/components/Dashboard/Overview";
 import CustomerProfile from "@/components/Form/CustomerProfile";
 import { DashboardBottomNav } from "@/components/Dashboard/DashboardBottomNav";

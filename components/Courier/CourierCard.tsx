@@ -13,7 +13,7 @@ export default function CourierCard() {
 
         <span>
           <p className="font-bold text-sm">Samson Ayeni</p>
-          <p className="font-bold text-[10px]">Your Courier</p>
+          <p className="font-bold text-[10px]">Motorcycle - 21-AS-43</p>
         </span>
       </div>
       <div className="flex justify-center items-center gap-2">
