@@ -1,9 +1,9 @@
 "use client";
 
 //main components
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
-import CustomerProfile from "@/components/Forms/CustomerProfile";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+import CustomerProfile from "@/components/Form/CustomerProfile";
 //ui components
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

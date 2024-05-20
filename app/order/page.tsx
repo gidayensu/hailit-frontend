@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 //main components
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 
-import NewOrderForm from "@/components/Forms/NewOrderForm";
+import NewOrderForm from "@/components/Form/NewOrderForm";
 
 export default function NewOrder() {
   return (

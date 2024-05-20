@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { IoIosInformationCircle } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
 import Container from "@/components/ui/container";
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import { FaWhatsapp } from "react-icons/fa";
 export default function TrackDelivery() {
   return (

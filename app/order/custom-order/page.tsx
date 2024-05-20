@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SelectDate } from "@/components/Order/SelectDate";
 import { SelectDeliveryType } from "@/components/Order/SelectDeliveryType";
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 
 export default function CustomOrder() {
   return (

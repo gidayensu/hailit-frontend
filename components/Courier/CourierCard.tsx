@@ -1,7 +1,7 @@
 import Container from "../ui/container";
 import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
-import { UserAvatar } from "@/components/Common/user-avatar";
+import { UserAvatar } from "@/components/Shared/user-avatar";
 
 export default function CourierCard() {
   return (

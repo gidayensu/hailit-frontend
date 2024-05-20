@@ -35,8 +35,8 @@ import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 
 //main components
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import ChangePassword from "@/components/Profile/ChangePassword";
 import Feedback from "@/components/Profile/Feedback";

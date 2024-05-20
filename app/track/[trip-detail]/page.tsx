@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 //main components
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import OrderUpdates from "@/components/Order/OrderUpdates";
 import OrderSummary from "@/components/Order/OrderSummary";
 import CourierCard from "@/components/Courier/CourierCard";

@@ -2,8 +2,8 @@
 import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 import { useState } from "react";
 import type { Deliveries } from "@/app/page";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 
 export default function AllOrders () {
     

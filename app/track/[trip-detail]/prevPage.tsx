@@ -1,13 +1,13 @@
 import { Separator } from "@/components/ui/separator";
-import { UserAvatar } from "@/components/Common/user-avatar";
+import { UserAvatar } from "@/components/Shared/user-avatar";
 import { PiPackageThin } from "react-icons/pi";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
 
-import TopSectionContainer from "@/components/Common/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Common/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 
 export default function TrackDelivery() {
   const status = "delivered";

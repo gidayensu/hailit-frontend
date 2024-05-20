@@ -13,7 +13,7 @@ import { RecentTripTable } from "@/components/Dashboard/RecentTripTable";
 import { AllTripsTable } from "@/components/Dashboard/AllTripsTable";
 import TrackOrder from "@/components/Dashboard/TrackOrder";
 import Overview from "@/components/Dashboard/Overview";
-import CustomerProfile from "@/components/Forms/CustomerProfile";
+import CustomerProfile from "@/components/Form/CustomerProfile";
 import { DashboardBottomNav } from "@/components/Dashboard/DashboardBottomNav";
 import DashboardTopNav from "@/components/Dashboard/DashboardTopNav";
 

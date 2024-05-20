@@ -9,7 +9,7 @@ import { setBoardingCompletion } from "@/lib/store/userSlice";
 
 
 //main components
-import CustomerProfile from "@/components/Forms/CustomerProfile";
+import CustomerProfile from "@/components/Form/CustomerProfile";
 
 //ui related components + icons
 import { Separator } from "@/components/ui/separator";
