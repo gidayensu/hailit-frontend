@@ -26,7 +26,7 @@ export default function PackageDestinationChoice () {
               MainIcon={BsFillPinMapFill}
               elementOption="Accra"
             >
-              <p className="text-sm md:text-md relative">
+              <p className="text-sm md:text-md text-center">
                 Accra or Tema suburb
               </p>
             </DeliveryChoices>
@@ -39,7 +39,7 @@ export default function PackageDestinationChoice () {
                 MainIcon={RiMapPinRangeLine}
                 elementOption="Kumasi"
               >
-                <p className="text-sm md:text-md">Abuakwa, Ejisu, etc</p>
+                <p className="text-sm md:text-md text-center">Abuakwa, Ejisu, etc</p>
               </DeliveryChoices>
               
               <DeliveryChoices
@@ -49,7 +49,7 @@ export default function PackageDestinationChoice () {
                 MainIcon={RiTreasureMapFill}
                 elementOption="Inter city"
               >
-                <p className="text-sm md:text-md">Accra - Kumasi</p>
+                <p className="text-sm md:text-md text-center">Accra - Kumasi</p>
               </DeliveryChoices>
               </div>
               </>

@@ -22,7 +22,7 @@ export default function DeliveryDayChoice () {
                 MainIcon={RiTimerFlashFill}
                 elementOption="Today"
               >
-                <p className="text-[12px] md:text-lg"> from <b>GHS 30</b></p>
+                <p className="text-[12px] md:text-lg text-center"> from <b>GHS 30</b></p>
               </DeliveryChoices>
                 
               <DeliveryChoices
@@ -32,7 +32,7 @@ export default function DeliveryDayChoice () {
                 MainIcon={RiTimer2Fill}
                 elementOption="Tomorrow"
               >
-                <p className="text-[12px] md:text-lg"> from <strong>GHS 20</strong>  </p>
+                <p className="text-[12px] md:text-lg text-center"> from <strong>GHS 20</strong>  </p>
               </DeliveryChoices>
                 
                 
@@ -43,7 +43,7 @@ export default function DeliveryDayChoice () {
                 MainIcon={RiCalendarScheduleFill}
                 elementOption="Schedule"
               >
-                <p className="text-[12px] md:text-lg">  from <strong>GHS 20</strong></p>
+                <p className="text-[12px] md:text-lg text-center">  from <strong>GHS 20</strong></p>
               </DeliveryChoices>
         </>
     )
