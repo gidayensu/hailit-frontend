@@ -49,7 +49,7 @@ export default function DispatcherBottomNav () {
       </Link>
 
       <Link href="/dispatcher/profile">
-        {" "}
+        
         <div className={divClass}>
           <Button
             variant={path.startsWith("/dispatcher/profile") ? "default" : "secondary"}
