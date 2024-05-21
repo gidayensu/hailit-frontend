@@ -5,9 +5,9 @@ import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import { Input } from "../ui/input";
 import { FcGoogle } from "react-icons/fc";
-
+import { TailSpin } from "react-loader-spinner"
 import { useRouter } from "next/navigation";
-
+import Loader from "../Shared/Loader";
 //redux
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/authSlice";
@@ -25,7 +25,7 @@ import {useForm, SubmitHandler} from 'react-hook-form';
 
 import type { Inputs } from "@/lib/supabaseAuth";
 
-import {   supabaseSignUp, supabaseSignIn } from "@/lib/supabaseAuth";
+import {   supabaseSignUp, supabaseSignIn, googleSupabaseSignIn  } from "@/lib/supabaseAuth";
 
 
 export default function LoginSignUp () {
@@ -38,7 +38,7 @@ export default function LoginSignUp () {
       setDataFetchError(false);
     }, 2000);
 
-    return () => clearTimeout(timeoutId); // Cleanup function
+    return () => clearTimeout(timeoutId); 
   }, [dataFetchError]);
 
   const router = useRouter();
@@ -76,6 +76,17 @@ export default function LoginSignUp () {
     }
     
   }
+  
+  const googleSignIn = async ()=> {
+    setFormSubmissionLoading(true)
+    const signInData = await googleSupabaseSignIn()
+    if (!signInData) {
+      setFormSubmissionLoading(false)
+      setDataFetchError(true)
+    }
+    setFormSubmissionLoading(false)
+  }
+
   
     return (
         <Tabs defaultValue="login" className="w-80 sm:w-[400px] mt-0 sm:mt-4">
@@ -153,7 +164,7 @@ export default function LoginSignUp () {
                   {...register("password")}
                   />
                 </div>
-                <Button className="w-full h-12 mt-4" type="submit">{formSubmissionLoading ? 'Loading...' : 'Login'}</Button>
+                <Button className="w-full h-12 mt-4" type="submit">{formSubmissionLoading ? <Loader color="white"/> : 'Login'}</Button>
                 {dataFetchError && (
                   <div className="flex items-center justify-center w-full  text-red-500">
                       <p>Error Occurred!</p>
@@ -171,8 +182,11 @@ export default function LoginSignUp () {
                 <Button
                   variant="outline"
                   className="w-full border border-slate-300 h-12 flex gap-4"
+                  onClick={googleSignIn}
                 >
-                  <FcGoogle className="text-2xl" /> Continue with Google
+                  {formSubmissionLoading ? <Loader color="#3b82f6"/>
+   : <p className="flex items-center justify-center gap-2"><FcGoogle className="text-2xl" /> Continue with Google</p>}
+                  
                 </Button>
               </CardFooter>
             </Card>

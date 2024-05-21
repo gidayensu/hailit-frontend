@@ -79,7 +79,23 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
   }
 };
 
+export const googleSupabaseSignIn = async ()=> {
+  try {
+  const {data, error} = await supabase.auth.signInWithOAuth({
+    provider: 'google'
+  })
+  if (error) {
+    return {
+      error: "Error signing in via google"
+    }
+  }
 
+  return data;
+
+ } catch (err) {
+  return {error: `Error Occurred: ${err}`}
+ }
+}
 export const supabaseSession = async ()=> {
     
 const { data, error } = await supabase.auth.getSession()

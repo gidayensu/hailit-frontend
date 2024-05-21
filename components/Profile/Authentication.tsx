@@ -6,28 +6,16 @@ import LoginSignUp from "./LoginSignUp";
 
 export type CurrentTheme = string | undefined;
 export default function Authentication () {
-    const { theme, setTheme, systemTheme } = useTheme();
-    const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
-      //setting current theme. Not using useEffect result in hydration errors
-  useEffect(() => {
-    const preferredTheme: CurrentTheme =
-      localStorage.getItem("theme") || systemTheme || theme;
-    setCurrentTheme(preferredTheme);
-  }, [currentTheme]);
-
-  const handleThemeChange = () => {
-    setCurrentTheme(theme === "dark" ? "light" : "dark");
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+    
     return (
         <>
 
           <div className="flex flex-col items-center justify-center gap-2 mt-10">
-          <div className="flex justify-between items-center p-2 font-bold group hover:bg-blue-500 hover:text-white rounded-md cursor-pointer mt-5 mb-5 md:hidden border border-black dark:border-white" onClick={handleThemeChange}>
+          <div className="flex justify-between items-center p-2 font-bold group hover:bg-blue-500 hover:text-white rounded-md cursor-pointer mt-5 mb-5 md:hidden border border-black dark:border-white">
             <span className="flex items-center justify-center gap-2 relative">
               <ThemeToggle />
               <p className="text-sm">
-                {currentTheme === "light" ? "Dark mode" : "Light mode"}
+                Change Mode
               </p>
             </span>
           </div>
