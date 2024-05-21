@@ -45,8 +45,29 @@ export default function LoginSignUp () {
 
   
   const {register, handleSubmit} = useForm<Inputs>();
-  const onSignUpSubmit: SubmitHandler<Inputs> = (data)=> {
-    supabaseSignUp(data)
+  const onSignUpSubmit: SubmitHandler<Inputs> = async (data)=> {
+    const signUpData = await supabaseSignUp(data);
+    if (signUpData.error) {
+      setFormSubmissionLoading(false)
+      setDataFetchError(true)
+    }
+    console.log('signUpData::', signUpData)
+    if (signUpData.user) {
+      setFormSubmissionLoading(false)
+      dispatch(setAuthState(true))
+      
+      dispatch(setUserState({
+        user_id: signUpData.user[0].user_id,
+        first_name: signUpData.user[0].first_name,
+        last_name: signUpData.user[0].last_name,
+          email: signUpData.user[0].email,
+          onboard: signUpData.user[0].onboard
+      
+        }))
+        
+      const onboard = signUpData.user[0].onboard;
+        onboard ? router.push('/profile') : router.push('/onboarding')
+    }
   }
   
   //signin form submission
@@ -84,7 +105,10 @@ export default function LoginSignUp () {
       setFormSubmissionLoading(false)
       setDataFetchError(true)
     }
-    setFormSubmissionLoading(false)
+    if (signInData) {
+
+      setFormSubmissionLoading(false)
+    }
   }
 
   
@@ -164,7 +188,7 @@ export default function LoginSignUp () {
                   {...register("password")}
                   />
                 </div>
-                <Button className="w-full h-12 mt-4" type="submit">{formSubmissionLoading ? <Loader color="white"/> : 'Login'}</Button>
+                <Button className="w-full h-12 mt-4" type="submit">{formSubmissionLoading ? <Loader color="#fff23"/> : 'Login'}</Button>
                 {dataFetchError && (
                   <div className="flex items-center justify-center w-full  text-red-500">
                       <p>Error Occurred!</p>

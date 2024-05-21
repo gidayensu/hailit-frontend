@@ -15,10 +15,10 @@ export default function CustomerProfile() {
           <Input type="text" placeholder="Last Name" className="h-14" />
         </div>
       
-      <div className={inputAndLabeClass}>
+      {/* <div className={inputAndLabeClass}>
         <h3 className={labelClass}>Email</h3>
         <Input type="email" placeholder="email@example.com" className="h-14" />
-      </div>
+      </div> */}
       <div className={inputAndLabeClass}>
         <h3 className={labelClass}>Phone Number</h3>
         <Input type="number" placeholder="024 123 4567" className="h-14" />

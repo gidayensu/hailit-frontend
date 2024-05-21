@@ -14,9 +14,7 @@ export default function Authentication () {
           <div className="flex justify-between items-center p-2 font-bold group hover:bg-blue-500 hover:text-white rounded-md cursor-pointer mt-5 mb-5 md:hidden border border-black dark:border-white">
             <span className="flex items-center justify-center gap-2 relative">
               <ThemeToggle />
-              <p className="text-sm">
-                Change Mode
-              </p>
+              
             </span>
           </div>
             <span className="text-7xl font-bold">Hello!</span>
