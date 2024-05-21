@@ -1,5 +1,4 @@
-//main components
-import { SelectDeliveryType } from "@/components/Order/SelectDeliveryType";
+
 //ui
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
