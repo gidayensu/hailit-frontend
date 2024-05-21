@@ -29,7 +29,7 @@ export default function DispatcherBottomNav () {
         </div>
       </Link>
 
-      <Link href="/dispatcher/trip">
+      <Link href="/dispatcher/trips">
         <div className={divClass}>
           <Button
             variant={path.startsWith("/dispatcher/trip") ? "default" : "secondary"}
