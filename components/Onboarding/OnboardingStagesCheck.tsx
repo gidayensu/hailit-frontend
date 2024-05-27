@@ -34,7 +34,7 @@ function OnboardingStageLayout ({onBoardingStage, stage}:{onBoardingStage:boolea
           {onBoardingStage ? (
             <FiCheck />
           ) : (
-            <p className="opacity-50 font-bold">1</p>
+            <p className="opacity-50 font-bold">{stage === "One" ? "'1'" : stage === "Two" ? "2" : "3" }</p>
           )}
         </div>
         {

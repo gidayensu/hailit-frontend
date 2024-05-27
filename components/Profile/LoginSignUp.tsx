@@ -5,13 +5,13 @@ import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import { Input } from "../ui/input";
 import { FcGoogle } from "react-icons/fc";
-import { TailSpin } from "react-loader-spinner"
 import { useRouter } from "next/navigation";
 import Loader from "../Shared/Loader";
+
 //redux
 import { useAppDispatch } from "@/lib/store/hooks";
-import { setAuthState } from "@/lib/store/authSlice";
-import { setUserState } from "@/lib/store/userSlice";
+import { setAuthState } from "@/lib/store/slice/authSlice";
+import { setUserState } from "@/lib/store/slice/userSlice";
 
 //react
 import { useState, useEffect } from "react";
@@ -22,13 +22,12 @@ import {useForm, SubmitHandler} from 'react-hook-form';
 //supabase
 
 
-
+import {   supabaseSignUp, supabaseSignIn, googleSupabaseSignIn  } from "@/lib/supabaseAuth";
+//types
 import type { Inputs } from "@/lib/supabaseAuth";
 
-import {   supabaseSignUp, supabaseSignIn, googleSupabaseSignIn  } from "@/lib/supabaseAuth";
-
-
 export default function LoginSignUp () {
+  
     const [dataFetchError, setDataFetchError] = useState<boolean>(false);
   const [formSubmissionLoading, setFormSubmissionLoading] = useState<boolean>(false)
   const dispatch = useAppDispatch();
@@ -45,27 +44,31 @@ export default function LoginSignUp () {
 
   
   const {register, handleSubmit} = useForm<Inputs>();
+
+  //sign up form submission
   const onSignUpSubmit: SubmitHandler<Inputs> = async (data)=> {
     const signUpData = await supabaseSignUp(data);
     if (signUpData.error) {
       setFormSubmissionLoading(false)
       setDataFetchError(true)
     }
-    console.log('signUpData::', signUpData)
+    
     if (signUpData.user) {
       setFormSubmissionLoading(false)
       dispatch(setAuthState(true))
       
+    
       dispatch(setUserState({
-        user_id: signUpData.user[0].user_id,
-        first_name: signUpData.user[0].first_name,
-        last_name: signUpData.user[0].last_name,
-          email: signUpData.user[0].email,
-          onboard: signUpData.user[0].onboard
+        user_id: signUpData.user.user_id,
+        first_name: signUpData.user.first_name,
+        last_name: signUpData.user.last_name,
+          email: signUpData.user.email,
+          user_role: signUpData.user_role,
+          onboard: signUpData.user.onboard
       
         }))
         
-      const onboard = signUpData.user[0].onboard;
+      const onboard = signUpData.user.onboard;
         onboard ? router.push('/profile') : router.push('/onboarding')
     }
   }
@@ -80,24 +83,29 @@ export default function LoginSignUp () {
     }
     
     if (signInData.user) {
+    
+      
       setFormSubmissionLoading(false)
       dispatch(setAuthState(true))
       
       dispatch(setUserState({
-        user_id: signInData.user[0].user_id,
-        first_name: signInData.user[0].first_name,
-        last_name: signInData.user[0].last_name,
-          email: signInData.user[0].email,
-          onboard: signInData.user[0].onboard
+        user_id: signInData.user.user_id,
+        first_name: signInData.user.first_name,
+        last_name: signInData.user.last_name,
+          email: signInData.user.email,
+          user_role: signInData.user_role,
+          onboard: signInData.user.onboard
       
         }))
         
-      const onboard = signInData.user[0].onboard;
-        onboard ? router.push('/profile') : router.push('/onboarding')
+
+      const onboard = signInData.user.onboard;
+        onboard ? router.push('/') : router.push('/onboarding')
     }
     
   }
   
+  //google sign in
   const googleSignIn = async ()=> {
     setFormSubmissionLoading(true)
     const signInData = await googleSupabaseSignIn()
@@ -131,11 +139,11 @@ export default function LoginSignUp () {
                 <form onSubmit={handleSubmit(onSignUpSubmit)}>
                 <div className="space-y-1">
                   <Label>Email</Label>
-                  <Input id="current" type="email" {...register("email")}/>
+                  <Input id="current" type="email" {...register("email")} required/>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="new">Password</Label>
-                  <Input id="new" type="password" {...register("password")}/>
+                  <Input id="new" type="password" {...register("password")} required/>
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="new">Confirm Password</Label>
@@ -175,17 +183,12 @@ export default function LoginSignUp () {
                   
                 <div className="space-y-1">
                   <Label htmlFor="name">Email</Label>
-                  <Input
-                    id="name"
-                    placeholder="example@email.com"
-                    type="text"
-                    {...register("email")}
-                  />
+                  <Input id="name" placeholder="example@email.com" type="email" {...register("email")}    required  />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="username">Password</Label>
                   <Input id="username" placeholder="Password" type="password" 
-                  {...register("password")}
+                  {...register("password")} required
                   />
                 </div>
                 <Button className="w-full h-12 mt-4" type="submit">{formSubmissionLoading ? <Loader color="#fff23"/> : 'Login'}</Button>

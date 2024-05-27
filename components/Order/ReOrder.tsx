@@ -11,11 +11,11 @@ import {
 //main components
 import OrderSummaryMin from "./OrderSummaryMin";
 
-export function ReOrder() {
+export function ReOrder({pickupLocation, dropOffLocation, senderNumber, recipientNumber} : {pickupLocation: string, dropOffLocation:string, senderNumber:string, recipientNumber:string}) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="w-full">
+        <Button variant="default" className="w-full">
           Reorder
         </Button>
       </DrawerTrigger>
@@ -28,9 +28,9 @@ export function ReOrder() {
               </span>
               <span className="text-sm">
                 <p className="line-clamp-1">
-                  <b>Pickup:</b> Accra Teimain
+                  <b>Pickup:</b> {pickupLocation}
                 </p>
-                <p>0586780454</p>
+                <p>{senderNumber}</p>
               </span>
             </div>
             <div className="flex flex-col justify-end items-start">
@@ -39,15 +39,15 @@ export function ReOrder() {
               </span>
               <span className="text-sm">
                 <p className="line-clamp-1">
-                  <b>To: </b>Kumasi Amakom
+                  <b>To: </b>{dropOffLocation}
                 </p>
-                <p>0586780454</p>
+                <p>{recipientNumber}</p>
               </span>
             </div>
           </div>
           <div className="flex items-center justify-center space-x-2 px-4">
             <OrderSummaryMin
-              deliveryStatus="Yet to Book"
+              deliveryStatus="New"
               packageType="Gadgets"
             />
           </div>

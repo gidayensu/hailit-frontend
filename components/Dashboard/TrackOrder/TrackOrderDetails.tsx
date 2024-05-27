@@ -11,10 +11,10 @@ import { LiaMotorcycleSolid } from "react-icons/lia";
 import { Separator } from "../../ui/separator";
 import { LuUser } from "react-icons/lu";
 import OrderSummary from "../../Order/OrderSummary";
-import OrderStatusElement from "./OrderStatusElement";
+import OrderStatusElement from "../../Order/TrackOrder/OrderStatusElement";
 
 // type OrderStatus = "New Order" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
-export type OrderStatus = string;
+export type OrderStatus = "New" |  "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 
 export default function TrackOrder() {
 
@@ -24,15 +24,7 @@ export default function TrackOrder() {
 
   let currentOrderStage = 4;
 
-  currentOrderStatus === "New Order"
-    ? currentOrderStage
-    : currentOrderStatus === "Picked Up"
-    ? (currentOrderStage = 2)
-    : currentOrderStatus === "In Transit"
-    ? (currentOrderStage = 3)
-    : currentOrderStatus === "Delivered"
-    ? (currentOrderStage = 4)
-    : currentOrderStage;
+  
   return (
     <main className="flex flex-col gap-5">
       {/* HEADER */}
@@ -71,7 +63,7 @@ export default function TrackOrder() {
 
           <div className="flex">
             <OrderStatusElement
-              orderStatus="New Order"
+              orderStatus="New"
               currentOrderStage={currentOrderStage}
               orderStage={1}
             >
@@ -194,7 +186,7 @@ export default function TrackOrder() {
           <h3 className="font-bold">Package</h3>
           <h3 className="text-[12px] text-slate-400 -mt-3">Package Details</h3>
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <OrderSummary deliveryStatus="INTERCITY" />
+            <OrderSummary deliveryStatus="DELIVERED" deliveryType="SCHEDULED" />
           </div>
         </div>
         <Container className="flex flex-col  w-full lg:w-2/6 h-52 rounded-lg p-3 gap-2">

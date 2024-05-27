@@ -1,14 +1,18 @@
 "use client";
 //packages + react + next + redux
-import { useState } from "react";
+
 import { useRouter } from "next/navigation";
-
+import { updateUserDetails } from "@/components/Form/FormSubmission";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import CustomerProfile from "@/components/Form/EditCustomerProfile";
+import { setBoardingCompletion, setOnboardingStages } from "@/lib/store/slice/onBoardingSlice";
+import { setUserOnBoard } from "@/lib/store/slice/userSlice";
+import { setAuthState } from "@/lib/store/slice/authSlice";
+import { sessionAccessToken } from "@/lib/supabaseAuth";
+import { setFormSubmissionLoading, setFormSubmissionError} from "@/lib/store/formSlice"
 
-import { setBoardingCompletion, setOnboardingStages } from "@/lib/store/onBoardingSlice";
-import { setUserOnBoard } from "@/lib/store/userSlice";
-
-
+//react-hook-form
+import {useForm, SubmitHandler} from 'react-hook-form';
 
 //ui related components + icons
 import { FiArrowLeft, FiCheck } from "react-icons/fi";
@@ -19,17 +23,21 @@ import SecondStage from "@/components/Onboarding/SecondStage";
 import FirstStage from "@/components/Onboarding/FirstStage/FirstStage";
 import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
 
+import { CustomerDetails } from "@/lib/store/slice/onBoardingSlice";
 
 
 export default function Onboarding() {
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const {authenticationState} = useAppSelector((state)=>state.auth);
   const {onboard, chosenRole, stageOne, stageTwo, stageThree} = useAppSelector((state)=>state.onBoarding)
-
   
 
+  const {handleSubmit} = useForm<CustomerDetails>();
+
+  
   const handleOnboardStage = (stage: "First" | "Second" | "Third" | "Complete")=> {
     if (stage === "First") {
       dispatch(setOnboardingStages({
@@ -54,14 +62,15 @@ export default function Onboarding() {
         stageThree: true
       }))
     }
-
+    
     if (stage === "Complete") {
       dispatch(setBoardingCompletion(true))
       dispatch(setUserOnBoard(true))
       router.push('/')
     }
   }
-
+  
+  
   return (
     <>
     {
@@ -118,26 +127,29 @@ export default function Onboarding() {
         stageTwo &&
         !stageThree && (
           <>
-          <SecondStage/>
-          <div className="flex md:w-1/4 w-full gap-4 px-4 md:p-0 ">
+          
+              <SecondStage />   
+        
+        <div className="flex md:w-1/3 w-full gap-4 px-4 md:p-0 ">
               <Button
                 variant={"outline"}
                 className="w-1/3"
                 onClick={() => {
                   handleOnboardStage("First");
                 }}
-              >
+                >
                 <FiArrowLeft />
               </Button>
               <Button
                 className="w-full"
-                onClick={() => {
-                  handleOnboardStage("Third");
-                }}
-              >
+                form="customerProfileUpdate"
+                type="submit"
+                
+                >
                 Next
               </Button>
             </div>
+                  
           </>
           
         )}
@@ -150,15 +162,7 @@ export default function Onboarding() {
           <LastStage/>
 
           <div className="w-full md:w-2/4 p-5 flex  items-center justify-center gap-4">
-              <Button
-                variant={"outline"}
-                className="w-1/3"
-                onClick={() => {
-                  handleOnboardStage("Third");
-                }}
-              >
-                <FiArrowLeft />
-              </Button>
+              
               <Button
                 className="w-full"
                 onClick={() => {

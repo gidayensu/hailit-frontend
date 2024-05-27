@@ -4,6 +4,7 @@ export interface User {
     user_id: string,
     first_name: string,
     last_name: string,
+    user_role: string,
     email: string,
     onboard: boolean
 
@@ -14,6 +15,7 @@ const initialState:User = {
     first_name: '',
     last_name: '',
     email: '',
+    user_role: '',
     onboard: false
 
 }
@@ -27,6 +29,7 @@ export const userSlice = createSlice({
             state.first_name = action.payload.first_name
             state.last_name = action.payload.last_name
             state.email = action.payload.email
+            state.user_role = action.payload.user_role
             state.onboard = action.payload.onboard
             
         },

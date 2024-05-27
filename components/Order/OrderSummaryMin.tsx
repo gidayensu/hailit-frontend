@@ -17,7 +17,7 @@ type DeliveryStatus =
   | "Cancelled"
   | "Picked up"
   | "Delivering"
-  | "New Order"
+  | "New"
   |  "Yet to Book";
 
 type PackageType = | "Gadgets"
@@ -88,8 +88,8 @@ export default function OrderSummaryMin({
                 ? "  text-sky-600"
                 : deliveryStatus === "Delivering"
                 ? " text-amber-500 "
-                : deliveryStatus === "New Order"
-                ? " text-slate-600 dark:text-slate-50"
+                : deliveryStatus === "New"
+                ? " text-teal-600 dark:text-slate-50"
                 : " text-red-500"
             }  h-5 w-20 rounded-md    `}
           >

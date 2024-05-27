@@ -1,5 +1,5 @@
 
-import Container from "../ui/container"
+import Container from "../../ui/container"
 
 interface ChoicesProps {
     handleDeliveryOption: (deliveryOption:string)=>void,
@@ -15,7 +15,7 @@ export  const DeliveryChoices:React.FC<ChoicesProps> = ({handleDeliveryOption, d
         <>
         <div className="w-full" onClick={()=>handleDeliveryOption(elementOption)}>
 
-<Container className={`flex flex-col items-center justify-center w-full h-40 md:h-44  rounded-lg p-3 ${deliveryOption === elementOption || !deliveryOption  ? '': 'text-slate-300 opacity-60'} cursor-pointer`}>
+<Container className={`flex flex-col items-center justify-center w-full h-40 md:h-44  rounded-lg p-3 ${deliveryOption === elementOption || !deliveryOption  ? '': 'text-slate-300'} cursor-pointer`}>
   <MainIcon className={`text-3xl mb-2 ${deliveryOption === elementOption || !deliveryOption  ? 'text-blue-600': 'text-slate-300'}`}/>
   <p className="font-bold text-[12px] md:text-sm">{elementOption.toUpperCase()}</p>
   {children}
