@@ -20,15 +20,17 @@ type DeliveryStatus =
   | "New"
   |  "Yet to Book";
 
-type PackageType = | "Gadgets"
+type PackageType = | "Electronics"
 | "Parcel"
 | "Food"
 | "Fragile"
 | "Others";
 export default function OrderSummaryMin({
+  tripId,
   deliveryStatus,
   packageType
 }: {
+  tripId: string,
   deliveryStatus: DeliveryStatus,
   packageType: PackageType
 }) {
@@ -39,7 +41,7 @@ export default function OrderSummaryMin({
 
   //setting other icon colors
   switch (packageType) {
-    case("Gadgets"): {
+    case("Electronics"): {
       deliveryTypeIcon = <PiMonitorFill className="text-teal-400 dark:text-teal-500"/> 
       deliveryTypeIconBgClass = "bg-teal-100 dark:bg-teal-200" 
     }
@@ -74,8 +76,8 @@ export default function OrderSummaryMin({
             {deliveryTypeIcon}
           </span>
           <span >
-              <h3 className="ml-2 font-bold text-s">#PKG-1205-3</h3>
-            <p className="ml-2 text-[12px] text-slate-500">12th May, 2024</p>
+              <h3 className="ml-2 font-bold text-s">{tripId}</h3>
+            <p className="ml-2 text-[12px] text-slate-500">{tripRequestDate}</p>
           </span>
         </div>
           <div className="flex flex-col">

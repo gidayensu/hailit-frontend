@@ -48,7 +48,7 @@ export function ReOrder({pickupLocation, dropOffLocation, senderNumber, recipien
           <div className="flex items-center justify-center space-x-2 px-4">
             <OrderSummaryMin
               deliveryStatus="New"
-              packageType="Gadgets"
+              packageType="Electronics"
             />
           </div>
           <DrawerFooter>

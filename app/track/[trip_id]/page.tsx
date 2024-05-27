@@ -151,7 +151,7 @@ export default function TrackDelivery() {
             </div>
           </Container>
           <div className="flex flex-col gap-2 mt-4 w-full">
-            <ReOrder dropOffLocation={trip.drop_off_location} pickupLocation={trip.pickup_location} recipientNumber=""/>
+            <ReOrder dropOffLocation={trip.drop_off_location} pickupLocation={trip.pickup_location} recipientNumber={trip.recipient_number} senderNumber={trip.sender_number}/>
             <Modal dialogTriggerElement="Help" className="border border-red-500 w-full text-red-500 h-10 rounded-lg">
 
             
