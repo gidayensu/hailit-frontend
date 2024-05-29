@@ -154,7 +154,7 @@ export default function TrackDelivery() {
             <ReOrder tripData={trip} />
             {
               trip.trip_status && (trip.trip_status !== 'Delivered' || trip.trip_status !== 'Cancelled') &&
-            <Button className="border border-red-500 bg-transparent text-red-500 ">
+            <Button variant={'empty'} className="border border-red-500 hover:border-red-700 hover:text-red-700 bg-transparent text-red-500 dark:bg-transparent dark:text-red-500">
                 Cancel
             </Button>
             }

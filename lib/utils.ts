@@ -84,4 +84,6 @@ export const extractDateWithDayFomDate = (dateString:string | null | Date)=> {
   return date.toDateString();
 }
 
-
+export const copyToClipBoard = (element:string)=> {
+  navigator.clipboard.writeText(element);
+}
