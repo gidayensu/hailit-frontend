@@ -4,7 +4,7 @@ import { userSlice } from './slice/userSlice';
 import { onBoardingSlice } from './slice/onBoardingSlice';
 import { formSlice } from './slice/formSlice';
 import { deliveryChoiceSlice } from './slice/deliveryChoicesSlice';
-import { trackOrderSlice } from './slice/trackOrderSlice';
+import { newOrderSlice } from './slice/newOrderSlice';
 import { tripApi } from './apiSlice/tripApi';
 
 export const store = configureStore({
@@ -14,7 +14,7 @@ export const store = configureStore({
             onBoarding: onBoardingSlice.reducer,
             form: formSlice.reducer,
             deliveryChoices: deliveryChoiceSlice.reducer,
-            trackOrder: trackOrderSlice.reducer,
+            newOrder: newOrderSlice.reducer,
             [tripApi.reducerPath] : tripApi.reducer
         },
 

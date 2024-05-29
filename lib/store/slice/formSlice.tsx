@@ -5,8 +5,6 @@ interface Form {
     formSubmissionLoading: boolean,
     formSubmissionError: boolean,
     newTripSuccess: boolean,
-    
-
 }
 
 type FormSubmissionLoading = boolean;

@@ -1,14 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const generateQueryStr = (baseString: string, query: Object): string => {
-  const queryString: string =
-    baseString +
-    Object.entries(query)
-      .map(([key, value]) => `${key}=${value}`)
-      .join("&");
-
-  return queryString;
-};
+import { NewTrip } from "@/components/Form/NewOrderForm";
 
 interface IHeader {
   "X-RapidAPI-Key": string;
@@ -23,7 +15,7 @@ const Header: IHeader = {
 export const tripApi = createApi({
   reducerPath: "reviewApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:5000/api/v1/trip/user-trip/`,
+    baseUrl: `http://localhost:5000/api/v1/trip/`,
     prepareHeaders: (headers) => {
       headers.set("X-RapidAPI-Key", Header["X-RapidAPI-Key"]);
       headers.set("X-RapidAPI-Host", Header["X-RapidAPI-Host"]);
@@ -33,13 +25,29 @@ export const tripApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    getTripDetails: builder.query<any, string|string[]>({ // Change type to string for tripId
+    getTripDetails: builder.query<any, string|string[]>({ 
       query: (tripId) => ({
-        url: `${tripId}`, 
+        url: `user-trip/${tripId}`, 
+        method: "GET"
+      }),
+    }),
+    addTrip: builder.query<any, any>({ 
+      query: (tripDetails) => ({
+        url: `add`, 
+        method: "POST",
+        body: tripDetails
+      }),
+    }),
+    updateTrip: builder.query<any, any>({ 
+      query: ({tripId, tripDetails}) => ({
+        url: `add`, 
+        method: "POST",
+        body: tripDetails
       }),
     }),
     
   }),
+  
 });
 
-export const { useGetTripDetailsQuery } = tripApi;
+export const { useGetTripDetailsQuery, useAddTripQuery, useLazyAddTripQuery } = tripApi;

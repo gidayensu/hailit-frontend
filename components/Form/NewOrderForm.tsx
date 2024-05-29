@@ -10,17 +10,26 @@ import {useForm, SubmitHandler} from 'react-hook-form';
 
 //main components
 import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoicesBreadcrumb";
-import { createNewTrip } from "./FormSubmission";
 import PackageTypes from "../Order/NewDelivery/PackageTypes";
 
 //redux + next + react
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
-import { setNewTripSuccess } from "@/lib/store/slice/formSlice";
+import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
+import { useLazyAddTripQuery } from "@/lib/store/apiSlice/tripApi";
 
-import { setTrackedOrder } from "@/lib/store/slice/trackOrderSlice";
-
+export interface NewTrip {
+  trip_medium: string,
+    package_type: string,
+    pickup_location: string,
+    drop_off_location: string,
+    additional_information: string,
+    trip_type: string,
+    package_value: string,
+    sender_number: string,
+    recipient_number: string,
+}
 interface DeliveryDetails {
   
     pickup_location: string,
@@ -32,56 +41,48 @@ interface DeliveryDetails {
 }
 
 export default function NewOrderForm() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   
   const router = useRouter();
   const dispatch = useAppDispatch();
   const {package_type, trip_type, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
   
+
+  const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
+ 
+
+  
   const {register, handleSubmit } = useForm<DeliveryDetails>();
   
   
   const onDeliveryFormSubmit: SubmitHandler<DeliveryDetails> = async (data)=> {
-    setIsLoading(true);
+    setLoading(true);
     if(!package_type) {
       return (
-      setIsLoading(false)
+        setLoading(false)
       )
     }
     const formDetails = {...data, package_type, trip_type, trip_medium};
-    const newTrip = await createNewTrip(formDetails);
-
-    if (newTrip.error) {
-      dispatch(
-        setNewTripSuccess(false)
-      )
-      setIsLoading(false)
-      return router.push('/order/new/failed')
-    }
-
+    addTrip(formDetails)
     
-    dispatch(
-      setNewTripSuccess(true)
-    )
-    console.log('newTrip:', newTrip)
-    dispatch (
-      setTrackedOrder({
-        trip_id: newTrip.trip.trip_id,
-        trip_medium: newTrip.trip.trip_medium,
-        package_type: newTrip.trip.package_type,
-        additional_information: newTrip.trip.additional_information,
-        drop_off_location:  newTrip.trip.drop_off_location,
-        package_value: newTrip.trip.package_value,
-        pickup_location: newTrip.trip.pickup_location,
-        recipient_number: newTrip.trip.recipient_number,
-        scheduled: scheduled,
-        sender_number: newTrip.trip.sender_number,
-        trip_type: newTrip.trip.trip_type  
-
-      })
-    )
+  }
+  if(data && !isLoading && !error) {
+    const {trip} = data;
+    dispatch(setNewOrder({
+      order_success: true,
+      trip_id: trip.trip_id,
+      scheduled: false
+    }))
     router.push('/order/new/success')
   }
+
+  if (error) {
+    
+    router.push('/order/new/failed')
+  }
+
+    
+    
   return (
     <form className="flex flex-col gap-4 md:justify-center md:items-center" onSubmit={handleSubmit(onDeliveryFormSubmit)}>
       <div className=" grid w-full max-w-sm items-center gap-1.5 ">
@@ -161,14 +162,14 @@ export default function NewOrderForm() {
             <p>Package type not selected</p>
           </span>
         }
-        {!isLoading &&
+        {!loading &&
           <Button type="submit" className="w-full h-14" >
           Book
         
         </Button>
         }
         
-        { isLoading &&
+        { loading &&
         <Button type="submit" className="w-full h-14 cursor-not-allowed" disabled>
           <Loader color="red"/>
 

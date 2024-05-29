@@ -9,10 +9,9 @@ import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { redirect } from "next/navigation";
 
 export default function SuccessfulOrder() {
-  const {newTripSuccess} = useAppSelector(state=>state.form);
-  const { trip_id, additional_information, drop_off_location, package_type, package_value, pickup_location, recipient_number,scheduled
-  } = useAppSelector(state=>state.trackOrder)
-  if(!newTripSuccess) {
+  
+  const { trip_id, order_success } = useAppSelector(state=>state.newOrder)
+  if(!order_success) {
     redirect('/order')
   }
 

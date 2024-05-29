@@ -20,19 +20,25 @@ type DeliveryStatus =
   | "New"
   |  "Yet to Book";
 
-type PackageType = | "Electronics"
-| "Parcel"
+export type PackageType = | "Electronics"
 | "Food"
 | "Fragile"
+| "Clothes"
+| "Documents"
+| "Bulky Items"
 | "Others";
 export default function OrderSummaryMin({
   tripId,
+  tripRequestDate,
   deliveryStatus,
-  packageType
+  packageType,
+  cost
 }: {
   tripId: string,
+  tripRequestDate: string | null,
   deliveryStatus: DeliveryStatus,
-  packageType: PackageType
+  packageType: PackageType | string,
+  cost: string
 }) {
 
     //default icon gadgets
@@ -98,7 +104,7 @@ export default function OrderSummaryMin({
             <p>{deliveryStatus}</p>
           </span>
           
-            <p className="font-bold">GHS 50</p>
+            <p className="font-bold">GHS {cost}</p>
           
           </div>
         

@@ -3,7 +3,7 @@ import { RiMessage3Line } from "react-icons/ri";
 import { LuPhone } from "react-icons/lu";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 
-export default function CourierCard({firstName, lastName, vehicleName, vehicleNumber, tripMedium}: {firstName: string, lastName: string, vehicleName: string, vehicleNumber:string, tripMedium: string}) {
+export default function DispatcherCard({firstName, lastName, vehicleName, vehicleNumber, tripMedium}: {firstName: string, lastName: string, vehicleName: string, vehicleNumber:string, tripMedium: string}) {
   if (!vehicleNumber || !firstName) {
     return (
       <Container className="w-full rounded-xl border  h-24  p-4 flex justify-between items-center">
