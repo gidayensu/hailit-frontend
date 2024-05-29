@@ -31,16 +31,16 @@ export default function Home() {
     <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-[#121212] relative mb-20 ">
       
       
-          {/* Location */}
+          
           <div className="md:w-4/6 w-full flex items-center justify-center">
 
           <TrackPackage/>
           </div>
-          {/* Send a package */}
+          
           
           <SendPackage/>
           
-          {/* Previous Orders  */}
+          
           <OrderHistory/>   
            </main>
     </>
