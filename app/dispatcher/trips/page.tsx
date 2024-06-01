@@ -1,3 +1,4 @@
+'use client'
 import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
 import Container from "@/components/ui/container";
 
