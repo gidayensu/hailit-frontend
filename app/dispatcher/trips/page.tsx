@@ -1,4 +1,4 @@
-import { RecentTripTable } from "@/components/Dashboard/RecentTripTable";
+import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
 import Container from "@/components/ui/container";
 
 export default function RiderTrips () {

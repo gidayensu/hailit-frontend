@@ -2,7 +2,7 @@ import { usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { setFormSubmissionError, setFormSubmissionLoading } from "@/lib/store/formSlice";
+import { setFormSubmissionError, setFormSubmissionLoading } from "@/lib/store/slice/formSlice";
 
 import { updateUserDetails } from "./FormSubmission";
 import { setOnboardingStages } from "@/lib/store/slice/onBoardingSlice";
