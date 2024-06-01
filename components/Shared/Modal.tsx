@@ -12,7 +12,7 @@ export function Modal({dialogTriggerElement, className, children}: {dialogTrigge
       <DialogTrigger className={`flex justify-center items-center text-sm ${className}`}>
         {dialogTriggerElement}
       </DialogTrigger>
-      <DialogContent className="max-w-[350px] sm:max-w-[425px]">
+      <DialogContent className="max-w-[350px] sm:max-w-[450px]">
         {children}
       </DialogContent>
     </Dialog>  );

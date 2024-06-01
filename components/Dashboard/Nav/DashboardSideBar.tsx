@@ -1,6 +1,6 @@
 import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
 import DashboardSections from "./DashboardSections"
-import { Separator } from "../ui/separator"
+import { Separator } from "@/components/ui/separator"
 import { RiFileListLine, RiSteering2Line } from "react-icons/ri"
 import { IoLogOutOutline } from "react-icons/io5"
 import { MdOutlineSportsMotorsports } from "react-icons/md"
@@ -12,7 +12,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
             dashMin ? "w-[60px]" : "md:w-[150px] w-[60px]"
           } py-4  px-2 bg-blue-500 h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4`}
         >
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3">
             <div
               className="flex items-center justify-center  w-full h-8 rounded-lg  cursor-pointer "
               onClick={handleDashMin}

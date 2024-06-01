@@ -1,3 +1,5 @@
+'use client'
+import useDebounce from "./mapDebounce";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Map, Marker } from "pigeon-maps";
@@ -8,26 +10,31 @@ import { fetchMapData, reverseMapSearch } from "@/lib/utils";
 
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
+import { setSearchData, setChosenLocation } from "@/lib/store/slice/mapSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
-type UserLocation = [number, number] | null;
+export type UserLocation = [number, number] | null;
 type UserLocationName = any;
 type MapBoundaryChange = boolean;
 
 export default function LocationMap() {
+  const dispatch = useAppDispatch();
+  const { searchData } = useAppSelector(state=>state.map)
   const [userLocation, setUserLocation] = useState<UserLocation>(null); // Initialize as null
   const [userLocationName, setUserLocationName] =
     useState<UserLocationName>(null);
   const [mapBoundaryChanged, setMapBoundaryChanged] =
     useState<MapBoundaryChange>(false);
-  const [mapSearchData, setMapSearchData] = useState<UserLocationName>(null);
+  
   const [mapSearchContainerOpen, setMapSearchContainerOpen] = useState(false);
   const [zoom, setZoom] = useState(18);
-
+  
   const mapDataHandler = async (searchQuery: any) => {
     const data = await fetchMapData(searchQuery.target.value);
-    setMapSearchData(data);
+    dispatch(setSearchData(data))
     setMapSearchContainerOpen(true);
   };
+  const handleDebounceMapData = useDebounce(mapDataHandler, 500)
   const locationNameData = async (
     latitude: string | number,
     longitude: string | number
@@ -66,7 +73,7 @@ export default function LocationMap() {
     }
   }, [userLocation]);
 
-  const [selectedLocation, setSelectedLocation] = useState(userLocation);
+  const [selectedLocation, setSelectedLocation] = useState<UserLocation>(userLocation);
   const [selectedLocationName, setSelectedLocationName] =
     useState(userLocationName);
 
@@ -76,7 +83,6 @@ export default function LocationMap() {
         locationNameData(selectedLocation[0], selectedLocation[1])
       );
     }
-    console.log("mapSearchData:::::", mapSearchData);
   }, [selectedLocation]);
 
   const selectedSearchItemHandler = (mapPoint: UserLocation) => {
@@ -84,6 +90,7 @@ export default function LocationMap() {
   };
   const selectedLocationHandler = (selectedLocation: UserLocation) => {
     //push this to store or state
+    dispatch(setChosenLocation(selectedLocation))
   };
 
   return (
@@ -92,12 +99,12 @@ export default function LocationMap() {
         <Input
           className="flex items-center justify-center h-10 sm:h-12 w-60 md:w-96 text-center bg-white z-50 mt-5 shadow-lg rounded-full"
           placeholder="Search your location"
-          onChange={() => mapDataHandler(event)}
+          onChange={() => handleDebounceMapData(event)}
         />
-        {mapSearchData && mapSearchContainerOpen && (
+        {searchData && mapSearchContainerOpen && (
           <div className="md:w-96 h-auto bg-white z-50 dark:bg-[#121212] text-black dark:text-slate-200 text-sm rounded-lg p-3">
             <span className="flex flex-col gap-2">
-              {mapSearchData.map((data: any, index: number) => {
+              {searchData.map((data: any, index: number) => {
                 console.log("data.lat:", data.lat);
                 if (data && index <= 3) {
                   return (
@@ -123,10 +130,10 @@ export default function LocationMap() {
                   );
                 }
               })}
-              {mapSearchData.length === 0 && (
+              {searchData && searchData?.length === 0 && (
                 <p className="w-full"> No location matches your search </p>
               )}
-              {mapSearchData && mapSearchData?.length > 3 && (
+              {searchData && searchData?.length > 3 && (
                 <div>
                   <p className="text-red">See More</p>
                 </div>
@@ -135,10 +142,7 @@ export default function LocationMap() {
           </div>
         )}
       </div>
-      {/* // onClick={({ event, latLng, pixel }) => {
-        //   // console.log("event:", event, "latLng:", latLng, "pixel:", pixel);
-        //   setSelectedLocation(latLng);
-        // }} */}
+      
 
       <div className="relative w-full h-full">
         {userLocation && selectedLocation && (
@@ -149,6 +153,8 @@ export default function LocationMap() {
               minZoom={1}
               maxZoom={18}
               zoom={zoom}
+              touchEvents = {true}
+
               animate={true}
               onAnimationStart={() => setMapBoundaryChanged(true)}
               onAnimationStop={() => setMapBoundaryChanged(false)}

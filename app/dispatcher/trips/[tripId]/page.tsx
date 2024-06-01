@@ -29,11 +29,11 @@ export default function DispatcherTrip () {
 
         <TrackOrderContainer headingText="Trip Status" >
           
-          <OrderUpdates />
+          <OrderUpdates currentOrderStage={2} currentOrderStatus="Cancelled"/>
         </TrackOrderContainer>
         
-        <TrackOrderContainer headingText="Location and Timeline">
-          <OrderSummary deliveryStatus="SCHEDULED" />
+        <TrackOrderContainer headingText="LOCATION AND TIMELINE">
+          <OrderSummary deliveryStatus="IN TRANSIT" completionDate="Mon, 30 May, 2024" commencementTime="2:15 PM" completionTime="1:15PM" deliveryType="TOMORROW" dropOffLocation="Kwadaso" pickupLocation="Asonomaso" tripId="4528"  commencementDate={'Mon, 24 May, 2024'} />
         </TrackOrderContainer>
 
         <TrackOrderContainer headingText="Sender">

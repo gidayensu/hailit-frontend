@@ -17,7 +17,7 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/tripApi";
+import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
 
 export interface NewTrip {
   trip_medium: string,

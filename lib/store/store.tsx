@@ -5,7 +5,10 @@ import { onBoardingSlice } from './slice/onBoardingSlice';
 import { formSlice } from './slice/formSlice';
 import { deliveryChoiceSlice } from './slice/deliveryChoicesSlice';
 import { newOrderSlice } from './slice/newOrderSlice';
-import { tripApi } from './apiSlice/tripApi';
+import { hailitApi } from './apiSlice/hailitApi';
+import  { mapSlice } from './slice/mapSlice'
+
+
 
 export const store = configureStore({
         reducer: {
@@ -14,12 +17,16 @@ export const store = configureStore({
             onBoarding: onBoardingSlice.reducer,
             form: formSlice.reducer,
             deliveryChoices: deliveryChoiceSlice.reducer,
+            map: mapSlice.reducer,
             newOrder: newOrderSlice.reducer,
-            [tripApi.reducerPath] : tripApi.reducer
+            [hailitApi.reducerPath] : hailitApi.reducer,
+            
+            
         },
 
         middleware: (getDefaultMiddleware) => 
-                getDefaultMiddleware({}).concat([tripApi.middleware])
+                getDefaultMiddleware({}).concat([hailitApi.middleware])
+                                        
     })
 
 

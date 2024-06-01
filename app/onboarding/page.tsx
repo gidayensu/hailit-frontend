@@ -9,7 +9,7 @@ import { setBoardingCompletion, setOnboardingStages } from "@/lib/store/slice/on
 import { setUserOnBoard } from "@/lib/store/slice/userSlice";
 import { setAuthState } from "@/lib/store/slice/authSlice";
 import { sessionAccessToken } from "@/lib/supabaseAuth";
-import { setFormSubmissionLoading, setFormSubmissionError} from "@/lib/store/formSlice"
+import { setFormSubmissionLoading, setFormSubmissionError} from "@/lib/store/slice/formSlice"
 
 //react-hook-form
 import {useForm, SubmitHandler} from 'react-hook-form';

@@ -30,8 +30,8 @@ export default function DispatcherCard({firstName, lastName, vehicleName, vehicl
 
         <span>
           <p className="font-bold text-sm">{`${firstName} ${lastName}`}</p>
-          <p className="font-bold text-[10px]">
-            {vehicleName} - {vehicleNumber}</p>
+          <p className="font-bold text-[12px]">
+            {vehicleName} <br /> {vehicleNumber}</p>
         </span>
       </div>
       <div className="flex justify-center items-center gap-2">

@@ -10,10 +10,10 @@ import { PiReceipt } from "react-icons/pi";
 import { LiaMotorcycleSolid } from "react-icons/lia";
 import { Separator } from "../../ui/separator";
 import { LuUser } from "react-icons/lu";
-import OrderSummary from "../../Order/OrderSummary";
+import { Modal } from "@/components/Shared/Modal";
 import OrderStatusElement from "../../Order/TrackOrder/OrderStatusElement";
 
-// type OrderStatus = "New Order" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
+// type OrderStatus = "New" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 export type OrderStatus = "New" |  "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 
 export default function TrackOrder() {
@@ -169,8 +169,11 @@ export default function TrackOrder() {
               variant={"empty"}
               className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white"
             >
-              <TbArrowsExchange className="text-xl " />
-              <p>Assign</p>
+              
+              <Modal dialogTriggerElement={<><TbArrowsExchange className="text-xl " /> <p>Assign </p></>} className="" >
+                <p>List of Drivers</p>
+              
+              </Modal>
             </Button>
           </div>
         </Container>
@@ -186,7 +189,7 @@ export default function TrackOrder() {
           <h3 className="font-bold">Package</h3>
           <h3 className="text-[12px] text-slate-400 -mt-3">Package Details</h3>
           <div className="grid w-full max-w-sm items-center gap-1.5">
-            <OrderSummary deliveryStatus="DELIVERED" deliveryType="SCHEDULED" />
+            
           </div>
         </div>
         <Container className="flex flex-col  w-full lg:w-2/6 h-52 rounded-lg p-3 gap-2">

@@ -1,8 +1,8 @@
 //ui + icons
-import Container from "../ui/container"
+import Container from "@/components/ui/container";
 import { IoTrendingUp, IoTrendingDown } from "react-icons/io5";
 //main components
-import { RecentTripTable } from "./RecentTripTable"
+import { RecentTripTable } from "./RecentTripTable";
 
 export default function Overview () {
     return (
@@ -14,7 +14,7 @@ export default function Overview () {
               <div className="">
                 <h3 className="font-bold"> DELIVERIES</h3>
                 <h3 className="text-[12px] text-slate-400 -mt-1">
-                    This Week`&lsquo;`s Deliveries
+                    This Week&lsquo;s Deliveries
                 </h3>
               </div>
               </div>
@@ -34,7 +34,7 @@ export default function Overview () {
               <div className="">
                 <h3 className="font-bold">REVENUE</h3>
                 <h3 className="text-[12px] text-slate-400 -mt-1">
-                    This Week`&lsquo;`s Revenue
+                    This Week &lsquo;s Revenue
                 </h3>
               </div>
               </div>

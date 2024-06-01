@@ -5,6 +5,8 @@ export type Deliveries = boolean;
 
 export default function OrderHistory () {
     const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
+    
+    
 
     const handleSelectedDeliveries = (status: boolean) => {
       setCurrentDeliveries(status);
@@ -39,10 +41,11 @@ export default function OrderHistory () {
               <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl gap-2 items-center justify-center">
                 <div className="flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3">
 
-                <OrderSummaryMin deliveryStatus="New Order" packageType="Electronics"/>
-                <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel"/>
+{/* PASS USER ID TO MAKE THIS ACTIVE */}
+                <OrderSummaryMin deliveryStatus="New" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}  />
+                <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
 
-                <OrderSummaryMin deliveryStatus="Delivering" packageType="Others"/>
+                <OrderSummaryMin deliveryStatus="In Transit" packageType="Others" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
                 </div>
               </div>
             )}
@@ -50,8 +53,8 @@ export default function OrderHistory () {
               <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl gap-2 items-center justify-center">
                 <div className="flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3">
 
-                <OrderSummaryMin deliveryStatus="Delivered" packageType="Food" />
-                <OrderSummaryMin deliveryStatus="Cancelled" packageType="Fragile"/>
+                <OrderSummaryMin deliveryStatus="Delivered" packageType="Food" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Cancelled" packageType="Fragile" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
                 </div>
               </div>
             )}

@@ -14,7 +14,7 @@ import { ReOrder } from "@/components/Order/ReOrder";
 import TrackOrderContainer from "@/components/Order/TrackOrder/TrackOrderContainer";
 import { MidSkeleton, TopSkeleton } from "@/components/Order/OrderSkeleton";
 //redux + data fetch + supabaseAuth + next
-import { useGetTripDetailsQuery } from "@/lib/store/apiSlice/tripApi";
+import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useParams } from "next/navigation";
 import TrackOrder from "@/components/Order/TrackOrder/TrackOrder";
 //helper functions
@@ -23,7 +23,7 @@ import { extractTimeFromDate, extractDateWithDayFomDate } from "@/lib/utils";
 export default function TrackDelivery() {
   const params = useParams();
   const { trip_id } = params;
-  const { data, isLoading, error } = useGetTripDetailsQuery(`${trip_id}`);
+  const { data, isLoading, error } = useGetTripQuery(`${trip_id}`);
 
   if (isLoading) {
     return (
@@ -102,14 +102,14 @@ export default function TrackDelivery() {
       </TopSectionContainer>
 
       <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
-        <TrackOrderContainer headingText="Trip Status">
+        <TrackOrderContainer headingText="TRIP STATUS">
           <OrderUpdates
             currentOrderStage={trip.trip_stage}
             currentOrderStatus={trip.trip_status}
           />
         </TrackOrderContainer>
 
-        <TrackOrderContainer headingText="Courier">
+        <TrackOrderContainer headingText="COURIER">
           <DispatcherCard
             firstName={dispatcher.first_name}
             lastName={dispatcher.last_name}
@@ -119,7 +119,7 @@ export default function TrackDelivery() {
           />
         </TrackOrderContainer>
 
-        <TrackOrderContainer headingText="Location and Timeline">
+        <TrackOrderContainer headingText="LOCATION AND TIMELINE">
           <OrderSummary
             deliveryStatus="DELIVERED"
             tripId={trip.trip_id}
@@ -133,18 +133,18 @@ export default function TrackDelivery() {
           />
         </TrackOrderContainer>
 
-        <TrackOrderContainer headingText="Cost and Payment">
+        <TrackOrderContainer headingText="COST AND PAYMENT">
           <Container className=" w-full h-auto rounded-xl">
             <div className="grid grid-cols-3  p-3 ">
-              <span className="text-[13px]">
+              <span className="text-sm">
                 <p className=" font-bold">Amount</p>
                 <p> {trip.trip_cost}</p>
               </span>
-              <span className="text-[13px]">
+              <span className="text-sm">
                 <p className=" font-bold">Status</p>
                 <p> {trip.payment_status ? "Paid" : "Not Paid"}</p>
               </span>
-              <span className="text-[13px]">
+              <span className="text-sm">
                 <p className=" font-bold">Method</p>
                 <p> {trip.payment_method}</p>
               </span>

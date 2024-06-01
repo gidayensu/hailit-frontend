@@ -17,7 +17,7 @@ import { extractDateWithDayFomDate } from "@/lib/utils";
 //redux+next+react
 import { useState } from "react";
 
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/tripApi";
+import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";

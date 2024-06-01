@@ -8,14 +8,18 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
 //main components
-import DashboardSideBar from "@/components/Dashboard/DashboardSideBar";
-import { RecentTripTable } from "@/components/Dashboard/RecentTripTable";
-import { AllTripsTable } from "@/components/Dashboard/AllTripsTable";
+import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
+import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
+import { AllTripsTable } from "@/components/Dashboard/Orders/AllTripsTable";
+import { AllUsers } from "@/components/Dashboard/Users/AllUsersTable";
+import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers";
+import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
-import Overview from "@/components/Dashboard/Overview";
+import Overview from "@/components/Dashboard/Overview/Overview";
+
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
-import { DashboardBottomNav } from "@/components/Dashboard/DashboardBottomNav";
-import DashboardTopNav from "@/components/Dashboard/DashboardTopNav";
+import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
+import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 
 export default function Dashboard() {
   const [dashMin, setDashMin] = useState<boolean>(false);
@@ -32,7 +36,7 @@ export default function Dashboard() {
     <>
       <DashboardTopNav />
 
-      <main className="flex gap-4 w-full  bg-[#f7f7f7] dark:bg-[#121212]">
+      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7] dark:bg-[#121212]">
         
         <DashboardSideBar
           activeSection={activeSection}
@@ -53,7 +57,7 @@ export default function Dashboard() {
 
           {activeSection === "Users" && (
             <>
-              <section className="flex gap-2">
+              <section className="lg:hidden flex gap-2">
                 <Button
                   variant={"empty"}
                   className="space-x-1 bg-black hover:bg-[#1e1e1e] hover:dark:bg-white text-white  dark:border  dark:text-[#121212] dark:bg-slate-50"
@@ -71,12 +75,17 @@ export default function Dashboard() {
                 </Button>
               </section>
               <section>
-                <RecentTripTable />
+                <AllUsers />
               </section>
+              
             </>
           )}
 
           {activeSection === "Track Order" && <TrackOrder /> }
+
+          {activeSection === "Riders" && <AllRiders />}
+
+          {activeSection === "Drivers" && <AllDrivers />}
           
           {activeSection === "Edit Profile" &&  <CustomerProfile /> }
         </article>

@@ -4,9 +4,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import type { CurrentTheme } from "@/app/profile/page";
-import { ThemeToggle } from "../Theme/ThemeToggle";
+import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+
 import { RiNotification3Line } from "react-icons/ri";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 
 
 export default function DashboardTopNav () {

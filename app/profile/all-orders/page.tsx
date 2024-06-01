@@ -49,18 +49,18 @@ export default function AllOrders () {
 
             {currentDeliveries && (
               <>
-                <OrderSummaryMin deliveryStatus="New Order" packageType="Electronics"/>
-                <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel"/>
+                <OrderSummaryMin deliveryStatus="New" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel"cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
 
-                <OrderSummaryMin deliveryStatus="Delivering" packageType="Others"/>
+                <OrderSummaryMin deliveryStatus="In Transit" packageType="Others" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
               </>
             )}
             {!currentDeliveries && (
               <>
-                <OrderSummaryMin deliveryStatus="Delivered" packageType="Food" />
-                <OrderSummaryMin deliveryStatus="Cancelled" packageType="Fragile"/>
-                <OrderSummaryMin deliveryStatus="Delivered" packageType="Others"/>
-                <OrderSummaryMin deliveryStatus="Delivered" packageType="Parcel"/>
+                <OrderSummaryMin deliveryStatus="Delivered" packageType="Food" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Cancelled" packageType="Fragile" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Delivered" packageType="Others" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Delivered" packageType="Parcel" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
               </>
             )}
           </div>
