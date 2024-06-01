@@ -15,7 +15,7 @@ export default function SkeletonTable({
       {skeletons.map((_, index) => (
         <TableRow key={index}>
           {tableCells.map((_, index) => (
-            <TableCell>
+            <TableCell key={index}>
               <Skeleton className="h-4 w-16" />
             </TableCell>
           ))}
