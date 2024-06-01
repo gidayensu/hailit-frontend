@@ -1,5 +1,5 @@
 'use client'
-import useDebounce from "./mapDebounce";
+
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Map, Marker } from "pigeon-maps";
@@ -34,7 +34,7 @@ export default function LocationMap() {
     dispatch(setSearchData(data))
     setMapSearchContainerOpen(true);
   };
-  const handleDebounceMapData = useDebounce(mapDataHandler, 500)
+  
   const locationNameData = async (
     latitude: string | number,
     longitude: string | number
@@ -99,7 +99,7 @@ export default function LocationMap() {
         <Input
           className="flex items-center justify-center h-10 sm:h-12 w-60 md:w-96 text-center bg-white z-50 mt-5 shadow-lg rounded-full"
           placeholder="Search your location"
-          onChange={() => handleDebounceMapData(event)}
+          
         />
         {searchData && mapSearchContainerOpen && (
           <div className="md:w-96 h-auto bg-white z-50 dark:bg-[#121212] text-black dark:text-slate-200 text-sm rounded-lg p-3">
