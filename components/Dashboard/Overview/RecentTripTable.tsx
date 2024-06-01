@@ -1,5 +1,6 @@
+'use client'
 import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import Link from "next/link";
+
 import SkeletonTable from "../SkeletonTable";
 import {
     Table,
@@ -11,10 +12,19 @@ import {
   } from "@/components/ui/table"
   
 import { extractDateWithDayFomDate } from "@/lib/utils";
-
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { setActiveSection, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 
 export function RecentTripTable() {
-    const {data, isLoading, error} = useGetAllTripsQuery(`trips?limit=7`);
+    
+  const dispatch = useAppDispatch();
+  
+  const handleTrackTrip = (tripId:string)=> {
+    dispatch(setActiveSection('Track Order'))
+    dispatch (setTrackingOrder(true))
+    dispatch (setSelectedTripId(tripId))
+  }  
+  const {data, isLoading, error} = useGetAllTripsQuery(`trips?limit=7`);
     
     let trips = [];
     if (data) {
@@ -52,7 +62,7 @@ export function RecentTripTable() {
           }
           {data && trips.map((trip:any) => (
             
-            <TableRow key={trip.trip_id}>
+            <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
               
               <TableCell>{extractDateWithDayFomDate(trip.trip_request_date)} </TableCell>

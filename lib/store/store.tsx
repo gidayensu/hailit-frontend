@@ -6,6 +6,7 @@ import { formSlice } from './slice/formSlice';
 import { deliveryChoiceSlice } from './slice/deliveryChoicesSlice';
 import { newOrderSlice } from './slice/newOrderSlice';
 import { hailitApi } from './apiSlice/hailitApi';
+import { dashboardSlice } from './slice/dashboardSlice';
 import  { mapSlice } from './slice/mapSlice'
 
 
@@ -19,6 +20,7 @@ export const store = configureStore({
             deliveryChoices: deliveryChoiceSlice.reducer,
             map: mapSlice.reducer,
             newOrder: newOrderSlice.reducer,
+            dashboard: dashboardSlice.reducer,
             [hailitApi.reducerPath] : hailitApi.reducer,
             
             

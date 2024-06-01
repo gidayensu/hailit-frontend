@@ -1,3 +1,4 @@
+
 import type { OrderStatus } from "../../Dashboard/TrackOrder/TrackOrderDetails";
 import { GrFormCheckmark } from "react-icons/gr";
 import { GoX } from "react-icons/go";
@@ -22,7 +23,7 @@ export default function OrderStatusElement ({orderStatus, orderStage, currentOrd
                     <div className={`flex flex-col items-center justify-center ${currentOrderStage < orderStage ? 'text-gray-300 dark:text-[#4e4e4e]' : 'text-black dark:text-slate-50'}`}>
                         {children}
                         <div className="flex flex-col items-center justify-center w-full gap-1" >
-                            <p className={`text-sm   line-clamp-1 font-semibold ${orderStage === 0 ? 'text-red-500': currentOrderStage === 4 && orderStatus === 'Delivered' ? 'text-green-500' : ''}`}>{orderStatus}</p>
+                            <p className={`text-sm   line-clamp-1  ${orderStage === 0 ? 'text-red-500': currentOrderStage === 4 && orderStatus === 'Delivered' ? 'text-green-500' : ''}`}>{orderStatus}</p>
                             
                         </div>
                     </div>

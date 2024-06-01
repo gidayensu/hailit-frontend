@@ -16,7 +16,7 @@ import { MidSkeleton, TopSkeleton } from "@/components/Order/OrderSkeleton";
 //redux + data fetch + supabaseAuth + next
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useParams } from "next/navigation";
-import TrackOrder from "@/components/Order/TrackOrder/TrackOrder";
+import TrackOrder from "@/components/Order/TrackOrder/UserTrackOrder";
 //helper functions
 import { extractTimeFromDate, extractDateWithDayFomDate } from "@/lib/utils";
 

@@ -1,33 +1,65 @@
+'use client'
 //ui + icons
+import { CiViewList } from "react-icons/ci";
+import { PiPackageLight } from "react-icons/pi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Button } from "../../ui/button";
 import Container from "../../ui/container";
 import { GoChecklist, GoX } from "react-icons/go";
 import { TbArrowsExchange } from "react-icons/tb";
-import { PiArticle, PiCodesandboxLogo } from "react-icons/pi";
+import {  PiCodesandboxLogo } from "react-icons/pi";
 import { PiReceipt } from "react-icons/pi";
+import { PiMotorcycleLight } from "react-icons/pi";
 import { LiaMotorcycleSolid } from "react-icons/lia";
 import { Separator } from "../../ui/separator";
 import { LuUser } from "react-icons/lu";
 import { Modal } from "@/components/Shared/Modal";
-import OrderStatusElement from "../../Order/TrackOrder/OrderStatusElement";
 
+//main components
+import OrderStatusElement from "../../Order/TrackOrder/OrderStatusElement";
+import TrackOrderSkeleton from "./TrackOrderDetailsSkeleton";
+import TrackOrderForm from "@/components/Form/TrackOrderForm";
+//redux +react
+import { useRef } from "react";
+import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { setTrackingOrder, setSelectedTripId } from "@/lib/store/slice/dashboardSlice";
 // type OrderStatus = "New" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 export type OrderStatus = "New" |  "Picked Up" | "In Transit" | "Delivered" | "Cancelled";
 
 export default function TrackOrder() {
-
+  const {selectedTripId, trackingOrder} = useAppSelector(state=>state.dashboard);
+  const {data, isLoading, error} = useGetTripQuery(`${selectedTripId}`)
   const currentOrderStatus: OrderStatus = "Cancelled";
+  
+  const dispatch = useAppDispatch();
+  const inputRef = useRef<any>(null);
   
   const paymentStatus = 'Paid'
 
   let currentOrderStage = 4;
 
+  const handleTrackTrip = ()=> {
+    const tripId = inputRef.current?.value;;
+    dispatch (setTrackingOrder(true))
+    dispatch (setSelectedTripId(tripId))
+  }
+
   
   return (
     <main className="flex flex-col gap-5">
       {/* HEADER */}
+      {
+        !trackingOrder && 
+        <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip}/>
+      }
+      {
+        trackingOrder && isLoading &&
+        <TrackOrderSkeleton/>
+      }
+      { trackingOrder && data && 
+      <>
       <article className="flex flex-col gap-2">
         <section className="flex gap-2 text-2xl mb-2">
           <h2> Order:</h2>
@@ -67,7 +99,7 @@ export default function TrackOrder() {
               currentOrderStage={currentOrderStage}
               orderStage={1}
             >
-              <PiArticle className="text-3xl" />
+              <CiViewList className="text-3xl" />
             </OrderStatusElement>
 
             <OrderStatusElement
@@ -75,7 +107,7 @@ export default function TrackOrder() {
               currentOrderStage={currentOrderStage}
               orderStage={2}
             >
-              <PiCodesandboxLogo className="text-3xl" />
+              <PiPackageLight className="text-3xl" />
             </OrderStatusElement>
 
             <OrderStatusElement
@@ -83,7 +115,7 @@ export default function TrackOrder() {
               currentOrderStage={currentOrderStage}
               orderStage={3}
             >
-              <LiaMotorcycleSolid className="text-3xl" />
+              <PiMotorcycleLight className="text-3xl" />
             </OrderStatusElement>
 
             {currentOrderStatus !== "Cancelled" && (
@@ -228,6 +260,7 @@ export default function TrackOrder() {
           </div>
         </Container>
       </article>
-    </main>
+      </>
+}    </main>
   );
 }

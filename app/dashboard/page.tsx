@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { setActiveSection } from "@/lib/store/slice/dashboardSlice";
 
 //icons + ui
 import { MdOutlineSportsMotorsports } from "react-icons/md";
@@ -23,14 +25,17 @@ import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 
 export default function Dashboard() {
   const [dashMin, setDashMin] = useState<boolean>(false);
-  const [activeSection, setActiveSection] = useState<string>("Overview");
+  const dispatch = useAppDispatch();
+  const {activeSection} = useAppSelector(state=>state.dashboard);
+  
 
   const handleDashMin = () => {
     setDashMin(() => !dashMin);
   };
 
   const handleActiveSection = (section: string) => {
-    setActiveSection(section);
+    dispatch(setActiveSection(section))
+    
   };
   return (
     <>

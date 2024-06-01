@@ -63,7 +63,7 @@ export function AllTripsTable() {
                 <TableCell className="">
                   <div
                     className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
-                      trip.payment_status ? "bg-green-600 " : "bg-red-500 "
+                      trip.payment_status ? "bg-green-500 " : "bg-red-500 "
                     }`}
                   >
                     <p>{trip.payment_status ? "Paid" : "Not Paid"}</p>
