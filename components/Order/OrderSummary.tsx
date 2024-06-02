@@ -54,13 +54,13 @@ const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
           <div
             className={`flex justify-center items-center text-[12px] font-medium w-20  ${
               trip.trip_status === "BOOKED"
-                ? "  bg-blue-500 text-white"
+                ? "  bg-primary-color text-white"
                 : trip.trip_status === "PICKED UP"
                 ? "  bg-teal-500 text-white"
                 : trip.trip_status === "IN TRANSIT"
-                ? " bg-amber-500 dark:text-[#1e1e1e]"
+                ? " bg-amber-500 dark:text-secondary-dark"
                 : trip.trip_status === "DELIVERED"
-                ? " bg-green-500 dark:text-[#1e1e1e]"
+                ? " bg-green-500 dark:text-secondary-dark"
                 : " bg-red-500 text-white"
             }  h-6 w-24 rounded-md`}
           >
@@ -71,7 +71,7 @@ const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
           <div
             className={`flex justify-center items-center text-sm font-bold w-20 -ml-12   ${
               trip.trip_type === "TODAY"
-                ? "  text-blue-500"
+                ? "  text-primary-color"
                 : trip.trip_type === "TOMORROW"
                 ? "  text-teal-500 "
                 : trip.trip_type === "SCHEDULED"

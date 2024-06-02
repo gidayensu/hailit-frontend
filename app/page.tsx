@@ -24,7 +24,7 @@ export default function Home() {
       <div className="md:hidden">
         <DashboardTopNav />
       </div>
-      <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-[#121212] relative mb-20 ">
+      <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-primary-dark relative mb-20 ">
         <div className="md:w-4/6 w-full flex items-center justify-center">
           <TrackPackage />
         </div>

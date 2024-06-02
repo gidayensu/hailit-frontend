@@ -41,7 +41,7 @@ export default function Dashboard() {
     <>
       <DashboardTopNav />
 
-      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7] dark:bg-[#121212]">
+      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7] dark:bg-primary-dark">
         
         <DashboardSideBar
           activeSection={activeSection}
@@ -65,7 +65,7 @@ export default function Dashboard() {
               <section className="lg:hidden flex gap-2">
                 <Button
                   variant={"empty"}
-                  className="space-x-1 bg-black hover:bg-[#1e1e1e] hover:dark:bg-white text-white  dark:border  dark:text-[#121212] dark:bg-slate-50"
+                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
                 >
                   <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
                   <p>Riders</p>
@@ -73,7 +73,7 @@ export default function Dashboard() {
 
                 <Button
                   variant={"empty"}
-                  className="space-x-1 bg-black hover:bg-[#1e1e1e] hover:dark:bg-white text-white  dark:border  dark:text-[#121212] dark:bg-slate-50"
+                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
                 >
                   <RiSteering2Line className="text-xl " />
                   <p>Drivers</p>

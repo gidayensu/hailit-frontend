@@ -102,7 +102,7 @@ export default function LocationMap() {
           
         />
         {searchData && mapSearchContainerOpen && (
-          <div className="md:w-96 h-auto bg-white z-50 dark:bg-[#121212] text-black dark:text-slate-200 text-sm rounded-lg p-3">
+          <div className="md:w-96 h-auto bg-white z-50 dark:bg-primary-dark text-black dark:text-slate-200 text-sm rounded-lg p-3">
             <span className="flex flex-col gap-2">
               {searchData.map((data: any, index: number) => {
                 console.log("data.lat:", data.lat);
@@ -125,7 +125,7 @@ export default function LocationMap() {
                         </p>
                       )}
 
-                      <Separator className="dark:bg-slate-300 bg-[#121212] opacity-60" />
+                      <Separator className="dark:bg-slate-300 bg-primary-dark opacity-60" />
                     </span>
                   );
                 }
@@ -193,7 +193,7 @@ export default function LocationMap() {
                           onClick={() =>
                             selectedLocationHandler(selectedLocation)
                           }
-                          className="text-[10px] font-bold bg-blue-600 h-6 text-white"
+                          className="text-[10px] font-bold bg-primary-medium h-6 text-white"
                         >
                           Use this location
                         </Button>

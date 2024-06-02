@@ -27,7 +27,7 @@ function OnboardingStageLayout ({onBoardingStage, stage}:{onBoardingStage:boolea
         <div
           className={`flex items-center justify-center h-10 w-10 border-2 border-slate-800 rounded-full text-sm  ${
             onBoardingStage
-              ? "bg-blue-500 text-white border-white"
+              ? "bg-primary-color text-white border-white"
               : "border-opacity-50"
           }`}
         >
@@ -42,7 +42,7 @@ function OnboardingStageLayout ({onBoardingStage, stage}:{onBoardingStage:boolea
         <Separator
           className={`w-16 h-1  ${
             onBoardingStage
-              ? "bg-blue-500"
+              ? "bg-primary-color"
               : "bg-slate-800 bg-opacity-50"
           }`}
         />

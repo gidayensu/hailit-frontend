@@ -158,7 +158,7 @@ export default function NewOrderForm() {
         <h3 className=" text-[14px] font-bold">Additional Information</h3>
         <Textarea className="h-32" {...register("additional_information")} required/>
         {
-          !package_type && <span className="text-rose-500 text-center">
+          !package_type && <span className="text-secondary-color text-center">
             <p>Package type not selected</p>
           </span>
         }

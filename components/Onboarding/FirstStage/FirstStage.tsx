@@ -41,11 +41,11 @@ export default function FirstStage () {
                 <p>Hailit gives you a wholesome delivery experience! </p>
               </div>
               <div className="flex gap-4 p-2 -mt-4 ">
-                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 cursor-pointer">
+                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-primary-color cursor-pointer">
                   <p>Customer</p>
                   <UserOption animation={customerAnimation} selectedUserRole={selectedUserRole.customer} selectedUserRoleHandler={selectedUserRoleHandler} userRole="customer"/>
                 </div>
-                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-blue-500 cursor-pointer">
+                <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-primary-color cursor-pointer">
                   <p>Dispatcher</p>
                   <UserOption animation={riderAnimation} selectedUserRole={selectedUserRole.dispatcher} selectedUserRoleHandler={selectedUserRoleHandler} userRole="dispatcher"/>
                   

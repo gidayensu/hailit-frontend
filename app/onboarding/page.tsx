@@ -84,7 +84,7 @@ export default function Onboarding() {
   return (
     <>
       {(!authenticationState || onboard) && (
-        <section className="flex flex-col items-center justify-center bg-slate-50 dark:bg-[#121212] min-h-screen gap-4">
+        <section className="flex flex-col items-center justify-center bg-slate-50 dark:bg-primary-dark min-h-screen gap-4">
           <h2 className="font-bold text-2xl">Page Not Found</h2>
           <Link href={"/"}>
             
@@ -93,7 +93,7 @@ export default function Onboarding() {
         </section>
       )}
       {authenticationState && !onboard && (
-        <main className="flex flex-col  items-center w-full h-screen p-5 md:justify-center bg-slate-50 mb-20 dark:bg-[#121212]">
+        <main className="flex flex-col  items-center w-full h-screen p-5 md:justify-center bg-slate-50 mb-20 dark:bg-primary-dark">
           {/* Onboarding stages 1 - 3 starts here */}
           <div className="flex items-center justify-center md:w-1/2">
             <OnboardingStagesCheck />

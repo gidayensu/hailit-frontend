@@ -35,10 +35,10 @@ export default function DispatcherCard({firstName, lastName, vehicleName, vehicl
         </span>
       </div>
       <div className="flex justify-center items-center gap-2">
-        <span className=" bg-blue-500 h-10 w-10 rounded-full flex items-center justify-center">
+        <span className=" bg-primary-color h-10 w-10 rounded-full flex items-center justify-center">
           <RiMessage3Line className="text-[20px] text-slate-50" />
         </span>
-        <span className=" bg-blue-500 h-10 w-10 rounded-full flex items-center justify-center">
+        <span className=" bg-primary-color h-10 w-10 rounded-full flex items-center justify-center">
           <LuPhone className="text-[20px] text-slate-50" />
         </span>
       </div>

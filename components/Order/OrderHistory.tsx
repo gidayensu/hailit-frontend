@@ -14,13 +14,13 @@ export default function OrderHistory () {
     return (
         <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
             <h2 className="font-bold text-xl"> Your Deliveries</h2>
-            <div className="flex justify-between items-center w-full md:w-4/6 h-10 bg-white dark:bg-[#1e1e1e] border border-blue-500   rounded-xl p-2 gap-3 text-[13px] mb-4">
+            <div className="flex justify-between items-center w-full md:w-4/6 h-10 bg-white dark:bg-secondary-dark border border-primary-color   rounded-xl p-2 gap-3 text-[13px] mb-4">
               <span
                 className={`flex items-center justify-center ${
                   currentDeliveries
-                    ? "bg-blue-500 text-white"
-                    : " dark:bg-[#1e1e1e] dark:opacity-50"
-                }  text-blue-500 dark:text-slate-100 w-1/2 h-8 -ml-1 text-center rounded-lg`}
+                    ? "bg-primary-color text-white"
+                    : " dark:bg-secondary-dark dark:opacity-50"
+                }  text-primary-color dark:text-slate-100 w-1/2 h-8 -ml-1 text-center rounded-lg`}
                 onClick={() => handleSelectedDeliveries(true)}
               >
                 Current
@@ -28,9 +28,9 @@ export default function OrderHistory () {
               <span
                 className={`flex items-center justify-center ${
                   currentDeliveries
-                    ? " dark:bg-[#1e1e1e] dark:opacity-50"
-                    : "text-white bg-blue-500"
-                } text-blue-500 dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg`}
+                    ? " dark:bg-secondary-dark dark:opacity-50"
+                    : "text-white bg-primary-color"
+                } text-primary-color dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg`}
                 onClick={() => handleSelectedDeliveries(false)}
               >
                 Previous

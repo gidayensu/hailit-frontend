@@ -21,7 +21,7 @@ export function BottomNavBar() {
   
 
   return (!path.startsWith('/dashboard') && !path.startsWith('/dispatcher') && (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-[#1e1e1e] font-medium">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-secondary-dark font-medium">
       <Link href="/">
         <div className={divClass}>
           <Button
@@ -33,7 +33,7 @@ export function BottomNavBar() {
           </Button>
           <p
             className={`${textClass} ${
-              path === "/" ? "text-blue-700 dark:text-white" : ""
+              path === "/" ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             Home
@@ -52,7 +52,7 @@ export function BottomNavBar() {
           </Button>
           <p
             className={`${textClass} ${
-              path.startsWith("/order") ? "text-blue-700 dark:text-white" : ""
+              path.startsWith("/order") ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             New Delivery
@@ -72,7 +72,7 @@ export function BottomNavBar() {
           </Button>
           <p
             className={`${textClass} ${
-              path.startsWith("/profile") ? "text-blue-700 dark:text-white" : ""
+              path.startsWith("/profile") ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             Profile

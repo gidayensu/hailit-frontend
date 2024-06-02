@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 export default function TrackPackage () {
     return(
         
-        <div className=" flex flex-col items-center justify-center w-5/6 h-36 md:h-44 bg-gradient-to-r from-blue-700 to-blue-500 mt-10 rounded-lg text-white gap-1">
+        <div className=" flex flex-col items-center justify-center w-5/6 h-36 md:h-44 bg-gradient-to-r from-primary-shade to-primary-color mt-10 rounded-lg text-white gap-1">
         <p className="text-[14px] w-44 h-7 text-center">
           Track your package
         </p>

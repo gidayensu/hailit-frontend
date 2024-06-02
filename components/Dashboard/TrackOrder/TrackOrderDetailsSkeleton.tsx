@@ -43,7 +43,7 @@ export default function TrackOrderSkeleton() {
             </div>
             <Skeleton className="w-32" />
           </div>
-          <div className="w-full flex flex-col items-start justify-between h-3/5 rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+          <div className="w-full flex flex-col items-start justify-between h-3/5 rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="spacey-y-2">
                 <Skeleton className="w-14" />
@@ -92,7 +92,7 @@ export default function TrackOrderSkeleton() {
             </div>
             <Skeleton className="w-32" />
           </div>
-          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="space-y-1">
                 <Skeleton className="w-14" />

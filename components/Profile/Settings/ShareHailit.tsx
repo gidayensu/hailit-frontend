@@ -35,7 +35,7 @@ export default function ShareHailit() {
           <h3 className={labelClass}>Share on Social Media</h3>
           <span className="flex gap-4">
             <FacebookShareButton url={shareUrl} title={title}>
-              <FaFacebook className="text-3xl text-blue-500" />
+              <FaFacebook className="text-3xl text-primary-color" />
             </FacebookShareButton>
 
             <WhatsappShareButton url={shareUrl} title={title}>

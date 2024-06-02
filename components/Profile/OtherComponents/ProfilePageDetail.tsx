@@ -45,7 +45,7 @@ export default function ProfilePageDetails () {
         <TopSectionContainer className="justify-center items-center">
           <div className="flex flex-col items-center justify-center gap-5">
             <div className="flex items-center justify-center">
-              <span className="bg-gradient-to-r from-cyan-500 to-blue-500 w-16 h-16 rounded-full"></span>
+              <span className="bg-gradient-to-r from-cyan-500 to-primary-color w-16 h-16 rounded-full"></span>
               <p className="absolute z-10 font-bold ">{first_name[0]}</p>
             </div>
             <div className="flex flex-col justify-center items-center">

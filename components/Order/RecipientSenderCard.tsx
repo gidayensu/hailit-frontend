@@ -16,10 +16,10 @@ export default function RecipientSenderCard({name, location, identity}: {name:st
         </span>
       </div>
       <div className="flex justify-center items-center gap-2">
-        <Button className=" bg-blue-600 h-8 w-32 rounded-md flex items-center justify-center text-slate-50 dark:text-[#1e1e1e] text-[12px]">
+        <Button className=" bg-primary-medium h-8 w-32 rounded-md flex items-center justify-center text-slate-50 dark:text-secondary-dark text-[12px]">
           <p className=" "> Call {identity} </p>
         </Button>
-        <div className=" bg-blue-600 dark:bg-slate-50 h-8 w-8 rounded-md flex items-center justify-center text-[16px] text-slate-50 dark:text-[#1e1e1e]">
+        <div className=" bg-primary-medium dark:bg-slate-50 h-8 w-8 rounded-md flex items-center justify-center text-[16px] text-slate-50 dark:text-secondary-dark">
           <FaWhatsapp />
         </div>
       </div>

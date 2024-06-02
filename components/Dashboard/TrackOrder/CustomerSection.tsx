@@ -20,7 +20,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
             </div>
             <Button
               variant={"empty"}
-              className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white"
+              className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
               <LuUser className="text-xl " />
               <p>View</p>
@@ -34,7 +34,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
             </div>
           } {
           data && user &&  
-          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="space-y-1">
                 <ul>Name</ul>

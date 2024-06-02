@@ -52,7 +52,7 @@ export default function CustomerHelp() {
           <span className="space-y-2 w-1/3 text-center">
             <Button
               variant="outline"
-              className="  bg-blue-500 border-none h-12 w-full text-white dark:bg-white dark:text-slate-800 dark:border-none"
+              className="  bg-primary-color border-none h-12 w-full text-white dark:bg-white dark:text-slate-800 dark:border-none"
             >
               <RiMessage3Line className="text-2xl" />
             </Button>
@@ -61,7 +61,7 @@ export default function CustomerHelp() {
           <span className="space-y-2 w-1/3 text-center">
             <Button
               variant="outline"
-              className="  bg-blue-500 border-none  h-12 w-full text-white dark:bg-white dark:text-slate-800 dark:border-none"
+              className="  bg-primary-color border-none  h-12 w-full text-white dark:bg-white dark:text-slate-800 dark:border-none"
             >
               <LuPhone className="text-2xl" />
             </Button>

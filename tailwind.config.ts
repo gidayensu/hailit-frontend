@@ -18,6 +18,16 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        'primary-dark': '#121212',
+        'secondary-dark': '#1E1E1E',
+        'primary-color': '#3B82F6',
+        'secondary-color': '#F43F5E',
+        'primary-medium': '#2563EB',
+        'primary-shade': '#1D4ED8',
+        'secondary-tint': '#FB7185',
+        'secondary-shade': '#E11D48',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

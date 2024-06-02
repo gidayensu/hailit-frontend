@@ -25,7 +25,7 @@ export function DashboardBottomNav({
   const divClass = "flex flex-col justify-center items-center ";
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-3 md:gap-5 w-full bg-white dark:bg-[#1e1e1e] font-medium">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-3 md:gap-5 w-full bg-white dark:bg-secondary-dark font-medium">
       <div className={divClass}>
         <Button
           onClick={() => onClickFunc("Orders")}
@@ -37,7 +37,7 @@ export function DashboardBottomNav({
         </Button>
         <p
           className={`${textClass} ${
-            path === "/" ? "text-blue-700 dark:text-white" : ""
+            path === "/" ? "text-primary-shade dark:text-white" : ""
           }`}
         >
           Orders
@@ -55,7 +55,7 @@ export function DashboardBottomNav({
         </Button>
         <p
           className={`${textClass} ${
-            activeSection === "Users" ? "text-blue-700 dark:text-white" : ""
+            activeSection === "Users" ? "text-primary-shade dark:text-white" : ""
           }`}
         >
           Users
@@ -73,7 +73,7 @@ export function DashboardBottomNav({
         </Button>
         <p
           className={`${textClass} ${
-            activeSection === "Overview" ? "text-blue-700 dark:text-white" : ""
+            activeSection === "Overview" ? "text-primary-shade dark:text-white" : ""
           }`}
         >
           Overview
@@ -92,7 +92,7 @@ export function DashboardBottomNav({
         <p
           className={`${textClass} ${
             activeSection === "Track Order"
-              ? "text-blue-700 dark:text-white"
+              ? "text-primary-shade dark:text-white"
               : ""
           }`}
         >
@@ -112,7 +112,7 @@ export function DashboardBottomNav({
         <p
           className={`${textClass} ${
             activeSection === "Edit Profile"
-              ? "text-blue-700 dark:text-white"
+              ? "text-primary-shade dark:text-white"
               : ""
           }`}
         >

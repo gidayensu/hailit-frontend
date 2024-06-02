@@ -16,7 +16,7 @@ export default function OrderStatusElement ({orderStatus, orderStage, currentOrd
                                 </div>
                             </div>
                             }
-                            {currentOrderStage < orderStage || orderStage === 0 ? <GoX className="text-white dark:text-[#1e1e1e] text-lg z-10"/> : <GrFormCheckmark className="text-white text-lg z-10 dark:text-[#1e1e1e]"/>}
+                            {currentOrderStage < orderStage || orderStage === 0 ? <GoX className="text-white dark:text-secondary-dark text-lg z-10"/> : <GrFormCheckmark className="text-white text-lg z-10 dark:text-secondary-dark"/>}
                             
                         </div>
 

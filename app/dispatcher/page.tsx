@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/Theme/ThemeToggle"
 
 export default function Dispatcher () {
     return (
-        <main className="flex flex-col gap-3 p-4 items-center w-full justify-center mb-24 h-screen dark:bg-[#121212]">
+        <main className="flex flex-col gap-3 p-4 items-center w-full justify-center mb-24 h-screen dark:bg-primary-dark">
             <div className="flex justify-between items-start md:justify-center gap-3 w-5/6 mb-2">
                 <div className="flex gap-2 ml-1">
                 <div className=" flex items-center justify-center w-16 h-16 bg-black text-white dark:bg-white dark:text-black rounded-md">

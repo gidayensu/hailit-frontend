@@ -16,7 +16,7 @@ export default function OrdersCard({userData}:{userData:any}) {
       <section className="w-full p-4">
         
         <div className="flex flex-col gap-2 w-full">
-          <div className={`flex items-center justify-center bg-blue-500 text-white dark:text-slate-100 w-full h-8 text-center rounded-lg`} >
+          <div className={`flex items-center justify-center bg-primary-color text-white dark:text-slate-100 w-full h-8 text-center rounded-lg`} >
             Recent Orders
           </div>
           {

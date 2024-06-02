@@ -9,7 +9,7 @@ export default function DispatcherBottomNav () {
     const path = usePathname();
     return(
         <>
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-[#1e1e1e] font-medium">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-10 w-full bg-white dark:bg-secondary-dark font-medium">
       <Link href="/dispatcher">
         <div className={divClass}>
           <Button
@@ -21,7 +21,7 @@ export default function DispatcherBottomNav () {
           </Button>
           <p
             className={`${textClass} ${
-              path === "/" ? "text-blue-700 dark:text-white" : ""
+              path === "/" ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             Home
@@ -40,7 +40,7 @@ export default function DispatcherBottomNav () {
           </Button>
           <p
             className={`${textClass} ${
-              path.startsWith("/dispatcher/trip") ? "text-blue-700 dark:text-white" : ""
+              path.startsWith("/dispatcher/trip") ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             Deliveries
@@ -60,7 +60,7 @@ export default function DispatcherBottomNav () {
           </Button>
           <p
             className={`${textClass} ${
-              path.startsWith("/dispatcher/profile") ? "text-blue-700 dark:text-white" : ""
+              path.startsWith("/dispatcher/profile") ? "text-primary-shade dark:text-white" : ""
             }`}
           >
             Profile

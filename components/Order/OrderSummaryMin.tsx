@@ -63,7 +63,7 @@ export default function OrderSummaryMin({
     }
     break;
     case("Fragile"): {
-      deliveryTypeIcon = < PiWineFill className="text-rose-400 dark:text-rose-500"/> 
+      deliveryTypeIcon = < PiWineFill className="text-secondary-tint dark:text-secondary-color"/> 
       deliveryTypeIconBgClass = "bg-rose-100 dark:bg-rose-200" 
     }
 

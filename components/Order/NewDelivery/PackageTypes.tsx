@@ -76,9 +76,9 @@ export default function PackageTypes () {
 const PackageType = ({packageType, onClickFunc, LightIcon, FillIcon, selectedPackageType}: {packageType: string, onClickFunc: (packageType:string)=>void, LightIcon: any, FillIcon:any, selectedPackageType: string})=> {
     return (
       <div
-        className={`flex flex-col items-center p-2 group hover:bg-blue-500 text-blue-500 hover:text-white font-bold rounded-md border border-blue-500 hover:border-none cursor-pointer ${
+        className={`flex flex-col items-center p-2 group hover:bg-primary-color text-primary-color hover:text-white font-bold rounded-md border border-primary-color hover:border-none cursor-pointer ${
           packageType === selectedPackageType
-            ? "bg-blue-500  text-white border-none"
+            ? "bg-primary-color  text-white border-none"
             : ""
         }`}
         onClick={() => onClickFunc(packageType)}

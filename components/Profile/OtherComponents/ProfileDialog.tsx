@@ -9,7 +9,7 @@ interface ProDialog {
 export function  ProfileDialog ({iconText, IconOutline, IconFill, children}: ProDialog) {
     return (
       <Dialog>
-      <DialogTrigger className="flex justify-between items-center p-2 font-bold group hover:bg-blue-500 hover:text-white rounded-md cursor-pointer">
+      <DialogTrigger className="flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md cursor-pointer">
         <span className="flex items-center justify-center gap-2 relative">
           <IconOutline className="text-2xl group-hover:opacity-0" />
           <IconFill className="text-2xl opacity-0 absolute top-0 left-0  group-hover:opacity-100" />

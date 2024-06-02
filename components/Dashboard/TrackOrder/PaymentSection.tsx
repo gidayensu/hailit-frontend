@@ -15,13 +15,13 @@ export default function PaymentSection ({cost, paymentStatus}: {cost:string, pay
             </div>
             {/* <Button
               variant={"empty"}
-              className="space-x-1 bg-blue-500 hover:bg-blue-600 text-white  hover:dark:bg-slate-100 dark:text-[#1e1e1e] dark:bg-white"
+              className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
               <PiReceipt className="text-xl " />
               <p>Invoice</p>
             </Button> */}
           </div>
-          <div className="w-full flex flex-col items-start justify-between h-3/5 rounded-md bg-[#f7f7f7] dark:bg-[#1e1e1e] p-3">
+          <div className="w-full flex flex-col items-start justify-between h-3/5 rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="spacey-y-2">
                 <ul>Bill amount</ul>
