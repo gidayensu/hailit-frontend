@@ -11,7 +11,7 @@ const Header: AuthorizationHeader = {
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
     prepareHeaders: (headers) => {
       headers.set("authorization", "");
       return headers;
@@ -74,7 +74,7 @@ export const hailitApi = createApi({
       }),
     }),
 
-    getUser: builder.query<any, string | string[]>({
+    getUser: builder.query<any, string | string[] | any>({
       query: (userId) => ({
         url: `users/${userId}`,
         method: "GET",

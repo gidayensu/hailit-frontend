@@ -18,7 +18,7 @@ interface RiderToBeAssigned {
   plate: string,
   phone: string,
 }
-export default function Riders ({dispatcherId, tripMedium}: {dispatcherId: string, tripMedium: string}) {
+export default function Riders () {
     const [riderToBeAssigned, setRiderToBeAssigned] = useState<RiderToBeAssigned>({
       id: '',
       name: '',

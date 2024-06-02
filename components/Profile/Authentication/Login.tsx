@@ -23,7 +23,7 @@ import { setUserState } from "@/lib/store/slice/userSlice";
 import { useLazyGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 
 //react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //react-hook-forms
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -37,42 +37,57 @@ import type { Inputs } from "@/lib/supabaseAuth";
 export default function Login () {
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const [getUser, {data:getUserData, error:getUserError}] = useLazyGetUserQuery();
+    const [getUser, {data:userData, error:getUserError}] = useLazyGetUserQuery();
     const [dataFetchError, setDataFetchError] = useState<boolean>(false);
-  const [formSubmissionLoading, setFormSubmissionLoading] =
+  const [isLoading, setIsLoading] =
     useState<boolean>(false);
+    
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setDataFetchError(false);
+      }, 2000);
+  
+      return () => clearTimeout(timeoutId);
+    }, [dataFetchError]);
     //Form
     const { register, handleSubmit } = useForm<Inputs>();
     
     //sign in form submission
     const onSignInSubmit: SubmitHandler<Inputs> = async (data) => {
-        setFormSubmissionLoading(true);
+        
+      setIsLoading(true);
         const signInData = await supabaseSignIn(data);
         if (signInData.error) {
-          setFormSubmissionLoading(false);
+          setIsLoading(false);
           setDataFetchError(true);
         }
-    
-        if (signInData.user) {
-          setFormSubmissionLoading(false);
-          dispatch(setAuthState(true));
-    
-          dispatch(
-            setUserState({
-              user_id: signInData.user.user_id,
-              first_name: signInData.user.first_name,
-              last_name: signInData.user.last_name,
-              email: signInData.user.email,
-              user_role: signInData.user_role,
-              onboard: signInData.user.onboard,
-            })
-          );
-    
-          const onboard = signInData.user.onboard;
-          onboard ? router.push("/") : router.push("/onboarding");
+        
+        if (signInData.user_id) {
+          getUser(`${signInData.user_id}`)
         }
-      };
-    
+      }
+      if(getUserError) {
+        return {error: 'Error occurred', errorMessage: "Could not fetch user"}
+      } 
+      if (userData) {
+        
+    const { user } = userData;
+    dispatch(
+        setUserState({
+            user_id: user.user_id,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            user_role: user.user_role,
+            onboard: user.onboard,
+          })
+      );
+      
+      const onboard = user.onboard;
+      dispatch(setAuthState(true));
+  
+   onboard ? router.push("/profile") : router.push("/onboarding");
+    };
     return (
         <TabsContent value="login">
         <Card>
@@ -103,7 +118,7 @@ export default function Login () {
                 />
               </div>
               <Button className="w-full h-12 mt-4" type="submit">
-                {formSubmissionLoading ? <Loader color="#fff23" /> : "Login"}
+                {isLoading ? <Loader color="red" /> : "Login"}
               </Button>
               {dataFetchError && (
                 <div className="flex items-center justify-center w-full  text-red-500">
@@ -124,7 +139,7 @@ export default function Login () {
               className="w-full border border-slate-300 h-12 flex gap-4"
               
             >
-              {formSubmissionLoading ? (
+              {isLoading ? (
                 <Loader color="#3b82f6" />
               ) : (
                 <p className="flex items-center justify-center gap-2">

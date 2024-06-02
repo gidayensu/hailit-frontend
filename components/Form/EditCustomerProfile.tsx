@@ -48,39 +48,39 @@ export default function CustomerProfile() {
         return {error: "error occurred"}
       } 
       
-      if(!isLoading && data && data.user) {
-        console.log('data2:', data)
-        const {user} = data
-        dispatch(setUserState({
-          user_id: user.user_id,
-          first_name: user.first_name,
-          last_name: user.last_name,
-            email: user.email,
-            user_role: data.user_role,
-            onboard: user.onboard
-        
-          }))
-          dispatch(setOnboardingStages({
-            stageOne: true,
-            stageTwo: true,
-            stageThree: true
-        }))
-        
-      }
       
-      if(data && data.error ) {
-        
-        setIsError(true)
-        console.log('data3:', data.error)
-      }
       
-  
     } catch (err) {
       
       setIsError(true)
       console.log('error:', err)
     }
-}
+  }
+  if(data && data.user) {
+    console.log('data2:', data)
+    const {user} = data
+    dispatch(setUserState({
+      user_id: user.user_id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+        email: user.email,
+        user_role: data.user_role,
+        onboard: user.onboard
+    
+      }))
+      dispatch(setOnboardingStages({
+        stageOne: true,
+        stageTwo: true,
+        stageThree: true
+    }))
+    
+  }
+  
+  if(data && data.error ) {
+    
+    setIsError(true)
+    console.log('data3:', data.error)
+  }
 
 
   return (

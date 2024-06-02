@@ -18,7 +18,7 @@ interface DriverToBeAssigned {
   plate: string,
   phone: string,
 }
-export default function Drivers ({dispatcherId, tripMedium}: {dispatcherId: string, tripMedium: string}) {
+export default function Drivers () {
     const [driverToBeAssigned, setDriverToBeAssigned] = useState<DriverToBeAssigned>({
       id: '',
       name: '',

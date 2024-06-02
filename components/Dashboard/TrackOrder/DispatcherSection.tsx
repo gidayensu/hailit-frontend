@@ -5,6 +5,7 @@ import { TbArrowsExchange } from "react-icons/tb";
 import { MdOutlineCancel } from "react-icons/md";
 import { LiaUserSlashSolid } from "react-icons/lia";
 import Riders from "../Dispatcher/Riders";
+import Drivers from "../Dispatcher/Drivers";
 import { useAppSelector } from "@/lib/store/hooks";
 
 export default function DispatcherSection({
@@ -42,14 +43,10 @@ export default function DispatcherSection({
             </Button>
           }
         >
-          <Riders
-            dispatcherId={
-              tripMedium === "Motor"
-                ? dispatcher.rider_id
-                : dispatcher.driver_id
-            }
-            tripMedium={tripMedium}
-          />
+          {
+            tripMedium === "Motor" ? 
+            <Riders/> : <Drivers/>
+          }
         </Modal>
       </div>
       {assignedDispatcherId === "ff-12-53" && 

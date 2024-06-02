@@ -47,7 +47,7 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
 
   const user_id:any = data.user?.id
   // const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
-  return user_id;
+  return {user_id};
 
   } catch (err) {
     return {error: `Error Occurred: ${err}`}
