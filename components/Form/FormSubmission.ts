@@ -6,7 +6,7 @@ import { sessionAccessToken } from "@/lib/supabaseAuth";
 export const updateUserDetails = async ({data, user_id}:{data:Object, user_id:string}) => {
     
     
-    const url = `http://localhost:4000/api/v1/user/${user_id}`
+    const url = `https://hailit-backend.onrender.com/api/v1/user/${user_id}`
     const accessToken = await sessionAccessToken();
     const bearerToken = `bearer ${accessToken}`
         const updateUser = await putFetch({bearerToken, data, url});
@@ -21,7 +21,7 @@ export const updateUserDetails = async ({data, user_id}:{data:Object, user_id:st
 }
 
 export const createNewTrip = async (data:Object) => {
-    const url = `http://localhost:4000/api/v1/trip/add/`
+    const url = `https://hailit-backend.onrender.com/api/v1/trip/add/`
     const accessToken = await sessionAccessToken();
     const bearerToken = `bearer ${accessToken}`
         const createTrip = await postFetch({bearerToken, data, url});
