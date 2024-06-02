@@ -42,7 +42,7 @@ export default function TrackDelivery() {
   }
 
   if (!data) {
-    const text = "sere";
+    
     return (
       <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">

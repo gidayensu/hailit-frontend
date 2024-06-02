@@ -7,13 +7,42 @@ import OrderSummary from "@/components/Order/OrderSummary";
 import TrackOrderContainer from "@/components/Order/TrackOrder/TrackOrderContainer";
 import Container from "@/components/ui/container";
 import RecipientSenderCard from "@/components/Order/RecipientSenderCard";
+import { useParams } from "next/navigation";
+import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { TopSkeleton } from "@/components/Order/OrderSkeleton";
+import { MidSkeleton } from "@/components/Order/OrderSkeleton";
 
 export default function DispatcherTrip () {
     let updateStatus = "Picked Up";
+    const params = useParams();
+  const { trip_id } = params;
+  console.log('trip_id:', trip_id)
+  
+  const { data, isLoading, error } = useGetTripQuery(`${trip_id}`);
+  let trip = [];
 
+  if (data) {
+    trip = data.trip;
+  }
+  if (isLoading) {
+    return (
+      <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
+        <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
+          <TopSkeleton />
+        </TopSectionContainer>
+
+        <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
+          <MidSkeleton />
+        </MiddleSectionContainer>
+      </main>
+    );
+  }
+
+  
+  if(data && trip) {
     return (
         
-        
+      
         <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
       <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
         <span className="text-4xl font-bold ">Trip #235-ASF5</span>
@@ -35,7 +64,7 @@ export default function DispatcherTrip () {
         <TrackOrderContainer headingText="LOCATION AND TIMELINE">
         <Container className="w-full flex flex-col gap-2 h-52 rounded-xl p-4 ">
 
-          <OrderSummary deliveryStatus="IN TRANSIT" completionDate="Mon, 30 May, 2024" commencementTime="2:15 PM" completionTime="1:15PM" deliveryType="TOMORROW" dropOffLocation="Kwadaso" pickupLocation="Asonomaso" tripId="4528"  commencementDate={'Mon, 24 May, 2024'} />
+          <OrderSummary trip={trip} />
         </Container>
         </TrackOrderContainer>
 
@@ -70,5 +99,24 @@ export default function DispatcherTrip () {
       </MiddleSectionContainer>
     </main>
     
-    )
+    )}
+
+ 
+      if (error || !data) {
+        
+          return (
+            <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
+              <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
+              <span className="text-4xl font-bold ">No Trip Found</span>
+                <p className="text-lg font-bold">Check Trip ID and Retry</p>
+              </TopSectionContainer>
+      
+              <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
+                <MidSkeleton />
+              </MiddleSectionContainer>
+            </main>
+          );
+        
+      
+      }
 }
