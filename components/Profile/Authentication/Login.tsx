@@ -67,7 +67,7 @@ export default function Login () {
         }
       }
       if(getUserError) {
-        return {error: 'Error occurred', errorMessage: "Could not fetch user"}
+        setDataFetchError(true)
       } 
       if (userData) {
         
