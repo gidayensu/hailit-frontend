@@ -11,7 +11,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-import Container from "../ui/container";
+import Container from "@/components/ui/container";
 
 import { FaFacebook } from "react-icons/fa";
 

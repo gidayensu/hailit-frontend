@@ -1,5 +1,5 @@
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function ChangePassword() {
   const inputAndLabelDivClass = "w-full max-w-sm items-center";

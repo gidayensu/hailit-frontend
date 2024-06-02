@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react"
-import { ThemeToggle } from "../Theme/ThemeToggle"
+import { ThemeToggle } from "../../Theme/ThemeToggle"
 import { useTheme } from "next-themes";
 import LoginSignUp from "./LoginSignUp";
 

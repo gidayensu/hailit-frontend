@@ -1,6 +1,6 @@
 
 import { createClient } from "@supabase/supabase-js";
-import { postFetch, getFetch } from "./fetch";
+
 
 
 export type Inputs = {
@@ -22,15 +22,15 @@ export const supabaseSignUp = async (userInputs: Inputs) => {
   });
 
   if (error) {
-    return "Error occurred signing up user"
+    return {error: `Error occurred signing up user: ${error}`}
   }
-  const userData = {
+  const userData:any = {
     user_id: data.user?.id,
     email: data.user?.email,
   }
-  const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
-  const signUpData = await postFetch({bearerToken:bearerToken, data: userData, url: 'https://hailit-backend.onrender.com/api/v1/user/register'  })
-  return signUpData
+  // const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
+  
+  return userData;
   
 };
 
@@ -45,11 +45,9 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
     throw new Error('Failed to Sign user in')
   }
 
-  const user_id = data.user?.id
-  const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
-  const signInData = await getFetch({bearerToken, url: `https://hailit-backend.onrender.com/api/v1/user/${user_id}`})
-  console.log('signInData', signInData)
-  return signInData;
+  const user_id:any = data.user?.id
+  // const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
+  return user_id;
 
   } catch (err) {
     return {error: `Error Occurred: ${err}`}

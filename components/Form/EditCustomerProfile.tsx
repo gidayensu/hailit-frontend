@@ -1,16 +1,18 @@
+'use client'
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { CustomerDetails } from "@/lib/store/slice/onBoardingSlice";
-import { updateUserDetails } from "./FormSubmission";
 import { setOnboardingStages } from "@/lib/store/slice/onBoardingSlice";
 import { setUserState } from "@/lib/store/slice/userSlice";
-
+import { useLazyUpdateUserQuery } from "@/lib/store/apiSlice/hailitApi";
 
 
 export default function CustomerProfile() {
-
+  
+  const [isError, setIsError] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const path = usePathname();
   const {register, handleSubmit } = useForm<CustomerDetails>();
@@ -19,43 +21,65 @@ export default function CustomerProfile() {
 
   const {email, user_id, user_role} = useAppSelector(state=>state.user);
   const {chosenRole} = useAppSelector(state=>state.onBoarding);
-  const onCustomerFormSubmit:SubmitHandler<CustomerDetails> = async (data)=> {
-    let userRole = user_role;
-    if (chosenRole && chosenRole ==='dispatcher') {
-      userRole = 'rider';
-    }
-    const newUserData = {...data, onboard:true, user_role: userRole}
-    const oldUserData = {...data, user_role}
-    
 
-    let updateUser = await updateUserDetails({data:oldUserData, user_id});
-    if (path.startsWith('/onboarding')) {
-       updateUser = await updateUserDetails({data:newUserData, user_id});
-    }
-
-    
-
-    if (updateUser.error) {
-      return {error: "error occurred"}
-    } 
-    
-    dispatch(setUserState({
-      user_id: updateUser.user.user_id,
-      first_name: updateUser.user.first_name,
-      last_name: updateUser.user.last_name,
-        email: updateUser.user.email,
-        user_role: updateUser.user_role,
-        onboard: updateUser.user.onboard
-    
-      }))
-
-      dispatch(setOnboardingStages({
-        stageOne: true,
-        stageTwo: true,
-        stageThree: true
-    }))
-    
+  const [updateUser, {data, isLoading, error}] = useLazyUpdateUserQuery();
   
+  const onCustomerFormSubmit:SubmitHandler<CustomerDetails> = async (formData)=> {
+    try {
+      console.log('formData:', formData)
+      let userRole = user_role;
+      if (chosenRole && chosenRole ==='dispatcher') {
+        userRole = 'rider';
+      }
+      console.log('Chosen Role:', chosenRole)
+      const newUserData = {...formData, onboard:true, user_role: userRole}
+      const oldUserData = {...formData, user_role}
+      
+      if(!path.startsWith('/onboarding')){
+         updateUser({userId: user_id, userDetails: oldUserData});}
+      
+      if (path.startsWith('/onboarding')) {
+         updateUser({userId: user_id, userDetails: newUserData});
+      }
+  
+      // console.log('update User', updateUser({userId: user_id, userDetails: newUserData}))
+  
+      if (error) {
+        return {error: "error occurred"}
+      } 
+      
+      if(!isLoading && data && data.user) {
+        console.log('data2:', data)
+        const {user} = data
+        dispatch(setUserState({
+          user_id: user.user_id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+            email: user.email,
+            user_role: data.user_role,
+            onboard: user.onboard
+        
+          }))
+          dispatch(setOnboardingStages({
+            stageOne: true,
+            stageTwo: true,
+            stageThree: true
+        }))
+        
+      }
+      
+      if(data && data.error ) {
+        
+        setIsError(true)
+        console.log('data3:', data.error)
+      }
+      
+  
+    } catch (err) {
+      
+      setIsError(true)
+      console.log('error:', err)
+    }
 }
 
 
@@ -69,6 +93,7 @@ export default function CustomerProfile() {
         <div className={inputAndLabeClass}>
           <h3 className={labelClass}>Last Name</h3>
           <Input type="text" placeholder="Last Name" className="h-14" {...register("last_name")} required />
+          
         </div>
       
       <div className={inputAndLabeClass}>
@@ -77,8 +102,9 @@ export default function CustomerProfile() {
       </div>
       <div className={inputAndLabeClass}>
         <h3 className={labelClass}>Phone Number</h3>
-        <Input type="number" placeholder="024 123 4567" className="h-14" {...register("phone_number")} required />
+        <Input type="text" placeholder="024 123 4567" className="h-14" {...register("phone_number")} required />
       </div>
+      {isError && <p className="text-red"> Error Occurred</p>}
       
       
                   

@@ -5,8 +5,8 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
 
 //main components
-import Authentication from "@/components/Profile/Authentication";
-import ProfilePageDetails from "@/components/Profile/ProfilePageDetail";
+import Authentication from "@/components/Profile/Authentication/Authentication";
+import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
 
 export type CurrentTheme = string | undefined;
 

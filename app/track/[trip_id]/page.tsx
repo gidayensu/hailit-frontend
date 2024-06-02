@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/Shared/Modal";
 //main components
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import CustomerHelp from "@/components/Profile/CustomerHelp";
+import CustomerHelp from "@/components/Profile/Settings/CustomerHelp";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import OrderUpdates from "@/components/Order/OrderUpdates";
 import OrderSummary from "@/components/Order/OrderSummary";

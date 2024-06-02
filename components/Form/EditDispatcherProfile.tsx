@@ -3,8 +3,7 @@ import { Input } from "@/components/ui/input";
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { setFormSubmissionError, setFormSubmissionLoading } from "@/lib/store/slice/formSlice";
-
-import { updateUserDetails } from "./FormSubmission";
+import { useLazyUpdateUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { setOnboardingStages } from "@/lib/store/slice/onBoardingSlice";
 import { setUserState } from "@/lib/store/slice/userSlice";
 import { DispatcherDetails } from "@/lib/store/slice/onBoardingSlice";
@@ -19,7 +18,9 @@ export default function DispatcherProfile() {
   const labelClass = "text-sm font-medium mb-1";
 
   const {email, user_id} = useAppSelector(state=>state.user);
-  const {chosenRole} = useAppSelector(state=>state.onBoarding)
+  const {chosenRole} = useAppSelector(state=>state.onBoarding);
+
+  const [updateUser, {data:updateUserData, error:updateUserError}] = useLazyUpdateUserQuery();
   const onCustomerFormSubmit:SubmitHandler<DispatcherDetails> = async (data)=> {
     let user_role = chosenRole;
     if (chosenRole ==='dispatcher') {
@@ -28,23 +29,24 @@ export default function DispatcherProfile() {
     const newUserData = {...data, onboard:true, user_role}
     const oldUserData = {...data, user_role}
 
-    let submitForm = await updateUserDetails({data:oldUserData, user_id});
+    let submitForm = updateUser({userId: user_id, userDetails: oldUserData});
     if (path.startsWith('/onboarding')) {
 
-       submitForm = await updateUserDetails({data:newUserData, user_id});
+       submitForm = updateUser({userId: user_id, userDetails: newUserData});
       
     }
 
     dispatch(setFormSubmissionLoading(true))
-    console.log('submit form', submitForm)
+    
 
-    if (submitForm.error) {
+    if (updateUserError) {
       dispatch(setFormSubmissionLoading(false))
       dispatch(setFormSubmissionError(true))
       
     } 
     
-    if (submitForm.user) {
+    if (updateUserData) {
+      const {user} = updateUserData
       dispatch(setOnboardingStages({
         stageOne: true,
         stageTwo: true,
@@ -52,12 +54,12 @@ export default function DispatcherProfile() {
     }))
 
       dispatch(setUserState({
-        email: submitForm.user.email,
-        first_name: submitForm.user.first_name,
-        last_name: submitForm.user.last_name,
-        onboard: submitForm.user.onboard,
-        user_id: submitForm.user.user_id,
-        user_role: submitForm.user.user_role,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        onboard: user.onboard,
+        user_id: user.user_id,
+        user_role: user.user_role,
       }))
     
   }
@@ -86,11 +88,8 @@ export default function DispatcherProfile() {
         </div>
       <div className={inputAndLabeClass}>
         <h3 className={labelClass}>Phone Number</h3>
-        <Input type="number" placeholder="024 123 4567" className="h-14" {...register("phone_number")} required />
-      </div>
-      
-      
-                  
+        <Input type="text" placeholder="024 123 4567" className="h-14" {...register("phone_number")} required />
+      </div>                  
     </form>
   );
 }
