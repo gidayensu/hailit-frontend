@@ -1,19 +1,21 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { supabase } from "@/lib/supabaseAuth";
 
-interface AuthorizationHeader {
-  authorization: string | [string, string];
-}
-const Header: AuthorizationHeader = {
-  authorization: ["", ""],
-};
 
 // API endpoint for fetching data
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
-    prepareHeaders: (headers) => {
-      headers.set("authorization", "");
+    baseUrl: `http://localhost:4000/api/v1/`,
+    prepareHeaders: async (headers) => {
+      
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (session) {
+        const accessToken = session.access_token;
+        headers.set("authorization", `Bearer ${accessToken}`);
+      }
+
       return headers;
     },
   }),
@@ -40,7 +42,7 @@ export const hailitApi = createApi({
     }),
     addTrip: builder.query<any, any>({
       query: (tripDetails) => ({
-        url: `trips/add`,
+        url: `trips/add-trip`,
         method: "POST",
         body: tripDetails,
       }),

@@ -41,8 +41,10 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
     password: userInputs.password,
   });
   
-  if (error) {
-    throw new Error('Failed to Sign user in')
+  if(error) {
+    return {
+      error: error.message
+    }
   }
 
   const user_id:any = data.user?.id
@@ -84,17 +86,18 @@ return data;
 }
 
 
-export const sessionAccessToken = async ()=> {
+export const sessionBearerToken = async ()=> {
     
   const { data, error } = await supabase.auth.getSession()
   if(error) {
     return {
-      message: "Error retrieving session"
+      error: error.status,
+      errorDescription: error.message
     }
   }
-  const accessToken = data.session?.access_token;
   
-  return accessToken;
+  const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
+  return {bearerToken};
   
   }
 
