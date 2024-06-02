@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabaseAuth";
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:4000/api/v1/`,
+    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
     prepareHeaders: async (headers) => {
       
       const { data: { session } } = await supabase.auth.getSession();
