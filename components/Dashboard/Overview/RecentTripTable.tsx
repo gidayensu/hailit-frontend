@@ -11,8 +11,8 @@ import {
     TableRow,
   } from "@/components/ui/table"
   
-import { extractDateWithDayFomDate } from "@/lib/utils";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { extractDateWithDayFromDate } from "@/lib/utils";
+import {  useAppDispatch } from "@/lib/store/hooks";
 import { setActiveSection, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 
 export function RecentTripTable() {
@@ -65,12 +65,12 @@ export function RecentTripTable() {
             <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
               
-              <TableCell>{extractDateWithDayFomDate(trip.trip_request_date)} </TableCell>
+              <TableCell>{extractDateWithDayFromDate(trip.trip_request_date)} </TableCell>
               <TableCell>{trip.pickup_location}</TableCell>
               
               <TableCell>{trip.drop_off_location}</TableCell>
               
-              <TableCell>{trip.trip_completion_date ? extractDateWithDayFomDate(trip.trip_completion_date): 'TBD'}</TableCell>
+              <TableCell>{trip.trip_completion_date ? extractDateWithDayFromDate(trip.trip_completion_date): 'TBD'}</TableCell>
               <TableCell>{trip.trip_cost}</TableCell>
               <TableCell className="">
                 <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.paymentStatus ? 'bg-green-600 ': 'bg-red-500 '}`}>
@@ -86,7 +86,7 @@ export function RecentTripTable() {
                 ? "  bg-sky-600"
                 : trip.trip_status === "In Transit"
                 ? " bg-amber-500 "
-                : trip.trip_status === "New"
+                : trip.trip_status === "Booked"
                 ? " bg-slate-600 dark:text-slate-50"
                 : " bg-red-500"}`}>
                     <p>

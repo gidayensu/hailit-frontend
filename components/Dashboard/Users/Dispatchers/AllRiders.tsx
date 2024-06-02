@@ -9,7 +9,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
   
-import { extractDateWithDayFomDate } from "@/lib/utils";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 
 
 export function AllRiders() {

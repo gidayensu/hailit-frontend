@@ -29,7 +29,7 @@ export const supabaseSignUp = async (userInputs: Inputs) => {
     email: data.user?.email,
   }
   const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
-  const signUpData = await postFetch({bearerToken:bearerToken, data: userData, url: 'https://hailit-backend.onrender.com/api/v1/user/register'  })
+  const signUpData = await postFetch({bearerToken:bearerToken, data: userData, url: 'http://localhost:4000/api/v1/user/register'  })
   return signUpData
   
 };
@@ -47,7 +47,7 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
 
   const user_id = data.user?.id
   const bearerToken = data.session?.token_type ? data.session.token_type + ' ' + data.session.access_token : '';
-  const signInData = await getFetch({bearerToken, url: `https://hailit-backend.onrender.com/api/v1/user/${user_id}`})
+  const signInData = await getFetch({bearerToken, url: `http://localhost:4000/api/v1/user/${user_id}`})
   console.log('signInData', signInData)
   return signInData;
 

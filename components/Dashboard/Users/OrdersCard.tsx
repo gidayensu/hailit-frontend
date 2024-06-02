@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { Skeleton } from "@/components/ui/skeleton";
-import { extractDateWithDayFomDate } from "@/lib/utils";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 
 export default function OrdersCard({userData}:{userData:any}) {
     const {data, isLoading } = useGetUserTripsQuery(userData.user_id);
@@ -30,7 +30,7 @@ export default function OrdersCard({userData}:{userData:any}) {
                     {console.log('index', index)}
                       { index <= 2 &&
 
-                        <OrderSummaryMin key={trip.trip_id} cost={trip.trip_cost} deliveryStatus={trip.trip_status} packageType={trip.package_type} tripId={trip.trip_id} tripRequestDate={extractDateWithDayFomDate(trip.trip_request_date)}/>
+                        <OrderSummaryMin key={trip.trip_id} cost={trip.trip_cost} deliveryStatus={trip.trip_status} packageType={trip.package_type} tripId={trip.trip_id} tripRequestDate={extractDateWithDayFromDate(trip.trip_request_date)}/>
                       }
                     </>
 

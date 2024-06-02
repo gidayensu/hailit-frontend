@@ -48,12 +48,12 @@ export default function DashboardTopNav () {
       </section>
       <div className={`#{iconsAndTextDivClass}  md:hidden`}>
           <span className={iconsAndTextSpanClass}>
-          <RiNotification3Line className="text-2xl"/>
+          {/* <RiNotification3Line className="text-2xl"/> */}
+      <p className="text-3xl md:hidden">Hailit</p>
           </span>
         </div>
       <section className="w-full">
-      <Input className="flex items-center justify-center border-2  border-black dark:border-white rounded-full md:w-full w-[200px] md:h-12 h-10 font-light "  placeholder="Enter Trip ID to search "/>
-      
+      {/* <Input className="flex items-center justify-center border-2  border-black dark:border-white rounded-full md:w-full w-[200px] md:h-12 h-10 font-light "  placeholder="Enter Trip ID to search "/> */}
 
       </section>
       
@@ -64,7 +64,7 @@ export default function DashboardTopNav () {
                 </div>
                 <div className="flex flex-col items-start justify-center">
                     <p className="font-bold text-md">
-                      Jeremy Dokua
+                      Administrator
                     </p>
                     <p className="font-bold text-[12px] opacity-50">
                       Administrator
@@ -74,7 +74,7 @@ export default function DashboardTopNav () {
           
           <div className={`#{iconsAndTextDivClass} hidden md:block`}>
           <span className={iconsAndTextSpanClass}>
-          <RiNotification3Line className="text-2xl"/>
+          {/* <RiNotification3Line className="text-2xl"/> */}
           </span>
         </div>
         <div className={iconsAndTextDivClass} onClick={handleThemeChange}>

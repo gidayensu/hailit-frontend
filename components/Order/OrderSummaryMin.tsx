@@ -17,7 +17,7 @@ type DeliveryStatus =
   | "Cancelled"
   | "Picked up"
   | "In Transit"
-  | "New"
+  | "Booked"
   |  "Yet to Book";
 
 export type PackageType = | "Electronics"
@@ -96,7 +96,7 @@ export default function OrderSummaryMin({
                 ? "  text-sky-600"
                 : deliveryStatus === "In Transit"
                 ? " text-amber-500 "
-                : deliveryStatus === "New"
+                : deliveryStatus === "Booked"
                 ? " text-teal-600 dark:text-slate-50"
                 : " text-red-500"
             }  h-5 w-20 rounded-md    `}

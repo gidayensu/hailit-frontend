@@ -11,7 +11,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
   
-import { extractDateWithDayFomDate } from "@/lib/utils";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 import { Modal } from "@/components/Shared/Modal";
 
 
@@ -79,7 +79,7 @@ export function AllUsers() {
                     
                 </div>
                 </TableCell>
-              <TableCell className="w-[100px]">{extractDateWithDayFomDate(user.date_created)} </TableCell>
+              <TableCell className="w-[100px]">{extractDateWithDayFromDate(user.date_created)} </TableCell>
               
               
                 <TableCell className="flex items-center justify-center">

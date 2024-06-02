@@ -9,9 +9,18 @@ import {
 
 import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import SkeletonTable from "../SkeletonTable";
-import { extractDateWithDayFomDate } from "@/lib/utils";
+import { extractDateWithDayFromDate } from "@/lib/utils";
+import {  useAppDispatch } from "@/lib/store/hooks";
+import { setActiveSection, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 
 export function AllTripsTable() {
+  const dispatch = useAppDispatch();
+  const handleTrackTrip = (tripId:string)=> {
+    dispatch(setActiveSection('Track Order'))
+    dispatch (setTrackingOrder(true))
+    dispatch (setSelectedTripId(tripId))
+  }  
+
   const { data, isLoading, error } = useGetAllTripsQuery(`trips`);
   
   let trips = [];
@@ -44,11 +53,11 @@ export function AllTripsTable() {
           {isLoading && <SkeletonTable cells={12} rows={10} />}
           {data &&
             trips.map((trip: any) => (
-              <TableRow key={trip.trip_id}>
+              <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
                 <TableCell className="font-medium">{trip.trip_id}</TableCell>
                 <TableCell>{trip.first_name + ' ' + trip.last_name}</TableCell>
                 <TableCell>
-                  {extractDateWithDayFomDate(trip.trip_request_date)}
+                  {extractDateWithDayFromDate(trip.trip_request_date)}
                 </TableCell>
                 <TableCell>{trip.pickup_location}</TableCell>
                 <TableCell>{trip.sender_number}</TableCell>
@@ -56,7 +65,7 @@ export function AllTripsTable() {
                 <TableCell>{trip.recipient_number}</TableCell>
                 <TableCell>
                   {trip.trip_completion_date
-                    ? extractDateWithDayFomDate(trip.trip_completion_date)
+                    ? extractDateWithDayFromDate(trip.trip_completion_date)
                     : "TBD"}
                 </TableCell>
                 <TableCell>{trip.trip_cost}</TableCell>
@@ -79,7 +88,7 @@ export function AllTripsTable() {
                         ? "  bg-sky-600"
                         : trip.trip_status === "In Transit"
                         ? " bg-amber-500 "
-                        : trip.trip_status === "New"
+                        : trip.trip_status === "Booked"
                         ? " bg-slate-600 dark:text-slate-50"
                         : " bg-red-500"
                     }`}

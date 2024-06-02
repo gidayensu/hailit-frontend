@@ -49,7 +49,7 @@ export default function AllOrders () {
 
             {currentDeliveries && (
               <>
-                <OrderSummaryMin deliveryStatus="New" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
+                <OrderSummaryMin deliveryStatus="Booked" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
                 <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel"cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
 
                 <OrderSummaryMin deliveryStatus="In Transit" packageType="Others" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>

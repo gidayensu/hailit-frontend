@@ -12,7 +12,7 @@ import Loader from "../Shared/Loader";
 //main components+helper function
 import { NewTrip } from "../Form/NewOrderForm";
 import OrderSummaryMin from "./OrderSummaryMin";
-import { extractDateWithDayFomDate } from "@/lib/utils";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 
 //redux+next+react
 import { useState } from "react";
@@ -64,7 +64,7 @@ export function ReOrder({
 
 
   const date = new Date();
-  const tripRequestDate = extractDateWithDayFomDate(date);
+  const tripRequestDate = extractDateWithDayFromDate(date);
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -104,7 +104,7 @@ export function ReOrder({
             <OrderSummaryMin
               tripId="#tripID"
               tripRequestDate={tripRequestDate}
-              deliveryStatus="New"
+              deliveryStatus="Booked"
               packageType={tripData.package_type}
               cost={tripData.trip_cost}
             />

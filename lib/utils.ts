@@ -76,7 +76,7 @@ return date.toLocaleTimeString();
 
 }
 
-export const extractDateWithDayFomDate = (dateString:string | null | Date)=> {
+export const extractDateWithDayFromDate = (dateString:string | null | Date)=> {
   if (dateString === null) {
     return null
   }

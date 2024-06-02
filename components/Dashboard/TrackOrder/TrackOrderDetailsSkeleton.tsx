@@ -77,19 +77,14 @@ export default function TrackOrderSkeleton() {
         </Container>
       </article>
 
-      <article className="flex flex-col lg:flex-row w-full gap-4">
+      <article className="flex flex-col lg:flex-row w-full gap-4 opacity-20">
         {/* PACKAGE DETAILS */}
-        <Container className="flex flex-col  w-full lg:w-2/6  h-52 rounded-lg p-3 gap-2">
+        <Container className="flex flex-col  w-full lg:w-2/6  h-60 rounded-lg p-3 gap-2">
           <Skeleton className="w-14" />
           <Skeleton className="w-14" />
         </Container>
-        <div className="flex flex-col  w-full lg:w-2/6  h-52 rounded-lg p-3 gap-2">
-          <Skeleton className="w-32" />
-          <Skeleton className="w-32" />
-
-          <div className="grid w-full max-w-sm items-center gap-1.5"></div>
-        </div>
-        <Container className="flex flex-col  w-full lg:w-2/6 h-52 rounded-lg p-3 gap-2">
+        
+        <Container className="flex flex-col  w-full lg:w-2/6 h-60 rounded-lg p-3 gap-2">
           <div className="flex justify-between">
             <div className="">
               <Skeleton className="w-14" />

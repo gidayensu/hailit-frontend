@@ -14,7 +14,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
     <Container className="w-full rounded-xl h-24 flex justify-center items-center  ">
       <div className="flex justify-center items-center w-full">
       <OrderStatusElement
-              orderStatus="New"
+              orderStatus="Booked"
               currentOrderStage={currentOrderStage}
               orderStage={1}
             >

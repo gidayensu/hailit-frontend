@@ -11,7 +11,7 @@ const Header: AuthorizationHeader = {
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
     prepareHeaders: (headers) => {
       headers.set("authorization", "");
       return headers;
@@ -46,7 +46,7 @@ export const hailitApi = createApi({
       }),
     }),
     updateTrip: builder.query<any, any>({
-      query: ({ tripDetails, tripId }) => ({
+      query: ({ tripId, tripDetails  }) => ({
         url: `trips/user-trip/${tripId}`,
         method: "PUT",
         body: tripDetails,
@@ -223,13 +223,17 @@ export const {
   
   //DRIVERS
   useGetAllDriversQuery,
+  useLazyGetAllDriversQuery,
   useGetDriverQuery,
+  useLazyGetDriverQuery,
   useLazyUpdateDriverQuery, 
   useLazyDeleteDriverQuery,
   
   //RIDERS
   useGetAllRidersQuery,
+  useLazyGetAllRidersQuery,
   useGetRiderQuery,
+  useLazyGetRiderQuery,
   useLazyUpdateRiderQuery,
   useLazyDeleteRiderQuery,
 

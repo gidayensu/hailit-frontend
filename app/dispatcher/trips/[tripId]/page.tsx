@@ -33,7 +33,10 @@ export default function DispatcherTrip () {
         </TrackOrderContainer>
         
         <TrackOrderContainer headingText="LOCATION AND TIMELINE">
+        <Container className="w-full flex flex-col gap-2 h-52 rounded-xl p-4 ">
+
           <OrderSummary deliveryStatus="IN TRANSIT" completionDate="Mon, 30 May, 2024" commencementTime="2:15 PM" completionTime="1:15PM" deliveryType="TOMORROW" dropOffLocation="Kwadaso" pickupLocation="Asonomaso" tripId="4528"  commencementDate={'Mon, 24 May, 2024'} />
+        </Container>
         </TrackOrderContainer>
 
         <TrackOrderContainer headingText="Sender">

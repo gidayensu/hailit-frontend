@@ -42,7 +42,7 @@ export default function OrderHistory () {
                 <div className="flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3">
 
 {/* PASS USER ID TO MAKE THIS ACTIVE */}
-                <OrderSummaryMin deliveryStatus="New" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}  />
+                <OrderSummaryMin deliveryStatus="Booked" packageType="Electronics" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}  />
                 <OrderSummaryMin deliveryStatus="Picked up" packageType="Parcel" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>
 
                 <OrderSummaryMin deliveryStatus="In Transit" packageType="Others" cost={'GHS40'} tripId="325" tripRequestDate={'Mon, 24 May, 2024'}/>

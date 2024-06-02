@@ -1,5 +1,5 @@
 "use client";
-
+import { extractDateWithDayFromDate, extractTimeFromDate } from "@/lib/utils";
 import { HiLocationMarker } from "react-icons/hi";
 import Container from "@/components/ui/container";
 import { usePathname } from "next/navigation";
@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 type DeliveryStatus =
   
   | "DELIVERED"
-  | "NEW"
+  | "BOOKED"
   | "PICKED UP"
   | "IN TRANSIT"
   | "DELIVERED"
@@ -18,36 +18,31 @@ type DeliveryType =
   | "TOMORROW" 
   | "SCHEDULED"
 
-export default function OrderSummary({tripId,
-  deliveryStatus, deliveryType, pickupLocation, dropOffLocation, commencementDate, commencementTime, completionDate, completionTime 
-}: {
-  tripId: string,
-  deliveryStatus: DeliveryStatus, 
-  deliveryType : DeliveryType,
-  pickupLocation: string,
-  dropOffLocation: string,
-  commencementDate: string,
-  commencementTime: string,
-  completionDate: string,
-  completionTime: string,
-}) {
-
+export default function OrderSummary({ trip }: { trip:any }) {
+  const { trip_request_date, trip_commencement_date, trip_completion_date } =
+  trip;
+  const tripRequestDate = extractDateWithDayFromDate(trip_request_date) || 'TBD';
+  const tripCommencementDate = extractDateWithDayFromDate(
+    trip_commencement_date
+  ) || 'TBD';
+  const tripCompletionDate = extractDateWithDayFromDate(trip_completion_date) || 'TBD';
+  const tripCommencementTime = extractTimeFromDate(trip_commencement_date) || 'TBD';
+const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
   const path = usePathname();
   return (
     <>
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
-      <Container className="w-full flex flex-col gap-2 h-52 rounded-xl p-4 ">
         <div className="flex justify-between items-center -mt-1">
           
           <div className="flex flex-col items-start">
-            {!path.startsWith('/track') &&
+            {path.startsWith('/dispatcher')  &&
             <>
             <p className="text-[12px] text-slate-500">Order ID</p>
-            <h3 className="font-bold text-[14px] ">{tripId}</h3>
+            <h3 className="font-bold text-[14px] ">{trip.trip_id}</h3>
             </>
             }
 
-          {path.startsWith('/track') &&
+          {(path.startsWith('/track') || path.startsWith('/dashboard')) &&
             <>
             <p className="text-sm text-slate-500">ACCRA</p>
             
@@ -55,36 +50,36 @@ export default function OrderSummary({tripId,
             }
 
           </div>
-        {!path.startsWith('/track') &&
+        {path.startsWith('/dispatcher') &&
           <div
             className={`flex justify-center items-center text-[12px] font-medium w-20  ${
-              deliveryStatus === "NEW"
+              trip.trip_status === "BOOKED"
                 ? "  bg-blue-500 text-white"
-                : deliveryStatus === "PICKED UP"
+                : trip.trip_status === "PICKED UP"
                 ? "  bg-teal-500 text-white"
-                : deliveryStatus === "IN TRANSIT"
+                : trip.trip_status === "IN TRANSIT"
                 ? " bg-amber-500 dark:text-[#1e1e1e]"
-                : deliveryStatus === "DELIVERED"
+                : trip.trip_status === "DELIVERED"
                 ? " bg-green-500 dark:text-[#1e1e1e]"
                 : " bg-red-500 text-white"
             }  h-6 w-24 rounded-md`}
           >
-            <p>{deliveryStatus}</p>
+            <p>{trip.trip_status}</p>
           </div>
           
           }
           <div
             className={`flex justify-center items-center text-sm font-bold w-20 -ml-12   ${
-              deliveryType === "TODAY"
+              trip.trip_type === "TODAY"
                 ? "  text-blue-500"
-                : deliveryType === "TOMORROW"
+                : trip.trip_type === "TOMORROW"
                 ? "  text-teal-500 "
-                : deliveryType === "SCHEDULED"
+                : trip.trip_type === "SCHEDULED"
                 ? "text-amber-600 dark:text-amber-500 "
                 : " text-green-500"
             }  h-6 w-24 rounded-md`}
           >
-            <p>{deliveryType}</p>
+            <p>{trip.trip_type.toUpperCase()}</p>
           </div>
           
         </div>
@@ -96,7 +91,7 @@ export default function OrderSummary({tripId,
             <HiLocationMarker className="text-xl" />
             <span className="flex flex-col">
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm ">{pickupLocation}</p>
+                <p className="text-sm ">{trip.pickup_location}</p>
               
               
             </span>
@@ -110,7 +105,7 @@ export default function OrderSummary({tripId,
             <HiLocationMarker className="text-xl text-green-500" />
             <span className="flex flex-col">
                 <p className="font-bold text-sm">Delivery Point</p>
-                <p className="text-sm ">{dropOffLocation}</p>
+                <p className="text-sm ">{trip.drop_off_location}</p>
               
             </span>
           </span>
@@ -122,7 +117,7 @@ export default function OrderSummary({tripId,
             <span className="flex gap-2">
               <span className="space-y-1">
                 <p className="text-sm font-semibold">Pickup date</p>
-                <p className="text-sm">{commencementDate} <br /> ({commencementTime})</p>
+                <p className="text-sm">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
               </span>
               
             </span>
@@ -134,14 +129,13 @@ export default function OrderSummary({tripId,
             <span className="flex gap-2">
               <span>
               <p className="text-sm font-semibold">Delivery date</p>
-                <p className="text-sm ">{completionDate} <br /> ({completionTime})</p>
+                <p className="text-sm ">{tripCompletionDate} <br /> ({tripCompletionTime})</p>
               </span>
               
             </span>
           </span>
         </div>
           </div>
-      </Container>
     </>
   );
 }
