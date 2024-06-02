@@ -1,6 +1,6 @@
 "use client";
 
-import ProfilePageDetails from "@/components/Profile/ProfilePageDetail";
+import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
 
 export default function DispatcherProfile() {
   return (
