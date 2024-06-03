@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import Loader from "../Shared/Loader";
 //main components+helper function
-import { NewTrip } from "../Form/NewOrderForm";
+import { NewTrip } from "../Form/FormTypes";
 import OrderSummaryMin from "./OrderSummaryMin";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 
