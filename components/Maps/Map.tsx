@@ -6,35 +6,31 @@ import { Map, Marker } from "pigeon-maps";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FaMapPin } from "react-icons/fa";
-import { fetchMapData, reverseMapSearch } from "@/lib/utils";
+import {  reverseMapSearch, getSpecificName } from "@/lib/utils";
 
-import { Separator } from "../ui/separator";
-import { Skeleton } from "../ui/skeleton";
-import { setSearchData, setChosenLocation } from "@/lib/store/slice/mapSlice";
+
+
+import { setChosenLocation, setChosenLocationName } from "@/lib/store/slice/mapSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-
+import LocationSearch from "./LocationSearch";
 export type UserLocation = [number, number] | null;
 type UserLocationName = any;
 type MapBoundaryChange = boolean;
 
 export default function LocationMap() {
+
   const dispatch = useAppDispatch();
-  const { searchData } = useAppSelector(state=>state.map)
+  const { searchData, chosenLocation, chosenLocationName } = useAppSelector(state=>state.map)
   const [userLocation, setUserLocation] = useState<UserLocation>(null); // Initialize as null
   const [userLocationName, setUserLocationName] =
     useState<UserLocationName>(null);
   const [mapBoundaryChanged, setMapBoundaryChanged] =
     useState<MapBoundaryChange>(false);
   
-  const [mapSearchContainerOpen, setMapSearchContainerOpen] = useState(false);
+  
   const [zoom, setZoom] = useState(18);
   
-  const mapDataHandler = async (searchQuery: any) => {
-    const data = await fetchMapData(searchQuery.target.value);
-    dispatch(setSearchData(data))
-    setMapSearchContainerOpen(true);
-  };
-  
+  let nameOfLocation: string | undefined = '';
   const locationNameData = async (
     latitude: string | number,
     longitude: string | number
@@ -42,8 +38,13 @@ export default function LocationMap() {
     const locationData = await reverseMapSearch(latitude, longitude);
 
     const locationName = locationData?.displayName;
-    // const locationName = ''
-    return locationName;
+    
+    let specificName: string | undefined = ''
+    if (locationName) {
+      specificName = getSpecificName(locationName)
+    }
+    
+    return specificName;
   };
 
   let windowHeight;
@@ -58,7 +59,7 @@ export default function LocationMap() {
         const { latitude, longitude } = coords;
         setUserLocation([latitude, longitude]);
 
-        setUserLocationName(locationNameData(latitude, longitude));
+        // setUserLocationName(locationNameData(latitude, longitude));
       },
       (error) => {
         console.error("Error getting location:", error.message);
@@ -67,89 +68,53 @@ export default function LocationMap() {
   }, []);
 
   //set the user's location as the marker point
+  
   useEffect(() => {
     if (userLocation) {
-      setSelectedLocation(userLocation);
+      dispatch(setChosenLocation(userLocation))
+      
     }
   }, [userLocation]);
 
-  const [selectedLocation, setSelectedLocation] = useState<UserLocation>(userLocation);
-  const [selectedLocationName, setSelectedLocationName] =
-    useState(userLocationName);
+  
 
   useEffect(() => {
-    if (selectedLocation) {
-      setSelectedLocationName(
-        locationNameData(selectedLocation[0], selectedLocation[1])
-      );
+    if (chosenLocation) {
+      const locationName = locationNameData(chosenLocation[0], chosenLocation[1])
+      dispatch(setChosenLocationName(locationName));
     }
-  }, [selectedLocation]);
+  }, [chosenLocation]);
 
-  const selectedSearchItemHandler = (mapPoint: UserLocation) => {
-    setSelectedLocation(mapPoint);
-  };
+  
   const selectedLocationHandler = (selectedLocation: UserLocation) => {
     //push this to store or state
     dispatch(setChosenLocation(selectedLocation))
   };
-
+console.log(nameOfLocation)
   return (
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">
-        <Input
-          className="flex items-center justify-center h-10 sm:h-12 w-60 md:w-96 text-center bg-white z-50 mt-5 shadow-lg rounded-full"
-          placeholder="Search your location"
+        <LocationSearch
           
         />
-        {searchData && mapSearchContainerOpen && (
-          <div className="md:w-96 h-auto bg-white z-50 dark:bg-primary-dark text-black dark:text-slate-200 text-sm rounded-lg p-3">
-            <span className="flex flex-col gap-2">
-              {searchData.map((data: any, index: number) => {
-                console.log("data.lat:", data.lat);
-                if (data && index <= 3) {
-                  return (
-                    <span
-                      key={index}
-                      className="flex flex-col text-[11px] gap-2"
-                    >
-                      {!data.display_name ? (
-                        <Skeleton className="h-4 w-full" />
-                      ) : (
-                        <p
-                          onClick={() => {
-                            selectedSearchItemHandler([data.lat, data.lon]);
-                            setMapSearchContainerOpen(false);
-                          }}
-                        >
-                          {data.display_name}
-                        </p>
-                      )}
-
-                      <Separator className="dark:bg-slate-300 bg-primary-dark opacity-60" />
-                    </span>
-                  );
-                }
-              })}
-              {searchData && searchData?.length === 0 && (
-                <p className="w-full"> No location matches your search </p>
-              )}
-              {searchData && searchData?.length > 3 && (
-                <div>
-                  <p className="text-red">See More</p>
-                </div>
-              )}
-            </span>
-          </div>
-        )}
+         {/* <Link href={'/map/search-location'} className="flex items-center justify-center font-normal h-10 sm:h-12 w-60 md:w-96 text-center text-slate-300 bg-white z-50 mt-5 shadow-lg rounded-full">
+        <Button
+          variant={'empty'}
+          className=" font-normal h-10 sm:h-12 w-60 md:w-96 text-center text-slate-300 bg-white z-50  rounded-full"        
+        >
+          Search your location
+        </Button>
+        </Link> */}
+        
       </div>
       
 
       <div className="relative w-full h-full">
-        {userLocation && selectedLocation && (
+        {userLocation && chosenLocation && (
           <>
             <Map
               height={800}
-              center={selectedLocation}
+              center={chosenLocation}
               minZoom={1}
               maxZoom={18}
               zoom={zoom}
@@ -159,7 +124,7 @@ export default function LocationMap() {
               onAnimationStart={() => setMapBoundaryChanged(true)}
               onAnimationStop={() => setMapBoundaryChanged(false)}
               onBoundsChanged={({ center, zoom }) => {
-                setSelectedLocation(center);
+                dispatch(setChosenLocation(center));
                 setZoom(zoom);
               }}
             >
@@ -176,7 +141,7 @@ export default function LocationMap() {
         </Marker>   */}
             </Map>
             <Marker
-              anchor={selectedLocation}
+              anchor={chosenLocation}
               onMouseOver={() => setMapBoundaryChanged(true)}
               onMouseOut={() => setMapBoundaryChanged(true)}
             >
@@ -185,13 +150,13 @@ export default function LocationMap() {
                   <div className="absolute flex items-center justify-center h-auto w-44 bg-white shadow-md text-center text-[10px] mb-36 rounded-lg p-2">
                     <span className="flex flex-col gap-1 text-slate-800 text-[10px] font-bold ">
                       <p className="line-clamp-2">
-                        {selectedLocationName || "Name could not be loaded"}
+                        {chosenLocationName || "Name could not be loaded"}
                       </p>
                       <Link href={"/"}>
                         <Button
                           variant="empty"
                           onClick={() =>
-                            selectedLocationHandler(selectedLocation)
+                            selectedLocationHandler(chosenLocation)
                           }
                           className="text-[10px] font-bold bg-primary-medium h-6 text-white"
                         >

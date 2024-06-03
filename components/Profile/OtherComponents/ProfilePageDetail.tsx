@@ -1,3 +1,4 @@
+import { userLogout } from "@/lib/store/actions";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import Link from "next/link";
 import { IoIosHelpCircle, IoIosHelpCircleOutline } from "react-icons/io";
@@ -30,10 +31,8 @@ export default function ProfilePageDetails () {
     
       //signOut
   const handleSignOut = ()=> {
-    dispatch(logUserOut())
+    dispatch(userLogout())
     supabaseSignOut();
-    dispatch(setAuthState(false));
-
   }  
 
   const iconsAndTextMainContainerClass = "flex flex-col gap-2 md:w-96 md:text-3xl";

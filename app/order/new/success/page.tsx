@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import { MdContentCopy, MdInfoOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import deliveryAnimation from "@/public/animations/success-animation.json";
-import { CiCircleCheck } from "react-icons/ci";
+
 import toast, { Toaster } from 'react-hot-toast';
 //main components 
 import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
@@ -30,7 +30,7 @@ export default function SuccessfulOrder() {
     resetDeliveryChoices({
       trip_type: "",
       trip_medium: "",
-      destination_city: "",
+      destination_area: "",
       package_type: "",
       scheduled: false,
     }))

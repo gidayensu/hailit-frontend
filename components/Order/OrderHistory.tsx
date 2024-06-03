@@ -2,18 +2,20 @@
 import { useState } from "react"
 import OrderSummaryMin from "./OrderSummaryMin"
 export type Deliveries = boolean;
-
+import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAppSelector } from "@/lib/store/hooks";
+import NoData from "../Shared/NoData";
 export default function OrderHistory () {
     const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
+    const {user_id} = useAppSelector(state=>state.user)
     
-    
-
     const handleSelectedDeliveries = (status: boolean) => {
       setCurrentDeliveries(status);
     };
     return (
-        <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
-            <h2 className="font-bold text-xl"> Your Deliveries</h2>
+    <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
+            <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
+      <NoData noDataText="Your Orders Will Appear Here!"/>
             <div className="flex justify-between items-center w-full md:w-4/6 h-10 bg-white dark:bg-secondary-dark border border-primary-color   rounded-xl p-2 gap-3 text-[13px] mb-4">
               <span
                 className={`flex items-center justify-center ${

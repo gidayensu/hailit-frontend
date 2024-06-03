@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DeliveryChoice {
-    destination_city: string,
+    destination_area: string,
     trip_type:string,
     trip_medium: string,
     scheduled: boolean,
@@ -9,7 +9,7 @@ interface DeliveryChoice {
 }
 
 const initialState: DeliveryChoice = {
-    destination_city: '',
+    destination_area: '',
     trip_type:'',
     trip_medium: '',
     scheduled: false,
@@ -21,7 +21,7 @@ export const deliveryChoiceSlice = createSlice({
     initialState, 
     reducers: {
         setDestinationCity (state, action:PayloadAction<string>) {
-            state.destination_city = action.payload;
+            state.destination_area = action.payload;
         },
         setDeliveryDay (state, action:PayloadAction<string>) {
             state.trip_type = action.payload;
@@ -35,10 +35,10 @@ export const deliveryChoiceSlice = createSlice({
         setPackageType (state,action:PayloadAction<string>) {
             state.package_type = action.payload;
         },
-        resetDeliveryChoices (state, action:PayloadAction<DeliveryChoice>) {
+        resetDeliveryChoices (state) {
             state.trip_type = '';
             state.trip_medium = '';
-            state.destination_city = '';
+            state.destination_area = '';
             state.package_type = '';
             state.scheduled = false;
             

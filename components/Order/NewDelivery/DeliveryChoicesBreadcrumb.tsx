@@ -1,20 +1,21 @@
-import { FaAngleRight, FaMotorcycle } from "react-icons/fa";
-import { AiFillCar } from "react-icons/ai"
-import {  RiCaravanFill } from "react-icons/ri"
-import { BsFillPinMapFill } from "react-icons/bs"
-import {  RiTimerFlashFill, RiTimer2Fill, RiCalendarScheduleFill } from "react-icons/ri"
-import { RiMapPinRangeLine, RiTreasureMapFill } from "react-icons/ri"
-import { useAppSelector } from "@/lib/store/hooks";
+import { FaAngleRight } from "react-icons/fa";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function DeliveryChoicesBreadcrumb () {
-  const {trip_type, trip_medium, destination_city} = useAppSelector(state=>state.deliveryChoices)
+  const dispatch = useAppDispatch();
+  const handleResetChoices = ()=> {
+    dispatch(resetDeliveryChoices())
+  }
+  const {trip_type, trip_medium, destination_area} = useAppSelector(state=>state.deliveryChoices)
     return(
         <section className="w-full flex gap-2 items-center justify-start text-secondary-shade">
           {
-            destination_city &&
+            destination_area &&
                 <div className="flex items-center justify-center gap-2 w-1/3 h-8 border-2 border-secondary-color rounded-md text-[12px] font-medium  text-secondary-shade">
                   
-                  <p>{destination_city.toUpperCase()}</p>
+                  <p>{destination_area.toUpperCase()}</p>
                   
                 </div>
           }
@@ -41,7 +42,10 @@ export default function DeliveryChoicesBreadcrumb () {
                 </div>
             </>
           }
+          <span onClick={handleResetChoices} className="cursor-pointer">
 
+      <MdDeleteForever className="text-rose-500 text-3xl"/>
+          </span>
               </section>
               
     )

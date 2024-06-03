@@ -87,3 +87,16 @@ export const extractDateWithDayFromDate = (dateString:string | null | Date)=> {
 export const copyToClipBoard = (element:string)=> {
   navigator.clipboard.writeText(element);
 }
+
+export function getSpecificName(str:string) {
+  console.log('this is str:', str)
+  if(str && typeof str==='string') {
+      
+      const parts = str.split(",");
+      return parts.slice(0, 3).join(",");
+  }
+  // if (parts.length < 3) {
+  //   return ""; // Return empty string if not enough commas
+  // }
+  return str
+}

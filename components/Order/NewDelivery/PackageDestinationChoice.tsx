@@ -11,10 +11,10 @@ import { FiCheck } from "react-icons/fi"
 
 
 export default function PackageDestinationChoice () {
-    const {destination_city} = useAppSelector(state=>state.deliveryChoices)
+    const {destination_area} = useAppSelector(state=>state.deliveryChoices)
     const dispatch = useAppDispatch();
-    const handleDeliveryDestination = (destination_city:string)=> {
-      dispatch(setDestinationCity(destination_city))
+    const handleDeliveryDestination = (destination_area:string)=> {
+      dispatch(setDestinationCity(destination_area))
         
     }
 
@@ -23,7 +23,7 @@ export default function PackageDestinationChoice () {
             
             <DeliveryChoices
               handleDeliveryOption={handleDeliveryDestination}
-              deliveryOption={destination_city}
+              deliveryOption={destination_area}
               CheckIcon={FiCheck}
               MainIcon={BsFillPinMapFill}
               elementOption="Accra"
@@ -36,7 +36,7 @@ export default function PackageDestinationChoice () {
             <div className="w-full md:w-2/3 flex gap-3">
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryDestination}
-                deliveryOption={destination_city}
+                deliveryOption={destination_area}
                 CheckIcon={FiCheck}
                 MainIcon={RiMapPinRangeLine}
                 elementOption="Kumasi"
@@ -46,7 +46,7 @@ export default function PackageDestinationChoice () {
               
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryDestination}
-                deliveryOption={destination_city}
+                deliveryOption={destination_area}
                 CheckIcon={FiCheck}
                 MainIcon={RiTreasureMapFill}
                 elementOption="Inter city"

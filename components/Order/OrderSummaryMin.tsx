@@ -69,11 +69,8 @@ export default function OrderSummaryMin({
 
   }
   
-  
-
-
   return (
-    <Link href={`/track/${tripId}`} className="w-full">
+    <div className="w-full">
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
       <Container className="flex  gap-3 justify-between   h-16 rounded-xl p-2">
         <div className="flex gap-2">
@@ -109,6 +106,6 @@ export default function OrderSummaryMin({
           </div>
         
       </Container>
-    </Link>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "../ui/button";
 import Loader from "../Shared/Loader";
+import { MdDeleteForever } from "react-icons/md";
 
 //react hook form
 import {useForm, SubmitHandler} from 'react-hook-form';
@@ -89,8 +90,9 @@ export default function NewOrderForm() {
         <span className="flex items-start justify-start">
           <h3 className=" text-[14px] font-bold ">Delivery Area and Medium</h3>
         </span>
-        
         <DeliveryChoicesBreadcrumb/>
+        
+
       </div>
       <div className=" grid w-full max-w-sm items-center gap-1.5 ">
         <span className="flex items-start justify-start">
