@@ -27,13 +27,7 @@ export default function SuccessfulOrder() {
   
   const dispatch = useAppDispatch();
   dispatch(
-    resetDeliveryChoices({
-      trip_type: "",
-      trip_medium: "",
-      destination_area: "",
-      package_type: "",
-      scheduled: false,
-    }))
+    resetDeliveryChoices())
 
     const handleCopyTripId = (tripId:string)=> {
       copyToClipBoard(tripId)
