@@ -8,6 +8,8 @@ import Riders from "../Dispatcher/Riders";
 import Drivers from "../Dispatcher/Drivers";
 import { useAppSelector } from "@/lib/store/hooks";
 
+export const DEFAULT_DISPATCHER_ID= "ff-12-53"
+
 export default function DispatcherSection({
   dispatcher,
   tripMedium,
@@ -38,7 +40,7 @@ export default function DispatcherSection({
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
               <>
-                <TbArrowsExchange className="text-xl " /> <p>Assign </p>
+                <TbArrowsExchange className="text-xl " /> <p>{assignedDispatcherId === DEFAULT_DISPATCHER_ID ? 'Assign': 'Change' }</p>
               </>
             </Button>
           }
@@ -49,7 +51,7 @@ export default function DispatcherSection({
           }
         </Modal>
       </div>
-      {assignedDispatcherId === "ff-12-53" && 
+      {assignedDispatcherId === DEFAULT_DISPATCHER_ID && 
       <div className="flex flex-col gap-1 items-center justify-center font-medium">
         <LiaUserSlashSolid className="text-4xl opacity-40"/>
         <p className="text-md">No {tripMedium === "Motor"? 'rider': 'driver'} assigned</p>

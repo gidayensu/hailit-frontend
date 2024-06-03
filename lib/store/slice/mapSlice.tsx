@@ -8,7 +8,7 @@ interface MapData {
 }
 
 const initialState:MapData = {
-    searchData: [],
+    searchData: ['1', '2'],
     chosenLocation: [0, 0],
     chosenLocationName: '',
     searchContainer: false

@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "../ui/button";
 import Loader from "../Shared/Loader";
-import { MdDeleteForever } from "react-icons/md";
+
 
 //react hook form
-import {useForm, SubmitHandler} from 'react-hook-form';
+import {useForm, SubmitHandler, FormProvider} from 'react-hook-form';
+import FormField from "./FormField";
+import {zodResolver} from '@hookform/resolvers/zod'
 
 //main components
 import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoicesBreadcrumb";
@@ -20,26 +22,9 @@ import { useRouter } from "next/navigation";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
 
-export interface NewTrip {
-  trip_medium: string,
-    package_type: string,
-    pickup_location: string,
-    drop_off_location: string,
-    additional_information: string,
-    trip_type: string,
-    package_value: string,
-    sender_number: string,
-    recipient_number: string,
-}
-interface DeliveryDetails {
-  
-    pickup_location: string,
-    drop_off_location: string,
-    sender_number: string,     
-    recipient_number: string,
-    package_value: number,
-    additional_information: string
-}
+//interface
+import { DeliveryDetails, NewOrderSchema } from "./FormTypes";
+import { NewTrip } from "./FormTypes";
 
 export default function NewOrderForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,11 +37,13 @@ export default function NewOrderForm() {
   const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
  
 
+  const formMethods = useForm<DeliveryDetails>({
+    resolver: zodResolver(NewOrderSchema)
+  });
+  const {register, handleSubmit, formState: {errors}, setError } = formMethods;
   
-  const {register, handleSubmit } = useForm<DeliveryDetails>();
   
-  
-  const onDeliveryFormSubmit: SubmitHandler<DeliveryDetails> = async (data)=> {
+  const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
     setLoading(true);
     if(!package_type) {
       return (
@@ -85,6 +72,9 @@ export default function NewOrderForm() {
     
     
   return (
+    <FormProvider {...formMethods}>
+
+    
     <form className="flex flex-col gap-4 md:justify-center md:items-center" onSubmit={handleSubmit(onDeliveryFormSubmit)}>
       <div className=" grid w-full max-w-sm items-center gap-1.5 ">
         <span className="flex items-start justify-start">
@@ -107,58 +97,66 @@ export default function NewOrderForm() {
 
       <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Pickup Location</h3>
-        <Input
+        <FormField
           type="text"
           placeholder="Enter location for pickup"
           className="h-14"
-          {...register("pickup_location")} required
+          name = "pickup_location"
+
+          
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Destination / Drop off</h3>
-        <Input
+        <FormField
           type="text"
           placeholder="Enter location for drop off"
           className="h-14"
-          {...register("drop_off_location")} required
+          name = "drop_off_location"
+          
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Sender Number</h3>
-        <Input
+        <FormField
           type="text"
           placeholder="Enter number of sender"
           className="h-14"
-          {...register("sender_number")} required
+          
+          name="sender_number"
+          
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Recipient Number</h3>
-        <Input
+        <FormField
           type="text"
           placeholder="Enter number of recipient"
           className="h-14"
-          {...register("recipient_number")} required
+          name="recipient_number"
+          
         />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Package value (GHS)</h3>
-        <Input
+        <FormField
           type="number"
-          placeholder="Enter number of recipient"
+          placeholder="Enter package value"
           className="h-14"
-          {...register("package_value")} required
+          name = "package_value"
+          valueAsNumber= {true}
+          
         />
       </div>
       {/* <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">
           Upload Product Image (optional)
         </h3>
-        <Input id="picture" type="file" />
+        <FormField id="picture" type="file" />
       </div> */}
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Additional Information</h3>
-        <Textarea className="h-32" {...register("additional_information")} required/>
+        <Textarea className="h-32" {...register("additional_information")} />
         {
           !package_type && <span className="text-secondary-color text-center">
             <p>Package type not selected</p>
@@ -178,6 +176,7 @@ export default function NewOrderForm() {
         </Button>}
       </div>
     </form>
+    </FormProvider>
   );
 }
 

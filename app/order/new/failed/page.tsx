@@ -6,14 +6,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { redirect } from "next/navigation";
-
+import { useState } from "react";
 export default function FailedOrder() {
   const {newTripSuccess} = useAppSelector(state=>state.form);
   console.log('newTripSuccess:', newTripSuccess)
   // if(newTripSuccess) {
   //   redirect('/order')
   // }
-
+  
   
   return (
     <main className="flex min-h-screen flex-col mt-16 items-center gap-4">
@@ -32,6 +32,7 @@ export default function FailedOrder() {
             Retry
           </Button>
         </Link>
+        
         <Link href="/">
           <Button
             className="border border-slate-300 h-14 w-60 flex gap-4"

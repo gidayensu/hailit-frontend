@@ -48,10 +48,11 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
+      serializableCheck: false
+      // serializableCheck: {
 
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-      },
+      //   ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'map'],
+      // },
     }).concat([hailitApi.middleware]),
 });
 

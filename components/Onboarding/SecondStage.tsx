@@ -11,16 +11,16 @@ export default function SecondStage () {
               <p className="font-bold text-2xl">Enter your details </p>
               <p>Send packages with ease using Hailit </p>
             </span>
-              {
+            <CustomerProfile />
+              {/* {
                 chosenRole === "customer" &&
-              <CustomerProfile />
               }
 
               {
                 chosenRole !== "customer" &&
                 <DispatcherProfile/>
               }
-            
+             */}
 
             
           </div>

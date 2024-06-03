@@ -85,7 +85,7 @@ export default function SendPackage() {
       <article
         id="delivery-medium"
         className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
-        onClick={()=>scrollToSection("continue")}
+        // onClick={()=>scrollToSection("continue")}
       >
         <h2 className="font-bold text-xl text-center my-2">
           SELECT DELIVERY MEDIUM
@@ -98,7 +98,7 @@ export default function SendPackage() {
         {
           (!trip_medium || !destination_area || !trip_type ) &&
           <>
-          <Button onClick={handleMissingChoice} className="md:w-4/6 w-full" id="continue">
+          <Button onClick={handleMissingChoice} className="md:w-4/6 w-full" >
             Continue
           </Button>
           <Toaster/>
