@@ -31,11 +31,12 @@ export const mapSlice = createSlice({
 
     setPickUpLocation(state, action: PayloadAction<UserLocation>) {
       state.pickUpLocation = action.payload
+      console.log('this pickup location is running')
     },
 
     setDropOffLocation(state, action: PayloadAction<UserLocation>) {
       state.dropOffLocation = action.payload
-      console.log('this really really runs')
+      console.log('this drop off location is running')
     },
 
      
@@ -53,8 +54,10 @@ export const mapSlice = createSlice({
     builder
       .addCase(fetchPickUpLocationName.fulfilled, (state, action: PayloadAction<string>) => {
         state.pickUpLocationName = action.payload;
+        console.log('this pickup extra reducer is running')
       })
       .addCase(fetchDropOffLocationName.fulfilled, (state, action: PayloadAction<string>) => {
+        console.log('this dropoff extra reducer is running')
         state.dropOffLocationName = action.payload;
       });
   },
