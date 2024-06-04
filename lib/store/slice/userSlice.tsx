@@ -34,9 +34,7 @@ export const userSlice = createSlice({
             
         },
         setUserOnBoard(state, action:PayloadAction<boolean>) {
-            console.log('this really runs')
             state.onboard = action.payload
-            console.log('this is payload action',action.payload)
         },
 
         logUserOut(state) {

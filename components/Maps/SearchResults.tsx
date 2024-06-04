@@ -24,8 +24,6 @@ export default function SearchResults() {
     dispatch(setSearchContainer(false));
   };
 
-  console.log("searchContainer", searchContainer);
-  console.log("searchContainer", searchData);
 
   return (
     <>

@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 
 export default function EditProfile() {
   const {user_role} = useAppSelector(state=>state.user);
-  console.log('userRole:::', user_role)
   return (
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">

@@ -19,7 +19,6 @@ export default function DispatcherSection({
 }) {
 
   const { assignedDispatcherId, assignedDispatcherName, assignedDispatcherPlate, assignedDispatcherVehicle} = useAppSelector(state=>state.dashboard)
-  console.log('assignedDispatcherId, assignedDispatcherName, assignedDispatcherPlate, assignedDispatcherVehicle', assignedDispatcherId, assignedDispatcherName, assignedDispatcherPlate, assignedDispatcherVehicle)
   return (
     <>
       <div className="flex justify-between">

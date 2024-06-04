@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/lib/store/hooks";
 export default function FailedOrder() {
   const {newTripSuccess} = useAppSelector(state=>state.form);
-  console.log('newTripSuccess:', newTripSuccess)
   // if(newTripSuccess) {
   //   redirect('/order')
   // }

@@ -9,7 +9,6 @@ export default function OrdersCard({userData}:{userData:any}) {
     let trips = [];
     if (data) {
       trips = data.trips;
-      console.log('trips:', trips[0].trip_id)
     }
   return (
     <>
@@ -27,7 +26,6 @@ export default function OrdersCard({userData}:{userData:any}) {
             
                     {trips.map((trip:any, index:number)=> 
                     <>
-                    {console.log('index', index)}
                       { index <= 2 &&
 
                         <OrderSummaryMin key={trip.trip_id} cost={trip.trip_cost} deliveryStatus={trip.trip_status} packageType={trip.package_type} tripId={trip.trip_id} tripRequestDate={extractDateWithDayFromDate(trip.trip_request_date)}/>

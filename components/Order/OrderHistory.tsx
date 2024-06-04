@@ -72,7 +72,6 @@ export default function OrderHistory() {
   };
 
   const { currentTrips, previousTrips, isLoading, error } = useGetUserTrips();
-  console.log("currentTrips:", currentTrips);
 
   if (isLoading) {
     return <TripsLoadingSkeleton />;

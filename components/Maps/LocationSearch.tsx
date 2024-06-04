@@ -19,7 +19,6 @@ export default function LocationSearch() {
   const mapDataHandler = useCallback( async (e:any) => {
         
     // const data: any = await fetchMapData(searchQuery?.target?.value);
-    console.log('e.target.value:', e.target.value)
     const data: any = await  fetchMapData(e.target.value);
     if (data) {
         

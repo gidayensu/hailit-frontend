@@ -16,7 +16,6 @@ export default function DispatcherTrip () {
     let updateStatus = "Picked Up";
     const params = useParams();
   const { trip_id } = params;
-  console.log('trip_id:', trip_id)
   
   const { data, isLoading, error } = useGetTripQuery(`${trip_id}`);
   let trip = [];

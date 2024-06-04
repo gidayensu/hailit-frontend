@@ -89,7 +89,6 @@ export const copyToClipBoard = (element:string)=> {
 }
 
 export function getSpecificName(str:string) {
-  console.log('this is str:', str)
   if(str && typeof str==='string') {
       
       const parts = str.split(",");

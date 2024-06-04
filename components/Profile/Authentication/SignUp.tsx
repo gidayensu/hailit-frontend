@@ -98,7 +98,6 @@ export default function SignUp() {
         }
       }
     } catch (err) {
-      console.log({ error: err });
     }
   };
   if (data) {

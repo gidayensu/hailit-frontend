@@ -48,19 +48,17 @@ export default function CustomerProfile() {
           updateUser({userId: user_id, userDetails: newUserData});
         }
         
-        // console.log('update User', updateUser({userId: user_id, userDetails: newUserData}))
         
         if (error) {
           return {error: "error occurred"}
         } 
       } catch (err) {  
         setIsError(true)
-        console.log('error:', err)
+        return {error: err}
       }
     }
 
     if(data && data.user) {
-      console.log('data2:', data)
       const {user} = data
       dispatch(setUserState({
         user_id: user.user_id,
@@ -82,7 +80,6 @@ export default function CustomerProfile() {
     if(data && data.error ) {
       
       setIsError(true)
-      console.log('data3:', data.error)
     }
     
     const inputAndLabeClass = "w-full max-w-sm items-center";

@@ -91,7 +91,6 @@ export default function LocationMap() {
     dispatch(setChosenLocation(selectedLocation))
     router.push('/')
   };
-console.log(nameOfLocation)
   return (
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">
