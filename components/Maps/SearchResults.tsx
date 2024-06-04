@@ -2,7 +2,7 @@ import { Separator } from "../ui/separator";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import {
   setPickUpLocation,
-  setPickUpLocationName,
+  
   setSearchContainer,
 } from "@/lib/store/slice/mapSlice";
 import { Skeleton } from "../ui/skeleton";
@@ -20,7 +20,6 @@ export default function SearchResults() {
     mapPoint: UserLocation;
   }) => {
     dispatch(setPickUpLocation(mapPoint));
-    dispatch(setPickUpLocationName(locationName));
     dispatch(setSearchContainer(false));
   };
 
