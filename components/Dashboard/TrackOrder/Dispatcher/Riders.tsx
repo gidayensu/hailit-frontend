@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks"
-import { setAssignedDispatcher } from "@/lib/store/slice/dashboardSlice"
+import { setAssignedDispatcher, setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice"
 import {  useGetAllRidersQuery, useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar } from "@/components/Shared/user-avatar";
@@ -28,7 +28,7 @@ export default function Riders () {
     });
     
     const dispatch = useAppDispatch();
-    const { assignedDispatcherId, selectedTripId } = useAppSelector(state=>state.dashboard);
+    const {previousSelectedTripId, assignedDispatcherId, selectedTripId } = useAppSelector(state=>state.dashboard);
 
     //fetching query based on trip medium
     
@@ -60,32 +60,30 @@ export default function Riders () {
         assignedDispatcherPlate: riderToBeAssigned.plate, 
         assignedDispatcherPhone: riderToBeAssigned.phone
       }))
+      dispatch(setPreviousSelectedTripId([selectedTripId]))
     }
-    let riders = [];
-    if (data) {
-      riders = data.riders;
-      }
-
+    const riders = data?.riders;
+    
     return (<>
     {
         (isLoading) && 
         <>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <Skeleton className="h-14 w-14 rounded-full"/>
           <div className="flex flex-col gap-2">
           <Skeleton className="h-6 w-32 "/>
           <Skeleton className="h-6 w-32 "/>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <Skeleton className="h-14 w-14 rounded-full"/>
           <div className="flex flex-col gap-2">
           <Skeleton className="h-6 w-32 "/>
           <Skeleton className="h-6 w-32 "/>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <Skeleton className="h-14 w-14 rounded-full"/>
           <div className="flex flex-col gap-2">
           <Skeleton className="h-6 w-32 "/>

@@ -95,15 +95,18 @@ export default function NewOrderForm() {
 
         <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
           <h3 className=" text-[14px] font-bold">Pickup Location</h3>
-          <div className="w-full grid grid-cols-8 items-center justify-center gap-1">
+          <div className="w-full grid grid-cols-8 items-start justify-center gap-1">
+            <div className="space-y-1 w-full col-span-6 ">
+
             <FormField
               type="text"
               placeholder="Enter location for pickup"
-              className="col-span-6 h-14"
+              className="h-14"
               name="pickup_location"
               defaultValue={pickUpLocationName}
             />
-            <span className="text-center col-span-1 text-[13px]">OR</span>
+            </div>
+            <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
             <Link className="col-span-1" href={"/pickup-map"}>
             <Button variant = {'outline'} className=" h-14">
                 <FaMapMarkerAlt className="text-lg" />
@@ -111,17 +114,20 @@ export default function NewOrderForm() {
             </Link>
           </div>
         </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
+        <div className="grid w-full max-w-sm items-start gap-1.5">
           <h3 className=" text-[14px] font-bold">Destination / Drop off</h3>
-          <div className="w-full grid grid-cols-8 items-center justify-center gap-1">
+          <div className="w-full grid grid-cols-8 items-start justify-center gap-1">
+            <div className=" w-full col-span-6 ">
+
             <FormField
               type="text"
               placeholder="Enter drop off location or "
-              className="col-span-6 h-14"
+              className="h-14"
               name="drop_off_location"
               defaultValue={dropOffLocationName}
             />
-            <span className="text-center col-span-1 text-[13px]">OR</span>
+            </div>
+            <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
             <Link className="col-span-1" href={"/pickup-map"}>
               <Button variant = {'outline'} className=" h-14">
                 <FaMapMarkerAlt className="text-lg" />

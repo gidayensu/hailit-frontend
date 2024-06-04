@@ -46,34 +46,6 @@ const TripsLoadingSkeleton = () => {
   );
 };
 
-const useGetUserTrips = () => {
-  const { user_id } = useAppSelector((state) => state.user);
-  const { data, isLoading, error } = useGetUserTripsQuery(user_id);
-
-  const currentTrips = data?.trips?.filter(
-    (trip: Trip) => trip.trip_status !== "Delivered" && trip.trip_status !== "Cancelled"
-  ) || [];
-  
-  const previousTrips = data?.trips?.filter(
-    (trip: Trip) => trip.trip_status === "Delivered" || trip.trip_status === "Cancelled"
-  ) || [];
-  
-  return { currentTrips, previousTrips, isLoading, error };
-};
-
-const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
-  return (
-    
-      <div className="flex flex-col items-center justify-center w-full md:w-3/6">
-
-      <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
-      <Link href={'/order'}>
-      <Button variant={'outline'}> Send a Package </Button>
-      </Link>
-      </div>
-    
-  )
-}
 
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
@@ -86,7 +58,7 @@ export default function OrderHistory() {
     setCurrentDeliveries(status);
   };
 
-  const { currentTrips, previousTrips, isLoading, error } = useGetUserTrips();
+  const { currentTrips, previousTrips, isLoading, error, noDelivery } = useGetUserTrips();
 
   if (isLoading) {
     return <TripsLoadingSkeleton />;
@@ -95,7 +67,7 @@ export default function OrderHistory() {
     <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
       <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
     {
-      currentTrips.length < 1 && previousTrips.length < 1 &&
+      noDelivery &&
       <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!"/>
       
     }
@@ -157,7 +129,7 @@ export default function OrderHistory() {
             </>
           ))}
           {
-            currentTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No current delivery!"/>
+            currentTrips.length < 1 &&  !noDelivery && <NoDeliveryHistory noDeliveryMessage="No current delivery!"/>
           }
           </div>
         </div>
@@ -184,7 +156,7 @@ export default function OrderHistory() {
                   tripRequestDate={extractDateWithDayFromDate(
                     trip.trip_request_date
                   )}
-                />
+                  />
               </Link>
               {tripLoading && (
                 <span className="absolute">
@@ -194,11 +166,41 @@ export default function OrderHistory() {
             </>
           ))}
           {
-                previousTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No previous delivery!"/>
+            previousTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No previous delivery!"/>
               }
           </div>
         </div>
       )}
     </div>
   );
+}
+
+const useGetUserTrips = () => {
+  const { user_id } = useAppSelector((state) => state.user);
+  const { data, isLoading, error } = useGetUserTripsQuery(user_id);
+
+  const currentTrips = data?.trips?.filter(
+    (trip: Trip) => trip.trip_status !== "Delivered" && trip.trip_status !== "Cancelled"
+  ) || [];
+  
+  const previousTrips = data?.trips?.filter(
+    (trip: Trip) => trip.trip_status === "Delivered" || trip.trip_status === "Cancelled"
+  ) || [];
+  let noDelivery = false;
+  currentTrips.length < 1 && previousTrips.length < 1 ? noDelivery = true : ''
+  return { currentTrips, previousTrips, isLoading, error, noDelivery };
+};
+
+const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
+  return (
+    
+      <div className="flex flex-col items-center justify-center w-full md:w-3/6">
+
+      <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
+      <Link href={'/order'}>
+      <Button variant={'outline'}> Send a Package </Button>
+      </Link>
+      </div>
+    
+  )
 }

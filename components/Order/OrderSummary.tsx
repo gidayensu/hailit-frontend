@@ -91,7 +91,7 @@ const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
             <HiLocationMarker className="text-xl" />
             <span className="flex flex-col">
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm ">{trip.pickup_location}</p>
+                <p className="text-sm line-clamp-1 max-w-52">{trip.pickup_location}</p>
               
               
             </span>

@@ -3,7 +3,7 @@ import Loader from "@/components/Shared/Loader";
 import { IoMdCheckmark } from "react-icons/io";
 import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTripStatus, TripStatus } from "@/lib/store/slice/dashboardSlice";
+import { setTripStatus, TripStatus, setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
 import { useState } from "react";
 
 export default function StatusUpdate() {
@@ -30,7 +30,7 @@ export default function StatusUpdate() {
       tripStatus: statusDetails.tripStatus,
       tripStage: statusDetails.tripStage,
     });
-
+    
     setIsLoading(true);
     await updateTrip({
       tripId: selectedTripId,
@@ -52,6 +52,7 @@ export default function StatusUpdate() {
         tripStatus: packageStatus.tripStatus,
       })
     );
+    dispatch(setPreviousSelectedTripId([selectedTripId]))
     setIsLoading(false);
   }
 
@@ -71,7 +72,7 @@ export default function StatusUpdate() {
         >
           <p>New</p>
           <span>
-            {tripStatus === "New" ? <IoMdCheckmark /> : ""}
+            {tripStatus === "New" && !loading ? <IoMdCheckmark /> : ""}
             {loading && packageStatus.tripStage === 1 ? (
               <Loader color="grey" />
             ) : (
@@ -81,7 +82,7 @@ export default function StatusUpdate() {
         </div>
         <div
           className={`${
-            tripStage === 2 ? "font-bold" : ""
+            tripStatus === "New" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
             handleUpdateTrip({
@@ -92,7 +93,7 @@ export default function StatusUpdate() {
         >
           <p>Picked Up</p>
           <span>
-            {tripStatus === "Picked Up" ? <IoMdCheckmark /> : ""}
+            {tripStatus === "Picked Up" && !loading ? <IoMdCheckmark /> : ""}
             {loading && packageStatus.tripStage == 2 ? (
               <Loader color="grey" />
             ) : (
@@ -113,7 +114,7 @@ export default function StatusUpdate() {
         >
           <p>In Transit</p>
           <span>
-            {tripStatus === "In Transit" ? <IoMdCheckmark /> : ""}
+            {tripStatus === "In Transit" && !loading ? <IoMdCheckmark /> : ""}
             {loading && packageStatus.tripStage == 3 ? (
               <Loader color="grey" />
             ) : (
@@ -134,7 +135,7 @@ export default function StatusUpdate() {
         >
           <p>Delivered</p>
           <span>
-            {tripStatus === "Delivered" ? <IoMdCheckmark /> : ""}
+            {tripStatus === "Delivered" && !loading ? <IoMdCheckmark /> : ""}
             {loading && packageStatus.tripStage == 4 ? (
               <Loader color="grey" />
             ) : (
@@ -156,7 +157,7 @@ export default function StatusUpdate() {
           >
             <p>Cancelled</p>
             <span>
-              {tripStatus === "Cancelled" ? <IoMdCheckmark /> : ""}
+              {tripStatus === "Cancelled" && !loading ? <IoMdCheckmark /> : ""}
               {loading && packageStatus.tripStatus === "Cancelled" ? (
                 <Loader color="grey" />
               ) : (

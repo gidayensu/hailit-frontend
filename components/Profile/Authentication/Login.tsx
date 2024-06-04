@@ -23,7 +23,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import { SignInForm, SignInSchema } from "@/components/Form/FormTypes";
 // supabase
-import { supabaseSignIn, googleSupabaseSignIn } from "@/lib/supabaseAuth";
+import { supabaseSignIn } from "@/lib/supabaseAuth";
 
 // types
 
@@ -74,8 +74,8 @@ export default function Login() {
         })
       );
 
-      const onboard = user.onboard;
       dispatch(setAuthState(true));
+      const onboard = user.onboard;
       if(onboard) {
         user.user_role === "admin" ? router.push("/dashboard") : router.push("/")
       } else {
