@@ -1,6 +1,7 @@
 import { useGetAllUsersQuery } from "@/lib/store/apiSlice/hailitApi";
 import SkeletonTable from "../SkeletonTable";
 import OrdersCard from "./OrdersCard";
+import { HiOutlineXCircle, HiOutlineCheckCircle } from "react-icons/hi2";
 import { IoEyeOutline } from "react-icons/io5";
 import {
     Table,
@@ -48,9 +49,9 @@ export function AllUsers() {
             <TableHead>Phone Number</TableHead>
             <TableHead >User Role</TableHead>
             
-            <TableHead >Onboard Status</TableHead>
+            <TableHead className="flex items-center justify-center">Onboard Status</TableHead>
             <TableHead className="w-[150px]">Date Joined</TableHead>
-            <TableHead >Trips</TableHead>
+            <TableHead className="flex items-center justify-center">Trips</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -75,7 +76,8 @@ export function AllUsers() {
               <TableCell>{user.phone_number}</TableCell>
               <TableCell>{user.user_role}</TableCell>
               <TableCell className="flex items-center justify-center" >
-                <div className={` h-4 w-4 text-white text-[12px] ${user.onboard ? 'bg-green-600 ': 'bg-red-500 '} rounded-full`}>
+                <div className={` text-white text-[12px]  rounded-full`}>
+                {user.onboard ? <HiOutlineCheckCircle className="text-green-500 text-2xl"/> : <HiOutlineXCircle className="text-red-500 text-2xl"/>}
                     
                 </div>
                 </TableCell>
@@ -85,7 +87,7 @@ export function AllUsers() {
                 <TableCell className="flex items-center justify-center">
                   
                   {user.user_role != 'admin' &&
-                    <Modal className=""  dialogTriggerElement={<IoEyeOutline className="text-xl"/>} >
+                    <Modal className=""  dialogTriggerElement={<span className="text-decoration: underline">view</span>} >
                   <OrdersCard userData={user}/>
                   </Modal>
 

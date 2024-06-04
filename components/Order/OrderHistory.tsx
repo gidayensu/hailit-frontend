@@ -9,7 +9,7 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import Loader from "../Shared/Loader";
 import { Skeleton } from "../ui/skeleton";
-
+import { Button } from "../ui/button";
 import { DeliveryStatus } from "./OrderSummaryMin";
 import { PackageType } from "./OrderSummaryMin";
 
@@ -45,6 +45,7 @@ const TripsLoadingSkeleton = () => {
     </div>
   );
 };
+
 const useGetUserTrips = () => {
   const { user_id } = useAppSelector((state) => state.user);
   const { data, isLoading, error } = useGetUserTripsQuery(user_id);
@@ -59,6 +60,20 @@ const useGetUserTrips = () => {
   
   return { currentTrips, previousTrips, isLoading, error };
 };
+
+const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
+  return (
+    
+      <div className="w-full md:w-3/6">
+
+      <NoData noDataText="No current delivery." textClassName="font-semibold text-md mb-4" />
+      <Link href={'/order'}>
+      <Button variant={'outline'}> Send a Package </Button>
+      </Link>
+      </div>
+    
+  )
+}
 
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
@@ -81,10 +96,8 @@ export default function OrderHistory() {
       <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
     {
       currentTrips.length < 1 && previousTrips.length < 1 &&
-      <div className="w-full md:w-3/6">
-
-      <NoData noDataText="Your Deliveries Will Appear Here!" textClassName="font-semibold text-md" />
-      </div>
+      <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!"/>
+      
     }
 
     {(currentTrips.length > 1 || previousTrips.length > 1 ) &&
@@ -112,7 +125,7 @@ export default function OrderHistory() {
       </div>
 }
       {currentDeliveries && (
-        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center">
+        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
         <div className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}>
 
 
@@ -143,11 +156,14 @@ export default function OrderHistory() {
               )}
             </>
           ))}
+          {
+            currentTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No current delivery!"/>
+          }
           </div>
         </div>
       )}
       {!currentDeliveries && (
-        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center">
+        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
           <div className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}>
 
           {previousTrips.map((trip: Trip) => (
@@ -177,6 +193,9 @@ export default function OrderHistory() {
               )}
             </>
           ))}
+          {
+                previousTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No previous delivery!"/>
+              }
           </div>
         </div>
       )}

@@ -43,6 +43,7 @@ export function AllTripsTable() {
             <TableHead>Drop off</TableHead>
             <TableHead>Drop off Contact</TableHead>
             <TableHead>Delivered On</TableHead>
+            <TableHead>Medium</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead>Payment Status</TableHead>
             <TableHead>Payment Method</TableHead>
@@ -68,6 +69,7 @@ export function AllTripsTable() {
                     ? extractDateWithDayFromDate(trip.trip_completion_date)
                     : "TBD"}
                 </TableCell>
+                <TableCell>{trip.trip_medium}</TableCell>
                 <TableCell>{trip.trip_cost}</TableCell>
                 <TableCell className="">
                   <div
