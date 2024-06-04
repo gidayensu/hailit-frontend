@@ -66,7 +66,7 @@ const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
     
       <div className="w-full md:w-3/6">
 
-      <NoData noDataText="No current delivery." textClassName="font-semibold text-md mb-4" />
+      <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
       <Link href={'/order'}>
       <Button variant={'outline'}> Send a Package </Button>
       </Link>

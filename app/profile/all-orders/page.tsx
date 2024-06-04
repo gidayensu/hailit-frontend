@@ -15,10 +15,10 @@ export default function AllOrders () {
           <p className="text-lg">Current and Previous Deliveries</p>
         </TopSectionContainer>
 
-        <MiddleSectionContainer className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] p-10 mb-20">
+        <MiddleSectionContainer className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] mb-20">
       
-        <div className="flex flex-col w-5/6 mt-4 rounded-2xl gap-2">
-            <h2 className="font-bold text-xl"> Your Deliveries</h2>
+        <div className="flex flex-col items-center justify-center w-full mt-4 rounded-2xl gap-2">
+            
             <OrderHistory/>       
             </div>
           </MiddleSectionContainer>
