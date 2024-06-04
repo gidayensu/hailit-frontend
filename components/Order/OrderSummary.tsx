@@ -1,33 +1,12 @@
 "use client";
-import { extractDateWithDayFromDate, extractTimeFromDate } from "@/lib/utils";
-import { HiLocationMarker } from "react-icons/hi";
-import Container from "@/components/ui/container";
-import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
-
-type DeliveryStatus =
-  
-  | "DELIVERED"
-  | "BOOKED"
-  | "PICKED UP"
-  | "IN TRANSIT"
-  | "DELIVERED"
-  
-type DeliveryType = 
-  | "TODAY"
-  | "TOMORROW" 
-  | "SCHEDULED"
+import { extractDateWithDayFromDate, extractTimeFromDate } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { HiLocationMarker } from "react-icons/hi";
 
 export default function OrderSummary({ trip }: { trip:any }) {
-  const { trip_request_date, trip_commencement_date, trip_completion_date } =
-  trip;
-  const tripRequestDate = extractDateWithDayFromDate(trip_request_date) || 'TBD';
-  const tripCommencementDate = extractDateWithDayFromDate(
-    trip_commencement_date
-  ) || 'TBD';
-  const tripCompletionDate = extractDateWithDayFromDate(trip_completion_date) || 'TBD';
-  const tripCommencementTime = extractTimeFromDate(trip_commencement_date) || 'TBD';
-const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
+  const {tripRequestDate, tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip)
+  
   const path = usePathname();
   return (
     <>
@@ -138,4 +117,15 @@ const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
           </div>
     </>
   );
+}
+
+const tripDates = (trip:any)=> {
+  const { trip_request_date, trip_commencement_date, trip_completion_date } =  trip;
+  const tripRequestDate = extractDateWithDayFromDate(trip_request_date) || 'TBD';
+  const tripCommencementDate = extractDateWithDayFromDate(trip_commencement_date ) || 'TBD';
+  const tripCompletionDate = extractDateWithDayFromDate(trip_completion_date) || 'TBD';
+  const tripCommencementTime = extractTimeFromDate(trip_commencement_date) || 'TBD';
+  const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
+
+return {tripRequestDate, tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime}
 }

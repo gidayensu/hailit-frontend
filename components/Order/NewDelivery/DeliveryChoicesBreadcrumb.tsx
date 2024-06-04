@@ -1,14 +1,11 @@
 import { FaAngleRight } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { MdDeleteForever } from "react-icons/md";
+import { useDeliveryChoice } from "../hooks/useDeliveryChoice";
 
 export default function DeliveryChoicesBreadcrumb () {
-  const dispatch = useAppDispatch();
-  const handleResetChoices = ()=> {
-    dispatch(resetDeliveryChoices())
-  }
-  const {trip_type, trip_medium, destination_area} = useAppSelector(state=>state.deliveryChoices)
+    
+  const {handleResetChoices, trip_type, trip_medium, destination_area } = useDeliveryChoice()
+  
     return(
         <section className="w-full flex gap-2 items-center justify-start text-secondary-shade">
           {

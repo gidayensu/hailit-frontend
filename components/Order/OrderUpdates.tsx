@@ -1,12 +1,8 @@
 //ui + icons
-import { Separator } from "../ui/separator";
-import { FiCheck } from "react-icons/fi";
+import type { OrderStatus } from "../Dashboard/TrackOrder/TrackOrderDetails";
 import Container from "../ui/container";
 import OrderStatusElement from "./TrackOrder/OrderStatusElement";
-import { GoChecklist, GoX } from "react-icons/go";
-import { LiaMotorcycleSolid } from "react-icons/lia";
-import { PiArticle, PiCodesandboxLogo } from "react-icons/pi";
-import type { OrderStatus } from "../Dashboard/TrackOrder/TrackOrderDetails";
+
 export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{currentOrderStatus: OrderStatus, currentOrderStage: number}) {
 
 

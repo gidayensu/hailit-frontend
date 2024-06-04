@@ -9,57 +9,17 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import Loader from "../Shared/Loader";
-//main components+helper function
-import { NewTrip } from "../Form/FormTypes";
+
+//main components
 import OrderSummaryMin from "./OrderSummaryMin";
-import { extractDateWithDayFromDate } from "@/lib/utils";
 
-//redux+next+react
-import { useState } from "react";
+//hook
+import { useReOrder } from "./hooks/useReOrder";
 
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 export function ReOrder({ tripData }: { tripData: any }) {
-  const tripDetails: NewTrip = {
-    trip_medium: "Motor",
-    package_type: tripData.package_type,
-    pickup_location: tripData.pickup_location,
-    drop_off_location: tripData.drop_off_location,
-    additional_information: tripData.additional_information,
-    trip_type: tripData.trip_type,
-    package_value: tripData.package_value,
-    sender_number: tripData.sender_number,
-    recipient_number: tripData.recipient_number,
-  };
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
-  const handleSubmit = () => {
-    setLoading(true);
-    addTrip(tripDetails);
-  };
-
-  if (data && !isLoading && !error) {
-    const { trip } = data;
-    dispatch(
-      setNewOrder({
-        order_success: true,
-        trip_id: trip.trip_id,
-        scheduled: false,
-      })
-    );
-    router.push("/order/new/success");
-  }
-
-  if (error) {
-    router.push("/order/new/failed");
-  }
-
-  const date = new Date();
-  const tripRequestDate = extractDateWithDayFromDate(date);
+  
+  const {tripRequestDate, handleSubmit, loading} = useReOrder(tripData);
+  
   return (
     <Drawer>
       <DrawerTrigger asChild>

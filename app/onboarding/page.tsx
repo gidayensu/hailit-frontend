@@ -1,86 +1,19 @@
 "use client";
-//packages + react + next + redux
-
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-
-import {
-  setBoardingCompletion,
-  setOnboardingStages,
-} from "@/lib/store/slice/onBoardingSlice";
-import { setUserOnBoard } from "@/lib/store/slice/userSlice";
-
-//react-hook-form
-import { useForm } from "react-hook-form";
-
-//ui related components + icons
-import { FiArrowLeft } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+//ui components + icons
+import FirstStage from "@/components/Onboarding/FirstStage/FirstStage";
 import LastStage from "@/components/Onboarding/LastStage";
 import SecondStage from "@/components/Onboarding/SecondStage";
-import FirstStage from "@/components/Onboarding/FirstStage/FirstStage";
-import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
 import Loader from "@/components/Shared/Loader";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
+import { FiArrowLeft } from "react-icons/fi";
 
+//hook
+import { useOnboarding } from "@/components/Onboarding/hook/useOnboarding";
 
 export default function Onboarding() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const { authenticationState } = useAppSelector((state) => state.auth);
-  const { onboard, chosenRole, stageOne, stageTwo, stageThree } =
-    useAppSelector((state) => state.onBoarding);
-
-
-
-  const handleOnboardStage = (
-    stage: "First" | "Second" | "Third" | "Complete"
-  ) => {
-    try {
-      setIsLoading(true)
-    if (stage === "First") {
-      dispatch(
-        setOnboardingStages({
-          stageOne: true,
-          stageTwo: false,
-          stageThree: false,
-        })
-      );
-    }
-
-    if (stage === "Second") {
-      dispatch(
-        setOnboardingStages({
-          stageOne: true,
-          stageTwo: true,
-          stageThree: false,
-        })
-      );
-    }
-
-    if (stage === "Third") {
-      dispatch(
-        setOnboardingStages({
-          stageOne: true,
-          stageTwo: true,
-          stageThree: true,
-        })
-      );
-    }
-
-    if (stage === "Complete") {
-      dispatch(setBoardingCompletion(true));
-      dispatch(setUserOnBoard(true));
-      router.push("/");
-    }
-  } finally {
-    setIsLoading(false)
-  }
-  };
-
+  const {authenticationState, chosenRole, isLoading, stageOne, stageTwo, stageThree, onboard, handleOnboardStage} = useOnboarding();
   return (
     <>
       {(!authenticationState || onboard) && (
@@ -110,25 +43,11 @@ export default function Onboarding() {
                     onClick={() => {
                       handleOnboardStage("Second");
                     }}
+                    disabled = {!chosenRole || isLoading}
                   >
-                    Next
+                    {isLoading ? <Loader color="red"/> : "Next"}
                   </Button>
-                )}
-
-            {chosenRole && isLoading && (
-                  <Button
-                    className="w-full bottom-0 row-start-6 "
-                    disabled
-                  >
-                    <Loader color="red"/>
-                  </Button>
-                )}
-
-                {!chosenRole && (
-                  <Button className="w-full bottom-0 row-start-6 " disabled>
-                    Next
-                  </Button>
-                )}
+                )}                
               </div>
             </>
           )}
@@ -147,22 +66,15 @@ export default function Onboarding() {
                 >
                   <FiArrowLeft />
                 </Button>
-                {!isLoading && <Button
+                 <Button
                   className="w-full"
                   form="customerProfileUpdate"
                   type="submit"
+                  disabled = {isLoading}
                 >
-                  Next
-                </Button>}
-                {isLoading &&
-                  <Button
-                  className="w-full"
-                  form="customerProfileUpdate"
-                  type="submit"
-                >
-                  <Loader color="red"/>
+                  {isLoading ? <Loader color="red"/>:'Next'}
                 </Button>
-                }
+                
               </div>
             </>
           )}
@@ -191,3 +103,5 @@ export default function Onboarding() {
     </>
   );
 }
+
+

@@ -1,32 +1,12 @@
-"use client";
-
-import Link from "next/link";
+import { IoArchive, IoFastFood } from "react-icons/io5";
 import {
   PiMonitorFill,
-  
   PiPackageFill,
-  
+  PiWineFill,
 } from "react-icons/pi";
-import { IoArchive, IoFastFood } from "react-icons/io5";
-import {  PiWineFill } from "react-icons/pi";
 
 import Container from "../ui/container";
 
-export type DeliveryStatus =
-  | "Delivered"
-  | "Cancelled"
-  | "Picked Up"
-  | "In Transit"
-  | "Booked"
-  |  "Yet to Book";
-
-export type PackageType = | "Electronics"
-| "Food"
-| "Fragile"
-| "Clothes"
-| "Documents"
-| "Bulky Items"
-| "Others";
 export default function OrderSummaryMin({
   tripId,
   tripRequestDate,
@@ -42,14 +22,16 @@ export default function OrderSummaryMin({
 }) {
 
     //default icon gadgets
-  let deliveryTypeIconBgClass = 'bg-blue-100';
-  let deliveryTypeIcon = <PiPackageFill className="text-blue-400"/>;
+    let deliveryTypeIconBgClass = 'bg-blue-100';
+    let deliveryTypeIcon = <PiPackageFill className="text-blue-400"/>;
+    
 
-  //setting other icon colors
-  switch (packageType) {
-    case("Electronics"): {
-      deliveryTypeIcon = <PiMonitorFill className="text-teal-400 dark:text-teal-500"/> 
-      deliveryTypeIconBgClass = "bg-teal-100 dark:bg-teal-200" 
+    //setting other icon colors
+   const deliveryIcon = ''
+    switch (packageType) {
+      case("Electronics"): {
+        deliveryTypeIcon = <PiMonitorFill className="text-teal-400 dark:text-teal-500"/> 
+        deliveryTypeIconBgClass = "bg-teal-100 dark:bg-teal-200" 
     }
     break;
     case("Food"): {
@@ -66,7 +48,7 @@ export default function OrderSummaryMin({
       deliveryTypeIcon = < PiWineFill className="text-secondary-tint dark:text-secondary-color"/> 
       deliveryTypeIconBgClass = "bg-rose-100 dark:bg-rose-200" 
     }
-
+    
   }
   
   return (
@@ -88,7 +70,7 @@ export default function OrderSummaryMin({
           <span
             className={`text-[12px] font-bold   ${
               deliveryStatus === "Delivered"
-                ? "  text-green-500"
+              ? "  text-green-500"
                 : deliveryStatus === "Picked Up"
                 ? "  text-sky-600"
                 : deliveryStatus === "In Transit"
@@ -96,8 +78,8 @@ export default function OrderSummaryMin({
                 : deliveryStatus === "Booked"
                 ? " text-teal-600 dark:text-slate-50"
                 : " text-red-500"
-            }  h-5 w-20 rounded-md    `}
-          >
+              }  h-5 w-20 rounded-md    `}
+              >
             <p>{deliveryStatus}</p>
           </span>
           
@@ -109,3 +91,18 @@ export default function OrderSummaryMin({
     </div>
   );
 }
+  export type DeliveryStatus =
+    | "Delivered"
+    | "Cancelled"
+    | "Picked Up"
+    | "In Transit"
+    | "Booked"
+    |  "Yet to Book";
+  
+  export type PackageType = | "Electronics"
+  | "Food"
+  | "Fragile"
+  | "Clothes"
+  | "Documents"
+  | "Bulky Items"
+  | "Others";

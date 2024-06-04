@@ -2,22 +2,20 @@
 
 import { AiFillCar } from "react-icons/ai"
 import { FaMotorcycle } from "react-icons/fa"
-import {  RiCaravanFill } from "react-icons/ri"
 import { FiCheck } from "react-icons/fi"
+import { RiCaravanFill } from "react-icons/ri"
 import { DeliveryChoices } from "./DeliveryChoice"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { setDeliveryMedium } from "@/lib/store/slice/deliveryChoicesSlice"
+
+import { useDeliveryChoice } from "../hooks/useDeliveryChoice"
 
 export default function DeliveryMediumChoice () {
-    const {trip_medium} = useAppSelector(state=>state.deliveryChoices)
-    const dispatch = useAppDispatch();
-    const handleDeliveryMedium = (medium:string)=> {
-        dispatch(setDeliveryMedium(medium))
-    }
+    
+    const {trip_medium, handleDeliveryChoice} = useDeliveryChoice("trip_medium");
+
     return(
         <>
         <DeliveryChoices
-                handleDeliveryOption={handleDeliveryMedium}
+                handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
                 CheckIcon={FiCheck}
                 MainIcon={RiCaravanFill}
@@ -27,7 +25,7 @@ export default function DeliveryMediumChoice () {
               </DeliveryChoices>
                
               <DeliveryChoices
-                handleDeliveryOption={handleDeliveryMedium}
+                handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
                 CheckIcon={FiCheck}
                 MainIcon={AiFillCar}
@@ -36,7 +34,7 @@ export default function DeliveryMediumChoice () {
                 <p className="text-sm md:text-md text-center">Big package</p>
               </DeliveryChoices>
               <DeliveryChoices
-                handleDeliveryOption={handleDeliveryMedium}
+                handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
                 CheckIcon={FiCheck}
                 MainIcon={FaMotorcycle}

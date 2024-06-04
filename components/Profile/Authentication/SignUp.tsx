@@ -1,7 +1,5 @@
 "use client";
 //ui + icons
-import { FaEye, FaEyeSlash, FaApple, FaFacebook } from "react-icons/fa";
-import { TabsContent } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
@@ -10,22 +8,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TabsContent } from "@/components/ui/tabs";
+import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
-import { Input } from "../../ui/input";
-import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/navigation";
-import Loader from "../../Shared/Loader";
 
 //redux
+import { useLazyAddUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/slice/authSlice";
 import { setUserState } from "@/lib/store/slice/userSlice";
-import { useLazyAddUserQuery } from "@/lib/store/apiSlice/hailitApi";
 
 //react
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-hook-forms
 import FormField from "@/components/Form/FormField";
@@ -37,93 +35,16 @@ import { SignUpForm, SignUpSchema } from "@/components/Form/FormTypes";
 import { supabaseSignUp } from "@/lib/supabaseAuth";
 //types
 import type { Inputs } from "@/lib/supabaseAuth";
-import { FiUser } from "react-icons/fi";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { LuMail } from "react-icons/lu";
 
 export default function SignUp() {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const [isPassword, setIsPassword] = useState<boolean>(true);
-
-  const [addUser, { data, error: addUserError }] = useLazyAddUserQuery();
-
-  const [dataFetchError, setDataFetchError] = useState({
-    error: false,
-    errorDescription: ''
-  });
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setDataFetchError((prevState)=>({...prevState, error: false}));
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
-  }, [dataFetchError]);
-
-  //Form
-
-  const formMethods = useForm<SignUpForm>({
-    resolver: zodResolver(SignUpSchema),
-  });
   const {
+    onSignUpSubmit,
+    formMethods,
     handleSubmit,
-    formState: { errors },
-    setError,
-  } = formMethods;
+    dataFetchError,
+    isLoading,
+  } = useSignUp();
 
-  //form submission
-  //async is used to await supabaseSignUp
-  const onSignUpSubmit: SubmitHandler<Inputs> = async (userData) => {
-    try {
-      setIsPassword(true);
-      setIsLoading(true);
-      const signUpData = await supabaseSignUp(userData);
-      if (signUpData && signUpData.error) {
-        console.log(signUpData.error)
-        setIsLoading(false);
-        setDataFetchError(()=>({errorDescription: signUpData.error, error: true}));
-      }
-
-      if (signUpData.user_id) {
-        addUser({
-          user_id: signUpData.user_id,
-          email: signUpData.email,
-        });
-
-        if (addUserError) {
-          return {
-            error: "Error occurred",
-            errorMessage: "Could not add user to database",
-          };
-        }
-      }
-    } catch (err) {
-    }
-  };
-  if (data) {
-    const { user } = data;
-    dispatch(
-      setUserState({
-        user_id: user.user_id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        user_role: user.user_role,
-        onboard: user.onboard,
-      })
-    );
-
-    const onboard = user.onboard;
-    dispatch(setAuthState(true));
-
-    onboard ? router.push("/profile") : router.push("/onboarding");
-  }
-
-  const isPasswordHandler = () => setIsPassword(() => !isPassword);
   return (
     <TabsContent value="signup">
       <Card className="rounded-2xl">
@@ -151,7 +72,7 @@ export default function SignUp() {
 
                 <FormField
                   placeholder="Password"
-                  type={isPassword ? "password" : "text"}
+                  type="password"
                   name="password"
                   className="h-12  relative"
                 />
@@ -162,21 +83,25 @@ export default function SignUp() {
 
                 <FormField
                   placeholder="Confirm Password"
-                  type={isPassword ? "password" : "text"}
+                  type="password"
                   name="confirm_password"
                   className="h-12 "
                 />
               </div>
-              
-                <Button className="w-full h-12 mt-4" type="submit" disabled={isLoading}>
-                  {isLoading ? <Loader color="red"/>: 'Sign Up'}
-                </Button>
-              
-                {dataFetchError.error && (
-              <div className="flex items-center justify-center w-full text-red-500">
-                <span>{dataFetchError.errorDescription}</span>
-              </div>
-            )}
+
+              <Button
+                className="w-full h-12 mt-4"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? <Loader color="red" /> : "Sign Up"}
+              </Button>
+
+              {dataFetchError.error && (
+                <div className="flex items-center justify-center w-full text-red-500">
+                  <span>{dataFetchError.errorDescription}</span>
+                </div>
+              )}
             </form>
           </FormProvider>
         </CardContent>
@@ -197,3 +122,92 @@ export default function SignUp() {
     </TabsContent>
   );
 }
+
+const useSignUp = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const [addUser, { data, error: addUserError }] = useLazyAddUserQuery();
+
+  const [dataFetchError, setDataFetchError] = useState({
+    error: false,
+    errorDescription: "",
+  });
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDataFetchError((prevState) => ({ ...prevState, error: false }));
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, [dataFetchError]);
+
+  //Form
+
+  const formMethods = useForm<SignUpForm>({
+    resolver: zodResolver(SignUpSchema),
+  });
+  const {
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = formMethods;
+
+  //form submission
+  //async is used to await supabaseSignUp
+  const onSignUpSubmit: SubmitHandler<Inputs> = async (userData) => {
+    try {
+      setIsLoading(true);
+      const signUpData = await supabaseSignUp(userData);
+      if (signUpData && signUpData.error) {
+        console.log(signUpData.error);
+        setIsLoading(false);
+        setDataFetchError(() => ({
+          errorDescription: signUpData.error,
+          error: true,
+        }));
+      }
+
+      if (signUpData.user_id) {
+        addUser({
+          user_id: signUpData.user_id,
+          email: signUpData.email,
+        });
+
+        if (addUserError) {
+          return {
+            error: "Error occurred",
+            errorMessage: "Could not add user to database",
+          };
+        }
+      }
+    } catch (err) {}
+  };
+  if (data) {
+    const { user } = data;
+    dispatch(
+      setUserState({
+        user_id: user.user_id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        user_role: user.user_role,
+        onboard: user.onboard,
+      })
+    );
+
+    const onboard = user.onboard;
+    dispatch(setAuthState(true));
+
+    onboard ? router.push("/profile") : router.push("/onboarding");
+  }
+  return {
+    onSignUpSubmit,
+    formMethods,
+    handleSubmit,
+    dataFetchError,
+    isLoading,
+  };
+};
