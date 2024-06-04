@@ -1,3 +1,8 @@
+'use client'
+import { useRouter } from "next/navigation"
+import { useAppDispatch } from "@/lib/store/hooks"
+import { supabaseSignOut } from "@/lib/supabaseAuth"
+import { userLogout } from "@/lib/store/actions"
 import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
 import DashboardSections from "./DashboardSections"
 import { Separator } from "@/components/ui/separator"
@@ -6,6 +11,13 @@ import { IoLogOutOutline } from "react-icons/io5"
 import { MdOutlineSportsMotorsports } from "react-icons/md"
 
 export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveSection, activeSection}: {dashMin: boolean, handleDashMin: ()=>void, handleActiveSection: (section: string)=>void, activeSection:string }) {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const handleSignOut = ()=> {
+    dispatch(userLogout())
+    supabaseSignOut();
+    router.push('/')
+  }  
     return (
         <article
           className={`hidden lg:flex flex-col fixed  ${
@@ -96,8 +108,8 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
 
             <DashboardSections
               dashMin={dashMin}
-              sectionName="Logout"
-              onClickFunc={handleActiveSection}
+              sectionName="Sign Out"
+              onClickFunc={handleSignOut}
               activeSection={activeSection}
             >
               <IoLogOutOutline className="text-2xl " />

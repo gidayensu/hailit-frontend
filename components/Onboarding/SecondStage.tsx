@@ -1,6 +1,5 @@
-import CustomerProfile from "../Form/EditCustomerProfile";
-import DispatcherProfile from "../Form/EditDispatcherProfile";
 import { useAppSelector } from "@/lib/store/hooks";
+import CustomerProfile from "../Form/EditCustomerProfile";
 
 export default function SecondStage () {
   const {chosenRole} = useAppSelector(state=>state.onBoarding)
@@ -12,15 +11,6 @@ export default function SecondStage () {
               <p>Send packages with ease using Hailit </p>
             </span>
             <CustomerProfile />
-              {/* {
-                chosenRole === "customer" &&
-              }
-
-              {
-                chosenRole !== "customer" &&
-                <DispatcherProfile/>
-              }
-             */}
 
             
           </div>

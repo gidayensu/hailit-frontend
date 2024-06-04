@@ -20,13 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} dark:bg-primary-dark `}>
         <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system">
+          
             <TopNavBar />
             {children}
             <BottomNavBar />
-          </ThemeProvider>
+          
         </Providers>
       </body>
     </html>

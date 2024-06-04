@@ -1,10 +1,9 @@
 'use client'
+import DashboardLoader from "@/components/Shared/DashboardLoader";
 import { Provider } from "react-redux";
-import { store, persistor } from "./store";
 import { PersistGate } from 'redux-persist/integration/react';
-import Loader from "@/components/Shared/Loader";
-
-
+import { persistor, store } from "./store";
+import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 export default function Providers ({children, }: {
     children: React.ReactNode;
 }) {
@@ -12,9 +11,17 @@ export default function Providers ({children, }: {
     return (
         <Provider store={store}>
             
-            <PersistGate loading={<Loader color="red"/>}  persistor={persistor}>
+        
+<PersistGate loading={null} persistor={persistor}>
+    {() => (
+        <ThemeProvider attribute="class" defaultTheme="system">
             {children}
-        </PersistGate>
+        </ThemeProvider>
+    )}
+</PersistGate>
+        
         </Provider>
     );
 }
+
+

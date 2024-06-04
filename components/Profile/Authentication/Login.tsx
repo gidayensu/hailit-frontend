@@ -1,35 +1,36 @@
-import { TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { TabsContent } from "@/components/ui/tabs";
+import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
-import { Input } from "../../ui/input";
-import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/navigation";
-import Loader from "../../Shared/Loader";
 
 // redux
+import { useLazyGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/slice/authSlice";
 import { setUserState } from "@/lib/store/slice/userSlice";
-import { useLazyGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 
 // react
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-hook-forms
-import { useForm, SubmitHandler } from "react-hook-form";
+import FormField from "@/components/Form/FormField";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
+import { SignInForm, SignInSchema } from "@/components/Form/FormTypes";
 // supabase
-import { supabaseSignIn } from "@/lib/supabaseAuth";
+import { supabaseSignIn, googleSupabaseSignIn } from "@/lib/supabaseAuth";
 
 // types
-import type { Inputs } from "@/lib/supabaseAuth";
-
 
 export default function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
   const [getUser, { data: userData, error: getUserError }] = useLazyGetUserQuery();
   const [dataFetchError, setDataFetchError] = useState({
     error: false,
@@ -37,11 +38,15 @@ export default function Login() {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  
   // Form
-  const { register, handleSubmit } = useForm<Inputs>();
+  const formMethods = useForm<SignInForm>({
+    resolver: zodResolver(SignInSchema)
+  });
+  const { handleSubmit, formState: {errors}, setError } = formMethods;
 
   // sign in form submission
-  const onSignInSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSignInSubmit: SubmitHandler<SignInForm> = async (data) => {
     setIsLoading(true);
     const signInData = await supabaseSignIn(data);
     if (signInData.error) {
@@ -71,7 +76,12 @@ export default function Login() {
 
       const onboard = user.onboard;
       dispatch(setAuthState(true));
-      onboard ? router.push("/") : router.push("/onboarding");
+      if(onboard) {
+        user.user_role === "admin" ? router.push("/dashboard") : router.push("/")
+      } else {
+        router.push("/onboarding");
+      }
+      
     }
 
     if (getUserError) {
@@ -85,32 +95,38 @@ export default function Login() {
 
   return (
     <TabsContent value="login">
-      <Card>
+      <Card className="rounded-2xl"> 
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Log into your account here</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <form onSubmit={handleSubmit(onSignInSubmit)}>
+          
+          <FormProvider {...formMethods}>
+          
+          <form onSubmit={handleSubmit(onSignInSubmit)} className="space-y-3">
             <div className="space-y-1">
               <Label htmlFor="name">Email</Label>
-              <Input id="name" placeholder="example@email.com" type="email" {...register("email")} required />
+              <FormField name="email" placeholder="example@email.com" type="email" className="h-12"/>
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">Password</Label>
-              <Input id="username" placeholder="Password" type="password" {...register("password")} required />
+              <FormField placeholder="Password" type="password" name="password" className="h-12"  />
             </div>
-            <Button className="w-full h-12 mt-4" type="submit">
+            <div className="space-y-2 mt-2">
+            <Button className="w-full h-12" type="submit">
               {isLoading ? <Loader color="red" /> : "Login"}
             </Button>
+            </div>
             {dataFetchError.error && (
               <div className="flex items-center justify-center w-full text-red-500">
-                <p>{dataFetchError.errorDescription}</p>
+                <span>{dataFetchError.errorDescription}</span>
               </div>
             )}
           </form>
+          </FormProvider>
         </CardContent>
-        <CardFooter className="flex flex-col gap-2">
+        <CardFooter className="flex flex-col gap-2 -mt-4">
           <div className="flex gap-4 justify-center items-center">
             <Separator className="w-32" />
             <p className="text-sm">or</p>

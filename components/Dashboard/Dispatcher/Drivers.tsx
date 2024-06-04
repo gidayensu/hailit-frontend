@@ -80,7 +80,7 @@ export default function Drivers () {
 
         { data && drivers &&
             <ScrollArea className="h-72 w-full rounded-md ">
-              <span className="mb-4 text-lg font-bold leading-none fixed z-10 h-6 bg-white w-2/3">RIDERS</span>
+              <span className="mb-4 text-lg font-bold leading-none  z-10 h-6  w-2/3">DRIVERS</span>
             <div className="w-full p-4 mt-6">
               <div>
 

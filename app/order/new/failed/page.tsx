@@ -1,12 +1,7 @@
 "use client";
 import Link from "next/link";
-
-
-
 import { Button } from "@/components/ui/button";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useAppSelector } from "@/lib/store/hooks";
 export default function FailedOrder() {
   const {newTripSuccess} = useAppSelector(state=>state.form);
   console.log('newTripSuccess:', newTripSuccess)

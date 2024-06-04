@@ -69,18 +69,35 @@ export default function Riders () {
     return (<>
     {
         (isLoading) && 
+        <>
+
         <div className="flex gap-2">
           <Skeleton className="h-14 w-14 rounded-full"/>
           <div className="flex flex-col gap-2">
-          <Skeleton className="h-6 w-20 "/>
-          <Skeleton className="h-6 w-20 "/>
+          <Skeleton className="h-6 w-32 "/>
+          <Skeleton className="h-6 w-32 "/>
           </div>
         </div>
+        <div className="flex gap-2">
+          <Skeleton className="h-14 w-14 rounded-full"/>
+          <div className="flex flex-col gap-2">
+          <Skeleton className="h-6 w-32 "/>
+          <Skeleton className="h-6 w-32 "/>
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <Skeleton className="h-14 w-14 rounded-full"/>
+          <div className="flex flex-col gap-2">
+          <Skeleton className="h-6 w-32 "/>
+          <Skeleton className="h-6 w-32 "/>
+          </div>
+        </div>
+        </>
     } 
 
         { data && riders &&
             <ScrollArea className="h-72 w-full rounded-md ">
-              <span className="mb-4 text-lg font-bold leading-none fixed z-10 h-6 bg-white w-2/3">RIDERS</span>
+              <span className="mb-4 text-lg font-bold leading-none z-10 h-6  w-2/3">RIDERS</span>
             <div className="w-full p-4 mt-6">
               <div>
 

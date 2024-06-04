@@ -1,30 +1,28 @@
 'use client'
 //ui + icons
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "../ui/button";
 import Loader from "../Shared/Loader";
+import { Button } from "../ui/button";
 
 
 //react hook form
-import {useForm, SubmitHandler, FormProvider} from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import FormField from "./FormField";
-import {zodResolver} from '@hookform/resolvers/zod'
 
 //main components
 import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoicesBreadcrumb";
 import PackageTypes from "../Order/NewDelivery/PackageTypes";
 
 //redux + next + react
-import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { useRouter } from "next/navigation";
-import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 //interface
 import { DeliveryDetails, NewOrderSchema } from "./FormTypes";
-import { NewTrip } from "./FormTypes";
 
 export default function NewOrderForm() {
   const [loading, setLoading] = useState<boolean>(false);

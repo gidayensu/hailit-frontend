@@ -1,11 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { IoIosInformationCircle } from "react-icons/io";
-import { FaPhone } from "react-icons/fa6";
-import Container from "@/components/ui/container";
-import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
-import { FaWhatsapp } from "react-icons/fa";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+
 import TrackOrder from "@/components/Order/TrackOrder/UserTrackOrder";
 export default function TrackDelivery() {
   return (
@@ -16,10 +11,8 @@ export default function TrackDelivery() {
       </TopSectionContainer>
 
       <MiddleSectionContainer className="flex flex-col justify-start items-center  p-5">
-          
-      
-      <TrackOrder/>    </MiddleSectionContainer>
+        <TrackOrder />
+      </MiddleSectionContainer>
     </main>
   );
 }
-

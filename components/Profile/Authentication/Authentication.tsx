@@ -1,8 +1,12 @@
 'use client'
-import { useState, useEffect } from "react"
-import { ThemeToggle } from "../../Theme/ThemeToggle"
-import { useTheme } from "next-themes";
-import LoginSignUp from "./LoginSignUp";
+import { ThemeToggle } from "../../Theme/ThemeToggle";
+//ui + icons
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+
+//main components
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 export type CurrentTheme = string | undefined;
 export default function Authentication () {
@@ -25,7 +29,17 @@ export default function Authentication () {
           </div>
           <div className="">
 
-            <LoginSignUp />
+          <Tabs defaultValue="login" className="w-80 sm:w-[400px] mt-0 sm:mt-4">
+      <TabsList className="grid w-full grid-cols-2 rounded-2xl h-14">
+        <TabsTrigger value="login" className="rounded-2xl h-12">Login</TabsTrigger>
+        <TabsTrigger value="signup" className="rounded-2xl h-12">Sign Up</TabsTrigger>
+      </TabsList>
+      {/* LOGIN TAB */}
+          <Login/>
+          {/* SIGN UP TAB */}
+          
+            <SignUp/>
+      </Tabs>
           </div>
           
         </>

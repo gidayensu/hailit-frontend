@@ -1,13 +1,12 @@
 'use client'
-import { useState, useRef } from "react"
+import TrackOrderForm from "@/components/Form/TrackOrderForm"
 import { Button } from "@/components/ui/button"
 import Container from "@/components/ui/container"
-import { Input } from "@/components/ui/input"
-import { FaPhone, FaWhatsapp } from "react-icons/fa"
-import { MdOutlineLocalPhone } from "react-icons/md";
-import Loader from "@/components/Shared/Loader"
 import { useRouter } from "next/navigation"
-import TrackOrderForm from "@/components/Form/TrackOrderForm"
+import { useRef } from "react"
+import { FaWhatsapp } from "react-icons/fa"
+import { MdOutlineLocalPhone } from "react-icons/md"
+
 export default function TrackOrder () {
 
   const inputRef = useRef<any>(null);

@@ -3,7 +3,7 @@ import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { extractDateWithDayFromDate } from "@/lib/utils";
-
+import NoData from "@/components/Shared/NoData";
 export default function OrdersCard({userData}:{userData:any}) {
     const {data, isLoading } = useGetUserTripsQuery(userData.user_id);
     let trips = [];
@@ -44,8 +44,8 @@ export default function OrdersCard({userData}:{userData:any}) {
             </>
           }
         {
-            !data && 
-            <span>User has made no orders</span>
+            !data && !isLoading && 
+            <NoData noDataText="User has made no orders" textClassName="font-semibold text-center"/>
         }
 
         </div>

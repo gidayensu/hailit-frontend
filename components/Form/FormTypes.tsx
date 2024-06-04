@@ -1,4 +1,4 @@
-import {z, ZodType} from 'zod';
+import { z, ZodType } from 'zod';
 import { zPhone } from './phoneValidation';
 
 export const NewOrderSchema:  ZodType<DeliveryDetails>  = z.object({
@@ -19,13 +19,32 @@ export const UserSchema: ZodType<User> = z.object({
   license_number: z.string().min(5, {message: "License number should be five letters or more"}).nullable().optional()
 })
 
-export interface SignUp {
+export const SignInSchema: ZodType<SignInForm> = z.object({
+  email: z.string().email({message: "Invalid email address"}),
+  password: z.string().min(1, {message: "Enter password"})
+})
+
+export const SignUpSchema: ZodType<SignUpForm> = z.object({
+  email: z.string().email({message: "Invalid email address"}),
+  password: z.string().min(6, {message: "Minimum of 6 characters"}),
+  confirm_password: z.string().min(6, {message: "Minimum of 6 characters"})
+}).superRefine(({ confirm_password, password }, ctx) => {
+  if (confirm_password !== password) {
+    ctx.addIssue({
+      code: "custom",
+      message: "The passwords did not match",
+      path: ['confirm_password']
+    });
+  }
+});
+
+export interface SignUpForm {
     email: string, 
     password: string, 
     confirm_password: string
 }
 
-export interface SignIn {
+export interface SignInForm {
   email: string, 
   password: string
 }
@@ -60,7 +79,7 @@ export type ValidFieldNames =
 | "recipient_number"
 | "password"
 | "license_number"
-| "confirmPassword";
+| "confirm_password";
 
 export type FormFieldProps = {
     type: string;

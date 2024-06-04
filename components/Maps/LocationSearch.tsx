@@ -1,20 +1,18 @@
 "use client";
 
-import { useCallback, useRef, useState, useMemo, useEffect } from "react";
-import { Input } from "../ui/input";
-import { fetchMapData } from "@/lib/utils";
 import { useAppDispatch } from "@/lib/store/hooks";
 import {
-
-  setSearchData,
   setSearchContainer,
+  setSearchData,
 } from "@/lib/store/slice/mapSlice";
+import { fetchMapData } from "@/lib/utils";
+import { useCallback, useRef, useState } from "react";
 
 
 
 
 export default function LocationSearch() {
-const [d, set] = useState('')
+
   const dispatch = useAppDispatch();
     const inputRef = useRef<any>(null);
 

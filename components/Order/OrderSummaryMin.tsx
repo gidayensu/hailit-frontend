@@ -12,10 +12,10 @@ import {  PiWineFill } from "react-icons/pi";
 
 import Container from "../ui/container";
 
-type DeliveryStatus =
+export type DeliveryStatus =
   | "Delivered"
   | "Cancelled"
-  | "Picked up"
+  | "Picked Up"
   | "In Transit"
   | "Booked"
   |  "Yet to Book";
@@ -89,7 +89,7 @@ export default function OrderSummaryMin({
             className={`text-[12px] font-bold   ${
               deliveryStatus === "Delivered"
                 ? "  text-green-500"
-                : deliveryStatus === "Picked up"
+                : deliveryStatus === "Picked Up"
                 ? "  text-sky-600"
                 : deliveryStatus === "In Transit"
                 ? " text-amber-500 "

@@ -1,13 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { useTheme } from "next-themes";
 import type { CurrentTheme } from "@/app/profile/page";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { RiNotification3Line } from "react-icons/ri";
-import { Input } from "@/components/ui/input";
 
 
 export default function DashboardTopNav () {

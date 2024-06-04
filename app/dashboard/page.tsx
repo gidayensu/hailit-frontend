@@ -8,7 +8,7 @@ import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-
+import Link from "next/link";
 //main components
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
 import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
@@ -18,16 +18,19 @@ import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers"
 import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
 import Overview from "@/components/Dashboard/Overview/Overview";
-
+import DashboardLoader from "@/components/Dashboard/Nav/DashboardLoader";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
+import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
+import TrackOrderSkeleton from "@/components/Dashboard/TrackOrder/TrackOrderDetailsSkeleton";
 
 export default function Dashboard() {
+
   const [dashMin, setDashMin] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const {activeSection} = useAppSelector(state=>state.dashboard);
-  
+  const {user_id} = useAppSelector(state=>state.user)  
 
   const handleDashMin = () => {
     setDashMin(() => !dashMin);
@@ -37,11 +40,24 @@ export default function Dashboard() {
     dispatch(setActiveSection(section))
     
   };
+
+  const {data, isLoading, error} = useGetAdminQuery(user_id)
+  let isAdmin = null;
+  if(data) {
+    isAdmin = data.admin
+  }
   return (
     <>
+    {
+      isLoading && <DashboardLoader/>
+    }
+
+
+    { isAdmin && <>
+    
       <DashboardTopNav />
 
-      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7] dark:bg-primary-dark">
+      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7]  dark:bg-primary-dark ">
         
         <DashboardSideBar
           activeSection={activeSection}
@@ -96,6 +112,18 @@ export default function Dashboard() {
         </article>
       </main>
       <DashboardBottomNav activeSection={activeSection}  onClickFunc={handleActiveSection}  />
+      </>
+}
+
+{(isAdmin === false || error) && (
+        <section className="flex flex-col items-center justify-center bg-slate-50 dark:bg-primary-dark min-h-screen gap-4">
+          <h2 className="font-bold text-2xl">Page Not Found</h2>
+          <Link href={"/"}>
+            
+            <Button>Return Home </Button>
+          </Link>
+        </section>
+      )}
     </>
   );
 }

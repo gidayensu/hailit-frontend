@@ -66,7 +66,7 @@ export const googleSupabaseSignIn = async ()=> {
       error: "Error signing in via google"
     }
   }
-
+  // const user_id:any = data.user?.id
   return data;
 
  } catch (err) {

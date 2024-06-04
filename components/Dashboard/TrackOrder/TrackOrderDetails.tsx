@@ -6,7 +6,7 @@ import { Button } from "../../ui/button";
 import Container from "../../ui/container";
 
 //main components
-
+import DashboardLoader from "../Nav/DashboardLoader";
 import TrackOrderSkeleton from "./TrackOrderDetailsSkeleton";
 import TrackOrderForm from "@/components/Form/TrackOrderForm";
 import DispatcherSection from "./DispatcherSection";
@@ -62,14 +62,14 @@ export default function TrackOrder() {
   };
 
   return (
-    <main className="flex flex-col gap-5">
+    <main className="flex flex-col gap-5  md:h-full mb-44 ">
       {/* HEADER */}
       {!trackingOrder && (
         <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
       )}
-      {trackingOrder && isLoading && <TrackOrderSkeleton />}
+      {trackingOrder && isLoading && <DashboardLoader />}
       {trackingOrder && !isLoading && trip && (
-        <div className="space-y-3">
+        <div className="space-y-3 mb-24">
           <article className="flex flex-col gap-4">
             <section className="flex gap-2 text-2xl mb-2">
               <h2> Order:</h2>
@@ -116,7 +116,7 @@ export default function TrackOrder() {
             </Container>
           </article>
 
-          <article className="flex flex-col lg:flex-row w-full gap-4 mb-10">
+          <article className="flex flex-col lg:flex-row w-full gap-4">
             <Container className=" w-full lg:w-2/6  h-60 rounded-lg p-3">
               <PackageSection trip={trip} />
             </Container>

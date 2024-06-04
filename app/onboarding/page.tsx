@@ -178,7 +178,10 @@ export default function Onboarding() {
                     handleOnboardStage("Complete");
                   }}
                 >
-                  Send a Package
+                  {
+                  chosenRole === "dispatcher" ? "Start Earning" :
+                  'Send a Package'
+                  }
                 </Button>
               </div>
             </>
