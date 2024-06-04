@@ -22,7 +22,7 @@ export const supabaseSignUp = async (userInputs: Inputs) => {
   });
 
   if (error) {
-    return {error: `Error occurred signing up user: ${error}`}
+    return {error: error.message}
   }
   const userData:any = {
     user_id: data.user?.id,

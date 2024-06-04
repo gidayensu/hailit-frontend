@@ -1,24 +1,25 @@
 "use client";
-import Link from "next/link";
 import Lottie from "lottie-react";
 
 //icons + ui
 import { MdContentCopy, MdInfoOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import deliveryAnimation from "@/public/animations/success-animation.json";
-
+import Loader from "@/components/Shared/Loader";
 import toast, { Toaster } from 'react-hot-toast';
 //main components 
 import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 
-//next+redux+helper function
+//next+redux+helper function +react
+import Link from "next/link";
+import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { redirect } from "next/navigation";
 import { copyToClipBoard } from "@/lib/utils";
 
 
 export default function SuccessfulOrder() {
-  
+const [loading, setLoading]  = useState<boolean>(false);
   const { trip_id, order_success } = useAppSelector(state=>state.newOrder)
   if(!order_success) {
     redirect('/order')
@@ -41,6 +42,9 @@ export default function SuccessfulOrder() {
         )
     }
 
+    const handleLoading = ()=> {
+      setLoading(true)
+    }
   return (
     <main className="flex min-h-screen flex-col mt-16 items-center gap-4">
       <div className="flex flex-col items-center justify-center ml-6 gap-2 w-64">
@@ -82,9 +86,9 @@ export default function SuccessfulOrder() {
 
       <div className="flex flex-col gap-5 justify-center items-center">
       
-        <Link href={`/track/${trip_id}`}>
-          <Button className="border border-slate-300 h-14 w-60 flex gap-4">
-            Track your package
+        <Link href={`/track/${trip_id}`} onClick={handleLoading}>
+          <Button className="border border-slate-300 h-14 w-60 flex gap-4" disabled={loading}>
+            {loading? <Loader color="red"/>:'Track your package'}
           </Button>
         </Link>
         <Link href="/">

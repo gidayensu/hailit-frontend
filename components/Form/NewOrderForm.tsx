@@ -121,14 +121,14 @@ export default function NewOrderForm() {
 
             <FormField
               type="text"
-              placeholder="Enter drop off location or "
+              placeholder="Enter drop off location"
               className="h-14"
               name="drop_off_location"
               defaultValue={dropOffLocationName}
             />
             </div>
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
-            <Link className="col-span-1" href={"/pickup-map"}>
+            <Link className="col-span-1" href={"/drop-off-map"}>
               <Button variant = {'outline'} className=" h-14">
                 <FaMapMarkerAlt className="text-lg" />
               </Button>
@@ -173,16 +173,16 @@ export default function NewOrderForm() {
           <h3 className=" text-[14px] font-bold">Additional Information</h3>
           <Textarea className="h-32" {...register("additional_information")} />
           {!package_type && (
-            <span className="text-secondary-color text-center">
+            <span className="text-red-500 text-[13px] text-center">
               <p>Package type not selected</p>
             </span>
           )}
-          {!loading && (
-            <Button type="submit" className="w-full h-14">
-              Book
+          
+            <Button type="submit" className="w-full h-14" disabled = {loading}>
+              {!loading ? 'Book' : <Loader color="red"/>} 
             </Button>
-          )}
-
+          
+{/* 
           {loading && (
             <Button
               type="submit"
@@ -191,7 +191,7 @@ export default function NewOrderForm() {
             >
               <Loader color="red" />
             </Button>
-          )}
+          )} */}
         </div>
       </form>
     </FormProvider>

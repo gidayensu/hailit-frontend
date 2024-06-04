@@ -49,13 +49,16 @@ export default function SignUp() {
 
   const [addUser, { data, error: addUserError }] = useLazyAddUserQuery();
 
-  const [dataFetchError, setDataFetchError] = useState<boolean>(false);
+  const [dataFetchError, setDataFetchError] = useState({
+    error: false,
+    errorDescription: ''
+  });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setDataFetchError(false);
+      setDataFetchError((prevState)=>({...prevState, error: false}));
     }, 2000);
 
     return () => clearTimeout(timeoutId);
@@ -80,8 +83,9 @@ export default function SignUp() {
       setIsLoading(true);
       const signUpData = await supabaseSignUp(userData);
       if (signUpData && signUpData.error) {
+        console.log(signUpData.error)
         setIsLoading(false);
-        setDataFetchError(true);
+        setDataFetchError(()=>({errorDescription: signUpData.error, error: true}));
       }
 
       if (signUpData.user_id) {
@@ -163,16 +167,16 @@ export default function SignUp() {
                   className="h-12 "
                 />
               </div>
-              {!isLoading && (
-                <Button className="w-full h-12 mt-4" type="submit">
-                  Sign Up
+              
+                <Button className="w-full h-12 mt-4" type="submit" disabled={isLoading}>
+                  {isLoading ? <Loader color="red"/>: 'Sign Up'}
                 </Button>
-              )}
-              {isLoading && (
-                <Button className="w-full h-12 mt-4" disabled>
-                  <Loader color="red" />
-                </Button>
-              )}
+              
+                {dataFetchError.error && (
+              <div className="flex items-center justify-center w-full text-red-500">
+                <span>{dataFetchError.errorDescription}</span>
+              </div>
+            )}
             </form>
           </FormProvider>
         </CardContent>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 //ui + icons
 import { Button } from "@/components/ui/button";
 import {
@@ -21,12 +21,7 @@ import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
-export function ReOrder({
-  tripData,
-}: {
-  tripData:any
-}) {
-
+export function ReOrder({ tripData }: { tripData: any }) {
   const tripDetails: NewTrip = {
     trip_medium: "Motor",
     package_type: tripData.package_type,
@@ -38,30 +33,30 @@ export function ReOrder({
     sender_number: tripData.sender_number,
     recipient_number: tripData.recipient_number,
   };
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
-  const handleSubmit = ()=> {
-    setLoading(true)
-    addTrip(tripDetails)  
-  }
+  const [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
+  const handleSubmit = () => {
+    setLoading(true);
+    addTrip(tripDetails);
+  };
 
-  if(data && !isLoading && !error) {
-    const {trip} = data;
-    dispatch(setNewOrder({
-      order_success: true,
-      trip_id: trip.trip_id,
-      scheduled: false
-    }))
-    router.push('/order/new/success')
+  if (data && !isLoading && !error) {
+    const { trip } = data;
+    dispatch(
+      setNewOrder({
+        order_success: true,
+        trip_id: trip.trip_id,
+        scheduled: false,
+      })
+    );
+    router.push("/order/new/success");
   }
 
   if (error) {
-    
-    router.push('/order/new/failed')
+    router.push("/order/new/failed");
   }
-
 
   const date = new Date();
   const tripRequestDate = extractDateWithDayFromDate(date);
@@ -72,7 +67,7 @@ export function ReOrder({
           Reorder
         </Button>
       </DrawerTrigger>
-      
+
       <DrawerContent className=" flex items-center justify-center">
         <div className="md:flex md:flex-col md:justify-center  pb-0  md:w-[400px]">
           <div className="grid grid-cols-2 justify-between px-5 mb-4 gap-7">
@@ -110,14 +105,10 @@ export function ReOrder({
             />
           </div>
           <DrawerFooter>
-            {!loading &&
-            
-              <Button onClick={handleSubmit}>Confirm</Button>
-            } 
+            <Button onClick={handleSubmit} disabled={loading}>
+              {loading ? <Loader color="red" /> : "Confirm"}
+            </Button>
 
-            {
-              loading && <Button disabled> <Loader color="red"/></Button>
-            }
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>

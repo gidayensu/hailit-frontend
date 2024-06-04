@@ -114,7 +114,7 @@ export default function Login() {
               <FormField placeholder="Password" type="password" name="password" className="h-12"  />
             </div>
             <div className="space-y-2 mt-2">
-            <Button className="w-full h-12" type="submit">
+            <Button className="w-full h-12" type="submit" disabled={isLoading}>
               {isLoading ? <Loader color="red" /> : "Login"}
             </Button>
             </div>
