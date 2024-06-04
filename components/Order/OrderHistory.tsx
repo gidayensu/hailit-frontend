@@ -64,7 +64,7 @@ const useGetUserTrips = () => {
 const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
   return (
     
-      <div className="w-full md:w-3/6">
+      <div className="flex flex-col items-center justify-center w-full md:w-3/6">
 
       <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
       <Link href={'/order'}>

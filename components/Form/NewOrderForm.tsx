@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 //interface
 import { DeliveryDetails, NewOrderSchema } from "./FormTypes";
@@ -30,7 +31,7 @@ export default function NewOrderForm() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const {package_type, trip_type, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
-  
+  const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
   const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
  
@@ -68,7 +69,7 @@ export default function NewOrderForm() {
   }
 
     
-    
+    console.log('dropOffLocationName:', dropOffLocationName)
   return (
     <FormProvider {...formMethods}>
 
@@ -95,24 +96,47 @@ export default function NewOrderForm() {
 
       <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Pickup Location</h3>
+        <div className="w-full grid grid-cols-8 items-center justify-center gap-1">
+
         <FormField
           type="text"
           placeholder="Enter location for pickup"
-          className="h-14"
+          className="col-span-4 h-14"
           name = "pickup_location"
-
+          defaultValue={pickUpLocationName}
           
         />
+        <span className="text-center text-sm">
+          OR
+        </span>
+        <Link className = "col-span-3" href={'/pickup-map'}>
+        <Button className=" h-14">
+          Choose From Map
+        </Button>
+        </Link>
+        </div>
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Destination / Drop off</h3>
+        <div className="w-full grid grid-cols-8 items-center justify-center gap-1">
+        
         <FormField
           type="text"
-          placeholder="Enter location for drop off"
-          className="h-14"
+          placeholder="Enter drop off location or "
+          className="col-span-4 h-14"
           name = "drop_off_location"
-          
+          defaultValue={dropOffLocationName}
         />
+        <span className="text-center text-sm">
+          OR
+        </span>
+        <Link className = "col-span-3" href={'/drop-off-map'}>
+
+        <Button className=" h-14">
+          Choose From Map
+        </Button>
+        </Link>
+        </div>
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <h3 className=" text-[14px] font-bold">Sender Number</h3>

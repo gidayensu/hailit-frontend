@@ -1,12 +1,12 @@
 import { Separator } from "../ui/separator";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import {
-  setChosenLocation,
-  setChosenLocationName,
+  setPickUpLocation,
+  setPickUpLocationName,
   setSearchContainer,
 } from "@/lib/store/slice/mapSlice";
 import { Skeleton } from "../ui/skeleton";
-import { UserLocation } from "./Map";
+import { UserLocation } from "./PickUpMap";
 import { getSpecificName } from "@/lib/utils";
 export default function SearchResults() {
   const dispatch = useAppDispatch();
@@ -19,8 +19,8 @@ export default function SearchResults() {
     locationName: string;
     mapPoint: UserLocation;
   }) => {
-    dispatch(setChosenLocation(mapPoint));
-    dispatch(setChosenLocationName(locationName));
+    dispatch(setPickUpLocation(mapPoint));
+    dispatch(setPickUpLocationName(locationName));
     dispatch(setSearchContainer(false));
   };
 
