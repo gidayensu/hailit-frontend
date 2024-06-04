@@ -48,6 +48,7 @@ export function AllTripsTable() {
             <TableHead>Payment Status</TableHead>
             <TableHead>Payment Method</TableHead>
             <TableHead>Delivery Status</TableHead>
+            <TableHead>View</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -85,7 +86,7 @@ export function AllTripsTable() {
                   <div
                     className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
                       trip.trip_status === "Delivered"
-                        ? "  bg-green-500"
+                      ? "  bg-green-500"
                         : trip.trip_status === "Picked Up"
                         ? "  bg-sky-600"
                         : trip.trip_status === "In Transit"
@@ -93,11 +94,12 @@ export function AllTripsTable() {
                         : trip.trip_status === "Booked"
                         ? " bg-slate-600 dark:text-slate-50"
                         : " bg-red-500"
-                    }`}
-                  >
+                      }`}
+                      >
                     <p>{trip.trip_status}</p>
                   </div>
                 </TableCell>
+                <TableCell><span className="text-decoration: underline">view</span></TableCell>
               </TableRow>
             ))}
         </TableBody>

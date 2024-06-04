@@ -1,29 +1,27 @@
 "use client";
-import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setActiveSection } from "@/lib/store/slice/dashboardSlice";
+import { useState } from "react";
 
 //icons + ui
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 //main components
+import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
+import DashboardLoader from "@/components/Dashboard/Nav/DashboardLoader";
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
-import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
+import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import { AllTripsTable } from "@/components/Dashboard/Orders/AllTripsTable";
+import Overview from "@/components/Dashboard/Overview/Overview";
+import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
 import { AllUsers } from "@/components/Dashboard/Users/AllUsersTable";
 import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers";
 import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
-import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
-import Overview from "@/components/Dashboard/Overview/Overview";
-import DashboardLoader from "@/components/Dashboard/Nav/DashboardLoader";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
-import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
-import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
-import TrackOrderSkeleton from "@/components/Dashboard/TrackOrder/TrackOrderDetailsSkeleton";
 
 export default function Dashboard() {
 

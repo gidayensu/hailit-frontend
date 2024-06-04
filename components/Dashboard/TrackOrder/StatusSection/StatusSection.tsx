@@ -2,18 +2,47 @@ import OrderStatusElement from "@/components/Order/TrackOrder/OrderStatusElement
 import { CiViewList } from "react-icons/ci"
 import { GoChecklist, GoX } from "react-icons/go"
 import { PiPackageLight, PiMotorcycleLight } from "react-icons/pi"
+import { Modal } from "@/components/Shared/Modal"
+import { Button } from "@/components/ui/button"
+import { FaRoute } from "react-icons/fa";
+import StatusUpdate from "./StatusUpdate"
 
 export default function StatusSection ({tripStatus, tripStage}: {tripStatus: string, tripStage: number}) {
     return (
         <>
         {/* order status */}
+        <div className="w-full flex justify-between">
+          <div className="w-full">
         <h3 className="font-bold">ORDER STATUS</h3>
-          <h3 className="text-[12px] text-slate-400 -mt-3">
+          <h3 className="text-[12px] text-slate-400 ">
             Current Order Status
           </h3>
-          
 
+          </div>
+        <Modal
+          className="max-w-32 flex items-start justify-end"
+          dialogTriggerElement={
+            <Button
+              variant={"empty"}
+              className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
+            >
+              <>
+                <FaRoute className="text-xl " /> <p>Update</p>
+              </>
+            </Button>
+          }
+        >
+          {
+            <div className="w-32">
+            <p className="font-bold">Update Status</p> 
+            <StatusUpdate/>
+            </div>
+            
+          }
+        </Modal>
+        </div>
           <div className="flex">
+          
             <OrderStatusElement
               orderStatus="Booked"
               currentOrderStage={tripStage}

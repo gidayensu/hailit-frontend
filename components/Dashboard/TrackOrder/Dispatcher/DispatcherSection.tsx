@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { TbArrowsExchange } from "react-icons/tb";
 import { MdOutlineCancel } from "react-icons/md";
 import { LiaUserSlashSolid } from "react-icons/lia";
-import Riders from "../Dispatcher/Riders";
-import Drivers from "../Dispatcher/Drivers";
+import Riders from "./Riders";
+import Drivers from "./Drivers";
 import { useAppSelector } from "@/lib/store/hooks";
 
 export const DEFAULT_DISPATCHER_ID= "ff-12-53"
@@ -24,10 +24,10 @@ export default function DispatcherSection({
       <div className="flex justify-between">
         <div className="">
           <h3 className="font-bold">
-            {tripMedium === "Motor" ? "RIDER" : "Driver"}
+            {tripMedium === "Motor" ? "RIDER" : "DRIVER"}
           </h3>
           <h3 className="text-[12px] text-slate-400 -mt-1">
-            {tripMedium === "Motor" ? "Details" : "Driver Details"}
+            Details
           </h3>
         </div>
 

@@ -1,29 +1,29 @@
 "use client";
 import { fetchPickUpLocationName } from "@/lib/store/actions";
-import Link from "next/link";
+import { getSpecificName, reverseMapSearch } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { Map, Marker } from "pigeon-maps";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { useEffect, useState } from "react";
 import { FaMapPin } from "react-icons/fa";
-import { reverseMapSearch, getSpecificName } from "@/lib/utils";
+import Loader from "../Shared/Loader";
+import { Button } from "../ui/button";
 
 import SearchResults from "./SearchResults";
 
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   setPickUpLocation,
-
 } from "@/lib/store/slice/mapSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import LocationSearch from "./LocationSearch";
 export type UserLocation = [number, number] | null;
 type UserLocationName = any;
 type MapBoundaryChange = boolean;
 
 export default function PickUpMap() {
+  
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState<boolean> (false);
   const { searchData, pickUpLocation, pickUpLocationName } = useAppSelector(
     (state) => state.map
   );
@@ -168,7 +168,7 @@ export default function PickUpMap() {
                             variant="empty"
                             className="text-[10px] font-bold bg-primary-medium h-6 text-white cursor-pointer"
                           >
-                            Use this location
+                            { loading ? <Loader color="red"/> : 'Use this location'}
                           </Button>
                         </span>
                       </div>

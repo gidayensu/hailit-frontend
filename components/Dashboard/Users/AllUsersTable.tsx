@@ -1,19 +1,18 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useGetAllUsersQuery } from "@/lib/store/apiSlice/hailitApi";
+import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi2";
 import SkeletonTable from "../SkeletonTable";
 import OrdersCard from "./OrdersCard";
-import { HiOutlineXCircle, HiOutlineCheckCircle } from "react-icons/hi2";
-import { IoEyeOutline } from "react-icons/io5";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
   
-import { extractDateWithDayFromDate } from "@/lib/utils";
 import { Modal } from "@/components/Shared/Modal";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 
 
 export function AllUsers() {
@@ -28,7 +27,7 @@ export function AllUsers() {
     if (error) {
       return <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!...Our Fault</p>
-        <p>We are fixing it</p>
+        
       </div>
     }
 

@@ -1,28 +1,28 @@
 "use client";
 //ui + icons
-import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
+import { MdDeleteOutline } from "react-icons/md";
 import { Button } from "../../ui/button";
 import Container from "../../ui/container";
 
 //main components
-import DashboardLoader from "../Nav/DashboardLoader";
-import TrackOrderSkeleton from "./TrackOrderDetailsSkeleton";
 import TrackOrderForm from "@/components/Form/TrackOrderForm";
-import DispatcherSection from "./DispatcherSection";
-import PackageSection from "./PackageSection";
+import DashboardLoader from "../Nav/DashboardLoader";
 import CustomerSection from "./CustomerSection";
+import DispatcherSection from "./Dispatcher/DispatcherSection";
+import PackageSection from "./PackageSection";
 import PaymentSection from "./PaymentSection";
-import StatusSection from "./StatusSection";
+import StatusSection from "./StatusSection/StatusSection";
 //redux +react
-import { useRef } from "react";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
-  setTrackingOrder,
-  setSelectedTripId,
   setAssignedDispatcher,
+  setSelectedTripId,
+  setTrackingOrder,
+  setTripStatus
 } from "@/lib/store/slice/dashboardSlice";
+import { useRef } from "react";
 
 export type OrderStatus =
   | "Booked"
@@ -32,7 +32,7 @@ export type OrderStatus =
   | "Cancelled";
 
 export default function TrackOrder() {
-  const { selectedTripId, trackingOrder, assignedDispatcherId } = useAppSelector(
+  const { selectedTripId, trackingOrder, assignedDispatcherId, tripStage, tripStatus } = useAppSelector(
     (state) => state.dashboard
   );
   const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`);
@@ -53,7 +53,9 @@ export default function TrackOrder() {
         assignedDispatcherVehicle: dispatcher.vehicle?.vehicle_name,
         assignedDispatcherPhone: dispatcher.phone_number
       })
-    );}
+    )
+    dispatch(setTripStatus({tripStage: trip.trip_stage, tripStatus: trip.trip_status}))
+    ;}
   }
   const handleTrackTrip = () => {
     const tripId = inputRef.current?.value;
@@ -96,8 +98,8 @@ export default function TrackOrder() {
           <article className="flex flex-col lg:flex-row w-full gap-4">
             <Container className="flex flex-col  w-full lg:w-3/6 h-52 rounded-lg p-3 gap-2">
               <StatusSection
-                tripStage={trip.trip_stage}
-                tripStatus={trip.trip_status}
+                tripStage={tripStage}
+                tripStatus={tripStatus}
               />
             </Container>
 

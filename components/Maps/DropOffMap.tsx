@@ -17,6 +17,7 @@ import {
 } from "@/lib/store/slice/mapSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import LocationSearch from "./LocationSearch";
+import Loader from "../Shared/Loader";
 export type UserLocation = [number, number] | null;
 
 type MapBoundaryChange = boolean;
@@ -24,6 +25,7 @@ type MapBoundaryChange = boolean;
 export default function DropOffMap() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
   const { searchData, dropOffLocation, dropOffLocationName } = useAppSelector(
     (state) => state.map
   );
@@ -110,8 +112,8 @@ export default function DropOffMap() {
   return (
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">
-        {/* <LocationSearch /> */}
-        {/* <SearchResults /> */}
+        <LocationSearch />
+        <SearchResults />
         {/* <Link href={'/map/search-location'} className="flex items-center justify-center font-normal h-10 sm:h-12 w-60 md:w-96 text-center text-slate-300 bg-white z-50 mt-5 shadow-lg rounded-full">
         <Button
           variant={'empty'}
@@ -168,7 +170,7 @@ export default function DropOffMap() {
                             variant="empty"
                             className="text-[10px] font-bold bg-primary-medium h-6 text-white cursor-pointer"
                           >
-                            Use this location
+                            { loading ? <Loader color="red"/> : 'Use this location'}
                           </Button>
                         </span>
                       </div>

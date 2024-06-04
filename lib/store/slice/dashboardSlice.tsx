@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export interface TripStatus {
+    tripStatus: string
+    tripStage: number, 
+}
 
 export interface DashboardDetails {
     activeSection: string,
@@ -11,6 +15,8 @@ export interface DashboardDetails {
     assignedDispatcherVehicle: string,
     assignedDispatcherPlate: string,
     assignedDispatcherPhone: string,
+    tripStatus: string,
+    tripStage: number
 }
 
 export interface AssignedDispatcherDetails {
@@ -30,7 +36,9 @@ export const initialState: DashboardDetails = {
     assignedDispatcherName: '', 
     assignedDispatcherVehicle: '', 
     assignedDispatcherPlate: '', 
-    assignedDispatcherPhone: ''
+    assignedDispatcherPhone: '',
+    tripStatus: '',
+    tripStage: 0,
 }
 export const dashboardSlice = createSlice({
     name: 'dashboard',
@@ -40,7 +48,11 @@ export const dashboardSlice = createSlice({
             state.activeSection = action.payload           
             
         },
+        setTripStatus(state, action:PayloadAction<TripStatus>) {
+            state.tripStage = action.payload.tripStage
+            state.tripStatus = action.payload.tripStatus
 
+        },
         setSelectedTripId (state, action:PayloadAction<string>) {
             state.selectedTripId = action.payload           
             
@@ -61,4 +73,4 @@ export const dashboardSlice = createSlice({
     }
 })
 
-export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher } = dashboardSlice.actions
+export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher, setTripStatus } = dashboardSlice.actions
