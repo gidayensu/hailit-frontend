@@ -64,7 +64,7 @@ export default function NewOrder() {
               <div className="w-full flex flex-col items-center justify-center md:w-1/2 gap-4">
                 <h2 className="font-bold text-lg text-center mb-2">
                   
-                  SELECT PACKAGE DESTINATION
+                  SELECT DESTINATION AREA
                 </h2>
                 <div className="flex flex-col md:flex-row  w-full items-center justify-center gap-2 md:items-start">
                   <PackageDestinationChoice />

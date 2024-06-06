@@ -64,7 +64,7 @@ export default function SendPackage() {
         onClick={() => scrollToSection("delivery-day")}
       >
         <h2 className="font-bold text-xl text-center mb-2">
-          SELECT PACKAGE DESTINATION
+          SELECT DESTINATION AREA
         </h2>
         <section className="flex flex-col md:flex-row md:w-4/6 w-full items-center justify-center gap-2 md:items-start">
           <PackageDestinationChoice />
