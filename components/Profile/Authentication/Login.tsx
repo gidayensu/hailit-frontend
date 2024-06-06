@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
-import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
@@ -8,91 +7,21 @@ import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
 
 // redux
-import { useLazyGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setAuthState } from "@/lib/store/slice/authSlice";
-import { setUserState } from "@/lib/store/slice/userSlice";
 
 // react
-import { useEffect, useState } from "react";
 
 // react-hook-forms
 import FormField from "@/components/Form/FormField";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 
-import { SignInForm, SignInSchema } from "@/components/Form/FormTypes";
+
+import { useLogin } from "./hooks/useLogin";
 // supabase
-import { supabaseSignIn } from "@/lib/supabaseAuth";
 
-// types
 
 export default function Login() {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const [getUser, { data: userData, error: getUserError }] = useLazyGetUserQuery();
-  const [dataFetchError, setDataFetchError] = useState({
-    error: false,
-    errorDescription: ''
-  });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods } = useLogin();
   
-  // Form
-  const formMethods = useForm<SignInForm>({
-    resolver: zodResolver(SignInSchema)
-  });
-  const { handleSubmit, formState: {errors}, setError } = formMethods;
-
-  // sign in form submission
-  const onSignInSubmit: SubmitHandler<SignInForm> = async (data) => {
-    setIsLoading(true);
-    const signInData = await supabaseSignIn(data);
-    if (signInData.error) {
-      setIsLoading(false);
-      setDataFetchError(()=> ({ 
-          error: true, 
-          errorDescription: signInData.error  
-      }));
-    } else if (signInData.user_id) {
-      getUser(`${signInData.user_id}`);
-    }
-  };
-
-  useEffect(() => {
-    if (userData) {
-      const { user } = userData;
-      dispatch(
-        setUserState({
-          user_id: user.user_id,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          email: user.email,
-          user_role: user.user_role,
-          onboard: user.onboard,
-        })
-      );
-
-      dispatch(setAuthState(true));
-      const onboard = user.onboard;
-      if(onboard) {
-        user.user_role === "admin" ? router.push("/dashboard") : router.push("/")
-      } else {
-        router.push("/onboarding");
-      }
-      
-    }
-
-    if (getUserError) {
-      setDataFetchError(()=>({
-        error: true, 
-        errorDescription: 'Sorry! Server Error. Try Again! '
-      }));
-      setIsLoading(false);
-    }
-  }, [userData, getUserError, dispatch, router]);
-
   return (
     <TabsContent value="login">
       <Card className="rounded-2xl"> 

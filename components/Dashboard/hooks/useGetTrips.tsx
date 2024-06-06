@@ -24,3 +24,4 @@ export const useGetTrips = ({limit, offset}: {limit?: number, offset?:number})=>
 
   }
   
+  
