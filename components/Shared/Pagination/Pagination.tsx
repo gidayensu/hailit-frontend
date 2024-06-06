@@ -13,9 +13,12 @@ export default function Pagination ({totalPages, setOffset, offset, limit}: {tot
     const pages = [];
     const maxDisplayedPages = 5;
 
-    if (totalPages <= maxDisplayedPages) {
-      return [...Array(totalPages).keys()].map((page, index) => (<ul key={index}>{page + 1}</ul>));
+
+     if (totalPages <= maxDisplayedPages) {
+      return [...Array(totalPages).keys()].map((page, index) => page + 1);
     }
+    
+  
 
     if(!totalPages) {
       pages.push(...[Array(maxDisplayedPages).keys()].map((_, index)=><Loader key={index} color="gray"/>))
