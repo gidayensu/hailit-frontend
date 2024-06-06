@@ -14,11 +14,11 @@ export default function Pagination ({totalPages, setOffset, offset, limit}: {tot
     const maxDisplayedPages = 5;
 
     if (totalPages <= maxDisplayedPages) {
-      return [...Array(totalPages).keys()].map((page) => page + 1);
+      return [...Array(totalPages).keys()].map((page, index) => (<ul key={index}>{page + 1}</ul>));
     }
-    
+
     if(!totalPages) {
-      pages.push(...[Array(maxDisplayedPages).keys()].map(()=><Loader color="gray"/>))
+      pages.push(...[Array(maxDisplayedPages).keys()].map((_, index)=><Loader key={index} color="gray"/>))
     } else  if (currentPage <= 3) {
       pages.push(...[1, 2, 3, 4, 5, '...', totalPages]);
     } else if (currentPage >= totalPages - 2) {
