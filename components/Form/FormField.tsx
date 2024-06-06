@@ -20,6 +20,7 @@ const FormField:React.FC<FormFieldProps> = ({
     {...register(name, {valueAsNumber})}
     className={`${className}`}
     defaultValue={defaultValue}
+    autoFocus
     />
     {formState?.errors?.[name] && <span className="flex gap-1 items-center text-[14px] text-red-500 ease-in-out ">
      {formState?.errors?.[name]?.message?.toString()}
