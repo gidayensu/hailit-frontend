@@ -5,10 +5,7 @@ import { useGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { Skeleton } from "@/components/ui/skeleton";
 export default function CustomerSection ({customerId}: {customerId:string}) {
     const {data, isLoading, error} = useGetUserQuery(`${customerId}`);
-    let user =[];
-    if(data) {
-        user = data.user;
-    }
+    const user = data?.user
     return(
         <>
         <div className="flex justify-between">
