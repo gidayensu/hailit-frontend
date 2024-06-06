@@ -1,3 +1,5 @@
+'use client'
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -14,9 +16,12 @@ import { Modal } from "@/components/Shared/Modal";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 
 import { useGetAllUsers } from "./hook/useGetAllUsers";
+import Pagination from "@/components/Shared/Pagination/Pagination";
 
 export function AllUsers() {
-  const { users, isLoading, error } = useGetAllUsers();
+  const limit = 7;
+  const [offset, setOffset] = useState<number> (limit);
+  const { data, users, isLoading, error, total_number_of_pages } = useGetAllUsers({limit, offset});
 
   if (error) {
     return (
@@ -30,30 +35,29 @@ export function AllUsers() {
   }
 
   return (
-    <div className="flex flex-col w-full   gap-2 p-4 h-full rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
+    <>
+    <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
       <Table className="w-full">
         <TableHeader>
           <TableRow>
-            <TableHead>First Name</TableHead>
-            <TableHead>Last Name</TableHead>
-
-            <TableHead>Email</TableHead>
-
-            <TableHead>Phone Number</TableHead>
-            <TableHead>User Role</TableHead>
-
-            <TableHead className="flex items-center justify-center">
-              Onboard Status
-            </TableHead>
-            <TableHead className="w-[150px]">Date Joined</TableHead>
-            <TableHead className="flex items-center justify-center">
-              Trips
-            </TableHead>
+            {
+              tableHeadings.map((tableHead, index)=> 
+                <TableHead 
+                  key={index}
+                  className={tableHead === "Onboard Status" || tableHead === "Trips" ? "flex items-center justify-center": ''}
+                
+                >
+                  {tableHead}
+                  </TableHead>
+              
+              )
+            }
+            
           </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading && <SkeletonTable rows={7} cells={8} />}
-          {users &&
+          {data && users.length && users &&
             users.map((user: any) => (
               <TableRow key={user.user_id}>
                 <TableCell>
@@ -97,5 +101,18 @@ export function AllUsers() {
         </TableBody>
       </Table>
     </div>
+      <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
+    </>
   );
 }
+
+const tableHeadings = [
+  "First Name",
+  "Last Name",
+  "Email",
+  "Phone Number",
+  "User Role",
+  "Onboard Status",
+  "Date Joined",
+  "Trips"
+];

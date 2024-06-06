@@ -1,3 +1,5 @@
+'use client'
+import Pagination from "@/components/Shared/Pagination/Pagination";
 import {
   Table,
   TableBody,
@@ -6,54 +8,39 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import SkeletonTable from "../SkeletonTable";
 import { extractDateWithDayFromDate } from "@/lib/utils";
-import {  useAppDispatch } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { useState } from "react";
+import { useGetTrips } from "../hooks/useGetTrips";
+import SkeletonTable from "../SkeletonTable";
 
 export function AllTripsTable() {
-  const dispatch = useAppDispatch();
-  const handleTrackTrip = (tripId:string)=> {
-    dispatch(setActiveSection('Track Order'))
-    dispatch (setTrackingOrder(true))
-    dispatch (setSelectedTripId(tripId))
-  }  
+  const [offset, setOffset] = useState<number> (7);
+  const limit = 7;
+  const {data, trips, total_number_of_pages, handleTrackTrip, isLoading, error}  = useGetTrips({limit, offset});
 
-  const { data, isLoading, error } = useGetAllTripsQuery(`trips`);
   
-  let trips = [];
+
   
-  if (data) {
-    trips = data.trips;
-  }
-
-
+  
   return (
-    <div className="flex flex-col w-full   gap-2 p-4 h-full rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
+    <>
+    
+    <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Trip id</TableHead>
-            <TableHead>Ordered by</TableHead>
-            <TableHead>Booked On</TableHead>
-            <TableHead>Pickup</TableHead>
-            <TableHead>Pickup Contact</TableHead>
-            <TableHead>Drop off</TableHead>
-            <TableHead>Drop off Contact</TableHead>
-            <TableHead>Delivered On</TableHead>
-            <TableHead>Medium</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Payment Status</TableHead>
-            <TableHead>Payment Method</TableHead>
-            <TableHead>Delivery Status</TableHead>
-            <TableHead>View</TableHead>
-          </TableRow>
+            {
+              tableHeadings.map((tableHeading, index)=>
+                <TableHead key={index}>{tableHeading}</TableHead>
+              )
+            }
+                      </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading && <SkeletonTable cells={12} rows={10} />}
-          {data &&
+
+          {error && <SkeletonTable cells={12} rows={10} />}
+          {data && trips.length &&
             trips.map((trip: any) => (
               <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
                 <TableCell className="font-medium">{trip.trip_id}</TableCell>
@@ -61,7 +48,7 @@ export function AllTripsTable() {
                 <TableCell>
                   {extractDateWithDayFromDate(trip.trip_request_date)}
                 </TableCell>
-                <TableCell>{trip.pickup_location}</TableCell>
+                <TableCell className="line-clamp-1">{trip.pickup_location}</TableCell>
                 <TableCell>{trip.sender_number}</TableCell>
                 <TableCell>{trip.drop_off_location}</TableCell>
                 <TableCell>{trip.recipient_number}</TableCell>
@@ -105,5 +92,28 @@ export function AllTripsTable() {
         </TableBody>
       </Table>
     </div>
+      
+    <div>
+
+    </div>
+    <Pagination totalPages={total_number_of_pages} setOffset={setOffset} offset={offset} limit={limit}/>
+    </>
   );
 }
+
+const tableHeadings = [
+  "Trip id",
+  "Ordered by",
+  "Booked On",
+  "Pickup",
+  "Pickup Contact",
+  "Drop off",
+  "Drop off Contact",
+  "Delivered On",
+  "Medium",
+  "Amount",
+  "Payment Status",
+  "Payment Method",
+  "Delivery Status",
+  "View"
+];
