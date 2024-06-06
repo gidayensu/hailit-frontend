@@ -1,5 +1,5 @@
 
-import type { OrderStatus } from "../../Dashboard/TrackOrder/TrackOrderDetails";
+import type { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
 import { GrFormCheckmark } from "react-icons/gr";
 import { GoX } from "react-icons/go";
 import Loader from "@/components/Shared/Loader";

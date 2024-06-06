@@ -1,5 +1,6 @@
 //ui + icons
-import type { OrderStatus } from "../Dashboard/TrackOrder/TrackOrderDetails";
+import type { OrderStatus } from "../Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+
 import Container from "../ui/container";
 import OrderStatusElement from "./TrackOrder/OrderStatusElement";
 
