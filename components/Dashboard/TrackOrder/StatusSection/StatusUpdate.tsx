@@ -1,60 +1,16 @@
-"use client";
 import Loader from "@/components/Shared/Loader";
 import { IoMdCheckmark } from "react-icons/io";
-import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTripStatus, TripStatus, setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
-import { useState } from "react";
+import { useStatusUpdate } from "./hook/useStatusUpdate";
 
 export default function StatusUpdate() {
-  const [packageStatus, setPackageStatus] = useState<TripStatus>({
-    tripStage: 0,
-    tripStatus: "",
-  });
-
-  const [loading, setIsLoading] = useState<boolean>(false);
-
-  const dispatch = useAppDispatch();
-
-  const { selectedTripId, tripStatus, tripStage } = useAppSelector(
-    (state) => state.dashboard
-  );
-
-  const [
-    updateTrip,
-    { data: updateData, isLoading: updateLoading, error: updateError },
-  ] = useLazyUpdateTripQuery();
-
-  const handleUpdateTrip = async (statusDetails: TripStatus) => {
-    setPackageStatus({
-      tripStatus: statusDetails.tripStatus,
-      tripStage: statusDetails.tripStage,
-    });
+  const {
+    handleUpdateTrip,
+    loading,
+    localTripStatus,
+    tripStatus,
+    tripStage,
     
-    setIsLoading(true);
-    await updateTrip({
-      tripId: selectedTripId,
-      tripDetails: {
-        trip_status: statusDetails.tripStatus,
-        trip_stage: statusDetails.tripStage,
-      },
-    });
-  };
-
-  if (
-    updateData &&
-    updateData.trip &&
-    tripStatus !== packageStatus.tripStatus
-  ) {
-    dispatch(
-      setTripStatus({
-        tripStage: packageStatus.tripStage,
-        tripStatus: packageStatus.tripStatus,
-      })
-    );
-    dispatch(setPreviousSelectedTripId([selectedTripId]))
-    setIsLoading(false);
-  }
+  } = useStatusUpdate();
 
   return (
     <div className="w-44">
@@ -66,14 +22,14 @@ export default function StatusUpdate() {
           onClick={() =>
             handleUpdateTrip({
               tripStage: 1,
-              tripStatus: "New",
+              tripStatus: "Booked",
             })
           }
         >
-          <p>New</p>
+          <p>Booked</p>
           <span>
-            {tripStatus === "New" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && packageStatus.tripStage === 1 ? (
+            {tripStatus === "Booked" && !loading ? <IoMdCheckmark /> : ""}
+            {loading && localTripStatus.tripStatus === "Booked" ? (
               <Loader color="grey" />
             ) : (
               ""
@@ -82,7 +38,7 @@ export default function StatusUpdate() {
         </div>
         <div
           className={`${
-            tripStatus === "New" ? "font-bold" : ""
+            tripStatus === "Picked Up" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
             handleUpdateTrip({
@@ -94,7 +50,7 @@ export default function StatusUpdate() {
           <p>Picked Up</p>
           <span>
             {tripStatus === "Picked Up" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && packageStatus.tripStage == 2 ? (
+            {loading && localTripStatus.tripStatus === "Picked Up" ? (
               <Loader color="grey" />
             ) : (
               ""
@@ -115,7 +71,7 @@ export default function StatusUpdate() {
           <p>In Transit</p>
           <span>
             {tripStatus === "In Transit" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && packageStatus.tripStage == 3 ? (
+            {loading && localTripStatus.tripStatus === "In Transit" ? (
               <Loader color="grey" />
             ) : (
               ""
@@ -124,7 +80,7 @@ export default function StatusUpdate() {
         </div>
         <div
           className={`${
-            tripStage === 4 ? "font-bold" : ""
+            tripStatus === "Delivered" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
             handleUpdateTrip({
@@ -136,7 +92,7 @@ export default function StatusUpdate() {
           <p>Delivered</p>
           <span>
             {tripStatus === "Delivered" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && packageStatus.tripStage == 4 ? (
+            {loading && localTripStatus.tripStatus === "Delivered" ? (
               <Loader color="grey" />
             ) : (
               ""
@@ -158,7 +114,7 @@ export default function StatusUpdate() {
             <p>Cancelled</p>
             <span>
               {tripStatus === "Cancelled" && !loading ? <IoMdCheckmark /> : ""}
-              {loading && packageStatus.tripStatus === "Cancelled" ? (
+              {loading && localTripStatus.tripStatus === "Cancelled" ? (
                 <Loader color="grey" />
               ) : (
                 ""

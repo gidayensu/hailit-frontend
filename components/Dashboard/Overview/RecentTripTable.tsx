@@ -1,35 +1,20 @@
 'use client'
-import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-
-import SkeletonTable from "../SkeletonTable";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import SkeletonTable from "../SkeletonTable";
   
 import { extractDateWithDayFromDate } from "@/lib/utils";
-import {  useAppDispatch } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 
+import { useGetTrips } from "../hooks/useGetTrips";
 export function RecentTripTable() {
     
-  const dispatch = useAppDispatch();
-  
-  const handleTrackTrip = (tripId:string)=> {
-    dispatch(setActiveSection('Track Order'))
-    dispatch (setTrackingOrder(true))
-    dispatch (setSelectedTripId(tripId))
-  }  
-  const {data, isLoading, error} = useGetAllTripsQuery(`trips?limit=7`);
-    
-    let trips = [];
-    if (data) {
-      trips = data.trips;
-    }
+  const {trips, handleTrackTrip, isLoading, error}  = useGetTrips({limit: 7});
 
     if (error) {
       return <div>
@@ -42,38 +27,31 @@ export function RecentTripTable() {
     
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Trip id</TableHead>
-            
-            <TableHead>Booked On</TableHead>
-            <TableHead>Pickup</TableHead>
-            
-            <TableHead>Drop off</TableHead>
-            
-            <TableHead>Delivered On</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead >Payment Status</TableHead>
-            
-            <TableHead >Delivery Status</TableHead>
-            <TableHead >View</TableHead>
+          {
+              tableHeadings.map((tableHeading, index)=>
+                <TableHead key={index}>{tableHeading}</TableHead>
+              )
+            }
+          
           </TableRow>
         </TableHeader>
         <TableBody>
           {
             isLoading && <SkeletonTable rows={7} cells={8}/>
           }
-          {data && trips.map((trip:any) => (
+          {trips && trips.map((trip:any) => (
             
             <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
               
               <TableCell>{extractDateWithDayFromDate(trip.trip_request_date)} </TableCell>
-              <TableCell>{trip.pickup_location}</TableCell>
+              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">{trip.pickup_location}</TableCell>
               
-              <TableCell>{trip.drop_off_location}</TableCell>
+              <TableCell className="w-44">{trip.drop_off_location}</TableCell>
               
               <TableCell>{trip.trip_completion_date ? extractDateWithDayFromDate(trip.trip_completion_date): 'TBD'}</TableCell>
               <TableCell>{trip.trip_cost}</TableCell>
-              <TableCell className="">
+              <TableCell>
                 <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.paymentStatus ? 'bg-green-600 ': 'bg-red-500 '}`}>
                     <p>
                         {trip.payment_status? 'Paid' : 'Not Paid'}
@@ -103,4 +81,15 @@ export function RecentTripTable() {
     )
   }
   
+  const tableHeadings = [
+    "Trip id",
+    "Booked On",
+    "Pickup",
+    "Drop off",
+    "Delivered On",
+    "Amount",
+    "Payment Status",
+    "Delivery Status",
+    "View"
+  ];
   
