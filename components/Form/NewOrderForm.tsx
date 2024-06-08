@@ -1,75 +1,26 @@
-'use client'
 //ui + icons
 import { Textarea } from "@/components/ui/textarea";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import Loader from "../Shared/Loader";
 import { Button } from "../ui/button";
-import { FaMapMarkerAlt } from "react-icons/fa";
 
 //react hook form
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 import FormField from "./FormField";
-
 //main components
-import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoicesBreadcrumb";
-import PackageTypes from "../Order/NewDelivery/PackageTypes";
+import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoices/DeliveryChoicesBreadcrumb";
+import PackageTypes from "../Order/NewDelivery/PackageTypes/PackageTypes";
 
-//redux + next + react
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+//redux + next + react + helper
 import Link from "next/link";
 
-//interface
-import { DeliveryDetails, NewOrderSchema } from "./FormTypes";
+import { useNewOrderSubmit } from "./hooks/useNewOrderSubmit";
 
 export default function NewOrderForm() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const {formMethods, handleSubmit, onDeliveryFormSubmit, scheduled, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, } = useNewOrderSubmit();
   
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const {package_type, trip_type, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
-  const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
-
-  const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
- 
-
-  const formMethods = useForm<DeliveryDetails>({
-    resolver: zodResolver(NewOrderSchema)
-  });
-  const {register, handleSubmit, formState: {errors}, setError } = formMethods;
-  
-  
-  const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
-    setLoading(true);
-    if(!package_type) {
-      return (
-        setLoading(false)
-      )
-    }
-    const formDetails = {...data, package_type, trip_type, trip_medium};
-    addTrip(formDetails)
     
-  }
-  if(data && !isLoading && !error) {
-    const {trip} = data;
-    dispatch(setNewOrder({
-      order_success: true,
-      trip_id: trip.trip_id,
-      scheduled: false
-    }))
-    router.push('/order/new/success')
-  }
-
-  if (error) {
     
-    router.push('/order/new/failed')
-  }
-
-    
-    console.log('dropOffLocationName:', dropOffLocationName)
   return (
     <FormProvider {...formMethods}>
       <form
@@ -84,7 +35,7 @@ export default function NewOrderForm() {
           </span>
           <DeliveryChoicesBreadcrumb />
         </div>
-        <div className=" grid w-full max-w-sm items-center gap-1.5 ">
+        <div className=" grid w-full max-w-sm items-center gap-1.5 " ref={packageTypeRef}>
           <span className="flex items-start justify-start">
             <h3 className=" text-[14px] font-bold ">Package Type</h3>
           </span>
@@ -92,7 +43,27 @@ export default function NewOrderForm() {
             <PackageTypes />
           </div>
         </div>
+        <span className="mt-2 -mb-3" >
 
+          {!package_type && (
+            <span className="text-red-500 text-[13px] text-left flex items-start justify-start ">
+              <p>Package type not selected</p>
+            </span>
+          )}
+        </span>
+            {
+              scheduled &&
+              <div className="grid w-full max-w-sm items-center gap-1.5">
+          <h3 className=" text-[14px] font-bold">Choose Delivery Date</h3>
+          <FormField
+            type="text"
+            placeholder="Enter number of sender"
+            className="h-14"
+            name="calendar_schedule"
+            calendar = {true}
+          />
+        </div>
+            }
         <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
           <h3 className=" text-[14px] font-bold">Pickup Location</h3>
           <div className="w-full grid grid-cols-8 items-start justify-center gap-1">
@@ -172,11 +143,7 @@ export default function NewOrderForm() {
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <h3 className=" text-[14px] font-bold">Additional Information</h3>
           <Textarea className="h-32" {...register("additional_information")} />
-          {!package_type && (
-            <span className="text-red-500 text-[13px] text-center">
-              <p>Package type not selected</p>
-            </span>
-          )}
+          
           
             <Button type="submit" className="w-full h-14" disabled = {loading}>
               {!loading ? 'Book' : <Loader color="red"/>} 

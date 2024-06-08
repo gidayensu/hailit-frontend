@@ -1,5 +1,5 @@
 import { z, ZodType } from 'zod';
-import { zPhone } from './phoneValidation';
+import { zPhone } from '../../lib/phoneValidation';
 
 export const NewOrderSchema:  ZodType<DeliveryDetails>  = z.object({
   pickup_location: z.string().min(2,{message: "Required and must be 2 or more letters"}), 
@@ -87,7 +87,9 @@ export type FormFieldProps = {
     name: ValidFieldNames | any;
     valueAsNumber?: boolean;
     className: string;
-    defaultValue?: string; 
+    defaultValue?: string;
+    calendar? : boolean;
+    
   };
 
 
