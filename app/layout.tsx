@@ -5,6 +5,7 @@ import "./globals.css";
 import { BottomNavBar } from "@/components/Nav/BottomNavBar";
 import { TopNavBar } from "@/components/Nav/TopNavBar";
 import Providers from "@/lib/store/redux-provider";
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Providers>
           
             <TopNavBar />
+            <NextTopLoader showSpinner={false} color="#3B82F6" height={5} speed={400}/>
             {children}
             <BottomNavBar />
           
