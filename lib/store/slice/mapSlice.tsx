@@ -1,7 +1,7 @@
 // mapSlice.tsx
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchPickUpLocationName, fetchDropOffLocationName } from "../actions";
-import { UserLocation } from "@/components/Maps/PickUpMap";
+import { UserLocation } from "@/components/Maps/MainMap";
 
 interface MapData {
   searchData: any,

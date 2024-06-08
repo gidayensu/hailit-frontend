@@ -6,16 +6,16 @@ type AsyncFunction = () => Promise<string>;
 
 export const fetchDropOffLocationName = createAsyncThunk(
   'location/fetchDropOffLocationName',
-  async (asyncFunction: AsyncFunction) => {
-    const result = await asyncFunction();
+  async (setLocationName: AsyncFunction) => {
+    const result = await setLocationName();
     return result; // the result is expected to be a string
   }
 );
 
 export const fetchPickUpLocationName = createAsyncThunk(
   'location/fetchPickUpLocationName',
-  async (asyncFunction: AsyncFunction) => {
-    const result = await asyncFunction();
+  async (setLocationName: AsyncFunction) => {
+    const result = await setLocationName();
     return result; // the result is expected to be a string
   }
 );
