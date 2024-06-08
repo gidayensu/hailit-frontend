@@ -94,6 +94,14 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
             >
               <RiSteering2Line className="text-2xl -scale-x-100" />
             </DashboardSections>
+            <DashboardSections
+              dashMin={dashMin}
+              sectionName="Vehicles"
+              onClickFunc={handleActiveSection}
+              activeSection={activeSection}
+            >
+              <RiSteering2Line className="text-2xl -scale-x-100" />
+            </DashboardSections>
           </div>
 
           <div className="text-center w-full ml-2">
