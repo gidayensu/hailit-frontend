@@ -11,7 +11,7 @@ import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
 //main components
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
-import DashboardLoader from "@/components/Dashboard/Nav/DashboardLoader";
+import BigLoader from "@/components/Shared/BigLoader";
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import { AllTripsTable } from "@/components/Dashboard/Orders/AllTripsTable";
@@ -47,7 +47,7 @@ export default function Dashboard() {
   return (
     <>
     {
-      isLoading && <DashboardLoader/>
+      isLoading && <BigLoader/>
     }
 
 

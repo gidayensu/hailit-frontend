@@ -15,13 +15,12 @@ import { useAppSelector } from "@/lib/store/hooks";
 
 export default function NewOrder() {
   
-  const {trip_medium} = useAppSelector(state=>state.deliveryChoices);
+  const {trip_medium, destination_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
 
-  if (!trip_medium) {
+  if (!trip_medium || !destination_area || !trip_type) {
     return redirect('/order')
   }
 
-  if (trip_medium)
   return (
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 md:justify-center md:items-center">

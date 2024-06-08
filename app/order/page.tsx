@@ -5,15 +5,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FiArrowLeft } from "react-icons/fi";
 import Loader from "@/components/Shared/Loader";
-
+import { useRouter } from "next/navigation";
+import toast, {Toaster} from "react-hot-toast";
+//redux
+import { useAppSelector } from "@/lib/store/hooks";
 //main components
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import PackageDestinationChoice from "@/components/Order/NewDelivery/PackageDestinationChoice";
-import DeliveryDayChoice from "@/components/Order/NewDelivery/DeliveryDayChoice";
-import DeliveryMediumChoice from "@/components/Order/NewDelivery/DeliveryMediumChoice";
-import DeliveryChoicesBreadcrumb from "@/components/Order/NewDelivery/DeliveryChoicesBreadcrumb";
-
+import PackageDestinationChoice from "@/components/Order/NewDelivery/DeliveryChoices/PackageDestinationChoice";
+import DeliveryChoicesBreadcrumb from "@/components/Order/NewDelivery/DeliveryChoices/DeliveryChoicesBreadcrumb";
+import DeliveryMediumChoice from "@/components/Order/NewDelivery/DeliveryChoices/DeliveryMediumChoice";
+import DeliveryDayChoice from "@/components/Order/NewDelivery/DeliveryChoices/DeliveryDayChoice";
 
 interface DeliveryChoiceStage {
   destination: boolean;
@@ -21,6 +23,7 @@ interface DeliveryChoiceStage {
   deliveryMedium: boolean;
 }
 export default function NewOrder() {
+  const router = useRouter();
   const [deliveryChoicesStage, setDeliveryChoicesStage] =
     useState<DeliveryChoiceStage>({
       destination: true,
@@ -28,26 +31,66 @@ export default function NewOrder() {
       deliveryMedium: false,
     });
 
+    const {destination_area, trip_medium, trip_type} = useAppSelector(state=>state.deliveryChoices)
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    
+    const handleMissingChoice = (toastMessage:string)=> {
+      toast.error(
+          <p className=" text-[13px]">
+             Choose <b>{toastMessage} </b>
+          </p>
+          )
+      
+      
+  
+      
+      
+    }
   const handleDeliveryChoicesStage = (stage: number) => {
-    stage === 2
-      ? setDeliveryChoicesStage({
-          destination: true,
-          deliveryDay: true,
-          deliveryMedium: false,
-        })
-      : stage === 1
-      ? setDeliveryChoicesStage({
+    switch (stage) {
+      case(1): {
+        setDeliveryChoicesStage({
           destination: true,
           deliveryDay: false,
           deliveryMedium: false,
         })
-      : setDeliveryChoicesStage({
+        break
+      }
+      case(2) : {
+        if(!destination_area) {
+          return handleMissingChoice("Destination Area")
+        } else 
+        setDeliveryChoicesStage({
           destination: true,
           deliveryDay: true,
-          deliveryMedium: true,
-        });
+          deliveryMedium: false,  
+        })
+        break
+      }
+      case(3) : {
+
+        (destination_area && !trip_type) ? handleMissingChoice("Delivery Day") 
+        : setDeliveryChoicesStage({
+            destination: true,
+            deliveryDay: true,
+            deliveryMedium: true,
+          })
+          break
+        }
+      
+
+      case(4): {
+        if(destination_area && trip_type && !trip_medium){
+          handleMissingChoice("Delivery Medium") }
+          else {
+            setIsLoading(true)
+            router.push('/order/new')
+          }
+          break
+      }
+    }
+    
   };
   return (
     <>
@@ -75,6 +118,7 @@ export default function NewOrder() {
                 >
                   Continue
                 </Button>
+                <Toaster/>
               </div>
             )}
 
@@ -102,6 +146,7 @@ export default function NewOrder() {
                     >
                       Continue
                     </Button>
+                    <Toaster/>
                   </div>
                 </section>
               </>
@@ -113,7 +158,7 @@ export default function NewOrder() {
               <DeliveryChoicesBreadcrumb/>
                   <h2 className="font-bold text-lg text-center mb-2">
                     
-                    SELECT DELIVERY DAY
+                    SELECT DELIVERY MEDIUM
                   </h2>
                   <div className="flex w-full md:flex-row  items-center justify-center gap-2 md:items-start">
                     <DeliveryMediumChoice />
@@ -126,15 +171,12 @@ export default function NewOrder() {
                     >
                       <FiArrowLeft />
                     </Button >
-                    {!isLoading &&
-                      <Link href={'/order/new'} className="w-3/4" onClick={()=>setIsLoading(true)}>
-                    <Button className="w-full"> Continue </Button>
-                    </Link>
-                    }
+                    
+                      
+                    <Button className="w-3/4" disabled={isLoading || !trip_medium} onClick={()=>handleDeliveryChoicesStage(4)}> Continue </Button>
+                    
+                    
 
-                    {isLoading &&
-                      <Button className="w-3/4"> <Loader color="red"/> </Button>
-                    }
 
                   </div>
                 </div>
