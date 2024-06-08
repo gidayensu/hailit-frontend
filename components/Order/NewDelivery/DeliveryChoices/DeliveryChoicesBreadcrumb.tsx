@@ -1,6 +1,6 @@
 import { FaAngleRight } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import { useDeliveryChoice } from "../hooks/useDeliveryChoice";
+import { useDeliveryChoice } from "../../hooks/useDeliveryChoice";
 
 export default function DeliveryChoicesBreadcrumb () {
     

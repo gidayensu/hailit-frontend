@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { MdOutlineLocationOn } from "react-icons/md";
 
 type DeliveryType = "Same Day" | "Next Day" | "Custom";
 export default function NewDeliveryCard({

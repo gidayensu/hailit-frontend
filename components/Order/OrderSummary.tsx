@@ -23,7 +23,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
 
           {(path.startsWith('/track') || path.startsWith('/dashboard')) &&
             <>
-            <p className="text-sm text-slate-500">ACCRA</p>
+            <p className="text-sm text-slate-500">{trip.trip_area.toUpperCase()}</p>
             
             </>
             }
@@ -70,7 +70,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
             <HiLocationMarker className="text-xl" />
             <span className="flex flex-col">
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm line-clamp-1 max-w-52">{trip.pickup_location}</p>
+                <p className="text-sm w-44 text-wrap truncate ">{trip.pickup_location}</p>
               
               
             </span>
@@ -78,17 +78,17 @@ export default function OrderSummary({ trip }: { trip:any }) {
 
           <Separator
             orientation="vertical"
-            className="bg-slate-800 h-1/3 dark:bg-slate-100 -mt-4 mb-1"
+            className="bg-slate-800 h-1/5 dark:bg-slate-100 -mt-8 mb-1"
           />
-          <span className="flex items-start gap-2 -ml-[9px]">
+          <span className="flex items-start gap-2 -ml-[9px] mt-2">
             <HiLocationMarker className="text-xl text-green-500" />
-            <span className="flex flex-col">
+            <span className="flex flex-col w-44">
                 <p className="font-bold text-sm">Delivery Point</p>
-                <p className="text-sm ">{trip.drop_off_location}</p>
+                <p className="text-sm text-wrap truncate line-clamp-2">{trip.drop_off_location}</p>
               
             </span>
           </span>
-        </div>
+        </div>  
         {/* Order date and time */}
         <div className="flex flex-col justify-start h-full gap-2">
           <span className="flex items-start  gap-2 -ml-2">
@@ -96,7 +96,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
             <span className="flex gap-2">
               <span className="space-y-1">
                 <p className="text-sm font-semibold">Pickup date</p>
-                <p className="text-sm">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
+                <p className="text-sm ">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
               </span>
               
             </span>

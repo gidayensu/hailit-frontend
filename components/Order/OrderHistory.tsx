@@ -1,17 +1,15 @@
 "use client";
-import { useState } from "react";
-import OrderSummaryMin from "./OrderSummaryMin";
-export type Deliveries = boolean;
-import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector } from "@/lib/store/hooks";
-import NoData from "../Shared/NoData";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
 import Loader from "../Shared/Loader";
-import { Skeleton } from "../ui/skeleton";
+import NoData from "../Shared/NoData";
 import { Button } from "../ui/button";
-import { DeliveryStatus } from "./OrderSummaryMin";
-import { PackageType } from "./OrderSummaryMin";
+import { useGetUserTrips } from "./hooks/useGetUserTrips";
+import OrderSummaryMin, { DeliveryStatus, PackageType } from "./OrderSummaryMin";
+import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
+
+export type Deliveries = boolean;
 
 interface Trip {
   trip_id: string;
@@ -27,25 +25,6 @@ interface Trip {
   trip_request_date: string;
   trip_status: DeliveryStatus;
 }
-
-const TripsLoadingSkeleton = () => {
-  return (
-    <div className="flex flex-col md:w-4/6 w-full mt-4 rounded-2xl gap-2 items-center justify-center">
-      <div className="flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3">
-        <div className="w-full">
-          <Skeleton className="flex  h-16 rounded-xl" />
-        </div>
-        <div className="w-full">
-          <Skeleton className="flex  h-16 rounded-xl" />
-        </div>
-        <div className="w-full">
-          <Skeleton className="flex  h-16 rounded-xl" />
-        </div>
-      </div>
-    </div>
-  );
-};
-
 
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
@@ -68,11 +47,9 @@ export default function OrderHistory() {
       <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
     {
       noDelivery &&
-      <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!"/>
-      
-    }
+      <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!"/>   }
 
-    {(currentTrips.length > 1 || previousTrips.length > 1 ) &&
+    {(currentTrips.length || previousTrips.length ) &&
       <div className="flex justify-between items-center w-full md:w-4/6 h-10 bg-white dark:bg-secondary-dark border border-primary-color   rounded-xl p-2 gap-3 text-[13px] mb-4">
         <span
           className={`flex items-center justify-center ${
@@ -122,12 +99,15 @@ export default function OrderHistory() {
                 />
               </Link>
               {tripLoading && (
-                <span className="absolute">
+                <span className="absolute flex items-center justify-center">
                   <Loader color="red" />
                 </span>
               )}
             </>
           ))}
+          </div>
+          <div className="flex items-center justify-center w-full">
+
           {
             currentTrips.length < 1 &&  !noDelivery && <NoDeliveryHistory noDeliveryMessage="No current delivery!"/>
           }
@@ -165,6 +145,9 @@ export default function OrderHistory() {
               )}
             </>
           ))}
+          </div>
+          <div className="flex items-center justify-center">
+
           {
             previousTrips.length < 1 && <NoDeliveryHistory noDeliveryMessage="No previous delivery!"/>
               }
@@ -175,32 +158,14 @@ export default function OrderHistory() {
   );
 }
 
-const useGetUserTrips = () => {
-  const { user_id } = useAppSelector((state) => state.user);
-  const { data, isLoading, error } = useGetUserTripsQuery(user_id);
-
-  const currentTrips = data?.trips?.filter(
-    (trip: Trip) => trip.trip_status !== "Delivered" && trip.trip_status !== "Cancelled"
-  ) || [];
-  
-  const previousTrips = data?.trips?.filter(
-    (trip: Trip) => trip.trip_status === "Delivered" || trip.trip_status === "Cancelled"
-  ) || [];
-  let noDelivery = false;
-  currentTrips.length < 1 && previousTrips.length < 1 ? noDelivery = true : ''
-  return { currentTrips, previousTrips, isLoading, error, noDelivery };
-};
-
 const NoDeliveryHistory = ({noDeliveryMessage}: {noDeliveryMessage: string})=> {
   return (
     
       <div className="flex flex-col items-center justify-center w-full md:w-3/6">
-
       <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
       <Link href={'/order'}>
       <Button variant={'outline'}> Send a Package </Button>
       </Link>
       </div>
-    
   )
 }

@@ -6,7 +6,7 @@ import { FiCheck } from "react-icons/fi"
 import { RiCaravanFill } from "react-icons/ri"
 import { DeliveryChoices } from "./DeliveryChoice"
 
-import { useDeliveryChoice } from "../hooks/useDeliveryChoice"
+import { useDeliveryChoice } from "../../hooks/useDeliveryChoice"
 
 export default function DeliveryMediumChoice () {
     

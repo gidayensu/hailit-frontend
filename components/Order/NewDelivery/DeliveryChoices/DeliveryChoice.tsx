@@ -1,13 +1,13 @@
-import Container from "../../ui/container";
-
+import Container from "../../../ui/container";
+import { IconType } from "react-icons/lib";
 interface ChoicesProps {
   handleDeliveryOption: (deliveryOption: string) => void;
   deliveryOption: string;
   elementOption: string;
-  MainIcon: any;
-  CheckIcon: any;
-
-  children: React.ReactNode;
+  MainIcon: IconType;
+  CheckIcon: IconType;
+  children?: React.ReactNode;
+  className?: string,
 }
 export const DeliveryChoices: React.FC<ChoicesProps> = ({
   handleDeliveryOption,
@@ -16,6 +16,7 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
   CheckIcon,
   elementOption,
   children,
+  className,
 }) => {
   return (
     <>
@@ -24,7 +25,7 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
         onClick={() => handleDeliveryOption(elementOption)}
       >
         <Container
-          className={`flex flex-col items-center justify-center w-full h-40 md:h-44  rounded-lg p-3 ${
+          className={`${className} flex flex-col  items-center justify-center w-full h-40 md:h-44  rounded-lg p-3 ${
             deliveryOption === elementOption || !deliveryOption
               ? ""
               : "text-slate-300"
