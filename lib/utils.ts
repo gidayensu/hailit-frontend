@@ -99,3 +99,15 @@ export function getSpecificName(str:string) {
   // }
   return str
 }
+
+export const scrollToSection = (sectionRef:React.RefObject<any>) => {
+  if (sectionRef.current) {
+    sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+
+export function splitLocationData(item:string) {
+  let parts = item.split(", ");
+  return [parts[0] + ", " + parts[1], parts[parts.length - 1]];
+}

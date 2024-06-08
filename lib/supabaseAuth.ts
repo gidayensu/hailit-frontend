@@ -81,7 +81,7 @@ if(error) {
     error: "Error retrieving session"
   }
 }
-return data;
+return data.session;
 
 }
 
