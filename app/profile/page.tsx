@@ -14,11 +14,13 @@ export default function Profile() {
   const router = useRouter();
   //getting data from redux store
   const { authenticationState } = useAppSelector((state) => state.auth);
-  const { onboard } = useAppSelector((state) => state.user);
+  const { onboard, user_role } = useAppSelector((state) => state.user);
 
-  if (authenticationState && !onboard) {
-    router.push("/onboarding");
+  if (authenticationState) {
+    !onboard ? router.push("/onboarding") : user_role === "admin" ? router.push("/dashboard") : ''
   }
+
+
 
   return (
     <>

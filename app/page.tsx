@@ -1,24 +1,38 @@
 "use client";
 //next + react + redux
 
-import { useAppSelector } from "@/lib/store/hooks";
-import { redirect } from "next/navigation";
-
+import BigLoader from "@/components/Shared/BigLoader";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 //main components
 
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
-import TrackPackage from "@/components/Home/TrackPackage";
 import SendPackage from "@/components/Home/SendPackage";
+import TrackPackage from "@/components/Home/TrackPackage";
 import OrderHistory from "@/components/Order/OrderHistory";
-
+import { supabaseSession } from "@/lib/supabaseAuth";
 export type Deliveries = boolean;
 
 export default function Home() {
-  const { authenticationState } = useAppSelector((state) => state.auth);
-  if (!authenticationState) {
-    return redirect("/profile");
-  }
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await supabaseSession();
+      if (!session) {
+        router.push('/profile');
+      } else {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
+  if (loading) {
+    return <BigLoader/>
+  }
   return (
     <>
       <div className="md:hidden">
