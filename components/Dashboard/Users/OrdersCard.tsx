@@ -1,24 +1,12 @@
-import { Button } from "@/components/ui/button";
 import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
-import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { setActiveSection, setTrackingOrder, setSelectedTripId } from "@/lib/store/slice/dashboardSlice";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { extractDateWithDayFromDate } from "@/lib/utils";
 import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
+import { extractDateWithDayFromDate } from "@/lib/utils";
+import { useGetUserTrips } from "../hooks/useGetUserTrips";
 
-export default function OrdersCard({userData}:{userData:any}) {
-  const dispatch = useAppDispatch();
-  const handleTrackTrip = (tripId:string)=> {
-    dispatch(setActiveSection('Track Order'))
-    dispatch (setTrackingOrder(true))
-    dispatch (setSelectedTripId(tripId))
-  }
-    const {data, isLoading } = useGetUserTripsQuery(userData.user_id);
-    let trips = [];
-    if (data) {
-      trips = data.trips;
-    }
+export default function OrdersCard({userId}:{userId:string}) {
+  const  {data, isLoading, trips, handleTrackTrip} = useGetUserTrips(userId);
+  
   return (
     <>
       <section className="w-full p-4">
@@ -48,12 +36,7 @@ export default function OrdersCard({userData}:{userData:any}) {
                     </>
 
                     )}
-                    {
-                      trips.length > 2 &&
-                  <Button variant={'empty'} className="font-semibold">
-                      View All
-                  </Button>
-                    }
+                  
             </>
           }
         {

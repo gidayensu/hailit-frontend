@@ -92,7 +92,7 @@ export function AllUsers() {
                         <span className="text-decoration: underline">view</span>
                       }
                     >
-                      <OrdersCard userData={user} />
+                      <OrdersCard userId={user.user_id} />
                     </Modal>
                   )}
                 </TableCell>

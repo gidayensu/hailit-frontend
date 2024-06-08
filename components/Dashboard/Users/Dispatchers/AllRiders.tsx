@@ -96,7 +96,7 @@ const Rating = ({ rating }: {rating: number }) => {
         .map((_, index) => (
           <FaStar key={index} className="text-amber-500"/>
         ))}
-      {<FaStarHalfAlt />}
+      
       {Array(emptyStars)
         .fill('empty stars')
         .map((_, index) => (

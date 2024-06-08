@@ -8,9 +8,6 @@ export default function DispatcherCard({firstName, lastName, vehicleName, vehicl
     return (
       <Container className="w-full rounded-xl border  h-24  p-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <span>
-          <UserAvatar />
-        </span>
 
         <span>
           <p className="font-bold text-sm">Courier will be assigned soon</p>

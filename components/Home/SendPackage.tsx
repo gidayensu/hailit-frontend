@@ -2,56 +2,56 @@
 //ui
 import { Button } from "../ui/button";
 import Loader from "../Shared/Loader";
+import { useRef } from "react";
 //main components
-import PackageDestinationChoice from "../Order/NewDelivery/PackageDestinationChoice";
-import DeliveryDayChoice from "../Order/NewDelivery/DeliveryDayChoice";
-import DeliveryMediumChoice from "../Order/NewDelivery/DeliveryMediumChoice";
+import PackageDestinationChoice from "../Order/NewDelivery/DeliveryChoices/PackageDestinationChoice";
+import DeliveryDayChoice from "../Order/NewDelivery/DeliveryChoices/DeliveryDayChoice";
+import DeliveryMediumChoice from "../Order/NewDelivery/DeliveryChoices/DeliveryMediumChoice";
 
-//redux + next + react
+//redux + next + react + helper
 import Link from "next/link";
 import { useAppSelector } from "@/lib/store/hooks";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from "react";
+import { scrollToSection } from "@/lib/utils";
 
 export default function SendPackage() {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const deliveryMediumRef = useRef<any> (null);
+  const destinationAreaRef = useRef<any> (null);
+  const deliveryDayRef = useRef<any> (null);
 
   const {trip_medium, destination_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
 
-  const scrollToSection = (sectionId:string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  
   
   let missingChoice = '';
-  !destination_area ? missingChoice = 'destination area' :  !trip_type ? missingChoice = 'delivery day' : !trip_medium ? missingChoice = 'trip medium' : '';
+  !destination_area ? missingChoice = 'destination area' :  !trip_type ? missingChoice = 'delivery day' : !trip_medium ? missingChoice = 'delivery medium' : '';
   
   const handleLoading = ()=> {
     setIsLoading(true)
   }
   const handleMissingChoice = ()=> {
     let toastMessage = ''
-    if(missingChoice === 'trip medium') {
-      toastMessage = "Destination Medium Not Selected"
-      scrollToSection("delivery-medium")
+    if(missingChoice === 'delivery medium') {
+      toastMessage = "Delivery Medium"
+      scrollToSection(deliveryMediumRef)
     }
 
     if(missingChoice === 'destination area') {
-      toastMessage = "Destination Area Not Selected"
-      scrollToSection("destination-area")
+      toastMessage = "Destination Area"
+      scrollToSection(destinationAreaRef)
     }
 
     if(missingChoice === 'delivery day') {
-      toastMessage = "Delivery Day Not Selected"
-      scrollToSection("delivery-day")
+      toastMessage = "Delivery Day"
+      scrollToSection(deliveryDayRef)
     }
     
     toast.error(
         <p className=" text-[13px]">
-          {toastMessage}
+          <b>{toastMessage} </b> Not Selected
         </p>
       
         )
@@ -59,9 +59,10 @@ export default function SendPackage() {
   return (
     <>
       <article
-        id="destination-area"
+        ref={destinationAreaRef}
+        
         className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
-        onClick={() => scrollToSection("delivery-day")}
+        onClick={() => scrollToSection(deliveryDayRef)}
       >
         <h2 className="font-bold text-xl text-center mb-2">
           SELECT DESTINATION AREA
@@ -72,9 +73,9 @@ export default function SendPackage() {
       </article>
 
       <article
-        id="delivery-day"
+        ref={deliveryDayRef}
         className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
-        onClick={() => scrollToSection("delivery-medium")}
+        onClick={() => scrollToSection(deliveryMediumRef)}
       >
         <h2 className="font-bold text-xl text-center my-2">SELECT DELIVERY DAY</h2>
         <section className="flex w-full md:flex-row md:w-4/6 items-center justify-center gap-2 md:items-start">
@@ -83,7 +84,7 @@ export default function SendPackage() {
       </article>
 
       <article
-        id="delivery-medium"
+        ref={deliveryMediumRef}
         className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
         // onClick={()=>scrollToSection("continue")}
       >
