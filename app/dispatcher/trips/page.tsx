@@ -1,15 +1,27 @@
-'use client'
-import { RecentTripTable } from "@/components/Dashboard/Overview/RecentTripTable";
-import Container from "@/components/ui/container";
+"use client";
+import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import OrderHistory from "@/components/Order/OrderHistory";
+import { redirect } from "next/navigation";
+import DispatcherHead from "@/components/Dispatcher/DispatcherHead";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+export default function Dispatcher() {
+  const { user_role, first_name, last_name } = useGetDispatcher();
 
-export default function RiderTrips () {
-    return (
-    <main className="flex flex-col items-center justify-center p-4 w-full">
-    <h1 className="font-bold mb-5 text-lg">All Trips of Rara Agyenim</h1>
-    <Container className="flex items-center justify-center h-full w-5/6 bg-white rounded-xl">
-        
-        <RecentTripTable/>
-    </Container>
-    </main>)
+  if (user_role === "customer" || user_role === "admin" || !user_role) {
+    redirect('/profile') 
+}
 
+  return (
+    <>
+        <TopSectionContainer>
+
+        <DispatcherHead firstName={first_name} lastName={last_name} userRole={user_role} />
+        </TopSectionContainer>
+        <MiddleSectionContainer className="rounded-tr-none flex justify-center items-center">
+
+                <OrderHistory />
+        </MiddleSectionContainer>
+    </>
+  );
 }

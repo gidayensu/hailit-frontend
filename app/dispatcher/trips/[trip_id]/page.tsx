@@ -7,25 +7,31 @@ import OrderSummary from "@/components/Order/OrderSummary";
 import TrackOrderContainer from "@/components/Order/TrackOrder/TrackOrderContainer";
 import Container from "@/components/ui/container";
 import RecipientSenderCard from "@/components/Order/RecipientSenderCard";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { TopSkeleton } from "@/components/Order/OrderSkeleton";
 import { MidSkeleton } from "@/components/Order/OrderSkeleton";
-import { useGetTrip } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+import { extractDateWithDayFromDate } from "@/lib/utils";
+import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+
+
+
 export default function DispatcherTrip () {
-    let updateStatus = "Picked Up";
-    const params = useParams();
+  const { user_role } = useGetDispatcher();
+  if (user_role === "Customer" || user_role === "Admin" || !user_role) {
+        redirect('/profile') 
+    }
+  let updateStatus = "Picked Up";
+  const params = useParams();
   const { trip_id } = params;
   
   const { data, isLoading, error } = useGetTripQuery(`${trip_id}`);
-  let trip = [];
+  const trip = data?.trip
+    const tripRequestDate = extractDateWithDayFromDate(trip?.trip_request_date)
 
-  if (data) {
-    trip = data.trip;
-  }
-  if (isLoading) {
-    return (
-      <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
+    if (isLoading) {
+      return (
+        <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
           <TopSkeleton />
         </TopSectionContainer>
@@ -44,8 +50,16 @@ export default function DispatcherTrip () {
       
         <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
       <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-        <span className="text-4xl font-bold ">Trip #235-ASF5</span>
-        <p className="text-lg font-bold">12th May, 2024</p>
+      <span className="text-5xl font-bold">#{trip.trip_id}</span>
+        <p className="text-md ">
+          <b>Package Type:</b> {trip.package_type}
+        </p>
+        <p className="text-md ">
+          <b>Request Date:</b> {tripRequestDate}
+        </p>
+        <p className="text-md ">
+          <b>Trip Medium:</b> {trip.trip_medium}
+        </p>
       </TopSectionContainer>
 
       <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
@@ -57,7 +71,7 @@ export default function DispatcherTrip () {
 
         <TrackOrderContainer headingText="Trip Status" >
           
-          <OrderUpdates currentOrderStage={2} currentOrderStatus="Cancelled"/>
+          <OrderUpdates currentOrderStage={trip.trip_stage} currentOrderStatus={trip.trip_status}/>
         </TrackOrderContainer>
         
         <TrackOrderContainer headingText="LOCATION AND TIMELINE">
@@ -65,15 +79,22 @@ export default function DispatcherTrip () {
 
           <OrderSummary trip={trip} />
         </Container>
+
         </TrackOrderContainer>
 
+      {
+        (trip.trip_status !== "Cancelled" || trip.trip_status !== "Delivered") && 
+          <>
         <TrackOrderContainer headingText="Sender">
-            <RecipientSenderCard name="Yaw Manu" location="Abuakwa Adumanu" identity="Sender"/>
+            <RecipientSenderCard location="Abuakwa Adumanu" identity="Sender" phoneNumber={trip.recipient_number}/>
         </TrackOrderContainer>
 
         <TrackOrderContainer headingText="Recipient">
-            <RecipientSenderCard name="Dankwa Asare" location="Bantama High Street" identity="Recipient"/>
+            <RecipientSenderCard location="Bantama High Street" identity="Recipient" phoneNumber={trip.sender_number}/>
         </TrackOrderContainer>
+          </>
+        
+      }
 
         
         <TrackOrderContainer headingText="Cost and Payment">
@@ -81,11 +102,11 @@ export default function DispatcherTrip () {
             <div className="grid grid-cols-3  p-3 ">
               <span className="text-[13px]">
                 <p className=" font-bold">Amount</p>
-                <p> GHS 50</p>
+                <p> {trip.trip_cost} </p>
               </span>
               <span className="text-[13px]">
                 <p className=" font-bold">Status</p>
-                <p> Paid</p>
+                <p> {trip.trip_payment ? 'Paid': 'Not Paid'}</p>
               </span>
               <span className="text-[13px]">
                 <p className=" font-bold">Method</p>
