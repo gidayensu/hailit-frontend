@@ -27,6 +27,7 @@ export default function SignUp() {
     handleSubmit,
     dataFetchError,
     isLoading,
+    googleSupabaseSignIn
   } = useSignUp();
 
   return (
@@ -78,7 +79,7 @@ export default function SignUp() {
                 type="submit"
                 disabled={isLoading}
               >
-                {isLoading ? <Loader color="red" /> : "Sign Up"}
+                {isLoading ? <Loader /> : "Sign Up"}
               </Button>
 
               {dataFetchError.error && (
@@ -98,6 +99,7 @@ export default function SignUp() {
           <Button
             variant="outline"
             className="w-full border border-slate-300 h-12 flex gap-4"
+            onClick={googleSupabaseSignIn}
           >
             <FcGoogle className="text-2xl" /> Continue with Google
           </Button>

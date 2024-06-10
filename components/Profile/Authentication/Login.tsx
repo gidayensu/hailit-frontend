@@ -5,7 +5,7 @@ import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
-
+import { googleSupabaseSignIn } from "@/lib/supabaseAuth";
 // redux
 
 // react
@@ -44,7 +44,7 @@ export default function Login() {
             </div>
             <div className="space-y-2 mt-2">
             <Button className="w-full h-12" type="submit" disabled={isLoading}>
-              {isLoading ? <Loader color="red" /> : "Login"}
+              {isLoading ? <Loader /> : "Login"}
             </Button>
             </div>
             {dataFetchError.error && (
@@ -61,7 +61,7 @@ export default function Login() {
             <p className="text-sm">or</p>
             <Separator className="w-32" />
           </div>
-          <Button variant="outline" className="w-full border border-slate-300 h-12 flex gap-4">
+          <Button variant="outline" className="w-full border border-slate-300 h-12 flex gap-4" onClick={googleSupabaseSignIn}>
             {isLoading ? (
               <Loader color="#3b82f6" />
             ) : (

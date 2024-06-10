@@ -37,6 +37,7 @@ export const useLogin=()=> {
   });
   const { handleSubmit, formState: {errors}, setError } = formMethods;
 
+  const googleSignIn:any = (OAuthUserId:string)=> getUser(OAuthUserId)
   // sign in form submission
   const onSignInSubmit: SubmitHandler<SignInForm> = async (data) => {
     setIsLoading(true);
@@ -52,8 +53,11 @@ export const useLogin=()=> {
     }
   };
 
+  
+
   useEffect(() => {
     if (userData) {
+
       const { user } = userData;
       dispatch(
         setUserState({
@@ -79,12 +83,14 @@ export const useLogin=()=> {
     if (getUserError) {
       setDataFetchError(()=>({
         error: true, 
-        errorDescription: 'Sorry! Server Error. Try Again! '
+        errorDescription: 'Sorry! Server Error. Try Again!'
       }));
       setIsLoading(false);
     }
-  }, [userData, getUserError, dispatch, router]);formMethods
-
-  return {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods }
+  }, [userData, getUserError, dispatch, router]);
+  
+  
+  
+  return {handleSubmit, onSignInSubmit, googleSignIn, dataFetchError, isLoading, formMethods }
 
 }
