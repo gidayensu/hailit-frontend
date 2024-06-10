@@ -76,6 +76,11 @@ return date.toLocaleTimeString();
 
 }
 
+export function extractShortDate(date:string) {
+  const dateObj = new Date(date);
+  return dateObj.toLocaleDateString("en-GB"); 
+}
+
 export const extractDateWithDayFromDate = (dateString:string | null | Date)=> {
   if (dateString === null) {
     return null
@@ -110,4 +115,8 @@ export const scrollToSection = (sectionRef:React.RefObject<any>) => {
 export function splitLocationData(item:string) {
   let parts = item.split(", ");
   return [parts[0] + ", " + parts[1], parts[parts.length - 1]];
+}
+
+export function extractBeforeComma(text:string) {
+  return text.split(",", 1)[0];
 }
