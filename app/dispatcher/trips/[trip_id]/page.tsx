@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { TopSkeleton } from "@/components/Order/OrderSkeleton";
 import { MidSkeleton } from "@/components/Order/OrderSkeleton";
-
+import { useGetTrip } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
 export default function DispatcherTrip () {
     let updateStatus = "Picked Up";
     const params = useParams();

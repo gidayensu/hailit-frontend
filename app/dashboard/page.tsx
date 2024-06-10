@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setActiveSection } from "@/lib/store/slice/dashboardSlice";
 import { useState } from "react";
-
+import TripsDonut from "@/components/Dashboard/Analytics/TripsDonut";
 //icons + ui
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -10,11 +10,12 @@ import Link from "next/link";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
 //main components
+
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
 import BigLoader from "@/components/Shared/BigLoader";
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
-import { AllTripsTable } from "@/components/Dashboard/Orders/AllTripsTable";
+import { AllTripsData } from "@/components/Dashboard/Orders/AllTripsTable";
 import Overview from "@/components/Dashboard/Overview/Overview";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
 import { AllUsers } from "@/components/Dashboard/Users/AllUsersTable";
@@ -23,6 +24,7 @@ import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
 import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
 
+import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
 export default function Dashboard() {
 
   const [dashMin, setDashMin] = useState<boolean>(false);
@@ -55,7 +57,7 @@ export default function Dashboard() {
     
       <DashboardTopNav />
 
-      <main className="flex gap-4 w-full h-screen bg-[#f7f7f7]  dark:bg-primary-dark ">
+      <main className="flex gap-4 w-full mb-20 bg-[#f7f7f7]  dark:bg-primary-dark ">
         
         <DashboardSideBar
           activeSection={activeSection}
@@ -72,7 +74,9 @@ export default function Dashboard() {
           
           {activeSection === "Overview" && <Overview />}
          
-          {activeSection === "Orders" &&  <AllTripsTable /> }
+          {activeSection === "Orders" &&  <AllTripsData /> }
+
+          {activeSection === "Vehicles" &&  <Vehicles /> }
 
           {activeSection === "Users" && (
             <>
@@ -106,6 +110,8 @@ export default function Dashboard() {
 
           {activeSection === "Drivers" && <AllDrivers />}
           
+          
+          {activeSection === "Analytics" && <TripsDonut />}
           {activeSection === "Edit Profile" &&  <CustomerProfile /> }
         </article>
       </main>
