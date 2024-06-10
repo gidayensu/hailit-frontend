@@ -20,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     const checkSession = async () => {
       const session = await supabaseSession();
+      
       if (!session) {
         router.push('/profile');
       } else {

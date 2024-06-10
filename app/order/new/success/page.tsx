@@ -88,7 +88,7 @@ const [loading, setLoading]  = useState<boolean>(false);
       
         <Link href={`/track/${trip_id}`} onClick={handleLoading}>
           <Button className="border border-slate-300 h-14 w-60 flex gap-4" disabled={loading}>
-            {loading? <Loader color="red"/>:'Track your package'}
+            {loading? <Loader />:'Track your package'}
           </Button>
         </Link>
         <Link href="/">

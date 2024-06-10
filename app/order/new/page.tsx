@@ -15,9 +15,9 @@ import { useAppSelector } from "@/lib/store/hooks";
 
 export default function NewOrder() {
   
-  const {trip_medium, destination_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
+  const {trip_medium, trip_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
 
-  if (!trip_medium || !destination_area || !trip_type) {
+  if (!trip_medium || !trip_area || !trip_type) {
     return redirect('/order')
   }
 

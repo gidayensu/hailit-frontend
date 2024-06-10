@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/Theme/ThemeProvider";
+
 import "./globals.css";
 import { BottomNavBar } from "@/components/Nav/BottomNavBar";
 import { TopNavBar } from "@/components/Nav/TopNavBar";
 import Providers from "@/lib/store/redux-provider";
 import NextTopLoader from 'nextjs-toploader';
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,7 +25,9 @@ export default function RootLayout({
           
             <TopNavBar />
             <NextTopLoader showSpinner={false} color="#3B82F6" height={5} speed={400}/>
+            
             {children}
+            
             <BottomNavBar />
           
         </Providers>
