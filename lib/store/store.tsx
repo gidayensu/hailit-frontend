@@ -11,7 +11,7 @@ import { newOrderSlice } from './slice/newOrderSlice';
 import { hailitApi } from './apiSlice/hailitApi';
 import { dashboardSlice } from './slice/dashboardSlice';
 import { mapSlice } from './slice/mapSlice';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { dashboardTablesSlice } from './slice/dashboardTablesSlice';
 import { USER_LOGOUT } from './actions';
 const appReducer = combineReducers({
   auth: supabaseAuthSlice.reducer,
@@ -22,6 +22,7 @@ const appReducer = combineReducers({
   map: mapSlice.reducer,
   newOrder: newOrderSlice.reducer,
   dashboard: dashboardSlice.reducer,
+  dashboardTables: dashboardTablesSlice.reducer,
   [hailitApi.reducerPath]: hailitApi.reducer,
 });
 
