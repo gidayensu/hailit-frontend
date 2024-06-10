@@ -59,19 +59,34 @@ export const supabaseSignIn = async (userInputs: Inputs) => {
 export const googleSupabaseSignIn = async ()=> {
   try {
   const {data, error} = await supabase.auth.signInWithOAuth({
-    provider: 'google'
+    provider: 'google',
+    options: {
+      redirectTo: "https://hailit-frontend.vercel.app/oauth-callback"
+    }
   })
   if (error) {
     return {
       error: "Error signing in via google"
     }
   }
-  // const user_id:any = data.user?.id
+  
   return data;
 
  } catch (err) {
   return {error: `Error Occurred: ${err}`}
  }
+}
+
+export const userIdAndEmailFromSession = async ()=> {
+  const { data, error } = await supabase.auth.getSession()
+  if(error) {
+    return {
+      error: "Error retrieving session"
+    }
+  }
+  const user_id = data?.session?.user?.id
+  const email= data?.session?.user?.email
+  return {user_id, email};
 }
 export const supabaseSession = async ()=> {
     
@@ -81,7 +96,8 @@ if(error) {
     error: "Error retrieving session"
   }
 }
-return data.session;
+
+return data?.session?.user;
 
 }
 
