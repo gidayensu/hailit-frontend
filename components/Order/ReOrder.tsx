@@ -66,7 +66,7 @@ export function ReOrder({ tripData }: { tripData: any }) {
           </div>
           <DrawerFooter>
             <Button onClick={handleSubmit} disabled={loading}>
-              {loading ? <Loader color="red" /> : "Confirm"}
+              {loading ? <Loader /> : "Confirm"}
             </Button>
 
             <DrawerClose asChild>
