@@ -8,14 +8,14 @@ import { RiMapPinRangeLine, RiTreasureMapFill } from "react-icons/ri";
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice";
 
 export default function PackageDestinationChoice() {
-  const { destination_area, handleDeliveryChoice } =
-    useDeliveryChoice("destination_area");
+  const { trip_area, handleDeliveryChoice } =
+    useDeliveryChoice("trip_area");
   return (
     <>
       <DeliveryChoices
         handleDeliveryOption={handleDeliveryChoice}
-        deliveryOption={destination_area}
-        CheckIcon={FiCheck}
+        deliveryOption={trip_area}
+        
         MainIcon={BsFillPinMapFill}
         elementOption="Accra"
       >
@@ -25,8 +25,8 @@ export default function PackageDestinationChoice() {
       <div className="w-full md:w-2/3 flex gap-3">
         <DeliveryChoices
           handleDeliveryOption={handleDeliveryChoice}
-          deliveryOption={destination_area}
-          CheckIcon={FiCheck}
+          deliveryOption={trip_area}
+          
           MainIcon={RiMapPinRangeLine}
           elementOption="Kumasi"
         >
@@ -35,8 +35,8 @@ export default function PackageDestinationChoice() {
 
         <DeliveryChoices
           handleDeliveryOption={handleDeliveryChoice}
-          deliveryOption={destination_area}
-          CheckIcon={FiCheck}
+          deliveryOption={trip_area}
+          
           MainIcon={RiTreasureMapFill}
           elementOption="Inter city"
         >

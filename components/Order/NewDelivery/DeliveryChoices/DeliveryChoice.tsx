@@ -1,11 +1,11 @@
 import Container from "../../../ui/container";
 import { IconType } from "react-icons/lib";
+import { FiCheck } from "react-icons/fi";
 interface ChoicesProps {
   handleDeliveryOption: (deliveryOption: string) => void;
   deliveryOption: string;
   elementOption: string;
   MainIcon: IconType;
-  CheckIcon: IconType;
   children?: React.ReactNode;
   className?: string,
 }
@@ -13,7 +13,6 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
   handleDeliveryOption,
   deliveryOption,
   MainIcon,
-  CheckIcon,
   elementOption,
   children,
   className,
@@ -49,7 +48,7 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
                 : "hidden"
             }`}
           >
-            <CheckIcon
+            <FiCheck
               className={`${deliveryOption !== elementOption && "hidden"}`}
             />
           </span>

@@ -22,12 +22,12 @@ export default function SendPackage() {
   const destinationAreaRef = useRef<any> (null);
   const deliveryDayRef = useRef<any> (null);
 
-  const {trip_medium, destination_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
+  const {trip_medium, trip_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
 
   
   
   let missingChoice = '';
-  !destination_area ? missingChoice = 'destination area' :  !trip_type ? missingChoice = 'delivery day' : !trip_medium ? missingChoice = 'delivery medium' : '';
+  !trip_area ? missingChoice = 'trip area' :  !trip_type ? missingChoice = 'delivery day' : !trip_medium ? missingChoice = 'delivery medium' : '';
   
   const handleLoading = ()=> {
     setIsLoading(true)
@@ -39,7 +39,7 @@ export default function SendPackage() {
       scrollToSection(deliveryMediumRef)
     }
 
-    if(missingChoice === 'destination area') {
+    if(missingChoice === 'trip area') {
       toastMessage = "Destination Area"
       scrollToSection(destinationAreaRef)
     }
@@ -97,7 +97,7 @@ export default function SendPackage() {
       </article>
       <article className="flex items-center justify-center flex-col md:4/6 w-5/6" >
         {
-          (!trip_medium || !destination_area || !trip_type ) &&
+          (!trip_medium || !trip_area || !trip_type ) &&
           <>
           <Button onClick={handleMissingChoice} className="md:w-4/6 w-full" >
             Continue
@@ -107,10 +107,10 @@ export default function SendPackage() {
         }
 
 {
-          (trip_medium && destination_area && trip_type ) &&
+          (trip_medium && trip_area && trip_type ) &&
           <Link href={'/order/new'} className="w-full flex items-center justify-center" onClick={handleLoading}>
           <Button className="md:w-4/6 w-full">
-            {isLoading ? <Loader color="red"/> : 'Continue'}
+            {isLoading ? <Loader /> : 'Continue'}
           </Button>
           
           </Link>

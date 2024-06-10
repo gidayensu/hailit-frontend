@@ -17,7 +17,7 @@ export default function DeliveryMediumChoice () {
         <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
-                CheckIcon={FiCheck}
+                
                 MainIcon={RiCaravanFill}
                 elementOption="Truck"
               >
@@ -27,7 +27,7 @@ export default function DeliveryMediumChoice () {
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
-                CheckIcon={FiCheck}
+                
                 MainIcon={AiFillCar}
                 elementOption="Car"
               >
@@ -36,7 +36,7 @@ export default function DeliveryMediumChoice () {
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
-                CheckIcon={FiCheck}
+                
                 MainIcon={FaMotorcycle}
                 elementOption="Motor"
               >

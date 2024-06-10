@@ -1,3 +1,4 @@
+'use client'
 //ui + icons
 import { Textarea } from "@/components/ui/textarea";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -13,14 +14,13 @@ import PackageTypes from "../Order/NewDelivery/PackageTypes/PackageTypes";
 
 //redux + next + react + helper
 import Link from "next/link";
-
+import { useState } from "react";
 import { useNewOrderSubmit } from "./hooks/useNewOrderSubmit";
 
 export default function NewOrderForm() {
   const {formMethods, handleSubmit, onDeliveryFormSubmit, scheduled, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, } = useNewOrderSubmit();
-  
-    
-    
+  const [pickUpLoading, setPickUpLoading] = useState<boolean>(false)
+  const [dropOffLoading, setDropOffLoading] = useState<boolean>(false)
   return (
     <FormProvider {...formMethods}>
       <form
@@ -61,6 +61,7 @@ export default function NewOrderForm() {
             className="h-14"
             name="calendar_schedule"
             calendar = {true}
+            schedule = {true }
           />
         </div>
             }
@@ -78,9 +79,9 @@ export default function NewOrderForm() {
             />
             </div>
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
-            <Link className="col-span-1" href={"/pickup-map"}>
+            <Link className="col-span-1" href={"/pickup-map"} onClick={()=> setPickUpLoading(true)}>
             <Button variant = {'outline'} className=" h-14">
-                <FaMapMarkerAlt className="text-lg" />
+                {pickUpLoading ? <Loader/> : <FaMapMarkerAlt className="text-lg" />}
               </Button>
             </Link>
           </div>
@@ -99,9 +100,9 @@ export default function NewOrderForm() {
             />
             </div>
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
-            <Link className="col-span-1" href={"/drop-off-map"}>
+            <Link className="col-span-1" href={"/drop-off-map"} onClick={()=>setDropOffLoading(true)}>
               <Button variant = {'outline'} className=" h-14">
-                <FaMapMarkerAlt className="text-lg" />
+              {dropOffLoading ? <Loader/> : <FaMapMarkerAlt className="text-lg" />}
               </Button>
             </Link>
           </div>
@@ -146,7 +147,7 @@ export default function NewOrderForm() {
           
           
             <Button type="submit" className="w-full h-14" disabled = {loading}>
-              {!loading ? 'Book' : <Loader color="red"/>} 
+              {!loading ? 'Book' : <Loader />} 
             </Button>
           
 {/* 
@@ -156,7 +157,7 @@ export default function NewOrderForm() {
               className="w-full h-14 cursor-not-allowed"
               disabled
             >
-              <Loader color="red" />
+              <Loader />
             </Button>
           )} */}
         </div>

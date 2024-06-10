@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 export default function OrderDetails() {
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="font-bold">Trip Details</h3>
+      <h3 className="font-bold">Delivery Details</h3>
       <div className=" flex flex-col items-center justify-center w-[330px] rounded-xl border-2 border-slate-300 h-auto dark:border-none dark:bg-[#2c2c29] p-4 gap-2">
         <div
           className={`grid grid-cols-10 w-[300px] text-sm items-center justify-center ${

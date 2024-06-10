@@ -10,6 +10,7 @@ export interface DashboardDetails {
     selectedUserId: string,
     selectedTripId: string,
     trackingOrder: boolean,
+    editingOrder: boolean,
     assignedDispatcherId: string, 
     assignedDispatcherName: string,
     assignedDispatcherVehicle: string,
@@ -41,7 +42,8 @@ export const initialState: DashboardDetails = {
     assignedDispatcherPhone: '',
     tripStatus: '',
     tripStage: 0,
-    previousSelectedTripId : ''
+    previousSelectedTripId : '',
+    editingOrder: false,
 }
 export const dashboardSlice = createSlice({
     name: 'dashboard',
@@ -65,6 +67,10 @@ export const dashboardSlice = createSlice({
             state.trackingOrder = action.payload           
             
         },
+        setEditingOrder (state, action:PayloadAction<boolean>) {
+            state.editingOrder = action.payload           
+            
+        },
         setAssignedDispatcher (state, action:PayloadAction<AssignedDispatcherDetails>) {
             state.assignedDispatcherId = action.payload.assignedDispatcherId
             state.assignedDispatcherName = action.payload.assignedDispatcherName
@@ -80,4 +86,4 @@ export const dashboardSlice = createSlice({
     }
 })
 
-export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher, setTripStatus, setPreviousSelectedTripId } = dashboardSlice.actions
+export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher, setTripStatus, setPreviousSelectedTripId, setEditingOrder } = dashboardSlice.actions

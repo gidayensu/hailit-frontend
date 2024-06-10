@@ -13,7 +13,8 @@ import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../SkeletonTable";
 import OrdersCard from "./OrdersCard";
 import { Modal } from "@/components/Shared/Modal";
-import { extractDateWithDayFromDate } from "@/lib/utils";
+import { extractShortDate, extractBeforeComma } from "@/lib/utils";
+
 
 import { useGetAllUsers } from "./hook/useGetAllUsers";
 import Pagination from "@/components/Shared/Pagination/Pagination";
@@ -21,7 +22,7 @@ import Pagination from "@/components/Shared/Pagination/Pagination";
 export function AllUsers() {
   const limit = 7;
   const [offset, setOffset] = useState<number> (limit);
-  const { data, users, isLoading, error, total_number_of_pages } = useGetAllUsers({limit, offset});
+  const { data, usersData, isLoading, error, total_number_of_pages } = useGetAllUsers({limit, offset});
 
   if (error) {
     return (
@@ -36,7 +37,7 @@ export function AllUsers() {
 
   return (
     <>
-    <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
+    <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       <Table className="w-full">
         <TableHeader>
           <TableRow>
@@ -57,8 +58,8 @@ export function AllUsers() {
         </TableHeader>
         <TableBody>
           {isLoading && <SkeletonTable rows={7} cells={8} />}
-          {data && users.length && users &&
-            users.map((user: any) => (
+          {data && usersData?.length && usersData &&
+            usersData.map((user: any) => (
               <TableRow key={user.user_id}>
                 <TableCell>
                   <Modal dialogTriggerElement={user.first_name} className="">
@@ -81,7 +82,7 @@ export function AllUsers() {
                   </div>
                 </TableCell>
                 <TableCell className="w-[100px]">
-                  {extractDateWithDayFromDate(user.date_created)}
+                  {extractShortDate(user.date_created)}
                 </TableCell>
 
                 <TableCell className="flex items-center justify-center">

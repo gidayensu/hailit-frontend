@@ -28,7 +28,7 @@ export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any,
         </Button>
         }
         {isLoading && <Button type="submit" className="w-full" disabled>
-          <Loader color="red"/>
+          <Loader />
         </Button>}
       </div>
            </>

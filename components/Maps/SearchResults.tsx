@@ -37,7 +37,7 @@ export default function SearchResults({locationType}: {locationType:LocationType
   return (
     <>
       {searchContainer && (
-        <div className="md:w-96 h-auto shadow-md  bg-white z-50 dark:bg-primary-dark text-black dark:text-slate-200 text-sm rounded-lg ">
+        <div className="md:w-96 h-auto shadow-md  bg-white z-50  text-secondary-dark  text-sm rounded-lg ">
           <span className="flex flex-col gap-2">
             {searchData && searchData.length > 0 &&
               searchData.map((data: any, index: number) => {

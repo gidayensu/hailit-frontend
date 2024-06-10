@@ -27,7 +27,7 @@ export default function OrderSummaryMin({
     
 
     //setting other icon colors
-   const deliveryIcon = ''
+   
     switch (packageType) {
       case("Electronics"): {
         deliveryTypeIcon = <PiMonitorFill className="text-teal-400 dark:text-teal-500"/> 
@@ -61,7 +61,7 @@ export default function OrderSummaryMin({
             {deliveryTypeIcon}
           </span>
           <span >
-              <h3 className="ml-2 font-bold text-s">{tripId}</h3>
+              <h3 className="ml-2 font-bold text-[13px]">{tripId}</h3>
             <p className="ml-2 text-[12px] text-slate-500">{tripRequestDate}</p>
           </span>
         </div>
@@ -83,7 +83,7 @@ export default function OrderSummaryMin({
             <p>{deliveryStatus}</p>
           </span>
           
-            <p className="font-bold">GHS {cost}</p>
+            <p className="font-bold text-[13px]">GHS {cost}</p>
           
           </div>
         

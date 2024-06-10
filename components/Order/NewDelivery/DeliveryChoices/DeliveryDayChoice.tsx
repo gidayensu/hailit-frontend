@@ -13,7 +13,7 @@ export default function   DeliveryDayChoice () {
         <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_type}
-                CheckIcon={FiCheck}
+                
                 MainIcon={RiTimerFlashFill}
                 elementOption="Today"
                 className="animate-in  zoom-in duration-50"
@@ -24,7 +24,7 @@ export default function   DeliveryDayChoice () {
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_type}
-                CheckIcon={FiCheck}
+                
                 MainIcon={RiTimer2Fill}
                 elementOption="Tomorrow"
                 className="animate-in zoom-in duration-150"
@@ -36,7 +36,7 @@ export default function   DeliveryDayChoice () {
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_type}
-                CheckIcon={FiCheck}
+                
                 MainIcon={RiCalendarScheduleFill}
                 elementOption="Schedule"
                 className="animate-in  zoom-in duration-300"

@@ -22,9 +22,9 @@ export default function Authentication () {
             </span>
           </div>
             <span className="text-7xl font-bold">Hello!</span>
-            <p className="text-3xl">Welcome to HailIt</p>
+            <p className="text-3xl">Welcome to Hailit</p>
             <p className="text-center mt-8">
-              Login or Sign Up to Request for affordable <br /> and fast deliveries in Accra and Kumasi
+              Move Goods With Speed
             </p>
           </div>
           <div className="">

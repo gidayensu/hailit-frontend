@@ -29,7 +29,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
             }
 
           </div>
-        {path.startsWith('/dispatcher') &&
+        {/* {path.startsWith('/dispatcher') &&
           <div
             className={`flex justify-center items-center text-[12px] font-medium w-20  ${
               trip.trip_status === "BOOKED"
@@ -46,9 +46,9 @@ export default function OrderSummary({ trip }: { trip:any }) {
             <p>{trip.trip_status}</p>
           </div>
           
-          }
+          } */}
           <div
-            className={`flex justify-center items-center text-sm font-bold w-20 -ml-12   ${
+            className={`flex justify-center items-center  mr-7 text-sm font-bold w-20   ${
               trip.trip_type === "TODAY"
                 ? "  text-primary-color"
                 : trip.trip_type === "TOMORROW"
@@ -63,34 +63,40 @@ export default function OrderSummary({ trip }: { trip:any }) {
           
         </div>
           <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10"/>
-          <div className="h-full flex  justify-between">
+          <div className=" flex  justify-between">
 {/* Location */}
-        <div className="flex flex-col justify-start h-full">
-          <span className="flex items-start  gap-2 -ml-2">
+        <div className="flex  justify-start -mt-4 gap-3">
+          <div className="flex flex-col gap-2 justify-between items-center mt-4 mb-8">
+
             <HiLocationMarker className="text-xl" />
-            <span className="flex flex-col">
+          <Separator
+            orientation="vertical"
+            className="bg-slate-800 h-1/5 dark:bg-slate-100"
+          />
+          <HiLocationMarker className="text-xl text-green-500" />
+          </div>
+          <div className="flex justify-between flex-col mt-4 mb-3 ">
+
+          <span className="flex items-start  gap-2 -ml-2">
+            <span className="flex flex-col w-44">
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm w-44 text-wrap truncate ">{trip.pickup_location}</p>
+                <p className="text-sm text-wrap truncate line-clamp-2 ">{trip.pickup_location}</p>
               
               
             </span>
           </span>
 
-          <Separator
-            orientation="vertical"
-            className="bg-slate-800 h-1/5 dark:bg-slate-100 -mt-8 mb-1"
-          />
           <span className="flex items-start gap-2 -ml-[9px] mt-2">
-            <HiLocationMarker className="text-xl text-green-500" />
             <span className="flex flex-col w-44">
                 <p className="font-bold text-sm">Delivery Point</p>
                 <p className="text-sm text-wrap truncate line-clamp-2">{trip.drop_off_location}</p>
               
             </span>
           </span>
+          </div>
         </div>  
         {/* Order date and time */}
-        <div className="flex flex-col justify-start h-full gap-2">
+        <div className="flex flex-col justify-start h-full gap-2 ">
           <span className="flex items-start  gap-2 -ml-2">
             
             <span className="flex gap-2">

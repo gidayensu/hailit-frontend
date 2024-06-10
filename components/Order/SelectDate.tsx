@@ -18,16 +18,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectDate() {
+export function SelectDate({schedule}: {schedule:boolean | undefined}) {
   const [date, setDate] = useState<Date>();
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          variant={"outline"}
+          variant={"empty"}
           className={cn(
-            "w-full h-14 justify-start text-left font-normal",
+            "w-full h-14 justify-start text-left font-normal border-black border dark:border-slate-300  border-opacity-40 dark:border-opacity-10 dark:bg-primary-dark",
             !date && "text-muted-foreground"
           )}
         >
@@ -51,10 +51,9 @@ export function SelectDate() {
             <SelectItem value="14">In two weeks</SelectItem>
           </SelectContent>
         </Select>
-        <div className="rounded-md border">
-          <Calendar mode="single" selected={date} onSelect={setDate} disabled={(date) =>
-                      date < new Date(new Date().setDate(new Date().getDate() + 1))
-
+        <div className="rounded-md ">
+          <Calendar mode="single" selected={date} onSelect={setDate} disabled={schedule ? (date) =>
+                      date < new Date(new Date().setDate(new Date().getDate() + 1)): (date)=>(typeof(date)==='number')
                     }/>
         </div>
       </PopoverContent>

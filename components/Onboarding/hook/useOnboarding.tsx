@@ -23,7 +23,7 @@ export const useOnboarding = ()=> {
     stage: "First" | "Second" | "Third" | "Complete"
   ) => {
     try {
-      setIsLoading(true)
+      
     if (stage === "First") {
       dispatch(
         setOnboardingStages({
@@ -35,16 +35,20 @@ export const useOnboarding = ()=> {
     }
 
     if (stage === "Second") {
+      setIsLoading(true)
       dispatch(
         setOnboardingStages({
           stageOne: true,
           stageTwo: true,
           stageThree: false,
         })
+        
       );
+      setIsLoading(false)
     }
 
     if (stage === "Third") {
+      setIsLoading(true)
       dispatch(
         setOnboardingStages({
           stageOne: true,
@@ -52,6 +56,7 @@ export const useOnboarding = ()=> {
           stageThree: true,
         })
       );
+      setIsLoading(false)
     }
 
     if (stage === "Complete") {
@@ -59,9 +64,9 @@ export const useOnboarding = ()=> {
       dispatch(setUserOnBoard(true));
       router.push("/");
     }
-  } finally {
-    setIsLoading(false)
-  }
+  } catch(err) {
+    console.error(err)
+  } 
   };
 
   return {authenticationState, chosenRole, isLoading, stageOne, stageTwo, stageThree, onboard, handleOnboardStage}

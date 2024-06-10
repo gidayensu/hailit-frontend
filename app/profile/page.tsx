@@ -17,38 +17,13 @@ export default function Profile() {
   const { authenticationState } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
 
-  // useEffect(()=> {
-
-  //   const  handleSignInWithGoogle = async (provider_token:string)=> {
-    
-    
-  //     const { data, error } = await supabase.auth.signInWithIdToken({
-  //       provider: 'google',
-  //       token: provider_token,
-  //     })
-  //     console.log({data})
-    
-  // }
-  //   const checkSession = async () => {
-  //     const user = await supabaseSession();
-      
-  //     console.log({user})
-        
-        
-        
-        
-  //       return ''
-        
-  //   };
-
-  //   checkSession();
-  
-    
-  // }, [])
-
-
   if (authenticationState) {
-    !onboard ? router.push("/onboarding") : user_role === "admin" ? router.push("/dashboard") : ''
+    !onboard ? router.push("/onboarding") 
+    : user_role === "admin" 
+    ? router.push("/dashboard") 
+    : user_role === "driver" || user_role === "rider" 
+    ? router.push('/dispatcher') 
+    : ''
   }
 
 
