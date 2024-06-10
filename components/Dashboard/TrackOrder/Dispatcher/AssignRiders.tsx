@@ -88,7 +88,7 @@ export default function Riders() {
                     rider.rider_id === dispatcherToBeAssigned.id &&
                     updateLoading && (
                       <Button className="w-20" disabled>
-                        <Loader color="red" />
+                        <Loader />
                       </Button>
                     )}
 

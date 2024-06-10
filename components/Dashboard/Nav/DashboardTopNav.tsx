@@ -28,9 +28,7 @@ export default function DashboardTopNav() {
   const iconsAndTextSpanClass =
     "flex items-center justify-center gap-2 relative";
 
-  const iconTextClass = "text-sm cursor-pointer ";
-
-  const divClass = "flex flex-col justify-center items-center";
+  
 
   return (
     <nav

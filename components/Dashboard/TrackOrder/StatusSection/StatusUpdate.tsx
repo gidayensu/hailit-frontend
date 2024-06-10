@@ -30,7 +30,7 @@ export default function StatusUpdate() {
           <span>
             {tripStatus === "Booked" && !loading ? <IoMdCheckmark /> : ""}
             {loading && localTripStatus.tripStatus === "Booked" ? (
-              <Loader color="grey" />
+              <Loader />
             ) : (
               ""
             )}
@@ -51,7 +51,7 @@ export default function StatusUpdate() {
           <span>
             {tripStatus === "Picked Up" && !loading ? <IoMdCheckmark /> : ""}
             {loading && localTripStatus.tripStatus === "Picked Up" ? (
-              <Loader color="grey" />
+              <Loader />
             ) : (
               ""
             )}
@@ -72,7 +72,7 @@ export default function StatusUpdate() {
           <span>
             {tripStatus === "In Transit" && !loading ? <IoMdCheckmark /> : ""}
             {loading && localTripStatus.tripStatus === "In Transit" ? (
-              <Loader color="grey" />
+              <Loader />
             ) : (
               ""
             )}
@@ -93,7 +93,7 @@ export default function StatusUpdate() {
           <span>
             {tripStatus === "Delivered" && !loading ? <IoMdCheckmark /> : ""}
             {loading && localTripStatus.tripStatus === "Delivered" ? (
-              <Loader color="grey" />
+              <Loader />
             ) : (
               ""
             )}
@@ -115,7 +115,7 @@ export default function StatusUpdate() {
             <span>
               {tripStatus === "Cancelled" && !loading ? <IoMdCheckmark /> : ""}
               {loading && localTripStatus.tripStatus === "Cancelled" ? (
-                <Loader color="grey" />
+                <Loader />
               ) : (
                 ""
               )}

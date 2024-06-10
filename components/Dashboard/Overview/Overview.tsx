@@ -8,7 +8,7 @@ export default function Overview() {
   return (
     <section className="space-y-6 w-full">
       <div className="flex flex-col md:flex-row  w-full gap-3">
-        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4">
+        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4 animate-in md:slide-in-from-right slide-in-from-bottom duration-100 ">
           <div className="flex justify-between">
             <div className="">
               <h3 className="font-bold"> DELIVERIES</h3>
@@ -25,7 +25,7 @@ export default function Overview() {
             </div>
           </div>
         </Container>
-        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4">
+        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4 md:slide-in-from-right slide-in-from-bottom duration-150">
           <div className="flex justify-between">
             <div className="">
               <h3 className="font-bold">REVENUE</h3>
@@ -42,7 +42,7 @@ export default function Overview() {
             </div>
           </div>
         </Container>
-        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4">
+        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4 md:slide-in-from-right slide-in-from-bottom duration-200">
           <div className="flex justify-between">
             <div className="">
               <h3 className="font-bold">PENDING</h3>
@@ -59,7 +59,7 @@ export default function Overview() {
             </div>
           </div>
         </Container>
-        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4">
+        <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4 md:slide-in-from-right slide-in-from-bottom duration-300">
           <div className="flex justify-between">
             <div className="">
               <h3 className="font-bold">DELIVERED</h3>
@@ -78,7 +78,7 @@ export default function Overview() {
         </Container>
       </div>
       <div className="flex flex-col gap-4 w-full ">
-        <div className="flex flex-col w-full   gap-2 p-4 h-full rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark dark:hover:border-slate-100 dark:text-slate-100  cursor-pointer">
+        <div className="flex flex-col w-full   gap-2 p-4 h-full rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
           <h3 className="font-bold">Most Recent Trips</h3>
           <RecentTripTable />
         </div>

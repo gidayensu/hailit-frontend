@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/lib/store/hooks"
 import { supabaseSignOut } from "@/lib/supabaseAuth"
 import { userLogout } from "@/lib/store/actions"
 import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
+import { PiMotorcycleFill } from "react-icons/pi";
 import DashboardSections from "./DashboardSections"
 import { Separator } from "@/components/ui/separator"
 import { RiFileListLine, RiSteering2Line } from "react-icons/ri"
@@ -22,9 +23,9 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
         <article
           className={`hidden lg:flex flex-col fixed  ${
             dashMin ? "w-[60px]" : "md:w-[150px] w-[60px]"
-          } py-4  px-2 bg-primary-color h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4`}
+          } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4`}
         >
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1 ">
             <div
               className="flex items-center justify-center  w-full h-8 rounded-lg  cursor-pointer "
               onClick={handleDashMin}
@@ -100,7 +101,15 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <RiSteering2Line className="text-2xl -scale-x-100" />
+              <PiMotorcycleFill className="text-2xl -scale-x-100" />
+            </DashboardSections>
+            <DashboardSections
+              dashMin={dashMin}
+              sectionName="Analytics"
+              onClickFunc={handleActiveSection}
+              activeSection={activeSection}
+            >
+              <PiMotorcycleFill className="text-2xl -scale-x-100" />
             </DashboardSections>
           </div>
 

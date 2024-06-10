@@ -73,7 +73,7 @@ export default function Drivers () {
                 }
                 {driver.driver_id !== assignedDispatcherId && driver.driver_id === dispatcherToBeAssigned.id && updateLoading &&
                 <Button className="w-20" disabled>
-                      <Loader color="red"/>
+                      <Loader />
                 </Button>
                 }
 

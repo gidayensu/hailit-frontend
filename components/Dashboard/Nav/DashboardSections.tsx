@@ -14,7 +14,7 @@ export default function DashboardSections({
     return (
       <div
         onClick={() => onClickFunc(sectionName)}
-        className={`flex h-10 p-2  items-center w-full hover:text-primary-color hover:bg-white rounded-md text-sm ${
+        className={`flex h-10 p-2  items-center w-full hover:text-primary-color hover:bg-white rounded-md text-[13px] ${
           dashMin ? "justify-center" : "md:justify-between justify-center"
         }  cursor-pointer ${
           activeSection === sectionName ? "bg-white text-primary-color" : ""

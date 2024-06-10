@@ -16,7 +16,7 @@ export default function OrdersCard({userId}:{userId:string}) {
             isLoading && 
             <div className="flex items-center justify-center">
 
-              <Loader color="red" />
+              <Loader />
             </div>
           }
           {

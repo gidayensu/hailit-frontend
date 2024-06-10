@@ -3,6 +3,7 @@ import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
+import { divClass } from "@/components/Nav/BottomNavBar";
 
 export default function UserOtherTrips({
   userId,
@@ -11,29 +12,32 @@ export default function UserOtherTrips({
   userId: string;
   tripId: string;
 }) {
-  const { data, isLoading, trips, handleTrackTrip } = useGetUserTrips(userId);
+  const { isLoading, trips, handleTrackTrip } = useGetUserTrips(userId);
   const otherTrips = trips?.filter((trip: any) => trip.trip_id !== tripId);
-
+  console.log({otherTrips})
   return (
+    <>
+    
     <div className="flex flex-col gap-2">
-          <h3 className="font-bold">USER OTHER RECENT TRIPS</h3>
+          <h3 className="font-bold">CLIENT RECENT TRIPS</h3>
       <div className="flex justify-between">
         
         <>
 
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-2 w-full ">
               {isLoading && (
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center mt-4">
                   <Loader color="red" />
                 </div>
               )}
-              {trips && (
+              {otherTrips?.length >0 && (
                 <>
                   {otherTrips.map((trip: any, index: number) => (
-                    <>
+                    <div key={index}>
                       {index <= 1 && (
-                        <div onClick={() => handleTrackTrip(trip.trip_id)}>
+                        <div key={trip.trip_id} onClick={() => handleTrackTrip(trip.trip_id)}>
                           <OrderSummaryMin
+                            
                             key={trip.trip_id}
                             cost={trip.trip_cost}
                             deliveryStatus={trip.trip_status}
@@ -45,20 +49,23 @@ export default function UserOtherTrips({
                           />
                         </div>
                       )}
-                    </>
+                    </div>
                   ))}
                 </>
-              )}
-              {!data && !isLoading && (
-                <NoData
-                  noDataText="User has made no other orders"
-                  textClassName="font-semibold text-center"
-                />
               )}
             </div>
 
         </>
       </div>
     </div>
+    {otherTrips?.length <1  && !isLoading && (
+      <div className="h-1/3 md:w-full md:mt-2 mt-4 flex lg:md-0 items-center justify-center ">
+        <NoData
+          noDataText="User has made no other orders"
+          textClassName="font-semibold text-center"
+        />
+      </div>
+    )}
+    </>
   );
 }

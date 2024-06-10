@@ -4,7 +4,7 @@ import { GoChecklist, GoX } from "react-icons/go";
 import { PiPackageLight, PiMotorcycleLight } from "react-icons/pi";
 import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
-import { FaRoute } from "react-icons/fa";
+import { MdOutlineWhereToVote } from "react-icons/md";
 import StatusUpdate from "./StatusUpdate";
 
 export default function StatusSection({
@@ -29,7 +29,7 @@ export default function StatusSection({
               variant={"empty"}
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
-                <FaRoute className="text-xl " /> <p>Update</p>
+                <p>Update</p>
               
             </Button>
           }
