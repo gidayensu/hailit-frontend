@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectDate({schedule}: {schedule:boolean | undefined}) {
+export function SelectDate({schedule}: {schedule?:boolean | undefined}) {
   const [date, setDate] = useState<Date>();
 
   return (

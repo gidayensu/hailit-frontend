@@ -39,7 +39,7 @@ export default function CustomOrder() {
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <h3 className="text-md font-medium">Pickup Date</h3>
-              <SelectDate />
+              <SelectDate schedule={false}/>
             </div>
             
             <div className="grid w-full max-w-sm items-center gap-1.5">
