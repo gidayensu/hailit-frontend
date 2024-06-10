@@ -24,7 +24,7 @@ export const useNewOrderSubmit = () => {
   const packageTypeRef = useRef<any>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const {package_type, trip_type, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
+  const {package_type, trip_type, trip_area, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
   const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
   const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
@@ -38,7 +38,7 @@ export const useNewOrderSubmit = () => {
   
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
     
-    console.log({data})
+  
     setLoading(true);
 
     if(!package_type) {
@@ -48,7 +48,8 @@ export const useNewOrderSubmit = () => {
         
       )
     }
-    const formDetails = {...data, package_type, trip_type, trip_medium};
+    console.log({trip_area})
+    const formDetails = {...data, package_type, trip_area, trip_type, trip_medium};
     addTrip(formDetails)
     
   }

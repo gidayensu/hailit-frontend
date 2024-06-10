@@ -10,13 +10,14 @@ const FormField:React.FC<FormFieldProps> = ({
     valueAsNumber,
     className,
     defaultValue,
-    calendar
+    calendar,
+    children
 }) => { 
     
     const { register, formState } = useFormContext();
     return (<>
-    {
-        !calendar &&
+    
+    {!calendar &&     
     <Input 
     type={type}
     placeholder={placeholder}
@@ -24,15 +25,8 @@ const FormField:React.FC<FormFieldProps> = ({
     className={`${className}`}
     defaultValue={defaultValue}
     
-    />
-    }
-{
-    calendar && 
-    <div>
-
-        <SelectDate/>
-    </div>
-}
+    />}
+    {children}
     
     {formState?.errors?.[name] && <span className="flex gap-1 items-center text-[14px] text-red-500 ease-in-out ">
      {formState?.errors?.[name]?.message?.toString()}

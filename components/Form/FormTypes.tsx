@@ -1,14 +1,19 @@
 import { z, ZodType } from 'zod';
 import { zPhone } from '../../lib/phoneValidation';
 
-export const NewOrderSchema:  ZodType<DeliveryDetails>  = z.object({
-  pickup_location: z.string().min(2,{message: "Required and must be 2 or more letters"}), 
-  drop_off_location: z.string().min(2,{message: "Required and must be 2 or more letters"}), 
+
+export const NewOrderSchema: ZodType<DeliveryDetails> = z.object({
+  pickup_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
+  drop_off_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
   sender_number: zPhone,
   recipient_number: zPhone, 
-  package_value: z.optional(z.number().min(1, {message: "Package value should be GHS 1 or more"})),
-  additional_information: z.optional(z.string())
-})
+  package_value: z.optional(z.number().min(1, { message: "Package value should be GHS 1 or more" })),
+  additional_information: z.optional(z.string()),
+  pickup_date: z.optional(z.string().refine(val => !isNaN(Date.parse(val)), { message: "Must be a valid date" })),
+  delivery_date: z.optional(z.string().refine(val => !isNaN(Date.parse(val)), { message: "Must be a valid date" }))
+});
+
+
 
 
 export const UserSchema: ZodType<User> = z.object({
@@ -79,6 +84,8 @@ export type ValidFieldNames =
 | "recipient_number"
 | "password"
 | "license_number"
+| "pickup_date"
+| "delivery_date"
 | "confirm_password";
 
 export type FormFieldProps = {
@@ -89,6 +96,8 @@ export type FormFieldProps = {
     className: string;
     defaultValue?: string;
     calendar? : boolean;
+    schedule? : boolean;
+    children? : React.ReactNode
     
   };
 

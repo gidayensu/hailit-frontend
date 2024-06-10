@@ -14,7 +14,7 @@ export default function MapModal({modalRef, closeModal, handleSelectedLocation, 
   const {dropOffLocationName, pickUpLocationName}  = useAppSelector(state=>state.map);
   return (
     
-      <dialog ref={modalRef} className="animate-in zoom-in-50  ease-in-out    w-2/3 md:w-1/6  rounded-2xl h-1/3 md:h-[360px] p-4  backdrop:bg-secondary-dark backdrop:opacity-80">
+      <dialog ref={modalRef} className="animate-in zoom-in duration-100  ease-in-out    w-2/3 md:w-1/4  rounded-2xl h-2/4 md:h-[360px] p-4  backdrop:bg-secondary-dark backdrop:opacity-80">
         <div className="w-full flex items-end justify-end">
 
         <div className="fontbold cursor-pointer  flex justify-center items-center h-6 w-6 rounded-full bg-red-200 text-red-400" onClick={closeModal}><RxCross2 />
@@ -37,8 +37,8 @@ export default function MapModal({modalRef, closeModal, handleSelectedLocation, 
         <div className="flex flex-col  gap-2 w-full">
           <div className="">
 
-          <h2 className="text-center leading-5 text-sm mb-2 animate-in slide-in-from-bottom">Set <b>{locationType === "drop off" ? dropOffLocationName : pickUpLocationName }</b> as your {locationType} location</h2>
-          <h3 className="text-center text-[12px] text-slate-500 animate-in slide-in-from-bottom delay-20">This is where your item will be {locationType === "drop off" ? 'delivered': 'picked up'}</h3>
+          <h2 className="text-center leading-5 text-sm mb-2 animate-in slide-in-from-bottom duration-100">Set <b>{locationType === "drop off" ? dropOffLocationName : pickUpLocationName }</b> as your {locationType} location</h2>
+          <h3 className="text-center text-[12px] text-slate-500 animate-in slide-in-from-bottom duration-150">This is where your item will be {locationType === "drop off" ? 'delivered': 'picked up'}</h3>
           {/* <LoaderCircle className="animate-spin "/> */}
           </div>
           <div className="mt-4 w-full flex flex-col gap-2 items-center justify-center">
