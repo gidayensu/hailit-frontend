@@ -67,9 +67,9 @@ export default function ProfilePageDetails() {
           </div>
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col items-center gap-1 text-white">
-              <h2 className="text-2xl font-semibold">
-                {first_name + " " + last_name}
-              </h2>
+              <p className="text-2xl font-semibold">
+                {`${first_name} ${last_name}`}
+              </p>
               <p className={iconTextClass}>{email}</p>
               <p className={iconTextClass}> </p>
             </div>
@@ -83,6 +83,7 @@ export default function ProfilePageDetails() {
 
         <div className={iconsAndTextMainContainerClass}>
           {!path.startsWith("/dispatcher") && (
+            <>
             <Link href={"/profile/all-orders"}>
               <ProfileNonDialogItem
                 IconFill={RiFileListFill}
@@ -91,8 +92,6 @@ export default function ProfilePageDetails() {
                 <p className="text-sm"> Orders </p>
               </ProfileNonDialogItem>
             </Link>
-          )}
-
           <Link href={"/profile/edit-profile"}>
             <ProfileNonDialogItem
               IconFill={PiUserCircleFill}
@@ -101,6 +100,9 @@ export default function ProfilePageDetails() {
               <p className="text-sm"> Edit profile </p>
             </ProfileNonDialogItem>
           </Link>
+            </>
+          )}
+
 
           <ProfileDialog
             IconFill={RiLockPasswordFill}

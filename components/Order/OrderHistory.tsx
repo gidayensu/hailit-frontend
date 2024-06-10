@@ -64,7 +64,7 @@ export default function OrderHistory() {
               <Link
                 onClick={()=>setTripLoading(true)}
                 key={trip.trip_id}
-                href={path.startsWith('/dispatcher')? `dispatcher/trips/${trip.trip_id}` :`track/${trip.trip_id}`}
+                href={path.startsWith('/dispatcher')? `/dispatcher/trips/${trip.trip_id}` :`track/${trip.trip_id}`}
                 className={`w-full relative ${
                   tripLoading ? "opacity-30" : ""
                 }`}

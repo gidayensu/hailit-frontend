@@ -4,7 +4,7 @@ export default function MiddleSectionContainer({
   className,
 }: {
   children: any;
-  className: string;
+  className?: string;
 }) {
   return (
     <div

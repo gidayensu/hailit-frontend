@@ -4,7 +4,7 @@ export default function TopSectionContainer({
   className,
   children,
 }: {
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }) {
 
