@@ -45,7 +45,7 @@ export default function Onboarding() {
                     }}
                     disabled = {!chosenRole || isLoading}
                   >
-                    {isLoading ? <Loader color="red"/> : "Next"}
+                    {isLoading ? <Loader /> : "Next"}
                   </Button>
                 )}                
               </div>
@@ -72,7 +72,7 @@ export default function Onboarding() {
                   type="submit"
                   disabled = {isLoading}
                 >
-                  {isLoading ? <Loader color="red"/>:'Next'}
+                  {isLoading ? <Loader />:'Next'}
                 </Button>
                 
               </div>

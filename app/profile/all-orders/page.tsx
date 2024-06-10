@@ -1,10 +1,7 @@
 'use client'
-import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
-import { useState } from "react";
-import type { Deliveries } from "@/app/page";
+import OrderHistory from "@/components/Order/OrderHistory";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import OrderHistory from "@/components/Order/OrderHistory";
 
 export default function AllOrders () {
     

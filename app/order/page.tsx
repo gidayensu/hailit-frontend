@@ -31,7 +31,7 @@ export default function NewOrder() {
       deliveryMedium: false,
     });
 
-    const {destination_area, trip_medium, trip_type} = useAppSelector(state=>state.deliveryChoices)
+    const {trip_area, trip_medium, trip_type} = useAppSelector(state=>state.deliveryChoices)
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     
@@ -58,7 +58,7 @@ export default function NewOrder() {
         break
       }
       case(2) : {
-        if(!destination_area) {
+        if(!trip_area) {
           return handleMissingChoice("Destination Area")
         } else 
         setDeliveryChoicesStage({
@@ -70,7 +70,7 @@ export default function NewOrder() {
       }
       case(3) : {
 
-        (destination_area && !trip_type) ? handleMissingChoice("Delivery Day") 
+        (trip_area && !trip_type) ? handleMissingChoice("Delivery Day") 
         : setDeliveryChoicesStage({
             destination: true,
             deliveryDay: true,
@@ -81,7 +81,7 @@ export default function NewOrder() {
       
 
       case(4): {
-        if(destination_area && trip_type && !trip_medium){
+        if(trip_area && trip_type && !trip_medium){
           handleMissingChoice("Delivery Medium") }
           else {
             setIsLoading(true)
@@ -96,7 +96,7 @@ export default function NewOrder() {
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-          <span className="text-5xl font-bold ">Trip Details</span>
+          <span className="text-5xl font-bold ">Delivery Details</span>
           <p className="text-lg">Select city, day of delivery, and vehicle</p>
         </TopSectionContainer>
 

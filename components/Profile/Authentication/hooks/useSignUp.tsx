@@ -17,15 +17,17 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SignUpForm, SignUpSchema } from "@/components/Form/FormTypes";
 //supabase
-import { supabaseSignUp } from "@/lib/supabaseAuth";
+import { supabaseSignUp, googleSupabaseSignIn } from "@/lib/supabaseAuth";
 //types
 import type { Inputs } from "@/lib/supabaseAuth";
 
-export const useSignUp = () => {
+
+
+export const useSignUp =  () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
   
-    const [addUser, { data, error: addUserError }] = useLazyAddUserQuery();
+    const [addUser, { data:signUpData, error: addUserError }] = useLazyAddUserQuery();
   
     const [dataFetchError, setDataFetchError] = useState({
       error: false,
@@ -34,7 +36,8 @@ export const useSignUp = () => {
   
     const [isLoading, setIsLoading] = useState<boolean>(false);
   
-    
+    //Google SignUp. Runs only if the user has not been registered in the user table (not auth table)
+    const googleSignUp:any = (data:string)=> addUser(data)
   
     //Form
   
@@ -53,6 +56,7 @@ export const useSignUp = () => {
       try {
         setIsLoading(true);
         const signUpData = await supabaseSignUp(userData);
+
         if (signUpData && signUpData.error) {
           console.log(signUpData.error);
           setIsLoading(false);
@@ -67,7 +71,7 @@ export const useSignUp = () => {
             user_id: signUpData.user_id,
             email: signUpData.email,
           });
-  
+
           if (addUserError) {
             return {
               error: "Error occurred",
@@ -77,8 +81,8 @@ export const useSignUp = () => {
         }
       } catch (err) {}
     };
-    if (data) {
-      const { user } = data;
+    if (signUpData) {
+      const { user } = signUpData;
       dispatch(
         setUserState({
           user_id: user.user_id,
@@ -89,18 +93,19 @@ export const useSignUp = () => {
           onboard: user.onboard,
         })
       );
-  
       const onboard = user.onboard;
       dispatch(setAuthState(true));
-  
       onboard ? router.push("/profile") : router.push("/onboarding");
     }
+
     return {
       onSignUpSubmit,
       formMethods,
       handleSubmit,
       dataFetchError,
       isLoading,
+      googleSignUp,
+      googleSupabaseSignIn
     };
   };
   
