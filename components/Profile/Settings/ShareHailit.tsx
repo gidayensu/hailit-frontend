@@ -12,15 +12,25 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import Container from "@/components/ui/container";
-
+import { copyToClipBoard } from "@/lib/utils";
 import { FaFacebook } from "react-icons/fa";
-
+import toast, {Toaster} from "react-hot-toast";
 export default function ShareHailit() {
   const shareUrl = "https://hailit-frontend.vercel.app";
   const title = "Hailit";
   const inputAndLabelDivClass = "w-full  items-center";
   const labelClass = "text-md font-medium mb-2";
 
+  const handleCopyLink = (link:string)=> {
+    copyToClipBoard(link)
+    toast.success(
+      
+      <p className=" text-[13px]">
+        <b>Hailit</b> Link Copied!
+              </p>
+    
+      )
+  }
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full space-y-6 p-5 ">
@@ -67,9 +77,11 @@ export default function ShareHailit() {
                 https://hailit-frontend.vercel.app
               </p>
             </Container>
-            <Container className="flex items-center justify-center text-lg w-1/4 rounded-lg">
+            <Container className="flex items-center justify-center text-lg w-1/4 rounded-lg" onClickFunc={()=>handleCopyLink("https://hailit-frontend.vercel.app")}>
+
               <IoCopyOutline />
             </Container>
+            <Toaster/>
           </div>
         </div>
       </div>

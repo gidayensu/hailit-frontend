@@ -1,7 +1,7 @@
 //icons
 
-import { IoDocumentText, IoDocumentTextOutline } from "react-icons/io5";
-
+import { IoDocumentText, IoDocumentTextOutline, IoShirtOutline, IoShirt } from "react-icons/io5";
+import { MdLineWeight, MdOutlineLineWeight } from "react-icons/md";
 import {
   PiMonitorFill,
   PiMonitorLight,
@@ -16,9 +16,9 @@ import { RiArchiveStackFill, RiArchiveStackLine } from "react-icons/ri";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setPackageType } from "@/lib/store/slice/deliveryChoicesSlice";
 
-import { PackageType } from "./PackageType";
+import { ItemsSelector } from "../../../Shared/ItemsSelector";
 export default function PackageTypes () {
-
+  
   const { package_type } = useAppSelector(state=>state.deliveryChoices);
 
   const dispatch = useAppDispatch();
@@ -28,47 +28,53 @@ export default function PackageTypes () {
   }
     return (
         <>
-          <PackageType
+          <ItemsSelector
             FillIcon={PiMonitorFill}
             LightIcon={PiMonitorLight}
-            packageType="Electronics"
-            selectedPackageType={package_type}
+            itemType="Electronics"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
-          <PackageType
+          <ItemsSelector
             FillIcon={IoDocumentText}
             LightIcon={IoDocumentTextOutline}
-            packageType="Documents"
-            selectedPackageType={package_type}
+            itemType="Documents"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
-          <PackageType
-            FillIcon={PiPackageFill}
-            LightIcon={PiPackageLight}
-            packageType="Clothes"
-            selectedPackageType={package_type}
+          <ItemsSelector
+            FillIcon={IoShirt}
+            LightIcon={IoShirtOutline}
+            itemType="Clothes"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
-          <PackageType
-            FillIcon={RiArchiveStackFill}
-            LightIcon={RiArchiveStackLine}
-            packageType="Bulky Items"
-            selectedPackageType={package_type}
+          <ItemsSelector
+            FillIcon={MdLineWeight}
+            LightIcon={MdOutlineLineWeight}
+            itemType="Bulky Items"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
-          <PackageType
+          <ItemsSelector
             FillIcon={PiWineFill}
             LightIcon={PiWineLight}
-            packageType="Fragile"
-            selectedPackageType={package_type}
+            itemType="Fragile"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
-          <PackageType
+          <ItemsSelector
             FillIcon={PiPackageFill}
             LightIcon={PiPackageLight}
-            packageType="Others"
-            selectedPackageType={package_type}
+            itemType="Others"
+            selectedItemType={package_type}
             onClickFunc={handlePackageType}
+            width="w-24"
           />
 
         </>

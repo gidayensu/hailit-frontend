@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { SmallLoader } from "../Shared/Loader";
+
 export default function TrackPackage () {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
@@ -25,7 +26,7 @@ export default function TrackPackage () {
         <div className="w-full font-bold rounded-xl flex items-center justify-end gap-2">
             <Input className="flex gap-2 items-center relative h-9 w-60 md:w-96 md:h-12 justify-center rounded-full text-secondary-dark dark:text-white text-[12px]" placeholder="Trip ID" ref={inputRef}/>
             <Button  className="absolute border-none mr-1 p-1 h-7 w-16 md:w-28 md:h-10  text-white rounded-full text-[13px]" onClick={handleTripTrack}>
-              { isLoading ? <SmallLoader color="red"/> : "Track"
+              { isLoading ? <SmallLoader/> : "Track"
               }
               </Button>                  
           
