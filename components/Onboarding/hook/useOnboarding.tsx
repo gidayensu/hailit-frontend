@@ -64,8 +64,7 @@ export const useOnboarding = ()=> {
       dispatch(setUser({
         ...user, onboard: true, user_role: chosenRole
       }))
-      
-      router.push("/");
+      chosenRole === "rider" ? router.push("/dispatcher"): router.push("/");
     }
   } catch(err) {
     console.error(err)
