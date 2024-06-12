@@ -18,9 +18,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectDate({schedule}: {schedule?:boolean | undefined}) {
+export function SelectDate({schedule, select, onSelect, datePurpose}: {datePurpose:string | undefined, schedule:boolean | undefined, select:any, onSelect:any}) {
   const [date, setDate] = useState<Date>();
-
+    console.log({select, onSelect})
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -32,11 +32,11 @@ export function SelectDate({schedule}: {schedule?:boolean | undefined}) {
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Choose date for delivery</span>}
+          {select ? format(select, "PPP") : <span>Choose date for {datePurpose}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="flex w-auto flex-col space-y-2 p-2">
-        <Select
+       {schedule && <Select
           onValueChange={(value) =>
             setDate(addDays(new Date(), parseInt(value)))
           }
@@ -50,11 +50,9 @@ export function SelectDate({schedule}: {schedule?:boolean | undefined}) {
             <SelectItem value="7">In a week</SelectItem>
             <SelectItem value="14">In two weeks</SelectItem>
           </SelectContent>
-        </Select>
-        <div className="rounded-md ">
-          <Calendar mode="single" selected={date} onSelect={setDate} disabled={schedule ? (date) =>
-                      date < new Date(new Date().setDate(new Date().getDate() + 1)): (date)=>(typeof(date)==='number')
-                    }/>
+        </Select>}
+        <div className="rounded-md">
+          <Calendar mode="single" selected={select} onSelect={onSelect} />
         </div>
       </PopoverContent>
     </Popover>

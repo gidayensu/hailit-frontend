@@ -2,15 +2,35 @@ import { z, ZodType } from 'zod';
 import { zPhone } from '../../lib/phoneValidation';
 
 
-export const NewOrderSchema: ZodType<DeliveryDetails> = z.object({
+export const NewOrderSchema: ZodType<OrderDetails> = z.object({
   pickup_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
   drop_off_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
   sender_number: zPhone,
   recipient_number: zPhone, 
-  package_value: z.optional(z.number().min(1, { message: "Package value should be GHS 1 or more" })),
+  package_value: z.optional(z.string().min(1, { message: "Package value should be GHS 1 or more" })),
   additional_information: z.optional(z.string()),
-  pickup_date: z.optional(z.string().refine(val => !isNaN(Date.parse(val)), { message: "Must be a valid date" })),
-  delivery_date: z.optional(z.string().refine(val => !isNaN(Date.parse(val)), { message: "Must be a valid date" }))
+  schedule_date: z.optional(z.date({
+    required_error: "Pickup date is required.",
+  })),
+  
+  delivery_date: z.date({
+    required_error: "Delivery date is required.",
+  })
+});
+export const UpdateOrderSchema: ZodType<UpdateOrderDetails> = z.object({
+  pickup_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
+  drop_off_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
+  sender_number: zPhone,
+  recipient_number: zPhone, 
+  package_value: z.optional(z.string().min(1, { message: "Package value should be GHS 1 or more" })),
+  additional_information: z.optional(z.string()),
+  pickup_date: z.date({
+    required_error: "Pickup date is required.",
+  }),
+  
+  delivery_date: z.date({
+    required_error: "Delivery date is required.",
+  })
 });
 
 
@@ -62,14 +82,27 @@ export interface User {
   license_number?: string | null | undefined
 }
 
-export interface DeliveryDetails {
+export interface OrderDetails {
 
   pickup_location: string,
   drop_off_location: string,
   sender_number: string,     
   recipient_number: string,
-  package_value?: number ,
-  additional_information?: string 
+  package_value?: string ,
+  additional_information?: string,
+  schedule_date?: Date,
+  
+}
+export interface UpdateOrderDetails {
+
+  pickup_location: string,
+  drop_off_location: string,
+  sender_number: string,     
+  recipient_number: string,
+  package_value?: string ,
+  additional_information?: string,
+  pickup_date?: Date,
+  drop_off_date?: Date
 }
 
 export type ValidFieldNames =
@@ -79,7 +112,7 @@ export type ValidFieldNames =
 | "phone_number"
 | "password"
 | "drop_off_location"
-| "pick_up_location"
+| "pickup_location"
 | "sender_number"
 | "recipient_number"
 | "password"
@@ -89,15 +122,16 @@ export type ValidFieldNames =
 | "confirm_password";
 
 export type FormFieldProps = {
-    type: string;
-    placeholder: string;
-    name: ValidFieldNames | any;
+    type?: string;
+    placeholder?: string;
+    name: ValidFieldNames;
     valueAsNumber?: boolean;
-    className: string;
+    className?: string;
     defaultValue?: string;
     calendar? : boolean;
     schedule? : boolean;
     children? : React.ReactNode
+    datePurpose?: string
     
   };
 
