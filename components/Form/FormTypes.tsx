@@ -107,6 +107,8 @@ export interface UpdateOrderDetails {
 
 export type ValidFieldNames =
 | "email"
+| "first_name"
+| "last_name"
 | "package_value"
 | "additional_information"
 | "phone_number"
