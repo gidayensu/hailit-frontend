@@ -43,7 +43,7 @@ export default function TrackOrderItem({trip, userId}: {trip:any, userId:string 
           <DispatcherCard
             firstName={dispatcher.first_name}
             lastName={dispatcher.last_name}
-            tripMedium={trip.trip_medium}
+            phoneNumber={dispatcher.phone_number}
             vehicleName={dispatcher.vehicle?.vehicle_name}
             vehicleNumber={dispatcher.vehicle?.plate_number}
           />
