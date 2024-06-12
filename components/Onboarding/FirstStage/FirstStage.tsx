@@ -29,7 +29,7 @@ export default function FirstStage () {
             customer: false,
             dispatcher: true,
           }));
-          dispatch(setChosenRole("dispatcher"))
+          dispatch(setChosenRole("rider"))
         }
       };
     return (

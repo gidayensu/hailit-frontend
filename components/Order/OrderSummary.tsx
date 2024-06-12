@@ -3,9 +3,11 @@ import { Separator } from "@/components/ui/separator";
 import { extractDateWithDayFromDate, extractTimeFromDate } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { HiLocationMarker } from "react-icons/hi";
+import { useAppSelector } from "@/lib/store/hooks";
+
 
 export default function OrderSummary({ trip }: { trip:any }) {
-  const {tripRequestDate, tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip)
+  const { tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip);
   
   const path = usePathname();
   return (

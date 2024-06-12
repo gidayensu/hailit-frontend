@@ -25,19 +25,12 @@ export const userSlice = createSlice({
     name: "user state",
     initialState,
     reducers: {
-        setUserState(state, action:PayloadAction<User>) {
+        setUser(state, action:PayloadAction<User>) {
             
-            state.user_id = action.payload.user_id
-            state.first_name = action.payload.first_name
-            state.last_name = action.payload.last_name
-            state.email = action.payload.email
-            state.user_role = action.payload.user_role
-            state.onboard = action.payload.onboard
+            return action.payload
             
         },
-        setUserOnBoard(state, action:PayloadAction<boolean>) {
-            state.onboard = action.payload
-        },
+        
 
         logUserOut(state) {
             state.user_id = ''
@@ -51,4 +44,4 @@ export const userSlice = createSlice({
 
 })
 
-export const {setUserState, logUserOut, setUserOnBoard} = userSlice.actions;
+export const {setUser, logUserOut} = userSlice.actions;

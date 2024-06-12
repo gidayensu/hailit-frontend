@@ -58,7 +58,7 @@ export default function CustomerProfile() {
         </div>
         {isError && <p className="text-red"> Error Occurred</p>}
 
-        {chosenRole === "dispatcher" && (
+        {chosenRole === "rider" && (
           <div className={inputAndLabeClass}>
             <h3 className={labelClass}>License Number</h3>
             <FormField

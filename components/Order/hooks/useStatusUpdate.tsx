@@ -1,13 +1,16 @@
 "use client";
 import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setPreviousSelectedTripId, setTripStatus, TripStatus } from "@/lib/store/slice/dashboardSlice";
-import { useState } from "react";
+import { setPreviousSelectedTripId, setTripStatus,TripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
+
+import { useCallback, useState } from "react";
+
 
 export const useStatusUpdate = ()=> {
-  const [localTripStatus, setLocalTripStatus] = useState<TripStatus>({
-    tripStage: 0,
-    tripStatus: "",
+  
+  const [localTripStatus, setLocalTripStatus] = useState<TripStatusandStage>({
+    tripStage: 1,
+    tripStatus: "Booked",
   });
 
   const [loading, setIsLoading] = useState<boolean>(false);
@@ -18,13 +21,15 @@ export const useStatusUpdate = ()=> {
     (state) => state.dashboard
   );
 
+
+
   const [
     updateTrip,
     { data: updateData, isLoading: updateLoading, error: updateError },
   ] = useLazyUpdateTripQuery();
 
-
-  const handleUpdateTrip =  (statusDetails: TripStatus) => {
+  
+  const handleUpdateDashboardTrip = useCallback((statusDetails: TripStatusandStage) => {
     setLocalTripStatus({
       tripStatus: statusDetails.tripStatus,
       tripStage: statusDetails.tripStage,
@@ -38,11 +43,11 @@ export const useStatusUpdate = ()=> {
         trip_stage: statusDetails.tripStage,
       },
     });
-  };
-
+  }
+, [dispatch, selectedTripId]) 
   if (
-    updateData &&
-    updateData.trip &&
+    
+    updateData?.trip &&
     tripStatus !== localTripStatus.tripStatus
   ) {
     dispatch(
@@ -55,6 +60,6 @@ export const useStatusUpdate = ()=> {
     setIsLoading(false);
   }
 
-  return {updateData, handleUpdateTrip, loading, localTripStatus,tripStatus, tripStage, updateLoading, updateError}
+  return {updateData, handleUpdateDashboardTrip, updateTrip, loading, localTripStatus,tripStatus, tripStage, updateLoading, updateError}
 
 }

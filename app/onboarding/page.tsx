@@ -91,7 +91,7 @@ export default function Onboarding() {
                   }}
                 >
                   {
-                  chosenRole === "dispatcher" ? "Start Earning" :
+                  chosenRole === "rider" ? "Start Earning" :
                   'Send a Package'
                   }
                 </Button>

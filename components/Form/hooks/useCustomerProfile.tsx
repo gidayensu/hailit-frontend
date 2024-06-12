@@ -7,7 +7,7 @@ import {
   CustomerDetails,
   setOnboardingStages,
 } from "@/lib/store/slice/onBoardingSlice";
-import { setUserState } from "@/lib/store/slice/userSlice";
+import { setUser } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User, UserSchema } from "../FormTypes";
@@ -37,7 +37,7 @@ export const useCustomerProfile = () => {
   ) => {
     try {
       let userRole = user_role;
-      if (chosenRole && chosenRole === "dispatcher") {
+      if (chosenRole && chosenRole === "rider") {
         userRole = "rider";
       }
 
@@ -64,7 +64,7 @@ export const useCustomerProfile = () => {
   if (data && data.user) {
     const { user } = data;
     dispatch(
-      setUserState({
+      setUser({
         user_id: user.user_id,
         first_name: user.first_name,
         last_name: user.last_name,

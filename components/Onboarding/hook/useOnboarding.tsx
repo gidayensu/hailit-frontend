@@ -8,7 +8,7 @@ import {
     setBoardingCompletion,
     setOnboardingStages,
 } from "@/lib/store/slice/onBoardingSlice";
-import { setUserOnBoard } from "@/lib/store/slice/userSlice";
+import { setUser } from "@/lib/store/slice/userSlice";
 
 export const useOnboarding = ()=> {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -18,7 +18,7 @@ export const useOnboarding = ()=> {
   const { authenticationState } = useAppSelector((state) => state.auth);
   const { onboard, chosenRole, stageOne, stageTwo, stageThree } =
     useAppSelector((state) => state.onBoarding);
-
+  const user = useAppSelector(state=>state.user)
   const handleOnboardStage = (
     stage: "First" | "Second" | "Third" | "Complete"
   ) => {
@@ -61,7 +61,10 @@ export const useOnboarding = ()=> {
 
     if (stage === "Complete") {
       dispatch(setBoardingCompletion(true));
-      dispatch(setUserOnBoard(true));
+      dispatch(setUser({
+        ...user, onboard: true, user_role: chosenRole
+      }))
+      
       router.push("/");
     }
   } catch(err) {

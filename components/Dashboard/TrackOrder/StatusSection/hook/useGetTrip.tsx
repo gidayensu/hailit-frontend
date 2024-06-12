@@ -104,7 +104,7 @@ export interface Trip {
   trip_request_date: string;
   trip_commencement_date: null | string;
   trip_completion_date: null | string;
-  trip_cost: string;
+  trip_cost: number;
   payment_status: boolean;
   dispatcher_rating: null | number;
   rated: boolean;

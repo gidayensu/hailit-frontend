@@ -16,7 +16,7 @@ import { useRef, useState } from "react";
 
 //interface
 
-import { NewOrderSchema, DeliveryDetails } from '../FormTypes';
+import { NewOrderSchema, OrderDetails } from '../FormTypes';
 
 export const useNewOrderSubmit = () => {
 
@@ -30,7 +30,7 @@ export const useNewOrderSubmit = () => {
   const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
  
 
-  const formMethods = useForm<DeliveryDetails>({
+  const formMethods = useForm<OrderDetails>({
     resolver: zodResolver(NewOrderSchema)
   });
   const {register, handleSubmit, formState: {errors}, setError } = formMethods;
