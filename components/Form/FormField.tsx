@@ -1,13 +1,34 @@
 import React from "react";
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import { Input } from "../ui/input";
 import { FormFieldProps } from "./FormTypes";
 import { SelectDate } from "../Order/SelectDate";
-const FormField:React.FC<FormFieldProps> = ({
+ export const CalendarField:React.FC<FormFieldProps> = ({
+    
+    name,
+    datePurpose,
+}) => { 
+    
+    const { register, formState } = useFormContext();
+    return (<>
+    <Controller
+    name={name}
+    
+    render={({ field }) => (
+        <SelectDate schedule={false} select = {field.value} onSelect = {field.onChange} datePurpose={datePurpose}/>
+      )}
+    />
+    
+    {formState?.errors?.[name] && <span className="flex gap-1 items-center text-[14px] text-red-500 ease-in-out ">
+     {formState?.errors?.[name]?.message?.toString()}
+
+    
+    </span>}
+    </>)
+}
+export  const FormField:React.FC<FormFieldProps> = ({
     type,
     name,
-    placeholder, 
-    valueAsNumber,
     className,
     defaultValue,
     calendar,
@@ -17,20 +38,21 @@ const FormField:React.FC<FormFieldProps> = ({
     const { register, formState } = useFormContext();
     return (<>
     
-    {!calendar &&     
+        
     <Input 
     type={type}
-    placeholder={placeholder}
-    {...register(name, {valueAsNumber})}
+    
+    {...register(name,)}
     className={`${className}`}
     defaultValue={defaultValue}
     
-    />}
-    {children}
+    />
+    
     
     {formState?.errors?.[name] && <span className="flex gap-1 items-center text-[14px] text-red-500 ease-in-out ">
      {formState?.errors?.[name]?.message?.toString()}
     </span>}
     </>)
 }
-    export default FormField
+
+export default FormField
