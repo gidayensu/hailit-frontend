@@ -38,10 +38,14 @@ export default function DispatcherCard({firstName, lastName, vehicleName, vehicl
           <FaWhatsapp className="text-[20px] text-slate-50" />
         </span>
       </Link>
+      <Link href={`tel:${phoneNumber}`} className="w-full">
+      
         <span className=" bg-primary-color h-10 w-10 rounded-full flex items-center justify-center">
           <LuPhone className="text-[20px] text-slate-50" />
         </span>
+      </Link>
       </div>
+
     </Container>
   );
 }
