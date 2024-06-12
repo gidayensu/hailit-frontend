@@ -1,29 +1,30 @@
 "use client";
 //ui + icons
-import { ItemsSelectorNoIcons } from "@/components/Shared/ItemsSelectorNoIcons";
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FaMapMarkerAlt } from "react-icons/fa";
 //react hook form
 import FormField from "@/components/Form/FormField";
-import { SelectDate } from "@/components/Order/SelectDate";
-import { Controller, FormProvider } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 //main components
-
 import PackageTypes from "@/components/Order/NewDelivery/PackageTypes/PackageTypes";
+import TripAreaMediumAndType from "./TripAreaMediumAndType";
 
 //redux + next + react + helper
+import { CalendarField } from "@/components/Form/FormField";
 import {
-  setDeliveryMedium,
-  setDestinationArea,
+  setTripMedium,
+  setTripArea,
   setPackageType,
   setScheduled,
 } from "@/lib/store/slice/deliveryChoicesSlice";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect } from "react";
 import { Trip } from "../StatusSection/hook/useGetTrip";
 import { useUpdateTrip } from "./hook/useUpdateTrip";
+
 export default function EditTrip({ trip }: { trip: Trip }) {
   const {
     formMethods,
@@ -37,23 +38,24 @@ export default function EditTrip({ trip }: { trip: Trip }) {
     trip_area,
     package_type,
     updateLoading,
-    isLoading,
-    control,
     register,
   } = useUpdateTrip(trip)
 
   useEffect(() => {
     dispatch(setPackageType(trip?.package_type));
-    dispatch(setDeliveryMedium(trip?.trip_medium));
-    dispatch(setDestinationArea(trip?.trip_area));
+    dispatch(setTripMedium(trip?.trip_medium));
+    dispatch(setTripArea(trip?.trip_area));
     if (trip?.trip_type === "scheduled") {
       dispatch(setScheduled(true));
     }
   }, [trip?.package_type, trip?.trip_type]);
   return (
     <main className=" bg-white dark:bg-secondary-dark p-6 rounded-xl flex flex-col">
-      <h1 className="mb-2 text-xl">
+      <h1 className="mb-2 text-2xl">
         Editing Trip: <b>{trip?.trip_id}</b>
+      </h1>
+      <h1 className="text-sm mb-5">
+        Requested On: <b>{extractDateWithDayFromDate(trip?.trip_request_date)}</b>
       </h1>
       <FormProvider {...formMethods}>
         <form
@@ -65,75 +67,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
             className="flex flex-col w-full max-w-sm  gap-1.5 "
             ref={packageTypeRef}
           >
-            <span className="text-left">
-              <h3 className=" text-[14px] font-bold ">Trip Area</h3>
-            </span>
-            <div className="flex gap-2 w-full">
-              <ItemsSelectorNoIcons
-                itemType="Accra"
-                selectedItemType={trip_area}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Kumasi"
-                selectedItemType={trip_area}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Inter City"
-                selectedItemType={trip_area}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-            </div>
-            <span className="text-left">
-              <h3 className=" text-[14px] font-bold ">Trip Type</h3>
-            </span>
-            <div className="flex gap-2 w-full">
-              <ItemsSelectorNoIcons
-                itemType="Today"
-                selectedItemType={trip_type}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Tomorrow"
-                selectedItemType={trip_type}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Schedule"
-                selectedItemType={trip_type}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-            </div>
-            <span className="text-left">
-              <h3 className=" text-[14px] font-bold ">Trip Medium</h3>
-            </span>
-            <div className="flex gap-2 w-full">
-              <ItemsSelectorNoIcons
-                itemType="Car"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Motor"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-              <ItemsSelectorNoIcons
-                itemType="Truck"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {}}
-                className=" w-24"
-              />
-            </div>
+            <TripAreaMediumAndType/>
             <span className="text-left">
               <h3 className=" text-[14px] font-bold ">Package Type</h3>
             </span>
@@ -153,19 +87,22 @@ export default function EditTrip({ trip }: { trip: Trip }) {
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-[14px] font-bold">Pickup Date</h3>
-                {/* <Controller
-                // name="pickup_date"
-                // control={control}
-          
-          render={() => (
-            <SelectDate schedule={false}/>
-          )}
-        /> */}
+    
+      {/* <Controller
+        name="pickup_date"
+        control={control}
+        render={({ field }) => (
+          <SelectDate schedule={false} select = {field.value} onSelect = {field.onChange} />
+        )}
+      /> */}
+      <CalendarField name="pickup_date" datePurpose = "pickup"/>
+    
                 
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-[14px] font-bold">Delivery Date</h3>
                 
+      <CalendarField name="delivery_date" datePurpose= "delivery"/>
           
               </div>
             </div>
@@ -247,7 +184,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <h3 className=" text-[14px] font-bold">Package value (GHS)</h3>
               <FormField
-                type="number"
+                type="text"
                 placeholder="Enter package value"
                 className="h-14"
                 name="package_value"

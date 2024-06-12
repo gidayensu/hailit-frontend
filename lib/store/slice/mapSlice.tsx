@@ -36,7 +36,7 @@ export const mapSlice = createSlice({
 
     setDropOffLocation(state, action: PayloadAction<UserLocation>) {
       state.dropOffLocation = action.payload
-      console.log('this drop off location is running')
+      
     },
 
      

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useLazyAddUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/slice/authSlice";
-import { setUserState } from "@/lib/store/slice/userSlice";
+import { setUser } from "@/lib/store/slice/userSlice";
 
 //react
 import { useState } from "react";
@@ -84,7 +84,7 @@ export const useSignUp =  () => {
     if (signUpData) {
       const { user } = signUpData;
       dispatch(
-        setUserState({
+        setUser({
           user_id: user.user_id,
           first_name: user.first_name,
           last_name: user.last_name,

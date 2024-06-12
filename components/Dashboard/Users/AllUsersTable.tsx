@@ -18,11 +18,14 @@ import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 
 import { useGetAllUsers } from "./hook/useGetAllUsers";
 import Pagination from "@/components/Shared/Pagination/Pagination";
+import { Button } from "@/components/ui/button";
+import { MdOutlineSportsMotorsports } from "react-icons/md";
+import { RiSteering2Line } from "react-icons/ri";
 
 export function AllUsers() {
   const limit = 7;
   const [offset, setOffset] = useState<number> (limit);
-  const { data, usersData, isLoading, error, total_number_of_pages } = useGetAllUsers({limit, offset});
+  const { data, usersData, isLoading, error, total_number_of_pages,  } = useGetAllUsers({limit, offset});
 
   if (error) {
     return (
@@ -37,6 +40,23 @@ export function AllUsers() {
 
   return (
     <>
+    <section className="lg:hidden flex gap-2">
+                <Button
+                  variant={"empty"}
+                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
+                >
+                  <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
+                  <p>Riders</p>
+                </Button>
+
+                <Button
+                  variant={"empty"}
+                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
+                >
+                  <RiSteering2Line className="text-xl " />
+                  <p>Drivers</p>
+                </Button>
+              </section>
     <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       <Table className="w-full">
         <TableHeader>

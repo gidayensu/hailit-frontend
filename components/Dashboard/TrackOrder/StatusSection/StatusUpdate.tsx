@@ -1,10 +1,10 @@
 import Loader from "@/components/Shared/Loader";
 import { IoMdCheckmark } from "react-icons/io";
-import { useStatusUpdate } from "./hook/useStatusUpdate";
+import { useStatusUpdate } from "../../../Order/hooks/useStatusUpdate";
 
 export default function StatusUpdate() {
   const {
-    handleUpdateTrip,
+    handleUpdateDashboardTrip,
     loading,
     localTripStatus,
     tripStatus,
@@ -20,7 +20,7 @@ export default function StatusUpdate() {
             tripStage === 1 ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateTrip({
+            handleUpdateDashboardTrip({
               tripStage: 1,
               tripStatus: "Booked",
             })
@@ -41,7 +41,7 @@ export default function StatusUpdate() {
             tripStatus === "Picked Up" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateTrip({
+            handleUpdateDashboardTrip({
               tripStage: 2,
               tripStatus: "Picked Up",
             })
@@ -62,7 +62,7 @@ export default function StatusUpdate() {
             tripStage === 3 ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateTrip({
+            handleUpdateDashboardTrip({
               tripStage: 3,
               tripStatus: "In Transit",
             })
@@ -83,7 +83,7 @@ export default function StatusUpdate() {
             tripStatus === "Delivered" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateTrip({
+            handleUpdateDashboardTrip({
               tripStage: 4,
               tripStatus: "Delivered",
             })
@@ -105,7 +105,7 @@ export default function StatusUpdate() {
               tripStatus === "Cancelled" ? "font-bold" : ""
             } flex items-center justify-between h-10`}
             onClick={() =>
-              handleUpdateTrip({
+              handleUpdateDashboardTrip({
                 tripStage: tripStage,
                 tripStatus: "Cancelled",
               })

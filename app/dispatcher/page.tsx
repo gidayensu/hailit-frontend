@@ -10,7 +10,7 @@ export default function Dispatcher () {
         redirect('/profile') 
     }
     return (
-        <main className="flex flex-col gap-3 p-4 items-center w-full justify-center mb-24 h-screen dark:bg-primary-dark">
+        <main className="flex flex-col gap-3 p-4 items-center w-full justify-center">
             <DispatcherDetail/>
         </main>
     )

@@ -13,6 +13,7 @@ import { dashboardSlice } from './slice/dashboardSlice';
 import { mapSlice } from './slice/mapSlice';
 import { dashboardTablesSlice } from './slice/dashboardTablesSlice';
 import { USER_LOGOUT } from './actions';
+import { dispatcherSlice } from './slice/dispatcherSlice';
 const appReducer = combineReducers({
   auth: supabaseAuthSlice.reducer,
   user: userSlice.reducer,
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
   newOrder: newOrderSlice.reducer,
   dashboard: dashboardSlice.reducer,
   dashboardTables: dashboardTablesSlice.reducer,
+  dispatcher: dispatcherSlice.reducer,
   [hailitApi.reducerPath]: hailitApi.reducer,
 });
 

@@ -1,21 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
+import { UserRole } from "./userSlice";
 interface OnBoarding {
     stageOne: boolean,
     stageTwo: boolean,
     stageThree: boolean,
-    chosenRole: string,
+    chosenRole: UserRole,
     first_name: string,
     last_name: string,
     phone_number: string,
     license_number: string,
     onboard: boolean,
-
 }
-
-type Onboard = boolean;
-type ChosenRole = "customer" | "dispatcher";
 
 interface OnboardingStages {
     stageOne: boolean,
@@ -27,7 +23,7 @@ const initialState:OnBoarding = {
     stageOne: true,
     stageTwo: false,
     stageThree: false,
-    chosenRole: '',
+    chosenRole: 'customer',
     first_name: '',
     last_name: '',
     phone_number: '',
@@ -58,21 +54,11 @@ export const onBoardingSlice = createSlice({
             state.stageThree = action.payload.stageThree
         },
         
-        setChosenRole(state, action:PayloadAction<ChosenRole>) {
+        setChosenRole(state, action:PayloadAction<UserRole>) {
             state.chosenRole = action.payload
         },
-
-        setCustomerDetails (state, action) {
-
-        },
-
-        setDispatcherDetails (state, action:PayloadAction<CustomerDetails>) {
-           state.first_name = action.payload.first_name
-           state.last_name = action.payload.last_name
-           state.phone_number = action.payload.phone_number 
-        }, 
         
-        setBoardingCompletion(state, action:PayloadAction<Onboard>) {
+        setBoardingCompletion(state, action:PayloadAction<boolean>) {
             state.onboard = action.payload
             
         },

@@ -2,26 +2,23 @@
 import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
 import OrderHistory from "@/components/Order/OrderHistory";
 import { redirect } from "next/navigation";
-import DispatcherHead from "@/components/Dispatcher/DispatcherHead";
-import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+import TripsStats from "@/components/Dispatcher/TripsStats";
+import DispatcherOrderHistory from "@/components/Dispatcher/DispatcherOrderHistory";
 export default function Dispatcher() {
-  const { user_role, first_name, last_name } = useGetDispatcher();
+  const { user_role, trips } = useGetDispatcher();
 
   if (user_role === "customer" || user_role === "admin" || !user_role) {
     redirect('/profile') 
 }
 
   return (
-    <>
-        <TopSectionContainer>
+    <div className="w-full flex flex-col justify-center items-center">
+          <div className="w-full flex items-center justify-center p-8">
 
-        <DispatcherHead firstName={first_name} lastName={last_name} userRole={user_role} />
-        </TopSectionContainer>
-        <MiddleSectionContainer className="rounded-tr-none flex justify-center items-center">
-
-                <OrderHistory />
-        </MiddleSectionContainer>
-    </>
+                <TripsStats/>      
+          </div>
+                <DispatcherOrderHistory />
+        
+    </div>
   );
 }

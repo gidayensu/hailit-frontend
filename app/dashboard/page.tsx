@@ -80,23 +80,7 @@ export default function Dashboard() {
 
           {activeSection === "Users" && (
             <>
-              <section className="lg:hidden flex gap-2">
-                <Button
-                  variant={"empty"}
-                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
-                >
-                  <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
-                  <p>Riders</p>
-                </Button>
-
-                <Button
-                  variant={"empty"}
-                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
-                >
-                  <RiSteering2Line className="text-xl " />
-                  <p>Drivers</p>
-                </Button>
-              </section>
+              
               <section>
                 <AllUsers />
               </section>

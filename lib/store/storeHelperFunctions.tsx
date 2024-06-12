@@ -11,7 +11,7 @@ interface UserData {
   onboard: boolean;
 }
 
-export default function useUserDataDispatch ({dispatch, setUserState, userData}: {dispatch:any, setUserState: any, userData: UserData}) {
+export default function useUserDataDispatch ({dispatch, setUser, userData}: {dispatch:any, setUser: any, userData: UserData}) {
   
 
   const updateUser = () => {

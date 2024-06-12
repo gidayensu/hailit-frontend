@@ -20,13 +20,13 @@ export const deliveryChoiceSlice = createSlice({
     name: 'delivery choice',
     initialState, 
     reducers: {
-        setDestinationArea (state, action:PayloadAction<string>) {
+        setTripArea (state, action:PayloadAction<string>) {
             state.trip_area = action.payload;
         },
-        setDeliveryDay (state, action:PayloadAction<string>) {
+        setTripType (state, action:PayloadAction<string>) {
             state.trip_type = action.payload;
         },
-        setDeliveryMedium (state, action:PayloadAction<string>) {
+        setTripMedium (state, action:PayloadAction<string>) {
             state.trip_medium = action.payload;
         },
         setScheduled (state, action:PayloadAction<boolean>) {
@@ -47,4 +47,4 @@ export const deliveryChoiceSlice = createSlice({
 
 })
 
-export const {setDeliveryDay, setDeliveryMedium, setDestinationArea, setPackageType, setScheduled, resetDeliveryChoices} = deliveryChoiceSlice.actions;
+export const {setTripType, setTripMedium, setTripArea, setPackageType, setScheduled, resetDeliveryChoices} = deliveryChoiceSlice.actions;

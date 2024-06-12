@@ -1,8 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface TripStatus {
-    tripStatus: string
-    tripStage: number, 
+
+
+export type TripStatus= "Booked" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled" 
+export type TripStage = 1 | 2 | 3 | 4;
+
+export interface TripStatusDBUpdate {
+    trip_status: TripStatus,
+        trip_stage: TripStage,
+        trip_commencement_date: null | Date,
+        trip_completion_date: null | Date,
+}
+export interface TripStatusandStage{
+    tripStatus: TripStatus
+    tripStage: TripStage, 
+    tripCommencementDate: null | Date,
+    tripCompletionDate: null | Date
 }
 
 export interface DashboardDetails {
@@ -17,7 +30,7 @@ export interface DashboardDetails {
     assignedDispatcherPlate: string,
     assignedDispatcherPhone: string,
     tripStatus: string,
-    tripStage: number,
+    tripStage: TripStage,
     previousSelectedTripId : string
 
 }
@@ -41,7 +54,7 @@ export const initialState: DashboardDetails = {
     assignedDispatcherPlate: '', 
     assignedDispatcherPhone: '',
     tripStatus: '',
-    tripStage: 0,
+    tripStage: 1,
     previousSelectedTripId : '',
     editingOrder: false,
 }
@@ -53,7 +66,7 @@ export const dashboardSlice = createSlice({
             state.activeSection = action.payload           
             
         },
-        setTripStatus(state, action:PayloadAction<TripStatus>) {
+        setTripStatus(state, action:PayloadAction<TripStatusandStage>) {
             state.tripStage = action.payload.tripStage
             state.tripStatus = action.payload.tripStatus
 

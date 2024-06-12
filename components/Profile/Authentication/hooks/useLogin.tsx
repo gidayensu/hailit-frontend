@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useLazyGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setAuthState } from "@/lib/store/slice/authSlice";
-import { setUserState } from "@/lib/store/slice/userSlice";
+import { setUser } from "@/lib/store/slice/userSlice";
 
 // react
 import { useEffect, useState } from "react";
@@ -60,7 +60,7 @@ export const useLogin=()=> {
 
       const { user } = userData;
       dispatch(
-        setUserState({
+        setUser({
           user_id: user.user_id,
           first_name: user.first_name,
           last_name: user.last_name,

@@ -12,9 +12,9 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 //interface
-import { NewOrderSchema, DeliveryDetails } from '@/components/Form/FormTypes';
+import { NewOrderSchema, OrderDetails, UpdateOrderDetails, UpdateOrderSchema } from '@/components/Form/FormTypes';
 import { setEditingOrder } from "@/lib/store/slice/dashboardSlice";
-import { setDeliveryMedium, setDestinationArea, setPackageType, setScheduled } from "@/lib/store/slice/deliveryChoicesSlice";
+import { setTripMedium, setTripArea, setPackageType, setScheduled } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useEffect } from "react";
 import { Trip } from "../../StatusSection/hook/useGetTrip";
 import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
@@ -32,8 +32,8 @@ export const useUpdateTrip = (trip:Trip)=> {
   
   useEffect(()=> {
       dispatch(setPackageType(trip?.package_type))
-      dispatch(setDeliveryMedium(trip?.trip_medium))
-      dispatch(setDestinationArea(trip?.trip_area))
+      dispatch(setTripMedium(trip?.trip_medium))
+      dispatch(setTripArea(trip?.trip_area))
       if(trip?.trip_type === "scheduled") {
           dispatch(setScheduled(true))
       }
@@ -45,10 +45,10 @@ export const useUpdateTrip = (trip:Trip)=> {
     dispatch(setEditingOrder(false))
   }
 
-  const formMethods = useForm<DeliveryDetails>({
-    resolver: zodResolver(NewOrderSchema)
+  const formMethods = useForm<UpdateOrderDetails>({
+    resolver: zodResolver(UpdateOrderSchema)
     });
-    const {register, handleSubmit, control, formState: {errors}, setError } = formMethods;
+    const {register, handleSubmit, control, formState: {errors}, setError,  } = formMethods;
     
   
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
@@ -64,6 +64,7 @@ export const useUpdateTrip = (trip:Trip)=> {
       )
     }
     const formDetails = {...data, package_type, control, trip_type, trip_area:trip_area, trip_medium};
+    console.log({formDetails})
     // updateTrip(formDetails)
     
   }
