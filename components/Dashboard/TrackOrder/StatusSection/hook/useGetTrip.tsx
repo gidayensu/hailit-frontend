@@ -53,6 +53,8 @@ export const useGetTrip = () => {
         setTripStatus({
           tripStage: trip.trip_stage,
           tripStatus: trip.trip_status,
+          tripCommencementDate: trip.trip_commencement_date,
+          tripCompletionDate: trip.trip_completion_date
         })
       );
     }
