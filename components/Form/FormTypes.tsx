@@ -121,6 +121,7 @@ export type ValidFieldNames =
 | "license_number"
 | "pickup_date"
 | "delivery_date"
+| "calendar_schedule"
 | "confirm_password";
 
 export type FormFieldProps = {
