@@ -1,10 +1,9 @@
 import OrderStatusElement from "@/components/Order/TrackOrder/OrderStatusElement";
-import { CiViewList } from "react-icons/ci";
-import { GoChecklist, GoX } from "react-icons/go";
-import { PiPackageLight, PiMotorcycleLight } from "react-icons/pi";
 import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
-import { MdOutlineWhereToVote } from "react-icons/md";
+import { CiViewList } from "react-icons/ci";
+import { GoChecklist, GoX } from "react-icons/go";
+import { PiMotorcycleLight, PiPackageLight } from "react-icons/pi";
 import StatusUpdate from "./StatusUpdate";
 
 export default function StatusSection({

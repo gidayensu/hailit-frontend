@@ -9,7 +9,7 @@ export default function StatusUpdate() {
     localTripStatus,
     tripStatus,
     tripStage,
-    
+    trip
   } = useStatusUpdate();
 
   return (
@@ -23,6 +23,8 @@ export default function StatusUpdate() {
             handleUpdateDashboardTrip({
               tripStage: 1,
               tripStatus: "Booked",
+              tripCommencementDate: trip?.trip_commencement_date,
+              tripCompletionDate: trip?.trip_completion_date,
             })
           }
         >
@@ -44,6 +46,8 @@ export default function StatusUpdate() {
             handleUpdateDashboardTrip({
               tripStage: 2,
               tripStatus: "Picked Up",
+              tripCommencementDate: new Date(),
+              tripCompletionDate: trip?.trip_completion_date,
             })
           }
         >
@@ -65,6 +69,8 @@ export default function StatusUpdate() {
             handleUpdateDashboardTrip({
               tripStage: 3,
               tripStatus: "In Transit",
+              tripCommencementDate: trip?.trip_commencement_date,
+              tripCompletionDate: trip?.trip_completion_date,
             })
           }
         >
@@ -86,6 +92,8 @@ export default function StatusUpdate() {
             handleUpdateDashboardTrip({
               tripStage: 4,
               tripStatus: "Delivered",
+              tripCommencementDate: trip?.trip_commencement_date,
+              tripCompletionDate: new Date(),
             })
           }
         >
@@ -108,6 +116,8 @@ export default function StatusUpdate() {
               handleUpdateDashboardTrip({
                 tripStage: tripStage,
                 tripStatus: "Cancelled",
+                tripCommencementDate: trip?.trip_commencement_date,
+                tripCompletionDate: trip?.trip_completion_date,
               })
             }
           >
