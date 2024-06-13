@@ -48,7 +48,7 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
           phone: dispatcherDetails.phone
         }
       )  
-        useEffect( ()=> {
+        
 
           if (updateData) {
             dispatch(setAssignedDispatcher({
@@ -60,9 +60,9 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
             }))
             dispatch(setPreviousSelectedTripId([selectedTripId]))
           }
-        }, [updateData, dispatcherToBeAssigned, selectedTripId, dispatch]
+      
 
-        )
+        
         
     }, [])
     const riders = ridersData?.riders; 

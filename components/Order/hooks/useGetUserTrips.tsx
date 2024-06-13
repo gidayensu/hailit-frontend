@@ -1,10 +1,8 @@
 "use client";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { PackageType, DeliveryStatus } from "../OrderSummaryMin";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { TripStage, TripStatus } from "@/lib/store/slice/dashboardSlice";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
-import { useCallback, useEffect } from "react";
+import { DeliveryStatus, PackageType } from "../OrderSummaryMin";
 
 export const useGetUserTrips = () => {
   const { user_id, user_role } = useAppSelector((state) => state.user);
