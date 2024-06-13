@@ -22,10 +22,16 @@ import { Button } from "@/components/ui/button";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
 
-export function AllUsers() {
+export default function AllUsersTable({showUser}: {showUser: (show:boolean)=>void}) {
   const limit = 7;
   const [offset, setOffset] = useState<number> (limit);
-  const { data, usersData, isLoading, error, total_number_of_pages,  } = useGetAllUsers({limit, offset});
+
+  const handleUserSelection = (selectedUserId:string)=> {
+      showUser(true)
+      handleSetSelectedUser(selectedUserId)
+  }
+
+  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser } = useGetAllUsers({limit, offset});
 
   if (error) {
     return (
@@ -80,7 +86,7 @@ export function AllUsers() {
           {isLoading && <SkeletonTable rows={7} cells={8} />}
           {data && usersData?.length && usersData &&
             usersData.map((user: any) => (
-              <TableRow key={user.user_id}>
+              <TableRow key={user.user_id} onClick={()=>handleUserSelection(user.user_id)}>
                 <TableCell>
                   <Modal dialogTriggerElement={user.first_name} className="">
                     {user.first_name}

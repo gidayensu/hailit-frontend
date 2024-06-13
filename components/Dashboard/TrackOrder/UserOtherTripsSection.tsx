@@ -3,7 +3,7 @@ import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
-import { divClass } from "@/components/Nav/BottomNavBar";
+
 
 export default function UserOtherTrips({
   userId,
@@ -12,9 +12,9 @@ export default function UserOtherTrips({
   userId: string;
   tripId: string;
 }) {
-  const { isLoading, trips, handleTrackTrip } = useGetUserTrips(userId);
-  const otherTrips = trips?.filter((trip: any) => trip.trip_id !== tripId);
-  console.log({otherTrips})
+  const { isLoading, data, handleTrackTrip } = useGetUserTrips(userId);
+  const otherTrips = data?.trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId);
+  
   return (
     <>
     

@@ -18,12 +18,13 @@ import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import { AllTripsData } from "@/components/Dashboard/Orders/AllTripsTable";
 import Overview from "@/components/Dashboard/Overview/Overview";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
-import { AllUsers } from "@/components/Dashboard/Users/AllUsersTable";
+import AllUsersTable  from "@/components/Dashboard/Users/AllUsersTable";
+import UserDetails from "@/components/Dashboard/Users/UserDetails";
 import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers";
 import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
 import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
-
+import AllUsers from "@/components/Dashboard/Users/AllUsers";
 import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
 export default function Dashboard() {
 
@@ -42,10 +43,8 @@ export default function Dashboard() {
   };
 
   const {data, isLoading, error} = useGetAdminQuery(user_id)
-  let isAdmin = null;
-  if(data) {
-    isAdmin = data.admin
-  }
+  const isAdmin = data?.admin
+  
   return (
     <>
     {
@@ -82,7 +81,7 @@ export default function Dashboard() {
             <>
               
               <section>
-                <AllUsers />
+                <AllUsers/>
               </section>
               
             </>

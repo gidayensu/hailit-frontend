@@ -56,7 +56,7 @@ export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tr
                   </Button>
                 }
               >
-               <DeleteModalCard tripId={trip.trip_id}/> 
+               <DeleteModalCard itemId={trip.trip_id} item="Trip"/> 
               </Modal>
             </section>
           </article>

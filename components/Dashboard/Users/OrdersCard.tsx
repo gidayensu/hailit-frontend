@@ -5,8 +5,8 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
 
 export default function OrdersCard({userId}:{userId:string}) {
-  const  {data, isLoading, trips, handleTrackTrip} = useGetUserTrips(userId);
-  
+  const  {data, isLoading, handleTrackTrip} = useGetUserTrips(userId);
+  console.log()
   return (
     <>
       <section className="w-full p-4">
@@ -25,10 +25,10 @@ export default function OrdersCard({userId}:{userId:string}) {
           <div className={`flex items-center justify-center bg-primary-color text-white dark:text-slate-100 w-full h-8 text-center rounded-lg`} >
             Recent Orders
           </div>
-                    {trips.map((trip:any, index:number)=> 
+                    {data?.trips?.customer_trips?.map((trip:any, index:number)=> 
                     <>
                       { index <= 2 &&
-                        <div onClick={()=>handleTrackTrip(trip.trip_id)}>
+                        <div onClick={()=>handleTrackTrip(trip.trip_id)} key={trip.trip_id}>
 
                           <OrderSummaryMin key={trip.trip_id} cost={trip.trip_cost} deliveryStatus={trip.trip_status} packageType={trip.package_type} tripId={trip.trip_id} tripRequestDate={extractDateWithDayFromDate(trip.trip_request_date)}/>
                         </div>

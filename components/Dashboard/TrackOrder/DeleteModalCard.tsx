@@ -1,7 +1,7 @@
 import ModalCard from "@/components/Shared/ModalCard";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-export default function DeleteModalCard ({tripId}: {tripId:string}) {
+export default function DeleteModalCard ({itemId, item}: {itemId:string, item:string}) {
     return (
         <ModalCard cancelFunc={() => {}} confirmFunc={() => {}}>
                   <div className="flex flex-col items-center justify-center">
@@ -9,7 +9,7 @@ export default function DeleteModalCard ({tripId}: {tripId:string}) {
                             <RiDeleteBin6Line className="text-red-500 text-2xl"/>
                     </span>
                     <h2 className="text-center text-lg mb-2 animate-in slide-in-from-bottom duration-100">
-                      Permanently delete <br/> Trip:  <b>{tripId} </b> ?
+                      Permanently delete <br/> {item}:  <b>{itemId} </b> ?
                     </h2>
                     <h3 className="text-center text-[12px]  text-red-500 animate-in slide-in-from-bottom duration-150">
                       This is irreversible
