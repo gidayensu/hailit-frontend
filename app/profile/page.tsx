@@ -1,14 +1,11 @@
 "use client";
 //next, redux, react, and supabase
-
+import { useEffect } from "react";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
 import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
-import { supabaseSession, supabase } from "@/lib/supabaseAuth";
-import { access } from "fs";
 export type CurrentTheme = string | undefined;
 
 export default function Profile() {
@@ -17,15 +14,18 @@ export default function Profile() {
   const { authenticationState } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
 
-  if (authenticationState) {
-    !onboard ? router.push("/onboarding") 
-    : user_role === "admin" 
-    ? router.push("/dashboard") 
-    : user_role === "driver" || user_role === "rider" 
-    ? router.push('/dispatcher') 
-    : ''
-  }
 
+  useEffect(() => {
+    if (authenticationState) {
+      if (!onboard) {
+        router.push("/onboarding");
+      } else if (user_role === "admin") {
+        router.push("/dashboard");
+      } else if (user_role === "driver" || user_role === "rider") {
+        router.push('/dispatcher');
+      }
+    }
+  }, [authenticationState, onboard, user_role, router]);
 
 
   return (

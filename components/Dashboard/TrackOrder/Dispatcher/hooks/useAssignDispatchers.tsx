@@ -1,8 +1,8 @@
 'use client'
-import {useLazyGetAllRidersQuery, useLazyGetAllDriversQuery, useGetAllDriversQuery, useGetAllRidersQuery, useLazyUpdateTripQuery,  } from "@/lib/store/apiSlice/hailitApi";
+import { useGetAllDriversQuery, useGetAllRidersQuery, useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setAssignedDispatcher, setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 interface DispatcherToBeAssigned {
   id: string, 
@@ -33,7 +33,7 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
     const {data:driversData, isLoading:driversLoading, error:driversError} = useGetAllDriversQuery('drivers');
     // role === "riders" ? getAllRiders('riders') : getAllDrivers('drivers');
 
-    const handleAssignedDispatcher = (dispatcherDetails: DispatcherToBeAssigned)=> {
+    const handleAssignedDispatcher = useCallback( (dispatcherDetails: DispatcherToBeAssigned)=> {
       updateTrip({
           tripId: selectedTripId,
           tripDetails: {dispatcher_id: dispatcherDetails.id}
@@ -48,18 +48,23 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
           phone: dispatcherDetails.phone
         }
       )  
+        useEffect( ()=> {
+
+          if (updateData) {
+            dispatch(setAssignedDispatcher({
+              assignedDispatcherId: dispatcherToBeAssigned.id,
+              assignedDispatcherName: dispatcherToBeAssigned.name,
+              assignedDispatcherVehicle: dispatcherToBeAssigned.vehicle,
+              assignedDispatcherPlate: dispatcherToBeAssigned.plate, 
+              assignedDispatcherPhone: dispatcherToBeAssigned.phone
+            }))
+            dispatch(setPreviousSelectedTripId([selectedTripId]))
+          }
+        }, [updateData, dispatcherToBeAssigned, selectedTripId, dispatch]
+
+        )
         
-    }
-    if (updateData) {
-      dispatch(setAssignedDispatcher({
-        assignedDispatcherId: dispatcherToBeAssigned.id,
-        assignedDispatcherName: dispatcherToBeAssigned.name,
-        assignedDispatcherVehicle: dispatcherToBeAssigned.vehicle,
-        assignedDispatcherPlate: dispatcherToBeAssigned.plate, 
-        assignedDispatcherPhone: dispatcherToBeAssigned.phone
-      }))
-      dispatch(setPreviousSelectedTripId([selectedTripId]))
-    }
+    }, [])
     const riders = ridersData?.riders; 
     const drivers = driversData?.drivers;
     

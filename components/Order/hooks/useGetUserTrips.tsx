@@ -1,14 +1,17 @@
 "use client";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector } from "@/lib/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { PackageType, DeliveryStatus } from "../OrderSummaryMin";
 import { TripStage, TripStatus } from "@/lib/store/slice/dashboardSlice";
-
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { useCallback, useEffect } from "react";
 
 export const useGetUserTrips = () => {
   const { user_id, user_role } = useAppSelector((state) => state.user);
   const { data, isLoading, error } = useGetUserTripsQuery(user_id);
 
+  const dispatch = useAppDispatch();
+  
   let previousTrips = [];
   let currentTrips = [];
   let currentTripsCount = 0;
@@ -30,22 +33,25 @@ export const useGetUserTrips = () => {
       previousTripsCount = previousTrips.length
   } else {
     currentTrips =
-      data?.trips?.filter(
+      data?.trips?.customer_trips.filter(
         (trip: Trip) =>
           trip.trip_status !== "Delivered" && trip.trip_status !== "Cancelled"
       ) || [];
     previousTrips =
-      data?.trips?.filter(
+      data?.trips?.customer_trips.filter(
         (trip: Trip) =>
           trip.trip_status === "Delivered" || trip.trip_status === "Cancelled"
       ) || [];
   }
 
+  
+  
+  
   let noDelivery = false;
   currentTrips.length < 1 && previousTrips.length < 1
     ? (noDelivery = true)
     : "";
-  return {trips, currentTrips, previousTrips, currentTripsCount, previousTripsCount, isLoading, error, noDelivery };
+  return {trips, currentTrips, previousTrips, currentTripsCount, previousTripsCount, isLoading, error, noDelivery,  };
 };
 
 

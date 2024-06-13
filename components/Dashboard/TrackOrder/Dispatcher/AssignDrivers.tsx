@@ -25,7 +25,7 @@ export default function Drivers () {
     updateData,
     dispatcherToBeAssigned,
     driversError,
-    ridersError,
+    
     handleAssignedDispatcher,
   } = useAssignDispatchers("drivers");
     

@@ -1,14 +1,12 @@
 'use client'
 
-import OrderHistory from "../Order/OrderHistory"
+import Link from "next/link"
+import { DispatcherTrip } from "../Order/hooks/useGetUserTrips"
 import OrderSummary from "../Order/OrderSummary"
+import NoData from "../Shared/NoData"
 import Container from "../ui/container"
-import { Separator } from "../ui/separator"
 import { useGetDispatcher } from "./hook/useGetDispatcher"
 import TripsStats from "./TripsStats"
-import { DispatcherTrip } from "../Order/hooks/useGetUserTrips"
-import NoData from "../Shared/NoData"
-import Link from "next/link"
 
 export default function CourierDetail () {
     const { trips, dispatcher} = useGetDispatcher();
@@ -17,7 +15,7 @@ export default function CourierDetail () {
         
             <TripsStats />
             <div className="w-full md:w-3/5 space-y-2 mt-4">
-            <h2 className="font-bold text-xl text-center"> YOUR CURRENT DELIVERIES</h2>
+            <h2 className="font-bold text-xl text-center"> YOUR ASSIGNED DELIVERIES</h2>
                 {
                     dispatcher.dispatcherCurrentTrips.length > 0  && 
                     <div className="w-full flex flex-col items-center justify-center gap-4">

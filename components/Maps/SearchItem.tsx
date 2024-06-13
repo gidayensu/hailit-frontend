@@ -1,6 +1,5 @@
-import { RiMapPinLine } from "react-icons/ri";
-import { FaAngleRight } from "react-icons/fa6";
 import { MdChevronRight } from "react-icons/md";
+import { RiMapPinLine } from "react-icons/ri";
 export default function SearchItem ({item}: {item:any}) {
     const formatedItem = splitLocationData(item);
     return (
