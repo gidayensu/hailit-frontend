@@ -76,6 +76,11 @@ export const dashboardSlice = createSlice({
             
         },
 
+        setSelectedUserId (state, action:PayloadAction<string>) {
+            state.selectedUserId = action.payload           
+            
+        },
+
         setTrackingOrder (state, action:PayloadAction<boolean>) {
             state.trackingOrder = action.payload           
             
@@ -99,4 +104,4 @@ export const dashboardSlice = createSlice({
     }
 })
 
-export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher, setTripStatus, setPreviousSelectedTripId, setEditingOrder } = dashboardSlice.actions
+export const { setActiveSection, setSelectedTripId, setTrackingOrder, setAssignedDispatcher, setTripStatus, setPreviousSelectedTripId, setEditingOrder, setSelectedUserId } = dashboardSlice.actions
