@@ -23,7 +23,7 @@ export const hailitApi = createApi({
       return headers;
     },
   }),
-
+  tagTypes: ['Trip', 'Trips', 'User Trips'],
   endpoints: (builder) => ({
     // TRIPS
     getAllTrips: builder.query<any, string | string[]>({
@@ -33,16 +33,18 @@ export const hailitApi = createApi({
       }),
     }),
     getTrip: builder.query<any, string | string[]>({
-      query: (tripId) => ({
-        url: `trips/user-trip/${tripId}`,
+      query: (trip_id) => ({
+        url: `trips/user-trip/${trip_id}`,
         method: "GET",
       }),
+      providesTags: ['Trip']
     }),
     getUserTrips: builder.query<any, string | string[]>({
       query: (userId) => ({
         url: `trips/user-trips/${userId}`,
         method: "GET",
       }),
+      providesTags: ['User Trips']
     }),
     addTrip: builder.query<any, any>({
       query: (tripDetails) => ({
@@ -51,23 +53,24 @@ export const hailitApi = createApi({
         body: tripDetails,
       }),
     }),
-    updateTrip: builder.query<any, any>({
-      query: ({ tripId, tripDetails  }) => ({
-        url: `trips/user-trip/${tripId}`,
+    updateTrip: builder.mutation<any, any>({
+      query: ({ trip_id, tripDetails  }) => ({
+        url: `trips/user-trip/${trip_id}`,
         method: "PUT",
         body: tripDetails,
       }),
+      invalidatesTags: ['Trip', 'User Trips']
     }),
     rateTrip: builder.query<any, string | string[]>({
-      query: (tripId) => ({
-        url: `trips/rate-trip/${tripId}`,
+      query: (trip_id) => ({
+        url: `trips/rate-trip/${trip_id}`,
         method: "PUT",
       }),
     }),
 
     deleteTrip: builder.query<any, string | string[]>({
-      query: (tripId) => ({
-        url: `trips/user-trip/${tripId}`,
+      query: (trip_id) => ({
+        url: `trips/user-trip/${trip_id}`,
         method: "DELETE",
       }),
     }),
@@ -230,7 +233,8 @@ export const {
   useGetTripQuery,
   useGetUserTripsQuery,
   useLazyAddTripQuery,
-  useLazyUpdateTripQuery,
+  useUpdateTripMutation,
+  
   useLazyDeleteTripQuery,
   useLazyRateTripQuery,
   

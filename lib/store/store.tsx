@@ -14,6 +14,8 @@ import { mapSlice } from './slice/mapSlice';
 import { dashboardTablesSlice } from './slice/dashboardTablesSlice';
 import { USER_LOGOUT } from './actions';
 import { dispatcherSlice } from './slice/dispatcherSlice';
+import { tripSlice } from './tripSlice';
+
 const appReducer = combineReducers({
   auth: supabaseAuthSlice.reducer,
   user: userSlice.reducer,
@@ -25,6 +27,7 @@ const appReducer = combineReducers({
   dashboard: dashboardSlice.reducer,
   dashboardTables: dashboardTablesSlice.reducer,
   dispatcher: dispatcherSlice.reducer,
+  trip: tripSlice.reducer,
   [hailitApi.reducerPath]: hailitApi.reducer,
 });
 
