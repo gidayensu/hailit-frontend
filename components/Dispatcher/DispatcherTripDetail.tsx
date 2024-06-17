@@ -23,10 +23,9 @@ export default function DispatcherTripDetail () {
       data,
       error,
       tripRequestDate,
-      dispatcher,
-      tripCommencementDate,
-      tripCompletionDate
+      
     } = useUpdateDispatcherTrip();
+    console.log('THIS IS TRIP',trip)
     
   const { user_role } = useGetDispatcher();
   if (user_role === "customer" || user_role === "admin" || !user_role) {
@@ -35,7 +34,7 @@ export default function DispatcherTripDetail () {
   let updateStatus: TripStatus = "Picked Up";
   let updateStage: TripStage = 2;
   
-  switch (dispatcher.tripStatus) {
+  switch (trip?.trip_status) {
     case "Booked":
       updateStatus = "Picked Up";
       break;
@@ -68,26 +67,26 @@ export default function DispatcherTripDetail () {
     return (
       <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-          <span className="text-5xl font-bold">#{trip.trip_id}</span>
+          <span className="text-5xl font-bold">#{trip?.trip_id}</span>
           <p className="text-md ">
-            <b>Package Type:</b> {trip.package_type}
+            <b>Package Type:</b> {trip?.package_type}
           </p>
           <p className="text-md ">
             <b>Request Date:</b> {tripRequestDate}
           </p>
           <p className="text-md ">
-            <b>Trip Medium:</b> {trip.trip_medium}
+            <b>Trip Medium:</b> {trip?.trip_medium}
           </p>
         </TopSectionContainer>
 
         <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
-          {!(dispatcher.tripStatus === "Delivered" ||
-            dispatcher.tripStatus === "Cancelled") && (
+          {!(trip?.trip_status === "Delivered" ||
+            trip?.trip_status === "Cancelled") && (
             <TrackOrderContainer headingText="Update Trip">
               <Button
                 variant={"outline"}
                 onClick={() =>
-                  handleDispatcherUpdateTrip(trip.trip_id, updateStatus, updateStage)
+                  handleDispatcherUpdateTrip(trip?.trip_id, updateStatus, updateStage)
                   }
                 disabled = {updateLoading}
               >
@@ -99,34 +98,34 @@ export default function DispatcherTripDetail () {
 
           <TrackOrderContainer headingText="Trip Status">
             <OrderUpdates
-              currentOrderStage={dispatcher.tripStage}
-              currentOrderStatus={dispatcher.tripStatus}
+              currentOrderStage={trip?.trip_stage}
+              currentOrderStatus={trip?.trip_status}
             />
           </TrackOrderContainer>
 
           <TrackOrderContainer headingText="LOCATION AND TIMELINE">
-            <Container className="w-full flex flex-col gap-2 h-52 rounded-xl p-4 ">
+            <Container className="w-full flex flex-col gap-2 md:h-52 h-64 rounded-xl p-4 ">
               <OrderSummary trip={trip} />
             </Container>
           </TrackOrderContainer>
 
-          {!(dispatcher.tripStatus === "Delivered" ||
-            dispatcher.tripStatus === "Cancelled" ) && (
+          {!(trip?.trip_status === "Delivered" ||
+            trip?.trip_status === "Cancelled" ) && (
             <>
               {/* SENDER */}
               <TrackOrderContainer headingText="Sender Location">
                 <RecipientSenderCard
-                  location={trip.pickup_location}
+                  location={trip?.pickup_location}
                   identity="Sender"
-                  phoneNumber={trip.recipient_number}
+                  phoneNumber={trip?.recipient_number}
                 />
               </TrackOrderContainer>
               {/* RECIPIENT */}
               <TrackOrderContainer headingText="Recipient Location">
                 <RecipientSenderCard
-                  location={trip.drop_off_location}
+                  location={trip?.drop_off_location}
                   identity="Recipient"
-                  phoneNumber={trip.sender_number}
+                  phoneNumber={trip?.sender_number}
                 />
               </TrackOrderContainer>
             </>
@@ -137,15 +136,15 @@ export default function DispatcherTripDetail () {
               <div className="grid grid-cols-3  p-3 ">
                 <span className="text-[13px]">
                   <p className=" font-bold">Amount</p>
-                  <p> {trip.trip_cost} </p>
+                  <p> {trip?.trip_cost} </p>
                 </span>
                 <span className="text-[13px]">
                   <p className=" font-bold">Status</p>
-                  <p> {trip.payment_status ? "Paid" : "Not Paid"}</p>
+                  <p> {trip?.payment_status ? "Paid" : "Not Paid"}</p>
                 </span>
                 <span className="text-[13px]">
                   <p className=" font-bold">Method</p>
-                  <p> {trip.payment_method}</p>
+                  <p> {trip?.payment_method}</p>
                 </span>
               </div>
             </Container>

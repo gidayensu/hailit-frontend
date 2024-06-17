@@ -1,48 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { TripStatus, TripStage } from "./dashboardSlice";
-
-;
-
-interface DispatcherTripsDetails {
-    tripId: string,
-    tripStatus: TripStatus,
-    tripStage: TripStage
-    dispatcherDeliveredTrips: [],
-    totalEarnings: number,
-    dispatcherCurrentTrips: [],
-    dispatcherPreviousTrips: [],
-    dispatcherCurrentTripsCount: number, 
-    dispatcherDeliveredTripsCount: number,
-    dispatcherEarnings: number,
-    commencementDate: null | Date,
-    completionDate: null | Date,
-    
-}
-
-
-interface StatusUpdate {
-    tripId: string,
-    tripStatus: TripStatus,
-    tripStage: TripStage,
-}
-interface DispatcherStats {
-    dispatcherDeliveredTripsCount: number,
-    totalEarnings: number,
-    dispatcherCurrentTripsCount: number
-}
+import { DispatcherTrip } from "@/components/Order/hooks/useGetUserTrips";
 
 
 
 const initialState: DispatcherTripsDetails = {
     tripId: '',
-    tripStatus: "Booked",
+    trip: {
+        trip_id: '',
+  trip_medium: '',
+  trip_status: 'Booked',
+  trip_stage: 0,
+  trip_type: '',
+  pickup_location: '',
+  drop_off_location: '',
+  package_type: '',
+  trip_commencement_date: null,
+  trip_completion_date: null,
+  trip_cost: 0,
+  trip_request_date: null,
+  payment_method: '',
+  recipient_number: '',
+  sender_number: '',
+  payment_status: false,
+  customer_id: '',
+  dispatcher_id: '',
+  dispatcher_rating: null,
+  rated: false,
+  rating_comment: '',
+  promo_code: '',
+  trip_area: '',
+  additional_information: '',
+  user_id: '',
+  rating_count: 0,
+  cumulative_rating: '',
+      },
     dispatcherDeliveredTrips: [],
     dispatcherCurrentTrips: [],
     totalEarnings: 0,
-    tripStage: 1,
-    commencementDate: null, 
-    completionDate: null,
+    
+        
+    
     dispatcherCurrentTripsCount: 0,
     dispatcherDeliveredTripsCount: 0,
     dispatcherPreviousTrips: [], 
@@ -58,10 +56,12 @@ export const dispatcherSlice = createSlice({
             console.log(action.payload)
             return action.payload
         },
-        setDispatcherTripStatus (state, action:PayloadAction<StatusUpdate>) {
-            state.tripId = action.payload.tripId
-            state.tripStatus = action.payload.tripStatus
-            state.tripStage = action.payload.tripStage
+        setDispatcherTripId (state, action:PayloadAction<string>) {
+            state.tripId = action.payload
+        },
+        setDispatcherTrip (state, action:PayloadAction<any>) {
+            console.log('THIS IS ACTION PAYLOAD',action.payload)
+            state.trip = action.payload
         },
         setDispatcherStats (state, action:PayloadAction<DispatcherStats>) {
             state.dispatcherDeliveredTripsCount = action.payload.dispatcherDeliveredTripsCount
@@ -73,4 +73,32 @@ export const dispatcherSlice = createSlice({
 
 })
 
-export const {setDispatcherTripStatus, setDispatcherStats, setDispatcherTripDetails} = dispatcherSlice.actions;
+export const {
+  setDispatcherTrip,
+  setDispatcherStats,
+  setDispatcherTripId,
+  setDispatcherTripDetails,
+} = dispatcherSlice.actions;
+
+
+interface DispatcherTripsDetails {
+    tripId: string,
+    trip: any
+    dispatcherDeliveredTrips: [],
+    totalEarnings: number,
+    dispatcherCurrentTrips: [],
+    dispatcherPreviousTrips: [],
+    dispatcherCurrentTripsCount: number, 
+    dispatcherDeliveredTripsCount: number,
+    dispatcherEarnings: number,
+}
+
+
+
+interface DispatcherStats {
+    dispatcherDeliveredTripsCount: number,
+    totalEarnings: number,
+    dispatcherCurrentTripsCount: number
+}
+
+
