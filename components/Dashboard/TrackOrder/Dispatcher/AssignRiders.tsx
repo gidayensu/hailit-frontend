@@ -14,13 +14,13 @@ export default function Riders() {
     ridersLoading,
     updateData,
     updateLoading,
-    dispatcherToBeAssigned,
+    dispatcher,
     assignedDispatcherId,
-    driversError,
     ridersError,
     handleAssignedDispatcher,
   } = useAssignDispatchers("riders");
 
+  
   return (
     <>
       {ridersLoading && (
@@ -63,11 +63,14 @@ export default function Riders() {
                   className="flex justify-between text-sm w-full"
                   onClick={() =>
                     handleAssignedDispatcher({
-                      id: rider.rider_id,
-                      name: `${rider.first_name} ${rider.last_name}`,
-                      plate: rider.plate_number,
-                      vehicle: rider.vehicle_name,
-                      phone: rider.phone_number,
+                      dispatcher_id: rider.rider_id,
+                      first_name: rider.first_name,
+                      last_name: rider.last_name,
+                      phone_number: rider.phone_number,
+                      vehicle: {
+                      plate_number: rider.plate_number,
+                      vehicle_name: rider.vehicle_name,
+                    },
                     })
                   }
                 >
@@ -80,21 +83,12 @@ export default function Riders() {
                       <p className=" text-[12px]">{rider.vehicle_name}</p>
                     </div>
                   </div>
-                  {rider.rider_id !== assignedDispatcherId &&
-                    rider.rider_id !== dispatcherToBeAssigned.id && (
+                  {rider.rider_id !== dispatcher.dispatcher_id && (
                       <Button className="w-20">Assign</Button>
                     )}
-                  {rider.rider_id !== assignedDispatcherId &&
-                    rider.rider_id === dispatcherToBeAssigned.id &&
-                    updateLoading && (
-                      <Button className="w-20" disabled>
-                        <Loader />
-                      </Button>
-                    )}
+                  
 
-                  {(rider.rider_id === assignedDispatcherId ||
-                    (rider.rider_id === dispatcherToBeAssigned.id &&
-                      updateData)) && (
+                  {(rider.rider_id  === dispatcher.dispatcher_id) && (
                     <Button className="w-20 bg-black" disabled>
                       Assigned
                     </Button>
