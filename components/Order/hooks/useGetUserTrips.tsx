@@ -7,9 +7,7 @@ import { DeliveryStatus, PackageType } from "../OrderSummaryMin";
 export const useGetUserTrips = () => {
   const { user_id, user_role } = useAppSelector((state) => state.user);
   const { data, isLoading, error } = useGetUserTripsQuery(user_id);
-
-  const dispatch = useAppDispatch();
-  
+    
   let previousTrips = [];
   let currentTrips = [];
   let currentTripsCount = 0;
@@ -69,21 +67,37 @@ export interface Trip {
   trip_status: DeliveryStatus;
 }
 
+
+
+
 export interface DispatcherTrip {
   trip_id: string;
   trip_medium: string;
-  trip_status: TripStatus;
-  trip_stage: TripStage,
-  trip_type: string;
+  trip_status: TripStatus; 
+  trip_stage: number; 
+  trip_type: string; 
   pickup_location: string;
   drop_off_location: string;
   package_type: string;
-  trip_commencement_date: Date | null; 
-  trip_completion_date: Date | null; 
+  trip_commencement_date: Date | null;
+  trip_completion_date: Date | null;
   trip_cost: number;
-  trip_request_date: Date;
+  trip_request_date: Date | null;
   payment_method: string;
   recipient_number: string;
   sender_number: string;
-  payment_status: boolean
+  payment_status: boolean;
+  customer_id: string;
+  dispatcher_id: string;
+  dispatcher_rating: number | null;
+  rated: boolean;
+  rating_comment: string;
+  promo_code: string;
+  trip_area: string;
+  additional_information: string;
+  user_id: string;
+  rating_count: number;
+  cumulative_rating: string;
 }
+
+

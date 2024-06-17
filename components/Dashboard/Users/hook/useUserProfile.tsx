@@ -1,9 +1,61 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGetUserTrips } from "../../hooks/useGetUserTrips";
 import {  useGetUserTripsQuery, useLazyDeleteTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector } from "@/lib/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { User } from "./useGetAllUsers";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { useGetUser } from "./useGetUser";
+export const useUserProfile = ()=> {
+    const {selectedUserId} = useAppSelector(state=>state.dashboard);
+    const {user} = useGetUser(selectedUserId)
+    const {usersData} = useAppSelector(state=>state.dashboardTables);
+    const [userTrips, setUserTrips] = useState<UserTrips>({
+        current_trips: 0,
+        customer_trips: [],
+        delivered_trips: 0,
+        total_trip_count: 0,
+        cancelled_trips: 0
+    });
+
+    const dispatch = useAppDispatch();
+
+    const {data, isLoading, error } = useGetUserTripsQuery(selectedUserId);
+    const { handleTrackTrip} = useGetUserTrips(selectedUserId);
+    const trips = data?.trips
+    
+    useEffect(()=>{
+        if(error) {
+            setUserTrips({
+                current_trips: 0,
+                customer_trips: [],
+                delivered_trips: 0,
+                total_trip_count: 0,
+                cancelled_trips:0
+            })
+        }else {
+
+            setUserTrips(trips)
+        }
+    }, [trips, error])
+
+    const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useLazyDeleteTripQuery();
+    
+    const handleDeselect = useCallback( ()=> {
+        
+        dispatch(setSelectedUserId(''))
+    }, [dispatch, setSelectedUserId])
+    
+    const handleDeleteTrip = (tripId:string)=> {
+        deleteTrip(tripId)
+        const customerTrips = userTrips.customer_trips.filter(trip=>trip.trip_id !==tripId)
+        deleteData ? setUserTrips((prevTrips=>({...prevTrips, customer_trips: customerTrips}))) : deleteError
+    }
+    
+    const selectedUser:User = usersData?.filter((user:User)=>user.user_id === selectedUserId)[0] || user;
+    return {userTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading, handleDeselect }
+}
+
 interface UserTrip {
     trip_id: string;
     dispatcher_id: string;
@@ -30,47 +82,4 @@ interface UserTrips {
     current_trips: number, 
     cancelled_trips: number
  
-}
-export const useUserProfile = ()=> {
-    const {selectedUserId} = useAppSelector(state=>state.dashboard);
-    const {usersData} = useAppSelector(state=>state.dashboardTables);
-    const [userTrips, setUserTrips] = useState<UserTrips>({
-        current_trips: 0,
-        customer_trips: [],
-        delivered_trips: 0,
-        total_trip_count: 0,
-        cancelled_trips: 0
-    });
-
-
-    const {data, isLoading, error } = useGetUserTripsQuery(selectedUserId);
-    const { handleTrackTrip} = useGetUserTrips(selectedUserId);
-    const trips = data?.trips
-    
-    useEffect(()=>{
-        if(error) {
-            setUserTrips({
-                current_trips: 0,
-                customer_trips: [],
-                delivered_trips: 0,
-                total_trip_count: 0,
-                cancelled_trips:0
-            })
-        }else {
-
-            setUserTrips(trips)
-        }
-    }, [trips, error])
-
-    const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useLazyDeleteTripQuery();
-    
-    
-    const handleDeleteTrip = (tripId:string)=> {
-        deleteTrip(tripId)
-        const customerTrips = userTrips.customer_trips.filter(trip=>trip.trip_id !==tripId)
-        deleteData ? setUserTrips((prevTrips=>({...prevTrips, customer_trips: customerTrips}))) : deleteError
-    }
-
-    const selectedUser:User = usersData?.filter((user:User)=>user.user_id === selectedUserId)[0];
-    return {userTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading }
 }

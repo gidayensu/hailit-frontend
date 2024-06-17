@@ -6,66 +6,64 @@ import { useStatusUpdate } from "@/components/Order/hooks/useStatusUpdate";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 
 //next +react+redux
-import { redirect, useParams } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { TripStage, TripStatus } from "@/lib/store/slice/dashboardSlice";
 import {
+  setDispatcherTrip,
   setDispatcherTripDetails,
-
 } from "@/lib/store/slice/dispatcherSlice";
-import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { redirect, useParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 //types
-import { DispatcherTrip } from "@/components/Order/hooks/useGetUserTrips";
 import { TripStatusDBUpdate } from "@/lib/store/slice/dashboardSlice";
 
 export const useUpdateDispatcherTrip = () => {
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const { updateTrip } = useStatusUpdate();
-  const { tripStatus, tripStage } = useAppSelector((state) => state.dispatcher);
-  const dispatcher = useAppSelector((state) => state.dispatcher);
 
+  const params = useParams();
+  const {trip_id} = params;
+  
+  const dispatch = useAppDispatch();
+  const [
+    updateTrip,
+    { data: updateData, isLoading: updateLoading, error: updateError },
+  ] =   useUpdateTripMutation();
+  const {trip, tripId} = useAppSelector(state=>state.dispatcher)
+  
+  const dispatcher = useAppSelector((state) => state.dispatcher);
+  const { data, isLoading, error } = useGetTripQuery(trip_id);
+  console.log('THIS BE DATA',data)
+  const tripData = data?.trip
+  useEffect(()=>{
+    if(tripData && data) {
+
+      dispatch(setDispatcherTrip(tripData))
+      
+    }
+  }, [tripData, data])
+  
+  
   const { user_role } = useGetDispatcher();
   if (user_role === "customer" || user_role === "admin" || !user_role) {
     redirect("/profile");
   }
 
-  const params = useParams();
-  const { trip_id } = params;
-
-  const { data, isLoading, error } = useGetTripQuery(`${trip_id}`,
-    // this overrules the api definition setting,
-    // forcing the query to always fetch when this component is mounted
-    { refetchOnMountOrArgChange: true });
-  const trip: DispatcherTrip = data?.trip;
   
 
-  useEffect(() => {
-    if (trip) {
-      dispatch(
-        setDispatcherTripDetails({
-          ...dispatcher,
-          tripId: trip.trip_id,
-          tripStatus: trip.trip_status,
-          tripStage: trip.trip_stage,
-          commencementDate: trip.trip_commencement_date,
-          completionDate: trip.trip_completion_date,
-        })
-      );
-    }
-  }, [trip]);
+  
+
+  
 
   const handleDispatcherUpdateTrip = useCallback(
     (tripId: string, tripStatus: TripStatus, tripStage: TripStage) => {
-      setUpdateLoading(true);
+      
 
       let tripDetails: TripStatusDBUpdate = {
         trip_status: tripStatus,
         trip_stage: tripStage,
-        trip_commencement_date: dispatcher.commencementDate,
-        trip_completion_date: dispatcher.completionDate,
+        trip_commencement_date: dispatcher.trip.trip_commencement_date,
+        trip_completion_date: dispatcher.trip.trip_completion_date,
       };
 
       tripStatus === "Delivered"
@@ -78,30 +76,26 @@ export const useUpdateDispatcherTrip = () => {
             ...tripDetails,
             trip_commencement_date: new Date(),
           })
+        :  tripStatus === "In Transit"
+        ? (tripDetails = {
+            ...tripDetails,
+            trip_completion_date: null,
+          })
         : "";
 
+        dispatch(setDispatcherTrip({...trip, ...tripDetails}))
+
       updateTrip({
-        tripId,
+        trip_id: tripId,
         tripDetails,
       });
-
-      dispatch(
-        setDispatcherTripDetails({
-          ...dispatcher,
-          tripId,
-          tripStatus,
-          tripStage,
-          commencementDate: tripDetails.trip_commencement_date,
-          completionDate: tripDetails.trip_completion_date,
-        })
-      );
-      setUpdateLoading(false);
+           
     },
     [updateTrip]
   );
   const tripRequestDate = extractDateWithDayFromDate(trip?.trip_request_date);
-  const tripCompletionDate = extractDateWithDayFromDate(dispatcher.completionDate)
-  const tripCommencementDate = extractDateWithDayFromDate(dispatcher.commencementDate)
+  const tripCompletionDate = extractDateWithDayFromDate(trip?.trip_completion_date)
+  const tripCommencementDate = extractDateWithDayFromDate(trip?.trip_commencement_date)
   return {
     handleDispatcherUpdateTrip,
     dispatcher,

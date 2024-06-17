@@ -2,7 +2,7 @@
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { useGetUserTrips } from "@/components/Order/hooks/useGetUserTrips";
 import { useEffect } from "react";
-import { setDispatcherTripDetails } from "@/lib/store/slice/dispatcherSlice";
+import { setDispatcherTripDetails, setDispatcherTripId } from "@/lib/store/slice/dispatcherSlice";
 import { DispatcherTrip } from "@/components/Order/hooks/useGetUserTrips";
 
 export const useGetDispatcher = () => {
@@ -22,12 +22,9 @@ export const useGetDispatcher = () => {
 
   const dispatcherDeliveredTripsCount = previousTrips.filter((trip: DispatcherTrip)=>trip.trip_status === "Delivered").length
   const dispatcherEarnings = trips?.total_earnings
-  console.log(trips)
-  console.log('this runs ')
+  
   useEffect(() => {
     if(trips){
-      console.log('this runs in useEffect')
-      console.log(trips)
     dispatch(
       setDispatcherTripDetails({
         ...dispatcher,
@@ -40,5 +37,9 @@ export const useGetDispatcher = () => {
     )}
   }, [trips, dispatch]);
 
-  return { email, first_name, last_name, trips, user_role, dispatcher };
+
+  const handleDispatcherTripId = (tripId:string)=> {
+    dispatch(setDispatcherTripId(tripId))
+  }
+  return { email, first_name, last_name, trips, user_role, dispatcher, handleDispatcherTripId };
 };
