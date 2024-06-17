@@ -1,33 +1,75 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { Button } from "@/components/ui/button";
 import Loader from "../Loader";
 
 type HandlePagination = (options: number)=> void;
-export default function Pagination ({totalPages, setOffset, offset, limit}: {totalPages: number, setOffset: HandlePagination, offset:number, limit:number})  {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  
+
+export default function Pagination({
+  totalPages,
+  setOffset,
+  offset,
+  limit,
+  storageKey,
+}: {
+  totalPages: number;
+  setOffset: HandlePagination;
+  offset: number;
+  limit: number;
+  storageKey: string;
+}) {
+  const getInitialCurrentPage = () => {
+    const savedCurrentPage = localStorage.getItem(storageKey);
+    return savedCurrentPage ? JSON.parse(savedCurrentPage) : 1;
+  };
+  const [currentPage, setCurrentPage] = useState<number>(getInitialCurrentPage);
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(currentPage));
+    setOffset(limit * currentPage);
+  }, [currentPage, setOffset, storageKey]);
 
   const getPaginationButtons = () => {
     const pages = [];
     const maxDisplayedPages = 5;
 
-
-     if (totalPages <= maxDisplayedPages) {
+    if (totalPages <= maxDisplayedPages) {
       return [...Array(totalPages).keys()].map((page, index) => page + 1);
     }
-    
-  
 
-    if(!totalPages) {
-      pages.push(...[Array(maxDisplayedPages).keys()].map((_, index)=><Loader key={index} color="gray"/>))
-    } else  if (currentPage <= 3) {
-      pages.push(...[1, 2, 3, 4, 5, '...', totalPages]);
+    if (!totalPages) {
+      pages.push(
+        ...[Array(maxDisplayedPages).keys()].map((_, index) => (
+          <Loader key={index} color="gray" />
+        ))
+      );
+    } else if (currentPage <= 3) {
+      pages.push(...[1, 2, 3, 4, 5, "...", totalPages]);
     } else if (currentPage >= totalPages - 2) {
-      pages.push(...[1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]);
+      pages.push(
+        ...[
+          1,
+          "...",
+          totalPages - 4,
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages,
+        ]
+      );
     } else {
-      pages.push(...[1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages]);
+      pages.push(
+        ...[
+          1,
+          "...",
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          "...",
+          totalPages,
+        ]
+      );
     }
 
     return pages;
@@ -36,21 +78,21 @@ export default function Pagination ({totalPages, setOffset, offset, limit}: {tot
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      setOffset(offset-limit)
+      setOffset(offset - limit);
     }
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      setOffset(limit+offset)
+      setOffset(limit + offset);
     }
   };
 
   const handlePageClick = (page: number | string | React.ReactNode) => {
-      if (typeof page === "number"){
+    if (typeof page === "number") {
       setCurrentPage(page);
-      setOffset(limit * page)
+      setOffset(limit * page);
     }
   };
 
@@ -63,24 +105,32 @@ export default function Pagination ({totalPages, setOffset, offset, limit}: {tot
 
   return (
     <div className="flex items-center justify-center space-x-2">
-      <Button variant = {'empty'} onClick={handlePrevious} className={`${generalClass} dark:text-white`}>
+      <Button
+        variant={"empty"}
+        onClick={handlePrevious}
+        className={`${generalClass} dark:text-white`}
+      >
         <GrFormPrevious />
       </Button>
-      {
-        
-      }
-      {
-      getPaginationButtons().map((page, index) => (
-        <Button variant = {'empty'}
+      {}
+      {getPaginationButtons().map((page, index) => (
+        <Button
+          variant={"empty"}
           key={index}
           onClick={() => handlePageClick(page)}
-          className={`${generalClass} ${currentPage === page ? activeClass : inActiveClass}`}
-          disabled={page === '...'}
+          className={`${generalClass} ${
+            currentPage === page ? activeClass : inActiveClass
+          }`}
+          disabled={page === "..."}
         >
           {page}
         </Button>
       ))}
-      <Button variant = {'empty'} onClick={handleNext} className={`${generalClass} dark:text-white`}>
+      <Button
+        variant={"empty"}
+        onClick={handleNext}
+        className={`${generalClass} dark:text-white`}
+      >
         <GrFormNext />
       </Button>
     </div>

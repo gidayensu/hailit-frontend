@@ -96,7 +96,7 @@ export function AllTripsData() {
     <div>
 
     </div>
-    <Pagination totalPages={total_number_of_pages} setOffset={setOffset} offset={offset} limit={limit}/>
+    <Pagination totalPages={total_number_of_pages} setOffset={setOffset} offset={offset} limit={limit} storageKey="AllTrips"/>
     </>
   );
 }

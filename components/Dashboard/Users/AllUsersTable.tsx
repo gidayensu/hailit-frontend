@@ -21,13 +21,15 @@ import Pagination from "@/components/Shared/Pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
+import { useUserProfile } from "./hook/useUserProfile";
 
-export default function AllUsersTable({showUser}: {showUser: (show:boolean)=>void}) {
+export default function AllUsersTable({setShowUser} : {setShowUser: (state:boolean)=>void}) {
+  
   const limit = 7;
   const [offset, setOffset] = useState<number> (limit);
 
   const handleUserSelection = (selectedUserId:string)=> {
-      showUser(true)
+      setShowUser(true)
       handleSetSelectedUser(selectedUserId)
   }
 
@@ -128,7 +130,7 @@ export default function AllUsersTable({showUser}: {showUser: (show:boolean)=>voi
         </TableBody>
       </Table>
     </div>
-      <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
+      <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages} storageKey="AllUsers"/>
     </>
   );
 }
