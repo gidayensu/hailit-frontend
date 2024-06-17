@@ -65,7 +65,7 @@ export function Vehicles() {
         </TableBody>
       </Table>
     </div>
-    <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
+    <Pagination storageKey="Vehicles" limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
     </>
   );
 }
