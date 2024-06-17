@@ -16,8 +16,8 @@ import { NewOrderSchema, OrderDetails, UpdateOrderDetails, UpdateOrderSchema } f
 import { setEditingOrder } from "@/lib/store/slice/dashboardSlice";
 import { setTripMedium, setTripArea, setPackageType, setScheduled } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useEffect } from "react";
-import { Trip } from "../../StatusSection/hook/useGetTrip";
-import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { Trip } from '@/lib/store/tripSlice';
+import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 
 export const useUpdateTrip = (trip:Trip)=> {
 
@@ -25,7 +25,7 @@ export const useUpdateTrip = (trip:Trip)=> {
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
   
-  const  [updateTrip, { data, isLoading, error }] = useLazyUpdateTripQuery();
+  const  [updateTrip, { data, isLoading, error }] =   useUpdateTripMutation();
   
   const dispatch = useAppDispatch();
   const { trip_medium, trip_type, trip_area, package_type } = useAppSelector(state=>state.deliveryChoices);
