@@ -2,20 +2,20 @@
 import { useState } from "react";
 import UserDetails from "./UserDetails";
 import AllUsersTable from "./AllUsersTable";
-
+import { useUserProfile } from "./hook/useUserProfile";
+import { useAppSelector } from "@/lib/store/hooks";
 export default function AllUsers () {
     const [showUser, setShowUser] = useState<boolean>(false);
-
-    const handleShowUser = (show:boolean):void => {
-        setShowUser(show)
-    }
+    const {selectedUserId} = useAppSelector((state)=>state.dashboard)
+    
+    
         return (
             <>
-            {!showUser &&
-            <AllUsersTable showUser={handleShowUser}/>
+            {!selectedUserId &&
+            <AllUsersTable setShowUser={setShowUser} />
             }
-            {showUser &&
-            <UserDetails showUser={handleShowUser} />}
+            {selectedUserId &&
+            <UserDetails setShowUser={setShowUser} />}
             </>
         )
 }
