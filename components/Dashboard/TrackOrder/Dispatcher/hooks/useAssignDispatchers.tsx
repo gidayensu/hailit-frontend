@@ -1,65 +1,60 @@
 'use client'
-import { useGetAllDriversQuery, useGetAllRidersQuery, useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useGetAllDriversQuery, useGetAllRidersQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setAssignedDispatcher, setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
+import { setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
+import { setTrip } from "@/lib/store/tripSlice";
+import { Dispatcher } from "@/lib/store/tripSlice";
 import { useState, useCallback, useEffect } from "react";
 
-interface DispatcherToBeAssigned {
-  id: string, 
-  name: string, 
-  vehicle: string,
-  plate: string,
-  phone: string,
+interface AssignedDispatcher {
+  dispatcher_id: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  vehicle: {
+    plate_number: string;
+    vehicle_name: string;
+  };
 }
 
+
 export const useAssignDispatchers = (role:"riders" | "drivers") => {
-    const [dispatcherToBeAssigned, setDispatcherToBeAssigned] = useState<DispatcherToBeAssigned>({
-      id: '',
-      name: '',
-      vehicle: '',
-      plate: '',
-      phone: '',
-    });
-    
+    const [dispatcherToBeAssigned, setAssignedDispatcher] =
+      useState<AssignedDispatcher>({
+        dispatcher_id: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        vehicle: {
+          plate_number: "",
+          vehicle_name: "",
+        },
+      });
     const dispatch = useAppDispatch();
     const { assignedDispatcherId, selectedTripId } = useAppSelector(state=>state.dashboard);
-
+    const trip = useAppSelector(state=>state.trip);
+    const {dispatcher} = trip;
     //fetching query based on trip medium
     
     // const  [getAllDrivers, {data:driversData, isLoading:driversLoading, error:driversError}] = useLazyGetAllDriversQuery();
     // const  [getAllRiders, {data:ridersData, isLoading:ridersLoading, error:ridersError}] = useLazyGetAllRidersQuery();
-    const [updateTrip, {data:updateData, isLoading: updateLoading, error: updateError}] = useLazyUpdateTripQuery();
+    const [updateTrip, {data:updateData, isLoading: updateLoading, error: updateError}] = useUpdateTripMutation();
     const {data:ridersData, isLoading:ridersLoading, error:ridersError} = useGetAllRidersQuery('riders'); 
     const {data:driversData, isLoading:driversLoading, error:driversError} = useGetAllDriversQuery('drivers');
     // role === "riders" ? getAllRiders('riders') : getAllDrivers('drivers');
 
-    const handleAssignedDispatcher = useCallback( (dispatcherDetails: DispatcherToBeAssigned)=> {
+    const handleAssignedDispatcher = useCallback( (dispatcherDetails: AssignedDispatcher)=> {
+      dispatch(setTrip({...trip, dispatcher: {
+        ...dispatcher, ...dispatcherDetails
+      }}))
       updateTrip({
-          tripId: selectedTripId,
-          tripDetails: {dispatcher_id: dispatcherDetails.id}
+          trip_id: selectedTripId,
+          tripDetails: {dispatcher_id: dispatcherDetails.dispatcher_id}
           
         })
-        setDispatcherToBeAssigned(
-        {
-          id: dispatcherDetails.id,
-          name: dispatcherDetails.name,
-          vehicle: dispatcherDetails.vehicle,
-          plate: dispatcherDetails.vehicle,
-          phone: dispatcherDetails.phone
-        }
-      )  
         
 
-          if (updateData) {
-            dispatch(setAssignedDispatcher({
-              assignedDispatcherId: dispatcherToBeAssigned.id,
-              assignedDispatcherName: dispatcherToBeAssigned.name,
-              assignedDispatcherVehicle: dispatcherToBeAssigned.vehicle,
-              assignedDispatcherPlate: dispatcherToBeAssigned.plate, 
-              assignedDispatcherPhone: dispatcherToBeAssigned.phone
-            }))
-            dispatch(setPreviousSelectedTripId([selectedTripId]))
-          }
+          dispatch(setPreviousSelectedTripId([selectedTripId]))
       
 
         
@@ -68,6 +63,6 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
     const riders = ridersData?.riders; 
     const drivers = driversData?.drivers;
     
-    return {drivers, riders, driversLoading, ridersLoading, updateData, updateLoading, dispatcherToBeAssigned, assignedDispatcherId, driversError, ridersError, handleAssignedDispatcher, }
+    return {drivers, riders, driversLoading, ridersLoading, updateData, updateLoading, assignedDispatcherId, driversError, ridersError, dispatcher, handleAssignedDispatcher, }
     
 }
