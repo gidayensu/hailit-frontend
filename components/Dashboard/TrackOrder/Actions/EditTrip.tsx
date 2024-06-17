@@ -22,7 +22,7 @@ import {
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect } from "react";
-import { Trip } from "../StatusSection/hook/useGetTrip";
+import { Trip } from "@/lib/store/tripSlice";
 import { useUpdateTrip } from "./hook/useUpdateTrip";
 
 export default function EditTrip({ trip }: { trip: Trip }) {
@@ -133,7 +133,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
                   OR
                 </span>
                 <Link className="col-span-1" href={"/pickup-map"}>
-                  <Button variant={"outline"} className=" h-14">
+                  <Button variant={"outline"} className=" h-14 hover:none dark:hover:none">
                     <FaMapMarkerAlt className="text-lg" />
                   </Button>
                 </Link>
@@ -155,7 +155,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
                   OR
                 </span>
                 <Link className="col-span-1" href={"/drop-off-map"}>
-                  <Button variant={"outline"} className=" h-14">
+                  <Button variant={"outline"} className=" h-14 hover:none dark:hover:none">
                     <FaMapMarkerAlt className="text-lg" />
                   </Button>
                 </Link>

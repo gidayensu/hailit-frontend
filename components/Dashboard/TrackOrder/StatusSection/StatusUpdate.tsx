@@ -1,134 +1,108 @@
 import Loader from "@/components/Shared/Loader";
 import { IoMdCheckmark } from "react-icons/io";
 import { useStatusUpdate } from "../../../Order/hooks/useStatusUpdate";
-
+import { useGetTrip } from "./hook/useGetTrip";
 export default function StatusUpdate() {
-  const {
-    handleUpdateDashboardTrip,
-    loading,
-    localTripStatus,
-    tripStatus,
-    tripStage,
-    trip
-  } = useStatusUpdate();
+
+  const {trip, handleTripUpdate} = useGetTrip();
 
   return (
     <div className="w-44">
       <div className="flex flex-col gap-2 p-5 ">
         <div
           className={`${
-            tripStage === 1 ? "font-bold" : ""
+            trip?.trip_stage === 1 ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateDashboardTrip({
-              tripStage: 1,
-              tripStatus: "Booked",
-              tripCommencementDate: trip?.trip_commencement_date,
-              tripCompletionDate: trip?.trip_completion_date,
+            handleTripUpdate('1',{
+              trip_stage: 1,
+              trip_status: "Booked",
+              trip_commencement_date: trip?.trip_commencement_date,
+              trip_completion_date: trip?.trip_completion_date,
             })
           }
         >
           <p>Booked</p>
           <span>
-            {tripStatus === "Booked" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && localTripStatus.tripStatus === "Booked" ? (
-              <Loader />
-            ) : (
-              ""
-            )}
+            {trip?.trip_status === "Booked" ? <IoMdCheckmark /> : ""}
+            
           </span>
         </div>
         <div
           className={`${
-            tripStatus === "Picked Up" ? "font-bold" : ""
+            trip?.trip_status === "Picked Up" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateDashboardTrip({
-              tripStage: 2,
-              tripStatus: "Picked Up",
-              tripCommencementDate: new Date(),
-              tripCompletionDate: trip?.trip_completion_date,
+            handleTripUpdate('2',{
+              trip_stage: 2,
+              trip_status: "Picked Up",
+              trip_commencement_date: new Date(),
+              trip_completion_date: trip?.trip_completion_date,
             })
           }
         >
           <p>Picked Up</p>
           <span>
-            {tripStatus === "Picked Up" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && localTripStatus.tripStatus === "Picked Up" ? (
-              <Loader />
-            ) : (
-              ""
-            )}
+            {trip?.trip_status === "Picked Up" ? <IoMdCheckmark /> : ""}
+            
           </span>
         </div>
         <div
           className={`${
-            tripStage === 3 ? "font-bold" : ""
+            trip?.trip_stage === 3 ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateDashboardTrip({
-              tripStage: 3,
-              tripStatus: "In Transit",
-              tripCommencementDate: trip?.trip_commencement_date,
-              tripCompletionDate: trip?.trip_completion_date,
+            handleTripUpdate( '3',{
+              trip_stage: 3,
+              trip_status: "In Transit",
+              trip_commencement_date: trip?.trip_commencement_date,
+              trip_completion_date: trip?.trip_completion_date,
             })
           }
         >
           <p>In Transit</p>
           <span>
-            {tripStatus === "In Transit" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && localTripStatus.tripStatus === "In Transit" ? (
-              <Loader />
-            ) : (
-              ""
-            )}
+            {trip?.trip_status === "In Transit" ? <IoMdCheckmark /> : ""}
+            
           </span>
         </div>
         <div
           className={`${
-            tripStatus === "Delivered" ? "font-bold" : ""
+            trip?.trip_status === "Delivered" ? "font-bold" : ""
           } flex items-center justify-between h-10`}
           onClick={() =>
-            handleUpdateDashboardTrip({
-              tripStage: 4,
-              tripStatus: "Delivered",
-              tripCommencementDate: trip?.trip_commencement_date,
-              tripCompletionDate: new Date(),
+            handleTripUpdate( '4',{
+              trip_stage: 4,
+              trip_status: "Delivered",
+              trip_commencement_date: trip?.trip_commencement_date,
+              trip_completion_date: new Date(),
             })
           }
         >
           <p>Delivered</p>
           <span>
-            {tripStatus === "Delivered" && !loading ? <IoMdCheckmark /> : ""}
-            {loading && localTripStatus.tripStatus === "Delivered" ? (
-              <Loader />
-            ) : (
-              ""
-            )}
+            {trip?.trip_status === "Delivered" ? <IoMdCheckmark /> : ""}
+           
           </span>
         </div>
-        {tripStatus !== "Delivered" && (
+        {trip?.trip_status !== "Delivered" && (
           <div
             className={`${
-              tripStatus === "Cancelled" ? "font-bold" : ""
+              trip?.trip_status === "Cancelled" ? "font-bold" : ""
             } flex items-center justify-between h-10`}
             onClick={() =>
-              handleUpdateDashboardTrip({
-                tripStage: tripStage,
-                tripStatus: "Cancelled",
-                tripCommencementDate: trip?.trip_commencement_date,
-                tripCompletionDate: trip?.trip_completion_date,
+              handleTripUpdate('5',{
+                trip_stage: trip?.trip_stage,
+                trip_status: "Cancelled",
+                trip_commencement_date: trip?.trip_commencement_date,
+                trip_completion_date: trip?.trip_completion_date,
               })
             }
           >
             <p>Cancelled</p>
             <span>
-              {tripStatus === "Cancelled" && !loading ? <IoMdCheckmark /> : ""}
-              {loading && localTripStatus.tripStatus === "Cancelled" ? (
-                <Loader />
-              ) : (
-                ""
-              )}
+              {trip?.trip_status === "Cancelled" ? <IoMdCheckmark /> : ""}
+              
             </span>
           </div>
         )}

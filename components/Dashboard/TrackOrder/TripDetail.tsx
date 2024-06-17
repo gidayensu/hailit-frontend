@@ -25,8 +25,9 @@ export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tr
         <div className="space-y-3 mb-24">
           <article className="flex flex-col gap-4">
             <section className="flex gap-2 text-2xl mb-2">
-              <h2> Order:</h2>
-              <h1 className="font-bold">{trip.trip_id}</h1>
+              <h1> Order:</h1>
+              <h2 className="font-bold">{trip.trip_id}</h2>
+              <h2 className="font-bold"> - {trip.package_type}</h2>
             </section>
             <section className="flex gap-3">
               
@@ -64,7 +65,7 @@ export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tr
           <article className="flex flex-col lg:flex-row w-full gap-4">
             <div className="w-full lg:w-3/6 space-y-5">
               <Container className="flex flex-col  w-full h-52 rounded-lg p-3 gap-2">
-                <StatusSection tripStage={tripStage} tripStatus={tripStatus} />
+                <StatusSection tripStage={trip?.trip_stage} tripStatus={trip?.trip_status} />
               </Container>
               <Container className=" w-full h-60 rounded-lg p-6">
                 <PackageSection trip={trip} />

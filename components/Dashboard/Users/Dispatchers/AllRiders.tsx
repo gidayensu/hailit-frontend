@@ -68,7 +68,7 @@ export function AllRiders() {
         </TableBody>
       </Table>
     </div>
-    <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
+    <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages} storageKey="AllRiders"/>
     </>
   );
 }

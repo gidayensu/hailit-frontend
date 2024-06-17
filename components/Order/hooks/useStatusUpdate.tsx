@@ -1,5 +1,5 @@
 "use client";
-import { useLazyUpdateTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setPreviousSelectedTripId, setTripStatus,TripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
 
@@ -28,7 +28,7 @@ export const useStatusUpdate = ()=> {
   const [
     updateTrip,
     { data: updateData, isLoading: updateLoading, error: updateError },
-  ] = useLazyUpdateTripQuery();
+  ] =   useUpdateTripMutation();
 
   
   const handleUpdateDashboardTrip = useCallback((statusDetails: TripStatusandStage) => {

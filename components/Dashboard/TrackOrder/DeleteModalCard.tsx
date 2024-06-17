@@ -11,7 +11,7 @@ export default function DeleteModalCard ({itemId, item}: {itemId:string, item:st
                     <h2 className="text-center text-lg mb-2 animate-in slide-in-from-bottom duration-100">
                       Permanently delete <br/> {item}:  <b>{itemId} </b> ?
                     </h2>
-                    <h3 className="text-center text-[12px]  text-red-500 animate-in slide-in-from-bottom duration-150">
+                    <h3 className="text-center text-[14px]  text-red-500 animate-in slide-in-from-bottom duration-150">
                       This is irreversible
                     </h3>
                   </div>

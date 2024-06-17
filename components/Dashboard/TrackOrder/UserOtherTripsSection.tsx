@@ -45,6 +45,7 @@ export default function UserOtherTrips({
                             tripId={trip.trip_id}
                             tripRequestDate={extractDateWithDayFromDate(
                               trip.trip_request_date
+                            
                             )}
                           />
                         </div>

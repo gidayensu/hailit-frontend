@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button"
 import { LuUser } from "react-icons/lu"
 import { useGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useGetUser } from "../Users/hook/useGetUser";
 export default function CustomerSection ({customerId}: {customerId:string}) {
-    const {data, isLoading, error} = useGetUserQuery(`${customerId}`);
-    const user = data?.user
+    const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
+    
+    
     return(
         <>
         <div className="flex justify-between">
@@ -18,6 +20,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
             <Button
               variant={"empty"}
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
+              onClick={handleSelectUser}
             >
               <LuUser className="text-xl " />
               <p>View</p>
@@ -30,7 +33,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
                 <Skeleton className="w-32"/>
             </div>
           } {
-          data && user &&  
+           user &&  
           <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="space-y-1">

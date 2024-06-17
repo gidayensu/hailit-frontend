@@ -13,10 +13,10 @@ export default function OrderSummary({ trip }: { trip:any }) {
   return (
     <>
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
-        <div className="flex justify-between items-center -mt-1">
+        <div className="flex justify-between items-center -mt-1 ">
           
           <div className="flex flex-col items-start">
-            {path.startsWith('/dispatcher')  &&
+            {path ==='/dispatcher'  &&
             <>
             <p className="text-[12px] text-slate-500">Order ID</p>
             <h3 className="font-bold text-[14px] ">{trip.trip_id}</h3>
