@@ -8,7 +8,7 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:4000
+    baseUrl: `https://hailit-backend.onrender.com
 /api/v1/`,
     prepareHeaders: async (headers) => {
       
