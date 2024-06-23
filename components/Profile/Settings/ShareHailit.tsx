@@ -16,7 +16,7 @@ import { copyToClipBoard } from "@/lib/utils";
 import { FaFacebook } from "react-icons/fa";
 import toast, {Toaster} from "react-hot-toast";
 export default function ShareHailit() {
-  const shareUrl = "https://hailit-frontend.vercel.app";
+  const shareUrl = "https://hailit.vercel.app";
   const title = "Hailit";
   const inputAndLabelDivClass = "w-full  items-center";
   const labelClass = "text-md font-medium mb-2";
