@@ -7,7 +7,9 @@ import { useUserProfile } from "./hook/useUserProfile";
 import UserTripsTable from "./UserTripsTable";
 import { UserRole } from "@/lib/store/slice/userSlice";
 
-export default  function UserDetails ({userRole}: {userRole?:UserRole}) {
+
+//UserDetails accepts userRole to show details based on the userRole
+export default  function UserDetails ({userRole}: {userRole:UserRole}) {
 const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile(userRole);
   const total_trip_count = userTrips?.total_trip_count
   const selectedUserId = selectedUser?.user_id
