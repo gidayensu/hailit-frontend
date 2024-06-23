@@ -13,7 +13,7 @@ import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
-export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tripStage: number, tripStatus: string}) {
+export default function TripDetail ({trip}: {trip:any}) {
     const dispatch = useAppDispatch();
     const dispatcher = trip?.dispatcher;
     const handleEditTrip = ()=> {
@@ -22,12 +22,22 @@ export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tr
      dispatch(setTrackingOrder(false))
 }
     return (
-        <div className="space-y-3 mb-24">
+        <div className="space-y-3 md:mb-0 mb-24">
           <article className="flex flex-col gap-4">
-            <section className="flex gap-2 text-2xl mb-2">
+            <section className="flex flex-col md:flex-row gap-2 text-xl mb-2">
+              <span className="flex gap-2">
+
               <h1> Order:</h1>
-              <h2 className="font-bold">{trip.trip_id}</h2>
-              <h2 className="font-bold"> - {trip.package_type}</h2>
+              <h2 className="font-bold">{trip.trip_id}</h2> 
+                <span className="hidden md:block">|     </span>
+              </span>
+
+              <span className="flex gap-2">
+              <h1> Package Type:</h1>
+              <h2 className="font-bold">{trip.package_type}</h2>
+              </span>
+              
+              
             </section>
             <section className="flex gap-3">
               
@@ -68,7 +78,7 @@ export default function TripDetail ({trip, tripStage, tripStatus}: {trip:any, tr
                 <StatusSection tripStage={trip?.trip_stage} tripStatus={trip?.trip_status} />
               </Container>
               <Container className=" w-full h-60 rounded-lg p-6">
-                <PackageSection trip={trip} />
+                <PackageSection/>
               </Container>
             </div>
 

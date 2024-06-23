@@ -23,7 +23,7 @@ export default function TrackOrder() {
   } = useGetTrip();
   
   return (
-    <main className="flex flex-col gap-5  md:h-full mb-44 ">
+    <main className="flex flex-col gap-5  md:h-full md:mb-0 mb-44 ">
       {/* HEADER */}
       {!trackingOrder && !editingOrder && (
         <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
@@ -32,7 +32,7 @@ export default function TrackOrder() {
       {trackingOrder && !editingOrder && isLoading  && <BigLoader />}
 
       {trackingOrder &&  !editingOrder && !isLoading && trip &&  (
-        <TripDetail trip={trip} tripStage={tripStage} tripStatus={tripStatus}/>
+        <TripDetail trip={trip}/>
         )}
       {editingOrder && <EditTrip trip={trip}/>}
     </main>

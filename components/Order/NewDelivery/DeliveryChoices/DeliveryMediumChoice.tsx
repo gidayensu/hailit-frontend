@@ -28,19 +28,19 @@ export default function DeliveryMediumChoice () {
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
                 
-                MainIcon={AiFillCar}
-                elementOption="Car"
+                MainIcon={FaMotorcycle}
+                elementOption="Motor"
               >
-                <p className="text-sm md:text-md text-center">Big package</p>
+                <p className="text-sm md:text-md text-center">Medium package</p>
               </DeliveryChoices>
               <DeliveryChoices
                 handleDeliveryOption={handleDeliveryChoice}
                 deliveryOption={trip_medium}
                 
-                MainIcon={FaMotorcycle}
-                elementOption="Motor"
+                MainIcon={AiFillCar}
+                elementOption="Car"
               >
-                <p className="text-sm md:text-md text-center">Medium package</p>
+                <p className="text-sm md:text-md text-center">Big package</p>
               </DeliveryChoices>
         </>
     )

@@ -46,7 +46,7 @@ const [loading, setLoading]  = useState<boolean>(false);
       setLoading(true)
     }
   return (
-    <main className="flex min-h-screen flex-col mt-16 items-center gap-4">
+    <main className="flex min-h-screen flex-col mt-16 items-center gap-4 mb-24 md:mb-0">
       <div className="flex flex-col items-center justify-center ml-6 gap-2 w-64">
         <span className="text-4xl font-bold text-green-500 text-center">Order Successful!</span>
         <p className=" text-center">

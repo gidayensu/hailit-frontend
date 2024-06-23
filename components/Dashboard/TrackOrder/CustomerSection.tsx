@@ -1,12 +1,12 @@
 'use client'
 import { Button } from "@/components/ui/button"
 import { LuUser } from "react-icons/lu"
-import { useGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
+import { extractShortDate } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetUser } from "../Users/hook/useGetUser";
 export default function CustomerSection ({customerId}: {customerId:string}) {
     const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
-    
+    console.log(user)
     
     return(
         <>
@@ -37,16 +37,20 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
           <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
             <div className="flex w-full items-start justify-between text-sm">
               <div className="space-y-1">
-                <ul>Name</ul>
+                <ul>First Name</ul>
+                <ul>Last Name</ul>
                 <ul>Email</ul>
                 <ul>Phone</ul>
+                <ul>Date Joined</ul>
                 
                 
               </div>
               <div className="space-y-1 text-right font-semibold">
-                <ul>{user.first_name} {user.last_name}</ul>
+                <ul>{user.first_name}</ul>
+                <ul>{user.last_name}</ul>
                 <ul>{user.email}</ul>
                 <ul>{user.phone_number}</ul>
+                <ul>{extractShortDate(user.date_created)}</ul>
                 
                 
               </div>

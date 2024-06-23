@@ -47,15 +47,15 @@ export default function TripAreaMediumAndType () {
             </span>
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
-                itemType="Today"
+                itemType="Same Day"
                 selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Today", "trip type")}}
+                onClickFunc={() => {handleTripChoices("Same Day", "trip type")}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Tomorrow"
+                itemType="Next Day"
                 selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Tomorrow", "trip type")}}
+                onClickFunc={() => {handleTripChoices("Next Day", "trip type")}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons

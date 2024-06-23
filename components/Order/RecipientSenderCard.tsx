@@ -13,10 +13,10 @@ export default function RecipientSenderCard({
   phoneNumber: string;
 }) {
   return (
-    <Container className="w-full rounded-xl border  h-24  p-4 flex justify-between items-center">
+    <Container className="w-full rounded-xl border   max-h-32  p-4 flex justify-between items-center">
       <div className="flex items-center gap-2">
         <span>
-          <p className="font-semibold text-sm w-40">{location}</p>
+          <p className="font-semibold text-sm w-34 ">{location}</p>
         </span>
       </div>
       <div className="flex justify-center items-center gap-2">

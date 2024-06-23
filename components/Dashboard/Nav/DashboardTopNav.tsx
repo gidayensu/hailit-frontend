@@ -1,6 +1,7 @@
 "use client";
 import type { CurrentTheme } from "@/app/profile/page";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

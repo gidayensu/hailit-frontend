@@ -13,6 +13,7 @@ import TripAreaMediumAndType from "./TripAreaMediumAndType";
 
 //redux + next + react + helper
 import { CalendarField } from "@/components/Form/FormField";
+import { useAppSelector } from "@/lib/store/hooks";
 import {
   setTripMedium,
   setTripArea,
@@ -22,7 +23,7 @@ import {
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect } from "react";
-import { Trip } from "@/lib/store/tripSlice";
+import { Trip } from "@/lib/store/slice/tripSlice";
 import { useUpdateTrip } from "./hook/useUpdateTrip";
 
 export default function EditTrip({ trip }: { trip: Trip }) {
@@ -49,12 +50,15 @@ export default function EditTrip({ trip }: { trip: Trip }) {
       dispatch(setScheduled(true));
     }
   }, [trip?.package_type, trip?.trip_type]);
+
+  const {dropOffLocationName, pickUpLocationName} = useAppSelector(state=>state.map)
+
   return (
     <main className=" bg-white dark:bg-secondary-dark p-6 rounded-xl flex flex-col">
       <h1 className="mb-2 text-2xl">
         Editing Trip: <b>{trip?.trip_id}</b>
       </h1>
-      <h1 className="text-sm mb-5">
+      <h1 className="text-md mb-5">
         Requested On: <b>{extractDateWithDayFromDate(trip?.trip_request_date)}</b>
       </h1>
       <FormProvider {...formMethods}>
@@ -95,14 +99,14 @@ export default function EditTrip({ trip }: { trip: Trip }) {
           <SelectDate schedule={false} select = {field.value} onSelect = {field.onChange} />
         )}
       /> */}
-      <CalendarField name="pickup_date" datePurpose = "pickup"/>
+      <CalendarField name="pickup_date" datePurpose = "pickup" defaultValue={trip?.trip_commencement_date?.toString()}/>
     
                 
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-[14px] font-bold">Delivery Date</h3>
                 
-      <CalendarField name="delivery_date" datePurpose= "delivery"/>
+      <CalendarField name="delivery_date" datePurpose= "delivery" defaultValue={trip?.trip_completion_date?.toString()}/>
           
               </div>
             </div>
@@ -126,7 +130,8 @@ export default function EditTrip({ trip }: { trip: Trip }) {
                     placeholder="Enter location for pickup"
                     className="h-14"
                     name="pickup_location"
-                    defaultValue={trip?.pickup_location}
+                    
+                    defaultValue={pickUpLocationName ? pickUpLocationName : trip?.pickup_location}
                   />
                 </div>
                 <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">
@@ -148,7 +153,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
                     placeholder="Enter drop off location"
                     className="h-14"
                     name="drop_off_location"
-                    defaultValue={trip?.drop_off_location}
+                    defaultValue={dropOffLocationName ? dropOffLocationName : trip?.drop_off_location}
                   />
                 </div>
                 <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">

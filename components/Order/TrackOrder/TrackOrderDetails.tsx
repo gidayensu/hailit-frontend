@@ -35,7 +35,7 @@ export default function TrackOrderDetails() {
     return (
       <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-          <span className="text-5xl font-bold ">No data found for {trip_id}</span>
+          <span className="text-4xl font-bold ">No trip is associated with ID {trip_id}</span>
           <p className="text-lg font-bold">
             Check the trip ID and ensure that you are not missing a value and
             search again
