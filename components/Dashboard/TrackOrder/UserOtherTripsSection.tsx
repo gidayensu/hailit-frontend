@@ -50,10 +50,12 @@ export default function UserOtherTrips({
                           />
                         </div>
                       )}
+               
                     </div>
                   ))}
                 </>
               )}
+          
             </div>
 
         </>

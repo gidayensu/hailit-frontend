@@ -28,7 +28,7 @@ export default function DispatcherTripDetail () {
     
     
   const { user_role } = useGetDispatcher();
-  if (user_role === "customer" || user_role === "admin" || !user_role) {
+  if (user_role === "customer" || !user_role) {
     redirect("/profile");
   }
   let updateStatus: TripStatus = "Picked Up";
@@ -91,7 +91,7 @@ export default function DispatcherTripDetail () {
                 disabled = {updateLoading}
               >
                 
-                {updateLoading ? <Loader/>  : `Mark as ${updateStatus}`}
+                {updateLoading ? <Loader color="primary"/>  : `Mark as ${updateStatus}`}
               </Button>
             </TrackOrderContainer>
           )}

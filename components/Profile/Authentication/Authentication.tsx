@@ -23,9 +23,6 @@ export default function Authentication () {
           </div>
             <span className="text-7xl font-bold">Hello!</span>
             <p className="text-3xl">Welcome to Hailit</p>
-            <p className="text-center mt-8">
-              Move Goods With Speed
-            </p>
           </div>
           <div className="">
 

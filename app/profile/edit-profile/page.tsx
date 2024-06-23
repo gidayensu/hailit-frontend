@@ -19,10 +19,10 @@ export default function EditProfile() {
         </TopSectionContainer>
 
         <MiddleSectionContainer className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] p-10 mb-20">
-          <div className="w-full space-y-6">
+          <div className="w-full flex flex-col items-center justify-center gap-4">
             <CustomerProfile />
 
-            <Button type="submit" className="w-full h-14" form="customerProfileUpdate">
+            <Button type="submit" className="max-w-sm w-full h-14" form="customerProfileUpdate">
               Save
             </Button>
           </div>

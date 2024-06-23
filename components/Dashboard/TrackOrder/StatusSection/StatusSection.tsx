@@ -73,7 +73,7 @@ export default function StatusSection({
             orderStage={4}
           >
             <GoChecklist
-              className={`text-3xl ${tripStage === 4 ? "text-green-500" : ""} `}
+              className={`text-3xl ${tripStage == 4 ? "text-green-500" : ""} `}
             />
           </OrderStatusElement>
         )}
@@ -84,7 +84,7 @@ export default function StatusSection({
             currentOrderStage={tripStage}
             orderStage={0}
           >
-            <GoX className="text-3xl text-red-500" />
+            <GoX className="text-3xl text-red-500 dark:text-red-500" />
           </OrderStatusElement>
         )}
       </div>

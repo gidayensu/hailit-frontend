@@ -1,8 +1,7 @@
 'use client'
-import { Button } from "@/components/ui/button"
-import { LuUser } from "react-icons/lu"
-import { extractShortDate } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { extractShortDate } from "@/lib/utils";
 import { useGetUser } from "../Users/hook/useGetUser";
 export default function CustomerSection ({customerId}: {customerId:string}) {
     const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
@@ -22,7 +21,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
               onClick={handleSelectUser}
             >
-              <LuUser className="text-xl " />
+              
               <p>View</p>
             </Button>
           </div>

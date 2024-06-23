@@ -29,7 +29,7 @@ export default function UserTripsTable() {
       
         
           
-        <div className="h-1/5 md:w-64 flex lg:md-0 items-center justify-center ">
+        <div className="h-80 md:w-80 flex items-center justify-center  ">
         <NoData
           noDataText="User has made no orders"
           textClassName="font-semibold text-center"
@@ -49,12 +49,13 @@ export default function UserTripsTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {isLoading && <SkeletonTable rows={7} cells={8} />}
+        {isLoading && <SkeletonTable rows={6} cells={7} />}
         {userTrips &&
           userTrips?.customer_trips.map((trip: any) => (
             <TableRow
               key={trip.trip_id}
               onClick={() => handleTrackTrip(trip.trip_id)}
+              className="cursor-pointer"
             >
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
 

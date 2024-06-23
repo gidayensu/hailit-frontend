@@ -5,12 +5,13 @@ import { supabaseSignOut } from "@/lib/supabaseAuth"
 import { userLogout } from "@/lib/store/actions"
 import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
 import { PiMotorcycleFill } from "react-icons/pi";
+import { RiMotorbikeFill } from "react-icons/ri";
 import DashboardSections from "./DashboardSections"
 import { Separator } from "@/components/ui/separator"
 import { RiFileListLine, RiSteering2Line } from "react-icons/ri"
 import { IoLogOutOutline } from "react-icons/io5"
 import { MdOutlineSportsMotorsports } from "react-icons/md"
-
+import { MdInsertChartOutlined } from "react-icons/md";
 export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveSection, activeSection}: {dashMin: boolean, handleDashMin: ()=>void, handleActiveSection: (section: string)=>void, activeSection:string }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -101,7 +102,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <PiMotorcycleFill className="text-2xl -scale-x-100" />
+              <RiMotorbikeFill className="text-2xl -scale-x-100" />
             </DashboardSections>
             <DashboardSections
               dashMin={dashMin}
@@ -109,7 +110,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <PiMotorcycleFill className="text-2xl -scale-x-100" />
+              <MdInsertChartOutlined className="text-2xl -scale-x-100" />
             </DashboardSections>
           </div>
 

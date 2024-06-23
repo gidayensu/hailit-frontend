@@ -12,7 +12,7 @@ const options: Highcharts.Options = {
         text: 'My chart'
     },
     series: [{
-        type: 'pie',
+        type: 'bar',
         data: [{
           name: 'Water',
           y: 55.02
@@ -67,12 +67,15 @@ export default function TripsDonut (props: HighchartsReact.Props) {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      ref={chartComponentRef}
-      {...props}
-    />
+    <section className='w-1/2'>
+
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+          ref={chartComponentRef}
+          {...props}
+        />
+    </section>
   );
 };
 // Render your App component into the #root element of the document.

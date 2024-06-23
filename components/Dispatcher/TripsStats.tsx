@@ -14,7 +14,7 @@ export default function TripsStats () {
         <Container className="w-full flex items-center justify-center h-32 rounded-xl mb-8">
         <div className="flex flex-col items-center justify-center gap-3 w-1/2">
                         <span className="flex items-center justify-center text-[12px] w-full bg-teal-500 font-medium h-6 dark:text-black rounded-md"><p>Your Earnings</p></span>
-                        <p className="text-5xl font-bold">¢{isLoading ? <Loader color="primary"/> : (dispatcherEarnings || 0)}</p>
+                        <p className="text-5xl font-bold">{isLoading ? <Loader color="primary"/> : `¢${dispatcherEarnings}` || "¢0"}</p>
                         
                 </div>
         </Container>

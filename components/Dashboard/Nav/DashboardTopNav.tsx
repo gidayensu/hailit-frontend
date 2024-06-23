@@ -6,8 +6,9 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { useAppSelector } from "@/lib/store/hooks";
 export default function DashboardTopNav() {
+  const {last_name, first_name} = useAppSelector(state=>state.user)
   const { theme, setTheme, systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
 
@@ -55,10 +56,10 @@ export default function DashboardTopNav() {
       <section className="flex gap-2 justify-end items-center w-full ">
         <div className="hidden md:flex items-center  w-full  justify-end rounded-full h-12 gap-2">
           <div className="flex items-center justify-center border-none bg-black dark:bg-white dark:text-secondary-dark text-white rounded-full  md:h-12 md:w-12 sm:h-8 sm:w-8 -ml-1">
-            <p>J</p>
+            <p>{first_name[0]}</p>
           </div>
           <div className="flex flex-col items-start justify-center">
-            <p className="font-bold text-md">Administrator</p>
+            <p className="font-bold text-md">{first_name} {last_name}</p>
             <p className="font-bold text-[12px] opacity-50">Administrator</p>
           </div>
         </div>

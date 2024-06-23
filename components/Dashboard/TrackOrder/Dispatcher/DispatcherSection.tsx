@@ -41,7 +41,7 @@ export default function DispatcherSection({
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
               <>
-                <TbArrowsExchange className="text-xl " />
+                
                 <p>
                   {dispatcher.dispatcher_id === DEFAULT_DISPATCHER_ID
                     ? "Assign"

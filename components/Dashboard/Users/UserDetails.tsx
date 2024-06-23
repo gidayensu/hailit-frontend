@@ -65,7 +65,7 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
               </h2>
             }
 
-          <Container className="rounded-xl">
+          <Container className="rounded-xl flex justify-center items-center">
             <UserTripsTable />
           </Container>
           </section>
