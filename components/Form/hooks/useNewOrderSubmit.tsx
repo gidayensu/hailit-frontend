@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 
 //redux + next + react + helper
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
@@ -27,7 +27,7 @@ export const useNewOrderSubmit = () => {
   const {package_type, trip_type, trip_area, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
   const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
-  const  [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
+  const  [addTrip, { data, isLoading, error }] = useAddTripMutation();
  
 
   const formMethods = useForm<OrderDetails>({

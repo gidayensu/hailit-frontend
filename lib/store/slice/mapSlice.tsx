@@ -39,8 +39,6 @@ export const mapSlice = createSlice({
       
     },
 
-     
-
     setSearchContainer(state, action: PayloadAction<boolean>) {
       state.searchContainer = action.payload
     },
@@ -48,16 +46,19 @@ export const mapSlice = createSlice({
     resetSearch(state) {
       state.searchContainer = false;
       state.searchData = ['1', '2'];
+    },
+    resetMapData(state) {
+      return initialState;
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPickUpLocationName.fulfilled, (state, action: PayloadAction<string>) => {
         state.pickUpLocationName = action.payload;
-        console.log('this pickup extra reducer is running')
+        
       })
       .addCase(fetchDropOffLocationName.fulfilled, (state, action: PayloadAction<string>) => {
-        console.log('this dropoff extra reducer is running')
+        
         state.dropOffLocationName = action.payload;
       });
   },
@@ -66,7 +67,7 @@ export const mapSlice = createSlice({
 export const {
   setSearchData,
   setPickUpLocation,
-
+  resetMapData,
   setSearchContainer,
   setDropOffLocation,
 

@@ -25,6 +25,8 @@ export default function Pagination({
   };
   const [currentPage, setCurrentPage] = useState<number>(getInitialCurrentPage);
 
+  //store current page in localstorage. StorageKey associated with the table using the pagination
+  //component
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify(currentPage));
     setOffset(limit * currentPage);
@@ -41,7 +43,7 @@ export default function Pagination({
     if (!totalPages) {
       pages.push(
         ...[Array(maxDisplayedPages).keys()].map((_, index) => (
-          <Loader key={index} color="gray" />
+          <Loader key={index} />
         ))
       );
     } else if (currentPage <= 3) {

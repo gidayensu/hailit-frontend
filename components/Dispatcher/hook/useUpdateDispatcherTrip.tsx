@@ -36,12 +36,11 @@ export const useUpdateDispatcherTrip = () => {
   console.log('THIS BE DATA',data)
   const tripData = data?.trip
   useEffect(()=>{
-    if(tripData && data) {
 
       dispatch(setDispatcherTrip(tripData))
       
-    }
-  }, [tripData, data])
+
+  }, [tripData])
   
   
   const { user_role } = useGetDispatcher();
@@ -51,9 +50,7 @@ export const useUpdateDispatcherTrip = () => {
 
   
 
-  
 
-  
 
   const handleDispatcherUpdateTrip = useCallback(
     (tripId: string, tripStatus: TripStatus, tripStage: TripStage) => {
@@ -62,8 +59,8 @@ export const useUpdateDispatcherTrip = () => {
       let tripDetails: TripStatusDBUpdate = {
         trip_status: tripStatus,
         trip_stage: tripStage,
-        trip_commencement_date: dispatcher.trip.trip_commencement_date,
-        trip_completion_date: dispatcher.trip.trip_completion_date,
+        trip_commencement_date: dispatcher.trip?.trip_commencement_date,
+        trip_completion_date: dispatcher.trip?.trip_completion_date,
       };
 
       tripStatus === "Delivered"

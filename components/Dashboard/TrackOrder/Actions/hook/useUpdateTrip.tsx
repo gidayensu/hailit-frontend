@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 
 //redux + next + react + helper
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
@@ -13,15 +13,16 @@ import { useRef, useState } from "react";
 
 //interface
 import { NewOrderSchema, OrderDetails, UpdateOrderDetails, UpdateOrderSchema } from '@/components/Form/FormTypes';
-import { setEditingOrder } from "@/lib/store/slice/dashboardSlice";
-import { setTripMedium, setTripArea, setPackageType, setScheduled } from "@/lib/store/slice/deliveryChoicesSlice";
+import { setEditingOrder, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { setTripMedium, setTripArea, setPackageType, setScheduled, resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useEffect } from "react";
-import { Trip } from '@/lib/store/tripSlice';
+import { Trip } from '@/lib/store/slice/tripSlice';
 import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { resetMapData } from '@/lib/store/slice/mapSlice';
 
 export const useUpdateTrip = (trip:Trip)=> {
 
-
+  const { selectedTripId } = useAppSelector(state=>state.dashboard)
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
   
@@ -42,6 +43,7 @@ export const useUpdateTrip = (trip:Trip)=> {
 
   
   const handleCancel = ()=> {
+    dispatch(setTrackingOrder(true))
     dispatch(setEditingOrder(false))
   }
 
@@ -53,7 +55,7 @@ export const useUpdateTrip = (trip:Trip)=> {
   
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
     
-  console.log({data})
+  
     setUpdateLoading(true);
 
     if(!package_type) {
@@ -63,12 +65,21 @@ export const useUpdateTrip = (trip:Trip)=> {
         
       )
     }
-    const formDetails = {...data, package_type, control, trip_type, trip_area:trip_area, trip_medium};
-    console.log({formDetails})
-    // updateTrip(formDetails)
+    const trip_commencement_date = data.pickup_date;
+    const trip_completion_date = data.delivery_date;
+
+    const tripDetails = {...data, trip_commencement_date, trip_completion_date, package_type, trip_type, trip_area, trip_medium};
+    
+    updateTrip({trip_id: selectedTripId, tripDetails})
+    
     
   }
-
+  if(data) {
+    dispatch(resetDeliveryChoices())
+    dispatch(resetMapData())
+    dispatch(setTrackingOrder(true))
+    dispatch(setEditingOrder(false))
+  }
 
   return {formMethods, control, dispatch, handleCancel, handleSubmit, onDeliveryFormSubmit, packageTypeRef, trip_medium, trip_type, trip_area, package_type , updateLoading, isLoading, register}
 

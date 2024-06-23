@@ -11,11 +11,13 @@ export const useGetDispatcher = () => {
     (state) => state.user
   );
   const dispatcher = useAppSelector((state) => state.dispatcher);
+  
   const {
     trips,
     currentTrips,
     previousTrips,
     currentTripsCount,
+    isLoading
     
   } = useGetUserTrips();
 
@@ -41,5 +43,5 @@ export const useGetDispatcher = () => {
   const handleDispatcherTripId = (tripId:string)=> {
     dispatch(setDispatcherTripId(tripId))
   }
-  return { email, first_name, last_name, trips, user_role, dispatcher, handleDispatcherTripId };
+  return { email, first_name, last_name, trips, user_role, dispatcher, handleDispatcherTripId, isLoading };
 };

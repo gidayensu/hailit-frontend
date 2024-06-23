@@ -13,9 +13,9 @@ export const NewOrderSchema: ZodType<OrderDetails> = z.object({
     required_error: "Pickup date is required.",
   })),
   
-  delivery_date: z.date({
-    required_error: "Delivery date is required.",
-  })
+  // delivery_date: z.date({
+  //   required_error: "Delivery date is required.",
+  // })
 });
 export const UpdateOrderSchema: ZodType<UpdateOrderDetails> = z.object({
   pickup_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
@@ -101,7 +101,7 @@ export interface UpdateOrderDetails {
   recipient_number: string,
   package_value?: string ,
   additional_information?: string,
-  pickup_date?: Date,
+  pickup_date?: Date ,
   drop_off_date?: Date
 }
 
@@ -134,8 +134,9 @@ export type FormFieldProps = {
     calendar? : boolean;
     schedule? : boolean;
     children? : React.ReactNode
+    value? : string,
     datePurpose?: string
-    
+    [key: string]: any;
   };
 
 

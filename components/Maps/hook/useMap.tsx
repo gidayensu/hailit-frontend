@@ -122,7 +122,7 @@ export const useMap = (locationType: LocationType) => {
   //   }
   // }, [dropOffLocation]);
 
-  //push this to store or state
+  //redirect either to new order or dashboard depending on where the map is being accessed.
   const handleSelectedLocation = () => {
     setLoading(true);
     locationType === "drop off"
@@ -131,7 +131,7 @@ export const useMap = (locationType: LocationType) => {
     locationType === "pickup"
       ? dispatch(setPickUpLocation(pickUpLocation))
       : "";
-    router.push("/order/new");
+    router.back();
   };
 
   return {

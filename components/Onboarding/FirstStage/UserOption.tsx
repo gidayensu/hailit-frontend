@@ -20,7 +20,7 @@ export default function UserOption ({selectedUserRole, selectedUserRoleHandler, 
                     <div className="flex items-center justify-center w-full h-44 rounded-xl border border-primary-color bg-white dark:bg-secondary-dark object-contain">
                       <Lottie
                         animationData={animation}
-                        className="w-96 object-contain -ml-8 md:w-52"
+                        className="w-52 object-contain  md:w-52"
                       />
                     </div>
                     <span

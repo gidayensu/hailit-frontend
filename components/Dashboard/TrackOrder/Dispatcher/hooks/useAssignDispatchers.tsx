@@ -2,8 +2,8 @@
 import { useGetAllDriversQuery, useGetAllRidersQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
-import { setTrip } from "@/lib/store/tripSlice";
-import { Dispatcher } from "@/lib/store/tripSlice";
+import { setTrip } from "@/lib/store/slice/tripSlice";
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import { useState, useCallback, useEffect } from "react";
 
 interface AssignedDispatcher {

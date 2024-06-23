@@ -6,7 +6,7 @@ import { NewTrip } from "@/components/Form/FormTypes";
 
 //redux+next+react
 import { useState } from "react";
-import { useLazyAddTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ export const useReOrder = (tripData: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [addTrip, { data, isLoading, error }] = useLazyAddTripQuery();
+  const [addTrip, { data, isLoading, error }] = useAddTripMutation();
   const handleSubmit = () => {
     setLoading(true);
     addTrip(tripDetails);

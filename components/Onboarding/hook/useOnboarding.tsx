@@ -3,24 +3,21 @@
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-import {
-    setBoardingCompletion,
-    setOnboardingStages,
-} from "@/lib/store/slice/onBoardingSlice";
+import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
+import { setBoardingCompletion, setOnboardingStages} from "@/lib/store/slice/onBoardingSlice";
 import { setUser } from "@/lib/store/slice/userSlice";
 
 export const useOnboarding = ()=> {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  
   const router = useRouter();
   const dispatch = useAppDispatch();
-
+  const {loading} = useCustomerProfile();
   const { authenticationState } = useAppSelector((state) => state.auth);
   const { onboard, chosenRole, stageOne, stageTwo, stageThree } =
     useAppSelector((state) => state.onBoarding);
   const user = useAppSelector(state=>state.user)
   const handleOnboardStage = (
-    stage: "First" | "Second" | "Third" | "Complete"
+    stage: Stages
   ) => {
     try {
       
@@ -35,7 +32,7 @@ export const useOnboarding = ()=> {
     }
 
     if (stage === "Second") {
-      setIsLoading(true)
+      
       dispatch(
         setOnboardingStages({
           stageOne: true,
@@ -44,11 +41,11 @@ export const useOnboarding = ()=> {
         })
         
       );
-      setIsLoading(false)
+      
     }
 
     if (stage === "Third") {
-      setIsLoading(true)
+      
       dispatch(
         setOnboardingStages({
           stageOne: true,
@@ -56,7 +53,6 @@ export const useOnboarding = ()=> {
           stageThree: true,
         })
       );
-      setIsLoading(false)
     }
 
     if (stage === "Complete") {
@@ -71,5 +67,7 @@ export const useOnboarding = ()=> {
   } 
   };
 
-  return {authenticationState, chosenRole, isLoading, stageOne, stageTwo, stageThree, onboard, handleOnboardStage}
+  return {authenticationState, chosenRole,  stageOne, stageTwo, stageThree, onboard, loading, handleOnboardStage}
 }
+
+export type Stages = "First" | "Second" | "Third" | "Complete"

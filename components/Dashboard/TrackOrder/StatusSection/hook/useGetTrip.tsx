@@ -8,7 +8,7 @@ import {
   setTrackingOrder,
   setTripStatus,
 } from "@/lib/store/slice/dashboardSlice";
-import { setTrip } from "@/lib/store/tripSlice";
+import { setTrip } from "@/lib/store/slice/tripSlice";
 
 import { useRef, useCallback, useEffect } from "react";
 
@@ -29,7 +29,7 @@ export const useGetTrip = () => {
     selectedTripId,
     trackingOrder,
     editingOrder,
-    assignedDispatcherId,
+    
     tripStage,
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
@@ -75,6 +75,7 @@ export const useGetTrip = () => {
     trackingOrder,
     dispatcher,
     inputRef,
+    error,
     isLoading,
     handleTripUpdate,
     handleTrackTrip,

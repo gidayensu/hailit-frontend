@@ -8,7 +8,7 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://hailit-backend.onrender.com
+    baseUrl: `http://localhost:4000
 /api/v1/`,
     prepareHeaders: async (headers) => {
       
@@ -31,6 +31,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
+      providesTags: ['Trips']
     }),
     getTrip: builder.query<any, string | string[]>({
       query: (trip_id) => ({
@@ -46,20 +47,22 @@ export const hailitApi = createApi({
       }),
       providesTags: ['User Trips']
     }),
-    addTrip: builder.query<any, any>({
+    addTrip: builder.mutation<any, any>({
       query: (tripDetails) => ({
         url: `trips/add-trip`,
         method: "POST",
         body: tripDetails,
       }),
+      invalidatesTags: ['Trip', 'User Trips'],
     }),
+
     updateTrip: builder.mutation<any, any>({
       query: ({ trip_id, tripDetails  }) => ({
         url: `trips/user-trip/${trip_id}`,
         method: "PUT",
         body: tripDetails,
       }),
-      invalidatesTags: ['Trip', 'User Trips']
+      invalidatesTags: ['Trip', 'User Trips', 'Trips']
     }),
     rateTrip: builder.query<any, string | string[]>({
       query: (trip_id) => ({
@@ -232,7 +235,7 @@ export const {
   useGetAllTripsQuery,
   useGetTripQuery,
   useGetUserTripsQuery,
-  useLazyAddTripQuery,
+  useAddTripMutation,
   useUpdateTripMutation,
   
   useLazyDeleteTripQuery,

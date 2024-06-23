@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { FormFieldProps } from "./FormTypes";
 import { SelectDate } from "../Order/SelectDate";
  export const CalendarField:React.FC<FormFieldProps> = ({
-    
+    defaultValue,
     name,
     datePurpose,
 }) => { 
@@ -15,7 +15,7 @@ import { SelectDate } from "../Order/SelectDate";
     name={name}
     
     render={({ field }) => (
-        <SelectDate schedule={false} select = {field.value} onSelect = {field.onChange} datePurpose={datePurpose}/>
+        <SelectDate schedule={false} select = {!field.value ? defaultValue: field.value} onSelect = {field.onChange} datePurpose={datePurpose}/>
       )}
     />
     
@@ -32,7 +32,9 @@ export  const FormField:React.FC<FormFieldProps> = ({
     className,
     defaultValue,
     calendar,
-    children
+    children,
+    value,
+    disabled
 }) => { 
     
     const { register, formState } = useFormContext();
@@ -45,7 +47,8 @@ export  const FormField:React.FC<FormFieldProps> = ({
     {...register(name,)}
     className={`${className}`}
     defaultValue={defaultValue}
-    
+    disabled = {disabled}
+    value={value}
     />
     
     
