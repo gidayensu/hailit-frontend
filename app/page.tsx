@@ -5,9 +5,9 @@ import BigLoader from "@/components/Shared/BigLoader";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 //main components
-
+import UserStats from "@/components/Home/UserStats";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
-import SendPackage from "@/components/Home/SendPackage";
+import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
 import OrderHistory from "@/components/Order/OrderHistory";
 import { supabaseSession } from "@/lib/supabaseAuth";
@@ -40,13 +40,18 @@ export default function Home() {
         <DashboardTopNav />
       </div>
       <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-primary-dark relative mb-20 ">
-        <div className="md:w-4/6 w-full flex items-center justify-center">
+        <section className=" w-full flex items-center justify-center">
           <TrackPackage />
-        </div>
+        </section>
+        <section className="w-full flex flex-col items-center justify-center gap-3">
 
-        <SendPackage />
-
+        <UserStats/>
+        
+        <QuickOrder/>
         <OrderHistory />
+        </section>
+        
+
       </main>
     </>
   );
