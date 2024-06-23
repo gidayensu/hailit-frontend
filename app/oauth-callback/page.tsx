@@ -35,7 +35,7 @@ export default function OAuthCallBack (){
     };
 
     signInWithGoogle();
-  }, [googleSignIn]);
+  }, [googleSignIn, attemptedSignUp, googleSignUp]);
 
   if(error) {
     return (
