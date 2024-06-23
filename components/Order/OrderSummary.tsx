@@ -51,9 +51,9 @@ export default function OrderSummary({ trip }: { trip:any }) {
           } */}
           <div
             className={`flex justify-center items-center  mr-7 text-sm font-bold w-20   ${
-              trip.trip_type === "TODAY"
+              trip.trip_type === "SAME DAY"
                 ? "  text-primary-color"
-                : trip.trip_type === "TOMORROW"
+                : trip.trip_type === "NEXT DAY"
                 ? "  text-teal-500 "
                 : trip.trip_type === "SCHEDULED"
                 ? "text-amber-600 dark:text-amber-500 "
@@ -67,19 +67,64 @@ export default function OrderSummary({ trip }: { trip:any }) {
           <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10"/>
           <div className=" flex  justify-between">
 {/* Location */}
-        <div className="flex  justify-start -mt-4 gap-3">
-          <div className="flex flex-col gap-2 justify-between items-center mt-4 mb-8">
+<div className="grid grid-cols-9 grid-rows-7 h-32  w-full justify-between items-start">
+  <div className="col-span-1 row-span-7 flex items-start justify-center h-full ">
+
+          <div className="flex flex-col gap-2 justify-between h-3/4 items-center">
 
             <HiLocationMarker className="text-xl" />
           <Separator
             orientation="vertical"
-            className="bg-slate-800 h-1/5 dark:bg-slate-100"
+            className="bg-slate-800 h-1/5 dark:bg-slate-100 row-span-3"
           />
           <HiLocationMarker className="text-xl text-green-500" />
           </div>
+  </div>
+  <section className="col-span-4 row-span-7 flex items-start h-full ">
+          <div className="flex justify-between flex-col h-4/5">
+
+          <span className="flex items-start  gap-2 md:-ml-1">
+            <span className="flex flex-col w-44">
+                <p className="text-sm font-semibold">Pickup Point</p>
+                <p className="text-sm w-28 md:w-40 text-wrap truncate line-clamp-2 ">{trip.pickup_location}</p>
+              
+              
+            </span>
+          </span>
+
+          <span className="flex items-start gap-2 md:-ml-1 mt-1">
+            <span className="flex flex-col w-44">
+                <p className="font-bold text-sm mt-3">Delivery Point</p>
+                <p className="text-sm text-wrap w-28 md:w-40 truncate line-clamp-2">{trip.drop_off_location}</p>
+              
+            </span>
+          </span>
+          </div>
+        </  section>
+        <section className="col-span-4 row-span-7 flex flex-col items-start h-full ">
+          <div className="flex flex-col items-start   -ml-1">
+            
+                <p className="text-sm font-semibold">Pickup date</p>
+                <p className="text-sm ">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
+            <div className="">
+              
+              
+            </div>
+          </div>
+
+          
+          <div className="flex flex-col mt-3 items-start  -ml-1">
+          
+              <p className="text-sm font-semibold">Delivery date</p>
+                <p className="text-sm ">{tripCompletionDate} <br /> ({tripCompletionTime})</p>
+            
+          </div>
+        </section>
+</div>
+        {/* <section className="flex  justify-start -mt-4 gap-3">
           <div className="flex justify-between flex-col mt-4 mb-3 ">
 
-          <span className="flex items-start  gap-2 -ml-2">
+          <span className="flex items-start  gap-2 -ml-1">
             <span className="flex flex-col w-44">
                 <p className="text-sm font-semibold">Pickup Point</p>
                 <p className="text-sm text-wrap truncate line-clamp-2 ">{trip.pickup_location}</p>
@@ -96,32 +141,32 @@ export default function OrderSummary({ trip }: { trip:any }) {
             </span>
           </span>
           </div>
-        </div>  
+        </  section>   */}
         {/* Order date and time */}
-        <div className="flex flex-col justify-start h-full gap-2 ">
-          <span className="flex items-start  gap-2 -ml-2">
+        <section className="flex flex-col justify-start h-full gap-2 ">
+          {/* <div className="flex items-start  gap-2 -ml-1">
             
-            <span className="flex gap-2">
+            <div className="flex gap-2">
               <span className="space-y-1">
                 <p className="text-sm font-semibold">Pickup date</p>
                 <p className="text-sm ">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
               </span>
               
-            </span>
-          </span>
+            </div>
+          </div> */}
 
           
-          <span className="flex items-start gap-2 -ml-[9px]">
+          {/* <div className="flex items-start gap-2 -ml-[9px]">
           
-            <span className="flex gap-2">
+            <div className="flex gap-2">
               <span>
               <p className="text-sm font-semibold">Delivery date</p>
                 <p className="text-sm ">{tripCompletionDate} <br /> ({tripCompletionTime})</p>
               </span>
               
-            </span>
-          </span>
-        </div>
+            </div>
+          </div> */}
+        </section>
           </div>
     </>
   );

@@ -15,7 +15,7 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiTimerFlashFill}
-                elementOption="Today"
+                elementOption="Same Day"
                 className="animate-in  zoom-in duration-50"
               >
                 <p className="text-[12px] md:text-lg text-center"> from <b>GHS 30</b></p>
@@ -26,7 +26,7 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiTimer2Fill}
-                elementOption="Tomorrow"
+                elementOption="Next Day"
                 className="animate-in zoom-in duration-150"
               >
                 <p className="text-[12px] md:text-lg text-center"> from <strong>GHS 20</strong>  </p>

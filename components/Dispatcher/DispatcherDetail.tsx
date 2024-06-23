@@ -13,10 +13,10 @@ export default function CourierDetail () {
     return (
       <main className="p-3 w-full flex flex-col items-center justify-center">
         <TripsStats />
-        <div className="w-full md:w-3/5 space-y-2 mt-4">
-          <h2 className="font-bold text-xl text-center">
+        <div className="w-full md:w-1/2 lg:w-2/5  space-y-2 mt-4">
+          <h2 className="font-bold text-xl">
             
-            YOUR ASSIGNED DELIVERIES
+            Your assigned deliveries
           </h2>
           {dispatcher.dispatcherCurrentTrips.length > 0 && (
             <div className="w-full flex flex-col items-center justify-center gap-4">

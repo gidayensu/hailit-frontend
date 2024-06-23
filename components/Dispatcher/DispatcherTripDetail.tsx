@@ -25,7 +25,7 @@ export default function DispatcherTripDetail () {
       tripRequestDate,
       
     } = useUpdateDispatcherTrip();
-    console.log('THIS IS TRIP',trip)
+    
     
   const { user_role } = useGetDispatcher();
   if (user_role === "customer" || user_role === "admin" || !user_role) {
@@ -103,8 +103,8 @@ export default function DispatcherTripDetail () {
             />
           </TrackOrderContainer>
 
-          <TrackOrderContainer headingText="LOCATION AND TIMELINE">
-            <Container className="w-full flex flex-col gap-2 md:h-52 h-64 rounded-xl p-4 ">
+          <TrackOrderContainer headingText="Location and Timeline">
+            <Container className="w-full flex flex-col gap-2 md:h-52 max-h-64 rounded-xl p-4 ">
               <OrderSummary trip={trip} />
             </Container>
           </TrackOrderContainer>

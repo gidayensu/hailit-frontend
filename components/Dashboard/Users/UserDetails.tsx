@@ -5,15 +5,16 @@ import DashboardCard from "../DashboardCard";
 import DashboardUserCard from "./DashboardUserCard";
 import { useUserProfile } from "./hook/useUserProfile";
 import UserTripsTable from "./UserTripsTable";
+import { UserRole } from "@/lib/store/slice/userSlice";
 
-export default  function UserDetails ({setShowUser} : {setShowUser: (state:boolean)=>void}) {
-const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile();
+export default  function UserDetails ({userRole}: {userRole:UserRole}) {
+const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile(userRole);
   const total_trip_count = userTrips?.total_trip_count
   const selectedUserId = selectedUser?.user_id
-
+  
   const handleGoBack = ()=> {
     handleDeselect();
-    setShowUser(false)
+    
   }
 
     return (
@@ -53,12 +54,14 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
           </section>
           }
           <section className="w-full flex flex-col gap-4">
+            { total_trip_count > 0  && 
+
             <h2 className="font-bold text-md">
-              {total_trip_count > 0 ? `All ${selectedUser?.first_name} ${selectedUser?.last_name} Trips` :
-                `${selectedUser?.first_name} ${selectedUser?.last_name} has made no order`
+              {`All ${selectedUser?.first_name} ${selectedUser?.last_name} Trips` 
               }
               
               </h2>
+            }
 
           <Container className="rounded-xl">
             <UserTripsTable />

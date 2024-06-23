@@ -45,6 +45,8 @@ export default function CustomerProfile() {
             className="h-14"
             defaultValue={email}
             name="email"
+            value={email}
+            disabled = {email}
           />
         </div>
         <div className={inputAndLabeClass}>

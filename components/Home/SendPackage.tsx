@@ -61,11 +61,11 @@ export default function SendPackage() {
       <article
         ref={destinationAreaRef}
         
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
+        className="mt-5 flex flex-col items-start justify-center md:4/6 w-5/6 rounded-2xl gap-3"
         onClick={() => scrollToSection(deliveryDayRef)}
       >
-        <h2 className="font-bold text-xl text-center mb-2">
-          SELECT DESTINATION AREA
+        <h2 className="font-bold text-xl  mb-2">
+          Select destination area
         </h2>
         <section className="flex flex-col md:flex-row md:w-4/6 w-full items-center justify-center gap-2 md:items-start">
           <PackageDestinationChoice />
@@ -74,10 +74,10 @@ export default function SendPackage() {
 
       <article
         ref={deliveryDayRef}
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
+        className="mt-5 flex flex-col items-start justify-center md:4/6 w-5/6 rounded-2xl gap-3"
         onClick={() => scrollToSection(deliveryMediumRef)}
       >
-        <h2 className="font-bold text-xl text-center my-2">SELECT DELIVERY DAY</h2>
+        <h2 className="font-bold text-xl my-2">Select delivery day</h2>
         <section className="flex w-full md:flex-row md:w-4/6 items-center justify-center gap-2 md:items-start">
           <DeliveryDayChoice />
         </section>
@@ -85,11 +85,11 @@ export default function SendPackage() {
 
       <article
         ref={deliveryMediumRef}
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
+        className="mt-5 flex flex-col items-start justify-center md:4/6 w-5/6 rounded-2xl gap-3"
         // onClick={()=>scrollToSection("continue")}
       >
-        <h2 className="font-bold text-xl text-center my-2">
-          SELECT DELIVERY MEDIUM
+        <h2 className="font-bold text-xl  my-2">
+          Select delivery medium
         </h2>
         <section className="flex w-full md:flex-row md:w-4/6 items-center justify-center gap-2 md:items-start">
           <DeliveryMediumChoice />

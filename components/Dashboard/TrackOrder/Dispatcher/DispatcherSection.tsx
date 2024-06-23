@@ -7,7 +7,7 @@ import { LiaUserSlashSolid } from "react-icons/lia";
 import Riders from "./AssignRiders";
 import Drivers from "./AssignDrivers";
 import { useAppSelector } from "@/lib/store/hooks";
-import { Dispatcher } from "@/lib/store/tripSlice";
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
 export const DEFAULT_DISPATCHER_ID = "ff-12-53";
 
 export default function DispatcherSection({

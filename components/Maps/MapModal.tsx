@@ -14,7 +14,7 @@ export default function MapModal({modalRef, closeModal, handleSelectedLocation, 
   const {dropOffLocationName, pickUpLocationName}  = useAppSelector(state=>state.map);
   return (
     
-      <dialog ref={modalRef} className="animate-in zoom-in duration-100  ease-in-out    w-2/3 md:w-1/4  rounded-2xl h-[250px] md:h-[360px] p-4  backdrop:bg-secondary-dark backdrop:opacity-80">
+      <dialog ref={modalRef} className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/4  rounded-2xl h-[360px]  p-4  backdrop:bg-secondary-dark backdrop:opacity-80">
         <div className="w-full flex items-end justify-end">
 
         <div className="fontbold cursor-pointer  flex justify-center items-center h-6 w-6 rounded-full bg-red-200 text-red-400" onClick={closeModal}><RxCross2 />

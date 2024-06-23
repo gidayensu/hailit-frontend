@@ -14,7 +14,7 @@ import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
 
 export function AllTripsData() {
-  const [offset, setOffset] = useState<number> (7);
+  const [offset, setOffset] = useState<number> (0);
   const limit = 7;
   const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error}  = useGetTrips({limit, offset, table:"trips"});
 

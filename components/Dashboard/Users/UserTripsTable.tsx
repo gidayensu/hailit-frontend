@@ -26,17 +26,17 @@ export default function UserTripsTable() {
   } = useUserProfile();
   if (error) {
     return (
-      <div>
+      
         
           
-        <div className="h-1/3 md:w-full md:mt-2 mt-4 flex lg:md-0 items-center justify-center ">
+        <div className="h-1/5 md:w-64 flex lg:md-0 items-center justify-center ">
         <NoData
-          noDataText="User has made no other orders"
+          noDataText="User has made no orders"
           textClassName="font-semibold text-center"
         />
       </div>
     
-      </div>
+      
     );
   }
   return (

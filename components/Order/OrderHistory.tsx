@@ -1,33 +1,32 @@
 "use client";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Loader from "../Shared/Loader";
 import NoData from "../Shared/NoData";
 import { Button } from "../ui/button";
-import { useGetUserTrips } from "./hooks/useGetUserTrips";
-import OrderSummaryMin, { DeliveryStatus, PackageType } from "./OrderSummaryMin";
+import { Trip, useGetUserTrips } from "./hooks/useGetUserTrips";
+import OrderSummaryMin from "./OrderSummaryMin";
 import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
-import { Trip } from "./hooks/useGetUserTrips";
 export type Deliveries = boolean;
-import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/lib/store/hooks";
 
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
   const [tripLoading, setTripLoading] = useState<boolean>(false);
   const [dispatcher, setDispatcher] = useState<boolean>(false)
-  const { dispatcherCurrentTrips, dispatcherPreviousTrips } = useAppSelector(state=>state.dispatcher)
+  
   const path = usePathname();
 
   const { currentTrips, previousTrips, isLoading, error, noDelivery } = useGetUserTrips();
   
-  if (isLoading) {
-    return <TripsLoadingSkeleton />;
-  }
+  
   return (
     <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
-      <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
+        <p className="text-md  md:w-4/6 w-full font-bold h-7 "> Your Deliveries </p> 
+      {
+        isLoading && <TripsLoadingSkeleton/>
+      }
       {noDelivery && (
         <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!" dispatcher={dispatcher} />
       )}
@@ -39,7 +38,7 @@ export default function OrderHistory() {
               currentDeliveries
                 ? "bg-primary-color text-white"
                 : " dark:bg-secondary-dark dark:opacity-50"
-            }  text-primary-color dark:text-slate-100 w-1/2 h-8 -ml-1 text-center rounded-lg`}
+            }  text-primary-color dark:text-slate-100 w-1/2 h-8 -ml-1 text-center rounded-lg cursor-pointer`}
             onClick={() => setCurrentDeliveries(true)}
           >
             Current
@@ -49,7 +48,7 @@ export default function OrderHistory() {
               currentDeliveries
                 ? " dark:bg-secondary-dark dark:opacity-50"
                 : "text-white bg-primary-color"
-            } text-primary-color dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg`}
+            } text-primary-color dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg cursor-pointer`}
             onClick={() => setCurrentDeliveries(false)}
           >
             Previous
@@ -84,12 +83,8 @@ export default function OrderHistory() {
                       trip.trip_request_date
                     )}
                   />
+                
                 </Link>
-                {tripLoading && (
-                  <span className="absolute flex items-center justify-center">
-                    <Loader />
-                  </span>
-                )}
               </>
             ))}
           </div>
@@ -148,6 +143,7 @@ export default function OrderHistory() {
         </div>
       )}
     </div>
+    
   );
 }
 

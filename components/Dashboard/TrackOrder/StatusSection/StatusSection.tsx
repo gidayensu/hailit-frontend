@@ -28,7 +28,7 @@ export default function StatusSection({
               variant={"empty"}
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
-                <p>Update</p>
+                <p>Change Status</p>
               
             </Button>
           }

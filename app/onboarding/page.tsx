@@ -11,9 +11,12 @@ import { FiArrowLeft } from "react-icons/fi";
 
 //hook
 import { useOnboarding } from "@/components/Onboarding/hook/useOnboarding";
-
+import { useState } from "react";
 export default function Onboarding() {
-  const {authenticationState, chosenRole, isLoading, stageOne, stageTwo, stageThree, onboard, handleOnboardStage} = useOnboarding();
+  
+  const {authenticationState, loading, chosenRole, stageOne, stageTwo, stageThree, onboard, handleOnboardStage} = useOnboarding();
+  
+  
   return (
     <>
       {(!authenticationState || onboard) && (
@@ -37,17 +40,17 @@ export default function Onboarding() {
             <>
               <div className="grid  grid-cols-1 w-full min-h-[300px] p-5 gap-2 justify-between -mt-3 md:w-1/2">
                 <FirstStage />
-                {chosenRole && !isLoading && (
+                
                   <Button
                     className="w-full bottom-0 row-start-6 "
                     onClick={() => {
                       handleOnboardStage("Second");
                     }}
-                    disabled = {!chosenRole || isLoading}
+                    disabled = {!chosenRole || loading}
                   >
-                    {isLoading ? <Loader /> : "Next"}
+                    {loading ? <Loader /> : "Next"}
                   </Button>
-                )}                
+                
               </div>
             </>
           )}
@@ -68,11 +71,13 @@ export default function Onboarding() {
                 </Button>
                  <Button
                   className="w-full"
+                  //connected to the customer profile update form
                   form="customerProfileUpdate"
                   type="submit"
-                  disabled = {isLoading}
+                  disabled = {loading}
+                  
                 >
-                  {isLoading ? <Loader />:'Next'}
+                  {loading ? <Loader />:'Next'}
                 </Button>
                 
               </div>
