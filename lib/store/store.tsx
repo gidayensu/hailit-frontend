@@ -14,7 +14,7 @@ import { mapSlice } from './slice/mapSlice';
 import { dashboardTablesSlice } from './slice/dashboardTablesSlice';
 import { USER_LOGOUT } from './actions';
 import { dispatcherSlice } from './slice/dispatcherSlice';
-import { tripSlice } from './tripSlice';
+import { tripSlice } from './slice/tripSlice';
 
 const appReducer = combineReducers({
   auth: supabaseAuthSlice.reducer,
