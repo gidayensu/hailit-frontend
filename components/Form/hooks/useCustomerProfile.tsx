@@ -13,6 +13,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { User, UserSchema } from "../FormTypes";
 
 export const useCustomerProfile = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const path = usePathname();
@@ -36,6 +37,7 @@ export const useCustomerProfile = () => {
     formData
   ) => {
     try {
+      setLoading(true);
       let userRole = user_role;
       if (chosenRole && chosenRole === "rider") {
         userRole = "rider";
@@ -53,10 +55,12 @@ export const useCustomerProfile = () => {
       }
 
       if (error) {
+        setLoading(false)
         return { error: "error occurred" };
       }
     } catch (err) {
       setIsError(true);
+      setLoading(false)
       return { error: err };
     }
   };
@@ -84,6 +88,7 @@ export const useCustomerProfile = () => {
 
   if (data && data.error) {
     setIsError(true);
+    setLoading(false)
   }
-  return { formMethods, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole };
+  return { formMethods, loading, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole };
 };
