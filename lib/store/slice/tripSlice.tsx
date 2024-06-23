@@ -6,7 +6,7 @@ const initialState:Trip = {
       trip_request_date: null,
       trip_commencement_date: null,
       trip_completion_date: null,
-      trip_cost: 0, 
+      trip_cost: '0', 
       payment_status: false,
       dispatcher_rating: null,
       rated: false,
@@ -62,6 +62,9 @@ export const tripSlice = createSlice({
             return action.payload
             
         },
+        setPaymentStatus (state, action:PayloadAction<boolean>) {
+          state.payment_status = action.payload
+        },
         clearTrip (state, action:PayloadAction<Trip>) {
           return initialState;
         }
@@ -71,7 +74,7 @@ export const tripSlice = createSlice({
 })
 
 export const {
-    setTrip, clearTrip
+    setTrip, clearTrip, setPaymentStatus
 } = tripSlice.actions;
 
 
@@ -94,7 +97,7 @@ export interface Dispatcher {
     trip_request_date: null | Date;
     trip_commencement_date: null | Date;
     trip_completion_date: null | Date;
-    trip_cost: number;
+    trip_cost: string;
     payment_status: boolean;
     dispatcher_rating: null | number;
     rated: boolean;

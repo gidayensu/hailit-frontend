@@ -39,7 +39,7 @@ export const UpdateOrderSchema: ZodType<UpdateOrderDetails> = z.object({
 export const UserSchema: ZodType<User> = z.object({
   first_name: z.string().min(2,{message: "First name required "}), 
   last_name: z.string().min(2,{message: "Last name required"}), 
-  email: z.string().email({message: "Invalid email address"}),
+  email: z.optional(z.string().email({message: "Invalid email address"})),
   phone_number: zPhone,
   license_number: z.string().min(5, {message: "License number should be five letters or more"}).nullable().optional()
 })
@@ -77,7 +77,7 @@ export interface SignInForm {
 export interface User {
   first_name: string, 
   last_name: string, 
-  email: string, 
+  email?: string, 
   phone_number: string,
   license_number?: string | null | undefined
 }

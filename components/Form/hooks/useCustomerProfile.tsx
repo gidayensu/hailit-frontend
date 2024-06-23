@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLazyUpdateUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
@@ -15,10 +15,11 @@ import { User, UserSchema } from "../FormTypes";
 export const useCustomerProfile = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const path = usePathname();
 
-  const { email, user_id, user_role } = useAppSelector((state) => state.user);
+  const { email, user_id, user_role, first_name, last_name, phone_number } = useAppSelector((state) => state.user);
   const { chosenRole } = useAppSelector((state) => state.onBoarding);
 
   const [updateUser, { data, isLoading, error }] = useLazyUpdateUserQuery();
@@ -33,62 +34,70 @@ export const useCustomerProfile = () => {
     setError,
   } = formMethods;
 
-  const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (
-    formData
-  ) => {
+  const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (formData) => {
     try {
       setLoading(true);
       let userRole = user_role;
       if (chosenRole && chosenRole === "rider") {
         userRole = "rider";
       }
-
+  
       const newUserData = { ...formData, onboard: true, user_role: userRole };
       const oldUserData = { ...formData, user_role };
-
+  
       if (!path.startsWith("/onboarding")) {
-        updateUser({ userId: user_id, userDetails: oldUserData });
+        await updateUser({ userId: user_id, userDetails: oldUserData });
       }
-
+  
       if (path.startsWith("/onboarding")) {
-        updateUser({ userId: user_id, userDetails: newUserData });
+        await updateUser({ userId: user_id, userDetails: newUserData });
       }
-
-      if (error) {
-        setLoading(false)
-        return { error: "error occurred" };
-      }
+      setIsSuccess(true)
+      setLoading(false);
     } catch (err) {
       setIsError(true);
-      setLoading(false)
+      setLoading(false);
       return { error: err };
     }
   };
 
-  if (data && data.user) {
-    const { user } = data;
-    dispatch(
-      setUser({
-        user_id: user.user_id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        user_role: data.user_role,
-        onboard: user.onboard,
-      })
-    );
-    dispatch(
-      setOnboardingStages({
-        stageOne: true,
-        stageTwo: true,
-        stageThree: true,
-      })
-    );
-  }
+  const user = data?.user;
+
+  useEffect(()=> {
+    if (user) {
+
+      dispatch(
+        setUser({
+          user_id: user.user_id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          user_role: data.user_role,
+          phone_number: user.phone_number,
+          onboard: user.onboard,
+        })
+      );
+      if(path.startsWith("/onboarding")) {
+  
+        dispatch(
+          setOnboardingStages({
+            stageOne: true,
+            stageTwo: true,
+            stageThree: true,
+          })
+        );
+      
+      }
+      setIsSuccess(true)
+    }
+      
+    
+  }, [dispatch, user, path])
+    
 
   if (data && data.error) {
     setIsError(true);
     setLoading(false)
   }
-  return { formMethods, loading, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole };
+  return { formMethods, loading, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole,  first_name, last_name, phone_number, isLoading, isSuccess };
 };

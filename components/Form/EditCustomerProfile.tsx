@@ -4,9 +4,19 @@ import FormField from "./FormField";
 import { useCustomerProfile } from "./hooks/useCustomerProfile";
 
 export default function CustomerProfile() {
-
-  const { formMethods, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole } =
-    useCustomerProfile();
+  const {
+    formMethods,
+    handleSubmit,
+    onCustomerFormSubmit,
+    email,
+    isError,
+    chosenRole,
+    first_name,
+    last_name,
+    phone_number,
+    isSuccess,
+    isLoading
+  } = useCustomerProfile();
 
   const inputAndLabeClass = "w-full max-w-sm items-center";
   const labelClass = "text-sm font-medium mb-1";
@@ -25,6 +35,7 @@ export default function CustomerProfile() {
             placeholder="First Name"
             className="h-14 "
             name="first_name"
+            defaultValue={first_name || ""}
           />
         </div>
         <div className={inputAndLabeClass}>
@@ -34,6 +45,7 @@ export default function CustomerProfile() {
             placeholder="Last Name"
             className="h-14"
             name="last_name"
+            defaultValue={last_name || ''}
           />
         </div>
 
@@ -43,10 +55,10 @@ export default function CustomerProfile() {
             type="email"
             placeholder="email@example.com"
             className="h-14"
-            defaultValue={email}
+            // defaultValue={email}
             name="email"
             value={email}
-            disabled = {email}
+            disabled={email }
           />
         </div>
         <div className={inputAndLabeClass}>
@@ -56,6 +68,7 @@ export default function CustomerProfile() {
             placeholder="0240 000 000"
             className="h-14"
             name="phone_number"
+            defaultValue={phone_number || ""}
           />
         </div>
         {isError && <p className="text-red"> Error Occurred</p>}

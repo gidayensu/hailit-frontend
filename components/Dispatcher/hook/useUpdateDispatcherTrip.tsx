@@ -37,7 +37,10 @@ export const useUpdateDispatcherTrip = () => {
   const tripData = data?.trip
 
   useEffect(()=>{
+    if(tripData) {
+
       dispatch(setDispatcherTrip(tripData))     
+    }
 
   }, [tripData, dispatch, setDispatcherTrip])
   
@@ -87,7 +90,7 @@ export const useUpdateDispatcherTrip = () => {
       });
            
     },
-    [updateTrip]
+    [updateTrip, trip, dispatcher]
   );
   const tripRequestDate = extractDateWithDayFromDate(trip?.trip_request_date);
   const tripCompletionDate = extractDateWithDayFromDate(trip?.trip_completion_date)

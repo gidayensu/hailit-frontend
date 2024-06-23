@@ -84,10 +84,7 @@ export default function TripDetail ({trip}: {trip:any}) {
 
             <div className="w-full lg:w-2/6 space-y-5">
               <Container className="flex flex-col  w-full   h-52 rounded-lg p-3 gap-2">
-                <PaymentSection
-                  cost={trip.trip_cost}
-                  paymentStatus={trip.payment_status}
-                />
+                <PaymentSection/>
               </Container>
               <Container className="flex flex-col  w-full h-60 rounded-lg p-3 gap-2">
                 <CustomerSection customerId={trip.customer_id} />

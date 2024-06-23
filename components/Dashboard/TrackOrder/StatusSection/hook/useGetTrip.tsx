@@ -35,27 +35,31 @@ export const useGetTrip = () => {
   } = useAppSelector((state) => state.dashboard);
   const trip = useAppSelector((state)=>state.trip)
   const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`);
+  const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-      dispatch(setTrip(data?.trip));
-    
-  }, [data]);
+    if (selectedTripId && fetchedTrip) {
+      dispatch(setTrip(fetchedTrip));
+    }
+  }, [selectedTripId, fetchedTrip, dispatch]);
+  
 
   
   const dispatcher = trip?.dispatcher;
 
   const [updateTrip] = useUpdateTripMutation();
 
-  const handleTripUpdate = useCallback(  (key:string, tripDetails: any) => {
-    
+  //move this to useUpdateTrip
+  const handleTripUpdate = useCallback(async (key: string, tripDetails: any) => {
     try {
-
-      dispatch(setTrip({...trip, ...tripDetails}))
-       updateTrip({ trip_id: selectedTripId, tripDetails });
+      dispatch(setTrip({ ...trip, ...tripDetails }));
+      await updateTrip({ trip_id: selectedTripId, tripDetails });
     } catch (error) {
       console.error("Failed to update trip:", error);
     }
-  }, []);
+  }, [trip, selectedTripId, updateTrip, dispatch]);
+  
 
 
   const handleTrackTrip = () => {

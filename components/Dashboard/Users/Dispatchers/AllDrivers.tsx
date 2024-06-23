@@ -63,6 +63,6 @@ export function AllDrivers() {
     "Rating",
     "Vehicle Name",
     "Vehicle Number",
-    "Trip Count"
+    
   ];
   

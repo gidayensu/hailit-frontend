@@ -8,6 +8,7 @@ export interface User {
     last_name: string,
     user_role: UserRole,
     email: string,
+    phone_number: string,
     onboard: boolean
 
 }
@@ -18,6 +19,7 @@ const initialState:User = {
     last_name: '',
     email: '',
     user_role: 'customer',
+    phone_number: '',
     onboard: false
 
 }
