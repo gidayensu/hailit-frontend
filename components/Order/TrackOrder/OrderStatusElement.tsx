@@ -1,11 +1,10 @@
 
 import type { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
-import { GrFormCheckmark } from "react-icons/gr";
 import { GoX } from "react-icons/go";
-import Loader from "@/components/Shared/Loader";
+import { GrFormCheckmark } from "react-icons/gr";
 
 export default function OrderStatusElement ({orderStatus, orderStage, currentOrderStage, children}: {orderStatus: OrderStatus, orderStage:number, currentOrderStage:number, children:React.ReactNode}) {
-    console.log({orderStage, orderStatus, currentOrderStage})
+    
     return (
       <div className="flex flex-col items-center justify-center w-1/4 gap-4 relative">
         <div
@@ -15,7 +14,7 @@ export default function OrderStatusElement ({orderStatus, orderStage, currentOrd
               : "bg-black dark:bg-slate-50"
           } ${
             orderStage == 0
-              ? "bg-red-500"
+              ? "bg-red-500 dark:bg-red-500"
               : currentOrderStage == 4 && orderStatus === "Delivered"
               ? "bg-green-500 dark:bg-green-500"
               : ""
@@ -54,8 +53,8 @@ export default function OrderStatusElement ({orderStatus, orderStage, currentOrd
           <div className="flex flex-col items-center justify-center w-full gap-1">
             <p
               className={`text-sm   line-clamp-1  ${
-                orderStage === 0
-                  ? "text-red-500"
+                orderStage == 0
+                  ? "text-red-500 dark:text-red-500"
                   : currentOrderStage == 4 && orderStatus === "Delivered"
                   ? "text-green-500 dark:text-green-500"
                   : ""

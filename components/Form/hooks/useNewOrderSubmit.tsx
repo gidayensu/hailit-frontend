@@ -48,7 +48,7 @@ export const useNewOrderSubmit = () => {
         
       )
     }
-    console.log({trip_area})
+    
     const formDetails = {...data, package_type, trip_area, trip_type, trip_medium};
     addTrip(formDetails)
     

@@ -58,7 +58,7 @@ export const useSignUp =  () => {
         const signUpData = await supabaseSignUp(userData);
 
         if (signUpData && signUpData.error) {
-          console.log(signUpData.error);
+          
           setIsLoading(false);
           setDataFetchError(() => ({
             errorDescription: signUpData.error,
@@ -91,6 +91,7 @@ export const useSignUp =  () => {
           email: user.email,
           user_role: user.user_role,
           onboard: user.onboard,
+          phone_number: user.phone_number
         })
       );
       const onboard = user.onboard;

@@ -31,7 +31,7 @@ export const mapSlice = createSlice({
 
     setPickUpLocation(state, action: PayloadAction<UserLocation>) {
       state.pickUpLocation = action.payload
-      console.log('this pickup location is running')
+      
     },
 
     setDropOffLocation(state, action: PayloadAction<UserLocation>) {

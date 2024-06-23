@@ -33,14 +33,13 @@ export const useUpdateDispatcherTrip = () => {
   
   const dispatcher = useAppSelector((state) => state.dispatcher);
   const { data, isLoading, error } = useGetTripQuery(trip_id);
-  console.log('THIS BE DATA',data)
+  
   const tripData = data?.trip
+
   useEffect(()=>{
+      dispatch(setDispatcherTrip(tripData))     
 
-      dispatch(setDispatcherTrip(tripData))
-      
-
-  }, [tripData])
+  }, [tripData, dispatch, setDispatcherTrip])
   
   
   const { user_role } = useGetDispatcher();

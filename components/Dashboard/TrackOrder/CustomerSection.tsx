@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useGetUser } from "../Users/hook/useGetUser";
 export default function CustomerSection ({customerId}: {customerId:string}) {
     const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
-    console.log(user)
+    
     
     return(
         <>

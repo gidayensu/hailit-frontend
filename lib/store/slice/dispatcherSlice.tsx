@@ -53,14 +53,14 @@ export const dispatcherSlice = createSlice({
     initialState,
     reducers: {
         setDispatcherTripDetails (state, action:PayloadAction<DispatcherTripsDetails>) {
-            console.log(action.payload)
+            
             return action.payload
         },
         setDispatcherTripId (state, action:PayloadAction<string>) {
             state.tripId = action.payload
         },
         setDispatcherTrip (state, action:PayloadAction<any>) {
-            console.log('THIS IS ACTION PAYLOAD',action.payload)
+            
             state.trip = action.payload
         },
         setDispatcherStats (state, action:PayloadAction<DispatcherStats>) {

@@ -6,7 +6,7 @@ import { useGetUserTrips } from "../hooks/useGetUserTrips";
 
 export default function OrdersCard({userId}:{userId:string}) {
   const  {data, isLoading, handleTrackTrip} = useGetUserTrips(userId);
-  console.log()
+  
   return (
     <>
       <section className="w-full p-4">

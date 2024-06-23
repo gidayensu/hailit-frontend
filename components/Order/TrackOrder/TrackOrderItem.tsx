@@ -14,7 +14,7 @@ import { Modal } from "@/components/Shared/Modal";
 export default function TrackOrderItem({trip, userId}: {trip:any, userId:string  }) {
     const dispatcher = trip?.dispatcher;
     const {customer_id} = trip
-    console.log({userId, customer_id})
+    
     const tripRequestDate = extractDateWithDayFromDate(trip?.trip_request_date);
     return (
         <main className="flex min-h-screen flex-col items-center gap-10 mb-20">

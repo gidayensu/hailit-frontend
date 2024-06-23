@@ -20,7 +20,7 @@ import {
 
 export function SelectDate({schedule, select, onSelect, datePurpose}: {datePurpose?:string | undefined, schedule?:boolean | undefined, select?:any, onSelect?:any}) {
   const [date, setDate] = useState<Date>();
-    console.log({select, onSelect})
+    
   return (
     <Popover>
       <PopoverTrigger asChild>
