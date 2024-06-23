@@ -18,7 +18,7 @@ export const useGetTrips = ({limit, offset, table}: {limit?: number, offset?:num
 
   let endpoint = 'trips';
   offset && limit ? endpoint = `trips?limit=${limit}&offset=${offset}` : limit ? endpoint = `trips?limit=${limit}` : '';
-  
+  console.log({endpoint})
   const { data, isLoading, error } = useGetAllTripsQuery(endpoint);
   
   const trips = data?.trips;
