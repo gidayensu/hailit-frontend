@@ -3,6 +3,7 @@
 
 import BigLoader from "@/components/Shared/BigLoader";
 import { useRouter } from "next/navigation";
+import { supabaseSession } from "@/lib/supabaseAuth";
 import { useEffect, useState } from "react";
 //main components
 import UserStats from "@/components/Home/UserStats";
@@ -10,7 +11,8 @@ import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
 import OrderHistory from "@/components/Order/OrderHistory";
-import { supabaseSession } from "@/lib/supabaseAuth";
+import OtherActions from "@/components/Home/OtherActions";
+
 export type Deliveries = boolean;
 
 export default function Home() {
@@ -45,9 +47,9 @@ export default function Home() {
         </section>
         <section className="w-full flex flex-col items-center justify-center gap-3">
 
-        <UserStats/>
-        
+        <UserStats/>        
         <QuickOrder/>
+        <OtherActions/>
         <OrderHistory />
         </section>
         
