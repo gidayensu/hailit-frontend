@@ -67,6 +67,7 @@ export const useLogin=()=> {
           email: user.email,
           user_role: user.user_role,
           onboard: user.onboard,
+          phone_number: user.phone_number
         })
       );
 
