@@ -1,3 +1,4 @@
+'use client'
 import { IoArchive, IoFastFood } from "react-icons/io5";
 import { IoDocumentText, IoShirt } from "react-icons/io5";
 import { MdLineWeight, MdOutlineLineWeight } from "react-icons/md";
@@ -9,6 +10,8 @@ import {
 } from "react-icons/pi";
 
 import Container from "../ui/container";
+import { useState } from "react";
+import Loader from "../Shared/Loader";
 
 export default function OrderSummaryMin({
   tripId,
@@ -25,7 +28,7 @@ export default function OrderSummaryMin({
   cost: string
   className?: string
 }) {
-
+    const [loading, setLoading] = useState<boolean>(false)
     //default icon gadgets
     let deliveryTypeIconBgClass = 'bg-blue-100';
     let deliveryTypeIcon = <PiPackageFill className="text-blue-400"/>;
@@ -66,7 +69,13 @@ export default function OrderSummaryMin({
   }
   
   return (
-    <div className="w-full cursor-pointer">
+    <div className="w-full cursor-pointer relative" onClick={()=>setLoading(true)}>
+      {loading && 
+      <div className="w-full items-center justify-center flex absolute">
+
+        <Loader color="primary"/> 
+      </div>
+      }
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
       <Container className={`${className} flex  gap-3 justify-between   h-16 rounded-xl p-2`}>
         <div className="flex gap-2">
