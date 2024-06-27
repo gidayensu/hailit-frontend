@@ -11,8 +11,10 @@ import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 //next+redux+helper function +react
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { copyToClipBoard } from "@/lib/utils";
-import { redirect } from "next/navigation";
+
 import { useState } from "react";
+import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
+import { setActiveSection, setEditingOrder, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 
 
 export default function AddTripOutcome() {
@@ -22,8 +24,8 @@ const [loading, setLoading]  = useState<boolean>(false);
 
   
   const dispatch = useAppDispatch();
-  dispatch(
-    resetDeliveryChoices())
+  
+  
 
     const handleCopyTripId = (tripId:string)=> {
       copyToClipBoard(tripId)
@@ -37,8 +39,36 @@ const [loading, setLoading]  = useState<boolean>(false);
         )
     }
 
-    const handleLoading = ()=> {
-      setLoading(true)
+    
+
+    const handleBack = ()=> {
+        dispatch(setNewOrder({
+            order_success: false,
+            trip_id: '',
+            order_submitted: false,
+            scheduled: false
+          }))
+        
+          dispatch(
+            resetDeliveryChoices())
+    }
+
+    const trackTrip = ()=> {
+        dispatch(setActiveSection("Track Order"))
+        dispatch(setTrackingOrder(true));
+        dispatch(setSelectedTripId(trip_id))
+        
+        setLoading(true)
+
+        dispatch(setNewOrder({
+            order_success: false,
+            order_submitted: false,
+            trip_id,
+            scheduled: false
+          }))
+        
+          dispatch(
+            resetDeliveryChoices())
     }
   return (
     <main className="flex min-h-screen flex-col mt-16 items-center gap-4 mb-24 md:mb-0">
@@ -54,9 +84,9 @@ const [loading, setLoading]  = useState<boolean>(false);
         <div className="w-full flex flex-col items-center justify-center">
           
         <p className=" text-center font-bold mb-2">
-          Trip ID 
+        Copy Trip ID 
         </p>
-        <div className="w-full flex items-center justify-center gap-4 cursor-pointer" onClick={()=>handleCopyTripId(trip_id)}>
+        <div className="ml-8 w-full flex items-center justify-center gap-4 cursor-pointer" onClick={()=>handleCopyTripId(trip_id)}>
 
         <p className="text-sm text-center h-10 border p-2 border-green-500 w-2/4 rounded-md cursor-pointer">
            <b>{trip_id} </b>
@@ -72,9 +102,7 @@ const [loading, setLoading]  = useState<boolean>(false);
         <div className="w-full flex items-center justify-center mt-2">
           
           
-        <p className=" text-center font-semibold text-[12px] w-3/4 h-5 text-white bg-green-500 ">
-          Copy Trip ID for tracking 
-        </p>
+        
         </div>
         </div>
       </div>
@@ -83,12 +111,37 @@ const [loading, setLoading]  = useState<boolean>(false);
       <div className="flex flex-col gap-5 justify-center items-center">
       
         
-          <Button className="border border-slate-300 h-14 w-60 flex gap-4" disabled={loading} onClick={handleLoading}>
-            {loading? <Loader />:'Track your package'}
+          <Button className="border border-slate-300 h-14 w-60 flex gap-4" disabled={loading} onClick={trackTrip}>
+            {loading? <Loader />:'Track the package'}
           </Button>
         
         
       </div>
+            </>
+        }
+        {
+            !order_success && 
+            <>
+            <div className="flex flex-col items-center justify-center ml-6 gap-2 w-64">
+        <span className="text-4xl text-center font-bold text-red-500">Order Failed!</span>
+        <p className="text-lg text-center">
+        This occurred because of a network or server error. 
+        </p>
+      </div>
+      
+
+      <div className="flex flex-col gap-5 justify-center items-center">
+        
+        
+          <Button className="border border-slate-300 h-14 w-60 flex gap-4" onClick={handleBack}>
+            Back
+          </Button>
+        
+        
+        
+      </div>
+
+
             </>
         }
     </main>

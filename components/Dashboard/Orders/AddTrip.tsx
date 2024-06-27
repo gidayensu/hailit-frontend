@@ -3,28 +3,29 @@ import NewOrderForm from "@/components/Form/NewOrderForm";
 import TripAreaMediumAndType from "../TrackOrder/Actions/TripAreaMediumAndType";
 import AddTripOutcome from "./AddTripOutcome";
 import { useAppSelector } from "@/lib/store/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+export default function AddTrip ({setAddTrip}:{setAddTrip: (arg:boolean)=>void}) {
+  
 
-export default function AddTrip () {
-  const [orderSubmitted, setOrderSubmitted]  = useState<boolean>(false);
-
-  const {order_success} = useAppSelector(state=>state.newOrder)
-  if(order_success) {
-    setOrderSubmitted(true);
-  }
+  const {order_submitted} = useAppSelector(state=>state.newOrder)
+  
  
   return (
-    <section className='w-full flex flex-col items-start gap-3'>
+    <section className='md:w-1/4 flex flex-col items-start gap-3'>
       {
-        !orderSubmitted && 
+        !order_submitted && 
         <>
       <TripAreaMediumAndType/>
       <NewOrderForm/>
+      <Button variant={'outline'} onClick={()=>setAddTrip(false)} className="w-full h-12 ">
+        Cancel
+      </Button>
         </>
       }
 
       {
-        orderSubmitted && <AddTripOutcome/>
+        order_submitted && <AddTripOutcome/>
       }
         
     </section>

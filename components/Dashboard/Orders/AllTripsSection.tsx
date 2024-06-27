@@ -8,7 +8,7 @@ export default function AllTripsSection() {
     <>
       {!addTrip && <AllTripsData setAddTrip={setAddTrip} />}
 
-      {addTrip && <AddTrip />}
+      {addTrip && <AddTrip setAddTrip={setAddTrip}/>}
     </>
   );
 }
