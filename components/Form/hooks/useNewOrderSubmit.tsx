@@ -62,6 +62,7 @@ export const useNewOrderSubmit = () => {
     dispatch(setNewOrder({
       order_success: true,
       trip_id: trip.trip_id,
+      order_submitted: true,
       scheduled: false
     }))
     //redirect based on where the form is being used
@@ -73,6 +74,7 @@ export const useNewOrderSubmit = () => {
     dispatch(setNewOrder({
       order_success: false,
       trip_id: '',
+      order_submitted: true,
       scheduled: false
     }))
     !path.startsWith('/dashboard') ? router.push('/order/new/failed'): ''
