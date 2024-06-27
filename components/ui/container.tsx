@@ -18,4 +18,5 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(({ children, classN
     );
 });
 
+Container.displayName = 'Container';
 export default Container;

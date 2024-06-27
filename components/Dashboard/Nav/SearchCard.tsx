@@ -65,4 +65,6 @@ const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoadi
     )
 })
 
+SearchCard.displayName= 'SearchCard';
+
 export default SearchCard
