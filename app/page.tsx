@@ -2,7 +2,7 @@
 //next + react + redux
 
 import BigLoader from "@/components/Shared/BigLoader";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { supabaseSession } from "@/lib/supabaseAuth";
 import { useEffect, useState } from "react";
 //main components
@@ -12,13 +12,13 @@ import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
 import OrderHistory from "@/components/Order/OrderHistory";
 import OtherActions from "@/components/Home/OtherActions";
-
+import { useAppSelector } from "@/lib/store/hooks";
 export type Deliveries = boolean;
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
+  
   useEffect(() => {
     const checkSession = async () => {
       const session = await supabaseSession();
@@ -29,9 +29,13 @@ export default function Home() {
         setLoading(false);
       }
     };
-
+    
     checkSession();
   }, [router]);
+  
+  //redirect users who are not customers
+  const {user_role} = useAppSelector(state=>state.user);
+  user_role && user_role !== "customer" ? redirect('/profile') : ''
 
   if (loading) {
     return <BigLoader/>

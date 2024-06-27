@@ -12,7 +12,9 @@ import { RiFileListLine, RiSteering2Line } from "react-icons/ri"
 import { IoLogOutOutline } from "react-icons/io5"
 import { MdOutlineSportsMotorsports } from "react-icons/md"
 import { MdInsertChartOutlined } from "react-icons/md";
-export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveSection, activeSection}: {dashMin: boolean, handleDashMin: ()=>void, handleActiveSection: (section: string)=>void, activeSection:string }) {
+import { ActiveSection } from "@/lib/store/slice/dashboardSlice"
+
+export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveSection, activeSection}: {dashMin: boolean, handleDashMin: ()=>void, handleActiveSection: (section: ActiveSection)=>void, activeSection:ActiveSection }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleSignOut = ()=> {

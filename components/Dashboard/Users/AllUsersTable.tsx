@@ -25,12 +25,11 @@ import { useUserProfile } from "./hook/useUserProfile";
 
 export default function AllUsersTable() {
   
-  const limit = 7;
-  const [offset, setOffset] = useState<number> (limit);
+  const [page, setPage] = useState<number> (1);
 
   
 
-  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser } = useGetAllUsers({limit, offset});
+  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser } = useGetAllUsers(page);
 
   if (error) {
     return (
@@ -127,7 +126,7 @@ export default function AllUsersTable() {
         </TableBody>
       </Table>
     </div>
-      <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages} storageKey="AllUsers"/>
+      <Pagination setPage={setPage} totalPages={total_number_of_pages} storageKey="AllUsers"/>
     </>
   );
 }

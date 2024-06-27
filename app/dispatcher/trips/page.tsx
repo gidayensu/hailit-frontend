@@ -13,11 +13,14 @@ export default function Dispatcher() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-          <div className="w-full flex items-center justify-center p-8">
+          <div className="w-full flex-col flex items-center justify-center p-8">
 
                 <TripsStats/>      
           </div>
+                <div className="md:w-4/6 flex items-center justify-center">
+
                 <DispatcherOrderHistory />
+                </div>
         
     </div>
   );

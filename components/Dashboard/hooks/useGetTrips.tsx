@@ -4,7 +4,7 @@ import { setActiveSection, setSelectedTripId, setTrackingOrder, setEditingOrder 
 import { setOverviewData, setTripsData, setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useEffect, useCallback } from "react";
 
-export const useGetTrips = ({limit, offset, table}: {limit?: number, offset?:number, table:string}) => {
+export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   const {tripsData, overviewData}  = useAppSelector(state => state.dashboardTables);
 
   const dispatch = useAppDispatch();
@@ -16,10 +16,13 @@ export const useGetTrips = ({limit, offset, table}: {limit?: number, offset?:num
     dispatch(setEditingOrder(false));
   }, [dispatch])
 
-  let endpoint = 'trips';
-  offset && limit ? endpoint = `trips?limit=${limit}&offset=${offset}` : limit ? endpoint = `trips?limit=${limit}` : '';
+  // let endpoint = 'trips';
+  // offset && limit ? endpoint = `trips?limit=${limit}&offset=${offset}` : limit ? endpoint = `trips?limit=${limit}` : '';
   
-  const { data, isLoading, error } = useGetAllTripsQuery(endpoint);
+  const { data, isLoading, error } = useGetAllTripsQuery(`trips?page=${page}`, {
+    pollingInterval:3000,
+    skipPollingIfUnfocused: true
+  });
   
   const trips = data?.trips;
   const total_number_of_pages = data?.total_number_of_pages;

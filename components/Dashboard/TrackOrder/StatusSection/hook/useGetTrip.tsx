@@ -3,14 +3,13 @@ import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hai
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   setActiveSection,
-  setAssignedDispatcher,
   setSelectedTripId,
   setTrackingOrder,
-  setTripStatus,
+  ActiveSection
 } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
-
-import { useRef, useCallback, useEffect } from "react";
+import { Trip } from "@/lib/store/slice/tripSlice";
+import { useCallback, useEffect, useRef } from "react";
 
 export type OrderStatus =
   | "Booked"
@@ -19,7 +18,6 @@ export type OrderStatus =
   | "Delivered"
   | "Cancelled";
 
-import { Vehicle } from "@/components/Dashboard/Vehicles/hook/useGetVehicles";
 
 export const useGetTrip = () => {
   const inputRef = useRef<any>(null);
@@ -68,7 +66,7 @@ export const useGetTrip = () => {
     dispatch(setSelectedTripId(tripId));
   };
 
-  const handleUsersOrTripsNav = (section: string) => {
+  const handleUsersOrTripsNav = (section: ActiveSection) => {
     dispatch(setActiveSection(section));
   };
 
@@ -81,6 +79,7 @@ export const useGetTrip = () => {
     inputRef,
     error,
     isLoading,
+    selectedTripId,
     handleTripUpdate,
     handleTrackTrip,
     handleUsersOrTripsNav,

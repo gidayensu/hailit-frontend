@@ -60,7 +60,7 @@ export default function UserTripsTable() {
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
 
               
-              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">
+              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis mb-2">
                 {extractBeforeComma(trip.pickup_location)}
               </TableCell>
 
@@ -77,7 +77,7 @@ export default function UserTripsTable() {
               <TableCell>
                 <div
                   className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
-                    trip.paymentStatus ? "bg-green-600 " : "bg-red-500 "
+                    trip.payment_status ? "bg-green-600 " : "bg-red-500 "
                   }`}
                 >
                   <p>{trip.payment_status ? "Paid" : "Not Paid"}</p>
@@ -86,9 +86,9 @@ export default function UserTripsTable() {
 
               <TableCell>
                 <div
-                  className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
+                  className={`flex item-center justify-center rounded-md w-16 text-white text-[12px]  ${
                     trip.trip_status === "Delivered"
-                      ? "  bg-green-500"
+                      ? "   bg-green-600"
                       : trip.trip_status === "Picked Up"
                       ? "  bg-sky-600"
                       : trip.trip_status === "In Transit"

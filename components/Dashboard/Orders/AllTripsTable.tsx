@@ -12,20 +12,22 @@ import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 import { useState } from "react";
 import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
+import { Button } from "@/components/ui/button";
 
-export function AllTripsData() {
-  const [offset, setOffset] = useState<number> (0);
-  const limit = 7;
-  const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error}  = useGetTrips({limit, offset, table:"trips"});
-
+export function AllTripsData({setAddTrip}:{setAddTrip: (arg:boolean)=>void}) {
   
-
-  
-  
+  const handleAddTripClick = () => {
+    
+    setAddTrip(true);
+  };
+  const [page, setPage] = useState<number> (1);
+  const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error}  = useGetTrips({ page, table:"trips"});
+ 
   return (
     <>
-    
+    <Button className="md:w-1/6 w-1/3" onClick={handleAddTripClick}> Add trip</Button>
     <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
+      
       <Table>
         <TableHeader>
           <TableRow>
@@ -37,9 +39,9 @@ export function AllTripsData() {
                       </TableRow>
         </TableHeader>
         <TableBody>
-          {isLoading && <SkeletonTable cells={12} rows={10} />}
+          {isLoading && <SkeletonTable cells={14} rows={10} />}
 
-          {error && <SkeletonTable cells={12} rows={10} />}
+          {error && <div> Error Occurred </div>}
           {data && tripsData &&
             tripsData.map((trip: any) => (
               <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
@@ -96,7 +98,7 @@ export function AllTripsData() {
     <div>
 
     </div>
-    <Pagination totalPages={total_number_of_pages} setOffset={setOffset} offset={offset} limit={limit} storageKey="AllTrips"/>
+    <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips"/>
     </>
   );
 }

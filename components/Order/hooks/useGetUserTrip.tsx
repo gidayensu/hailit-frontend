@@ -9,7 +9,10 @@ export const useGetUserTrip=()=> {
   const params = useParams();
   const { trip_id } = params;
   const { user_id} = useAppSelector(state=>state.user);
-  const { data, isLoading, error } = useGetTripQuery(`${trip_id}`);
+  const { data, isLoading, error } = useGetTripQuery(trip_id ,{
+    pollingInterval:3000,
+    skipPollingIfUnfocused: true
+  });
   const trip = data?.trip
   const dispatcher = trip?.dispatcher
   return {trip_id, user_id, data, isLoading, error, trip, dispatcher}

@@ -1,7 +1,7 @@
 export const ItemsSelector = ({itemType, onClickFunc, LightIcon, FillIcon, selectedItemType, width}: {itemType: string, onClickFunc: (itemType:string)=>void, LightIcon: any, FillIcon:any, selectedItemType: string, width:string})=> {
     return (
       <div
-        className={`w-24 flex flex-col items-center p-2 group hover:bg-primary-color text-primary-color hover:text-white font-bold rounded-md border border-primary-color hover:border-none cursor-pointer ${
+        className={`w-24  flex flex-col items-center p-2 group hover:bg-primary-color text-primary-color hover:text-white font-bold rounded-md border border-primary-color hover:border-none cursor-pointer ${
           itemType === selectedItemType
             ? "bg-primary-color  text-white border-none"
             : ""

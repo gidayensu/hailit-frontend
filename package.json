@@ -37,8 +37,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
-    "highcharts": "^11.4.3",
-    "highcharts-react-official": "^3.2.1",
     "input-otp": "^1.2.4",
     "libphonenumber-js": "^1.11.2",
     "lottie-react": "^2.4.0",

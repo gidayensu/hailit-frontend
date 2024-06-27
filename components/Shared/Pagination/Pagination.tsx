@@ -8,15 +8,11 @@ type HandlePagination = (options: number)=> void;
 
 export default function Pagination({
   totalPages,
-  setOffset,
-  offset,
-  limit,
+  setPage,
   storageKey,
 }: {
   totalPages: number;
-  setOffset: HandlePagination;
-  offset: number;
-  limit: number;
+  setPage: HandlePagination;
   storageKey: string;
 }) {
   const getInitialCurrentPage = () => {
@@ -29,8 +25,8 @@ export default function Pagination({
   //component
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify(currentPage));
-    setOffset(limit * currentPage);
-  }, [currentPage, setOffset, storageKey]);
+    setPage(currentPage);
+  }, [currentPage, setPage, storageKey]);
 
   const getPaginationButtons = () => {
     const pages = [];
@@ -80,21 +76,21 @@ export default function Pagination({
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      setOffset(offset - limit);
+      setPage(currentPage - 1);
     }
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      setOffset(limit + offset);
+      setPage(currentPage + 1);
     }
   };
 
   const handlePageClick = (page: number | string | React.ReactNode) => {
     if (typeof page === "number") {
       setCurrentPage(page);
-      setOffset(limit * page);
+      setPage(page);
     }
   };
 

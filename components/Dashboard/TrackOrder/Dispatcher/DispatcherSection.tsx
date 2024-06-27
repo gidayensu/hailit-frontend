@@ -17,12 +17,7 @@ export default function DispatcherSection({
   dispatcher: Dispatcher;
   tripMedium: string;
 }) {
-  const {
-    assignedDispatcherId,
-    assignedDispatcherName,
-    assignedDispatcherPlate,
-    assignedDispatcherVehicle,
-  } = useAppSelector((state) => state.dashboard);
+  
   return (
     <>
       <div className="flex justify-between">

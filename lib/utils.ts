@@ -5,34 +5,41 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+let debounceTimeout: NodeJS.Timeout | null = null;
+
 export async function fetchMapData(
   searchQuery: string
 ): Promise<GeoData | null> {
   const url = `https://nominatim.openstreetmap.org/search.php?street=${searchQuery}&country=Ghana&format=jsonv2`;
 
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching map data: ${response.status}`);
-    }
-
-    const results = await response.json();
-    const returnedResults = results.filter(
-      (result: any) => result.display_name !== "Ghana"
-    );
-
-    // if (!Array.isArray(data) || data.length === 0) {
-    //   console.warn(`No results found for search query: "${searchQuery}"`);
-    //   return null;
-    // }
-
-    return returnedResults;
-  } catch (error) {
-    console.error("Error fetching map data:", error);
-    return null;
+  // Debounce logic
+  if (debounceTimeout) {
+    clearTimeout(debounceTimeout);
   }
+
+  return new Promise((resolve) => {
+    debounceTimeout = setTimeout(async () => {
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`Error fetching map data: ${response.status}`);
+        }
+
+        const results = await response.json();
+        const returnedResults = results.filter(
+          (result: any) => result.display_name !== "Ghana"
+        );
+
+        resolve(returnedResults);
+      } catch (error) {
+        console.error("Error fetching map data:", error);
+        resolve(null);
+      }
+    }, 500); 
+  });
 }
+
 
 export async function reverseMapSearch(
   lat: string | number,
@@ -119,4 +126,11 @@ export function splitLocationData(item:string) {
 
 export function extractBeforeComma(text:string) {
   return text.split(",", 1)[0];
+}
+
+export const reversePercentageDifference = (percentageDifference:number)=> {
+  
+   percentageDifference < 1 ? percentageDifference = Math.abs(percentageDifference): percentageDifference = -percentageDifference;
+   
+   return percentageDifference
 }

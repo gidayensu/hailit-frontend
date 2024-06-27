@@ -13,6 +13,7 @@ import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { usePathname } from 'next/navigation';
 
 //interface
 
@@ -22,8 +23,11 @@ export const useNewOrderSubmit = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
+  
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const path = usePathname();
+  
   const {package_type, trip_type, trip_area, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
   const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
@@ -60,13 +64,20 @@ export const useNewOrderSubmit = () => {
       trip_id: trip.trip_id,
       scheduled: false
     }))
-    router.push('/order/new/success')
+    //redirect based on where the form is being used
+    !path.startsWith('/dashboard') ? router.push('/order/new/success') : ''
+   
   }
 
   if (error) {
-    
-    router.push('/order/new/failed')
+    dispatch(setNewOrder({
+      order_success: false,
+      trip_id: '',
+      scheduled: false
+    }))
+    !path.startsWith('/dashboard') ? router.push('/order/new/failed'): ''
+   
   }
 
-  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, scheduled}
+  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error}
 }

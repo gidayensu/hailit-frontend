@@ -2,12 +2,19 @@
 import type { CurrentTheme } from "@/app/profile/page";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import { Input } from "@/components/ui/input";
+import { useAppSelector } from "@/lib/store/hooks";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/lib/store/hooks";
+import SearchCard from "./SearchCard";
+import { useGetSearchResults } from "./hook/useGetSearchResults";
+
 export default function DashboardTopNav() {
+  
+  const {inputRef, debouncedSearch, searchContainerRef, trips, isLoading, error, openSearchContainer, handleSearchItemTrack} = useGetSearchResults();
+
+  
   const {last_name, first_name} = useAppSelector(state=>state.user)
   const { theme, setTheme, systemTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
@@ -39,18 +46,18 @@ export default function DashboardTopNav() {
       }  items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-primary-dark font-bold`}
     >
       <section className="hidden md:block w-full text-2xl ml-10 cursor-pointer">
-        <Link href={"/dashboard"}>
+        <Link href={"/dashboard"} >
           <p>Hailit</p>
         </Link>
       </section>
-      <div className={`#{iconsAndTextDivClass}  md:hidden`}>
-        <span className={iconsAndTextSpanClass}>
-          {/* <RiNotification3Line className="text-2xl"/> */}
-          <p className="text-3xl md:hidden">Hailit</p>
-        </span>
-      </div>
-      <section className="w-full">
-        {/* <Input className="flex items-center justify-center border-2  border-black dark:border-white rounded-full md:w-full w-[200px] md:h-12 h-10 font-light "  placeholder="Enter Trip ID to search "/> */}
+      
+      <section className="ml-8 md:ml-0  w-full relative">
+        <input ref={inputRef} onChange={debouncedSearch} className="flex items-center justify-center border-2 border-opacity-40 text-gray-600 dark:text-gray-200 dark:border-opacity-20  border-black dark:border-slate-50 rounded-full md:w-full w-[250px] dark:bg-primary-dark md:h-12 h-10 font-light p-3"  placeholder="Enter Trip ID to search "/>
+        {
+          openSearchContainer && 
+        <SearchCard trips={trips} isLoading={isLoading} error={error} handleSelectedTrip={handleSearchItemTrack} ref= {searchContainerRef} />
+        }
+        
       </section>
 
       <section className="flex gap-2 justify-end items-center w-full ">
@@ -69,7 +76,7 @@ export default function DashboardTopNav() {
             {/* <RiNotification3Line className="text-2xl"/> */}
           </span>
         </div>
-        <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
+        <div className={`-ml-4 md:-ml-0 ${iconsAndTextDivClass}`} onClick={handleThemeChange}>
           <span className={iconsAndTextSpanClass}>
             <ThemeToggle />
           </span>

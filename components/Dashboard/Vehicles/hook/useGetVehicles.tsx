@@ -11,14 +11,9 @@ export interface Vehicle {
     availability: boolean
 }
 
-export function useGetVehicles({limit, offset}: {limit?: number, offset?:number}) {
-    let endpoint = "vehicles";
-    offset && limit
-      ? (endpoint = `vehicles?limit=${limit}&offset=${offset}`)
-      : limit
-      ? (endpoint = `vehicles?limit=${limit}`)
-      : "";
-  const { data, isLoading, error } = useGetAllVehiclesQuery(endpoint);
+export function useGetVehicles(page:number) {
+    
+  const { data, isLoading, error } = useGetAllVehiclesQuery(`vehicles?page=${page}`);
   const vehicles = data?.vehicles;
   const total_number_of_pages = data?.total_number_of_pages;
   

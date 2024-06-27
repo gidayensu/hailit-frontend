@@ -8,12 +8,11 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://hailit-backend.onrender.com
-/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
+//     baseUrl: `https://hailit-backend.onrender.com
+// /api/v1/`,
     prepareHeaders: async (headers) => {
-      
       const { data: { session } } = await supabase.auth.getSession();
-      
       if (session) {
         const accessToken = session.access_token;
         headers.set("authorization", `Bearer ${accessToken}`)
@@ -23,7 +22,7 @@ export const hailitApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Trip', 'Trips', 'User Trips'],
+  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts'],
   endpoints: (builder) => ({
     // TRIPS
     getAllTrips: builder.query<any, string | string[]>({
@@ -53,7 +52,7 @@ export const hailitApi = createApi({
         method: "POST",
         body: tripDetails,
       }),
-      invalidatesTags: ['Trip', 'User Trips'],
+      invalidatesTags: ['Trip', 'User Trips', 'Current Month Trip Counts'],
     }),
 
     updateTrip: builder.mutation<any, any>({
@@ -62,7 +61,7 @@ export const hailitApi = createApi({
         method: "PUT",
         body: tripDetails,
       }),
-      invalidatesTags: ['Trip', 'User Trips', 'Trips']
+      invalidatesTags: ['Trip', 'User Trips', 'Trips', 'Current Month Trip Counts']
     }),
     rateTrip: builder.query<any, string | string[]>({
       query: (trip_id) => ({
@@ -77,7 +76,25 @@ export const hailitApi = createApi({
         method: "DELETE",
       }),
     }),
-
+    getCurrentMonthTripCounts: builder.query({
+      query: () => ({
+        url: `trips/current-month-trip-count`,
+        method: "GET",
+      }),
+      providesTags: ['Current Month Trip Counts']
+    }),
+    getTripMonths: builder.query<any, string | string[]>({
+      query: () => ({
+        url: `trips/trip-months`,
+        method: "GET",
+      }),
+    }),
+    searchTrips: builder.query<any, string | string[]>({
+      query: (searchQuery)=> ({
+        url: `trips/search-trips?search=${searchQuery}`,
+        method: "GET",
+      })
+    }),
     // USERS
     getAllUsers: builder.query<any, string | string[]>({
       query: (endpoint) => ({
@@ -237,9 +254,11 @@ export const {
   useGetUserTripsQuery,
   useAddTripMutation,
   useUpdateTripMutation,
-  
+  useGetTripMonthsQuery,
+  useGetCurrentMonthTripCountsQuery,  
   useLazyDeleteTripQuery,
   useLazyRateTripQuery,
+  useLazySearchTripsQuery,
   
   //DRIVERS
   useGetAllDriversQuery,

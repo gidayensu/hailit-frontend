@@ -7,13 +7,13 @@ import { LuUsers } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { TbRoute, TbUser, TbLayoutDashboard } from "react-icons/tb";
 import { RiFileListLine } from "react-icons/ri";
-
+import { ActiveSection } from "@/lib/store/slice/dashboardSlice";
 export function DashboardBottomNav({
   activeSection,
   onClickFunc,
 }: {
-  activeSection: string;
-  onClickFunc: (section: string) => void;
+  activeSection: ActiveSection;
+  onClickFunc: (section: ActiveSection) => void;
 }) {
   const path = usePathname();
 

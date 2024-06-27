@@ -16,17 +16,24 @@ import PackageTypes from "../Order/NewDelivery/PackageTypes/PackageTypes";
 import Link from "next/link";
 import { useState } from "react";
 import { useNewOrderSubmit } from "./hooks/useNewOrderSubmit";
+import { usePathname } from "next/navigation";
 
 export default function NewOrderForm() {
+
   const {formMethods, handleSubmit, onDeliveryFormSubmit, scheduled, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, } = useNewOrderSubmit();
   const [pickUpLoading, setPickUpLoading] = useState<boolean>(false)
   const [dropOffLoading, setDropOffLoading] = useState<boolean>(false)
+
+  const path = usePathname();
   return (
     <FormProvider {...formMethods}>
       <form
         className="flex flex-col gap-4 md:justify-center md:items-center"
         onSubmit={handleSubmit(onDeliveryFormSubmit)}
       >
+        {
+          !path.startsWith('/dashboard') &&
+
         <div className=" grid w-full max-w-sm items-center gap-1.5 ">
           <span className="flex items-start justify-start">
             <h3 className=" text-[14px] font-bold ">
@@ -35,6 +42,7 @@ export default function NewOrderForm() {
           </span>
           <DeliveryChoicesBreadcrumb />
         </div>
+        }
         <div className=" grid w-full max-w-sm items-center gap-1.5 " ref={packageTypeRef}>
           <span className="flex items-start justify-start">
             <h3 className=" text-[14px] font-bold ">Package Type</h3>
@@ -101,7 +109,7 @@ export default function NewOrderForm() {
             </div>
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
             <Link className="col-span-1" href={"/drop-off-map"} onClick={()=>setDropOffLoading(true)}>
-              <Button variant = {'outline'} className=" h-14 hover:none dark:hover:none">
+              <Button variant = {'outline'} className=" h-14 hover:none dark:hover:bg-none">
               {dropOffLoading ? <Loader color="primary"/> : <FaMapMarkerAlt className="text-lg" />}
               </Button>
             </Link>

@@ -16,9 +16,9 @@ import { useGetVehicles } from "./hook/useGetVehicles";
 import { Vehicle } from "./hook/useGetVehicles";
 
 export function Vehicles() {
-    const limit = 7;
-  const [offset, setOffset] = useState<number> (limit);
-    const {data, vehicles, error, isLoading, total_number_of_pages} = useGetVehicles({limit, offset})
+    
+  const [page, setPage] = useState<number> (1);
+    const {data, vehicles, error, isLoading, total_number_of_pages} = useGetVehicles(page)
 
   if (error) {
     return (
@@ -65,7 +65,7 @@ export function Vehicles() {
         </TableBody>
       </Table>
     </div>
-    <Pagination storageKey="Vehicles" limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages}/>
+    <Pagination storageKey="Vehicles"  setPage={setPage} totalPages={total_number_of_pages}/>
     </>
   );
 }

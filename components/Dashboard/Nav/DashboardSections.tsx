@@ -1,3 +1,4 @@
+import { ActiveSection } from "@/lib/store/slice/dashboardSlice";
 export default function DashboardSections({
     children,
     dashMin,
@@ -7,9 +8,9 @@ export default function DashboardSections({
   }: {
     children: React.ReactNode;
     dashMin: boolean;
-    sectionName: string;
+    sectionName: ActiveSection;
     activeSection: string;
-    onClickFunc: (section: string) => void;
+    onClickFunc: (section: ActiveSection) => void;
   }) {
     return (
       <div

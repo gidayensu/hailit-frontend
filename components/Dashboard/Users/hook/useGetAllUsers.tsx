@@ -19,14 +19,14 @@ export interface User {
 
 
 
-export const useGetAllUsers = ({limit, offset}: {limit?: number, offset?:number}) => {
+export const useGetAllUsers = (page:number) => {
   const dispatch = useAppDispatch();
   const { usersData,  } = useAppSelector(state=>state.dashboardTables)
   
   
-  let endpoint = 'users';
-  offset && limit ? endpoint = `users?limit=${limit}&offset=${offset}` : limit ? endpoint = `users?limit=${limit}` : ''
-  const { data, isLoading, error } = useGetAllUsersQuery(endpoint);
+  // let endpoint = 'users';
+  // offset && limit ? endpoint = `users?limit=${limit}&offset=${offset}` : limit ? endpoint = `users?limit=${limit}` : ''
+  const { data, isLoading, error } = useGetAllUsersQuery(`users?page=${page}`);
   
   
   const users = data?.users;

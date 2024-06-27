@@ -39,7 +39,7 @@ export const mapSlice = createSlice({
       
     },
 
-    setSearchContainer(state, action: PayloadAction<boolean>) {
+    setSearchCard(state, action: PayloadAction<boolean>) {
       state.searchContainer = action.payload
     },
 
@@ -68,7 +68,7 @@ export const {
   setSearchData,
   setPickUpLocation,
   resetMapData,
-  setSearchContainer,
+  setSearchCard,
   setDropOffLocation,
 
 } = mapSlice.actions;

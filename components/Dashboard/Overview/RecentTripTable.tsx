@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import SkeletonTable from "../SkeletonTable";
   
 import { extractShortDate, extractBeforeComma } from "@/lib/utils";
@@ -15,7 +16,7 @@ import { useGetTrips } from "../hooks/useGetTrips";
 
 export function RecentTripTable() {
     
-  const {overviewData, handleTrackTrip, isLoading, error}  = useGetTrips({limit: 7, table:"overview"});
+  const {overviewData, handleTrackTrip, isLoading, error}  = useGetTrips({page: 1, table:"overview"});
 
     if (error) {
       return <div>
@@ -38,7 +39,7 @@ export function RecentTripTable() {
         </TableHeader>
         <TableBody>
           {
-            isLoading && <SkeletonTable rows={7} cells={8}/>
+            isLoading && <SkeletonTable rows={7} cells={9}/>
           }
           {overviewData && overviewData.map((trip:any) => (
             
@@ -48,12 +49,12 @@ export function RecentTripTable() {
               <TableCell>{extractShortDate(trip.trip_request_date)} </TableCell>
               <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">{extractBeforeComma(trip.pickup_location)}</TableCell>
               
-              <TableCell className="w-44">{extractBeforeComma(trip.drop_off_location)}</TableCell>
+              <TableCell className="truncate">{extractBeforeComma(trip.drop_off_location)}</TableCell>
               
               <TableCell>{trip.trip_completion_date ? extractShortDate(trip.trip_completion_date): 'TBD'}</TableCell>
               <TableCell>{trip.trip_cost}</TableCell>
               <TableCell>
-                <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.paymentStatus ? 'bg-green-600 ': 'bg-red-500 '}`}>
+                <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.payment_status ? 'bg-green-500 ': 'bg-red-500 '}`}>
                     <p>
                         {trip.payment_status? 'Paid' : 'Not Paid'}
                     </p>

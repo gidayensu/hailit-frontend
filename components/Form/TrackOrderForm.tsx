@@ -24,15 +24,11 @@ export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any,
           className="w-full border-2 ml-1 h-12 border-slate-400"
           ref={inputRef }
           />
-        {!isLoading && 
-        
-        <Button type="submit" className="w-full h-12" onClick={handleSubmit}>
-          Submit
+        <Button type="submit" className="w-full h-12" onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? <Loader /> : 'Submit'}
         </Button>
-        }
-        {isLoading && <Button type="submit" className="w-full" disabled>
-          <Loader />
-        </Button>}
+        
+        
       </div>
            </>
     )

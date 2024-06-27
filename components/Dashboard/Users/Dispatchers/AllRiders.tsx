@@ -15,12 +15,8 @@ import { useGetAllRiders } from "./hook/useGetAllRiders";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 
 export function AllRiders() {
-  const limit = 7;
-  const [offset, setOffset] = useState<number> (limit);
-
-  
-  const {data, riders, total_number_of_pages, error, isLoading} = useGetAllRiders({limit, offset})
-
+  const [page, setPage] = useState<number>(1);
+  const {data, riders, total_number_of_pages, error, isLoading} = useGetAllRiders(page);
   if (error) {
     return (
       <div>
@@ -68,7 +64,7 @@ export function AllRiders() {
         </TableBody>
       </Table>
     </div>
-    <Pagination limit={limit} offset={offset} setOffset={setOffset} totalPages={total_number_of_pages} storageKey="AllRiders"/>
+    <Pagination   setPage={setPage} totalPages={total_number_of_pages} storageKey="AllRiders"/>
     </>
   );
 }

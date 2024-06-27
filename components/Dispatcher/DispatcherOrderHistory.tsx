@@ -30,7 +30,7 @@ export default function DispatcherOrderHistory() {
 
   return (
     <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
-      <h2 className="font-bold text-xl"> YOUR DELIVERIES</h2>
+      <h2 className="font-bold text-xl text-left md:w-4/6 w-5/6">Your Deliveries</h2>
       {noDelivery && (
         <NoDeliveryHistory
           noDeliveryMessage="Your Deliveries Will Appear Here!"
@@ -64,12 +64,12 @@ export default function DispatcherOrderHistory() {
         </div>
       )}
       {currentDeliveries && (
-        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
+        <div className="flex flex-col md:w-4/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
           <div
-            className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}
+            className={`flex flex-col md:w-4/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}
           >
             {dispatcherCurrentTrips.map((trip: Trip) => (
-              <>
+              <div key={trip.trip_id} className="w-full">
                 <Link
                   onClick={() => setTripLoading(true)}
                   key={trip.trip_id}
@@ -93,7 +93,7 @@ export default function DispatcherOrderHistory() {
                     <Loader />
                   </span>
                 )}
-              </>
+              </div>
             ))}
           </div>
           <div className="flex items-center justify-center w-full">

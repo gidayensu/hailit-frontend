@@ -9,6 +9,7 @@ import CustomerProfile from "@/components/Form/EditCustomerProfile";
 import { Button } from "@/components/ui/button";
 
 export default function EditProfile() {
+  //redirect users who are not customers
   const {user_role} = useAppSelector(state=>state.user);
   return (
     <>

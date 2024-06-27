@@ -14,6 +14,9 @@ import { redirect } from "next/navigation";
 import { useAppSelector } from "@/lib/store/hooks";
 
 export default function NewOrder() {
+  //redirect users who are not customers
+  const {user_role} = useAppSelector(state=>state.user);
+  user_role && user_role !== "customer" ? redirect('/profile') : ''
   
   const {trip_medium, trip_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
 

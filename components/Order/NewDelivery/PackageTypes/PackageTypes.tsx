@@ -27,7 +27,7 @@ export default function PackageTypes () {
     dispatch(setPackageType(packageType))
   }
     return (
-        <>
+        <div className="w-full md:flex md:flex-wrap grid grid-cols-3 gap-3">
           <ItemsSelector
             FillIcon={PiMonitorFill}
             LightIcon={PiMonitorLight}
@@ -77,7 +77,7 @@ export default function PackageTypes () {
             width="w-24"
           />
 
-        </>
+        </div>
     )
 }
 

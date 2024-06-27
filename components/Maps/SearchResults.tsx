@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import {
   setPickUpLocation,
   setDropOffLocation,
-  setSearchContainer,
+  setSearchCard,
 } from "@/lib/store/slice/mapSlice";
 import { Skeleton } from "../ui/skeleton";
 import { UserLocation } from "./MainMap";
@@ -11,35 +11,20 @@ import { getSpecificName } from "@/lib/utils";
 
 import SearchItem from "./SearchItem";
 import { LocationType } from "./hook/useMap";
-
+import { useLocationSearch } from "./hook/useLocationSearch";
+import Loader from "../Shared/Loader";
 
 export default function SearchResults({locationType}: {locationType:LocationType}) {
-  const dispatch = useAppDispatch();
-  const { searchData,  searchContainer } = useAppSelector((state) => state.map);
   
-    
-    const selectedSearchItemHandler = ({
-    locationName,
-    mapPoint,
-  }: {
-    locationName: string;
-    mapPoint: UserLocation;
-  }) => {
-    locationType === "pickup" 
-    ? dispatch(setPickUpLocation(mapPoint))
-    : locationType === "drop off"
-    ? dispatch(setDropOffLocation(mapPoint))
-    : ''
-    dispatch(setSearchContainer(false));
-  };
-
+  const {mapDataHandler, inputRef, isLoading, searchData,  searchContainer, selectedSearchItemHandler} = useLocationSearch(locationType)
   
   return (
     <>
       {searchContainer && (
-        <div className="md:w-96 h-auto shadow-md  bg-white z-50  text-secondary-dark  text-sm rounded-lg ">
+        <div className="md:w-96 h-auto shadow-md w-80  bg-white z-50  text-secondary-dark  text-sm rounded-lg ">
           <span className="flex flex-col gap-2">
-            {searchData && searchData.length > 0 &&
+            {isLoading && <Loader color="primary" />}
+            {!isLoading && searchData && searchData.length > 0 &&
               searchData.map((data: any, index: number) => {
                 
                 if (data && index <= 3) {
@@ -49,7 +34,7 @@ export default function SearchResults({locationType}: {locationType:LocationType
                       className="flex flex-col gap-2 cursor-pointer hover:bg-gray-50"
                     >
                       {!data.display_name? (
-                        <Skeleton className="h-4 w-full" />
+                        <Loader color="primary" />
                       ) : (
                         <p
                           onClick={() => {

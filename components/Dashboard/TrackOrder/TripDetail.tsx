@@ -13,6 +13,7 @@ import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
+import { extractShortDate } from "@/lib/utils";
 export default function TripDetail ({trip}: {trip:any}) {
     const dispatch = useAppDispatch();
     const dispatcher = trip?.dispatcher;
@@ -35,6 +36,11 @@ export default function TripDetail ({trip}: {trip:any}) {
               <span className="flex gap-2">
               <h1> Package Type:</h1>
               <h2 className="font-bold">{trip.package_type}</h2>
+              <span className="hidden md:block">|     </span>
+              </span>
+              <span className="flex gap-2">
+              <h1> Request Date:</h1>
+              <h2 className="font-bold">{extractShortDate(trip.trip_request_date)}</h2>
               </span>
               
               
