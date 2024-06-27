@@ -65,7 +65,7 @@ export default function Dashboard() {
         <>
           <DashboardTopNav />
 
-          <main className="flex gap-4 w-full mb-20 bg-[#f7f7f7]  dark:bg-primary-dark ">
+          <main className="flex gap-4 max-w-full mb-20 bg-[#f7f7f7]  dark:bg-primary-dark ">
             <DashboardSideBar
               activeSection={activeSection}
               dashMin={dashMin}
@@ -103,7 +103,7 @@ export default function Dashboard() {
 
               {activeSection === "Drivers" && <AllDrivers />}
 
-              {activeSection === "Analytics" && <TripsDonut />}
+              {/* {activeSection === "Analytics" && <TripsDonut />} */}
               {activeSection === "Edit Profile" && (
                 <section className="flex flex-col items-center justify-center gap-4">
                   <CustomerProfile />
