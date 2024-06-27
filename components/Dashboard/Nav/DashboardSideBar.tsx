@@ -26,7 +26,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
         <article
           className={`hidden lg:flex flex-col fixed  ${
             dashMin ? "w-[60px]" : "md:w-[150px] w-[60px]"
-          } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4`}
+          } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4 mb-10`}
         >
           <div className="flex flex-col gap-1 ">
             <div
@@ -106,14 +106,14 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
             >
               <RiMotorbikeFill className="text-2xl -scale-x-100" />
             </DashboardSections>
-            <DashboardSections
+            {/* <DashboardSections
               dashMin={dashMin}
               sectionName="Analytics"
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
               <MdInsertChartOutlined className="text-2xl -scale-x-100" />
-            </DashboardSections>
+            </DashboardSections> */}
           </div>
 
           <div className="text-center w-full ml-2">
