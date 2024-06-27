@@ -13,8 +13,7 @@ export default function TripsDonut () {
  
   return (
     <section className='w-full flex flex-col items-start gap-3'>
-      <TripAreaMediumAndType/>
-      <NewOrderForm/>
+      <span>WILL BE ADDED SOON</span>
         
     </section>
   );
