@@ -1,14 +1,18 @@
-
+'use client'
 //main components
 import SendPackage from "@/components/Home/SendPackage";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
+import { useAppSelector } from "@/lib/store/hooks";
+import { redirect } from "next/navigation";
 
 
 export default function NewOrder() {
   
    
-    
+    //redirect users who are not customers
+  const {user_role} = useAppSelector(state=>state.user);
+  user_role && user_role !== "customer" ? redirect('/profile') : ''
 
   return (
     <>
