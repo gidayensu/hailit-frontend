@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 //HAVE TO DEFINE TYPES FOR TRIPS, RIDERS, ETC. TO USE THEM HERE
 
-
+import { Trip } from "./tripSlice";
 type Table = "overviewData" | "usersData" | "tripsData" | "vehiclesData" | "ridersData" | "driversData";
 
 interface DeleteData {
@@ -14,9 +14,9 @@ interface SetData {
     data: any,
 }
 export interface DashboardTables {
-    overviewData: any, 
+    overviewData: Trip[], 
     usersData: any, 
-    tripsData: any,
+    tripsData: Trip[],
     ridersData: any, 
     driversData: any, 
     vehiclesData: any

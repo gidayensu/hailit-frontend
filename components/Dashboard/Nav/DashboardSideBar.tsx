@@ -119,7 +119,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
           <div className="text-center w-full ml-2">
             <DashboardSections
               dashMin={dashMin}
-              sectionName="Edit Profile"
+              sectionName="Profile"
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >

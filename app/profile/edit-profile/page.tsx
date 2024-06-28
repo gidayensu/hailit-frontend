@@ -7,10 +7,15 @@ import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
 //ui components
 import { Button } from "@/components/ui/button";
-
+import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
+import Loader from "@/components/Shared/Loader";
+import { useState } from "react";
 export default function EditProfile() {
   //redirect users who are not customers
-  const {user_role} = useAppSelector(state=>state.user);
+  const [loading, setLoading] = useState<boolean>(false)
+  
+  
+
   return (
     <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
@@ -23,8 +28,8 @@ export default function EditProfile() {
           <div className="w-full flex flex-col items-center justify-center gap-4">
             <CustomerProfile />
 
-            <Button type="submit" className="max-w-sm w-full h-14" form="customerProfileUpdate">
-              Save
+            <Button type="submit" className="max-w-sm w-full h-14" form="customerProfileUpdate" >
+              {loading? <Loader/> : `Save`}
             </Button>
           </div>
         </MiddleSectionContainer>

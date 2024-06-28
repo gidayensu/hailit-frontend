@@ -33,7 +33,8 @@ export default function Dashboard() {
   
   const {    
     isSuccess,
-    isLoading: formLoading
+    isLoading: formLoading,
+    handleSignOut
   } = useCustomerProfile();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -52,9 +53,8 @@ export default function Dashboard() {
   const isAdmin = data?.admin;
 
   if(data && !isAdmin) {
-    dispatch(userLogout());
-    supabaseSignOut();
-    router.push('/profile')
+    handleSignOut()
+    
   }
 
   return (
@@ -104,17 +104,35 @@ export default function Dashboard() {
               {activeSection === "Drivers" && <AllDrivers />}
 
               {/* {activeSection === "Analytics" && <TripsDonut />} */}
-              {activeSection === "Edit Profile" && (
-                <section className="flex flex-col items-center justify-center gap-4">
+              {activeSection === "Profile" && (
+                <section className="flex flex-col items-center md:items-start md:justify-start justify-center gap-4">
+                  <div className="w-1/2 flex items-start justify-start">
+
                   <CustomerProfile />
+                  </div>
                   {/* Form submit button placed here because the form is used at different places with different button position */}
                   <Button
                     type="submit"
-                    className="max-w-sm w-full h-14"
+                    className="max-w-sm w-1/2 h-14"
                     form="customerProfileUpdate"
+                    variant={'outline'}
                   >
                     
                   {formLoading ? <Loader/> : isSuccess ? "Saved" : "Save"}
+                  </Button>
+                  <span className="flex items-center justify-center max-w-sm w-1/2">
+                      <p>
+
+                      OR
+                      </p>
+                  </span>
+                  <Button
+                    
+                    className="max-w-sm w-1/2 h-14 lg:hidden"
+                    onClick={handleSignOut}
+                  >
+                    
+                    Logout
                   </Button>
                 </section>
               )}

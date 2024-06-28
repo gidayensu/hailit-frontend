@@ -11,9 +11,8 @@ export const useOnboarding = ()=> {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const {loading} = useCustomerProfile();
   const { authenticationState } = useAppSelector((state) => state.auth);
-  const { onboard, chosenRole, stageOne, stageTwo, stageThree } =
+  const { onboard, chosenRole, stageOne, stageTwo, stageThree, loading } =
     useAppSelector((state) => state.onBoarding);
   const user = useAppSelector(state=>state.user)
   const handleOnboardStage = (

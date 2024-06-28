@@ -11,6 +11,7 @@ interface OnBoarding {
     phone_number: string,
     license_number: string,
     onboard: boolean,
+    loading: boolean
 }
 
 interface OnboardingStages {
@@ -28,7 +29,8 @@ const initialState:OnBoarding = {
     last_name: '',
     phone_number: '',
     license_number: '',
-    onboard: false
+    onboard: false,
+    loading: false
 }
 
 export interface CustomerDetails {
@@ -62,10 +64,13 @@ export const onBoardingSlice = createSlice({
             state.onboard = action.payload
             
         },
+        setLoading(state, action:PayloadAction<boolean>) {
+            state.loading = action.payload
+        }
 
         
     }
 
 })
 
-export const {setOnboardingStages, setChosenRole, setBoardingCompletion} = onBoardingSlice.actions;
+export const {setOnboardingStages, setChosenRole, setBoardingCompletion, setLoading} = onBoardingSlice.actions;

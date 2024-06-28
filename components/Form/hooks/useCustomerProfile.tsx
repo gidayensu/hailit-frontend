@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLazyUpdateUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
@@ -11,19 +11,26 @@ import { setUser } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User, UserSchema } from "../FormTypes";
-
+import { supabaseSignOut } from "@/lib/supabaseAuth";
+import { setLoading } from "@/lib/store/slice/onBoardingSlice";
+import { useRouter } from "next/navigation";
+import { userLogout } from "@/lib/store/actions";
 export const useCustomerProfile = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  
   const path = usePathname();
+  const router = useRouter();
 
   const { email, user_id, user_role, first_name, last_name, phone_number } = useAppSelector((state) => state.user);
   const { chosenRole } = useAppSelector((state) => state.onBoarding);
 
   const [updateUser, { data, isLoading, error }] = useLazyUpdateUserQuery();
 
+
+  //form submission
   const formMethods = useForm<User>({
     resolver: zodResolver(UserSchema),
   });
@@ -36,7 +43,8 @@ export const useCustomerProfile = () => {
 
   const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (formData) => {
     try {
-      setLoading(true);
+      dispatch(setLoading(true))
+      console.log('this runs')
       let userRole = user_role;
       if (chosenRole && chosenRole === "rider") {
         userRole = "rider";
@@ -53,10 +61,14 @@ export const useCustomerProfile = () => {
         await updateUser({ userId: user_id, userDetails: newUserData });
       }
       setIsSuccess(true)
-      setLoading(false);
+      if (path.startsWith("/profile/edit-profile")) {
+        router.push('/profile')
+      }
+      
     } catch (err) {
       setIsError(true);
-      setLoading(false);
+     
+      
       return { error: err };
     }
   };
@@ -90,14 +102,23 @@ export const useCustomerProfile = () => {
       }
       setIsSuccess(true)
     }
-      
+
     
   }, [dispatch, user, path])
     
 
-  if (data && data.error) {
-    setIsError(true);
-    setLoading(false)
+  if(error) {
+    dispatch(setLoading(false))
   }
-  return { formMethods, loading, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole,  first_name, last_name, phone_number, isLoading, isSuccess };
+
+  
+
+  //log user out
+  const handleSignOut = () => {
+    dispatch(userLogout());
+    supabaseSignOut();
+    router.push('/profile')
+  };
+
+  return { formMethods, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole,  first_name, last_name, phone_number, isLoading, isSuccess, error, handleSignOut };
 };

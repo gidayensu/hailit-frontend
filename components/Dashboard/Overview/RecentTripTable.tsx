@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { Trip } from "@/lib/store/slice/tripSlice";
 import SkeletonTable from "../SkeletonTable";
   
 import { extractShortDate, extractBeforeComma } from "@/lib/utils";
@@ -41,37 +42,37 @@ export function RecentTripTable() {
           {
             isLoading && <SkeletonTable rows={7} cells={9}/>
           }
-          {overviewData && overviewData.map((trip:any) => (
+          {overviewData && overviewData.map((trip:Trip) => (
             
-            <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
-              <TableCell className="font-medium">{trip.trip_id} </TableCell>
+            <TableRow key={trip?.trip_id} onClick={()=>handleTrackTrip(trip?.trip_id)}>
+              <TableCell className="font-medium">{trip?.trip_id} </TableCell>
               
               <TableCell>{extractShortDate(trip.trip_request_date)} </TableCell>
-              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">{extractBeforeComma(trip.pickup_location)}</TableCell>
+              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">{extractBeforeComma(trip?.pickup_location)}</TableCell>
               
-              <TableCell className="truncate">{extractBeforeComma(trip.drop_off_location)}</TableCell>
+              <TableCell className="truncate">{extractBeforeComma(trip?.drop_off_location)}</TableCell>
               
-              <TableCell>{trip.trip_completion_date ? extractShortDate(trip.trip_completion_date): 'TBD'}</TableCell>
-              <TableCell>{trip.trip_cost}</TableCell>
+              <TableCell>{trip?.trip_completion_date ? extractShortDate(trip.trip_completion_date): 'TBD'}</TableCell>
+              <TableCell>{trip?.trip_cost}</TableCell>
               <TableCell>
-                <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.payment_status ? 'bg-green-500 ': 'bg-red-500 '}`}>
+                <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip?.payment_status ? 'bg-green-500 ': 'bg-red-500 '}`}>
                     <p>
-                        {trip.payment_status? 'Paid' : 'Not Paid'}
+                        {trip?.payment_status? 'Paid' : 'Not Paid'}
                     </p>
                 </div>
                 </TableCell>
               
-              <TableCell><div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip.trip_status === "Delivered"
+              <TableCell><div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip?.trip_status === "Delivered"
                 ? "  bg-green-500"
-                : trip.trip_status === "Picked Up"
+                : trip?.trip_status === "Picked Up"
                 ? "  bg-sky-600"
-                : trip.trip_status === "In Transit"
+                : trip?.trip_status === "In Transit"
                 ? " bg-amber-500 "
-                : trip.trip_status === "Booked"
+                : trip?.trip_status === "Booked"
                 ? " bg-slate-600 dark:text-slate-50"
                 : " bg-red-500"}`}>
                     <p>
-                        {trip.trip_status}
+                        {trip?.trip_status}
                     </p>
                 </div></TableCell>
               

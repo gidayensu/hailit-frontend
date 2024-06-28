@@ -6,7 +6,9 @@ import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
 import { googleSupabaseSignIn } from "@/lib/supabaseAuth";
-// redux
+
+// next
+import Link from "next/link";
 
 // react
 
@@ -70,6 +72,15 @@ export default function Login() {
               </p>
             )}
           </Button>
+          <Link href={'/order'} className="w-full">
+          <Button
+            variant="outline"
+            className="w-full border border-slate-300 h-12 flex gap-4"
+            
+          >
+            Continue as Guest
+          </Button>
+          </Link>
         </CardFooter>
       </Card>
     </TabsContent>

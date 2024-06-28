@@ -19,7 +19,7 @@ import FormField from "@/components/Form/FormField";
 import { FormProvider } from "react-hook-form";
 
 import { useSignUp } from "./hooks/useSignUp";
-
+import Link from "next/link";
 export default function SignUp() {
   const {
     onSignUpSubmit,
@@ -96,6 +96,9 @@ export default function SignUp() {
             <p className="text-sm">or</p>
             <Separator className="w-32" />
           </div>
+          <div>
+            
+          </div>
           <Button
             variant="outline"
             className="w-full border border-slate-300 h-12 flex gap-4"
@@ -103,6 +106,15 @@ export default function SignUp() {
           >
             <FcGoogle className="text-2xl" /> Continue with Google
           </Button>
+          <Link href={'/order'} className="w-full">
+          <Button
+            variant="outline"
+            className="w-full border border-slate-300 h-12 flex gap-4"
+            
+          >
+            Continue as Guest
+          </Button>
+          </Link>
         </CardFooter>
       </Card>
     </TabsContent>

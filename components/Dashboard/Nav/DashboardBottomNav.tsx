@@ -102,8 +102,8 @@ export function DashboardBottomNav({
 
       <div className={divClass}>
         <Button
-          onClick={() => onClickFunc("Edit Profile")}
-          variant={activeSection === "Edit Profile" ? "default" : "secondary"}
+          onClick={() => onClickFunc("Profile")}
+          variant={activeSection === "Profile" ? "default" : "secondary"}
           className="border-none"
         >
           <TbUser className={lightThemeClass} />
@@ -111,7 +111,7 @@ export function DashboardBottomNav({
         </Button>
         <p
           className={`${textClass} ${
-            activeSection === "Edit Profile"
+            activeSection === "Profile"
               ? "text-primary-shade dark:text-white"
               : ""
           }`}

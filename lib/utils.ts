@@ -83,7 +83,29 @@ return date.toLocaleTimeString();
 
 }
 
-export function extractShortDate(date:string) {
+export const checkTimeOfDay = () => {
+  const currentHour = new Date().getHours();
+
+
+  const morningStart = 0;   
+  const morningEnd = 11;    
+   
+
+  if (currentHour >= morningStart && currentHour <= morningEnd) {
+    return "morning";
+  }  else {
+    return "evening"; // Default case, though this might be redundant based on your needs
+  }
+};
+
+// Example usage
+const timeOfDay = checkTimeOfDay();
+console.log(`It's currently ${timeOfDay}.`);
+
+export function extractShortDate(date:string | null | Date) {
+  if (date === null) {
+    return null
+  }
   const dateObj = new Date(date);
   return dateObj.toLocaleDateString("en-GB"); 
 }

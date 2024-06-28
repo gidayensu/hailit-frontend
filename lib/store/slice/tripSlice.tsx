@@ -94,9 +94,9 @@ export interface Dispatcher {
   
   export interface Trip {
     trip_stage: number;
-    trip_request_date: null | Date;
-    trip_commencement_date: null | Date;
-    trip_completion_date: null | Date;
+    trip_request_date: null | Date | string;
+    trip_commencement_date: null | Date | string;
+    trip_completion_date: null | Date | string;
     trip_cost: string;
     payment_status: boolean;
     dispatcher_rating: null | number;

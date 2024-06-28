@@ -13,7 +13,7 @@ export type ActiveSection =
   | "Drivers"
   | "Analytics"
   | "Sign Out"
-  | "Edit Profile";
+  | "Profile";
 
 export type TripStage = 1 | 2 | 3 | 4;
 

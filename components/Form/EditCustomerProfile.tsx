@@ -14,9 +14,11 @@ export default function CustomerProfile() {
     first_name,
     last_name,
     phone_number,
-    isSuccess,
-    isLoading
+    error
   } = useCustomerProfile();
+
+   
+  
 
   const inputAndLabeClass = "w-full max-w-sm items-center";
   const labelClass = "text-sm font-medium mb-1";
@@ -71,7 +73,7 @@ export default function CustomerProfile() {
             defaultValue={phone_number || ""}
           />
         </div>
-        {isError && <p className="text-red"> Error Occurred</p>}
+
 
         {chosenRole === "rider" && (
           <div className={inputAndLabeClass}>
@@ -81,9 +83,12 @@ export default function CustomerProfile() {
               placeholder="License Number"
               className="h-14"
               name="license_number"
-            />
+              />
           </div>
         )}
+              {error && ('data' in error) && (
+         <p className="text-red-500">{`${JSON.stringify((error as any).data.error)}`}</p>
+      )}
       </form>
     </FormProvider>
   );

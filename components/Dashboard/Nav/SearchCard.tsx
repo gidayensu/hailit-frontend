@@ -18,7 +18,7 @@ interface SearchCardProps {
 const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoading, error, handleSelectedTrip}, ref) => {         
     
     return (
-        <Container className="-ml-4 md:-ml-24 absolute w-72 md:w-[800px] text-[13px] max-h-80 z-10 mt-3 rounded-xl p-4 flex flex-col items-center gap-2" ref= {ref}>
+        <Container className="-ml-4 md:-ml-24 absolute w-72 md:w-[800px] text-[12px] max-h-80 z-10 mt-3 rounded-xl p-4 font-normal  flex flex-col items-center gap-2" ref= {ref}>
           {isLoading && <Loader color="primary" /> } 
           {
               error  &&
@@ -43,7 +43,7 @@ const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoadi
                         <p>{trip?.sender_number}</p>
                         <p>{trip?.trip_medium}</p>
                       </div>
-                      <span className={`h-6 flex items-center justify-center w-20 rounded-lg ${
+                      <span className={`h-5 flex items-center justify-center w-16 rounded-md text-white ${
                           trip?.trip_status === "Delivered"
                           ? "bg-green-500"
                           : trip?.trip_status === "Picked Up"
