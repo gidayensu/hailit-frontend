@@ -61,7 +61,7 @@ export const googleSupabaseSignIn = async ()=> {
   const {data, error} = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: "https://hailit-frontend.vercel.app/oauth-callback"
+      redirectTo: "https://hailit.vercel.app/oauth-callback"
     }
   })
   if (error) {

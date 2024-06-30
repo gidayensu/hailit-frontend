@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { supabaseSignOut } from "@/lib/supabaseAuth";
 
 //this is the callback for google sign in. If this url loads, then the user has already logged in (from supabase auth's end) and his data
-//data has to be fetched (from our end); 
+//data has to be fetched (from the backend end); 
 export default function OAuthCallBack (){ 
     const [attemptedSignUp, setAttemptedSignUp] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
@@ -27,6 +27,7 @@ export default function OAuthCallBack (){
         if (signInResult?.error && !attemptedSignUp) {
             setAttemptedSignUp(true)
           const signUpResult = await googleSignUp({ user_id, email });
+          
           if(signUpResult?.error) {
             setError(true)
           }
