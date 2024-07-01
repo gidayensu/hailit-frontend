@@ -11,7 +11,7 @@ export default function Overview() {
   
   return (
     <section className="space-y-6 w-full">
-      <div className="flex flex-col md:flex-row  w-full gap-3">
+      <div className="flex flex-col lg:flex-row  w-full gap-3">
       <StatsCard
           title="Revenue"
           subtitle="This Month&lsquo;s Revenue"
@@ -20,7 +20,7 @@ export default function Overview() {
           percentageDifference={currentMonthStats?.revenue_percentage_difference || 0}
           currency= {true}
         />
-        <div className="grid grid-cols-2 grid-rows-2 md:flex  md:flex-row  w-full gap-3">
+        <div className="grid grid-cols-2 lg:flex  lg:flex-row  w-full gap-3">
 
         <StatsCard
           title="Orders"
@@ -60,11 +60,11 @@ export default function Overview() {
         </div>
         
       </div>
-      <div className="flex flex-col gap-4 w-full ">
-        <div className="flex flex-col w-full   gap-2 p-4 h-full rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
+        <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
           <h3 className="font-bold">Most Recent Trips</h3>
           <RecentTripTable />
         </div>
+      <div className="flex flex-col gap-4 w-full ">
       </div>
     </section>
   );
