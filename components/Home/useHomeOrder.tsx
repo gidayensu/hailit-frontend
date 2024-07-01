@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch } from "@/lib/store/hooks";
-import { setTripMedium, setTripArea, setTripType } from "@/lib/store/slice/deliveryChoicesSlice";
+import { setTripMedium, setTripArea, setTripType, resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DeliveryOptions } from "./HomeOptions";
@@ -34,6 +34,9 @@ export const useHomeOrder = ()=> {
       dispatch(setTripArea("Accra"));
       dispatch(setTripMedium("Truck"));
       dispatch(setTripType("Scheduled"));
+    }
+    if (selected === "New Delivery" || selected === "Custom") {
+      dispatch(resetDeliveryChoices());
     }
     router.push("/order/new");
   };

@@ -7,9 +7,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 
 export default function TripsDonut () {
   const {order_success} = useAppSelector(state=>state.newOrder)
-  if(order_success) {
-    console.log('this is successful')
-  }
+  
  
   return (
     <section className='w-full flex flex-col items-start gap-3'>
