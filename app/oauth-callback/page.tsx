@@ -19,19 +19,24 @@ export default function OAuthCallBack (){
   useEffect(() => {
 
     const signInWithGoogle = async () => {
-      const { user_id, email } = await userIdAndEmailFromSession();
+      try {
 
-      if (typeof user_id === 'string' &&!attemptedSignUp) {
-        const signInResult = await googleSignIn(user_id);
-        
-        if (signInResult?.error && !attemptedSignUp) {
-            setAttemptedSignUp(true)
-          const signUpResult = await googleSignUp({ user_id, email });
+        const { user_id, email } = await userIdAndEmailFromSession();
+  
+        if (typeof user_id === 'string' &&!attemptedSignUp) {
+          const signInResult = await googleSignIn(user_id);
           
-          if(signUpResult?.error) {
-            setError(true)
+          if (signInResult?.error && !attemptedSignUp) {
+              setAttemptedSignUp(true)
+            const signUpResult = await googleSignUp({ user_id, email });
+  
+            if(signUpResult?.error) {
+              setError(true)
+            }
           }
         }
+      } catch (err) {
+        setError(true)
       }
     };
 
