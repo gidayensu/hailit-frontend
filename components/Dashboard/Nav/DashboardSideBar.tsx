@@ -24,9 +24,9 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
   }  
     return (
         <article
-          className={`hidden lg:flex flex-col fixed  ${
-            dashMin ? "w-[60px]" : "md:w-[150px] w-[60px]"
-          } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-between rounded-xl mt-2 ml-4 mb-10`}
+          className={`hidden lg:flex flex-col fixed lg:h-[440px] ${
+            dashMin ? "w-[60px] transition-all duration-300" : "md:w-[150px] w-[60px] transition-all duration-300"
+          } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-start rounded-xl mt-2 ml-4 mb-10`}
         >
           <div className="flex flex-col gap-1 ">
             <div
@@ -34,13 +34,13 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClick={handleDashMin}
             >
               {dashMin && (
-                <TbLayoutSidebarRightCollapseFilled className="text-2xl" />
+                <TbLayoutSidebarRightCollapseFilled className="text-xl" />
               )}
 
               {!dashMin && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 transition-all duration-300">
                   <p>Hailit</p>
-                  <TbLayoutSidebarLeftCollapseFilled className="text-2xl" />
+                  <TbLayoutSidebarLeftCollapseFilled className="text-xl transition-all duration-300" />
                 </div>
               )}
             </div>
@@ -51,7 +51,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <TbLayoutDashboard className="text-2xl" />
+              <TbLayoutDashboard className="text-xl" />
             </DashboardSections>
 
             <DashboardSections
@@ -60,7 +60,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <RiFileListLine className="text-2xl" />
+              <RiFileListLine className="text-xl" />
             </DashboardSections>
 
             <DashboardSections
@@ -69,7 +69,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <TbRoute className="text-2xl" />
+              <TbRoute className="text-xl" />
             </DashboardSections>
 
             <DashboardSections
@@ -78,7 +78,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <TbUser className="text-2xl" />
+              <TbUser className="text-xl" />
             </DashboardSections>
 
             <DashboardSections
@@ -87,7 +87,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <MdOutlineSportsMotorsports className="text-2xl -scale-x-100" />
+              <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
             </DashboardSections>
 
             <DashboardSections
@@ -96,7 +96,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <RiSteering2Line className="text-2xl -scale-x-100" />
+              <RiSteering2Line className="text-xl -scale-x-100" />
             </DashboardSections>
             <DashboardSections
               dashMin={dashMin}
@@ -104,7 +104,7 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <RiMotorbikeFill className="text-2xl -scale-x-100" />
+              <RiMotorbikeFill className="text-xl -scale-x-100" />
             </DashboardSections>
             {/* <DashboardSections
               dashMin={dashMin}
@@ -112,18 +112,15 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <MdInsertChartOutlined className="text-2xl -scale-x-100" />
+              <MdInsertChartOutlined className="text-xl -scale-x-100" />
             </DashboardSections> */}
-          </div>
-
-          <div className="text-center w-full ml-2">
             <DashboardSections
               dashMin={dashMin}
               sectionName="Profile"
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
-              <TbUserEdit className="text-2xl " />
+              <TbUserEdit className="text-xl " />
             </DashboardSections>
 
             <DashboardSections
@@ -132,9 +129,29 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
               onClickFunc={handleSignOut}
               activeSection={activeSection}
             >
-              <IoLogOutOutline className="text-2xl " />
+              <IoLogOutOutline className="text-xl " />
             </DashboardSections>
           </div>
+
+          {/* <div className="text-center w-full ml-2">
+            <DashboardSections
+              dashMin={dashMin}
+              sectionName="Profile"
+              onClickFunc={handleActiveSection}
+              activeSection={activeSection}
+            >
+              <TbUserEdit className="text-xl " />
+            </DashboardSections>
+
+            <DashboardSections
+              dashMin={dashMin}
+              sectionName="Sign Out"
+              onClickFunc={handleSignOut}
+              activeSection={activeSection}
+            >
+              <IoLogOutOutline className="text-xl " />
+            </DashboardSections>
+          </div> */}
         </article>
     )
 }
