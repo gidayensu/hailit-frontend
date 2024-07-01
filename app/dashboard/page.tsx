@@ -1,7 +1,9 @@
 "use client";
-import TripsDonut from "@/components/Dashboard/Analytics/TripsDonut";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { ActiveSection, setActiveSection } from "@/lib/store/slice/dashboardSlice";
+import {
+  ActiveSection,
+  setActiveSection,
+} from "@/lib/store/slice/dashboardSlice";
 import { useState } from "react";
 //icons + ui
 import { Button } from "@/components/ui/button";
@@ -12,7 +14,7 @@ import Link from "next/link";
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
-import { AllTripsData } from "@/components/Dashboard/Orders/AllTripsTable";
+import AllTripsSection from "@/components/Dashboard/Orders/AllTripsSection";
 import Overview from "@/components/Dashboard/Overview/Overview";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
 import AllUsers from "@/components/Dashboard/Users/AllUsers";
@@ -20,21 +22,19 @@ import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers"
 import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
 import CustomerProfile from "@/components/Form/EditCustomerProfile";
-import BigLoader from "@/components/Shared/BigLoader";
-import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
+import BigLoader from "@/components/Shared/BigLoader";
 import Loader from "@/components/Shared/Loader";
-import { userLogout } from "@/lib/store/actions";
-import { supabaseSignOut } from "@/lib/supabaseAuth";
+import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
+import ErrorComponent from "@/components/Shared/ErrorComponent";
 import { useRouter } from "next/navigation";
-import AllTripsSection from "@/components/Dashboard/Orders/AllTripsSection";
 export default function Dashboard() {
   const [dashMin, setDashMin] = useState<boolean>(false);
-  
-  const {    
+
+  const {
     isSuccess,
     isLoading: formLoading,
-    handleSignOut
+    handleSignOut,
   } = useCustomerProfile();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -52,9 +52,8 @@ export default function Dashboard() {
   const { data, isLoading, error } = useGetAdminQuery(user_id);
   const isAdmin = data?.admin;
 
-  if(data && !isAdmin) {
-    handleSignOut()
-    
+  if (data && !isAdmin) {
+    handleSignOut();
   }
 
   return (
@@ -65,18 +64,18 @@ export default function Dashboard() {
         <>
           <DashboardTopNav />
 
-          <main className="flex gap-4 max-w-full mb-20 bg-[#f7f7f7]  dark:bg-primary-dark ">
+          <main className="flex gap-4  mb-20 lg:mb-0 xl:max-w-full bg-[#f7f7f7]  dark:bg-primary-dark ">
             <DashboardSideBar
               activeSection={activeSection}
               dashMin={dashMin}
               handleActiveSection={handleActiveSection}
               handleDashMin={handleDashMin}
             />
-
             <article
               className={`flex flex-col gap-4 w-full ${
-                dashMin ? "lg:ml-[70px]" : "lg:ml-[170px]"
-              } lg:ml-[170px] px-6 py-4`}
+                dashMin ? "lg:ml-[70px] lg:w-[calc(100vw-70px)] transition-all duration-300" : "lg:ml-[170px] lg:w-[calc(100vw-170px)] transition-all duration-300"
+              } px-6 py-4`}
+              // style={{ width: '100%', maxWidth: `${dashMin ? "calc(100% - 70px)" : "calc(100% - 170px)"}` }}
             >
               <section className="space-y-4">
                 <h1 className="font-bold text-3xl">{activeSection}</h1>
@@ -106,34 +105,27 @@ export default function Dashboard() {
               {/* {activeSection === "Analytics" && <TripsDonut />} */}
               {activeSection === "Profile" && (
                 <section className="flex flex-col items-center md:items-start md:justify-start justify-center gap-4">
-                  <div className="w-1/2 flex items-start justify-start">
-
-                  <CustomerProfile />
-                  </div>
-                  {/* Form submit button placed here because the form is used at different places with different button position */}
+                  <div className="flex flex-col gap-2 w-full items-start justify-start">
+                    <CustomerProfile />
                   <Button
                     type="submit"
-                    className="max-w-sm w-1/2 h-14"
+                    className="max-w-sm w-full h-14"
                     form="customerProfileUpdate"
-                    variant={'outline'}
+                    variant={"outline"}
                   >
-                    
-                  {formLoading ? <Loader/> : isSuccess ? "Saved" : "Save"}
+                    {formLoading ? <Loader /> : isSuccess ? "Saved" : "Save"}
                   </Button>
-                  <span className="flex items-center justify-center max-w-sm w-1/2">
-                      <p>
-
-                      OR
-                      </p>
+                  <span className="max-w-sm w-full lg:hidden flex items-center justify-center  ">
+                    <p>OR</p>
                   </span>
                   <Button
-                    
-                    className="max-w-sm w-1/2 h-14 lg:hidden"
+                    className="max-w-sm w-full h-14 lg:hidden"
                     onClick={handleSignOut}
                   >
-                    
                     Logout
                   </Button>
+                  </div>
+                  {/* Form submit button placed here because the form is used at different places with different button position */}
                 </section>
               )}
             </article>
@@ -147,10 +139,11 @@ export default function Dashboard() {
 
       {(isAdmin === false || error) && (
         <section className="flex flex-col items-center justify-center bg-slate-50 dark:bg-primary-dark min-h-screen gap-4">
-          <h2 className="font-bold text-2xl">Page Not Found</h2>
-          <Link href={"/"}>
-            <Button>Return Home </Button>
-          </Link>
+          <ErrorComponent
+            errorMessage="Page Not Found"
+            errorCode={404}
+            onClickFunc={handleSignOut}
+          />
         </section>
       )}
     </>
