@@ -46,18 +46,27 @@ export default function DashboardTopNav() {
       }  items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-primary-dark font-bold`}
     >
       <section className="hidden md:block w-full text-2xl ml-10 cursor-pointer">
-        <Link href={"/dashboard"} >
+        <Link href={"/dashboard"}>
           <p>Hailit</p>
         </Link>
       </section>
-      
+
       <section className="ml-8 md:ml-0  w-full relative">
-        <input ref={inputRef} onChange={debouncedSearch} className="flex items-center justify-center border-2 border-opacity-40 text-gray-600 dark:text-gray-200 dark:border-opacity-20  border-black dark:border-slate-50 rounded-full md:w-full w-[250px] dark:bg-primary-dark md:h-12 h-10 font-light p-3"  placeholder="Enter Trip ID to search "/>
-        {
-          openSearchContainer && 
-        <SearchCard trips={trips} isLoading={isLoading} error={error} handleSelectedTrip={handleSearchItemTrack} ref= {searchContainerRef} />
-        }
-        
+        <input
+          ref={inputRef}
+          onChange={debouncedSearch}
+          className="flex items-center justify-center border-2 border-opacity-40 text-[#4747478f] dark:text-[#4747478f] dark:border-opacity-20  border-black dark:border-slate-50 rounded-full md:w-full w-[250px] text-[12px]  dark:bg-primary-dark md:h-12 h-10 font-light p-3"
+          placeholder="Enter Trip ID to search "
+        />
+        {openSearchContainer && (
+          <SearchCard
+            trips={trips}
+            isLoading={isLoading}
+            error={error}
+            handleSelectedTrip={handleSearchItemTrack}
+            ref={searchContainerRef}
+          />
+        )}
       </section>
 
       <section className="flex gap-2 justify-end items-center w-full ">
@@ -66,7 +75,9 @@ export default function DashboardTopNav() {
             <p>{first_name[0]}</p>
           </div>
           <div className="flex flex-col items-start justify-center">
-            <p className="font-bold text-md">{first_name} {last_name}</p>
+            <p className="font-bold text-md">
+              {first_name} {last_name}
+            </p>
             <p className="font-bold text-[12px] opacity-50">Administrator</p>
           </div>
         </div>
@@ -76,7 +87,10 @@ export default function DashboardTopNav() {
             {/* <RiNotification3Line className="text-2xl"/> */}
           </span>
         </div>
-        <div className={`-ml-4 md:-ml-0 ${iconsAndTextDivClass}`} onClick={handleThemeChange}>
+        <div
+          className={`-ml-4 md:-ml-0 ${iconsAndTextDivClass}`}
+          onClick={handleThemeChange}
+        >
           <span className={iconsAndTextSpanClass}>
             <ThemeToggle />
           </span>
