@@ -94,13 +94,13 @@ export const checkTimeOfDay = () => {
   if (currentHour >= morningStart && currentHour <= morningEnd) {
     return "morning";
   }  else {
-    return "evening"; // Default case, though this might be redundant based on your needs
+    return "evening"; 
   }
 };
 
-// Example usage
-const timeOfDay = checkTimeOfDay();
-console.log(`It's currently ${timeOfDay}.`);
+
+
+
 
 export function extractShortDate(date:string | null | Date) {
   if (date === null) {
@@ -147,7 +147,7 @@ export function splitLocationData(item:string) {
 }
 
 export function extractBeforeComma(text:string) {
-  return text.split(",", 1)[0];
+  return text.split(", ", 1)[0];
 }
 
 export const reversePercentageDifference = (percentageDifference:number)=> {
