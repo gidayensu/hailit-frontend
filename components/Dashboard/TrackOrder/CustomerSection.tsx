@@ -1,5 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/Shared/Loader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { extractShortDate } from "@/lib/utils";
 import { useGetUser } from "../Users/hook/useGetUser";
@@ -27,9 +28,8 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
           </div>
           {
             isLoading && <div className="space-y-1">
-                <Skeleton className="w-32"/>
-                <Skeleton className="w-32"/>
-                <Skeleton className="w-32"/>
+              <Loader color="primary"/>
+                
             </div>
           } {
            user &&  

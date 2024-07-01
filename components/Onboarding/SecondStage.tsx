@@ -9,7 +9,10 @@ export default function SecondStage () {
               <p className="font-bold text-2xl">Enter your details </p>
               <p>These details will be used to set up your account </p>
             </span>
+            <div className="flex items-center justify-center w-full">
+
             <CustomerProfile />
+            </div>
 
             
           </div>

@@ -44,13 +44,13 @@ export function RecentTripTable() {
           }
           {overviewData && overviewData.map((trip:Trip) => (
             
-            <TableRow key={trip?.trip_id} onClick={()=>handleTrackTrip(trip?.trip_id)}>
+            <TableRow key={trip?.trip_id} onClick={()=>handleTrackTrip(trip?.trip_id)} >
               <TableCell className="font-medium">{trip?.trip_id} </TableCell>
               
               <TableCell>{extractShortDate(trip.trip_request_date)} </TableCell>
-              <TableCell className="w-44 text-wrap line-clamp-1 text-ellipsis">{extractBeforeComma(trip?.pickup_location)}</TableCell>
+              <TableCell className="w-44 text-wrap text-ellipsis">{extractBeforeComma(trip?.pickup_location)}</TableCell>
               
-              <TableCell className="truncate">{extractBeforeComma(trip?.drop_off_location)}</TableCell>
+              <TableCell className="truncate line-clamp-1 w-44">{extractBeforeComma(trip?.drop_off_location)}</TableCell>
               
               <TableCell>{trip?.trip_completion_date ? extractShortDate(trip.trip_completion_date): 'TBD'}</TableCell>
               <TableCell>{trip?.trip_cost}</TableCell>

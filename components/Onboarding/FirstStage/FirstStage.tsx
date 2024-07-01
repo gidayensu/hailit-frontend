@@ -38,7 +38,7 @@ export default function FirstStage () {
                 <p className="font-bold text-2xl">
                   Do you want to be a customer or a dispatcher?
                 </p>
-                <p>Hailit gives you a wholesome delivery experience! </p>
+                <p className="text-center">Get your packages delivered safe and fast! <br/>You can also make money  with delivering packgages  </p>
               </div>
               <div className="flex gap-4 p-2 -mt-4 ">
                 <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-primary-color cursor-pointer">
