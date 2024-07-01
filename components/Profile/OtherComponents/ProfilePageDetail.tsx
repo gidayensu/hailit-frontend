@@ -111,7 +111,8 @@ export default function ProfilePageDetails() {
           >
             <ChangePassword />
           </ProfileDialog>
-          {!path.startsWith("/dispatcher") && (
+          {/* IMPLEMENT SWITCH FROM CUSTOMER TO RIDER */}
+          {/* {!path.startsWith("/dispatcher") && (
             <ProfileDialog
               IconFill={MdSportsMotorsports}
               IconOutline={MdOutlineSportsMotorsports}
@@ -119,7 +120,7 @@ export default function ProfilePageDetails() {
             >
               <ChangePassword />
             </ProfileDialog>
-          )}
+          )} */}
 
           <ProfileNonDialogItem
             IconFill={IoLogOut}

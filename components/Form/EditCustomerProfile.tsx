@@ -59,7 +59,7 @@ export default function CustomerProfile() {
             className="h-14"
             // defaultValue={email}
             name="email"
-            value={email}
+            defaultValue={email}
             disabled={email }
           />
         </div>

@@ -22,10 +22,11 @@ export default function TrackOrder() {
     selectedTripId
   } = useGetTrip();
   
+
   return (
     <main className="flex flex-col gap-5  md:h-full md:mb-0  ">
       {/* HEADER */}
-      {!trackingOrder && !editingOrder && (
+      {!trackingOrder && !editingOrder && !selectedTripId && (
         <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
       )}
       
@@ -34,7 +35,7 @@ export default function TrackOrder() {
       {trackingOrder &&  !editingOrder && !isLoading && trip &&   !error  && (
         <TripDetail trip={trip}/>
         )}
-        {error &&
+        {error && selectedTripId &&
         <>
         <span className="text-4xl font-bold ">No trip is associated with ID {selectedTripId}</span>
           <p className="text-md">

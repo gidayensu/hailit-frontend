@@ -24,7 +24,7 @@ export default function StatsCard({
     
 
   return (
-    <Container className="flex flex-col gap-2 w-full md:w-1/4 h-40 rounded-xl p-4 justify-between items-start ">
+    <Container className="flex flex-col gap-2 w-full lg:w-1/4 h-40 rounded-xl p-4 justify-between items-start ">
       <div className="flex justify-between">
         <div className="">
           <h3 className="font-bold text-md"> {title}</h3>
