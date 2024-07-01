@@ -25,7 +25,7 @@ export default function OnboardingStages() {
   }
   const {authenticationState, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, handleOnboardStage} = useOnboarding();
   
-  console.log({loading, stageOne, stageTwo, stageThree})
+  
   return (
     <>
       {(!authenticationState || onboard) && (

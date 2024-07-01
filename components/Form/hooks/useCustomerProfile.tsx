@@ -44,7 +44,7 @@ export const useCustomerProfile = () => {
   const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (formData) => {
     try {
       dispatch(setLoading(true))
-      console.log('this runs')
+      
       let userRole = user_role;
       if (chosenRole && chosenRole === "rider") {
         userRole = "rider";
