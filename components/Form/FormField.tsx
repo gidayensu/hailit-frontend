@@ -1,13 +1,18 @@
-import React from "react";
+"use client"
 import { useFormContext, Controller } from 'react-hook-form';
 import { Input } from "../ui/input";
 import { FormFieldProps } from "./FormTypes";
 import { SelectDate } from "../Order/SelectDate";
+import { useEffect } from 'react';
+
  export const CalendarField:React.FC<FormFieldProps> = ({
     defaultValue,
     name,
     datePurpose,
 }) => { 
+    
+    
+    
     
     const { register, formState } = useFormContext();
     return (<>
@@ -37,18 +42,24 @@ export  const FormField:React.FC<FormFieldProps> = ({
     disabled
 }) => { 
     
-    const { register, formState } = useFormContext();
+    const { register, formState, setValue, } = useFormContext();
+//The useEffect is used to manually set the value on change
+    useEffect(()=> {
+        if (defaultValue !== undefined) {
+            setValue(name, defaultValue)
+        }
+    }, [defaultValue, name, setValue])
     return (<>
     
-        
-    <Input 
+        {/* will change it to shadcn input later after fixing why it is failing to register defaultValue */}
+    <Input
     type={type}
     
     {...register(name,)}
-    className={`${className}`}
+    className={`flex h-10 w-full rounded-xl border border-slate-500 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-amber-00 dark:border-opacity-30 dark:bg-primary-dark dark:ring-offset-slate-950 dark:placeholder:text-slate-100 dark:placeholder:text-opacity-20 dark:focus-visible:ring-slate-300 ${className}`}
     defaultValue={defaultValue}
     disabled = {disabled}
-    value={value}
+    
     />
     
     

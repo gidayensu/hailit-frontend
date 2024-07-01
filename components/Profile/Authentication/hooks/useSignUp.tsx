@@ -24,6 +24,7 @@ import type { Inputs } from "@/lib/supabaseAuth";
 
 
 export const useSignUp =  () => {
+  const [demoSignUpDetail, setDemoSignUpDetail] = useState<string>('');
     const router = useRouter();
     const dispatch = useAppDispatch();
   
@@ -33,6 +34,15 @@ export const useSignUp =  () => {
       error: false,
       errorDescription: "",
     });
+
+    const handleRandomSignUp = () => {
+        const defaultNames = ['user', 'starter', 'gery', 'win', 'victory', 'saly', 'awesome', 'fun', 'interest', 'true', 'life', 'trainer', 'good' , 'great' , 'super' , 'ben', 'tina', 'nol', 'director', 'mikel', 'goodman', 'salute', 'critical', 'alumi', 'peri', 'eddie', 'selom'];
+        const randomName = defaultNames[Math.ceil(Math.random()*defaultNames.length-1)]
+        const randomNumber = Math.ceil(Math.random() * 1000);
+        const demoDetail =`${randomName}${randomNumber}@hailit.vercel.app`;
+        setDemoSignUpDetail(demoDetail)
+        
+    }
   
     const [isLoading, setIsLoading] = useState<boolean>(false);
   
@@ -106,7 +116,11 @@ export const useSignUp =  () => {
       dataFetchError,
       isLoading,
       googleSignUp,
-      googleSupabaseSignIn
+      googleSupabaseSignIn,
+      setDemoSignUpDetail,
+      demoSignUpDetail,
+      handleRandomSignUp
     };
   };
   
+

@@ -1,3 +1,4 @@
+'use client'
 //ui + icons
 import {
   Card,
@@ -27,11 +28,27 @@ export default function SignUp() {
     handleSubmit,
     dataFetchError,
     isLoading,
-    googleSupabaseSignIn
+    googleSupabaseSignIn,
+    demoSignUpDetail,
+    setDemoSignUpDetail,
+    handleRandomSignUp
   } = useSignUp();
 
+
+  
+  
   return (
     <TabsContent value="signup">
+      <div className="flex gap-2 items-center justify-center mb-2">
+      <p className="font-bold">(Demo)</p>
+      
+      </div>
+    <div className="flex gap-2 mb-4 w-full">
+            <Button variant={'outline'} className="w-full" onClick={handleRandomSignUp}>
+              Generate random signup details
+            </Button>
+            
+      </div>
       <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
@@ -50,6 +67,7 @@ export default function SignUp() {
                   type="email"
                   className="h-12 "
                   name="email"
+                  defaultValue={demoSignUpDetail}
                 />
               </div>
               <div className="space-y-1">
@@ -60,6 +78,7 @@ export default function SignUp() {
                   type="password"
                   name="password"
                   className="h-12"
+                  defaultValue={demoSignUpDetail}
                 />
               </div>
 
@@ -71,6 +90,7 @@ export default function SignUp() {
                   type="password"
                   name="confirm_password"
                   className="h-12 "
+                  defaultValue={demoSignUpDetail}
                 />
               </div>
 

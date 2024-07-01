@@ -1,3 +1,4 @@
+'use client'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
 import { FcGoogle } from "react-icons/fc";
@@ -21,13 +22,31 @@ import { useLogin } from "./hooks/useLogin";
 // supabase
 
 
-export default function Login() {
-  const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods } = useLogin();
-  
+export default function Login( {demoDetail} : {demoDetail?:string}) {
+  const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods, setLoginDetail, loginDetail } = useLogin();
+    
   return (
+    <>
+    
     <TabsContent value="login">
+      <div className="flex gap-2 items-center justify-center mb-2">
+      <p className="font-bold">(Demo)</p>
+      <p>Login as:</p>
+      </div>
+    <div className="flex gap-2 mb-4 w-full">
+            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('admin@hailit.vercel.app')}>
+              Admin
+            </Button>
+            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('customer@hailit.vercel.app')}>
+               Customer
+            </Button>
+            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('rider@hailit.vercel.app')}>
+              Rider
+            </Button>
+      </div>
       <Card className="rounded-2xl"> 
         <CardHeader>
+    
           <CardTitle>Login</CardTitle>
           <CardDescription>Log into your account here</CardDescription>
         </CardHeader>
@@ -38,11 +57,12 @@ export default function Login() {
           <form onSubmit={handleSubmit(onSignInSubmit)} className="space-y-3">
             <div className="space-y-1">
               <Label htmlFor="name">Email</Label>
-              <FormField name="email" placeholder="example@email.com" type="email" className="h-12"/>
+              
+              <FormField name="email" placeholder="example@email.com" type="email" className="h-12" defaultValue={loginDetail}  />
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">Password</Label>
-              <FormField placeholder="Password" type="password" name="password" className="h-12"  />
+              <FormField placeholder="Password" type="password" name="password" className="h-12"  defaultValue={loginDetail }/>
             </div>
             <div className="space-y-2 mt-2">
             <Button className="w-full h-12" type="submit" disabled={isLoading}>
@@ -84,5 +104,6 @@ export default function Login() {
         </CardFooter>
       </Card>
     </TabsContent>
+    </>
   );
 }

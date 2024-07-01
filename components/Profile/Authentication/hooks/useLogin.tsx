@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from "next/navigation";
 
 // redux
@@ -29,15 +31,16 @@ export const useLogin=()=> {
     errorDescription: ''
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [loginDetail, setLoginDetail] = useState<string>('');
   
+  const googleSignIn:any = (OAuthUserId:string)=> getUser(OAuthUserId)
   // Form
   const formMethods = useForm<SignInForm>({
     resolver: zodResolver(SignInSchema)
   });
-  const { handleSubmit, formState: {errors}, setError } = formMethods;
+  const { handleSubmit, setValue, formState: {errors}, setError } = formMethods;
 
-  const googleSignIn:any = (OAuthUserId:string)=> getUser(OAuthUserId)
+
   // sign in form submission
   const onSignInSubmit: SubmitHandler<SignInForm> = async (data) => {
     setIsLoading(true);
@@ -92,6 +95,6 @@ export const useLogin=()=> {
   
   
   
-  return {handleSubmit, onSignInSubmit, googleSignIn, dataFetchError, isLoading, formMethods }
+  return {handleSubmit, onSignInSubmit, googleSignIn, dataFetchError, isLoading, formMethods, loginDetail, setLoginDetail }
 
 }
