@@ -26,7 +26,7 @@ export function AllTripsData({setAddTrip}:{setAddTrip: (arg:boolean)=>void}) {
   return (
     <>
     <Button className="md:w-1/6 w-1/3" onClick={handleAddTripClick}> Add trip</Button>
-    <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
+    <div className="flex flex-col max-w-fit   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       
       <Table>
         <TableHeader>
@@ -70,7 +70,7 @@ export function AllTripsData({setAddTrip}:{setAddTrip: (arg:boolean)=>void}) {
                     <p>{trip.payment_status ? "Paid" : "Not Paid"}</p>
                   </div>
                 </TableCell>
-                <TableCell>{trip.payment_method}</TableCell>
+                {/* <TableCell>{trip.payment_method}</TableCell> */}
                 <TableCell>
                   <div
                     className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
@@ -115,7 +115,7 @@ const tableHeadings = [
   "Medium",
   "Amount",
   "Payment Status",
-  "Payment Method",
+  // "Payment Method",
   "Delivery Status",
   "View"
 ];
