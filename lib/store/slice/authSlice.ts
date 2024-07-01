@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface SupabaseAuth {
+export interface Auth {
     authenticationState: boolean;
+ 
 }
 
-const initialState:SupabaseAuth = {
-    authenticationState: false
+const initialState:Auth = {
+    authenticationState: false,
+ 
 }
 
 export const supabaseAuthSlice = createSlice({
@@ -15,8 +17,9 @@ export const supabaseAuthSlice = createSlice({
     reducers: {
         setAuthState(state, action:PayloadAction<boolean>) {
             state.authenticationState = action.payload;
-        }
+        }, 
+ 
     }
 })
 
-export const { setAuthState } = supabaseAuthSlice.actions
+export const { setAuthState, } = supabaseAuthSlice.actions
