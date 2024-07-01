@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      maxWidth: {
+        '90': '90%',
+      },
       colors: {
         'primary-dark': '#121212',
         'secondary-dark': '#1E1E1E',
