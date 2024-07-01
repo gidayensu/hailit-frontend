@@ -14,10 +14,12 @@ import {
 export function ThemeToggle() {
   const { setTheme, systemTheme, theme: mainTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<any>(null);
+
   useEffect(() => {
     const preferredTheme = localStorage.getItem("theme") || systemTheme;
     setCurrentTheme(preferredTheme);
-  }, [mainTheme]);
+  }, [mainTheme, systemTheme, setCurrentTheme]);
+  
   const iconOutlineClass = "text-2xl group-hover:opacity-0";
   const iconFillClass =
     "text-2xl opacity-0 absolute top-0 left-0  group-hover:opacity-100";
