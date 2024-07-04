@@ -18,7 +18,7 @@ export default function ModalCard({
   modalType?: Modal;
   cancelFunc?: () => void;
   confirmFunc: (details?:any) => void;
-  loading: boolean
+  loading?: boolean
   children?: React.ReactNode 
 }) {
   
