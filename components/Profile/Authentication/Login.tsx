@@ -19,91 +19,131 @@ import { FormProvider } from 'react-hook-form';
 
 
 import { useLogin } from "./hooks/useLogin";
+import Container from "@/components/ui/container";
 // supabase
 
 
-export default function Login( {demoDetail} : {demoDetail?:string}) {
+export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
   const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods, setLoginDetail, loginDetail } = useLogin();
     
   return (
     <>
-    
-    <TabsContent value="login">
-      <div className="flex gap-2 items-center justify-center mb-2">
-      <p className="font-bold">(Demo)</p>
-      <p>Login as:</p>
-      </div>
-    <div className="flex gap-2 mb-4 w-full">
-            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('admin@hailit.vercel.app')}>
-              Admin
-            </Button>
-            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('customer@hailit.vercel.app')}>
-               Customer
-            </Button>
-            <Button variant={'outline'} className="w-full" onClick={()=>setLoginDetail('rider@hailit.vercel.app')}>
-              Rider
-            </Button>
-      </div>
-      <Card className="rounded-2xl"> 
-        <CardHeader>
-    
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Log into your account here</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
+      <div>
+        <div className="flex gap-2 items-center justify-center mb-2">
           
-          <FormProvider {...formMethods}>
-          
-          <form onSubmit={handleSubmit(onSignInSubmit)} className="space-y-3">
-            <div className="space-y-1">
-              <Label htmlFor="name">Email</Label>
-              
-              <FormField name="email" placeholder="example@email.com" type="email" className="h-12" defaultValue={loginDetail}  />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Password</Label>
-              <FormField placeholder="Password" type="password" name="password" className="h-12"  defaultValue={loginDetail }/>
-            </div>
-            <div className="space-y-2 mt-2">
-            <Button className="w-full h-12" type="submit" disabled={isLoading}>
-              {isLoading ? <Loader /> : "Login"}
-            </Button>
-            </div>
-            {dataFetchError.error && (
-              <div className="flex items-center justify-center w-full text-red-500">
-                <span>{dataFetchError.errorDescription}</span>
-              </div>
-            )}
-          </form>
-          </FormProvider>
-        </CardContent>
-        <CardFooter className="flex flex-col gap-2 -mt-4">
-          <div className="flex gap-4 justify-center items-center">
-            <Separator className="w-32" />
-            <p className="text-sm">or</p>
-            <Separator className="w-32" />
-          </div>
-          <Button variant="outline" className="w-full border border-slate-300 h-12 flex gap-4" onClick={googleSupabaseSignIn}>
-            {isLoading ? (
-              <Loader color="#3b82f6" />
-            ) : (
-              <p className="flex items-center justify-center gap-2">
-                <FcGoogle className="text-2xl" /> Continue with Google
-              </p>
-            )}
-          </Button>
-          <Link href={'/order'} className="w-full">
+          <p>Login as:</p>
+        </div>
+        <div className="flex gap-2 mb-4 w-full">
           <Button
-            variant="outline"
-            className="w-full border border-slate-300 h-12 flex gap-4"
-            
+            variant={"outline"}
+            className="w-full"
+            onClick={() => setLoginDetail("admin@hailit.vercel.app")}
           >
-            Continue as Guest
+            Admin
           </Button>
-          </Link>
-        </CardFooter>
-      </Card>
-    </TabsContent>
+          <Button
+            variant={"outline"}
+            className="w-full"
+            onClick={() => setLoginDetail("customer@hailit.vercel.app")}
+          >
+            Customer
+          </Button>
+          <Button
+            variant={"outline"}
+            className="w-full"
+            onClick={() => setLoginDetail("rider@hailit.vercel.app")}
+          >
+            Rider
+          </Button>
+        </div>
+        <Container className="rounded-2xl w-full p-4">
+          <div>
+            <p className="font-semibold text-3xl">Login</p>
+          </div>
+          <div className="space-y-2 ">
+            <FormProvider {...formMethods}>
+              <form
+                onSubmit={handleSubmit(onSignInSubmit)}
+                className="space-y-3"
+              >
+                <div className="space-y-1">
+                  <Label htmlFor="name">Email</Label>
+
+                  <FormField
+                    name="email"
+                    placeholder="example@email.com"
+                    type="email"
+                    className="h-12"
+                    defaultValue={loginDetail}
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="username">Password</Label>
+                  <FormField
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    className="h-12"
+                    defaultValue={loginDetail}
+                  />
+                </div>
+                <div className="space-y-2 mt-2">
+                  <Button
+                    className="w-full h-12"
+                    type="submit"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? <Loader /> : "Login"}
+                  </Button>
+                </div>
+                {dataFetchError.error && (
+                  <div className="flex items-center justify-center w-full text-red-500">
+                    <span>{dataFetchError.errorDescription}</span>
+                  </div>
+                )}
+              </form>
+            </FormProvider>
+          </div>
+          <div className="flex flex-col gap-2 mt-2">
+            <div className="flex gap-4 justify-center items-center">
+              <Separator className="w-32" />
+              <p className="text-sm">or</p>
+              <Separator className="w-32" />
+            </div>
+            <Button
+              variant="outline"
+              className="w-full border border-slate-300 h-12 flex gap-4"
+              onClick={googleSupabaseSignIn}
+            >
+              {isLoading ? (
+                <Loader color="#3b82f6" />
+              ) : (
+                <p className="flex items-center justify-center gap-2">
+                  <FcGoogle className="text-2xl" /> Continue with Google
+                </p>
+              )}
+            </Button>
+            <Link href={"/order"} className="w-full">
+              <Button
+                variant="outline"
+                className="w-full border border-slate-300 h-12 flex gap-4"
+              >
+                Continue as Guest
+              </Button>
+            </Link>
+            <span className="flex w-full text-sm">
+              
+              <p>Don't have an account? </p>
+              <p
+                className="ml-2 font-semibold underline text-primary-color cursor-pointer hover:text-primary-shade"
+                onClick={setSignUp}
+              >
+                Register
+              </p>
+            </span>
+          </div>
+        </Container>
+      </div>
     </>
   );
 }

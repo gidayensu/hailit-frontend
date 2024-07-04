@@ -13,11 +13,13 @@ import { useLogin } from "./hooks/useLogin";
 export type CurrentTheme = string | undefined;
 
 export default function Authentication () {
-  
+  const [signUp, setSignUp]  = useState<boolean>(true);
   
   const timeOfDay = checkTimeOfDay();
 
-  
+  const handleSignUp = ()=> {
+    setSignUp(()=>!signUp)
+  }
 
     
     return (
@@ -34,28 +36,22 @@ export default function Authentication () {
           </div>
             
             <span className="text-xl font-semibold">Hello, Good {`${timeOfDay}`}! </span>
-            <p className="text-center mt-8">
+            {/* <p className="text-center mt-8">
               Login or Sign Up to Request for affordable <br /> and fast deliveries in Accra and Kumasi
-            </p>
+            </p> */}
           </div>
           <div className=" flex flex-col items-center justify-center">
 {/* 
 
   LOGIN AS DIFFERENT USER TYPE
 */}
-
-      
-          <Tabs defaultValue="login" className="w-80 sm:w-[400px]">
-      <TabsList className="grid w-full grid-cols-2 rounded-2xl h-14">
-        <TabsTrigger value="login" className="rounded-2xl h-12">Login</TabsTrigger>
-        <TabsTrigger value="signup" className="rounded-2xl h-12">Sign Up</TabsTrigger>
-      </TabsList>
-      {/* LOGIN TAB */}
-          <Login />
-          {/* SIGN UP TAB */}
-          
-            <SignUp/>
-      </Tabs>
+        {!signUp && 
+          <Login setSignUp={handleSignUp} />
+      }
+        {signUp && 
+            <SignUp setSignUp={handleSignUp}/>
+      }
+       
           </div>
           
         </>

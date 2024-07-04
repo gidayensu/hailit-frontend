@@ -21,7 +21,9 @@ import { FormProvider } from "react-hook-form";
 
 import { useSignUp } from "./hooks/useSignUp";
 import Link from "next/link";
-export default function SignUp() {
+import Container from "@/components/ui/container";
+
+export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
   const {
     onSignUpSubmit,
     formMethods,
@@ -38,25 +40,22 @@ export default function SignUp() {
   
   
   return (
-    <TabsContent value="signup">
-      <div className="flex gap-2 items-center justify-center mb-2">
-      <p className="font-bold">(Demo)</p>
+    <div >
       
-      </div>
     <div className="flex gap-2 mb-4 w-full">
             <Button variant={'outline'} className="w-full" onClick={handleRandomSignUp}>
               Generate random signup details
             </Button>
             
       </div>
-      <Card className="rounded-2xl">
-        <CardHeader>
-          <CardTitle>Sign Up</CardTitle>
-          <CardDescription>
+      <Container className="rounded-2xl w-full p-4"> 
+        <div>
+        <p className="font-semibold text-3xl">Sign Up</p>
+          {/* <span>
             Create an Account to request for delivery
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
+          </span> */}
+        </div>
+        <div className="space-y-2 mt-2">
           <FormProvider {...formMethods}>
             <form onSubmit={handleSubmit(onSignUpSubmit)} className="space-y-3">
               <div className="space-y-1">
@@ -109,16 +108,14 @@ export default function SignUp() {
               )}
             </form>
           </FormProvider>
-        </CardContent>
-        <CardFooter className="flex flex-col gap-4">
+        </div>
+        <div className="flex flex-col gap-4 mt-3">
           <div className="flex gap-4 justify-center items-center">
             <Separator className="w-32" />
             <p className="text-sm">or</p>
             <Separator className="w-32" />
           </div>
-          <div>
-            
-          </div>
+          
           <Button
             variant="outline"
             className="w-full border border-slate-300 h-12 flex gap-4"
@@ -135,9 +132,10 @@ export default function SignUp() {
             Continue as Guest
           </Button>
           </Link>
-        </CardFooter>
-      </Card>
-    </TabsContent>
+        </div>
+        <span className="flex w-full text-sm mt-2"> <p>Have an account? </p> <p className="ml-2 font-semibold underline text-primary-color cursor-pointer hover:text-primary-shade" onClick={setSignUp}>  Login</p> </span>
+      </Container>
+    </div>
   );
 }
 
