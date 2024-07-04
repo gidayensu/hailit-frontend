@@ -2,26 +2,28 @@
 import TrackOrderForm from "@/components/Form/TrackOrderForm"
 import { Button } from "@/components/ui/button"
 import Container from "@/components/ui/container"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useRef } from "react"
 import { FaWhatsapp } from "react-icons/fa"
 import { MdOutlineLocalPhone } from "react-icons/md"
-
 export default function TrackOrder () {
   
   const inputRef = useRef<any>(null);
   const router = useRouter();
-
-  
-  
+  const params = useParams();
+  const {trip_id} = params;
   const handleTripTrack = ()=> {
     
     const tripId = inputRef.current?.value;
+    
     router.push(`/track/${tripId}`)
   }
+  const inputRefValue = inputRef.current?.value
+  
+  
     return (
         <>
-      <TrackOrderForm onClickFunc={handleTripTrack} inputRef={inputRef}/>
+      <TrackOrderForm onClickFunc={handleTripTrack} inputRef={inputRef} />
       
       <span className="flex items-start justify-start">
 
