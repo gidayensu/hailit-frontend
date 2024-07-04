@@ -32,7 +32,10 @@ export const useGetTrip = () => {
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
   const trip = useAppSelector((state)=>state.trip)
-  const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`);
+  const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`, {
+    pollingInterval: 3000,
+    refetchOnFocus: true
+  });
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 
@@ -48,7 +51,7 @@ export const useGetTrip = () => {
 
   const [updateTrip] = useUpdateTripMutation();
 
-  //move this to useUpdateTrip
+  //TODO: move this to useUpdateTrip
   const handleTripUpdate = useCallback(async (key: string, tripDetails: any) => {
     try {
       dispatch(setTrip({ ...trip, ...tripDetails }));
