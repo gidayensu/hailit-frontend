@@ -1,7 +1,7 @@
 // actions.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// Define the async function type
+
 type AsyncFunction = () => Promise<string>;
 
 export const fetchDropOffLocationName = createAsyncThunk(

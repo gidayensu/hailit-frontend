@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
 const initialState:Trip = {
     
       trip_stage: 0,
@@ -111,7 +111,7 @@ export interface Dispatcher {
     dispatcher_id: string;
     customer_id: string;
     trip_medium: string;
-    trip_status: string;
+    trip_status: OrderStatus;
     package_type: string;
     pickup_location: string;
     drop_off_location: string;
