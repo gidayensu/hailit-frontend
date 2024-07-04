@@ -40,7 +40,7 @@ export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
   
   
   return (
-    <div >
+    <div className="w-full ">
       
     <div className="flex gap-2 mb-4 w-full">
             <Button variant={'outline'} className="w-full" onClick={handleRandomSignUp}>
@@ -48,7 +48,7 @@ export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
             </Button>
             
       </div>
-      <Container className="rounded-2xl w-full p-4"> 
+      <Container className="rounded-2xl w-full p-6 flex flex-col gap-3"> 
         <div>
         <p className="font-semibold text-3xl">Sign Up</p>
           {/* <span>

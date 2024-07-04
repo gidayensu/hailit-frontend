@@ -40,7 +40,7 @@ export default function Authentication () {
               Login or Sign Up to Request for affordable <br /> and fast deliveries in Accra and Kumasi
             </p> */}
           </div>
-          <div className=" flex flex-col items-center justify-center">
+          <div className=" flex flex-col items-center justify-center max-w-[400px] w-full md:p-0 p-6">
 {/* 
 
   LOGIN AS DIFFERENT USER TYPE

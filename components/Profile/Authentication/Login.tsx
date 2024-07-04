@@ -27,8 +27,7 @@ export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
   const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods, setLoginDetail, loginDetail } = useLogin();
     
   return (
-    <>
-      <div>
+      <div className="w-full">
         <div className="flex gap-2 items-center justify-center mb-2">
           
           <p>Login as:</p>
@@ -56,7 +55,7 @@ export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
             Rider
           </Button>
         </div>
-        <Container className="rounded-2xl w-full p-4">
+        <Container className="rounded-2xl w-full p-6 flex flex-col gap-3"> 
           <div>
             <p className="font-semibold text-3xl">Login</p>
           </div>
@@ -133,7 +132,7 @@ export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
             </Link>
             <span className="flex w-full text-sm">
               
-              <p>Don't have an account? </p>
+              <p>Don&apos;t have an account? </p>
               <p
                 className="ml-2 font-semibold underline text-primary-color cursor-pointer hover:text-primary-shade"
                 onClick={setSignUp}
@@ -144,6 +143,6 @@ export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
           </div>
         </Container>
       </div>
-    </>
+    
   );
 }
