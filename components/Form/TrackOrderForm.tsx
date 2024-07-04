@@ -32,7 +32,7 @@ export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any,
         <div className="flex flex-col w-full max-w-xl items-center space-x-2 justify-center mt-10 gap-3 ">
           {
             sameAsCurrent && <p className="text-red-500">
-                You've entered same ID!
+                You have entered same ID!
             </p>
           }
         <Input
