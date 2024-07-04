@@ -1,5 +1,5 @@
 import { userLogout } from "@/lib/store/actions";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { IoIosHelpCircle, IoIosHelpCircleOutline } from "react-icons/io";
 import {
@@ -104,13 +104,13 @@ export default function ProfilePageDetails() {
           )}
 
 
-          <ProfileDialog
+          {/* <ProfileDialog
             IconFill={RiLockPasswordFill}
             IconOutline={RiLockPasswordLine}
             iconText="Change password"
           >
             <ChangePassword />
-          </ProfileDialog>
+          </ProfileDialog> */}
           {/* IMPLEMENT SWITCH FROM CUSTOMER TO RIDER */}
           {/* {!path.startsWith("/dispatcher") && (
             <ProfileDialog

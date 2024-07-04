@@ -14,14 +14,21 @@ import UserOtherTrips from "./UserOtherTripsSection";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
 import { extractShortDate } from "@/lib/utils";
+import { useEffect } from "react";
+
 export default function TripDetail ({trip}: {trip:any}) {
+
     const dispatch = useAppDispatch();
     const dispatcher = trip?.dispatcher;
     const handleEditTrip = ()=> {
     
      dispatch(setEditingOrder(true));
      dispatch(setTrackingOrder(false))
-}
+
+    }
+    useEffect(()=>  {
+     window.scrollTo(0, 0);
+    }, [trip])
     return (
         <div className="space-y-3 md:mb-0 mb-24">
           <article className="flex flex-col gap-4">
@@ -83,7 +90,7 @@ export default function TripDetail ({trip}: {trip:any}) {
               <Container className="flex flex-col  w-full h-52 rounded-lg p-3 gap-2">
                 <StatusSection tripStage={trip?.trip_stage} tripStatus={trip?.trip_status} />
               </Container>
-              <Container className=" w-full h-60 rounded-lg p-6">
+              <Container className=" w-full h-72  md:max-h-96 rounded-lg p-6">
                 <PackageSection/>
               </Container>
             </div>
@@ -92,7 +99,7 @@ export default function TripDetail ({trip}: {trip:any}) {
               <Container className="flex flex-col  w-full   h-52 rounded-lg p-3 gap-2">
                 <PaymentSection/>
               </Container>
-              <Container className="flex flex-col  w-full h-60 rounded-lg p-3 gap-2">
+              <Container className="flex flex-col  w-full h-72 rounded-lg p-3 gap-2">
                 <CustomerSection customerId={trip.customer_id} />
               </Container>
             </div>
@@ -103,7 +110,7 @@ export default function TripDetail ({trip}: {trip:any}) {
                   tripMedium={trip.trip_medium}
                 />
               </Container>
-              <Container className="flex flex-col  w-full   h-60 rounded-lg p-3 gap-2">
+              <Container className="flex flex-col  w-full   h-72 rounded-lg p-3 gap-2">
                 <UserOtherTrips
                   userId={trip.customer_id}
                   tripId={trip.trip_id}

@@ -34,7 +34,7 @@ export default function UserOtherTrips({
                 <>
                   {otherTrips.map((trip: any, index: number) => (
                     <div key={index}>
-                      {index <= 1 && (
+                      {index <= 2 && (
                         <div key={trip.trip_id} onClick={() => handleTrackTrip(trip.trip_id)}>
                           <OrderSummaryMin
                             

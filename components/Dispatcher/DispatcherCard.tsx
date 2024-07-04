@@ -3,7 +3,7 @@ import { LuPhone } from "react-icons/lu";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
-export default function DispatcherCard({firstName, lastName, vehicleName, vehicleNumber, phoneNumber}: {firstName: string, lastName: string, vehicleName: string, vehicleNumber:string, phoneNumber: string}) {
+export default function DispatcherCard({firstName, lastName, vehicleName, vehicleNumber, phoneNumber}: {firstName: string, lastName: string, vehicleName: string | undefined, vehicleNumber:string | undefined, phoneNumber: string | undefined}) {
   if (!vehicleNumber || !firstName) {
     return (
       <Container className="w-full rounded-xl border  h-24  p-4 flex justify-between items-center">

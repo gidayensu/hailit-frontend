@@ -33,26 +33,45 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
             </div>
           } {
            user &&  
-          <div className="w-full flex flex-col items-start justify-between h-screen rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3">
-            <div className="flex w-full items-start justify-between text-sm">
-              <div className="space-y-1">
-                <ul>First Name</ul>
-                <ul>Last Name</ul>
-                <ul>Email</ul>
-                <ul>Phone</ul>
-                <ul>Date Joined</ul>
+          <div className="w-full flex flex-col items-start justify-between h-full rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3 border">
+            <div className="flex w-full items-start justify-between text-sm ">
+              <div className="space-y-1 w-full">
+                <ul className="w-full flex justify-between  ">
+                  <p> First Name </p>
+                  <p className="font-bold"> {user.first_name} </p>
+                </ul>
+                <ul className="w-full flex justify-between ">
+                  <p> Last Name </p>
+                  <p className="font-bold"> {user.last_name} </p>
+                </ul>
+                
+                <ul className="w-full flex justify-between gap-2 ">
+                  <p> Email </p>
+                  <p className="font-bold truncate "> {user.email} </p>
+                </ul>
+                <ul className="w-full flex justify-between ">
+                  <p> Phone </p>
+                  <p className="font-bold"> {user.phone_number} </p>
+                </ul>
+                <ul className="w-full flex justify-between ">
+                  <p> Date Joined </p>
+                  <p className="font-bold"> {extractShortDate(user.date_created)} </p>
+                </ul>
+                
+                
+                
                 
                 
               </div>
-              <div className="space-y-1 text-right font-semibold">
-                <ul>{user.first_name}</ul>
+              {/* <div className="space-y-1 text-left font-semibold w-32 lg:w-full lg:text-right">
+                <ul className="border">{user.first_name}</ul>
                 <ul>{user.last_name}</ul>
-                <ul>{user.email}</ul>
+                <ul className=" w-4 ">{user.email}</ul>
                 <ul>{user.phone_number}</ul>
                 <ul>{extractShortDate(user.date_created)}</ul>
                 
                 
-              </div>
+              </div> */}
             </div>
           </div>
           }

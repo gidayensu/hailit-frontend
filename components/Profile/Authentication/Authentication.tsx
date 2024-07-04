@@ -23,14 +23,8 @@ export default function Authentication () {
     return (
         <>
 
-          <div className="flex flex-col items-center justify-center gap-2">
-          <div className="flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md cursor-pointer mt-2 md:hidden  gap-2">
-            <span className="flex items-center justify-center gap-2 relative border rounded-md w-8 h-8 border-black dark:border-white">
-              <ThemeToggle />
-            </span>
-              
-          </div>
-            
+          <div className="flex flex-col items-center justify-center gap-2 md:mt-10">
+                
             
             <div className="flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md cursor-pointer mt-5 mb-5 md:hidden border border-black dark:border-white">
             <span className="flex items-center justify-center gap-2 relative">

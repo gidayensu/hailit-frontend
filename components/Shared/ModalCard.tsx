@@ -7,20 +7,21 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "../ui/dialog";
 
 type Modal = "destructive" | "success";
+
 export default function ModalCard({
   cancelFunc,
   confirmFunc,
   modalType,
-  
+  loading,
   children
 }: {
   modalType?: Modal;
-  cancelFunc: () => void;
-  confirmFunc: () => void;
-  
+  cancelFunc?: () => void;
+  confirmFunc: (details?:any) => void;
+  loading: boolean
   children?: React.ReactNode 
 }) {
-  const [loading, setLoading] = useState<boolean>();
+  
 
   return (
     <div className="">

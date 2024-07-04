@@ -92,9 +92,9 @@ export const checkTimeOfDay = () => {
    
 
   if (currentHour >= morningStart && currentHour <= morningEnd) {
-    return "morning";
+    return "Morning";
   }  else {
-    return "evening"; 
+    return "Evening"; 
   }
 };
 

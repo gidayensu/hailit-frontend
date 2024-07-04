@@ -30,7 +30,7 @@ export default function Profile() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center gap-10 mb-32">
+      <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
         {!authenticationState && <Authentication />}
         {authenticationState && (
           

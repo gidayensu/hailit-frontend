@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 //main components
 import { MidSkeleton, TopSkeleton } from "@/components/Order/OrderSkeleton";
@@ -7,14 +7,16 @@ import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import TrackOrderItem from "./TrackOrderItem";
 
+
 //helper functions
 import { useGetUserTrip } from "../hooks/useGetUserTrip";
+import { useEffect } from "react";
 
-export default function TrackOrderDetails() {
+export default  function TrackOrderDetails() {
   
   const {trip_id, user_id, data, isLoading, error, trip } = useGetUserTrip();
-  
-  
+     
+
   
   if (isLoading) {
     return (

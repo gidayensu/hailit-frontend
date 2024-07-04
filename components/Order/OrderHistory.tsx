@@ -27,7 +27,7 @@ export default function OrderHistory() {
       {
         isLoading && <TripsLoadingSkeleton/>
       }
-      {noDelivery && (
+      {noDelivery && !isLoading && (
         <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!" dispatcher={dispatcher} />
       )}
 
@@ -61,7 +61,7 @@ export default function OrderHistory() {
             className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}
           >
             {currentTrips.map((trip: Trip) => (
-              <>
+              <div key={trip.trip_id} className="w-full">
                 <Link
                   onClick={() => setTripLoading(true)}
                   key={trip.trip_id}
@@ -85,7 +85,7 @@ export default function OrderHistory() {
                   />
                 
                 </Link>
-              </>
+              </div>
             ))}
           </div>
           <div className="flex items-center justify-center w-full">

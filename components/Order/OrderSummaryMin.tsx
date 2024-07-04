@@ -28,7 +28,12 @@ export default function OrderSummaryMin({
   cost: string
   className?: string
 }) {
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const handleOrderClicked = ()=> {
+      setLoading(true);
+      
+    }
     //default icon gadgets
     let deliveryTypeIconBgClass = 'bg-blue-100';
     let deliveryTypeIcon = <PiPackageFill className="text-blue-400"/>;
@@ -69,7 +74,7 @@ export default function OrderSummaryMin({
   }
   
   return (
-    <div className="w-full cursor-pointer relative" onClick={()=>setLoading(true)}>
+    <div className="w-full cursor-pointer relative" onClick={handleOrderClicked}>
       {loading && 
       <div className="w-full items-center justify-center flex absolute">
 

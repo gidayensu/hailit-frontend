@@ -20,7 +20,18 @@ import { usePathname } from "next/navigation";
 
 export default function NewOrderForm() {
 
-  const {formMethods, handleSubmit, onDeliveryFormSubmit, scheduled, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, } = useNewOrderSubmit();
+  const {
+    formMethods,
+    handleSubmit,
+    onDeliveryFormSubmit,
+    scheduled,
+    packageTypeRef,
+    package_type,
+    pickUpLocationName,
+    dropOffLocationName,
+    loading,
+    register,
+  } = useNewOrderSubmit();
   const [pickUpLoading, setPickUpLoading] = useState<boolean>(false)
   const [dropOffLoading, setDropOffLoading] = useState<boolean>(false)
 
@@ -51,7 +62,7 @@ export default function NewOrderForm() {
             <PackageTypes />
           </div>
         </div>
-        <span className="mt-2 -mb-3" >
+        <span className="mt-2 -mb-3 w-full max-w-sm" >
 
           {!package_type && (
             <span className="text-red-500 text-[13px] text-left flex items-start justify-start ">
@@ -75,7 +86,7 @@ export default function NewOrderForm() {
             }
         <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
           <h3 className=" text-[14px] font-bold">Pickup Location</h3>
-          <div className="w-full grid grid-cols-8 items-start justify-center gap-1">
+          <div className="w-full grid grid-cols-8 items-start justify-center gap-1 ">
             <div className="space-y-1 w-full col-span-6 ">
 
             <FormField

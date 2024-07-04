@@ -74,13 +74,13 @@ export default function ShareHailit() {
           <div className="flex gap-2 w-full h-12">
             <Container className="flex items-center justify-center w-full text-[13px] rounded-lg p-1">
               <p className="opacity-70 truncate">
-                https://hailit-frontend.vercel.app
+                https://hailit.vercel.app
               </p>
             </Container>
-            <Container className="flex items-center justify-center text-lg w-1/4 rounded-lg" onClickFunc={()=>handleCopyLink("https://hailit-frontend.vercel.app")}>
+            <div className="border border-slate-300 hover:bg-slate-200 dark:border-opacity-20 dark:bg-secondary-dark flex items-center justify-center text-lg w-1/4 rounded-lg cursor-pointer hover:dark:bg-primary-dark" onClick={()=>handleCopyLink("https://hailit.vercel.app")}>
 
               <IoCopyOutline />
-            </Container>
+            </div>
             <Toaster/>
           </div>
         </div>

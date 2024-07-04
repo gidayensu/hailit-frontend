@@ -67,42 +67,44 @@ export default function OrderSummary({ trip }: { trip:any }) {
           <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10"/>
           <div className=" flex  justify-between">
 {/* Location */}
-<div className="grid grid-cols-9 grid-rows-7 h-32  w-full justify-between items-start">
-  <div className="col-span-1 row-span-7 flex items-start justify-center h-full ">
+<div className="xl:ml-4 flex xl:grid xl:grid-cols-9 grid-rows-7 h-32  w-full justify-between items-start ">
+  
+  <section className="col-span-4 row-span-7 flex items-start h-full w-full ">
+          <div className="flex justify-between flex-col h-4/5 w-full ">
 
-          <div className="flex flex-col gap-2 justify-between h-3/4 items-center">
-
-            <HiLocationMarker className="text-xl" />
-          <Separator
-            orientation="vertical"
-            className="bg-slate-800 h-1/5 dark:bg-slate-100 row-span-3"
-          />
-          <HiLocationMarker className="text-xl text-green-500" />
-          </div>
-  </div>
-  <section className="col-span-4 row-span-7 flex items-start h-full ">
-          <div className="flex justify-between flex-col h-4/5">
-
-          <span className="flex items-start  gap-2 md:-ml-1">
-            <span className="flex flex-col w-44">
+          <div className="flex items-start  gap-2 md:-ml-1 w-full ">
+            <div className="flex flex-col xl:w-44 w-full">
+                <span className="flex -ml-5 ">
+                <HiLocationMarker className="text-xl text-green-500" />
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm w-28 md:w-40 text-wrap truncate line-clamp-2 ">{trip.pickup_location}</p>
-              
-              
-            </span>
-          </span>
+                </span>
+                <span className="flex gap-3 ">
+                <Separator
+            orientation="vertical"
+            className="bg-slate-800 md:h-10 h-6 dark:bg-slate-100  mt-3 row-span-3 -ml-3"
+          />
+                <p className="text-sm  lg:w-40   ">{trip.pickup_location}</p>
+                </span>
+                
+                
+            </div>
+          </div>
 
-          <span className="flex items-start gap-2 md:-ml-1 mt-1">
-            <span className="flex flex-col w-44">
-                <p className="font-bold text-sm mt-3">Delivery Point</p>
-                <p className="text-sm text-wrap w-28 md:w-40 truncate line-clamp-2">{trip.drop_off_location}</p>
+          <span className="flex items-start gap-2 md:-ml-1 mt-1 w-full">
+            <span className="flex flex-col w-full xl:w-44">
+            <span className="flex -ml-5 ">
+                <HiLocationMarker className="text-xl text-green-500" />
+                <p className="text-sm font-semibold">Delivery Point</p>
+                </span>
+                <p className="text-sm  lg:w-40 xl:line-clamp-3">{trip.drop_off_location}</p>
               
             </span>
           </span>
           </div>
         </  section>
-        <section className="col-span-4 row-span-7 flex flex-col items-start h-full ">
-          <div className="flex flex-col items-start   -ml-1">
+        
+        <section className="col-span-4 row-span-7 flex flex-col  items-start h-full mt-5 w-44 xl:mt-0 ml-4 md:ml-9 ">
+          <div className="flex flex-col items-start  -ml-1">
             
                 <p className="text-sm font-semibold">Pickup date</p>
                 <p className="text-sm ">{tripCommencementDate} <br /> ({tripCommencementTime})</p>
@@ -113,7 +115,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
           </div>
 
           
-          <div className="flex flex-col mt-3 items-start  -ml-1">
+          <div className="flex flex-col xl:mt-3 items-start mt-2  -ml-1">
           
               <p className="text-sm font-semibold">Delivery date</p>
                 <p className="text-sm ">{tripCompletionDate} <br /> ({tripCompletionTime})</p>

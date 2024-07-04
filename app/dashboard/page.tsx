@@ -104,9 +104,11 @@ export default function Dashboard() {
 
               {/* {activeSection === "Analytics" && <TripsDonut />} */}
               {activeSection === "Profile" && (
-                <section className="flex flex-col items-center md:items-start md:justify-start justify-center gap-4">
-                  <div className="flex flex-col gap-2 w-full items-start justify-start">
-                    <CustomerProfile />
+                <section className="flex flex-col justify-center items-center lg:items-start lg:justify-start  gap-4">
+                <div className="max-w-sm w-full">
+
+                <CustomerProfile />
+                </div>
                   <Button
                     type="submit"
                     className="max-w-sm w-full h-14"
@@ -124,6 +126,7 @@ export default function Dashboard() {
                   >
                     Logout
                   </Button>
+                  <div className="flex flex-col gap-2 w-full items-start justify-start">
                   </div>
                   {/* Form submit button placed here because the form is used at different places with different button position */}
                 </section>
