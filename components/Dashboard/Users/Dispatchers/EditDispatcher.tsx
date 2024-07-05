@@ -18,8 +18,10 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:an
     isLoading,
     isSuccess,
     error,
-    handleOnboard,
+    handleAvailable,
     modalRef,
+    available,
+    setAvailable,
     closeModal,
   } = useEditDispatcher(dispatcher);
   
@@ -81,8 +83,8 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:an
           />
         </div>
           <div className="flex gap-3 text-sm font-semibold mt-3 w-full max-w-sm justify-between border rounded-xl h-14 items-center p-2 border-slate-400 dark:border-opacity-20">
-            <p>Onboard</p>
-          <Switch checked={onboard} onCheckedChange={handleOnboard} />
+            <p>Available</p>
+          <Switch checked={available} onCheckedChange={handleAvailable}  />
           </div>
         {dispatcher?.user_role === "rider" || dispatcher?.user_role === "driver" && (
           <div className={inputAndLabeClass}>

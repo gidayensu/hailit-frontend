@@ -13,7 +13,8 @@ export const useEditDispatcher = (dispatcher: any) => {
   const [isError, setIsError] = useState<boolean>(false);
   const [available, setAvailable] = useState<boolean>(false);
   const [newUserRole, setNewUserRole] = useState<string>(dispatcher.user_role);
-  const handleOnboard = () => {
+  
+  const handleAvailable = () => {
     setAvailable(() => !available);
   };
 
@@ -53,7 +54,7 @@ export const useEditDispatcher = (dispatcher: any) => {
     formData
   ) => {
     try {
-      const userDetails = { ...formData, available, user_role: userRole };
+      const userDetails = { ...formData, user_role: userRole };
 
       await updateUser({ userId: dispatcher.user_id, userDetails });
     } catch (err) {
@@ -74,8 +75,9 @@ export const useEditDispatcher = (dispatcher: any) => {
     isLoading,
     isSuccess,
     error,
+    setAvailable,
     available,
-    handleOnboard,
+    handleAvailable,
     modalRef,
     closeModal,
   };
