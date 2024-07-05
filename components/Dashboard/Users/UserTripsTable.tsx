@@ -10,7 +10,7 @@ import {
 import SkeletonTable from "../SkeletonTable";
 
 import { extractShortDate, extractBeforeComma } from "@/lib/utils";
-
+import { UserTrip } from "./hooks/useUserProfile";
 import { useGetTrips } from "../hooks/useGetTrips";
 import { useUserProfile } from "./hooks/useUserProfile";
 import NoData from "@/components/Shared/NoData";
@@ -24,6 +24,8 @@ export default function UserTripsTable() {
     handleTrackTrip,
     isLoading,
   } = useUserProfile();
+
+  
   if (error) {
     return (
       
@@ -51,7 +53,7 @@ export default function UserTripsTable() {
       <TableBody>
         {isLoading && <SkeletonTable rows={6} cells={7} />}
         {userTrips &&
-          userTrips?.customer_trips.map((trip: any) => (
+          userTrips?.customer_trips.map((trip: UserTrip) => (
             <TableRow
               key={trip.trip_id}
               onClick={() => handleTrackTrip(trip.trip_id)}

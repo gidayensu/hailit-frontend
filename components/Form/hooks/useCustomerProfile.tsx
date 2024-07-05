@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLazyUpdateUserQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   CustomerDetails,
@@ -27,7 +27,7 @@ export const useCustomerProfile = () => {
   const { email, user_id, user_role, first_name, last_name, phone_number } = useAppSelector((state) => state.user);
   const { chosenRole } = useAppSelector((state) => state.onBoarding);
 
-  const [updateUser, { data, isLoading, error }] = useLazyUpdateUserQuery();
+  const [updateUser, { data, isLoading, error }] = useUpdateUserMutation();
 
 
   //form submission
@@ -117,7 +117,7 @@ export const useCustomerProfile = () => {
   const handleSignOut = () => {
     dispatch(userLogout());
     supabaseSignOut();
-    router.push('/profile')
+    router.push('/')
   };
 
   return { formMethods, handleSubmit, onCustomerFormSubmit, email, isError, chosenRole,  first_name, last_name, phone_number, isLoading, isSuccess, error, handleSignOut };

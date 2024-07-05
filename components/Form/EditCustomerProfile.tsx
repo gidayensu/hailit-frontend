@@ -3,7 +3,7 @@ import { FormProvider } from "react-hook-form";
 import FormField from "./FormField";
 import { useCustomerProfile } from "./hooks/useCustomerProfile";
 
-export default function CustomerProfile() {
+export default function EditCustomerProfile() {
   const {
     formMethods,
     handleSubmit,
@@ -86,6 +86,7 @@ export default function CustomerProfile() {
               />
           </div>
         )}
+        {/* If "'data' in error " is not used, there would be a Type Error. Same with use just "error" and not "error as any" */}
               {error && ('data' in error) && (
          <p className="text-red-500">{`${JSON.stringify((error as any).data.error)}`}</p>
       )}

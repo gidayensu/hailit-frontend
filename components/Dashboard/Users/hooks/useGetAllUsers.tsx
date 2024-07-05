@@ -12,7 +12,7 @@ export interface User {
   last_name: string;
   email: string;
   phone_number: string;
-  user_role: "customer" | "dispatcher" | "driver" | string; // Allows custom roles
+  user_role: "customer" | "dispatcher" | "driver" | "rider" | string; 
   onboard: boolean;
   date_updated: string;
   date_created: string;

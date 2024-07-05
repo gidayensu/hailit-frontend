@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { supabase } from "@/lib/supabaseAuth";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
 
@@ -126,12 +126,13 @@ export const hailitApi = createApi({
       }),
     }),
 
-    updateUser: builder.query<any, any>({
+    updateUser: builder.mutation<any, any>({
       query: ({ userId, userDetails }) => ({
         url: `users/${userId}`,
         method: "PUT",
         body: userDetails,
       }),
+      invalidatesTags: ['Users', 'User']
     }),
 
     deleteUser: builder.mutation<any, any>({
@@ -251,7 +252,7 @@ export const {
   useGetUserQuery,
   useLazyGetUserQuery,
   useLazyAddUserQuery,
-  useLazyUpdateUserQuery,
+  useUpdateUserMutation,
   useDeleteUserMutation,
   
   //TRIPS

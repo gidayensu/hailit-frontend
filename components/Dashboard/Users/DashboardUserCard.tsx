@@ -5,7 +5,7 @@ import Container from "@/components/ui/container";
 import DeleteModalCard from "../TrackOrder/DeleteModalCard";
 import { User } from "./hooks/useGetAllUsers";
 
-export default function DashboardUserCard ({selectedUser}: {selectedUser:User}) {
+export default function DashboardUserCard ({selectedUser, editUser}: {selectedUser:User, editUser:()=>void}) {
   
   const { isLoading, error, isSuccess, handleDeleteUser } = useDeleteUser(selectedUser?.user_id);
 
@@ -35,8 +35,12 @@ export default function DashboardUserCard ({selectedUser}: {selectedUser:User}) 
             <p>{selectedUser?.email}</p> <p>{selectedUser?.phone_number}</p>
           </div>
         </div>
+
+        {/* Buttons for Edit or Delete */}
         <div className="flex gap-2 mt-2">
-          <Button> Edit User</Button>
+          <Button onClick={editUser}> Edit User</Button>
+
+          {/* Delete Modal */}
           <Modal
             dialogTriggerElement={
               <Button
@@ -46,6 +50,7 @@ export default function DashboardUserCard ({selectedUser}: {selectedUser:User}) 
                 Delete User
               </Button>
             }
+
           >
             <DeleteModalCard
               itemId={`${selectedUser?.first_name} ${selectedUser?.last_name}`}

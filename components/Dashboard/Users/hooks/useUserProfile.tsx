@@ -1,12 +1,14 @@
 'use client'
+import { useDeleteTripMutation, useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { UserRole } from "@/lib/store/slice/userSlice";
 import { useCallback, useEffect, useState } from "react";
 import { useGetUserTrips } from "../../hooks/useGetUserTrips";
-import {  useGetUserTripsQuery, useDeleteTripMutation } from "@/lib/store/apiSlice/hailitApi";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
+import { OrderStatus } from "../../TrackOrder/StatusSection/hook/useGetTrip";
 import { User } from "./useGetAllUsers";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { useGetUser } from "./useGetUser";
-import { UserRole } from "@/lib/store/slice/userSlice";
+
 
 //useUserProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
@@ -14,7 +16,6 @@ import { UserRole } from "@/lib/store/slice/userSlice";
 export const useUserProfile = (userRole?: UserRole)=> {
     const {selectedUserId} = useAppSelector(state=>state.dashboard);
     const {user} = useGetUser(selectedUserId)
-    const {usersData} = useAppSelector(state=>state.dashboardTables);
     const [userTrips, setUserTrips] = useState<UserTrips>({
         current_trips: 0,
         customer_trips: [],
@@ -22,6 +23,7 @@ export const useUserProfile = (userRole?: UserRole)=> {
         total_trip_count: 0,
         cancelled_trips: 0
     });
+
 
     const dispatch = useAppDispatch();
 
@@ -57,15 +59,15 @@ export const useUserProfile = (userRole?: UserRole)=> {
         deleteData ? setUserTrips((prevTrips=>({...prevTrips, customer_trips: customerTrips}))) : deleteError
     }
     
-    const selectedUser:User = usersData?.filter((user:User)=>user.user_id === selectedUserId)[0] || user;
+    const selectedUser:User = user;
     return {userTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading, handleDeselect }
 }
 
-interface UserTrip {
+export interface UserTrip {
     trip_id: string;
     dispatcher_id: string;
     trip_medium: "Motor" | "Car" | "Bicycle" | string;
-    trip_status: "Requested" | "Pending" | "In Progress" | "Delivered" | "Cancelled";
+    trip_status: OrderStatus
     package_value: string;
     trip_area: string;
     recipient_number: string;
@@ -75,6 +77,7 @@ interface UserTrip {
     drop_off_location: string;
     additional_information: string;
     trip_request_date: string;
+    trip_completion_date: string;
     trip_cost: string;
     payment_status: boolean;
     payment_method: "Cash on Delivery" | "Mobile Money" | "Card" | string;
