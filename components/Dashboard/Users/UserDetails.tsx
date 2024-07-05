@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { MdArrowBack } from "react-icons/md";
@@ -6,26 +7,41 @@ import DashboardUserCard from "./DashboardUserCard";
 import { useUserProfile } from "./hooks/useUserProfile";
 import UserTripsTable from "./UserTripsTable";
 import { UserRole } from "@/lib/store/slice/userSlice";
+import { useState } from "react";
 
-
+import EditUser from "./EditUser";
 //UserDetails accepts userRole to show details based on the userRole
+
 export default  function UserDetails ({userRole}: {userRole:UserRole}) {
+const [editUser, setEditUser] = useState<boolean>(false);
+
 const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile(userRole);
   const total_trip_count = userTrips?.total_trip_count
-  const selectedUserId = selectedUser?.user_id
   
+  
+  const handleEditUser = ()=> {
+    setEditUser(()=>!editUser)
+  }
   const handleGoBack = ()=> {
-    handleDeselect();
+    if(editUser) {
+      handleEditUser()
+    } else {
+      handleDeselect();
+    }
     
   }
 
     return (
         <>
-        <Button onClick={handleGoBack} className="mb-4 w-16"><MdArrowBack /></Button>
+        <Button variant={'outline'} onClick={handleGoBack} className="mb-4 w-16"><MdArrowBack /> </Button>
+        {
+          !editUser &&
+          <> 
+          
       <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
         <div className="w-full col-span-2 flex flex-col gap-2">
 
-          <DashboardUserCard selectedUser={selectedUser}/>
+          <DashboardUserCard selectedUser={selectedUser} editUser={handleEditUser}/>
               </div>
               
 
@@ -71,6 +87,13 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
           </section>
         </div>
       </main>
+          </>
+        }
+
+        {
+          editUser &&
+          <EditUser selectedUser= {selectedUser} handleGoBack = {handleGoBack}/>
+        }
         </>
     );
 }
