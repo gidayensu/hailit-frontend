@@ -1,4 +1,4 @@
-import CustomerProfile from "../Form/EditCustomerProfile";
+import EditCustomerProfile from "../Form/EditCustomerProfile";
 
 export default function SecondStage () {
   
@@ -11,7 +11,7 @@ export default function SecondStage () {
             </span>
             <div className="flex items-center justify-center w-full">
 
-            <CustomerProfile />
+            <EditCustomerProfile />
             </div>
 
             

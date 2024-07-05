@@ -21,7 +21,7 @@ import AllUsers from "@/components/Dashboard/Users/AllUsers";
 import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers";
 import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
 import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
-import CustomerProfile from "@/components/Form/EditCustomerProfile";
+import EditCustomerProfile from "@/components/Form/EditCustomerProfile";
 import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
 import BigLoader from "@/components/Shared/BigLoader";
 import Loader from "@/components/Shared/Loader";
@@ -107,7 +107,7 @@ export default function Dashboard() {
                 <section className="flex flex-col justify-center items-center lg:items-start lg:justify-start  gap-4">
                 <div className="max-w-sm w-full">
 
-                <CustomerProfile />
+                <EditCustomerProfile />
                 </div>
                   <Button
                     type="submit"

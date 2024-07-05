@@ -4,7 +4,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 //main components
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
-import CustomerProfile from "@/components/Form/EditCustomerProfile";
+import EditCustomerProfile from "@/components/Form/EditCustomerProfile";
 //ui components
 import { Button } from "@/components/ui/button";
 import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
@@ -26,7 +26,7 @@ export default function EditProfile() {
 
         <MiddleSectionContainer className="flex flex-col justify-center items-center gap-6 bg-white w-full -mt-20 rounded-tr-[50px] p-10 mb-20">
           <div className="w-full flex flex-col items-center justify-center gap-4">
-            <CustomerProfile />
+            <EditCustomerProfile />
 
             <Button type="submit" className="max-w-sm w-full h-14" form="customerProfileUpdate" >
               {loading? <Loader/> : `Save`}
