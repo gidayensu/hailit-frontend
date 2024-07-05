@@ -5,7 +5,7 @@ import AddTripOutcome from "./AddTripOutcome";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-export default function AddTrip ({setAddTrip}:{setAddTrip: (arg:boolean)=>void}) {
+export default function AddTrip ({setAddTrip}:{setAddTrip: ()=>void}) {
   
 
   const {order_submitted} = useAppSelector(state=>state.newOrder)
@@ -18,7 +18,7 @@ export default function AddTrip ({setAddTrip}:{setAddTrip: (arg:boolean)=>void})
         <>
       <TripAreaMediumAndType/>
       <NewOrderForm/>
-      <Button variant={'outline'} onClick={()=>setAddTrip(false)} className="w-full h-12 ">
+      <Button variant={'outline'} onClick={setAddTrip} className="w-full h-12 ">
         Cancel
       </Button>
         </>
