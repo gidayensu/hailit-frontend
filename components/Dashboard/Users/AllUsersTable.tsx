@@ -16,12 +16,12 @@ import { Modal } from "@/components/Shared/Modal";
 import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 
 
-import { useGetAllUsers } from "./hook/useGetAllUsers";
+import { useGetAllUsers } from "./hooks/useGetAllUsers";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
-import { useUserProfile } from "./hook/useUserProfile";
+import { useUserProfile } from "./hooks/useUserProfile";
 
 export default function AllUsersTable() {
   
@@ -36,7 +36,7 @@ export default function AllUsersTable() {
       <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center">
           
-          Error occurred!...Our Fault
+          Error occurred!
         </p>
       </div>
     );

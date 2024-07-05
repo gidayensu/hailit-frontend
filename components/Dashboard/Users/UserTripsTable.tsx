@@ -12,7 +12,7 @@ import SkeletonTable from "../SkeletonTable";
 import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 
 import { useGetTrips } from "../hooks/useGetTrips";
-import { useUserProfile } from "./hook/useUserProfile";
+import { useUserProfile } from "./hooks/useUserProfile";
 import NoData from "@/components/Shared/NoData";
 
 export default function UserTripsTable() {
