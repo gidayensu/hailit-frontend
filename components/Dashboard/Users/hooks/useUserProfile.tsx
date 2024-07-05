@@ -1,7 +1,7 @@
 'use client'
 import { useCallback, useEffect, useState } from "react";
 import { useGetUserTrips } from "../../hooks/useGetUserTrips";
-import {  useGetUserTripsQuery, useLazyDeleteTripQuery } from "@/lib/store/apiSlice/hailitApi";
+import {  useGetUserTripsQuery, useDeleteTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { User } from "./useGetAllUsers";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
@@ -44,7 +44,7 @@ export const useUserProfile = (userRole?: UserRole)=> {
         }
     }, [trips, error])
 
-    const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useLazyDeleteTripQuery();
+    const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useDeleteTripMutation();
     
     const handleDeselect = useCallback( ()=> {
         

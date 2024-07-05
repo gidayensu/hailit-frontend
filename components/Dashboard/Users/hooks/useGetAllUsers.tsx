@@ -4,6 +4,7 @@ import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useCallback } from "react";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { usePrefetchData } from "../../hooks/usePrefetchData";
 
 export interface User {
   user_id: string;
@@ -31,6 +32,15 @@ export const useGetAllUsers = (page:number) => {
   
   const users = data?.users;
   const total_number_of_pages = data?.total_number_of_pages
+  
+  //prefetch users data
+  const {handlePrefetchData} = usePrefetchData({endpoint: 'users', page, prefetchOption: 'getAllUsers', total_number_of_pages});
+
+  useEffect(()=> {
+    handlePrefetchData();
+  }, [handlePrefetchData])
+
+  //set users data 
     useEffect(()=> {
         dispatch(setTableData({table: "usersData", data:users}))
     }, [dispatch, users])  
