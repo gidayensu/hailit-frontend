@@ -15,7 +15,7 @@ export default function AllUsers () {
             <AllUsersTable />
             }
             {selectedUserId &&
-            <UserDetails userRole = "customer"  />}
+            <UserDetails   />}
             </>
         )
 }
