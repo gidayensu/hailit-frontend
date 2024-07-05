@@ -9,7 +9,7 @@ import {
 } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
 import { Trip } from "@/lib/store/slice/tripSlice";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type OrderStatus =
   | "Booked"
@@ -31,11 +31,21 @@ export const useGetTrip = () => {
     tripStage,
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
+
+  const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(3000);
+  
   const trip = useAppSelector((state)=>state.trip)
   const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`, {
-    pollingInterval: 3000,
+    pollingInterval: controlledPollingInterval,
     refetchOnFocus: true
   });
+//control polling from running when there is an error
+  useEffect(()=> {
+    if(error) {
+      setControlledPollingInterval(0)
+
+    }
+  }, [error, setControlledPollingInterval])
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 
