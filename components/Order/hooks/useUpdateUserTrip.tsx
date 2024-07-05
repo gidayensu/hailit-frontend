@@ -14,7 +14,7 @@ export const useUpdateUserTrip = ()=> {
 
   const {trip_id} = params; 
   
-  const  [updateTrip, { isLoading, error }] =   useUpdateTripMutation();
+  const  [updateTrip, { isLoading, error, isSuccess }] =   useUpdateTripMutation();
   
   
 
@@ -30,7 +30,7 @@ export const useUpdateUserTrip = ()=> {
       };
 
       
-  return { handleTripUpdate, updateLoading, isLoading, error,  }
+  return { handleTripUpdate, updateLoading, isLoading, error, isSuccess }
 
   
 }
