@@ -3,7 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineError } from "react-icons/md";
 import { PiCheckCircleFill } from "react-icons/pi";
 export default function DeleteModalCard ({itemId, item, loading, deleteFn, error, isSuccess}: {itemId:string, item:string, loading?: boolean, error?: any, isSuccess?: boolean, deleteFn:()=>void}) {
-  console.log({deleteModal: isSuccess})
+  
     return (
         <ModalCard cancelFunc={() => {}} confirmFunc={deleteFn} loading={loading} error={error} isSuccess={isSuccess}>
                   <div className="flex flex-col items-center justify-center">

@@ -1,5 +1,7 @@
 import { useGetAllDriversQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 import SkeletonTable from "../../SkeletonTable";
+import { Rating } from "./AllRiders";
 import {
     Table,
     TableBody,
@@ -15,7 +17,7 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 export function AllDrivers() {
     const {data:driversData, isLoading:loadingDrivers, error:errorDrivers} = useGetAllDriversQuery(`drivers`);
     const drivers = driversData?.drivers;
-    
+    const {handleSelectedDriverId} = useDispatcherProfile("Driver")
     if (errorDrivers) {
       return <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!</p>
@@ -38,12 +40,12 @@ export function AllDrivers() {
             {loadingDrivers && <SkeletonTable rows={7} cells={8} />}
             {driversData &&
               drivers.map((driver: any) => (
-                <TableRow key={driver.driver_id}>
+                <TableRow key={driver.driver_id} onClick={()=>handleSelectedDriverId(driver.driver_id)}>
                   <TableCell>{`${driver.first_name} ${driver.last_name}`}</TableCell>
                   <TableCell>{driver.email}</TableCell>
                   <TableCell>{driver.phone_number}</TableCell>
                   <TableCell>{driver.license_number} </TableCell>
-                  <TableCell>{`${driver.cumulative_driver_rating} (${driver.driver_rating_count})`}</TableCell>
+                  <TableCell className="flex gap-1"><Rating rating = {driver.cumulative_rating}/> ({driver.rating_count})</TableCell>
                   <TableCell> {driver.vehicle_name}</TableCell>
                   <TableCell> {driver.plate_number}</TableCell>
                   <TableCell> {driver.trip_count}</TableCell>

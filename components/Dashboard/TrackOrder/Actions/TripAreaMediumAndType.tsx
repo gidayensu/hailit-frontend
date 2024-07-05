@@ -11,17 +11,21 @@ export default function TripAreaMediumAndType () {
   const dispatch = useAppDispatch();
 
   const handleTripChoices = useCallback((tripChoice:string, choiceType:string)=>{
-      choiceType === "trip area" ? dispatch(setTripArea(tripChoice)) 
-      : choiceType === "trip medium" ? dispatch(setTripMedium(tripChoice)) : dispatch(setTripType(tripChoice))
+      choiceType === "trip area"
+        ? dispatch(setTripArea(tripChoice))
+        : choiceType === "trip medium"
+        ? dispatch(setTripMedium(tripChoice))
+        : dispatch(setTripType(tripChoice));
   }, [dispatch])
 
     const {trip_area, trip_type, trip_medium} = useAppSelector(state=>state.deliveryChoices)
+    
     return (
       <div className="flex flex-col gap-3">
       <span className="text-left">
               <h3 className=" text-[14px] font-bold ">Trip Area</h3>
             </span>
-            
+            {/* TRIP AREA SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
                 itemType="Accra"
@@ -45,6 +49,8 @@ export default function TripAreaMediumAndType () {
             <span className="text-left">
               <h3 className=" text-[14px] font-bold ">Trip Type</h3>
             </span>
+
+            {/* TRIP TYPES SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
                 itemType="Same Day"
@@ -68,6 +74,8 @@ export default function TripAreaMediumAndType () {
             <span className="text-left">
               <h3 className=" text-[14px] font-bold ">Trip Medium</h3>
             </span>
+
+            {/* TRIP MEDIUM SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
                 itemType="Car"

@@ -25,7 +25,7 @@ export default function ModalCard({
   isSuccess?: boolean,
   children?: React.ReactNode 
 }) {
-  console.log({isSuccess})
+  
 
   return (
     <div className="">

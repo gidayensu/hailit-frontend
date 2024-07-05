@@ -8,7 +8,6 @@ import { useState } from "react";
 //icons + ui
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 //main components
 
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
@@ -19,14 +18,15 @@ import Overview from "@/components/Dashboard/Overview/Overview";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
 import AllUsers from "@/components/Dashboard/Users/AllUsers";
 import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDrivers";
-import { AllRiders } from "@/components/Dashboard/Users/Dispatchers/AllRiders";
+import AllRidersSection from "@/components/Dashboard/Users/Dispatchers/AllRidersSection";
+import AllDriversSection from "@/components/Dashboard/Users/Dispatchers/AllDriversSection";
 import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
 import EditCustomerProfile from "@/components/Form/EditCustomerProfile";
 import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
 import BigLoader from "@/components/Shared/BigLoader";
+import ErrorComponent from "@/components/Shared/ErrorComponent";
 import Loader from "@/components/Shared/Loader";
 import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
-import ErrorComponent from "@/components/Shared/ErrorComponent";
 import { useRouter } from "next/navigation";
 export default function Dashboard() {
   const [dashMin, setDashMin] = useState<boolean>(false);
@@ -98,9 +98,9 @@ export default function Dashboard() {
 
               {activeSection === "Track Order" && <TrackOrder />}
 
-              {activeSection === "Riders" && <AllRiders />}
+              {activeSection === "Riders" && <AllRidersSection />}
 
-              {activeSection === "Drivers" && <AllDrivers />}
+              {activeSection === "Drivers" && <AllDriversSection />}
 
               {/* {activeSection === "Analytics" && <TripsDonut />} */}
               {activeSection === "Profile" && (

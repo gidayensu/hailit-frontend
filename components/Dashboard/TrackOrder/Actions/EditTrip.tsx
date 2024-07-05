@@ -19,6 +19,7 @@ import {
   setTripArea,
   setPackageType,
   setScheduled,
+  setTripType,
 } from "@/lib/store/slice/deliveryChoicesSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
@@ -34,9 +35,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
     handleSubmit,
     onDeliveryFormSubmit,
     packageTypeRef,
-    trip_medium,
-    trip_type,
-    trip_area,
+    
     package_type,
     updateLoading,
     register,
@@ -45,6 +44,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
   useEffect(() => {
     dispatch(setPackageType(trip?.package_type));
     dispatch(setTripMedium(trip?.trip_medium));
+    dispatch(setTripType(trip?.trip_type));
     dispatch(setTripArea(trip?.trip_area));
     if (trip?.trip_type === "scheduled") {
       dispatch(setScheduled(true));
@@ -52,7 +52,7 @@ export default function EditTrip({ trip }: { trip: Trip }) {
   }, [trip?.package_type, trip?.trip_type]);
 
   const {dropOffLocationName, pickUpLocationName} = useAppSelector(state=>state.map)
-
+  
   return (
     <main className=" bg-white dark:bg-secondary-dark p-6 rounded-xl flex flex-col">
       <h1 className="mb-2 text-2xl">

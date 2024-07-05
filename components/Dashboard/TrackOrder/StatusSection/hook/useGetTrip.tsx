@@ -41,11 +41,11 @@ export const useGetTrip = () => {
   });
 //control polling from running when there is an error
   useEffect(()=> {
-    if(error) {
+    if(error || editingOrder) {
       setControlledPollingInterval(0)
 
     }
-  }, [error, setControlledPollingInterval])
+  }, [error, setControlledPollingInterval, editingOrder])
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 

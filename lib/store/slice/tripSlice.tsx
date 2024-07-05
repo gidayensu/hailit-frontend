@@ -34,7 +34,7 @@ const initialState:Trip = {
         user_id: "",
         dispatcher_id: "",
         license_number: "",
-        availability: "",
+        available: false,
         vehicle_id: "",
         first_name: "",
         last_name: "",
@@ -47,7 +47,7 @@ const initialState:Trip = {
           insurance_details: "",
           road_worthy: "",
           vehicle_name: "",
-          availability: false, 
+          available: false, 
         },
       },
     }
@@ -84,7 +84,7 @@ export interface Dispatcher {
     user_id: string;
     dispatcher_id?: string;
     license_number?: string;
-    availability?: string;
+    available?: boolean;
     vehicle_id?: string;
     first_name: string;
     last_name: string;
@@ -129,5 +129,5 @@ export interface Dispatcher {
     vehicle_type?: string,
     insurance_details?: string,
     road_worthy?: string,
-    availability?: boolean
+    available?: boolean
 }

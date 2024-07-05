@@ -55,22 +55,23 @@ export function RecentTripTable() {
               <TableCell>{trip?.trip_completion_date ? extractShortDate(trip.trip_completion_date): 'TBD'}</TableCell>
               <TableCell>{trip?.trip_cost}</TableCell>
               <TableCell>
-                <div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip?.payment_status ? 'bg-green-500 ': 'bg-red-500 '}`}>
+                <div className={`flex item-center justify-center rounded-md w-16 border font-medium text-[11px] ${trip?.payment_status ? 'bg-green-200  border-green-500 text-green-800': 'bg-red-200 text-red-800 border-red-500 '}`}>
                     <p>
                         {trip?.payment_status? 'Paid' : 'Not Paid'}
                     </p>
                 </div>
                 </TableCell>
               
-              <TableCell><div className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${trip?.trip_status === "Delivered"
-                ? "  bg-green-500"
-                : trip?.trip_status === "Picked Up"
-                ? "  bg-sky-600"
-                : trip?.trip_status === "In Transit"
-                ? " bg-amber-500 "
-                : trip?.trip_status === "Booked"
-                ? " bg-slate-600 dark:text-slate-50"
-                : " bg-red-500"}`}>
+              <TableCell><div className={`flex item-center justify-center rounded-md w-16 border font-medium text-[11px] ${trip?.trip_status === "Delivered"
+                ? "  bg-green-200  border-green-500 text-green-800"
+                : trip.trip_status === "Picked Up"
+                ? "  bg-sky-200 border-sky-500 text-sky-800"
+                : trip.trip_status === "In Transit"
+                ? " bg-amber-200 border-amber-500 text-amber-800"
+                : trip.trip_status === "Booked"
+                ? " bg-slate-200 border-slate-500 text-slate-800"
+                : " bg-red-200 text-red-800 border-red-500"
+                }`}>
                     <p>
                         {trip?.trip_status}
                     </p>

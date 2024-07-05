@@ -2,29 +2,35 @@
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { MdArrowBack } from "react-icons/md";
-import DashboardCard from "../DashboardCard";
-import DashboardUserCard from "./DashboardUserCard";
-import { useUserProfile } from "./hooks/useUserProfile";
-import UserTripsTable from "./UserTripsTable";
-import { UserRole } from "@/lib/store/slice/userSlice";
+import DashboardCard from "../../DashboardCard";
+
+import DispatcherCard from "./DispatcherCard";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+
+import UserTripsTable from "../UserTripsTable";
+import EditDispatcher from "./EditDispatcher";
+
 import { useState } from "react";
+import Loader from "@/components/Shared/Loader";
+import DispatcherTripsTable from "./DispatcherTripsTable";
 
-import EditUser from "./EditUser";
-//UserDetails accepts userRole to show details based on the userRole
 
-export default  function UserDetails () {
-const [editUser, setEditUser] = useState<boolean>(false);
+//DispatcherDetails accepts userRole (rider/driver) to show details based on the userRole
 
-const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile();
-  const total_trip_count = userTrips?.total_trip_count
+export default  function DispatcherDetails ({userRole}:{userRole: "Driver" | "Rider"}) {
+const [editDispatcher, setEditDispatcher] = useState<boolean>(false);
+
+const {dispatcherTrips,  error, deleteError, handleTrackTrip, selectedDispatcher, isLoading, handleDeselect, dispatcherLoading } = useDispatcherProfile(userRole);
+  const total_trip_count = dispatcherTrips?.total_trip_count
   
   
-  const handleEditUser = ()=> {
-    setEditUser(()=>!editUser)
+  
+  const handleEditDispatcher = ()=> {
+    setEditDispatcher(()=>!editDispatcher)
   }
   const handleGoBack = ()=> {
-    if(editUser) {
-      handleEditUser()
+    if(editDispatcher) {
+      handleEditDispatcher()
     } else {
       handleDeselect();
     }
@@ -35,13 +41,18 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
         <>
         <Button variant={'outline'} onClick={handleGoBack} className="mb-4 w-16"><MdArrowBack /> </Button>
         {
-          !editUser &&
+          !editDispatcher &&
           <> 
-          
+          {
+            dispatcherLoading && <Loader/>
+          }
+
+          {
+            !dispatcherLoading && 
       <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
         <div className="w-full col-span-2 flex flex-col gap-2">
 
-          <DashboardUserCard selectedUser={selectedUser} editUser={handleEditUser}/>
+          <DispatcherCard dispatcher={selectedDispatcher} editDispatcher={handleEditDispatcher}/>
               </div>
               
 
@@ -50,22 +61,22 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
             total_trip_count > 0 && 
           <section className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
             <DashboardCard
-              number={userTrips?.total_trip_count || 0  }
+              number={dispatcherTrips?.total_trip_count || 0  }
               title="Total Deliveries"
               subTitle="All deliveries made"
             />
             <DashboardCard
-              number={userTrips?.delivered_trips || 0}
+              number={dispatcherTrips?.delivered_trips || 0}
               title="Delivered"
               subTitle="Successful deliveries"
             />
             <DashboardCard
-              number={userTrips?.current_trips || 0}
+              number={dispatcherTrips?.current_trips || 0}
               title="Current"
               subTitle="Pending deliveries"
             />
             <DashboardCard
-              number={userTrips?.cancelled_trips || 0}
+              number={dispatcherTrips?.cancelled_trips || 0}
               title="Cancelled"
               subTitle="Cancelled trips"
             />
@@ -75,24 +86,25 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
             { total_trip_count > 0  && 
 
             <h2 className="font-bold text-md">
-              {`All ${selectedUser?.first_name} ${selectedUser?.last_name} Trips` 
+              {`All ${selectedDispatcher?.first_name} ${selectedDispatcher?.last_name} Trips` 
               }
               
               </h2>
             }
 
           <Container className="rounded-xl flex justify-center items-center">
-            <UserTripsTable />
+            <DispatcherTripsTable userRole={userRole} />
           </Container>
           </section>
         </div>
       </main>
+          }
           </>
         }
 
         {
-          editUser &&
-          <EditUser selectedUser= {selectedUser} handleGoBack = {handleGoBack}/>
+          editDispatcher &&
+          <EditDispatcher dispatcher= {selectedDispatcher} handleGoBack = {handleGoBack}/>
         }
         </>
     );

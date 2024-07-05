@@ -1,3 +1,4 @@
+// This is UI with minimal detail such as trip id, trip request data, delivery state, cost, and package type. 
 'use client'
 import { IoArchive, IoFastFood } from "react-icons/io5";
 import { IoDocumentText, IoShirt } from "react-icons/io5";

@@ -52,7 +52,7 @@ export function Vehicles() {
                 <TableCell>{vehicle.vehicle_type}</TableCell>
                 <TableCell>{vehicle.vehicle_model}</TableCell>
                 <TableCell>{vehicle.plate_number} </TableCell>                
-                <TableCell> {vehicle.availability ? (
+                <TableCell> {vehicle.available ? (
                     <LuCheckCircle2 className="text-green-500 text-2xl" />
                     ) : (
                         <LuXCircle className="text-red-500 text-2xl" />

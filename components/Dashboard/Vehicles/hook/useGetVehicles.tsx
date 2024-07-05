@@ -8,7 +8,7 @@ export interface Vehicle {
     vehicle_type: string,
     insurance_details: string,
     road_worthy: string,
-    availability: boolean
+    available: boolean
 }
 
 export function useGetVehicles(page:number) {

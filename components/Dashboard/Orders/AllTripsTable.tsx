@@ -60,8 +60,8 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
                 <TableCell>{trip.trip_cost}</TableCell>
                 <TableCell className="">
                   <div
-                    className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
-                      trip.payment_status ? "bg-green-500 " : "bg-red-500 "
+                    className={`flex item-center justify-center rounded-lg w-16 text-white text-[11px] border ${
+                      trip.payment_status ? "bg-green-200  border-green-500 text-green-800 " : "bg-red-200 text-red-800 border-red-500"
                     }`}
                   >
                     <p>{trip.payment_status ? "Paid" : "Not Paid"}</p>
@@ -70,16 +70,16 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
                 {/* <TableCell>{trip.payment_method}</TableCell> */}
                 <TableCell>
                   <div
-                    className={`flex item-center justify-center rounded-md w-16 text-white text-[12px] ${
+                    className={`flex item-center border justify-center rounded-lg font-medium w-16  text-[11px] ${
                       trip.trip_status === "Delivered"
-                      ? "  bg-green-500"
+                      ? "  bg-green-200  border-green-500 text-green-800"
                         : trip.trip_status === "Picked Up"
-                        ? "  bg-sky-600"
+                        ? "  bg-sky-200 border-sky-500 text-sky-800"
                         : trip.trip_status === "In Transit"
-                        ? " bg-amber-500 "
+                        ? " bg-amber-200 border-amber-500 text-amber-800"
                         : trip.trip_status === "Booked"
-                        ? " bg-slate-600 dark:text-slate-50"
-                        : " bg-red-500"
+                        ? " bg-slate-200 border-slate-500 text-slate-800"
+                        : " bg-red-200 text-red-800 border-red-500"
                       }`}
                       >
                     <p>{trip.trip_status}</p>

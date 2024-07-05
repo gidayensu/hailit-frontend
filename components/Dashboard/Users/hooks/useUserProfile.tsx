@@ -13,7 +13,8 @@ import { useGetUser } from "./useGetUser";
 //useUserProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
 //to have a 'go back' experience. 
-export const useUserProfile = (userRole?: UserRole)=> {
+export const useUserProfile = ()=> {
+    
     const {selectedUserId} = useAppSelector(state=>state.dashboard);
     const {user} = useGetUser(selectedUserId)
     const [userTrips, setUserTrips] = useState<UserTrips>({

@@ -1,30 +1,31 @@
 "use client";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table";
-import SkeletonTable from "../SkeletonTable";
 
-import { extractShortDate, extractBeforeComma } from "@/lib/utils";
-import { UserTrip } from "./hooks/useUserProfile";
-import { useGetTrips } from "../hooks/useGetTrips";
-import { useUserProfile } from "./hooks/useUserProfile";
+import SkeletonTable from "../../SkeletonTable";
 import NoData from "@/components/Shared/NoData";
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+import { UserTrip } from "./hooks/useDispatcherProfile";
 
-export default function UserTripsTable() {
+
+export default function DispatcherTripsTable({userRole}:{userRole: "Driver" | "Rider"}) {
   const {
-    userTrips,
+    dispatcherTrips,
     handleDeleteTrip,
     error,
     deleteError,
     handleTrackTrip,
     isLoading,
-  } = useUserProfile();
+  } = useDispatcherProfile(userRole);
 
+  
   
   if (error) {
     return (
@@ -52,8 +53,8 @@ export default function UserTripsTable() {
       </TableHeader>
       <TableBody>
         {isLoading && <SkeletonTable rows={6} cells={7} />}
-        {userTrips &&
-          userTrips?.customer_trips.map((trip: UserTrip) => (
+        {dispatcherTrips &&
+          dispatcherTrips?.dispatcher_trips.map((trip: UserTrip) => (
             <TableRow
               key={trip.trip_id}
               onClick={() => handleTrackTrip(trip.trip_id)}
@@ -78,7 +79,7 @@ export default function UserTripsTable() {
               <TableCell>{trip.trip_cost}</TableCell>
               <TableCell>
                 <div
-                  className={`flex item-center justify-center rounded-lg w-16 border text-white text-[12px] ${
+                  className={`flex item-center justify-center rounded-lg w-16 border  text-[12px] ${
                     trip.payment_status ? "bg-green-200  border-green-500 text-green-800 " : "bg-red-200 text-red-800 border-red-500 "
                   }`}
                 >
