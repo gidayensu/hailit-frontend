@@ -1,9 +1,9 @@
-import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useGetAllTripsQuery, usePrefetch } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedTripId, setTrackingOrder, setEditingOrder } from "@/lib/store/slice/dashboardSlice";
-import { setOverviewData, setTripsData, setTableData } from "@/lib/store/slice/dashboardTablesSlice";
-import { useEffect, useCallback } from "react";
-
+import { setActiveSection, setEditingOrder, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
+import { useCallback, useEffect } from "react";
+import { usePrefetchData } from "./usePrefetchData";
 export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   const {tripsData, overviewData}  = useAppSelector(state => state.dashboardTables);
 
@@ -16,6 +16,7 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
     dispatch(setEditingOrder(false));
   }, [dispatch])
 
+  
   // let endpoint = 'trips';
   // offset && limit ? endpoint = `trips?limit=${limit}&offset=${offset}` : limit ? endpoint = `trips?limit=${limit}` : '';
   
@@ -26,6 +27,14 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   
   const trips = data?.trips;
   const total_number_of_pages = data?.total_number_of_pages;
+
+  const {handlePrefetchData} = usePrefetchData({endpoint: 'trips', page, prefetchOption: 'getAllTrips', total_number_of_pages});
+  
+  //prefetch useEffect
+
+  useEffect(()=> {
+    handlePrefetchData()
+  }, [handlePrefetchData])
   
   useEffect(() => {
     if (table === "trips") {

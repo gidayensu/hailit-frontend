@@ -18,6 +18,10 @@ export default function Riders() {
     assignedDispatcherId,
     ridersError,
     handleAssignedDispatcher,
+    handleNextPage, 
+    handlePreviousPage,
+    dispatcherContainerRef,
+    page, ridersTotalPages,
   } = useAssignDispatchers("riders");
 
   
@@ -50,12 +54,12 @@ export default function Riders() {
       )}
 
       {riders && (
-        <ScrollArea className="h-72 w-full rounded-md ">
+        <ScrollArea className="h-[600px] w-full rounded-md " ref={dispatcherContainerRef}>
           <span className="mb-4 text-lg font-bold leading-none z-10 h-6  w-2/3">
             RIDERS
           </span>
-          <div className="w-full p-4 mt-6">
-            <div></div>
+          <div className="w-full p-4 mt-6" ref={dispatcherContainerRef}>
+            
             {riders.map((rider: any) => (
               <>
                 <div
@@ -68,9 +72,9 @@ export default function Riders() {
                       last_name: rider.last_name,
                       phone_number: rider.phone_number,
                       vehicle: {
-                      plate_number: rider.plate_number,
-                      vehicle_name: rider.vehicle_name,
-                    },
+                        plate_number: rider.plate_number,
+                        vehicle_name: rider.vehicle_name,
+                      },
                     })
                   }
                 >
@@ -84,11 +88,10 @@ export default function Riders() {
                     </div>
                   </div>
                   {rider.rider_id !== dispatcher.dispatcher_id && (
-                      <Button className="w-20">Assign</Button>
-                    )}
-                  
+                    <Button className="w-20">Assign</Button>
+                  )}
 
-                  {(rider.rider_id  === dispatcher.dispatcher_id) && (
+                  {rider.rider_id === dispatcher.dispatcher_id && (
                     <Button className="w-20 bg-black" disabled>
                       Assigned
                     </Button>
@@ -97,6 +100,27 @@ export default function Riders() {
                 <Separator className="my-2" />
               </>
             ))}
+          </div>
+          <p className="text-[12px]">Page {page} of {ridersTotalPages} </p>
+          <div className="flex justify-end items-center mr-4 gap-2">
+            
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => handlePreviousPage("riders")}
+              disabled={page===1}
+            >
+              Previous
+            </Button>
+            <p>|</p>
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => handleNextPage("riders")}
+              disabled={page===ridersTotalPages}
+            >
+              Next
+            </Button>
           </div>
         </ScrollArea>
       )}
