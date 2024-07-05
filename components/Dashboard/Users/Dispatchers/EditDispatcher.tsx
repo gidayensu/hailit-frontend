@@ -18,7 +18,6 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:an
     isLoading,
     isSuccess,
     error,
-    onboard,
     handleOnboard,
     modalRef,
     closeModal,
