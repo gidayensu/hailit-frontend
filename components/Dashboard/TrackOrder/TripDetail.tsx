@@ -4,6 +4,14 @@ import { Button } from "../../ui/button";
 import Container from "../../ui/container";
 import DeleteModalCard from "./DeleteModalCard";
 
+
+//custom hooks + react + helpers + redux
+import { useEffect } from "react";
+import { useDeleteTrip } from "../hooks/useDeleteTrip";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
+import { extractShortDate } from "@/lib/utils";
+
 //main components
 import CustomerSection from "./CustomerSection";
 import DispatcherSection from "./Dispatcher/DispatcherSection";
@@ -11,15 +19,18 @@ import PackageSection from "./PackageSection";
 import PaymentSection from "./PaymentSection";
 import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
-import { extractShortDate } from "@/lib/utils";
-import { useEffect } from "react";
 
-export default function TripDetail ({trip}: {trip:any}) {
+//interface
+import { Trip } from "@/lib/store/slice/tripSlice";
+
+export default function TripDetail ({trip}: {trip:Trip}) {
+    const {selectedTripId} = useAppSelector(state=>state.dashboard)
+    const {handleDeleteTrip, isLoading, error, isSuccess} = useDeleteTrip(selectedTripId)
 
     const dispatch = useAppDispatch();
+    
     const dispatcher = trip?.dispatcher;
+
     const handleEditTrip = ()=> {
     
      dispatch(setEditingOrder(true));
@@ -28,7 +39,8 @@ export default function TripDetail ({trip}: {trip:any}) {
     }
     useEffect(()=>  {
      window.scrollTo(0, 0);
-    }, [trip])
+    }, [trip.trip_id])
+
     return (
         <div className="space-y-3 md:mb-0 mb-24">
           <article className="flex flex-col gap-4">
@@ -80,7 +92,7 @@ export default function TripDetail ({trip}: {trip:any}) {
                   </Button>
                 }
               >
-               <DeleteModalCard itemId={trip.trip_id} item="Trip"/> 
+               <DeleteModalCard itemId={trip.trip_id} item="Trip" loading={isLoading} deleteFn={handleDeleteTrip} error= {error} isSuccess={isSuccess}/> 
               </Modal>
             </section>
           </article>
