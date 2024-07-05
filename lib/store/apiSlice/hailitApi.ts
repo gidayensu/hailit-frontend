@@ -21,7 +21,7 @@ export const hailitApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts'],
+  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts', 'User', 'Users', 'All Riders'],
   endpoints: (builder) => ({
     // TRIPS
     getAllTrips: builder.query<any, string | string[]>({
@@ -69,11 +69,12 @@ export const hailitApi = createApi({
       }),
     }),
 
-    deleteTrip: builder.query<any, string | string[]>({
+    deleteTrip: builder.mutation<any, any>({
       query: (trip_id) => ({
         url: `trips/user-trip/${trip_id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Trip', 'User Trips', 'Trips', 'Current Month Trip Counts']
     }),
     getCurrentMonthTripCounts: builder.query({
       query: () => ({
@@ -100,6 +101,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
+      providesTags: ['Users']
     }),
 
     getAdmin: builder.query<any, string | string[] | any>({
@@ -113,6 +115,7 @@ export const hailitApi = createApi({
         url: `users/${userId}`,
         method: "GET",
       }),
+      providesTags: ['User']
     }),
 
     addUser: builder.query<any, any>({
@@ -131,11 +134,12 @@ export const hailitApi = createApi({
       }),
     }),
 
-    deleteUser: builder.query<any, any>({
-      query: ({ userId }) => ({
-        url: `${userId}`,
+    deleteUser: builder.mutation<any, any>({
+      query: (userId) => ({
+        url: `users/${userId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['User', 'Users']
     }),
 
     //DRIVERS
@@ -173,6 +177,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
+      providesTags: ['All Riders']
     }),
 
     getRider: builder.query<any, string | string[]>({
@@ -238,6 +243,8 @@ export const hailitApi = createApi({
 });
 
 export const {
+  //PREFETCH
+  usePrefetch,
   // USERS
   useGetAllUsersQuery,
   useGetAdminQuery,
@@ -245,7 +252,7 @@ export const {
   useLazyGetUserQuery,
   useLazyAddUserQuery,
   useLazyUpdateUserQuery,
-  useLazyDeleteUserQuery,
+  useDeleteUserMutation,
   
   //TRIPS
   useGetAllTripsQuery,
@@ -254,8 +261,9 @@ export const {
   useAddTripMutation,
   useUpdateTripMutation,
   useGetTripMonthsQuery,
-  useGetCurrentMonthTripCountsQuery,  
-  useLazyDeleteTripQuery,
+  useGetCurrentMonthTripCountsQuery, 
+  useDeleteTripMutation, 
+  
   useLazyRateTripQuery,
   useLazySearchTripsQuery,
   
@@ -283,3 +291,4 @@ export const {
   useLazyDeleteVehicleQuery,
   
 } = hailitApi;
+
