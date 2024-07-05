@@ -17,7 +17,11 @@ export default function Drivers() {
     dispatcher,
     assignedDispatcherId,
     driversError,
+    page,
+    driversTotalPages,
     handleAssignedDispatcher,
+    handleNextPage,
+    handlePreviousPage
   } = useAssignDispatchers("drivers");
 
   
@@ -50,9 +54,9 @@ export default function Drivers() {
       )}
 
       {drivers && (
-        <ScrollArea className="h-72 w-full rounded-md ">
+        <ScrollArea className="h-[600px] w-full rounded-md ">
           <span className="mb-4 text-lg font-bold leading-none z-10 h-6  w-2/3">
-            RIDERS
+            DRIVERS
           </span>
           <div className="w-full p-4 mt-6">
             <div></div>
@@ -97,6 +101,27 @@ export default function Drivers() {
                 <Separator className="my-2" />
               </>
             ))}
+          </div>
+          <p className="text-[12px]">Page {page} of {driversTotalPages} </p>
+          <div className="flex justify-end items-center mr-4 gap-2">
+            
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => handlePreviousPage("drivers")}
+              disabled={page===1}
+            >
+              Previous
+            </Button>
+            <p>|</p>
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => handleNextPage("drivers")}
+              disabled={page===driversTotalPages}
+            >
+              Next
+            </Button>
           </div>
         </ScrollArea>
       )}
