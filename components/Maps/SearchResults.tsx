@@ -23,7 +23,7 @@ export default function SearchResults({locationType}: {locationType:LocationType
       {searchContainer && (
         <div className="md:w-96 h-auto shadow-md w-80  bg-white z-50  text-secondary-dark  text-sm rounded-lg ">
           <span className="flex flex-col gap-2">
-            {isLoading && <Loader color="primary" />}
+            {isLoading && <Loader color="text-primary-color" />}
             {!isLoading && searchData && searchData.length > 0 &&
               searchData.map((data: any, index: number) => {
                 
@@ -34,7 +34,7 @@ export default function SearchResults({locationType}: {locationType:LocationType
                       className="flex flex-col gap-2 cursor-pointer hover:bg-gray-50"
                     >
                       {!data.display_name? (
-                        <Loader color="primary" />
+                        <Loader color="text-primary-color" />
                       ) : (
                         <p
                           onClick={() => {

@@ -103,7 +103,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
           </div>
         </  section>
         
-        <section className="col-span-4 row-span-7 flex flex-col  items-start h-full mt-5 w-44 xl:mt-0 ml-4 md:ml-9 ">
+        <section className="col-span-4 row-span-7 flex flex-col  items-start h-full  w-44 xl:mt-0 ml-4 md:ml-9 ">
           <div className="flex flex-col items-start  -ml-1">
             
                 <p className="text-sm font-semibold">Pickup date</p>

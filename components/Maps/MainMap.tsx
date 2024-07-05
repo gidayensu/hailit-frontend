@@ -63,7 +63,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
       <div className="relative w-full h-full">
         {mapLoading ? (
           <div className="flex items-center justify-center h-screen">
-            <Loader color="primary"/>
+            <Loader color="text-primary-color"/>
           </div>
         ) : (
           userLocation && locationType && (

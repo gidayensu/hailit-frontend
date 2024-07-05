@@ -100,7 +100,7 @@ export default function NewOrderForm() {
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
             <Link className="col-span-1" href={"/pickup-map"} onClick={()=> setPickUpLoading(true)}>
             <Button variant = {'outline'} className="hover:none dark:hover:none h-14">
-                {pickUpLoading ? <Loader color="primary"/> : <FaMapMarkerAlt className="text-lg" />}
+                {pickUpLoading ? <Loader color="text-primary-color"/> : <FaMapMarkerAlt className="text-lg" />}
               </Button>
             </Link>
           </div>
@@ -121,7 +121,7 @@ export default function NewOrderForm() {
             <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
             <Link className="col-span-1" href={"/drop-off-map"} onClick={()=>setDropOffLoading(true)}>
               <Button variant = {'outline'} className=" h-14 hover:none dark:hover:bg-none">
-              {dropOffLoading ? <Loader color="primary"/> : <FaMapMarkerAlt className="text-lg" />}
+              {dropOffLoading ? <Loader color="text-primary-color"/> : <FaMapMarkerAlt className="text-lg" />}
               </Button>
             </Link>
           </div>

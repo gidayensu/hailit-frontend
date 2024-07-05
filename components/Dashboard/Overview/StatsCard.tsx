@@ -35,7 +35,7 @@ export default function StatsCard({
       </div>
       <div className="flex flex-col">
         {loading ? (
-          <Loader color="primary" />
+          <Loader color="text-primary-color" />
         ) : (
           <>
             <h2 className={`text-4xl font-bold `}>

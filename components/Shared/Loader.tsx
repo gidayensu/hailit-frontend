@@ -1,7 +1,7 @@
 import { CgSpinner } from "react-icons/cg";
 export default function Loader({ color }: { color?: string }) {
   return (
-    <CgSpinner className={`animate-spin ${color ? `text-primary-color`:' text-white'}  dark:text-primary-color text-2xl`} />
+    <CgSpinner className={`animate-spin ${color ? color :' text-white dark:text-primary-color'}   text-2xl`} />
   );
 }
 
@@ -10,6 +10,6 @@ export const InfinityLoader = () => {
 };
 export const SmallLoader = ({ color }: { color?: string }) => {
   return (
-    <CgSpinner className="animate-spin text-white dark:text-primary-color text-xl" />
+    <CgSpinner className={`animate-spin text-white dark:text-primary-color text-xl`} />
   );
 };

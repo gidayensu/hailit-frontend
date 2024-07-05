@@ -14,7 +14,7 @@ export default function TripsStats () {
         <Container className="w-full flex items-center justify-center h-32 rounded-xl mb-8">
         <div className="flex flex-col items-center justify-center gap-3 w-1/2">
                         <span className="flex items-center justify-center text-[12px] w-full bg-teal-500 font-medium h-6 dark:text-black rounded-md"><p>Your Earnings</p></span>
-                        <p className="text-5xl font-bold">{isLoading ? <Loader color="primary"/> : `¢${dispatcherEarnings}` || "¢0"}</p>
+                        <p className="text-5xl font-bold">{isLoading ? <Loader color="text-primary-color"/> : `¢${dispatcherEarnings}` || "¢0"}</p>
                         
                 </div>
         </Container>
@@ -26,7 +26,7 @@ export default function TripsStats () {
                 <div className="flex flex-col items-center justify-center gap-3 w-1/2">
                         <span className="flex items-center justify-center text-[12px] w-full bg-amber-500 dark:text-black font-medium h-6 rounded-md"><p>Active</p></span>
                         <p className="text-5xl font-bold">
-                                {isLoading ? <Loader color="primary"/> : (dispatcherCurrentTripsCount || 0)}
+                                {isLoading ? <Loader color="text-primary-color"/> : (dispatcherCurrentTripsCount || 0)}
                                 
                                 </p>
                 </div>
@@ -37,7 +37,7 @@ export default function TripsStats () {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-3 w-1/2">
                         <span className="flex items-center justify-center text-[12px] w-full bg-green-500 dark:text-black font-medium h-6 rounded-md"><p>Completed</p></span>
-                        <p className="text-5xl font-bold">{isLoading ? <Loader color="primary"/> : (dispatcherDeliveredTripsCount || 0)}</p>
+                        <p className="text-5xl font-bold">{isLoading ? <Loader color="text-primary-color"/> : (dispatcherDeliveredTripsCount || 0)}</p>
                 </div>
                 
                 

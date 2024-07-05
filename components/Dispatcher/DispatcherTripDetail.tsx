@@ -91,7 +91,7 @@ export default function DispatcherTripDetail () {
                 disabled = {updateLoading}
               >
                 
-                {updateLoading ? <Loader color="primary"/>  : `Mark as ${updateStatus}`}
+                {updateLoading ? <Loader color="text-primary-color"/>  : `Mark as ${updateStatus}`}
               </Button>
             </TrackOrderContainer>
           )}

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Loader from "@/components/Shared/Loader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { extractShortDate } from "@/lib/utils";
-import { useGetUser } from "../Users/hook/useGetUser";
+import { useGetUser } from "../Users/hooks/useGetUser";
 export default function CustomerSection ({customerId}: {customerId:string}) {
     const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
     
@@ -28,12 +28,20 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
           </div>
           {
             isLoading && <div className="space-y-1">
-              <Loader color="primary"/>
+              <Loader color="text-primary-color"/>
                 
             </div>
-          } {
+          } 
+          {
+            error && <div className="space-y-1">
+              <div><p>Error Occurred</p></div>
+                
+            </div>
+          } 
+          
+          {
            user &&  
-          <div className="w-full flex flex-col items-start justify-between h-full rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3 border">
+          <div className="w-full flex flex-col items-start justify-between h-full rounded-md bg-[#f7f7f7] dark:bg-secondary-dark p-3 ">
             <div className="flex w-full items-start justify-between text-sm ">
               <div className="space-y-1 w-full">
                 <ul className="w-full flex justify-between  ">

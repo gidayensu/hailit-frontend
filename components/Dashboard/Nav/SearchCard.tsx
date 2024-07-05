@@ -19,7 +19,7 @@ const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoadi
     
     return (
         <Container className="-ml-4 md:-ml-24 absolute w-72 md:w-[800px] text-[12px] max-h-80 z-10 mt-3 rounded-xl p-4 font-normal  flex flex-col items-center gap-2" ref= {ref}>
-          {isLoading && !error && <Loader color="primary" /> } 
+          {isLoading && !error && <Loader color="text-primary-color" /> } 
           {
               error  &&
               <p>

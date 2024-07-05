@@ -39,7 +39,7 @@ export default function OrderSummaryMin({
     let deliveryTypeIcon = <PiPackageFill className="text-blue-400"/>;
     
 
-    //setting other icon colors
+    //setting other icon colors based on package type
    
     switch (packageType) {
       case("Electronics"): {
@@ -76,13 +76,13 @@ export default function OrderSummaryMin({
   return (
     <div className="w-full cursor-pointer relative" onClick={handleOrderClicked}>
       {loading && 
-      <div className="w-full items-center justify-center flex absolute">
+      <div className="w-full items-center justify-center flex absolute mt-4">
 
-        <Loader color="primary"/> 
+        <Loader color="text-primary-color"/> 
       </div>
       }
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
-      <Container className={`${className} flex  gap-3 justify-between   h-16 rounded-xl p-2`}>
+      <Container className={`${className} flex  gap-3 justify-between   h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
         <div className="flex gap-2">
 
           <span className={`flex justify-center items-center ${deliveryTypeIconBgClass} w-10 h-10 rounded-md text-2xl`}>
@@ -94,7 +94,7 @@ export default function OrderSummaryMin({
           </span>
         </div>
           <div className="flex flex-col">
-
+{/* different text color based on delivery status */}
           <span
             className={`text-[12px] font-bold   ${
               deliveryStatus === "Delivered"

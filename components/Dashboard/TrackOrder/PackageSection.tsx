@@ -9,7 +9,7 @@ export default function PackageSection () {
         <h3 className="text-[12px] text-slate-400 -mt-3">Details</h3>
         {isLoading &&
           <div className=" w-full  items-center gap-1.5">
-          <Loader color="primary"/>
+          <Loader color="text-primary-color"/>
           </div>  
         }
         <div className=" w-full  items-center gap-1.5">

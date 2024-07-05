@@ -25,7 +25,7 @@ export const HomeOptions = ({
     >
       {title === selected && loading && (
         <div className="right-0 left-0 top-0 bottom-0 mt-1 ml-1 absolute">
-          <Loader color="primary" />
+          <Loader color="text-primary-color" />
         </div>
       )}
 
