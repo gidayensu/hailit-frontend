@@ -20,7 +20,7 @@ export const useGetUserTrip=()=> {
     skipPollingIfUnfocused: true
   });
 
-  console.log({error, controlledPollingInterval})
+  
   useEffect(()=> {
     if(error) {
       setControlledPollingInterval(0)

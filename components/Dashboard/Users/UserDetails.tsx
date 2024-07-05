@@ -3,7 +3,7 @@ import Container from "@/components/ui/container";
 import { MdArrowBack } from "react-icons/md";
 import DashboardCard from "../DashboardCard";
 import DashboardUserCard from "./DashboardUserCard";
-import { useUserProfile } from "./hook/useUserProfile";
+import { useUserProfile } from "./hooks/useUserProfile";
 import UserTripsTable from "./UserTripsTable";
 import { UserRole } from "@/lib/store/slice/userSlice";
 

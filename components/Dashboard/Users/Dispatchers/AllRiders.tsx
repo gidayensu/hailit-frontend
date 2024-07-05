@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
 import Pagination from "@/components/Shared/Pagination/Pagination";
+
 import {
   Table,
   TableBody,
@@ -22,7 +23,7 @@ export function AllRiders() {
       <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center">
   
-          Error occurred!...Our Fault
+          Error occurred!
         </p>
       </div>
     );

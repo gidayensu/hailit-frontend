@@ -13,7 +13,7 @@ import { useLogin } from "./hooks/useLogin";
 export type CurrentTheme = string | undefined;
 
 export default function Authentication () {
-  const [signUp, setSignUp]  = useState<boolean>(true);
+  const [signUp, setSignUp]  = useState<boolean>(false);
   
   const timeOfDay = checkTimeOfDay();
 

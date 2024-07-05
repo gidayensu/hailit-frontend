@@ -25,7 +25,7 @@ export function Vehicles() {
       <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center">
   
-          Error occurred!...Our Fault
+          Error occurred!
         </p>
       </div>
     );

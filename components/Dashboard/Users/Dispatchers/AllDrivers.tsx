@@ -18,7 +18,7 @@ export function AllDrivers() {
     
     if (errorDrivers) {
       return <div>
-        <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!...Our Fault</p>
+        <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!</p>
         
       </div>
     }
