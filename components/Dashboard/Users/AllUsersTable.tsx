@@ -29,7 +29,7 @@ export default function AllUsersTable() {
 
   
 
-  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser } = useGetAllUsers(page);
+  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection } = useGetAllUsers(page);
 
   if (error) {
     return (
@@ -47,7 +47,8 @@ export default function AllUsersTable() {
     <section className="lg:hidden flex gap-2">
                 <Button
                   variant={"empty"}
-                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
+                  className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50 mb-5"
+                  onClick={handleRidersSection}
                 >
                   <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
                   <p>Riders</p>
@@ -56,6 +57,7 @@ export default function AllUsersTable() {
                 <Button
                   variant={"empty"}
                   className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
+                  onClick={handleDriversSection}
                 >
                   <RiSteering2Line className="text-xl " />
                   <p>Drivers</p>

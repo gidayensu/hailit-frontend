@@ -3,7 +3,7 @@ import { useGetAllUsersQuery } from "@/lib/store/apiSlice/hailitApi";
 import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useCallback } from "react";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
 import { UserRole } from "@/lib/store/slice/userSlice";
 export interface User {
@@ -46,11 +46,20 @@ export const useGetAllUsers = (page:number) => {
         dispatch(setTableData({table: "usersData", data:users}))
     }, [dispatch, users])  
 
-    
+  
+    const handleDriversSection = ()=> {
+      dispatch(setActiveSection("Drivers"))
+    }
+    const handleRidersSection = ()=> {
+      dispatch(setActiveSection("Riders"))
+    }
+
+
+
   const handleSetSelectedUser = useCallback( (userId:string):void => {
     dispatch(setSelectedUserId(userId))
   
 }, [dispatch])
 
-  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser };
+  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection };
 };
