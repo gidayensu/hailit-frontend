@@ -1,4 +1,9 @@
 //ui + icons
+import { FaMoneyCheckAlt } from "react-icons/fa";
+import { BsBoxes } from "react-icons/bs";
+import { RiFileList2Line } from "react-icons/ri";
+import { LuPackageCheck, LuPackageX, LuPackage  } from "react-icons/lu";
+import { TbPackages } from "react-icons/tb";
 //main components
 import { RecentTripTable } from "./RecentTripTable";
 import StatsCard from "./StatsCard";

@@ -75,7 +75,7 @@ export default function EditCustomerProfile() {
         </div>
 
 
-        {chosenRole === "rider" && (
+        {chosenRole === "Rider" && (
           <div className={inputAndLabeClass}>
             <h3 className={labelClass}>License Number</h3>
             <FormField

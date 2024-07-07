@@ -112,7 +112,7 @@ export default function OnboardingStages() {
                   }}
                 >
                   {
-                  chosenRole === "rider" ? "Start Earning" :
+                  chosenRole === "Rider" ? "Start Earning" :
                   'Send a Package'
                   }
                 </Button>

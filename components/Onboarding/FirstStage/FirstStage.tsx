@@ -15,21 +15,21 @@ export default function FirstStage () {
         dispatcher: false,
       });
     
-      const selectedUserRoleHandler = (userRole: "customer" | "dispatcher") => {
-        if (userRole === "customer") {
+      const selectedUserRoleHandler = (userRole: "Customer" | "Dispatcher") => {
+        if (userRole === "Customer") {
           
           setSelectedUserRole(() => ({
             customer: true,
             dispatcher: false,
           }));
-          dispatch(setChosenRole("customer"))
+          dispatch(setChosenRole("Customer"))
         } else {
           
           setSelectedUserRole(() => ({
             customer: false,
             dispatcher: true,
           }));
-          dispatch(setChosenRole("rider"))
+          dispatch(setChosenRole("Rider"))
         }
       };
     return (
@@ -43,11 +43,11 @@ export default function FirstStage () {
               <div className="flex gap-4 p-2 -mt-4 ">
                 <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-primary-color cursor-pointer">
                   <p>Customer</p>
-                  <UserOption animation={customerAnimation} selectedUserRole={selectedUserRole.customer} selectedUserRoleHandler={selectedUserRoleHandler} userRole="customer"/>
+                  <UserOption animation={customerAnimation} selectedUserRole={selectedUserRole.customer} selectedUserRoleHandler={selectedUserRoleHandler} userRole="Customer"/>
                 </div>
                 <div className="w-1/2 flex flex-col gap-2 items-center justify-center font-bold text-primary-color cursor-pointer">
                   <p>Dispatcher</p>
-                  <UserOption animation={riderAnimation} selectedUserRole={selectedUserRole.dispatcher} selectedUserRoleHandler={selectedUserRoleHandler} userRole="dispatcher"/>
+                  <UserOption animation={riderAnimation} selectedUserRole={selectedUserRole.dispatcher} selectedUserRoleHandler={selectedUserRoleHandler} userRole="Dispatcher"/>
                   
                 </div>
               </div>

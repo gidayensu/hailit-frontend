@@ -5,14 +5,15 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useCallback } from "react";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
-
+import { UserRole } from "@/lib/store/slice/userSlice";
 export interface User {
   user_id: string;
   first_name: string;
   last_name: string;
   email: string;
   phone_number: string;
-  user_role: "customer" | "dispatcher" | "driver" | "rider" | string; 
+  // user_role had string type. Was probably done so to fix a bug. 
+  user_role: UserRole; 
   onboard: boolean;
   date_updated: string;
   date_created: string;

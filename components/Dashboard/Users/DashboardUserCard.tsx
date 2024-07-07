@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import DeleteModalCard from "../TrackOrder/DeleteModalCard";
 import { User } from "./hooks/useGetAllUsers";
+import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 export default function DashboardUserCard ({selectedUser, editUser}: {selectedUser:User, editUser:()=>void}) {
   
@@ -42,17 +43,16 @@ export default function DashboardUserCard ({selectedUser, editUser}: {selectedUs
               <p>Bantama Ahenebronum</p>
             </div> */}
 
-          <div className="flex flex-col  text-secondary-dark dark:text-white  gap-1 items-start justify-center  text-sm">
-            <p> <b>Email:</b>  {selectedUser?.email}</p> 
-            <p> <b>Phone:</b>{selectedUser?.phone_number}</p>
-            <p> <b>Rating:</b>{selectedUser?.phone_number}</p>
-            <p> <b>Assigned Vehicle:</b>{selectedUser?.phone_number}</p>
+          <div className="flex flex-col justify-center items-center  text-secondary-dark dark:text-white    gap-1   text-sm w-full">
+          <span><b>Email:</b>  <Link className="underline hover:text-primary-color" href="mailto:{selectedUser?.email}">{selectedUser?.email}</Link></span>
+          <span><b>Phone:</b> <Link className="underline hover:text-primary-color" href="tel:{selectedUser?.phone_number}"> {selectedUser?.phone_number} </Link></span>
+
           </div>
         </div>
 
         {/* Buttons for Edit or Delete */}
         <div className="flex gap-2 mt-2">
-          <Button onClick={editUser}> Edit User</Button>
+          <Button onClick={editUser}> Edit {selectedUser?.user_role}</Button>
 
           {/* Delete Modal */}
           <Modal

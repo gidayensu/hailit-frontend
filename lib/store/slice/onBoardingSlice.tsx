@@ -24,7 +24,7 @@ const initialState:OnBoarding = {
     stageOne: true,
     stageTwo: false,
     stageThree: false,
-    chosenRole: 'customer',
+    chosenRole: 'Customer',
     first_name: '',
     last_name: '',
     phone_number: '',
@@ -42,6 +42,7 @@ export interface CustomerDetails {
 export interface DispatcherDetails {
     first_name: string,
     last_name: string,
+    email?: string,
     phone_number: string,
     license_number: string,
 }

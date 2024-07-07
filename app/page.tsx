@@ -37,7 +37,7 @@ export default function Home() {
   
   //redirect users who are not customers
   const {user_role} = useAppSelector(state=>state.user);
-  user_role && user_role !== "customer" ? redirect('/profile') : ''
+  user_role && user_role !== "Customer" ? redirect('/profile') : ''
 
   if (loading) {
     return <BigLoader/>

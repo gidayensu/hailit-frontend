@@ -110,7 +110,7 @@ export default function AllUsersTable() {
                 </TableCell>
 
                 <TableCell className="flex items-center justify-center">
-                  {user.user_role != "admin" && (
+                  {user.user_role != "Admin" && (
                     <Modal
                       className=""
                       dialogTriggerElement={

@@ -78,7 +78,7 @@ export default function UserTripsTable() {
               <TableCell>{trip.trip_cost}</TableCell>
               <TableCell>
                 <div
-                  className={`flex item-center justify-center rounded-lg w-16 border text-white text-[12px] ${
+                  className={`flex item-center justify-center rounded-lg w-16 border font-medium text-[11px] ${
                     trip.payment_status ? "bg-green-200  border-green-500 text-green-800 " : "bg-red-200 text-red-800 border-red-500 "
                   }`}
                 >
@@ -88,7 +88,7 @@ export default function UserTripsTable() {
 
               <TableCell>
                 <div
-                  className={`flex item-center justify-center border rounded-lg w-16  text-[12px]  ${
+                  className={`flex item-center justify-center border rounded-lg w-16  text-[11px] medium ${
                     trip.trip_status === "Delivered"
                     ? "  bg-green-200  border-green-500 text-green-800"
                     : trip.trip_status === "Picked Up"

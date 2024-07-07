@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export type UserRole = "rider" | "driver" | "customer" | "admin" ;
+export type UserRole = "Rider" | "Driver" | "Customer" | "Admin" ;
 export interface User {
     user_id: string,
     first_name: string,
@@ -18,7 +18,7 @@ const initialState:User = {
     first_name: '',
     last_name: '',
     email: '',
-    user_role: 'customer',
+    user_role: 'Customer',
     phone_number: '',
     onboard: false
 

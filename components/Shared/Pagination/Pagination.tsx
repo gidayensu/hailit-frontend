@@ -39,7 +39,7 @@ export default function Pagination({
     if (!totalPages) {
       pages.push(
         ...[Array(maxDisplayedPages).keys()].map((_, index) => (
-          <Loader key={index} />
+          <Loader color="text-primary-color" key={index} />
         ))
       );
     } else if (currentPage <= 3) {

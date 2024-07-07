@@ -63,7 +63,8 @@ export function AllRiders() {
                       <LuCheckCircle2 className="text-green-500 text-2xl" />
                     ) : (
                       <LuXCircle className="text-red-500 text-2xl" />
-                    )}</TableCell>
+                    )}
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -92,7 +93,7 @@ export const Rating = ({ rating }: {rating: number }) => {
   const emptyStars = 5 - fullStars;
 
   return (
-    <div className="flex gap-1 ">
+    <div className="flex ">
       {Array(fullStars)
         .fill('full stars')
         .map((_, index) => (

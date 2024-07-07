@@ -1,13 +1,13 @@
 "use client";
 import { Modal } from "@/components/Shared/Modal";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { TbArrowsExchange } from "react-icons/tb";
-import { MdOutlineCancel } from "react-icons/md";
-import { LiaUserSlashSolid } from "react-icons/lia";
-import Riders from "./AssignRiders";
-import Drivers from "./AssignDrivers";
-import { useAppSelector } from "@/lib/store/hooks";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
+import { LiaUserSlashSolid } from "react-icons/lia";
+import Drivers from "./AssignDrivers";
+import Riders from "./AssignRiders";
+import { useGetTrip } from "../StatusSection/hook/useGetTrip";
+
 export const DEFAULT_DISPATCHER_ID = "ff-12-53";
 
 export default function DispatcherSection({
@@ -17,6 +17,9 @@ export default function DispatcherSection({
   dispatcher: Dispatcher;
   tripMedium: string;
 }) {
+
+  const {handleViewDispatcher} = useGetTrip();
+
   
   return (
     <>
@@ -53,7 +56,7 @@ export default function DispatcherSection({
         <div className="flex flex-col gap-1 items-center justify-center font-medium">
           <LiaUserSlashSolid className="text-4xl opacity-40" />
           <p className="text-md">
-            No {tripMedium === "Motor" ? "rider" : "driver"} assigned
+            No {tripMedium === "Motor" ? "Rider" : "Driver"} assigned
           </p>
         </div>
       )}
@@ -67,8 +70,9 @@ export default function DispatcherSection({
               <ul>Number Plate</ul>
             </div>
             <div className="space-y-1 text-right font-semibold">
-              <ul>{dispatcher.first_name} {dispatcher.last_name}</ul>
-              <ul>{dispatcher.phone_number}</ul>
+            <ul onClick={handleViewDispatcher}><span className="underline hover:text-primary-color cursor-pointer"> {dispatcher.first_name} {dispatcher.last_name} </span></ul>
+              
+              <ul><span> <Link className="underline hover:text-primary-color cursor-pointer" href="tel:{selectedUser?.phone_number}"> {dispatcher?.phone_number} </Link></span></ul>
               <ul className="line-clamp-1">{dispatcher.vehicle?.vehicle_name}</ul>
               <ul className="line-clamp-1">{dispatcher.vehicle?.plate_number}</ul>
             </div>

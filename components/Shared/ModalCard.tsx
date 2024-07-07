@@ -47,8 +47,8 @@ export default function ModalCard({
               <DialogClose asChild>
 
               <Button
-                variant={"outline"}
-                className="animate-in slide-in-from-bottom delay-75 w-full"
+                variant={"empty"}
+                className=" w-full border dark:bg-secondary-dark hover:bg-slate-100 bg-white border-slate-300 dark:border-opacity-20"
                 onClick={cancelFunc}
               >
                 Cancel
@@ -70,8 +70,8 @@ export default function ModalCard({
               <DialogClose asChild>
 
               <Button
-                variant={"outline"}
-                className="animate-in slide-in-from-bottom delay-75 w-full"
+                variant={"empty"}
+                className=" w-full border dark:bg-secondary-dark hover:bg-slate-100 bg-white border-slate-300 dark:border-opacity-20"
                 onClick={cancelFunc}
               >
                 Cancel

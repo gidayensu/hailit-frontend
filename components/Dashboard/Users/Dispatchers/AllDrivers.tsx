@@ -1,3 +1,4 @@
+import { LuXCircle, LuCheckCircle2 } from "react-icons/lu";
 import { useGetAllDriversQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 import SkeletonTable from "../../SkeletonTable";
@@ -48,7 +49,13 @@ export function AllDrivers() {
                   <TableCell className="flex gap-1"><Rating rating = {driver.cumulative_rating}/> ({driver.rating_count})</TableCell>
                   <TableCell> {driver.vehicle_name}</TableCell>
                   <TableCell> {driver.plate_number}</TableCell>
-                  <TableCell> {driver.trip_count}</TableCell>
+                  <TableCell> {driver.available ? (
+                      <LuCheckCircle2 className="text-green-500 text-2xl" />
+                    ) : (
+                      <LuXCircle className="text-red-500 text-2xl" />
+                    )}
+                </TableCell>
+                  
                 </TableRow>
               ))}
           </TableBody>
@@ -65,6 +72,6 @@ export function AllDrivers() {
     "Rating",
     "Vehicle Name",
     "Vehicle Number",
-    
+    "Available"  
   ];
   

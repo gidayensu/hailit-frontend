@@ -61,8 +61,8 @@ export default function DashboardModal({
                 className="animate-in slide-in-from-bottom delay-75 w-1/2 "
                 onClick={closeModal}
               >
-                {" "}
-                Close{" "}
+                
+                Close
               </Button>
             </div>
           </div>

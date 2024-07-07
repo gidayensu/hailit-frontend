@@ -77,7 +77,7 @@ export const useLogin=()=> {
       dispatch(setAuthState(true));
       const onboard = user.onboard;
       if(onboard) {
-        user.user_role === "admin" ? router.push("/dashboard") : router.push("/")
+        user.user_role === "Admin" ? router.push("/dashboard") : router.push("/")
       } else {
         router.push("/onboarding");
       }

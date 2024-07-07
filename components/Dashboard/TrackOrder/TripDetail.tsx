@@ -11,7 +11,7 @@ import { useDeleteTrip } from "../hooks/useDeleteTrip";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setEditingOrder, setTrackingOrder,  } from "@/lib/store/slice/dashboardSlice";
 import { extractShortDate } from "@/lib/utils";
-
+import { useGetTrip } from "./StatusSection/hook/useGetTrip";
 //main components
 import CustomerSection from "./CustomerSection";
 import DispatcherSection from "./Dispatcher/DispatcherSection";
@@ -23,8 +23,13 @@ import UserOtherTrips from "./UserOtherTripsSection";
 //interface
 import { Trip } from "@/lib/store/slice/tripSlice";
 
-export default function TripDetail ({trip}: {trip:Trip}) {
-    const {selectedTripId} = useAppSelector(state=>state.dashboard)
+export default function TripDetail () {
+  const {
+    trip,
+    
+    selectedTripId
+  } = useGetTrip();
+    
     const {handleDeleteTrip, isLoading, error, isSuccess} = useDeleteTrip(selectedTripId)
 
     const dispatch = useAppDispatch();

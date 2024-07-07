@@ -4,23 +4,25 @@ import { useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
 import { CustomerDetails } from "@/lib/store/slice/onBoardingSlice";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User as UserInterface } from "./useGetAllUsers";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+
 
 export const useEditUser = (user: UserInterface) => {
-  const [userRole, setUserRole] = useState<UserRole>("customer");
+  const dispatch = useAppDispatch();
+
+  const [userRole, setUserRole] = useState<UserRole>(user.user_role)
   const [isError, setIsError] = useState<boolean>(false);
-  const [onboard, setOnboard] = useState<boolean>(false);
+  const [onboard, setOnboard] = useState<boolean>(user.onboard);
 
   const handleOnboard = () => {
     setOnboard(() => !onboard);
   };
 
-  useEffect(() => {
-    setOnboard(user.onboard);
-  }, [setOnboard, user]);
-
+  
   //DashboardModal ref
   const modalRef = useRef<any>(null);
   const modal = modalRef.current;
@@ -34,9 +36,11 @@ export const useEditUser = (user: UserInterface) => {
 
   const [updateUser, { isSuccess, isLoading, error }] = useUpdateUserMutation();
 
-  const handleUserRoleSelection = (userRole: UserRole) => {
-    setUserRole(userRole);
-  };
+  
+
+  const handleUserRoleSelection = (userRole:UserRole)=> {
+      setUserRole(userRole)
+  }
 
   //form submission
   const formMethods = useForm<User>({
@@ -65,6 +69,17 @@ export const useEditUser = (user: UserInterface) => {
 
   if(isSuccess || error) {
     openModal();
+    // if user is changed from customer to a different role, that role will not have customerTrips. 
+    // There will be an error if the user clicks on the 'back arrrow'. Hence, the selectedUserId is set to empty string to return 
+    //the user to All Users table. 
+    
+    if(userRole !== "Customer") {
+      setTimeout(()=> {
+
+        dispatch(setSelectedUserId(''))
+      }, 1000)
+    }
+
   }
 
   return {
@@ -78,5 +93,7 @@ export const useEditUser = (user: UserInterface) => {
     handleOnboard,
     modalRef,
     closeModal,
+    handleUserRoleSelection,
+    userRole
   };
 };

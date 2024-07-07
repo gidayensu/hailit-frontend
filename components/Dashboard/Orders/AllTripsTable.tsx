@@ -60,7 +60,7 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
                 <TableCell>{trip.trip_cost}</TableCell>
                 <TableCell className="">
                   <div
-                    className={`flex item-center justify-center rounded-lg w-16 text-white text-[11px] border ${
+                    className={`flex item-center justify-center rounded-lg w-16  text-[11px] border ${
                       trip.payment_status ? "bg-green-200  border-green-500 text-green-800 " : "bg-red-200 text-red-800 border-red-500"
                     }`}
                   >

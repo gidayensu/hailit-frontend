@@ -1,7 +1,9 @@
 import Container from "@/components/ui/container";
-import Loader from "@/components/Shared/Loader";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { FiDollarSign } from "react-icons/fi";
+import { CiCircleList } from "react-icons/ci";
 import { IoTrendingDown, IoTrendingUp } from "react-icons/io5";
-
+import { Skeleton } from "@/components/ui/skeleton";
 export default function StatsCard({
   title,
   subtitle,
@@ -12,7 +14,7 @@ export default function StatsCard({
   reversed
 }: {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   loading: boolean;
   mainCount: number;
   percentageDifference: number;
@@ -24,21 +26,30 @@ export default function StatsCard({
     
 
   return (
-    <Container className="flex flex-col gap-2 w-full lg:w-1/4 h-40 rounded-xl p-4 justify-between items-start ">
-      <div className="flex justify-between">
-        <div className="">
+    <Container className="flex flex-col gap-2 w-full lg:w-1/4 h-32 rounded-xl p-4 justify-between items-start ">
+      <div className="flex justify-between w-full">
+        <div className="w-full">
+          <span className="w-full flex justify-between items-center">
+
           <h3 className="font-bold text-md"> {title}</h3>
+          
+          </span>
           <h3 className="text-[12px] text-slate-400 -mt-1">
-            {subtitle}
+            {/* {subtitle} */}
           </h3>
         </div>
       </div>
       <div className="flex flex-col">
         {loading ? (
-          <Loader color="text-primary-color" />
+          <div className="space-y-1">
+          
+          <Skeleton className="w-32 h-10" />
+          <Skeleton className="w-24 h-4" />
+          </div>
         ) : (
           <>
-            <h2 className={`text-4xl font-bold `}>
+            
+            <h2 className={`text-3xl font-bold `}>
             {mainCount}
             </h2>
             <div className={`flex gap-1 ${percentageDifference > 1 ? 'text-green-500' : 'text-red-500'}   w-full`}>

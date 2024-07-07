@@ -26,8 +26,12 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { useUpdateTrip } from "./hook/useUpdateTrip";
-
-export default function EditTrip({ trip }: { trip: Trip }) {
+import { useGetTrip } from "../StatusSection/hook/useGetTrip";
+export default function EditTrip() {
+  const {
+    trip,
+    
+  } = useGetTrip();
   const {
     formMethods,
     dispatch,

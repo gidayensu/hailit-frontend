@@ -1,4 +1,6 @@
 "use client";
+import { GoCheck } from "react-icons/go";
+import { IoIosCheckmark } from "react-icons/io";
 import FormField from "@/components/Form/FormField";
 import MapModal from "@/components/Maps/MapModal";
 import Loader from "@/components/Shared/Loader";
@@ -8,6 +10,8 @@ import { FormProvider } from "react-hook-form";
 import { useEditUser } from "./hooks/useEditUser";
 import { User } from "./hooks/useGetAllUsers";
 import DashboardModal from "../DashboardModal";
+import { useState } from "react";
+import { UserRole } from "@/lib/store/slice/userSlice";
 export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User, handleGoBack: ()=>void}) {
   
   const {
@@ -21,10 +25,16 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
     handleOnboard,
     modalRef,
     closeModal,
+    handleUserRoleSelection,
+    userRole
   } = useEditUser(selectedUser);
   
+  const [selectingUserRole, setSelectingUserRole] = useState<boolean>(false);
   
-  
+  const handleSelectingUserRole = (userRole?:UserRole)=> {
+    setSelectingUserRole(()=>!selectingUserRole)
+    userRole? handleUserRoleSelection(userRole): ''
+  }
 
   const inputAndLabeClass = "w-full max-w-sm items-center";
   const labelClass = "text-sm font-medium mb-1";
@@ -80,11 +90,28 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
             defaultValue={selectedUser?.phone_number || ""}
           />
         </div>
+        <div className={`${inputAndLabeClass} relative`}>
+          <h3 className={labelClass}>User Role</h3>
+          <div className="flex flex-col justify-center text-sm font-semibold mt-3 w-full max-w-sm  border rounded-xl h-14 p-2  border-slate-400 dark:border-opacity-20 relative" onClick={()=>handleSelectingUserRole()}>
+          <p>{userRole}</p>
+          
+          </div>
+          {selectingUserRole &&
+              <div className="flex flex-col gap-2 items-start justify-start absolute max-w-sm w-40 border rounded-xl max-h-24 text-sm p-2 border-slate-400 dark:border-opacity-20 z-10 bg-white mt-1 dark:bg-primary-dark cursor-pointer ">
+              <SelectUser handleUserRoleSelection={handleSelectingUserRole} option="Customer" userRole={userRole}/>
+              <SelectUser handleUserRoleSelection={handleSelectingUserRole} option="Rider" userRole={userRole}/>
+              <SelectUser handleUserRoleSelection={handleSelectingUserRole} option="Driver" userRole={userRole}/>
+              <SelectUser handleUserRoleSelection={handleSelectingUserRole} option="Customer" userRole={userRole}/>
+                  
+              </div>
+          }
+        </div>
           <div className="flex gap-3 text-sm font-semibold mt-3 w-full max-w-sm justify-between border rounded-xl h-14 items-center p-2 border-slate-400 dark:border-opacity-20">
             <p>Onboard</p>
           <Switch checked={onboard} onCheckedChange={handleOnboard} />
           </div>
-        {selectedUser?.user_role === "rider" || selectedUser?.user_role === "driver" && (
+          
+        {selectedUser?.user_role === "Rider" || selectedUser?.user_role === "Driver" && (
           <div className={inputAndLabeClass}>
             <h3 className={labelClass}>License Number</h3>
             <FormField
@@ -108,4 +135,13 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
     <DashboardModal closeModal={closeModal}  isSuccess={isSuccess} error = {error} modalRef={modalRef} info={error ? 'User not updated': 'User details saved'}/>
     </>
   );
+}
+
+const SelectUser = ({handleUserRoleSelection, userRole, option}:{handleUserRoleSelection: (userRole:UserRole)=>void, userRole:UserRole, option:UserRole})=> {
+  return (
+              <div onClick={()=>handleUserRoleSelection(option)} className="flex justify-between items-center gap-2">
+               <p className="hover:text-primary-color"> {option} </p>  {userRole === option && <GoCheck />}
+                </div>                 
+    
+  )
 }

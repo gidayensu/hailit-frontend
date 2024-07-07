@@ -7,9 +7,9 @@ export type SelectedUserRole = {
     dispatcher: boolean;
   };
 
-export type UserRole = "customer" | "dispatcher";
+export type InitialUserRole = "Customer" | "Dispatcher";
 
-export default function UserOption ({selectedUserRole, selectedUserRoleHandler, animation, userRole}: {selectedUserRole: boolean, selectedUserRoleHandler: (userRole: UserRole)=>void, animation: any, userRole: UserRole}) {
+export default function UserOption ({selectedUserRole, selectedUserRoleHandler, animation, userRole}: {selectedUserRole: boolean, selectedUserRoleHandler: (userRole: InitialUserRole)=>void, animation: any, userRole: InitialUserRole}) {
     return (
         <div
                     onClick={() => selectedUserRoleHandler(userRole)}

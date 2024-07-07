@@ -4,11 +4,13 @@ import { useDeleteUser } from "../hooks/useDeleteUser";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
-
-
+import Link from "next/link";
+import { Rating } from "./AllRiders";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:any, editDispatcher:()=>void}) {
   
-  const { isLoading, error, isSuccess, handleDeleteUser } = useDeleteUser(dispatcher?.user_id);
+  console.log({dispatcher})
+  const {handleDeleteDispatcher, dispatcherDeleteError, dispatcherDeleteLoading, dispatcherDeleteSuccess} = useDispatcherProfile(dispatcher.user_role)
 
     return (
       <Container className="flex gap-2 max-h-96 w-full rounded-xl flex-col items-center justify-start p-5">
@@ -30,7 +32,7 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
           </p>
         </div>
         <div
-          className={`w-1/3 rounded-xl bg-green-200 border border-green-500 text-green-800 font-medium h-6 flex items-center justify-center text-[13px]`}
+          className={`w-1/3 rounded-xl bg-green-200 border border-green-500 text-green-800 font-medium h-6 flex items-center justify-center text-[13px] `}
         >
           {<p>{dispatcher?.user_role}</p>}
         </div>
@@ -43,17 +45,17 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
               <p>Bantama Ahenebronum</p>
             </div> */}
 
-          <div className="flex flex-col  text-secondary-dark dark:text-white  gap-1 items-start justify-center  text-sm">
-            <p> <b>Email:</b>  {dispatcher?.email}</p> 
-            <p> <b>Phone:</b>{dispatcher?.phone_number}</p>
-            <p> <b>Rating:</b>{dispatcher?.rating_count}</p>
-            <p> <b>Assigned Vehicle:</b>{dispatcher?.vehicle_name}</p>
+          <div className="flex flex-col  text-secondary-dark dark:text-white  gap-1 items-center justify-center  text-sm">
+          <span><b>Email:</b>  <Link className="underline hover:text-primary-color" href="mailto:{selectedUser?.email}">{dispatcher?.email}</Link></span>
+          <span><b>Phone:</b> <Link className="underline hover:text-primary-color" href="tel:{selectedUser?.phone_number}"> {dispatcher?.phone_number} </Link></span>
+            <p className="flex gap-1 items-center justify-center"> <b>Rating:</b><Rating rating={dispatcher?.cumulative_rating}/>  ({dispatcher?.rating_count})</p>
+            <p> <b>Assigned Vehicle:</b>{dispatcher?.vehicle.vehicle_name}</p>
           </div>
         </div>
 
         {/* Buttons for Edit or Delete */}
         <div className="flex gap-2 mt-2">
-          <Button onClick={editDispatcher}> Edit User</Button>
+          <Button onClick={editDispatcher}> Edit {dispatcher?.user_role}</Button>
 
           {/* Delete Modal */}
           <Modal
@@ -62,18 +64,18 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
                 variant={"empty"}
                 className="text-red-500 border border-red-500 hover:text-white hover:bg-red-500"
               >
-                Delete User
+                Delete {dispatcher?.user_role}
               </Button>
             }
 
           >
             <DeleteModalCard
               itemId={`${dispatcher?.first_name} ${dispatcher?.last_name}`}
-              item="User"
-              deleteFn={handleDeleteUser}
-              error={error}
-              isSuccess={isSuccess}
-              loading={isLoading}
+              item={dispatcher?.user_role}
+              deleteFn={handleDeleteDispatcher}
+              error={dispatcherDeleteError}
+              isSuccess={dispatcherDeleteSuccess}
+              loading={dispatcherDeleteLoading}
             />
           </Modal>
         </div>

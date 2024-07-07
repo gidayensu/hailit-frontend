@@ -5,7 +5,9 @@ import {
   setActiveSection,
   setSelectedTripId,
   setTrackingOrder,
-  ActiveSection
+  ActiveSection,
+  setSelectedRiderId,
+  setSelectedDriverId
 } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
 import { Trip } from "@/lib/store/slice/tripSlice";
@@ -72,13 +74,24 @@ export const useGetTrip = () => {
   }, [trip, selectedTripId, updateTrip, dispatch]);
   
 
-
+  //track trip using form input via ref
   const handleTrackTrip = () => {
     const tripId = inputRef.current?.value;
     dispatch(setTrackingOrder(true));
     dispatch(setSelectedTripId(tripId));
   };
 
+  //handle view rider/driver assigned to trip
+  const handleViewDispatcher = ()=> {
+    if(trip?.trip_medium === "Motor" ) {
+      dispatch(setActiveSection('Riders'))
+      dispatch(setSelectedRiderId(dispatcher?.dispatcher_id))
+    } else {
+      dispatch(setActiveSection('Drivers'))
+      dispatch(setSelectedDriverId(dispatcher?.dispatcher_id))
+    }
+  }
+  //TODO:MOVE THIS
   const handleUsersOrTripsNav = (section: ActiveSection) => {
     dispatch(setActiveSection(section));
   };
@@ -96,6 +109,7 @@ export const useGetTrip = () => {
     handleTripUpdate,
     handleTrackTrip,
     handleUsersOrTripsNav,
+    handleViewDispatcher,
     editingOrder,
   };
 };

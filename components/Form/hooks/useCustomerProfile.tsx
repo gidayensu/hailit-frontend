@@ -46,8 +46,8 @@ export const useCustomerProfile = () => {
       dispatch(setLoading(true))
       
       let userRole = user_role;
-      if (chosenRole && chosenRole === "rider") {
-        userRole = "rider";
+      if (chosenRole && chosenRole === "Rider") {
+        userRole = "Rider";
       }
   
       const newUserData = { ...formData, onboard: true, user_role: userRole };

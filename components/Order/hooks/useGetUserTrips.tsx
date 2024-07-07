@@ -20,7 +20,7 @@ export const useGetUserTrips = () => {
   const trips = data?.trips;
   if (trips) {
     
-  if (user_role === "driver" || user_role === "rider") {
+  if (user_role === "Driver" || user_role === "Rider") {
 
       currentTrips =
         trips?.dispatcher_trips.filter(

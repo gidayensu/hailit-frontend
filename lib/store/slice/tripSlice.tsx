@@ -19,7 +19,7 @@ const initialState:Trip = {
       promo_code: "",
       dispatcher_id: "",
       customer_id: "",
-      trip_medium: "",
+      trip_medium: "Motor",
       trip_status: "Booked",
       package_type: "Others",
       pickup_location: "",
@@ -82,7 +82,9 @@ export interface Dispatcher {
     rating_count?: number;
     cumulative_rating?: string;
     user_id: string;
-    dispatcher_id?: string;
+    //was previously optional. If no bug is identified, will maintain it as required
+    dispatcher_id: string;
+    
     license_number?: string;
     available?: boolean;
     vehicle_id?: string;
@@ -110,7 +112,7 @@ export interface Dispatcher {
     promo_code: string;
     dispatcher_id: string;
     customer_id: string;
-    trip_medium: string;
+    trip_medium: "Car" | "Truck" | "Motor";
     trip_status: OrderStatus;
     package_type: string;
     pickup_location: string;

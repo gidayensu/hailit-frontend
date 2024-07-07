@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export default function TrackDelivery() { 
   //redirect users who are not customers
   const {user_role} = useAppSelector(state=>state.user);
-  user_role && user_role !== "customer" ? redirect('/profile') : ''
+  user_role && user_role !== "Customer" ? redirect('/profile') : ''
   return (
     <TrackOrderDetails />  );
 }

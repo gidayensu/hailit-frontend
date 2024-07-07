@@ -10,14 +10,14 @@ export default function DeleteModalCard ({itemId, item, loading, deleteFn, error
                     {
                     !error && !isSuccess &&
                     <>
-                    <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-red-200">
+                    <span className="mb-4 flex items-center justify-center h-12 w-12 rounded-full bg-red-200">
                             <RiDeleteBin6Line className="text-red-500 text-2xl"/>
                     </span>
                     <h2 className="text-center text-lg mb-2 animate-in slide-in-from-bottom duration-100">
-                      Permanently delete <br/> {item}:  <b>{itemId} </b> ?
+                      Permanently delete <b>{itemId} </b> ?
                     </h2>
-                    <h3 className="text-center text-[14px]  text-red-500 animate-in slide-in-from-bottom duration-150">
-                      This is irreversible
+                    <h3 className="text-center text-sm  text-red-500 animate-in slide-in-from-bottom duration-150">
+                      This is irreversible!
                     </h3>
                     </>
                     }

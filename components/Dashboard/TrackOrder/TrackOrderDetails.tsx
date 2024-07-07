@@ -10,10 +10,8 @@ import TripDetail from "./TripDetail";
 
 export default function TrackOrder() {
   const {
-    
     trip,
     trackingOrder,
-    
     inputRef,
     isLoading,
     handleTrackTrip,
@@ -33,7 +31,7 @@ export default function TrackOrder() {
       {trackingOrder && !editingOrder && isLoading && !error  && <BigLoader />}
 
       {trackingOrder &&  !editingOrder && !isLoading && trip &&   !error  && (
-        <TripDetail trip={trip}/>
+        <TripDetail/>
         )}
         {error && selectedTripId &&
         <>
@@ -45,7 +43,7 @@ export default function TrackOrder() {
           <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
         </> 
           }
-      {editingOrder && <EditTrip trip={trip}/>}
+      {editingOrder && <EditTrip />}
     </main>
   );
 }

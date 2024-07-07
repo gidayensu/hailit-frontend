@@ -24,13 +24,14 @@ export const UpdateOrderSchema: ZodType<UpdateOrderDetails> = z.object({
   recipient_number: zPhone, 
   package_value: z.optional(z.string().min(1, { message: "Package value should be GHS 1 or more" })),
   additional_information: z.optional(z.string()),
-  pickup_date: z.date({
+  // delivery and pickup date made optional to allow setting of pickup date without delivery date
+  pickup_date: z.optional(z.date({
     required_error: "Pickup date is required.",
-  }),
+  })),
   
-  delivery_date: z.date({
+  delivery_date: z.optional(z.date({
     required_error: "Delivery date is required.",
-  })
+  }))
 });
 
 

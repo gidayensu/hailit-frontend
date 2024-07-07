@@ -46,7 +46,7 @@ export const useUpdateDispatcherTrip = () => {
   
   
   const { user_role } = useGetDispatcher();
-  if (user_role === "customer" || user_role === "admin" || !user_role) {
+  if (user_role === "Customer" || user_role === "Admin" || !user_role) {
     redirect("/profile");
   }
 

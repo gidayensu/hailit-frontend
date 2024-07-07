@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setSelectedDriverId, setSelectedRiderId, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { useCallback, useEffect, useState } from "react";
 import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
-
+import { useDeleteDispatcher } from "./useDeleteDispatcher";
 //useDispatcherProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
 //to have a 'go back' experience. 
@@ -15,23 +15,71 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
     const {data:driverData, isLoading:driverLoading, error:driverError} = useGetDriverQuery(selectedDriverId);
     const {data:riderData, isLoading:riderLoading, error:riderError} = useGetRiderQuery(selectedRiderId);
 
-    const dispatcherLoading = userRole === "Driver" ? driverLoading : riderLoading;
+        //dispathcerId is the id of the dispatcher in the rider/driver table
+    const dispatcherId = userRole === "Driver" ? driverData?.driver?.driver_id : riderData?.rider?.rider_id
+    
+    const {
+        handleDeleteDispatcher, 
+        driverDeleteError, 
+        driverDeleteLoading, 
+        riderDeleteError, 
+        riderDeleteLoading, 
+        riderDeleteSuccess, 
+        driverDeleteSuccess
+    } = useDeleteDispatcher({dispatcherId, userRole});
+    
+    const driver = driverData?.driver;
+    const rider = riderData?.rider
+    
+    const roleMapping = {
+        Driver: {
+            dispatcherUserId: driverData?.driver?.user_id,
+            selectedDispatcher: {...driver, user_role: userRole},
+            dispatcherLoading: driverLoading,
+            dispatcherError: driverError,
+            deleteLoading: driverDeleteLoading,
+            deleteError: driverDeleteError,
+            deleteSuccess: driverDeleteSuccess
+        },
+        Rider: {
+            dispatcherUserId: riderData?.rider?.user_id,
+            selectedDispatcher: {...rider, user_role: userRole},
+            dispatcherLoading: riderLoading,
+            dispatcherError: riderError,
+            deleteLoading: riderDeleteLoading,
+            deleteError: riderDeleteError,
+            deleteSuccess: riderDeleteSuccess
+        }
+    };
+    
+    const {
+      dispatcherError,
+      //dispatcherUserId is the user_id of the dispatcher in the users table
+      dispatcherUserId,
+      selectedDispatcher,
+      dispatcherLoading,
+      deleteLoading: dispatcherDeleteLoading,
+      deleteError: dispatcherDeleteError,
+      deleteSuccess: dispatcherDeleteSuccess,
+    } = roleMapping[userRole];
+    
+    
     
     const [dispatcherTrips, setDispatcherTrips] = useState<dispatcherTrips>({
         current_trips: 0,
         dispatcher_trips: [],
         delivered_trips: 0,
         total_trip_count: 0,
-        cancelled_trips: 0
+        cancelled_trips: 0,
+        total_earnings: 0
     });
 
     //set selected rider id
-    
-    const dispatcherId = userRole === "Driver" ? driverData?.driver?.user_id : riderData?.rider?.user_id
+
     const dispatch = useAppDispatch();
     
-    const {data, isLoading, error } = useGetUserTripsQuery(dispatcherId);
-    const { handleTrackTrip} = useGetUserTrips(dispatcherId);
+    const {data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId);
+    const { handleTrackTrip} = useGetUserTrips(dispatcherUserId);
     
     const trips = data?.trips
 
@@ -50,13 +98,14 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
                 dispatcher_trips: [],
                 delivered_trips: 0,
                 total_trip_count: 0,
-                cancelled_trips:0
+                cancelled_trips:0, 
+                total_earnings: 0
             })
         }else {
 
             setDispatcherTrips(trips)
         }
-    }, [trips, error])
+    }, [trips, error, setDispatcherTrips])
 
     const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useDeleteTripMutation();
     
@@ -70,11 +119,27 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
         deleteData ? setDispatcherTrips((prevTrips=>({...prevTrips, dispatcher_trips: trips}))) : deleteError
     }
     
-    const driver = driverData?.driver;
-    const rider = riderData?.rider
-    const selectedDispatcher = userRole === "Driver" ? {...driver, user_role: userRole} : {...rider, user_role: userRole};
     
-    return {dispatcherTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedDispatcher, isLoading, handleDeselect, handleSelectedRiderId, handleSelectedDriverId, dispatcherLoading }
+    
+    return {
+      dispatcherTrips,
+      handleDeleteTrip,
+      error,
+      deleteError,
+      dispatcherUserId,
+      handleTrackTrip,
+      selectedDispatcher,
+      dispatcherError,
+      isLoading,
+      handleDeselect,
+      handleSelectedRiderId,
+      handleSelectedDriverId,
+      dispatcherLoading,
+      handleDeleteDispatcher,
+      dispatcherDeleteError,
+      dispatcherDeleteLoading, 
+      dispatcherDeleteSuccess
+    };
 }
 
 export interface UserTrip {
@@ -103,5 +168,6 @@ interface dispatcherTrips {
     delivered_trips: number, 
     current_trips: number, 
     cancelled_trips: number
+    total_earnings: number
  
 }

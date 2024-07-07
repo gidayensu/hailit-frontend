@@ -19,9 +19,9 @@ export default function Profile() {
     if (authenticationState) {
       if (!onboard) {
         router.push("/onboarding");
-      } else if (user_role === "admin") {
+      } else if (user_role === "Admin") {
         router.push("/dashboard");
-      } else if (user_role === "driver" || user_role === "rider") {
+      } else if (user_role === "Driver" || user_role === "Rider") {
         router.push('/dispatcher');
       }
     }

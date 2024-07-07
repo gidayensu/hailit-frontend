@@ -8,8 +8,8 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: `http://localhost:4000/api/v1/`,
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
+    // baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
     prepareHeaders: async (headers) => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -21,7 +21,7 @@ export const hailitApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts', 'User', 'Users', 'All Riders'],
+  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts', 'User', 'Users', 'All Riders', 'Rider', 'Driver', 'All Drivers'],
   endpoints: (builder) => ({
     // TRIPS
     getAllTrips: builder.query<any, string | string[]>({
@@ -132,7 +132,8 @@ export const hailitApi = createApi({
         method: "PUT",
         body: userDetails,
       }),
-      invalidatesTags: ['Users', 'User']
+      
+      invalidatesTags: ['Users', 'User',  ]
     }),
 
     deleteUser: builder.mutation<any, any>({
@@ -149,6 +150,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
+      providesTags: ['All Drivers']
     }),
 
     getDriver: builder.query<any, string | string[]>({
@@ -156,21 +158,24 @@ export const hailitApi = createApi({
         url: `drivers/${driverId}`,
         method: "GET",
       }),
+      providesTags: ['Driver']
     }),
 
-    updateDriver: builder.query<any, any>({
+    updateDriver: builder.mutation<any, any>({
       query: ({ driverId, driverDetails }) => ({
-        url: `users/${driverId}`,
+        url: `drivers/${driverId}`,
         method: "PUT",
         body: driverDetails,
       }),
+      invalidatesTags: ['Driver', 'All Drivers']
     }),
 
-    deleteDriver: builder.query<any, any>({
-      query: ({ driverId }) => ({
-        url: `${driverId}`,
+    deleteDriver: builder.mutation<any, any>({
+      query: (driverId ) => ({
+        url: `drivers/${driverId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Driver', 'All Drivers']
     }),
     // RIDERS
     getAllRiders: builder.query<any, string | string[]>({
@@ -186,21 +191,24 @@ export const hailitApi = createApi({
         url: `riders/${riderId}`,
         method: "GET",
       }),
+      providesTags: ['Rider']
     }),
 
-    updateRider: builder.query<any, any>({
+    updateRider: builder.mutation<any, any>({
       query: ({ riderId, riderDetails }) => ({
         url: `riders/${riderId}`,
         method: "PUT",
         body: riderDetails,
       }),
+      invalidatesTags: ['Rider', 'All Riders']
     }),
 
-    deleteRider: builder.query<any, any>({
-      query: ({ riderId }) => ({
-        url: `${riderId}`,
+    deleteRider: builder.mutation<any, any>({
+      query: (riderId ) => ({
+        url: `riders/${riderId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Rider', 'All Riders']
     }),
 
     //VEHICLES
@@ -273,16 +281,18 @@ export const {
   useLazyGetAllDriversQuery,
   useGetDriverQuery,
   useLazyGetDriverQuery,
-  useLazyUpdateDriverQuery, 
-  useLazyDeleteDriverQuery,
+  useUpdateDriverMutation,
+  useDeleteDriverMutation,
+  
   
   //RIDERS
   useGetAllRidersQuery,
   useLazyGetAllRidersQuery,
   useGetRiderQuery,
   useLazyGetRiderQuery,
-  useLazyUpdateRiderQuery,
-  useLazyDeleteRiderQuery,
+  useUpdateRiderMutation,
+  useDeleteRiderMutation,
+  
 
   //VEHICLES
   useGetAllVehiclesQuery,

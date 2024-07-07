@@ -7,14 +7,14 @@ export default function AllDriversSection () {
     
     const {selectedDriverId} = useAppSelector((state)=>state.dashboard)
     
-        console.log({selectedDriverId})
+        
         return (
             <>
             {!selectedDriverId &&
             <AllDrivers />
             }
             {selectedDriverId &&
-            <DispatcherDetails userRole="Driver"   />}
+            <DispatcherDetails userRole="Driver"/>}
             </>
         )
 }
