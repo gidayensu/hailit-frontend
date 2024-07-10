@@ -38,7 +38,7 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiCalendarScheduleFill}
-                elementOption="Schedule"
+                elementOption="Scheduled"
                 className="animate-in  zoom-in duration-300"
               >
                 <p className="text-[12px] md:text-lg text-center">  from <strong>GHS 20</strong></p>

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 
 export const useGetUserTrip=()=> {
-  const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(3000);
+  const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(5000);
   
   const params = useParams();
   const { trip_id } = params;

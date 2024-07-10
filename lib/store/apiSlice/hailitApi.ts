@@ -8,8 +8,8 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: `http://localhost:4000/api/v1/`,
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
+    // baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
     prepareHeaders: async (headers) => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -89,12 +89,29 @@ export const hailitApi = createApi({
         method: "GET",
       }),
     }),
+    getWeekTripCount: builder.query<any, string | string[]>({
+      query: () => ({
+        url: `trips/current-week-trip-count`,
+        method: "GET",
+      }),
+      providesTags: ['Trip',]
+    }),
+    getTripCountsByMonth: builder.query<any, string | string[]>({
+      query: (endpoint) => ({
+        url: `trips/trip-count-by-month?${endpoint}`,
+        method: "GET",
+      }),
+      providesTags: ['Trip',]
+    }),
     searchTrips: builder.query<any, string | string[]>({
       query: (searchQuery)=> ({
         url: `trips/search-trips?search=${searchQuery}`,
         method: "GET",
       })
     }),
+
+
+
     // USERS
     getAllUsers: builder.query<any, string | string[]>({
       query: (endpoint) => ({
@@ -254,6 +271,7 @@ export const hailitApi = createApi({
 export const {
   //PREFETCH
   usePrefetch,
+
   // USERS
   useGetAllUsersQuery,
   useGetAdminQuery,
@@ -272,7 +290,8 @@ export const {
   useGetTripMonthsQuery,
   useGetCurrentMonthTripCountsQuery, 
   useDeleteTripMutation, 
-  
+  useGetWeekTripCountQuery,
+  useGetTripCountsByMonthQuery,
   useLazyRateTripQuery,
   useLazySearchTripsQuery,
   

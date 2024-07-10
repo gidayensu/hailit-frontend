@@ -1,5 +1,8 @@
 // This is UI with minimal detail such as trip id, trip request data, delivery state, cost, and package type. 
 'use client'
+import { PackageType } from "./types/Types";
+
+
 import { IoArchive, IoFastFood } from "react-icons/io5";
 import { IoDocumentText, IoShirt } from "react-icons/io5";
 import { MdLineWeight, MdOutlineLineWeight } from "react-icons/md";
@@ -59,9 +62,10 @@ export default function OrderSummaryMin({
     }
     break;
     case("Clothes"): {
-      deliveryTypeIcon = < IoArchive className="text-cyan-400 dark:text-cyan-500"/> 
+      deliveryTypeIcon = < IoShirt className="text-cyan-400 dark:text-cyan-500"/> 
       deliveryTypeIconBgClass = "bg-cyan-100 dark:bg-cyan-200"; 
     }
+    break;
     case("Others"): {
       deliveryTypeIcon = < PiPackageFill className="text-amber-400 dark:text-amber-500"/> 
       deliveryTypeIconBgClass = "bg-amber-100 dark:bg-amber-200"; 
@@ -128,10 +132,4 @@ export default function OrderSummaryMin({
     | "Booked"
     |  "Yet to Book";
   
-  export type PackageType = | "Electronics"
-  | "Food"
-  | "Fragile"
-  | "Clothes"
-  | "Documents"
-  | "Bulky Items"
-  | "Others";
+  

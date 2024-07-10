@@ -21,7 +21,7 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   // offset && limit ? endpoint = `trips?limit=${limit}&offset=${offset}` : limit ? endpoint = `trips?limit=${limit}` : '';
   
   const { data, isLoading, error } = useGetAllTripsQuery(`trips?page=${page}`, {
-    pollingInterval:3000,
+    pollingInterval:5000,
     skipPollingIfUnfocused: true
   });
   

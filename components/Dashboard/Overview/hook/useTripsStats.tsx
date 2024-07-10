@@ -1,4 +1,11 @@
-import { useGetCurrentMonthTripCountsQuery } from "@/lib/store/apiSlice/hailitApi"
+import { useGetCurrentMonthTripCountsQuery, useGetWeekTripCountQuery } from "@/lib/store/apiSlice/hailitApi"
+
+type Day = "Sunday"|"Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday"
+interface WeekStats {
+  tripDays: Day[],
+  currentWeekTrips: number[]
+}
+
 interface CurrentMonthStats {
     total_trips_current_month: number;
     revenue_current_month: number;
@@ -16,8 +23,18 @@ export const useTripsStats = ()=> {
       pollingInterval:5000,
       skipPollingIfUnfocused: true
     });
-    
+    const {data:weekStats, isLoading:weekLoading, error:weekError,} = useGetWeekTripCountQuery('', {
+      pollingInterval:5000,
+      skipPollingIfUnfocused: true
+    });
+
     const currentMonthStats:CurrentMonthStats = monthStats;
     
-    return {currentMonthStats, isLoading, error}
+    
+    
+    const tripDays = weekStats?.currentWeekTrips?.tripDays;
+    const tripCounts = weekStats?.currentWeekTrips?.tripCounts;
+    
+    console.log({tripDays, tripCounts})
+    return {currentMonthStats, isLoading, error, tripDays, tripCounts, weekLoading, weekError }
 }

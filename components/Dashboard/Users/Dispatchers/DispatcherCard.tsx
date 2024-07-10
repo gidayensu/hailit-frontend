@@ -7,9 +7,10 @@ import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import Link from "next/link";
 import { Rating } from "./AllRiders";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+
 export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:any, editDispatcher:()=>void}) {
   
-  console.log({dispatcher})
+  
   const {handleDeleteDispatcher, dispatcherDeleteError, dispatcherDeleteLoading, dispatcherDeleteSuccess} = useDispatcherProfile(dispatcher.user_role)
 
     return (

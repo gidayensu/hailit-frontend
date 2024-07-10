@@ -63,7 +63,7 @@ export const useEditDispatcher = (dispatcher: any) => {
       const {license_number} = formData;
       await updateUser({ userId: dispatcher.user_id, userDetails });
 
-      console.log({available, license_number})
+      
       //update driver/rider-specific details
       userRole === "Rider" 
       ? await updateRider({riderId: dispatcher?.rider_id, riderDetails: {available, license_number,}}) 

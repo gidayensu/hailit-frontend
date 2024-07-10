@@ -1,9 +1,6 @@
 import Container from "@/components/ui/container";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FiDollarSign } from "react-icons/fi";
-import { CiCircleList } from "react-icons/ci";
-import { IoTrendingDown, IoTrendingUp } from "react-icons/io5";
 import { Skeleton } from "@/components/ui/skeleton";
+import { IoTrendingDown, IoTrendingUp } from "react-icons/io5";
 export default function StatsCard({
   title,
   subtitle,
@@ -31,7 +28,7 @@ export default function StatsCard({
         <div className="w-full">
           <span className="w-full flex justify-between items-center">
 
-          <h3 className="font-bold text-md"> {title}</h3>
+          <h3 className="font-bold text-md "> {title}</h3>
           
           </span>
           <h3 className="text-[12px] text-slate-400 -mt-1">

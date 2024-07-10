@@ -3,14 +3,13 @@
 //main components
 import { MidSkeleton, TopSkeleton } from "@/components/Order/OrderSkeleton";
 import TrackOrder from "@/components/Order/TrackOrder/UserTrackOrder";
+import ErrorComponent from "@/components/Shared/ErrorComponent";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import TrackOrderItem from "./TrackOrderItem";
-import ErrorComponent from "@/components/Shared/ErrorComponent";
 
 //helper functions
 import { useGetUserTrip } from "../hooks/useGetUserTrip";
-import { useEffect } from "react";
 
 export default  function TrackOrderDetails() {
   

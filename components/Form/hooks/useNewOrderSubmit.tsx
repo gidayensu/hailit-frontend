@@ -58,6 +58,10 @@ export const useNewOrderSubmit = () => {
     
   }
   if(data && !isLoading && !error) {
+    
+    //scroll to top if submission successful
+    
+    window.scrollTo(0, 0);
     const {trip} = data;
     dispatch(setNewOrder({
       order_success: true,

@@ -12,9 +12,16 @@ export default function UserOtherTrips({
   userId: string;
   tripId: string;
 }) {
-  const { isLoading, data, handleTrackTrip } = useGetUserTrips(userId);
-  const otherTrips = data?.trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId);
+  const { isLoading, data, handleTrackTrip, trips } = useGetUserTrips(userId);
   
+  //when a user is changed from customer to rider/driver, the user's previous trips remain.
+  //however, when the trips are fetched, since they are fetched as dispatcher trips since the current user_role is rider/driver
+  let otherTrips = [];
+    
+    trips?.dispatcher_trips 
+    ?  otherTrips = trips?.dispatcher_trips.filter((trip: any) => trip.trip_id !== tripId) 
+    : otherTrips = trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId)
+
   return (
     <>
     

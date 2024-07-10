@@ -10,7 +10,8 @@ import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
-import { TripStage, TripStatus } from "@/lib/store/slice/dashboardSlice";
+
+import { TripStatus, TripStage } from "../Order/types/Types";
 import { redirect } from "next/navigation";
 import { useUpdateDispatcherTrip } from "./hook/useUpdateDispatcherTrip";
 

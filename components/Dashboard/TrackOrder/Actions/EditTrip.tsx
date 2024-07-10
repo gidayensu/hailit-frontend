@@ -45,15 +45,7 @@ export default function EditTrip() {
     register,
   } = useUpdateTrip(trip)
 
-  useEffect(() => {
-    dispatch(setPackageType(trip?.package_type));
-    dispatch(setTripMedium(trip?.trip_medium));
-    dispatch(setTripType(trip?.trip_type));
-    dispatch(setTripArea(trip?.trip_area));
-    if (trip?.trip_type === "scheduled") {
-      dispatch(setScheduled(true));
-    }
-  }, [trip?.package_type, trip?.trip_type]);
+  
 
   const {dropOffLocationName, pickUpLocationName} = useAppSelector(state=>state.map)
   

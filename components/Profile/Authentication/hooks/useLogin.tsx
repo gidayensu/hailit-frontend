@@ -91,7 +91,7 @@ export const useLogin=()=> {
       }));
       setIsLoading(false);
     }
-  }, [userData, getUserError, dispatch, router]);
+  }, [userData, getUserError, dispatch, router, setDataFetchError, setIsLoading, setAuthState]);
   
   
   

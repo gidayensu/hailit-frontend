@@ -3,73 +3,19 @@
 //icons + ui
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { MdContentCopy, } from "react-icons/md";
 //main components 
-import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 
 //next+redux+helper function +react
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { copyToClipBoard } from "@/lib/utils";
-
-import { useState } from "react";
-import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
-import { setActiveSection, setEditingOrder, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { useAddTripOutcome } from "./hook/useAddTripOutcome";
 
 
 export default function AddTripOutcome() {
-const [loading, setLoading]  = useState<boolean>(false);
-  const { trip_id, order_success } = useAppSelector(state=>state.newOrder)
-  
+  const {loading, trackTrip, handleBack, handleCopyTripId, order_success, trip_id } = useAddTripOutcome();
 
   
-  const dispatch = useAppDispatch();
   
-  
-
-    const handleCopyTripId = (tripId:string)=> {
-      copyToClipBoard(tripId)
-      toast.success(
-      
-        <p className=" text-[13px]">
-
-          Trip ID: <b>  {tripId} </b> copied 
-        </p>
-      
-        )
-    }
-
-    
-
-    const handleBack = ()=> {
-        dispatch(setNewOrder({
-            order_success: false,
-            trip_id: '',
-            order_submitted: false,
-            scheduled: false
-          }))
-        
-          dispatch(
-            resetDeliveryChoices())
-    }
-
-    const trackTrip = ()=> {
-        dispatch(setActiveSection("Track Order"))
-        dispatch(setTrackingOrder(true));
-        dispatch(setSelectedTripId(trip_id))
-        
-        setLoading(true)
-
-        dispatch(setNewOrder({
-            order_success: false,
-            order_submitted: false,
-            trip_id,
-            scheduled: false
-          }))
-        
-          dispatch(
-            resetDeliveryChoices())
-    }
   return (
     <main className="flex min-h-screen flex-col mt-16 items-center gap-4 mb-24 md:mb-0">
         {
@@ -111,10 +57,19 @@ const [loading, setLoading]  = useState<boolean>(false);
       <div className="flex flex-col gap-5 justify-center items-center">
       
         
-          <Button className="border border-slate-300 h-14 w-60 flex gap-4" disabled={loading} onClick={trackTrip}>
+          <Button className="border h-12 border-slate-300  w-60 flex gap-4" disabled={loading} onClick={trackTrip}>
             {loading? <Loader />:'Track the package'}
           </Button>
-        
+          <Button
+          type="submit"
+          variant={"empty"}
+          
+          className="w-60 dark:bg-secondary-dark hover:bg-slate-100 bg-white border-slate-300 dark:border-opacity-20 border h-12"
+          
+          onClick={handleBack}
+        >
+          Back
+        </Button>
         
       </div>
             </>
@@ -133,7 +88,7 @@ const [loading, setLoading]  = useState<boolean>(false);
       <div className="flex flex-col gap-5 justify-center items-center">
         
         
-          <Button className="border border-slate-300 h-14 w-60 flex gap-4" onClick={handleBack}>
+          <Button className="border border-slate-300 h-12 w-60 flex gap-4" onClick={handleBack}>
             Back
           </Button>
         

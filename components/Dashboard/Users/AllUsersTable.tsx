@@ -86,11 +86,12 @@ export default function AllUsersTable() {
           {isLoading && <SkeletonTable rows={7} cells={8} />}
           {data && usersData?.length && usersData &&
             usersData.map((user: any) => (
-              <TableRow key={user.user_id} onClick={()=>handleSetSelectedUser(user.user_id)}>
+              <TableRow key={user.user_id} 
+              onClick={()=>handleSetSelectedUser(user.user_id)}
+              >
                 <TableCell>
-                  <Modal dialogTriggerElement={user.first_name} className="">
+                  
                     {user.first_name}
-                  </Modal>
                 </TableCell>
                 <TableCell>{user.last_name}</TableCell>
 
@@ -111,7 +112,7 @@ export default function AllUsersTable() {
                   {extractShortDate(user.date_created)}
                 </TableCell>
 
-                <TableCell className="flex items-center justify-center">
+                {/* <TableCell className="flex items-center justify-center">
                   {user.user_role != "Admin" && (
                     <Modal
                       className=""
@@ -122,7 +123,7 @@ export default function AllUsersTable() {
                       <OrdersCard userId={user.user_id} />
                     </Modal>
                   )}
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
         </TableBody>
@@ -141,5 +142,5 @@ const tableHeadings = [
   "User Role",
   "Onboard Status",
   "Date Joined",
-  "Trips"
+  
 ];

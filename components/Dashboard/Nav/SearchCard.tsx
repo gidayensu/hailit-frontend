@@ -43,16 +43,16 @@ const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoadi
                         <p>{trip?.sender_number}</p>
                         <p>{trip?.trip_medium}</p>
                       </div>
-                      <span className={`h-5 flex items-center justify-center w-16 rounded-md text-white ${
+                      <span className={`h-5 flex items-center justify-center w-16 rounded-md border ${
                           trip?.trip_status === "Delivered"
-                          ? "bg-green-500"
-                          : trip?.trip_status === "Picked Up"
-                          ? "bg-sky-600"
-                          : trip?.trip_status === "In Transit"
-                          ? "bg-amber-500"
-                          : trip?.trip_status === "Booked"
-                          ? "bg-slate-600 dark:text-slate-50"
-                          : "bg-red-500"
+                          ? "  bg-green-200  border-green-500 text-green-800"
+                        : trip.trip_status === "Picked Up"
+                        ? "  bg-sky-200 border-sky-500 text-sky-800"
+                        : trip.trip_status === "In Transit"
+                        ? " bg-amber-200 border-amber-500 text-amber-800"
+                        : trip.trip_status === "Booked"
+                        ? " bg-slate-200 border-slate-500 text-slate-800"
+                        : " bg-red-200 text-red-800 border-red-500"
                         }`}>  
                         {trip?.trip_status}
                       </span>

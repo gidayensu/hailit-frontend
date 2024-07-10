@@ -115,8 +115,8 @@ export const useCustomerProfile = () => {
 
   //log user out
   const handleSignOut = () => {
-    dispatch(userLogout());
     supabaseSignOut();
+    dispatch(userLogout());
     router.push('/')
   };
 

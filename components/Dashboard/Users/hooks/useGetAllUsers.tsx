@@ -6,6 +6,8 @@ import { useEffect, useCallback } from "react";
 import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
 import { UserRole } from "@/lib/store/slice/userSlice";
+
+type UserProps = "user_id" | "first_name" | "last_name" | "email" | "phone_number" | "user_role" | "onboard" | "date_updated" | "date_created" 
 export interface User {
   user_id: string;
   first_name: string;
@@ -41,12 +43,9 @@ export const useGetAllUsers = (page:number) => {
     handlePrefetchData();
   }, [handlePrefetchData])
 
-  //set users data 
-    useEffect(()=> {
-        dispatch(setTableData({table: "usersData", data:users}))
-    }, [dispatch, users])  
 
-  
+
+
     const handleDriversSection = ()=> {
       dispatch(setActiveSection("Drivers"))
     }
@@ -54,6 +53,16 @@ export const useGetAllUsers = (page:number) => {
       dispatch(setActiveSection("Riders"))
     }
 
+   
+  
+
+  // console.log(sortByProperty(usersData, 'date_created'))
+    //set users data 
+    useEffect(()=> {
+      
+      
+      dispatch(setTableData({table: "usersData", data:users}))
+  }, [dispatch, users])  
 
 
   const handleSetSelectedUser = useCallback( (userId:string):void => {

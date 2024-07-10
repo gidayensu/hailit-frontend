@@ -8,7 +8,8 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 //next +react+redux
 import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { TripStage, TripStatus } from "@/lib/store/slice/dashboardSlice";
+
+import { TripStatus, TripStage } from "@/components/Order/types/Types";
 import {
   setDispatcherTrip,
   setDispatcherTripDetails,

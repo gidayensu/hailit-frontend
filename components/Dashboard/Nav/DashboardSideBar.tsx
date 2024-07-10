@@ -106,14 +106,14 @@ export default function DashboardSideBar ({dashMin, handleDashMin, handleActiveS
             >
               <RiMotorbikeFill className="text-xl -scale-x-100" />
             </DashboardSections>
-            {/* <DashboardSections
+            <DashboardSections
               dashMin={dashMin}
               sectionName="Analytics"
               onClickFunc={handleActiveSection}
               activeSection={activeSection}
             >
               <MdInsertChartOutlined className="text-xl -scale-x-100" />
-            </DashboardSections> */}
+            </DashboardSections>
             <DashboardSections
               dashMin={dashMin}
               sectionName="Profile"

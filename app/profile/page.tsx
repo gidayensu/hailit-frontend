@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
 import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
-export type CurrentTheme = string | undefined;
+
 
 export default function Profile() {
   const router = useRouter();

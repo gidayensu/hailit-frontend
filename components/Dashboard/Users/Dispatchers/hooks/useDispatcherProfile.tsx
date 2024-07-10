@@ -1,10 +1,9 @@
 'use client'
-import { useGetUserTrips } from "@/components/Dashboard/hooks/useGetUserTrips";
+import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
 import { useDeleteTripMutation, useGetDriverQuery, useGetRiderQuery, useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setSelectedDriverId, setSelectedRiderId, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { setActiveSection, setSelectedDriverId, setSelectedRiderId, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 import { useCallback, useEffect, useState } from "react";
-import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
 import { useDeleteDispatcher } from "./useDeleteDispatcher";
 //useDispatcherProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
@@ -74,12 +73,16 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
         total_earnings: 0
     });
 
-    //set selected rider id
+
 
     const dispatch = useAppDispatch();
     
     const {data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId);
-    const { handleTrackTrip} = useGetUserTrips(dispatcherUserId);
+    const handleTrackTrip = (tripId:string)=> {
+        dispatch(setActiveSection('Track Order'))
+        dispatch (setTrackingOrder(true))
+        dispatch (setSelectedTripId(tripId))
+      }
     
     const trips = data?.trips
 

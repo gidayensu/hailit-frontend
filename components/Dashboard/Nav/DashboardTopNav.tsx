@@ -1,7 +1,6 @@
 "use client";
-import type { CurrentTheme } from "@/app/profile/page";
+
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
-import { Input } from "@/components/ui/input";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -9,27 +8,19 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchCard from "./SearchCard";
 import { useGetSearchResults } from "./hook/useGetSearchResults";
+import { useSetTheme } from "./hook/useSetTheme";
 
 export default function DashboardTopNav() {
   
   const {inputRef, debouncedSearch, searchContainerRef, trips, isLoading, error, openSearchContainer, handleSearchItemTrack} = useGetSearchResults();
-
+  const {handleThemeChange } = useSetTheme();
   
   const {last_name, first_name} = useAppSelector(state=>state.user)
-  const { theme, setTheme, systemTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
+  
+  
 
-  //setting current theme. Not using useEffect result in hydration errors
-  useEffect(() => {
-    const preferredTheme: CurrentTheme =
-      localStorage.getItem("theme") || systemTheme || theme;
-    setCurrentTheme(preferredTheme);
-  }, [currentTheme]);
-
-  const handleThemeChange = () => {
-    setCurrentTheme(theme === "dark" ? "light" : "dark");
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  
+  
   const path = usePathname();
 
   const iconsAndTextDivClass =
@@ -55,7 +46,7 @@ export default function DashboardTopNav() {
         <input
           ref={inputRef}
           onChange={debouncedSearch}
-          className="flex items-center justify-center border-2 border-opacity-40 text-[#4747478f] dark:text-[#4747478f] dark:border-opacity-20  border-black dark:border-slate-50 rounded-full md:w-full w-[250px] text-[12px]  dark:bg-primary-dark md:h-12 h-10 font-light p-3"
+          className="flex items-center justify-center border-2 border-opacity-40  dark:border-opacity-20  border-black dark:border-slate-50 rounded-full md:w-full w-[250px] text-[12px]  dark:bg-primary-dark md:h-12 h-10 font-light p-3"
           placeholder="Enter Trip ID to search "
         />
         {openSearchContainer && (

@@ -18,7 +18,7 @@ export const useDeliveryChoice = (choiceType?:ChoiceType) => {
         dispatch(setTripMedium(choice)) :
         ''
         if (choiceType === "delivery_day") {
-            choice === "Schedule" ? dispatch(setScheduled(true)) && dispatch(setTripType(choice)): dispatch(setTripType(choice))
+            choice === "Scheduled" ? dispatch(setScheduled(true)) && dispatch(setTripType(choice)): dispatch(setTripType(choice))
 
         }
         

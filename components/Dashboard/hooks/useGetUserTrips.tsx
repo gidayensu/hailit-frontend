@@ -12,7 +12,10 @@ export const useGetUserTrips = (userId:string) => {
     dispatch (setSelectedTripId(tripId))
   }
     const {data, isLoading, error } = useGetUserTripsQuery(userId);
-    // const trips = data?.trips?.customer_trips;
-    return {data, isLoading,  error, handleTrackTrip}
+    let trips = data?.trips;
+    
+  
+  
+    return {data, trips, isLoading,  error, handleTrackTrip}
 
 }

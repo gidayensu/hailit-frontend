@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 //main components
-
+import AnalyticsSection from "@/components/Dashboard/Analytics/AnalyticsSection";
 import { DashboardBottomNav } from "@/components/Dashboard/Nav/DashboardBottomNav";
 import DashboardSideBar from "@/components/Dashboard/Nav/DashboardSideBar";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
@@ -101,7 +101,7 @@ export default function Dashboard() {
 
               {activeSection === "Drivers" && <AllDriversSection />}
 
-              {/* {activeSection === "Analytics" && <TripsDonut />} */}
+              {activeSection === "Analytics" && <AnalyticsSection />}
               {activeSection === "Profile" && (
                 <section className="flex flex-col justify-center items-center lg:items-start lg:justify-start  gap-4">
                 <div className="max-w-sm w-full">

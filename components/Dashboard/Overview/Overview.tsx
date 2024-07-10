@@ -4,13 +4,15 @@ import { BsBoxes } from "react-icons/bs";
 import { RiFileList2Line } from "react-icons/ri";
 import { LuPackageCheck, LuPackageX, LuPackage  } from "react-icons/lu";
 import { TbPackages } from "react-icons/tb";
+
 //main components
+import WeekLongTripsChart from "./WeekLongTripsChart";
 import { RecentTripTable } from "./RecentTripTable";
 import StatsCard from "./StatsCard";
 import { useTripsStats } from "./hook/useTripsStats";
 import { reversePercentageDifference } from "@/lib/utils";
 export default function Overview() {
-  const {currentMonthStats, isLoading, error} = useTripsStats();
+  const {currentMonthStats, isLoading, error, tripCounts, tripDays, weekError, weekLoading} = useTripsStats();
   const pendingPD = reversePercentageDifference(currentMonthStats?.pending_percentage_difference)
   const cancelledPD = reversePercentageDifference(currentMonthStats?.cancelled_percentage_difference)
   
@@ -65,10 +67,16 @@ export default function Overview() {
         </div>
         
       </div>
-        <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
+      <div className="flex w-full flex-col md:flex-row md:gap-2 gap-6">
+        <div className="md:w-1/3 w-full ">
+
+          <WeekLongTripsChart categories={tripDays} loading={weekLoading} data={tripCounts}/>
+        </div>
+        <div className="flex flex-col md:w-2/3 w-full gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
           <h3 className="font-bold">Most Recent Trips</h3>
           <RecentTripTable />
         </div>
+      </div>
       <div className="flex flex-col gap-4 w-full ">
       </div>
     </section>

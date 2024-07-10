@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TripStatus, TripStage } from "@/components/Order/types/Types";
 
 
 
-export type TripStatus= "Booked" | "Picked Up" | "In Transit" | "Delivered" | "Cancelled" 
 export type ActiveSection =
   | "Overview"
   | "Orders"
@@ -15,7 +15,7 @@ export type ActiveSection =
   | "Sign Out"
   | "Profile";
 
-export type TripStage = 1 | 2 | 3 | 4;
+
 
 export interface TripStatusDBUpdate {
     trip_status: TripStatus,

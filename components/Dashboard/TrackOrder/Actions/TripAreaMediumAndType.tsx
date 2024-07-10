@@ -65,9 +65,9 @@ export default function TripAreaMediumAndType () {
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Schedule"
+                itemType="Scheduled"
                 selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Schedule", "trip type")}}
+                onClickFunc={() => {handleTripChoices("Scheduled", "trip type")}}
                 className=" w-24"
               />
             </div>

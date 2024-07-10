@@ -34,7 +34,7 @@ export const useGetTrip = () => {
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
 
-  const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(3000);
+  const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(5000);
   
   const trip = useAppSelector((state)=>state.trip)
   const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`, {

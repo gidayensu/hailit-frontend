@@ -1,12 +1,13 @@
 "use client";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
-import { TripStatus } from "@/lib/store/slice/dashboardSlice";
-import { DeliveryStatus, PackageType } from "../OrderSummaryMin";
+import { TripStatus } from "../types/Types";
+import { DeliveryStatus, } from "../OrderSummaryMin";
+import { PackageType } from "../types/Types";
 import { useEffect, useState } from "react";
 
 export const useGetUserTrips = () => {
-  const [pollingInt, setPollingInt] = useState<number>(50000);
+  const [pollingInt, setPollingInt] = useState<number>(500000);
   const { user_id, user_role } = useAppSelector((state) => state.user);
   const { data, isLoading, error } = useGetUserTripsQuery(user_id, {
     pollingInterval: pollingInt,
