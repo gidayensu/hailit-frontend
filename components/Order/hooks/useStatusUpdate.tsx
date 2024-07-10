@@ -1,7 +1,8 @@
 "use client";
 import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setPreviousSelectedTripId, setTripStatus,TripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
+import { setPreviousSelectedTripId, setTripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
+import { TripStatus } from "../types/Types";
 
 import { useCallback, useState } from "react";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
