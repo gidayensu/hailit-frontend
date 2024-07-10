@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import type { CurrentTheme } from "@/app/profile/page";
+import { CurrentTheme } from "../Dashboard/Nav/hook/useSetTheme";
 import { ThemeToggle } from "../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
 

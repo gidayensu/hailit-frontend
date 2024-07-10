@@ -1,5 +1,5 @@
 "use client";
-import type { CurrentTheme } from "@/app/profile/page";
+import { CurrentTheme } from "../Dashboard/Nav/hook/useSetTheme";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 
 import { useAppSelector } from "@/lib/store/hooks";

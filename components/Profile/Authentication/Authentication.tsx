@@ -1,16 +1,13 @@
 'use client'
 import { ThemeToggle } from "../../Theme/ThemeToggle";
 //ui + icons
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { checkTimeOfDay } from "@/lib/utils";
 
 //main components
+import { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { useLogin } from "./hooks/useLogin";
-export type CurrentTheme = string | undefined;
+
 
 export default function Authentication () {
   const [signUp, setSignUp]  = useState<boolean>(false);

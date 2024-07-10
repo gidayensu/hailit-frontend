@@ -38,7 +38,7 @@ import { supabaseSignOut } from "@/lib/supabaseAuth";
 import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
 import { usePathname } from "next/navigation";
 
-export type CurrentTheme = string | undefined;
+
 
 export default function ProfilePageDetails() {
   const path = usePathname();
