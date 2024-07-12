@@ -79,7 +79,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
                   <HiLocationMarker className="col-span-1 text-xl text-amber-500" />
                   <span className="flex flex-col col-span-7 ">
                     <p className="text-sm font-semibold">Pickup Point</p>
-                    <p className="text-sm  lg:w-40   ">
+                    <p className="text-sm  lg:w-64   ">
                       {trip.pickup_location}
                     </p>
                   </span>
@@ -95,7 +95,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
               <HiLocationMarker className="col-span-1 text-xl text-green-500" />
               <span className="flex flex-col col-span-7 ">
                 <p className="text-sm font-semibold">Pickup Point</p>
-                <p className="text-sm  lg:w-40   ">{trip.drop_off_location}</p>
+                <p className="text-sm lg:w-64    ">{trip.drop_off_location}</p>
               </span>
             </div>
           </div>

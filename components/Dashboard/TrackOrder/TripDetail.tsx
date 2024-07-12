@@ -107,7 +107,7 @@ export default function TripDetail () {
               <Container className="flex flex-col  w-full h-52 rounded-lg p-3 gap-2">
                 <StatusSection tripStage={trip?.trip_stage} tripStatus={trip?.trip_status} />
               </Container>
-              <Container className=" w-full h-80 rounded-lg p-6">
+              <Container className=" w-full h-72 rounded-lg p-6">
                 <PackageSection/>
               </Container>
             </div>
