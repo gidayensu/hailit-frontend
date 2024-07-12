@@ -87,7 +87,7 @@ export default function OrderSummaryMin({
       </div>
       }
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
-      <Container className={`${className} flex  gap-3 justify-between   h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
+      <Container className={`${className} flex items-center  gap-3 justify-between   h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
         <div className="flex gap-2">
 
           <span className={`flex justify-center items-center ${deliveryTypeIconBgClass} w-10 h-10 rounded-md text-2xl`}>
