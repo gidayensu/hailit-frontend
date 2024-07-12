@@ -14,19 +14,11 @@ import TripAreaMediumAndType from "./TripAreaMediumAndType";
 //redux + next + react + helper
 import { CalendarField } from "@/components/Form/FormField";
 import { useAppSelector } from "@/lib/store/hooks";
-import {
-  setTripMedium,
-  setTripArea,
-  setPackageType,
-  setScheduled,
-  setTripType,
-} from "@/lib/store/slice/deliveryChoicesSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
-import { useEffect } from "react";
-import { Trip } from "@/lib/store/slice/tripSlice";
-import { useUpdateTrip } from "./hook/useUpdateTrip";
 import { useGetTrip } from "../StatusSection/hook/useGetTrip";
+import { useUpdateTrip } from "./hook/useUpdateTrip";
+
 export default function EditTrip() {
   const {
     trip,
@@ -34,12 +26,10 @@ export default function EditTrip() {
   } = useGetTrip();
   const {
     formMethods,
-    dispatch,
     handleCancel,
     handleSubmit,
     onDeliveryFormSubmit,
     packageTypeRef,
-    
     package_type,
     updateLoading,
     register,
