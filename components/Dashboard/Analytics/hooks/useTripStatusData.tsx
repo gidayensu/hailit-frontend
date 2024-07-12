@@ -41,7 +41,7 @@ export const useTripStatusData = ()=> {
       const sumPending = () => {
         const pending: number[] = [];
         if(booked && pickedUp && inTransit) {
-            console.log({booked, pickedUp, inTransit})
+            
           booked.forEach((tripCount:number, index:number) => {
             
             pending.push((booked[index] || 0) + (pickedUp[index] || 0) + (inTransit[index] || 0))

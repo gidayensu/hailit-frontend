@@ -73,7 +73,7 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
         total_earnings: 0
     });
 
-
+    const total_trip_count = dispatcherTrips?.total_trip_count;
 
     const dispatch = useAppDispatch();
     
@@ -141,7 +141,8 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
       handleDeleteDispatcher,
       dispatcherDeleteError,
       dispatcherDeleteLoading, 
-      dispatcherDeleteSuccess
+      dispatcherDeleteSuccess,
+      total_trip_count
     };
 }
 

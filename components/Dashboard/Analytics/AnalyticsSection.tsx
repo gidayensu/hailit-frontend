@@ -1,6 +1,6 @@
-
 import HighchartsReact from "highcharts-react-official";
 import TripStatusChart from "./TripStatusChart";
+import TripRevenueChart from "./TripRevenueChart";
 import TripAreaChart from "./TripAreaChart";
 import TripMediumChart from "./TripMediumChart";
 import TripPackageType from "./TripPackageType";
@@ -16,7 +16,9 @@ export default function AnalyticsSection(props: HighchartsReact.Props) {
 
   return (
     <main className="w-full flex flex-col gap-5 mb-10">
-      
+      <div className="w-full">
+        <TripRevenueChart/>
+      </div>
       <div className="flex flex-col md:flex-row w-full gap-5">
         <div className="w-full md:w-1/2">
           <TripStatusChart />

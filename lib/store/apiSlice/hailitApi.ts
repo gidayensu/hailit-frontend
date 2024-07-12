@@ -8,8 +8,8 @@ export const hailitApi = createApi({
   
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: `http://localhost:4000/api/v1/`,
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl: `http://localhost:4000/api/v1/`,
+    // baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
     prepareHeaders: async (headers) => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -99,6 +99,13 @@ export const hailitApi = createApi({
     getTripCountsByMonth: builder.query<any, string | string[]>({
       query: (endpoint) => ({
         url: `trips/trip-count-by-month?${endpoint}`,
+        method: "GET",
+      }),
+      providesTags: ['Trip',]
+    }),
+    getTripRevenueByMonth: builder.query<any, string | string[]>({
+      query: () => ({
+        url: `trips/trips-revenue`,
         method: "GET",
       }),
       providesTags: ['Trip',]
@@ -292,8 +299,11 @@ export const {
   useDeleteTripMutation, 
   useGetWeekTripCountQuery,
   useGetTripCountsByMonthQuery,
+  useLazyGetTripMonthsQuery,
   useLazyRateTripQuery,
   useLazySearchTripsQuery,
+  useGetTripRevenueByMonthQuery,
+
   
   //DRIVERS
   useGetAllDriversQuery,

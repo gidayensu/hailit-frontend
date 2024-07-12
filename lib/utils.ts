@@ -55,8 +55,8 @@ export async function reverseMapSearch(
     }
 
     const data = await response.json();
-    const SolIName=data.display_name
-    console.log({data})
+    
+    
     return {
       latitude: data.lat,
       longitude: data.lon,

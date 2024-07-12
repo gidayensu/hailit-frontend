@@ -19,6 +19,12 @@ export default function TripStatusChart () {
       
       
     },
+    responsive: {  
+      rules: [{  
+        condition: {  
+          maxWidth: 1000  
+        }  }]
+      },
     title: { text: "Trip Status" },
     xAxis: {
       categories: tripMonths,

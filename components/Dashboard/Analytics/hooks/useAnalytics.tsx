@@ -1,6 +1,8 @@
 import {
   useGetTripCountsByMonthQuery,
   useGetTripMonthsQuery,
+  useLazyGetTripMonthsQuery,
+  useGetTripRevenueByMonthQuery
 } from "@/lib/store/apiSlice/hailitApi";
 import {
   PackageType,
@@ -9,6 +11,7 @@ import {
   TripMedium,
   TripType,
 } from "@/components/Order/types/Types";
+import { useState } from "react";
 
 export type TripColumn =
   | "trip_status"
@@ -53,7 +56,9 @@ export type EndPoint =
   | EndPointWithTripStatus
   | EndPointWithTripType;
 
-export const useAnalytics = (endpoint: EndPoint) => {
+export const useAnalytics = (endpoint: EndPoint, fetchMonth?: boolean) => {
+
+  // const [fetchedMonths, setFetchedMonths] = useState<[]>([]);
   const {
     data: conditionalMonths,
     isLoading: conditionalDataLoading,

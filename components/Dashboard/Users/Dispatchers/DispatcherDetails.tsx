@@ -1,14 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
+import { Skeleton } from "@/components/ui/skeleton";
 import { MdArrowBack } from "react-icons/md";
 import DashboardCard from "../../DashboardCard";
-
 import DispatcherCard from "./DispatcherCard";
 import EditDispatcher from "./EditDispatcher";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-
-import Loader from "@/components/Shared/Loader";
+import SkeletonTable from "../../SkeletonTable";
 import { useState } from "react";
 import DispatcherTripsTable from "./DispatcherTripsTable";
 
@@ -23,17 +22,17 @@ export default function DispatcherDetails({
 
   const {
     dispatcherTrips,
-    error,
     dispatcherError,
     selectedDispatcher,
     handleDeselect,
-    handleDeleteDispatcher,
+    
     dispatcherLoading,
+    total_trip_count
   } = useDispatcherProfile(userRole);
 
   
 
-  const total_trip_count = dispatcherTrips?.total_trip_count;
+  
 
   const handleEditDispatcher = () => {
     setEditDispatcher(() => !editDispatcher);
@@ -59,9 +58,20 @@ export default function DispatcherDetails({
       {!editDispatcher && !dispatcherError && (
         <>
           {dispatcherLoading && (
-            <div className="w-full h-full items-center justify-center">
-              <Loader color="text-primary-color" />
+            <div className="flex gap-2 w-full flex-col md:flex-row">
+            <Container className="flex  gap-2 max-h-96 w-full rounded-xl flex-col items-center justify-start p-5">
+            
+            
+                <Skeleton className="w-32 rounded-full h-32 mt-2"/>
+                <Skeleton className="w-32 rounded-full h-6"/>
+                <Skeleton className="w-32 rounded-full h-6"/>
+            </Container>
+            <Container className="flex gap-2 max-h-96 w-full rounded-xl flex-col items-center justify-start p-5">
+
+            <SkeletonTable rows={4} cells={5} />
+            </Container>
             </div>
+            
           )}
 
           {!dispatcherLoading && (

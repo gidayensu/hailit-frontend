@@ -35,6 +35,6 @@ export const useTripsStats = ()=> {
     const tripDays = weekStats?.currentWeekTrips?.tripDays;
     const tripCounts = weekStats?.currentWeekTrips?.tripCounts;
     
-    console.log({tripDays, tripCounts})
+    
     return {currentMonthStats, isLoading, error, tripDays, tripCounts, weekLoading, weekError }
 }

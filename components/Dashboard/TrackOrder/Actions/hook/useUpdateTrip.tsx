@@ -80,7 +80,7 @@ export const useUpdateTrip = (trip:Trip)=> {
     const trip_commencement_date = data.pickup_date;
     const trip_completion_date = data.delivery_date;
 
-    console.log({trip_commencement_date, trip_completion_date})
+    
     
     let tripDetails = {...data, trip_commencement_date, trip_completion_date, package_type, trip_type, trip_area, trip_medium};
     //update trip status if date is selected
