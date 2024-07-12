@@ -53,6 +53,7 @@ export default function Dashboard() {
 
   if (data && !isAdmin) {
     handleSignOut();
+    router.push('/')
   }
 
   return (
