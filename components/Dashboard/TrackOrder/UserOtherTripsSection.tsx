@@ -8,19 +8,17 @@ import { useGetUserTrips } from "../hooks/useGetUserTrips";
 
 export default function UserOtherTrips({
   userId,
-  tripId,
+  
 }: {
   userId: string;
-  tripId: string;
+  
 }) {
-  const { isLoading, data, handleTrackTrip, trips } = useGetUserTrips(userId);
+  const { isLoading, handleTrackTrip,  otherTrips } = useGetUserTrips(userId);
+  console.log({otherTrips})
   
   //when a user is changed from customer to rider/driver, the user's previous trips remain.
   //however, when the trips are fetched, since they are fetched as dispatcher trips since the current user_role is rider/driver
-  let otherTrips: Trip[] = [];
-  trips?.dispatcher_trips 
-  ?  otherTrips = trips?.dispatcher_trips.filter((trip: any) => trip.trip_id !== tripId) 
-  : otherTrips = trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId)
+  
   
   const noOrders = !otherTrips || otherTrips.length < 1;
 
@@ -44,16 +42,16 @@ export default function UserOtherTrips({
                   {otherTrips.map((trip: any, index: number) => (
                     <div key={index}>
                       {index <= 2 && (
-                        <div key={trip.trip_id} onClick={() => handleTrackTrip(trip.trip_id)}>
+                        <div key={trip?.trip_id} onClick={() => handleTrackTrip(trip?.trip_id)}>
                           <OrderSummaryMin
                             
-                            key={trip.trip_id}
-                            cost={trip.trip_cost}
-                            deliveryStatus={trip.trip_status}
-                            packageType={trip.package_type}
-                            tripId={trip.trip_id}
+                            key={trip?.trip_id}
+                            cost={trip?.trip_cost}
+                            deliveryStatus={trip?.trip_status}
+                            packageType={trip?.package_type}
+                            tripId={trip?.trip_id}
                             tripRequestDate={extractDateWithDayFromDate(
-                              trip.trip_request_date
+                              trip?.trip_request_date
                             
                             )}
                           />
