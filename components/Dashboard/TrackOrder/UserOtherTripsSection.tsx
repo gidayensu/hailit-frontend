@@ -18,11 +18,11 @@ export default function UserOtherTrips({
   //when a user is changed from customer to rider/driver, the user's previous trips remain.
   //however, when the trips are fetched, since they are fetched as dispatcher trips since the current user_role is rider/driver
   let otherTrips: Trip[] = [];
-  const noData = !otherTrips || otherTrips.length < 1;
-    trips?.dispatcher_trips 
-    ?  otherTrips = trips?.dispatcher_trips.filter((trip: any) => trip.trip_id !== tripId) 
-    : otherTrips = trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId)
-
+  trips?.dispatcher_trips 
+  ?  otherTrips = trips?.dispatcher_trips.filter((trip: any) => trip.trip_id !== tripId) 
+  : otherTrips = trips?.customer_trips.filter((trip: any) => trip.trip_id !== tripId)
+  
+  const noOrders = !otherTrips || otherTrips.length < 1;
 
   return (
     <>
@@ -70,7 +70,7 @@ export default function UserOtherTrips({
         </>
       </div>
     </div>
-    {noData  && !isLoading && (
+    {noOrders  && !isLoading && (
       <div className="h-1/3 md:w-full md:mt-10 mt-4 flex lg:md-0 items-center justify-center ">
         <NoData
           noDataText="User has made no other orders"
