@@ -29,7 +29,6 @@ export const useGetTrip = () => {
     selectedTripId,
     trackingOrder,
     editingOrder,
-    
     tripStage,
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
@@ -42,26 +41,20 @@ export const useGetTrip = () => {
     refetchOnFocus: true
   });
 //control polling from running when there is an error
-  
+  useEffect(()=> {
+    if(error || editingOrder) {
+      setControlledPollingInterval(0)
 
-if(error || editingOrder) {
-  setControlledPollingInterval(0)
-  
-
-}
-
-
+    }
+  }, [error, setControlledPollingInterval, editingOrder])
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 
-
-    if ( fetchedTrip !== trip) {
-      
+  useEffect(() => {
+    if (selectedTripId && fetchedTrip) {
       dispatch(setTrip(fetchedTrip));
-      window.scrollTo(0, 0);
     }
-
-  
+  }, [selectedTripId, fetchedTrip, dispatch]);
   
 
   
@@ -89,13 +82,10 @@ if(error || editingOrder) {
 
   //handle view rider/driver assigned to trip
   const handleViewDispatcher = ()=> {
-    const tripMedium = trip?.trip_medium;
-    if(tripMedium === "Motor" ) {
+    if(trip?.trip_medium === "Motor" ) {
       dispatch(setActiveSection('Riders'))
       dispatch(setSelectedRiderId(dispatcher?.dispatcher_id))
-    } 
-    
-    if (tripMedium === "Car" || tripMedium === "Truck" ) {
+    } else {
       dispatch(setActiveSection('Drivers'))
       dispatch(setSelectedDriverId(dispatcher?.dispatcher_id))
     }
