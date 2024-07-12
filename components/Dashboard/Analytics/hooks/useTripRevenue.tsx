@@ -7,7 +7,7 @@ import {
   
     const {data: revenueData, isLoading:revenueLoading, error:revenueError} = useGetTripRevenueByMonthQuery('');
 
-    console.log({revenueData})
+    
     const tripMonths = revenueData?.tripMonths
     const revenue = revenueData?.revenue; 
 

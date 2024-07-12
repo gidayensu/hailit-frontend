@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 
 //ui + icons
+import { MdInsertChartOutlined } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { TbRoute, TbUser, TbLayoutDashboard } from "react-icons/tb";
@@ -82,21 +83,21 @@ export function DashboardBottomNav({
 
       <div className={divClass}>
         <Button
-          onClick={() => onClickFunc("Track Order")}
-          variant={activeSection === "Track Order" ? "default" : "secondary"}
+          onClick={() => onClickFunc("Analytics")}
+          variant={activeSection === "Analytics" ? "default" : "secondary"}
           className="border-none"
         >
-          <TbRoute className={lightThemeClass} />
-          <TbRoute className={darkThemeClass} />
+          <MdInsertChartOutlined className={lightThemeClass} />
+          <MdInsertChartOutlined className={darkThemeClass} />
         </Button>
         <p
           className={`${textClass} ${
-            activeSection === "Track Order"
+            activeSection === "Analytics"
               ? "text-primary-shade dark:text-white"
               : ""
           }`}
         >
-          Track
+          Analytics
         </p>
       </div>
 
