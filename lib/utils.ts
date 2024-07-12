@@ -55,7 +55,8 @@ export async function reverseMapSearch(
     }
 
     const data = await response.json();
-
+    const SolIName=data.display_name
+    console.log({data})
     return {
       latitude: data.lat,
       longitude: data.lon,
@@ -122,16 +123,17 @@ export const copyToClipBoard = (element:string)=> {
   navigator.clipboard.writeText(element);
 }
 
-export function getSpecificName(str:string) {
-  if(str && typeof str==='string') {
+export function getSpecificName(name:string) {
+  
+  if(name && typeof name==='string') {
       
-      const parts = str.split(",");
-      return parts.slice(0, 3).join(",");
+      const specificName = name.split(",");
+      return specificName.slice(0, 3).join(",");
   }
   // if (parts.length < 3) {
   //   return ""; // Return empty string if not enough commas
   // }
-  return str
+  return name
 }
 
 export const scrollToSection = (sectionRef:React.RefObject<any>) => {

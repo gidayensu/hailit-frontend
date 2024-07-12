@@ -31,18 +31,30 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   const {handlePrefetchData} = usePrefetchData({endpoint: 'trips', page, prefetchOption: 'getAllTrips', total_number_of_pages});
   
   //prefetch useEffect
-
-  useEffect(()=> {
+  if (table) {
     handlePrefetchData()
-  }, [handlePrefetchData])
+  }
+
+  // useEffect(()=> {
+  //   handlePrefetchData()
+  // }, [handlePrefetchData])
   
-  useEffect(() => {
-    if (table === "trips") {
-      dispatch(setTableData({table: "tripsData", data: trips}));
-    } else {
-      dispatch(setTableData({table: "overviewData", data: trips}));
-    }
-  }, [trips, table, dispatch]); 
+  if (table === "trips") {
+    dispatch(setTableData({table: "tripsData", data: trips}));
+  } 
+  
+  if(table === "overview") {
+    dispatch(setTableData({table: "overviewData", data: trips}));
+  }
+  // useEffect(() => {
+  //   if (table === "trips") {
+  //     dispatch(setTableData({table: "tripsData", data: trips}));
+  //   } 
+    
+  //   if(table === "overview") {
+  //     dispatch(setTableData({table: "overviewData", data: trips}));
+  //   }
+  // }, [trips, table, dispatch]); 
 
   return { total_number_of_pages, data, trips, tripsData, overviewData, handleTrackTrip, isLoading, error };
 };

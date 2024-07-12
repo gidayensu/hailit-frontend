@@ -1,9 +1,8 @@
 "use client";
 import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import TripsStats from "@/components/Dispatcher/TripsStats";
 import OrderHistory from "@/components/Order/OrderHistory";
 import { redirect } from "next/navigation";
-import TripsStats from "@/components/Dispatcher/TripsStats";
-import DispatcherOrderHistory from "@/components/Dispatcher/DispatcherOrderHistory";
 export default function Dispatcher() {
   const { user_role, trips } = useGetDispatcher();
 
@@ -17,9 +16,9 @@ export default function Dispatcher() {
 
                 <TripsStats/>      
           </div>
-                <div className="md:w-4/6 flex items-center justify-center">
+                <div className="md:w-4/6 w-full flex items-center justify-center mb-20 md:mb-0">
 
-                <DispatcherOrderHistory />
+                <OrderHistory />
                 </div>
         
     </div>

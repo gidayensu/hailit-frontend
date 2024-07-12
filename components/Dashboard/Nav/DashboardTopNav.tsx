@@ -2,10 +2,8 @@
 
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import { useAppSelector } from "@/lib/store/hooks";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import SearchCard from "./SearchCard";
 import { useGetSearchResults } from "./hook/useGetSearchResults";
 import { useSetTheme } from "./hook/useSetTheme";

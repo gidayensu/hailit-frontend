@@ -19,7 +19,7 @@ export default function WeekLongTripsChart ({props,categories, loading, data }:{
       
       
     },
-    title: { text: "This Week Trips Count" },
+    title: { text: "Current Week Trips" },
     xAxis: {
       categories: categories,
       title: { text: "Days",
@@ -28,26 +28,10 @@ export default function WeekLongTripsChart ({props,categories, loading, data }:{
       
       
     },
-    yAxis: { title: { text: "Trip Counts" } },
+    yAxis: { title: { text: "Trip Count" } },
     series: [
       {
-        name: "Trip Count",
-        
-        type: "spline",
-          className: 'text-red-500',
-
-        data: categories && categories.map((category, index) => ({
-          name: category,
-          y: parseFloat(data ? data[index] : '0'),
-          style: {
-            color: 'red' // Color for y-axis title
-          }
-        })),
-      
-              
-      },
-      {
-        name: "Trip Count",
+        name: "Number of Trips",
         
         type: "spline",
           className: 'text-red-500',

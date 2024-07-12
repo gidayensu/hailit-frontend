@@ -36,7 +36,9 @@ export const useGetUserTrips = () => {
             trip.trip_status === "Delivered" || trip.trip_status === "Cancelled"
         ) || [];
         previousTripsCount = previousTrips.length
-      } else {
+      } 
+      
+      if (  user_role === "Customer" ) {
         
           currentTrips =
             trips?.customer_trips.filter(
@@ -55,10 +57,12 @@ export const useGetUserTrips = () => {
         
       } 
 
+      //Not using useEffect result in infinite loop. Probably due to the condition being always true.
+      
       useEffect(()=> {
-        if(currentTrips || previousTrips) {
+        if(currentTrips?.length > 0 || previousTrips.length > 0) {
 
-          currentTrips?.length > 0 || previousTrips.length > 0 ?  setPollingInt(3000) : ''
+            setPollingInt(3000)
         }
       }, [currentTrips, previousTrips, setPollingInt])
       
@@ -69,7 +73,7 @@ export const useGetUserTrips = () => {
     ? (noDelivery = true)
     : "";
     
-  return {trips, currentTrips, previousTrips, currentTripsCount, previousTripsCount, isLoading, error, noDelivery,  };
+  return {trips, currentTrips, previousTrips, currentTripsCount, previousTripsCount, isLoading, error, noDelivery, user_role  };
 };
 
 
@@ -121,5 +125,4 @@ export interface DispatcherTrip {
   rating_count: number;
   cumulative_rating: string;
 }
-
 

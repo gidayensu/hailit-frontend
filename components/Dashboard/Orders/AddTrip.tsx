@@ -1,11 +1,10 @@
 'use client'
 import NewOrderForm from "@/components/Form/NewOrderForm";
+import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/lib/store/hooks";
+import { FiArrowLeft } from "react-icons/fi";
 import TripAreaMediumAndType from "../TrackOrder/Actions/TripAreaMediumAndType";
 import AddTripOutcome from "./AddTripOutcome";
-import { useAppSelector } from "@/lib/store/hooks";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { FiArrowLeft } from "react-icons/fi";
 
 export default function AddTrip ({setAddTrip}:{setAddTrip: ()=>void}) {
   

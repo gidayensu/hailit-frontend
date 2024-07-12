@@ -21,6 +21,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const path = usePathname();
+  
+
+  
   useEffect(() => {
     const checkSession = async () => {
       const session = await supabaseSession();

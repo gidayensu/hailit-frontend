@@ -36,14 +36,13 @@ export const useMap = (locationType: LocationType) => {
     pickUpLocationName,
   } = useAppSelector((state) => state.map);
 
-  const [userLocation, setUserLocation] = useState<UserLocation>(undefined); // Initialize as undefined
+  const [userLocation, setUserLocation] = useState<UserLocation>([8.05462, -1.73066]); 
 
   const [mapBoundaryChanged, setMapBoundaryChanged] =
     useState<MapBoundaryChange>(false);
 
   const [zoom, setZoom] = useState(18);
 
-  let nameOfLocation: string | undefined = "";
 
   const locationNameData = async (
     latitude: string | number,
@@ -52,7 +51,7 @@ export const useMap = (locationType: LocationType) => {
     const locationData = await reverseMapSearch(latitude, longitude);
 
     const locationName = locationData?.displayName;
-
+    
     let specificName: string | undefined = "";
     if (locationName) {
       specificName = getSpecificName(locationName);

@@ -1,25 +1,23 @@
 "use client";
-import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Loader from "../Shared/Loader";
+import NoOrderHistory from "./NoOrderHistory";
 import NoData from "../Shared/NoData";
 import { Button } from "../ui/button";
-import { Trip, useGetUserTrips } from "./hooks/useGetUserTrips";
-import OrderSummaryMin from "./OrderSummaryMin";
+import OrderList from "./OrderList";
+import { useGetUserTrips } from "./hooks/useGetUserTrips";
 import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
-export type Deliveries = boolean;
+
 
 export default function OrderHistory() {
-  const [currentDeliveries, setCurrentDeliveries] = useState<Deliveries>(true);
-  const [tripLoading, setTripLoading] = useState<boolean>(false);
-  const [dispatcher, setDispatcher] = useState<boolean>(false)
+  const [currentDeliveries, setCurrentDeliveries] = useState<boolean>(true);
   
-  const path = usePathname();
-
-  const { currentTrips, previousTrips, isLoading, error, noDelivery } = useGetUserTrips();
   
+  
+  
+  const { currentTrips, previousTrips, isLoading, error, noDelivery, user_role } = useGetUserTrips();
+  
+  const isDispatcher = user_role !== "Customer" ? true: false;
   
   return (
     <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
@@ -28,7 +26,7 @@ export default function OrderHistory() {
         isLoading && <TripsLoadingSkeleton/>
       }
       {noDelivery && !isLoading && (
-        <NoDeliveryHistory noDeliveryMessage="Your Deliveries Will Appear Here!" dispatcher={dispatcher} />
+        <NoOrderHistory noDeliveryMessage="Your Deliveries Will Appear Here!" isDispatcher={isDispatcher} />
       )}
 
       {(currentTrips.length > 0 || previousTrips.length > 0) && (
@@ -55,107 +53,15 @@ export default function OrderHistory() {
           </span>
         </div>
       )}
-      {currentDeliveries && (
-        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
-          <div
-            className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}
-          >
-            {currentTrips.map((trip: Trip) => (
-              <div key={trip.trip_id} className="w-full">
-                <Link
-                  onClick={() => setTripLoading(true)}
-                  key={trip.trip_id}
-                  href={
-                    path.startsWith("/dispatcher/trips")
-                      ? `dispatcher/trips/${trip.trip_id}`
-                      : `track/${trip.trip_id}`
-                  }
-                  className={`w-full relative ${
-                    tripLoading ? "opacity-30" : ""
-                  }`}
-                >
-                  <OrderSummaryMin
-                    deliveryStatus={trip.trip_status}
-                    packageType={trip.package_type}
-                    cost={trip.trip_cost}
-                    tripId={trip.trip_id}
-                    tripRequestDate={extractDateWithDayFromDate(
-                      trip.trip_request_date
-                    )}
-                  />
-                
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center justify-center w-full">
-            {currentTrips.length < 1 && !noDelivery && (
-              <NoDeliveryHistory noDeliveryMessage="No current delivery!" dispatcher={dispatcher}/>
-            )}
-          </div>
-        </div>
+      <div className="w-full md:w-4/6 flex items-center ">
+
+      {currentDeliveries && (<OrderList isDispatcher={user_role !== "Customer" ? true: false} noDelivery={noDelivery} trips={currentTrips}  />
       )}
-      {!currentDeliveries && (
-        <div className="flex flex-col md:w-5/6 w-full mt-4 rounded-2xl items-center justify-center mb-4">
-          <div
-            className={`flex flex-col md:w-5/6 w-full items-center justify-center gap-2 md:items-start md:p-3 -mt-6 relative`}
-          >
-            {previousTrips.map((trip: Trip) => (
-              <>
-                <Link
-                  onClick={() => setTripLoading(true)}
-                  key={trip.trip_id}
-                  href={
-                    path.startsWith("/dispatcher/trips")
-                      ? `/dispatcher/trips/${trip.trip_id}`
-                      : `track/${trip.trip_id}`
-                  }
-                  className={`w-full relative ${
-                    tripLoading ? "opacity-30" : ""
-                  }`}
-                >
-                  <OrderSummaryMin
-                    deliveryStatus={trip.trip_status}
-                    packageType={trip.package_type}
-                    cost={trip.trip_cost}
-                    tripId={trip.trip_id}
-                    tripRequestDate={extractDateWithDayFromDate(
-                      trip.trip_request_date
-                    )}
-                  />
-                </Link>
-                {tripLoading && (
-                  <span className="absolute">
-                    <Loader />
-                  </span>
-                )}
-              </>
-            ))}
-          </div>
-          <div className="flex items-center justify-center">
-            {previousTrips.length < 1 && (
-              <NoDeliveryHistory
-                noDeliveryMessage="No previous delivery!"
-                dispatcher={dispatcher}
-              />
-            )}
-          </div>
-        </div>
+      {!currentDeliveries && (<OrderList isDispatcher={user_role !== "Customer" ? true: false} noDelivery={noDelivery} trips={previousTrips}  />
       )}
+      </div>
     </div>
     
   );
 }
 
-const NoDeliveryHistory = ({noDeliveryMessage, dispatcher}: {noDeliveryMessage: string, dispatcher:boolean})=> {
-  return (
-    
-      <div className="flex flex-col items-center justify-center w-full md:w-3/6">
-      <NoData noDataText={noDeliveryMessage} textClassName="font-semibold text-md mb-4" />
-      <Link href={'/order'}>
-      {!dispatcher &&
-      <Button variant={'outline'}> Send a Package </Button>}
-      </Link>
-      </div>
-  )
-}

@@ -16,32 +16,53 @@ export default function OAuthCallBack (){
   const { googleSignIn } = useLogin();
   const { googleSignUp } = useSignUp();
 
-  useEffect(() => {
+  (async () => {
+    try {
 
-    const signInWithGoogle = async () => {
-      try {
+      const { user_id, email } = await userIdAndEmailFromSession();
 
-        const { user_id, email } = await userIdAndEmailFromSession();
-  
-        if (typeof user_id === 'string' &&!attemptedSignUp) {
-          const signInResult = await googleSignIn(user_id);
-          
-          if (signInResult?.error && !attemptedSignUp) {
-              setAttemptedSignUp(true)
-            const signUpResult = await googleSignUp({ user_id, email });
-  
-            if(signUpResult?.error) {
-              setError(true)
-            }
+      if (typeof user_id === 'string' &&!attemptedSignUp) {
+        const signInResult = await googleSignIn(user_id);
+        
+        if (signInResult?.error && !attemptedSignUp) {
+            setAttemptedSignUp(true)
+          const signUpResult = await googleSignUp({ user_id, email });
+
+          if(signUpResult?.error) {
+            setError(true)
           }
         }
-      } catch (err) {
-        setError(true)
       }
-    };
+    } catch (err) {
+      setError(true)
+    }})
 
-    signInWithGoogle();
-  }, [googleSignIn, attemptedSignUp, googleSignUp]);
+  // useEffect(() => {
+
+  //   const signInWithGoogle = async () => {
+  //     try {
+
+  //       const { user_id, email } = await userIdAndEmailFromSession();
+  
+  //       if (typeof user_id === 'string' &&!attemptedSignUp) {
+  //         const signInResult = await googleSignIn(user_id);
+          
+  //         if (signInResult?.error && !attemptedSignUp) {
+  //             setAttemptedSignUp(true)
+  //           const signUpResult = await googleSignUp({ user_id, email });
+  
+  //           if(signUpResult?.error) {
+  //             setError(true)
+  //           }
+  //         }
+  //       }
+  //     } catch (err) {
+  //       setError(true)
+  //     }
+  //   };
+
+  //   signInWithGoogle();
+  // }, [googleSignIn, attemptedSignUp, googleSignUp]);
 
   if(error) {
     return (

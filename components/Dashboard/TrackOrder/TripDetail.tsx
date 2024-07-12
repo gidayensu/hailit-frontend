@@ -42,9 +42,11 @@ export default function TripDetail () {
      dispatch(setTrackingOrder(false))
 
     }
-    useEffect(()=>  {
-     window.scrollTo(0, 0);
-    }, [trip.trip_id])
+
+    
+    // useEffect(()=>  {
+    //  window.scrollTo(0, 0);
+    // }, [trip.trip_id])
 
     return (
         <div className="space-y-3 md:mb-0 mb-24">

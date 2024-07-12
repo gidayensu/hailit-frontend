@@ -42,20 +42,26 @@ export const useGetTrip = () => {
     refetchOnFocus: true
   });
 //control polling from running when there is an error
-  useEffect(()=> {
-    if(error || editingOrder) {
-      setControlledPollingInterval(0)
+  
 
-    }
-  }, [error, setControlledPollingInterval, editingOrder])
+if(error || editingOrder) {
+  setControlledPollingInterval(0)
+  
+
+}
+
+
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (selectedTripId && fetchedTrip) {
+
+    if ( fetchedTrip !== trip) {
+      
       dispatch(setTrip(fetchedTrip));
+      window.scrollTo(0, 0);
     }
-  }, [selectedTripId, fetchedTrip, dispatch]);
+
+  
   
 
   
@@ -83,10 +89,13 @@ export const useGetTrip = () => {
 
   //handle view rider/driver assigned to trip
   const handleViewDispatcher = ()=> {
-    if(trip?.trip_medium === "Motor" ) {
+    const tripMedium = trip?.trip_medium;
+    if(tripMedium === "Motor" ) {
       dispatch(setActiveSection('Riders'))
       dispatch(setSelectedRiderId(dispatcher?.dispatcher_id))
-    } else {
+    } 
+    
+    if (tripMedium === "Car" || tripMedium === "Truck" ) {
       dispatch(setActiveSection('Drivers'))
       dispatch(setSelectedDriverId(dispatcher?.dispatcher_id))
     }

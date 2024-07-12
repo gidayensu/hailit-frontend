@@ -1,35 +1,14 @@
 "use client";
-import { CurrentTheme } from "../Dashboard/Nav/hook/useSetTheme";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 
-import { useAppSelector } from "@/lib/store/hooks";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 
 
 export default function SmallScreenTopNav() {
   
-  
 
-  
-  const {last_name, first_name} = useAppSelector(state=>state.user)
-  const { theme, setTheme, systemTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
-
-  //setting current theme. Not using useEffect result in hydration errors
-  useEffect(() => {
-    const preferredTheme: CurrentTheme =
-      localStorage.getItem("theme") || systemTheme || theme;
-    setCurrentTheme(preferredTheme);
-  }, [currentTheme]);
-
-  const handleThemeChange = () => {
-    setCurrentTheme(theme === "dark" ? "light" : "dark");
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
   const path = usePathname();
 
   const iconsAndTextDivClass =
@@ -63,7 +42,7 @@ export default function SmallScreenTopNav() {
         </div>
         <div
           className={`-ml-4 md:-ml-0 ${iconsAndTextDivClass}`}
-          onClick={handleThemeChange}
+          
         >
           <span className={iconsAndTextSpanClass}>
             <ThemeToggle />

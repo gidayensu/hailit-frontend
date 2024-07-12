@@ -1,29 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { CurrentTheme } from "../Dashboard/Nav/hook/useSetTheme";
-import { ThemeToggle } from "../Theme/ThemeToggle";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+import { useSetTheme } from "../Dashboard/Nav/hook/useSetTheme";
+import { ThemeToggle } from "../Theme/ThemeToggle";
 
 
 export function TopNavBar() {
-  const { theme, setTheme, systemTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState<CurrentTheme>("system"); // Default theme
+  const { theme } = useSetTheme();
+  
 
   //setting current theme. Not using useEffect result in hydration errors
-  useEffect(() => {
-    const preferredTheme: CurrentTheme =
-      localStorage.getItem("theme") || systemTheme || theme;
-    setCurrentTheme(preferredTheme);
-  }, [currentTheme]);
+  
 
-  const handleThemeChange = () => {
-    setCurrentTheme(theme === "dark" ? "light" : "dark");
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+
   const path = usePathname();
 
   const iconsAndTextDivClass =
@@ -73,11 +64,11 @@ export function TopNavBar() {
           </Button>
         </div>
       </Link>
-      <div className={iconsAndTextDivClass} onClick={handleThemeChange}>
+      <div className={iconsAndTextDivClass} >
         <span className={iconsAndTextSpanClass}>
           <ThemeToggle />
           <p className={iconTextClass}>
-            {currentTheme === "light" ? "Dark mode" : "Light mode"}
+            {theme === "light" ? "Dark mode" : "Light mode"}
           </p>
         </span>
       </div>

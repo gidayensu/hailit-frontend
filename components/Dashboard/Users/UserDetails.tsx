@@ -51,7 +51,7 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
           <section className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
             <DashboardCard
               number={userTrips?.total_trip_count || 0  }
-              title="Total Deliveries"
+              title="Orders"
               subTitle="All deliveries made"
             />
             <DashboardCard
