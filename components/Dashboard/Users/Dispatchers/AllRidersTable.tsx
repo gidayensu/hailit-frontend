@@ -1,6 +1,5 @@
 'use client'
-import { useState } from "react";
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 
 import {
@@ -11,15 +10,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import SkeletonTable from "../../SkeletonTable";
-import { useGetAllRiders } from "./hooks/useGetAllRiders";
+import { useState } from "react";
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
+import SkeletonTable from "../../SkeletonTable";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+import { useGetAllRiders } from "./hooks/useGetAllRiders";
 
 
 export function AllRiders() {
   const [page, setPage] = useState<number>(1);
-  const {data, riders, total_number_of_pages, error, isLoading} = useGetAllRiders(page);
+  const {data, riders, total_number_of_pages, error, isLoading, total_items} = useGetAllRiders(page);
 
   const {handleSelectedRiderId} = useDispatcherProfile("Rider")
   if (error) {
@@ -70,6 +71,11 @@ export function AllRiders() {
         </TableBody>
       </Table>
     </div>
+    {
+        riders && 
+
+      <ItemsCount currentItemsCount={riders.length} item="Riders" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
+      }
     <Pagination   setPage={setPage} totalPages={total_number_of_pages} storageKey="AllRiders"/>
     </>
   );

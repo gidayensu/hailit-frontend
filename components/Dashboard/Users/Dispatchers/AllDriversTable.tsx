@@ -1,18 +1,17 @@
-import { LuXCircle, LuCheckCircle2 } from "react-icons/lu";
-import { useGetAllDriversQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-import SkeletonTable from "../../SkeletonTable";
-import { Rating } from "./AllRiders";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
-  
-import { extractDateWithDayFromDate } from "@/lib/utils";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useGetAllDriversQuery } from "@/lib/store/apiSlice/hailitApi";
+import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
+import SkeletonTable from "../../SkeletonTable";
+import { Rating } from "./AllRidersTable";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 
 
 export function AllDrivers() {
@@ -26,6 +25,8 @@ export function AllDrivers() {
       </div>
     }
     return (
+      <>
+      
       <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
         <Table>
           <TableHeader>
@@ -61,6 +62,12 @@ export function AllDrivers() {
           </TableBody>
         </Table>
       </div>
+        {
+        drivers && 
+
+      <ItemsCount currentItemsCount={drivers.length} item="Drivers" page={1} total_items={drivers.length} total_number_of_pages={1} />
+      }
+      </>
     );
   }
   

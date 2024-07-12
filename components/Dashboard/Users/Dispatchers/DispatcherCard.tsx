@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import Link from "next/link";
-import { Rating } from "./AllRiders";
+import { Rating } from "./AllRidersTable";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 
 export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:any, editDispatcher:()=>void}) {

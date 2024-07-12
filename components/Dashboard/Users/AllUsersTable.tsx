@@ -1,5 +1,4 @@
 'use client'
-import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,20 +7,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useState } from "react";
 
+import { extractShortDate } from "@/lib/utils";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../SkeletonTable";
-import OrdersCard from "./OrdersCard";
-import { Modal } from "@/components/Shared/Modal";
-import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 
-
-import { useGetAllUsers } from "./hooks/useGetAllUsers";
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
-import { useUserProfile } from "./hooks/useUserProfile";
+import { useGetAllUsers } from "./hooks/useGetAllUsers";
 
 export default function AllUsersTable() {
   
@@ -29,7 +26,7 @@ export default function AllUsersTable() {
 
   
 
-  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection } = useGetAllUsers(page);
+  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items  } = useGetAllUsers(page);
 
   if (error) {
     return (
@@ -129,6 +126,11 @@ export default function AllUsersTable() {
         </TableBody>
       </Table>
     </div>
+      {
+        usersData && 
+
+      <ItemsCount currentItemsCount={usersData.length} item="Users" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
+      }
       <Pagination setPage={setPage} totalPages={total_number_of_pages} storageKey="AllUsers"/>
     </>
   );

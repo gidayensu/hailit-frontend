@@ -1,6 +1,6 @@
 'use client'
 import { useAppSelector } from "@/lib/store/hooks";
-import { AllRiders } from "./AllRiders";
+import { AllRiders } from "./AllRidersTable";
 import DispatcherDetails from "./DispatcherDetails";
 
 export default function AllRidersSection () {

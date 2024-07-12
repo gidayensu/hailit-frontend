@@ -13,12 +13,13 @@ import { useState } from "react";
 import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
 import { Button } from "@/components/ui/button";
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 
 export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
   
   
   const [page, setPage] = useState<number> (1);
-  const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error}  = useGetTrips({ page, table:"trips"});
+  const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error, total_items}  = useGetTrips({ page, table:"trips"});
  
   return (
     <>
@@ -92,8 +93,10 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
       </Table>
     </div>
       
-    <div>
-    <p className="text-[12px]">Page {page} of {total_number_of_pages} </p>
+    <div>{
+      tripsData && 
+      <ItemsCount currentItemsCount={tripsData.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
+      }
     </div>
     <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips"/>
     </>

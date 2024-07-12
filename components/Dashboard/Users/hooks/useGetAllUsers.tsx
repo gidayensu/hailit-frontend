@@ -35,7 +35,7 @@ export const useGetAllUsers = (page:number) => {
   
   const users = data?.users;
   const total_number_of_pages = data?.total_number_of_pages
-  
+  const total_items = data?.total_items;
   //prefetch users data
   const {handlePrefetchData} = usePrefetchData({endpoint: 'users', page, prefetchOption: 'getAllUsers', total_number_of_pages});
 
@@ -70,5 +70,5 @@ export const useGetAllUsers = (page:number) => {
   
 }, [dispatch])
 
-  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection };
+  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items  };
 };

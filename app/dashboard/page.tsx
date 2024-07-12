@@ -16,7 +16,7 @@ import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
 import AllTripsSection from "@/components/Dashboard/Orders/AllTripsSection";
 import Overview from "@/components/Dashboard/Overview/Overview";
 import TrackOrder from "@/components/Dashboard/TrackOrder/TrackOrderDetails";
-import AllUsers from "@/components/Dashboard/Users/AllUsers";
+import AllUsers from "@/components/Dashboard/Users/AllUsersSection";
 import AllDriversSection from "@/components/Dashboard/Users/Dispatchers/AllDriversSection";
 import AllRidersSection from "@/components/Dashboard/Users/Dispatchers/AllRidersSection";
 import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";

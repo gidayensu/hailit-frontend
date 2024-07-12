@@ -27,7 +27,7 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   
   const trips = data?.trips;
   const total_number_of_pages = data?.total_number_of_pages;
-
+  const total_items = data?.total_items;
   const {handlePrefetchData} = usePrefetchData({endpoint: 'trips', page, prefetchOption: 'getAllTrips', total_number_of_pages});
   
   //prefetch useEffect
@@ -56,5 +56,5 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   //   }
   // }, [trips, table, dispatch]); 
 
-  return { total_number_of_pages, data, trips, tripsData, overviewData, handleTrackTrip, isLoading, error };
+  return { total_number_of_pages, data, trips, tripsData, overviewData, handleTrackTrip, isLoading, error, total_items };
 };
