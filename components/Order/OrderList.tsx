@@ -19,23 +19,23 @@ export default function OrderList({
 }) {
   const [tripLoading, setTripLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const tripsPerPage = 5; // Number of trips per page
+  const tripsPerPage = 5; 
 
   const path = usePathname();
 
-  // Calculate the index range of trips to display based on current page
+  
   const indexOfLastTrip = currentPage * tripsPerPage;
   const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
   const currentTrips = trips.slice(indexOfFirstTrip, indexOfLastTrip);
 
-  // Handle next page click
+  
   const nextPage = () => {
     if (indexOfLastTrip < trips.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // Handle previous page click
+  
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -52,12 +52,10 @@ export default function OrderList({
               key={trip?.trip_id}
               href={
                 path.startsWith("/dispatcher/trips")
-                  ? `dispatcher/trips/${trip?.trip_id}`
+                  ? `/dispatcher/trips/${trip?.trip_id}`
                   : `track/${trip?.trip_id}`
               }
-              className={`w-full relative ${
-                tripLoading ? "opacity-30" : ""
-              }`}
+              className={`w-full relative `}
             >
               <OrderSummaryMin
                 deliveryStatus={trip?.trip_status}

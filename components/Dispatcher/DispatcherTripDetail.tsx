@@ -105,7 +105,7 @@ export default function DispatcherTripDetail () {
           </TrackOrderContainer>
 
           <TrackOrderContainer headingText="Location and Timeline">
-            <Container className="w-full flex flex-col gap-2 md:h-52 max-h-64 rounded-xl p-4 ">
+            <Container className="w-full flex flex-col gap-2  max-h-80 rounded-xl p-1 ">
               <OrderSummary trip={trip} />
             </Container>
           </TrackOrderContainer>

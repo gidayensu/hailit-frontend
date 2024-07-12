@@ -12,7 +12,7 @@ export default function PackageSection () {
           <Loader color="text-primary-color"/>
           </div>  
         }
-        <div className=" w-full  items-center gap-1.5">
+        <div className=" w-full   items-center gap-1.5">
           <OrderSummary trip={trip} />
         </div>
       </div>

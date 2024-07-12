@@ -1,9 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 import NoOrderHistory from "./NoOrderHistory";
-import NoData from "../Shared/NoData";
-import { Button } from "../ui/button";
 import OrderList from "./OrderList";
 import { useGetUserTrips } from "./hooks/useGetUserTrips";
 import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
@@ -49,7 +46,7 @@ export default function OrderHistory() {
             } text-primary-color dark:text-slate-100 w-1/2 h-8 -mr-1 text-center rounded-lg cursor-pointer`}
             onClick={() => setCurrentDeliveries(false)}
           >
-            Previous
+            Completed
           </span>
         </div>
       )}

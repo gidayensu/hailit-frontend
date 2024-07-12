@@ -1,5 +1,4 @@
 'use client'
-
 import Link from "next/link"
 import { DispatcherTrip } from "../Order/hooks/useGetUserTrips"
 import OrderSummary from "../Order/OrderSummary"
@@ -11,7 +10,7 @@ import TripsStats from "./TripsStats"
 export default function CourierDetail () {
     const { handleDispatcherTripId, dispatcher} = useGetDispatcher();
     return (
-      <main className="p-3 w-full flex flex-col items-center justify-center">
+      <main className="p-3 w-full flex flex-col items-center justify-center mb-20 md:mb-0">
         <TripsStats />
         <div className="w-full md:w-1/2 lg:w-2/5  space-y-2 mt-4">
           <h2 className="font-bold text-xl">
@@ -28,7 +27,7 @@ export default function CourierDetail () {
                   onClick={()=>handleDispatcherTripId(trip?.trip_id)}
                 >
                   <Container
-                    className="w-full p-2 rounded-lg "
+                    className="w-full rounded-lg "
                     key={trip?.trip_id}
                   >
                     <OrderSummary trip={trip} key={trip?.trip_id} />
