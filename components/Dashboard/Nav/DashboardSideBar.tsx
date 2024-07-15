@@ -61,8 +61,8 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Overview"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
-          url=""
+          
+          url="/"
         >
           <TbLayoutDashboard className="text-xl" />
         </DashboardSections>
@@ -71,7 +71,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Orders"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="orders"
         >
           <RiFileListLine className="text-xl" />
@@ -81,7 +81,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Track Order"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="track-order"
         >
           <TbRoute className="text-xl" />
@@ -91,7 +91,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Users"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="users"
         >
           <TbUser className="text-xl" />
@@ -101,7 +101,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Riders"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="dispatchers/riders"
         >
           <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
@@ -111,7 +111,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Drivers"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="dispatchers/drivers"
         >
           <RiSteering2Line className="text-xl -scale-x-100" />
@@ -120,7 +120,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Vehicles"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="vehicles"
         >
           <RiMotorbikeFill className="text-xl -scale-x-100" />
@@ -129,7 +129,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Analytics"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="analytics"
         >
           <MdInsertChartOutlined className="text-xl -scale-x-100" />
@@ -138,7 +138,7 @@ export default function DashboardSideBar({
           dashMin={dashMin}
           sectionName="Profile"
           onClickFunc={handleActiveSection}
-          activeSectionName={activeSection}
+          
           url="profile"
         >
           <TbUserEdit className="text-xl " />

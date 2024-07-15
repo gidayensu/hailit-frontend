@@ -79,7 +79,7 @@ export default function RootLayout({
     </main>
     <DashboardBottomNav
       activeSection={activeSection}
-      onClickFunc={handleActiveSection}
+      setActiveSection={handleActiveSection}
     />
   </>
 )}
