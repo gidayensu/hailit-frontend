@@ -1,12 +1,11 @@
 "use client";
 //next, redux, react, and supabase
-import { useEffect } from "react";
 import { useAppSelector } from "@/lib/store/hooks";
-import { useRouter } from "next/navigation";
 import { supabaseSession } from "@/lib/supabaseAuth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
-import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
 
 
 export default function Profile() {
@@ -20,10 +19,6 @@ export default function Profile() {
     
     const checkSession = async () => {
       const session = await supabaseSession();
-
-      if(!authenticationState || !session) {
-        router.push('/authentication')
-      }
     
       if (authenticationState && session) {
         if (!onboard) {
@@ -45,12 +40,8 @@ export default function Profile() {
   return (
     <>
       <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
+        {!authenticationState && <Authentication />}
         
-        {authenticationState && user_role === "Customer" && (
-          
-            <ProfilePageDetails />
-          
-        )}
       </main>
     </>
   );

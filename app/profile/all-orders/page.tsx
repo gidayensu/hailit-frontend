@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 export default function AllOrders () {
     //redirect users who are not customers
   const {user_role} = useAppSelector(state=>state.user);
-  user_role && user_role !== "Customer" ? redirect('/profile') : ''
+  user_role && user_role !== "Customer" ? redirect('/authentication') : ''
     return (
       <main className="flex min-h-screen flex-col items-center gap-10 ">
         <TopSectionContainer className="">

@@ -7,7 +7,7 @@ export default function Dispatcher() {
   const { user_role, trips } = useGetDispatcher();
 
   if (user_role === "Customer" || user_role === "Admin" || !user_role) {
-    redirect('/profile') 
+    redirect('/authentication') 
 }
 
   return (

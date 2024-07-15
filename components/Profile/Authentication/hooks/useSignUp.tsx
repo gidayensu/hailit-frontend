@@ -106,7 +106,7 @@ export const useSignUp =  () => {
       );
       const onboard = user.onboard;
       dispatch(setAuthState(true));
-      onboard ? router.push("/profile") : router.push("/onboarding");
+      onboard ? router.push("/") : router.push("/onboarding");
     }
 
     return {

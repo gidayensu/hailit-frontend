@@ -7,7 +7,7 @@ import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher"
 export default function Dispatcher () {
     const {user_role} = useGetDispatcher();
     if (user_role === "Customer" || user_role === "Admin" || !user_role) {
-        redirect('/profile') 
+        redirect('/authentication') 
     }
     return (
         <main className="flex flex-col gap-3 p-4 items-center w-full justify-center">

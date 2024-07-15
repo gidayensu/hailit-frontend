@@ -29,7 +29,7 @@ export default function Home() {
       const session = await supabaseSession();
       
       if (!session) {
-        router.push('/profile');
+        router.push('/authentication');
       } else {
         setLoading(false);
       }
@@ -40,7 +40,7 @@ export default function Home() {
   
   //redirect users who are not customers
   const {user_role} = useAppSelector(state=>state.user);
-  user_role && user_role !== "Customer" ? redirect('/profile') : ''
+  user_role && user_role !== "Customer" ? redirect('/authentication') : ''
 
   if (loading) {
     return <BigLoader/>
