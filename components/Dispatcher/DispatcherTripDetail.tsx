@@ -30,7 +30,7 @@ export default function DispatcherTripDetail () {
     
   const { user_role } = useGetDispatcher();
   if (user_role === "Customer" || !user_role) {
-    redirect("/profile");
+    redirect("/authentication");
   }
   let updateStatus: TripStatus = "Picked Up";
   let updateStage: TripStage = 2;
