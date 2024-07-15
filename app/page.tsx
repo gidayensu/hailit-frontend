@@ -15,7 +15,7 @@ import OrderHistory from "@/components/Order/OrderHistory";
 import OtherActions from "@/components/Home/OtherActions";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/lib/store/hooks";
-export type Deliveries = boolean;
+
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

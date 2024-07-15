@@ -1,8 +1,5 @@
 // This is UI with minimal detail such as trip id, trip request data, delivery state, cost, and package type. 
 'use client'
-import { PackageType } from "./types/Types";
-
-
 import { IoArchive, IoFastFood } from "react-icons/io5";
 import { IoDocumentText, IoShirt } from "react-icons/io5";
 import { MdLineWeight, MdOutlineLineWeight } from "react-icons/md";
@@ -62,10 +59,9 @@ export default function OrderSummaryMin({
     }
     break;
     case("Clothes"): {
-      deliveryTypeIcon = < IoShirt className="text-cyan-400 dark:text-cyan-500"/> 
+      deliveryTypeIcon = < IoArchive className="text-cyan-400 dark:text-cyan-500"/> 
       deliveryTypeIconBgClass = "bg-cyan-100 dark:bg-cyan-200"; 
     }
-    break;
     case("Others"): {
       deliveryTypeIcon = < PiPackageFill className="text-amber-400 dark:text-amber-500"/> 
       deliveryTypeIconBgClass = "bg-amber-100 dark:bg-amber-200"; 
@@ -87,7 +83,7 @@ export default function OrderSummaryMin({
       </div>
       }
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
-      <Container className={`${className} flex items-center  gap-3 justify-between   h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
+      <Container className={`${className} flex  gap-3 justify-between   h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
         <div className="flex gap-2">
 
           <span className={`flex justify-center items-center ${deliveryTypeIconBgClass} w-10 h-10 rounded-md text-2xl`}>
@@ -132,4 +128,10 @@ export default function OrderSummaryMin({
     | "Booked"
     |  "Yet to Book";
   
-  
+  export type PackageType = | "Electronics"
+  | "Food"
+  | "Fragile"
+  | "Clothes"
+  | "Documents"
+  | "Bulky Items"
+  | "Others";

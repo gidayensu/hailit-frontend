@@ -3,7 +3,7 @@ import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
-
+import { Trip } from "@/lib/store/slice/tripSlice";
 export default function OrdersCard({userId}:{userId:string}) {
   const  {data, isLoading, handleTrackTrip} = useGetUserTrips(userId);
   
@@ -25,7 +25,7 @@ export default function OrdersCard({userId}:{userId:string}) {
           <div className={`flex items-center justify-center bg-primary-color text-white dark:text-slate-100 w-full h-8 text-center rounded-lg`} >
             Recent Orders
           </div>
-                    {data?.trips?.customer_trips?.map((trip:any, index:number)=> 
+                    {data?.trips?.customer_trips?.map((trip:Trip, index:number)=> 
                     <>
                       { index <= 2 &&
                         <div onClick={()=>handleTrackTrip(trip.trip_id)} key={trip.trip_id}>

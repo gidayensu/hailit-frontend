@@ -1,8 +1,30 @@
 import { useCallback, useEffect } from "react";
 import { usePrefetch } from "@/lib/store/apiSlice/hailitApi";
+const endpointNames = [
+  "getAllTrips",
+  "getTrip",
+  "getUserTrips",    
+  "getCurrentMonthTripCounts",
+  "getTripMonths",
+  "getWeekTripCount",
+  "getTripCountsByMonth",
+  "getTripRevenueByMonth",
+  "searchTrips",
+  "getAllUsers",
+  "getAdmin",
+  "getUser",
+  "getAllDrivers",
+  "getDriver",
+  "getAllRiders",
+  "getRider",
+  "getAllVehicles",
+  "getVehicle",
+] as const;
+
+type EndpointNames = typeof endpointNames[number]
 
 
-export const usePrefetchData = ({page, prefetchOption, total_number_of_pages, endpoint}:{page:number, prefetchOption:any, total_number_of_pages:number, endpoint:string}  ) => {
+export const usePrefetchData = ({page, prefetchOption, total_number_of_pages, endpoint}:{page:number, prefetchOption:EndpointNames, total_number_of_pages:number, endpoint:string}  ) => {
   //prefetching first five and last pages as well as previous and next pages
 const prefetchTrip = usePrefetch(prefetchOption);
   

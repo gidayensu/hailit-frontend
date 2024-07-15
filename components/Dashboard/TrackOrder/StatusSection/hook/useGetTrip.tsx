@@ -10,19 +10,16 @@ import {
   setSelectedDriverId
 } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
+import { useParams } from "next/navigation";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-export type OrderStatus =
-  | "Booked"
-  | "Picked Up"
-  | "In Transit"
-  | "Delivered"
-  | "Cancelled";
-
+import { useRouter } from "next/navigation";
 
 export const useGetTrip = () => {
   const inputRef = useRef<any>(null);
+  const params = useParams();
+
+  const router  = useRouter();
 
   const {
     previousSelectedTripId,
@@ -34,9 +31,9 @@ export const useGetTrip = () => {
   } = useAppSelector((state) => state.dashboard);
 
   const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(5000);
-  
+  const { trip_id } = params;
   const trip = useAppSelector((state)=>state.trip)
-  const { data, isLoading, error } = useGetTripQuery(`${selectedTripId}`, {
+  const { data, isLoading, error } = useGetTripQuery(trip_id, {
     pollingInterval: controlledPollingInterval,
     refetchOnFocus: true
   });
@@ -47,6 +44,7 @@ export const useGetTrip = () => {
 
     }
   }, [error, setControlledPollingInterval, editingOrder])
+  
   const fetchedTrip = data?.trip
   const dispatch = useAppDispatch();
 
@@ -78,10 +76,12 @@ export const useGetTrip = () => {
     const tripId = inputRef.current?.value;
     dispatch(setTrackingOrder(true));
     dispatch(setSelectedTripId(tripId));
+    router.push(`/dashboard/track-order/${tripId}`)
   };
 
   //handle view rider/driver assigned to trip
   const handleViewDispatcher = ()=> {
+    console.log('TRIP MEDIUM:',trip?.trip_medium)
     if(trip?.trip_medium === "Motor" ) {
       dispatch(setActiveSection('Riders'))
       dispatch(setSelectedRiderId(dispatcher?.dispatcher_id))
@@ -89,6 +89,7 @@ export const useGetTrip = () => {
       dispatch(setActiveSection('Drivers'))
       dispatch(setSelectedDriverId(dispatcher?.dispatcher_id))
     }
+    router.push('/dashboard/dispatchers/dispatcher-details')
   }
   //TODO:MOVE THIS
   const handleUsersOrTripsNav = (section: ActiveSection) => {

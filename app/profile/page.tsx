@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
+import { supabaseSession } from "@/lib/supabaseAuth";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
 import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
@@ -16,15 +17,23 @@ export default function Profile() {
 
 
   useEffect(() => {
-    if (authenticationState) {
-      if (!onboard) {
-        router.push("/onboarding");
-      } else if (user_role === "Admin") {
-        router.push("/dashboard");
-      } else if (user_role === "Driver" || user_role === "Rider") {
-        router.push('/dispatcher');
+    const checkSession = async () => {
+      const session = await supabaseSession();
+    
+      if (authenticationState && session) {
+        if (!onboard) {
+          router.push("/onboarding");
+        } else if (user_role === "Admin") {
+          router.push("/dashboard");
+        } else if (user_role === "Driver" || user_role === "Rider") {
+          router.push('/dispatcher');
+        }
       }
-    }
+      
+    };
+    
+    checkSession();
+
   }, [authenticationState, onboard, user_role, router]);
 
 

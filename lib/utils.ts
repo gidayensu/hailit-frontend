@@ -75,14 +75,15 @@ interface GeoData {
 }
 
 
-export const extractTimeFromDate = (dateString:string | any)=> {
+export const extractTimeFromDate = (dateString: string | Date | null): string | null => {
   if (dateString === null) {
-    return null
+    return null;
   }
-const date = new Date(dateString)
-return date.toLocaleTimeString();
+  
+  const date = new Date(dateString);
 
-}
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
 
 export const checkTimeOfDay = () => {
   const currentHour = new Date().getHours();

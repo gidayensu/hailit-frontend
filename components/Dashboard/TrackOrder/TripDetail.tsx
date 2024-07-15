@@ -11,6 +11,8 @@ import { setEditingOrder, setTrackingOrder, } from "@/lib/store/slice/dashboardS
 import { extractShortDate } from "@/lib/utils";
 import { useDeleteTrip } from "../hooks/useDeleteTrip";
 import { useGetTrip } from "./StatusSection/hook/useGetTrip";
+import { useAppSelector } from "@/lib/store/hooks";
+import { Trip } from "@/lib/store/slice/tripSlice";
 //main components
 import CustomerSection from "./CustomerSection";
 import DispatcherSection from "./Dispatcher/DispatcherSection";
@@ -18,16 +20,12 @@ import PackageSection from "./PackageSection";
 import PaymentSection from "./PaymentSection";
 import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
+import { useEffect } from "react";
 
 //interface
 
-export default function TripDetail () {
-  const {
-    trip,
-    
-    selectedTripId
-  } = useGetTrip();
-    
+export default function TripDetail ({trip}: {trip:Trip}) {
+  const {selectedTripId} = useAppSelector(state=>state.dashboard)
     const {handleDeleteTrip, isLoading, error, isSuccess} = useDeleteTrip(selectedTripId)
 
     const dispatch = useAppDispatch();
@@ -40,7 +38,9 @@ export default function TripDetail () {
      dispatch(setTrackingOrder(false))
 
     }
-
+    useEffect(()=>  {
+     window.scrollTo(0, 0);
+    }, [trip.trip_id])
     
     // useEffect(()=>  {
     //  window.scrollTo(0, 0);
@@ -130,7 +130,7 @@ export default function TripDetail () {
               <Container className="flex flex-col  w-full   h-72 rounded-lg p-3 gap-2">
                 <UserOtherTrips
                   userId={trip.customer_id}
-                  
+                  tripId={trip.trip_id}
                 />
               </Container>
             </div>

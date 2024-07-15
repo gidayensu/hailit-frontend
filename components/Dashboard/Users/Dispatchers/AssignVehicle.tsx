@@ -6,8 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAssignVehicle } from "./hooks/useAssignVehicle";
 import Loader from "@/components/Shared/Loader";
-
-export default function AssignVehicle({dispatcher}:{dispatcher:any}) {
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
+export default function AssignVehicle({dispatcher}:{dispatcher:Dispatcher}) {
   
   const {
     vehicles,

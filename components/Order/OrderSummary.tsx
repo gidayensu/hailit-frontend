@@ -1,12 +1,12 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { extractDateWithDayFromDate, extractTimeFromDate } from "@/lib/utils";
+import { extractDateWithDayFromDate, extractTimeFromDate, extractShortDate } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { HiLocationMarker } from "react-icons/hi";
 import { useAppSelector } from "@/lib/store/hooks";
+import { Trip } from "@/lib/store/slice/tripSlice";
 
-
-export default function OrderSummary({ trip }: { trip:any }) {
+export default function OrderSummary({ trip }: { trip:Trip }) {
   const { tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip);
   
   const path = usePathname();
@@ -94,7 +94,7 @@ export default function OrderSummary({ trip }: { trip:any }) {
             <div className="grid grid-cols-8 sm:flex items-start gap-1 w-full -mt-5  ">
               <HiLocationMarker className="col-span-1 text-xl text-green-500" />
               <span className="flex flex-col col-span-7 ">
-                <p className="text-sm font-semibold">Pickup Point</p>
+                <p className="text-sm font-semibold">Dropoff Point</p>
                 <p className="text-sm lg:w-64    ">{trip.drop_off_location}</p>
               </span>
             </div>
@@ -121,11 +121,11 @@ export default function OrderSummary({ trip }: { trip:any }) {
   );
 }
 
-const tripDates = (trip:any)=> {
+const tripDates = (trip:Trip)=> {
   const { trip_request_date, trip_commencement_date, trip_completion_date } =  trip;
   const tripRequestDate = extractDateWithDayFromDate(trip_request_date) || 'TBD';
-  const tripCommencementDate = extractDateWithDayFromDate(trip_commencement_date ) || 'TBD';
-  const tripCompletionDate = extractDateWithDayFromDate(trip_completion_date) || 'TBD';
+  const tripCommencementDate = extractShortDate(trip_commencement_date ) || 'TBD';
+  const tripCompletionDate = extractShortDate(trip_completion_date) || 'TBD';
   const tripCommencementTime = extractTimeFromDate(trip_commencement_date) || 'TBD';
   const tripCompletionTime = extractTimeFromDate(trip_completion_date) || 'TBD';
 

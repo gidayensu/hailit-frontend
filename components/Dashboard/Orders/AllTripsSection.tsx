@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import { AllTripsData } from "./AllTripsTable";
-import AddTrip from "./AddTrip";
+import { AllTripsTable } from "./AllTripsTable";
+import AddTrip from "./AddOrder";
 export default function AllTripsSection() {
-  const [addTrip, setAddTrip] = useState<boolean>(() => {
+  const [addTrip, setAddOrder] = useState<boolean>(() => {
     const saved = localStorage.getItem('addTrip');
     return saved !== null ? JSON.parse(saved) : false;
   });
 
   const toggleAddTrip = () => {
-    setAddTrip((prevAddTrip) => {
+    setAddOrder((prevAddTrip) => {
       const newAddTrip = !prevAddTrip;
       localStorage.setItem('addTrip', JSON.stringify(newAddTrip));
       return newAddTrip;
@@ -19,9 +19,9 @@ export default function AllTripsSection() {
 
   return (
     <>
-      {!addTrip && <AllTripsData setAddTrip={toggleAddTrip} />}
+      {!addTrip && <AllTripsTable />}
 
-      {addTrip && <AddTrip setAddTrip={toggleAddTrip}/>}
+      {addTrip && <AddTrip />}
     </>
   );
 }

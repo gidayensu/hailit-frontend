@@ -1,11 +1,9 @@
 "use client";
 //packages + react + next + redux
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
-import { setBoardingCompletion, setOnboardingStages} from "@/lib/store/slice/onBoardingSlice";
+import { setBoardingCompletion, setOnboardingStages } from "@/lib/store/slice/onBoardingSlice";
 import { setUser } from "@/lib/store/slice/userSlice";
+import { useRouter } from "next/navigation";
 
 export const useOnboarding = ()=> {
   

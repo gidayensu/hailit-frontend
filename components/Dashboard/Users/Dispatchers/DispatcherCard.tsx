@@ -7,11 +7,12 @@ import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import Link from "next/link";
 import { Rating } from "./AllRidersTable";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
 
-export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:any, editDispatcher:()=>void}) {
+export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:Dispatcher, editDispatcher:()=>void}) {
   
   
-  const {handleDeleteDispatcher, dispatcherDeleteError, dispatcherDeleteLoading, dispatcherDeleteSuccess} = useDispatcherProfile(dispatcher.user_role)
+  const {handleDeleteDispatcher, dispatcherDeleteError, dispatcherDeleteLoading, dispatcherDeleteSuccess} = useDispatcherProfile()
 
     return (
       <Container className="flex gap-2 max-h-96 w-full rounded-xl flex-col items-center justify-start p-5">
@@ -50,7 +51,7 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
           <span><b>Email:</b>  <Link className="underline hover:text-primary-color" href="mailto:{selectedUser?.email}">{dispatcher?.email}</Link></span>
           <span><b>Phone:</b> <Link className="underline hover:text-primary-color" href="tel:{selectedUser?.phone_number}"> {dispatcher?.phone_number} </Link></span>
             <p className="flex gap-1 items-center justify-center"> <b>Rating:</b><Rating rating={dispatcher?.cumulative_rating}/>  ({dispatcher?.rating_count})</p>
-            <p> <b>Assigned Vehicle:</b>{dispatcher?.vehicle.vehicle_name}</p>
+            <p> <b>Assigned Vehicle:</b>{dispatcher?.vehicle?.vehicle_name}</p>
           </div>
         </div>
 

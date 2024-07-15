@@ -2,7 +2,7 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Loader from "../Shared/Loader";
-import { Trip } from "./hooks/useGetUserTrips";
+import { Trip } from "@/lib/store/slice/tripSlice";
 import OrderSummaryMin from "./OrderSummaryMin";
 import NoOrderHistory from "./NoOrderHistory";
 import { usePathname } from "next/navigation";

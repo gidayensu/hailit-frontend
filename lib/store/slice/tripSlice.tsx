@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+import { UserRole } from "./userSlice";
+import { TripStatus, TripMedium,  } from "@/components/Order/types/Types";
 const initialState:Trip = {
     
       trip_stage: 0,
@@ -30,12 +31,13 @@ const initialState:Trip = {
       //dispatcher is structured to match both drivers and riders
       dispatcher: {
         rating_count: 0,
-        cumulative_rating: "0.0",
+        cumulative_rating: 0.,
         user_id: "",
         dispatcher_id: "",
         license_number: "",
         available: false,
         vehicle_id: "",
+        user_role: "Rider",
         first_name: "",
         last_name: "",
         phone_number: "",
@@ -79,17 +81,18 @@ export const {
 
 
 export interface Dispatcher {
-    rating_count?: number;
-    cumulative_rating?: string;
+    rating_count: number;
+    cumulative_rating: number;
     user_id: string;
-    //was previously optional. If no bug is identified, will maintain it as required
+    user_role:"Driver" | "Rider"; ///REVISIT
+    //distapcher_id was previously optional. If no bug is identified, will maintain it as required
     dispatcher_id: string;
-    
     license_number?: string;
     available?: boolean;
     vehicle_id?: string;
     first_name: string;
     last_name: string;
+    email?: string;
     phone_number?: string;
     vehicle?: Vehicle
   }
@@ -112,8 +115,8 @@ export interface Dispatcher {
     promo_code: string;
     dispatcher_id: string;
     customer_id: string;
-    trip_medium: "Car" | "Truck" | "Motor";
-    trip_status: OrderStatus;
+    trip_medium: TripMedium;
+    trip_status: TripStatus;
     package_type: string;
     pickup_location: string;
     drop_off_location: string;

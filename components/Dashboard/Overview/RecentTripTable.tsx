@@ -9,16 +9,15 @@ import {
 } from "@/components/ui/table";
 
 import { Trip } from "@/lib/store/slice/tripSlice";
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
-  
-import { extractShortDate, extractBeforeComma } from "@/lib/utils";
 
 import { useGetTrips } from "../hooks/useGetTrips";
-
 export function RecentTripTable() {
     
-  const {overviewData, handleTrackTrip, isLoading, error}  = useGetTrips({page: 1, table:"overview"});
-
+  const {overviewData,  isLoading, error, handleTrackTrip, tripLoading, selectedTripId}  = useGetTrips({page: 1, table:"overview"});
+  
     if (error) {
       return <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!</p>
@@ -43,8 +42,12 @@ export function RecentTripTable() {
             isLoading && <SkeletonTable rows={7} cells={9}/>
           }
           {overviewData && overviewData.map((trip:Trip) => (
-            
-            <TableRow key={trip?.trip_id} onClick={()=>handleTrackTrip(trip?.trip_id)} >
+            <>
+            { tripLoading && selectedTripId === trip.trip_id &&
+
+              <DashboardTableItemLoader/>
+            }
+            <TableRow key={trip?.trip_id} onClick={()=>handleTrackTrip(trip?.trip_id)} className={`cursor-pointer ${tripLoading && selectedTripId === trip.trip_id ?  'opacity-10': ''}`} >
               <TableCell className="font-medium">{trip?.trip_id} </TableCell>
               
               <TableCell>{extractShortDate(trip.trip_request_date)} </TableCell>
@@ -79,6 +82,7 @@ export function RecentTripTable() {
               
                 <TableCell><span className="text-decoration: underline">view</span></TableCell>
             </TableRow>
+            </>
           ))}
         </TableBody>
       </Table>

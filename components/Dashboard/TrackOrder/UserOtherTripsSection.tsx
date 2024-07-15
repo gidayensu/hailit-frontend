@@ -1,24 +1,32 @@
+'use client'
 import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
-import { Trip } from "@/components/Order/hooks/useGetUserTrips";
+import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
-
+import { useRouter } from "next/navigation";
 
 export default function UserOtherTrips({
   userId,
-  
+  tripId,
 }: {
   userId: string;
-  
+  tripId: string
 }) {
-  const { isLoading, handleTrackTrip,  otherTrips } = useGetUserTrips(userId);
-  console.log({otherTrips})
+  const router = useRouter();
+  const { isLoading, trips   } = useGetUserTrips(userId);
+   const handleTrackTrip = (tripId:string)=> {
+      router.push(`/dashboard/track-order/${tripId}`)
+
+   }
   
   //when a user is changed from customer to rider/driver, the user's previous trips remain.
   //however, when the trips are fetched, since they are fetched as dispatcher trips since the current user_role is rider/driver
-  
+  let otherTrips: Trip[] = [];
+    trips?.dispatcher_trips 
+    ?  otherTrips = trips?.dispatcher_trips.filter((trip: Trip) => trip.trip_id !== tripId) 
+    : otherTrips = trips?.customer_trips.filter((trip: Trip) => trip.trip_id !== tripId)
   
   const noOrders = !otherTrips || otherTrips.length < 1;
 
@@ -39,7 +47,7 @@ export default function UserOtherTrips({
               )}
               {otherTrips?.length >0 && (
                 <>
-                  {otherTrips.map((trip: any, index: number) => (
+                  {otherTrips.map((trip: Trip, index: number) => (
                     <div key={index}>
                       {index <= 2 && (
                         <div key={trip?.trip_id} onClick={() => handleTrackTrip(trip?.trip_id)}>

@@ -12,13 +12,15 @@ import { useState } from "react";
 import { extractShortDate } from "@/lib/utils";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../SkeletonTable";
-
+import Link from "next/link";
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import { Button } from "@/components/ui/button";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
 import { useGetAllUsers } from "./hooks/useGetAllUsers";
+import { useRouter } from "next/navigation";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
 
 export default function AllUsersTable() {
   
@@ -26,7 +28,29 @@ export default function AllUsersTable() {
 
   
 
-  const { data, usersData, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items  } = useGetAllUsers(page);
+  const {
+    data,
+    usersData,
+    isLoading,
+    error,
+    total_number_of_pages,
+    handleSetSelectedUser,
+    handleRidersSection,
+    handleDriversSection,
+    total_items,
+    selectedUserId,
+  } = useGetAllUsers(page);
+  
+  const [userLoading, setUserLoading] = useState<boolean>(false);
+  
+  const router = useRouter();
+  const handleUserDetails = (userId:string)=> {
+    handleSetSelectedUser(userId)
+    setUserLoading(true)
+    router.push('/dashboard/users/user-details')
+  }
+
+
 
   if (error) {
     return (
@@ -57,7 +81,7 @@ export default function AllUsersTable() {
                   onClick={handleDriversSection}
                 >
                   <RiSteering2Line className="text-xl " />
-                  <p>Drivers</p>
+                  <p>Users</p>
                 </Button>
               </section>
     <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
@@ -83,8 +107,17 @@ export default function AllUsersTable() {
           {isLoading && <SkeletonTable rows={7} cells={8} />}
           {data && usersData?.length && usersData &&
             usersData.map((user: any) => (
+              <>
+              {userLoading && selectedUserId === user.user_id && (
+                      <DashboardTableItemLoader />
+                    )}
               <TableRow key={user.user_id} 
-              onClick={()=>handleSetSelectedUser(user.user_id)}
+              onClick={()=>handleUserDetails(user.user_id)}
+              className={`cursor-pointer ${
+                userLoading && selectedUserId === user.user_id
+                  ? "opacity-20"
+                  : ""
+              } `}
               >
                 <TableCell>
                   
@@ -122,6 +155,8 @@ export default function AllUsersTable() {
                   )}
                 </TableCell> */}
               </TableRow>
+              </>
+              
             ))}
         </TableBody>
       </Table>

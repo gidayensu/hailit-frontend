@@ -10,7 +10,9 @@ import AssignVehicle from "./AssignVehicle";
 import { Modal } from "@/components/Shared/Modal";
 import DashboardModal from "../../DashboardModal";
 import { useAssignVehicle } from "./hooks/useAssignVehicle";
-export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:any, handleGoBack: ()=>void}) {
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
+
+export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Dispatcher, handleGoBack: ()=>void}) {
   
 
   

@@ -1,22 +1,14 @@
-import { Separator } from "../ui/separator";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import {
-  setPickUpLocation,
-  setDropOffLocation,
-  setSearchCard,
-} from "@/lib/store/slice/mapSlice";
-import { Skeleton } from "../ui/skeleton";
-import { UserLocation } from "./MainMap";
 import { getSpecificName } from "@/lib/utils";
+import { Separator } from "../ui/separator";
 
-import SearchItem from "./SearchItem";
-import { LocationType } from "./hook/useMap";
-import { useLocationSearch } from "./hook/useLocationSearch";
 import Loader from "../Shared/Loader";
+import SearchItem from "./SearchItem";
+import { useLocationSearch } from "./hook/useLocationSearch";
+import { LocationType } from "./hook/useMap";
 
 export default function SearchResults({locationType}: {locationType:LocationType}) {
   
-  const {mapDataHandler, inputRef, isLoading, searchData,  searchContainer, selectedSearchItemHandler} = useLocationSearch(locationType)
+  const {isLoading, searchData,  searchContainer, selectedSearchItemHandler} = useLocationSearch(locationType)
   
   return (
     <>

@@ -17,7 +17,7 @@ import {
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useState } from "react";
 
-export function useAddTripOutcome() {
+export function useAddOrderOutcome() {
   const [loading, setLoading] = useState<boolean>(false);
   const { trip_id, order_success } = useAppSelector((state) => state.newOrder);
 

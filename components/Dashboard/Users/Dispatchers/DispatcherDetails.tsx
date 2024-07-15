@@ -13,11 +13,7 @@ import DispatcherTripsTable from "./DispatcherTripsTable";
 
 //DispatcherDetails accepts userRole (rider/driver) to show details based on the userRole
 
-export default function DispatcherDetails({
-  userRole,
-}: {
-  userRole: "Driver" | "Rider";
-}) {
+export default function DispatcherDetails() {
   const [editDispatcher, setEditDispatcher] = useState<boolean>(false);
 
   const {
@@ -28,7 +24,7 @@ export default function DispatcherDetails({
     
     dispatcherLoading,
     total_trip_count
-  } = useDispatcherProfile(userRole);
+  } = useDispatcherProfile();
 
   
 
@@ -47,15 +43,13 @@ export default function DispatcherDetails({
 
   return (
     <>
-      <Button variant={"outline"} onClick={handleGoBack} className="mb-4 w-16">
-        <MdArrowBack />
-      </Button>
-      {!editDispatcher && dispatcherError && (
+      
+      {dispatcherError && (
         <div>
           <p>Error Occurred</p>
         </div>
       )}
-      {!editDispatcher && !dispatcherError && (
+      {!dispatcherError && (
         <>
           {dispatcherLoading && (
             <div className="flex gap-2 w-full flex-col md:flex-row">
@@ -123,7 +117,7 @@ export default function DispatcherDetails({
                   )}
 
                   <Container className="rounded-xl flex justify-center items-center">
-                    <DispatcherTripsTable userRole={userRole} />
+                    <DispatcherTripsTable  />
                   </Container>
                 </section>
               </div>

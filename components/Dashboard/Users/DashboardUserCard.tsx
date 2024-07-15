@@ -61,7 +61,7 @@ export default function DashboardUserCard ({selectedUser, editUser}: {selectedUs
                 variant={"empty"}
                 className="text-red-500 border border-red-500 hover:text-white hover:bg-red-500"
               >
-                Delete User
+                Delete {selectedUser?.user_role}
               </Button>
             }
 

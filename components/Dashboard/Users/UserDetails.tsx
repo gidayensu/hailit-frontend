@@ -5,7 +5,7 @@ import { MdArrowBack } from "react-icons/md";
 import DashboardCard from "../DashboardCard";
 import DashboardUserCard from "./DashboardUserCard";
 import { useUserProfile } from "./hooks/useUserProfile";
-import UserTripsTable from "./UserTripsTable";
+import NonDispatcherTripsTable from "./NonDispatcherTripsTable";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { useState } from "react";
 
@@ -33,7 +33,7 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
 
     return (
         <>
-        <Button variant={'outline'} onClick={handleGoBack} className="mb-4 w-16"><MdArrowBack /> </Button>
+        
         {
           !editUser &&
           <> 
@@ -82,7 +82,7 @@ const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDesel
             }
 
           <Container className="rounded-xl flex justify-center items-center">
-            <UserTripsTable />
+            <NonDispatcherTripsTable />
           </Container>
           </section>
         </div>

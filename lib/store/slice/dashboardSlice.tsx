@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TripStatus, TripStage } from "@/components/Order/types/Types";
-
+import { DispatcherRole } from "@/components/Dashboard/Users/Dispatchers/hooks/useDispatcherProfile";
 
 
 export type ActiveSection =
@@ -36,6 +36,7 @@ export interface DashboardDetails {
     selectedTripId: string,
     selectedRiderId: string,
     selectedDriverId:string,
+    dispatcherRole: DispatcherRole,
     trackingOrder: boolean,
     editingOrder: boolean,
     assignedDispatcherId: string,     
@@ -58,6 +59,7 @@ export const initialState: DashboardDetails = {
     selectedRiderId: '',
     trackingOrder: false,
     assignedDispatcherId: '', 
+    dispatcherRole: 'Rider',
     tripStatus: '',
     tripStage: 1,
     previousSelectedTripId : '',
@@ -86,6 +88,10 @@ export const dashboardSlice = createSlice({
             state.selectedRiderId = action.payload             
         },
 
+        setDispatcherRole (state, action: PayloadAction<DispatcherRole>) {
+            state.dispatcherRole = action.payload
+        }, 
+
         setSelectedUserId (state, action:PayloadAction<string>) {
             state.selectedUserId = action.payload           
             
@@ -108,4 +114,15 @@ export const dashboardSlice = createSlice({
     }
 })
 
-export const { setActiveSection, setSelectedTripId, setTrackingOrder,  setTripStatus, setPreviousSelectedTripId, setEditingOrder, setSelectedUserId, setSelectedDriverId, setSelectedRiderId } = dashboardSlice.actions
+export const {
+  setActiveSection,
+  setSelectedTripId,
+  setTrackingOrder,
+  setTripStatus,
+  setPreviousSelectedTripId,
+  setEditingOrder,
+  setSelectedUserId,
+  setSelectedDriverId,
+  setSelectedRiderId,
+  setDispatcherRole
+} = dashboardSlice.actions;

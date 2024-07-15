@@ -1,7 +1,7 @@
 'use client'
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
-
+import DashboardTableItemLoader from "../../DashboardTableItemLoader";
 import {
   Table,
   TableBody,
@@ -16,13 +16,23 @@ import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../../SkeletonTable";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 import { useGetAllRiders } from "./hooks/useGetAllRiders";
-
+import { useRouter } from "next/navigation";
 
 export function AllRiders() {
   const [page, setPage] = useState<number>(1);
   const {data, riders, total_number_of_pages, error, isLoading, total_items} = useGetAllRiders(page);
 
-  const {handleSelectedRiderId} = useDispatcherProfile("Rider")
+  const router =useRouter();
+  const {handleSelectedRiderId, selectedRiderId, handleSetDispatcherRole} = useDispatcherProfile()
+  const [riderLoading, setRiderLoading] = useState<boolean>(false);
+
+  const handleSelectedRider = (riderId:string)=> {
+    handleSelectedRiderId(riderId)
+    setRiderLoading(true)
+    handleSetDispatcherRole('Rider');
+    router.push('/dashboard/dispatchers/dispatcher-details')
+
+  }
   if (error) {
     return (
       <div>
@@ -50,7 +60,16 @@ export function AllRiders() {
           {isLoading && <SkeletonTable rows={5} cells={8} />}
           {data &&
             riders.map((rider: any) => (
-              <TableRow key={rider.rider_id} onClick={()=>handleSelectedRiderId(rider.rider_id)}>
+              <>
+                {riderLoading && selectedRiderId === rider.rider_id && (
+                      <DashboardTableItemLoader />
+                    )}
+              <TableRow key={rider.rider_id} onClick={()=>handleSelectedRider(rider.rider_id)}
+                className={`cursor-pointer ${
+                  riderLoading && selectedRiderId === rider.rider_id
+                    ? "opacity-20"
+                    : ""
+                } `}>
                 <TableCell>{`${rider.first_name} ${rider.last_name}`}</TableCell>
 
                 <TableCell>{rider.email}</TableCell>
@@ -67,6 +86,7 @@ export function AllRiders() {
                     )}
                 </TableCell>
               </TableRow>
+              </>
             ))}
         </TableBody>
       </Table>

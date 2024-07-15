@@ -1,5 +1,6 @@
 'use client'
 import Pagination from "@/components/Shared/Pagination/Pagination";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -14,16 +15,27 @@ import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
 import { Button } from "@/components/ui/button";
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
+import { useRouter } from "next/navigation";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
 
-export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
+export function AllTripsTable() {
   
-  
+  const [tripLoading, setTripLoading] = useState<boolean>(false);
+  const [selectedTripId, setSelectedTripId] = useState<string>('');
   const [page, setPage] = useState<number> (1);
-  const {data, tripsData, total_number_of_pages, handleTrackTrip, isLoading, error, total_items}  = useGetTrips({ page, table:"trips"});
- 
+  const {data, tripsData, total_number_of_pages, isLoading, error, total_items}  = useGetTrips({ page, table:"trips"});
+  const router = useRouter();
+  const tripTrack = (tripId:string)=> {
+    setTripLoading(true);
+    setSelectedTripId(tripId)
+    router.push(`/dashboard/track-order/${tripId}`)
+  }
   return (
     <>
-    <Button className="md:w-1/6 w-1/3" onClick={setAddTrip}> Add trip</Button>
+    <Link href={'/dashboard/orders/add-order'}>
+    
+    <Button className="md:w-1/6 w-1/3" > Add order</Button>
+    </Link>
     <div className="flex flex-col max-w-fit   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       
       <Table>
@@ -42,7 +54,12 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
           {error && <div> Error Occurred </div>}
           {data && tripsData &&
             tripsData.map((trip: any) => (
-              <TableRow key={trip.trip_id} onClick={()=>handleTrackTrip(trip.trip_id)}>
+              <>
+              { tripLoading && selectedTripId === trip.trip_id &&
+
+            <DashboardTableItemLoader/>
+            }
+              <TableRow key={trip.trip_id} onClick={()=>tripTrack(trip.trip_id)} className={`cursor-pointer ${tripLoading && selectedTripId === trip.trip_id ?  'opacity-10': ''}`}>
                 <TableCell className="font-medium">{trip.trip_id}</TableCell>
                 <TableCell>{`${trip.first_name}  ${trip.last_name}`}</TableCell>
                 <TableCell>
@@ -88,6 +105,7 @@ export function AllTripsData({setAddTrip}:{setAddTrip: ()=>void}) {
                 </TableCell>
                 <TableCell><span className="text-decoration: underline">view</span></TableCell>
               </TableRow>
+              </>
             ))}
         </TableBody>
       </Table>

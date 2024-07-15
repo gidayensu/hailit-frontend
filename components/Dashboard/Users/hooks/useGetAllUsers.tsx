@@ -26,6 +26,7 @@ export interface User {
 export const useGetAllUsers = (page:number) => {
   const dispatch = useAppDispatch();
   const { usersData,  } = useAppSelector(state=>state.dashboardTables)
+  const {selectedUserId} = useAppSelector(state=>state.dashboard)
   
   
   // let endpoint = 'users';
@@ -70,5 +71,5 @@ export const useGetAllUsers = (page:number) => {
   
 }, [dispatch])
 
-  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items  };
+  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items, selectedUserId  };
 };

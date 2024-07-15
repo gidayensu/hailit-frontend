@@ -2,10 +2,8 @@
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
 import { TripStatus } from "../types/Types";
-import { DeliveryStatus, } from "../OrderSummaryMin";
-import { PackageType } from "../types/Types";
 import { useEffect, useState } from "react";
-
+import { Trip } from "@/lib/store/slice/tripSlice";
 export const useGetUserTrips = () => {
   const [pollingInt, setPollingInt] = useState<number>(500000);
   const { user_id, user_role } = useAppSelector((state) => state.user);
@@ -77,50 +75,14 @@ export const useGetUserTrips = () => {
 };
 
 
-export type Deliveries = boolean;
-export interface Trip {
-  trip_id: string;
-  dispatcher_id: string;
-  trip_medium: string;
-  additional_information?: string;
-  drop_off_location: string;
-  package_type: PackageType;
-  payment_method: string;
-  payment_status: boolean;
-  pickup_location: string;
-  trip_cost: string;
-  trip_request_date: string;
-  trip_status: DeliveryStatus;
-}
 
 
-
-
-export interface DispatcherTrip {
-  trip_id: string;
-  trip_medium: string;
+export interface DispatcherTrip extends Trip {
+  trip_cost: string; 
+  trip_request_date: Date | null; 
+  trip_commencement_date: Date | null; 
+  trip_completion_date: Date | null; 
   trip_status: TripStatus; 
-  trip_stage: number; 
-  trip_type: string; 
-  pickup_location: string;
-  drop_off_location: string;
-  package_type: string;
-  trip_commencement_date: Date | null;
-  trip_completion_date: Date | null;
-  trip_cost: number;
-  trip_request_date: Date | null;
-  payment_method: string;
-  recipient_number: string;
-  sender_number: string;
-  payment_status: boolean;
-  customer_id: string;
-  dispatcher_id: string;
-  dispatcher_rating: number | null;
-  rated: boolean;
-  rating_comment: string;
-  promo_code: string;
-  trip_area: string;
-  additional_information: string;
   user_id: string;
   rating_count: number;
   cumulative_rating: string;

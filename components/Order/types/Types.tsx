@@ -21,3 +21,5 @@ export type TripArea = "Accra" | "Kumasi" | "Inter City";
 export type TripMedium = "Motor" | "Car" | "Truck";
 
 export type TripType = "Next Day" | "Same Day" | "Scheduled";
+
+  

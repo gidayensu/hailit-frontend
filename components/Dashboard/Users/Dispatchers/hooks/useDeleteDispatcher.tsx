@@ -8,6 +8,11 @@ export const useDeleteDispatcher = ({dispatcherId, userRole}:{dispatcherId:strin
     const [deleteDriver, { isSuccess:driverDeleteSuccess, isLoading: driverDeleteLoading, error:driverDeleteError }] = useDeleteDriverMutation();
     const [deleteRider, { isSuccess:riderDeleteSuccess, isLoading: riderDeleteLoading, error: riderDeleteError }] = useDeleteRiderMutation();
     
+
+    const deleteSuccess = riderDeleteSuccess || driverDeleteSuccess;
+    const deleteLoading = riderDeleteLoading || driverDeleteLoading;
+    const deleteError = riderDeleteError || driverDeleteError;
+
     const handleDeleteDispatcher = ()=> {
         userRole === "Driver" 
         ? deleteDriver(dispatcherId)
@@ -28,5 +33,5 @@ export const useDeleteDispatcher = ({dispatcherId, userRole}:{dispatcherId:strin
     
     
     
-    return { riderDeleteError, riderDeleteLoading, riderDeleteSuccess, driverDeleteLoading, driverDeleteError, driverDeleteSuccess, handleDeleteDispatcher }
+    return { deleteError, deleteSuccess,  deleteLoading, handleDeleteDispatcher }
 }

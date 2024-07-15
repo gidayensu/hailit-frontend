@@ -1,16 +1,9 @@
-//ui + icons
-import { FaMoneyCheckAlt } from "react-icons/fa";
-import { BsBoxes } from "react-icons/bs";
-import { RiFileList2Line } from "react-icons/ri";
-import { LuPackageCheck, LuPackageX, LuPackage  } from "react-icons/lu";
-import { TbPackages } from "react-icons/tb";
-
 //main components
-import WeekLongTripsChart from "./WeekLongTripsChart";
+import { reversePercentageDifference } from "@/lib/utils";
 import { RecentTripTable } from "./RecentTripTable";
 import StatsCard from "./StatsCard";
+import WeekLongTripsChart from "./WeekLongTripsChart";
 import { useTripsStats } from "./hook/useTripsStats";
-import { reversePercentageDifference } from "@/lib/utils";
 export default function Overview() {
   const {currentMonthStats, isLoading, error, tripCounts, tripDays, weekError, weekLoading} = useTripsStats();
   const pendingPD = reversePercentageDifference(currentMonthStats?.pending_percentage_difference)
@@ -18,6 +11,7 @@ export default function Overview() {
   
   return (
     <section className="space-y-6 w-full">
+      
       <div className="flex flex-col lg:flex-row  w-full gap-3">
       <StatsCard
           title="Revenue"

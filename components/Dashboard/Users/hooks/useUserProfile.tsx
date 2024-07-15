@@ -5,7 +5,7 @@ import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { useCallback, useEffect, useState } from "react";
 import { useGetUserTrips } from "../../hooks/useGetUserTrips";
-import { OrderStatus } from "../../TrackOrder/StatusSection/hook/useGetTrip";
+import { TripStatus, TripMedium, PackageType, TripArea } from "@/components/Order/types/Types";
 import { User } from "./useGetAllUsers";
 import { useGetUser } from "./useGetUser";
 
@@ -25,7 +25,7 @@ export const useUserProfile = ()=> {
         cancelled_trips: 0
     });
 
-
+    const customerTrips = userTrips?.customer_trips
     const dispatch = useAppDispatch();
 
     const {data, isLoading, error } = useGetUserTripsQuery(selectedUserId);
@@ -61,19 +61,19 @@ export const useUserProfile = ()=> {
     }
     
     const selectedUser:User = user;
-    return {userTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading, handleDeselect }
+    return {userTrips, customerTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading, handleDeselect }
 }
 
 export interface UserTrip {
     trip_id: string;
     dispatcher_id: string;
-    trip_medium: "Motor" | "Car" | "Bicycle" | string;
-    trip_status: OrderStatus
+    trip_medium: TripMedium;
+    trip_status: TripStatus
     package_value: string;
-    trip_area: string;
+    trip_area: TripArea;
     recipient_number: string;
     sender_number: string;
-    package_type: string;
+    package_type: PackageType;
     pickup_location: string;
     drop_off_location: string;
     additional_information: string;

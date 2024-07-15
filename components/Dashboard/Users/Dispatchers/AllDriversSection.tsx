@@ -14,7 +14,7 @@ export default function AllDriversSection () {
             <AllDrivers />
             }
             {selectedDriverId &&
-            <DispatcherDetails userRole="Driver"/>}
+            <DispatcherDetails />}
             </>
         )
 }

@@ -16,58 +16,37 @@ export default function OAuthCallBack (){
   const { googleSignIn } = useLogin();
   const { googleSignUp } = useSignUp();
 
-  (async () => {
-    try {
+  useEffect(() => {
 
-      const { user_id, email } = await userIdAndEmailFromSession();
+    const signInWithGoogle = async () => {
+      try {
 
-      if (typeof user_id === 'string' &&!attemptedSignUp) {
-        const signInResult = await googleSignIn(user_id);
-        
-        if (signInResult?.error && !attemptedSignUp) {
-            setAttemptedSignUp(true)
-          const signUpResult = await googleSignUp({ user_id, email });
-
-          if(signUpResult?.error) {
-            setError(true)
+        const { user_id, email } = await userIdAndEmailFromSession();
+  
+        if (typeof user_id === 'string' &&!attemptedSignUp) {
+          const signInResult = await googleSignIn(user_id);
+          
+          if (signInResult?.error && !attemptedSignUp) {
+              setAttemptedSignUp(true)
+            const signUpResult = await googleSignUp({ user_id, email });
+  
+            if(signUpResult?.error) {
+              setError(true)
+            }
           }
         }
+      } catch (err) {
+        setError(true)
       }
-    } catch (err) {
-      setError(true)
-    }})
+    };
 
-  // useEffect(() => {
-
-  //   const signInWithGoogle = async () => {
-  //     try {
-
-  //       const { user_id, email } = await userIdAndEmailFromSession();
-  
-  //       if (typeof user_id === 'string' &&!attemptedSignUp) {
-  //         const signInResult = await googleSignIn(user_id);
-          
-  //         if (signInResult?.error && !attemptedSignUp) {
-  //             setAttemptedSignUp(true)
-  //           const signUpResult = await googleSignUp({ user_id, email });
-  
-  //           if(signUpResult?.error) {
-  //             setError(true)
-  //           }
-  //         }
-  //       }
-  //     } catch (err) {
-  //       setError(true)
-  //     }
-  //   };
-
-  //   signInWithGoogle();
-  // }, [googleSignIn, attemptedSignUp, googleSignUp]);
+    signInWithGoogle();
+  }, [googleSignIn, attemptedSignUp, googleSignUp]);
 
   if(error) {
     return (
         
-        <ErrorComponent errorCode={500} errorMessage="Server Error Occurred" onClickFunc={supabaseSignOut}/>
+        <ErrorComponent errorCode={500} errorMessage="Server Error Occurred"  url='/'/>
     )
   }
 

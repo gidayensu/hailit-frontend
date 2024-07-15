@@ -4,15 +4,15 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
 import { useGetAllVehiclesQuery, useUpdateDriverMutation, useUpdateRiderMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useCallback, useEffect, useRef, useState } from "react";
-
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
 
 interface DispatcherVehicle {
-  vehicle_id: string,
-  plate_number: string;
-  vehicle_name: string;
+  vehicle_id: string | undefined,
+  plate_number: string | undefined;
+  vehicle_name: string | undefined;
 }
 
-export const useAssignVehicle = (dispatcher?:any) => {
+export const useAssignVehicle = (dispatcher?:Dispatcher) => {
     const userRole = dispatcher?.user_role
     const dispatcherContainerRef = useRef<any>(null)
 

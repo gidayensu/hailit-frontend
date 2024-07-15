@@ -1,30 +1,32 @@
 "use client";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import SkeletonTable from "../SkeletonTable";
-
-import { extractShortDate, extractBeforeComma } from "@/lib/utils";
-import { UserTrip } from "./hooks/useUserProfile";
-import { useGetTrips } from "../hooks/useGetTrips";
-import { useUserProfile } from "./hooks/useUserProfile";
 import NoData from "@/components/Shared/NoData";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 
-export default function UserTripsTable() {
-  const {
-    userTrips,
-    handleDeleteTrip,
-    error,
-    deleteError,
-    handleTrackTrip,
-    isLoading,
-  } = useUserProfile();
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
+import SkeletonTable from "../SkeletonTable";
+import { UserTrip } from "./hooks/useUserProfile";
+export default function UserTripsTable({userTrips, error, isLoading}: {userTrips: UserTrip[], error:any, isLoading: boolean}) {
 
+  const router  = useRouter();
+
+  const [tripLoading, setTripLoading] = useState<boolean>(false);
+  const [selectedTripId, setSelectedTripId] = useState<string>('');
+
+  const handleTrackTrip = (tripId:string)=> {
+    setTripLoading(true);
+    setSelectedTripId(tripId)
+    router.push(`/dashboard/track-order/${tripId}`)
+  }
   
   if (error) {
     return (
@@ -53,11 +55,16 @@ export default function UserTripsTable() {
       <TableBody>
         {isLoading && <SkeletonTable rows={6} cells={7} />}
         {userTrips &&
-          userTrips?.customer_trips.map((trip: UserTrip) => (
+          userTrips.map((trip: UserTrip) => (
+            <>
+            { tripLoading && selectedTripId === trip.trip_id &&
+
+            <DashboardTableItemLoader/>
+            }
             <TableRow
               key={trip.trip_id}
               onClick={() => handleTrackTrip(trip.trip_id)}
-              className="cursor-pointer"
+              className={`cursor-pointer ${tripLoading && selectedTripId === trip.trip_id ?  'opacity-10': ''}`}
             >
               <TableCell className="font-medium">{trip.trip_id} </TableCell>
 
@@ -106,6 +113,7 @@ export default function UserTripsTable() {
 
               
             </TableRow>
+            </>
           ))}
       </TableBody>
     </Table>
@@ -121,3 +129,4 @@ const tableHeadings = [
   "Payment Status",
   "Delivery Status",
 ];
+

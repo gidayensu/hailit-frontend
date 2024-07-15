@@ -4,32 +4,31 @@ import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/lib/store/hooks";
 import { FiArrowLeft } from "react-icons/fi";
 import TripAreaMediumAndType from "../TrackOrder/Actions/TripAreaMediumAndType";
-import AddTripOutcome from "./AddTripOutcome";
+import AddOrderOutcome from "./AddOrderOutcome";
+import { useRouter } from "next/navigation";
 
-export default function AddTrip ({setAddTrip}:{setAddTrip: ()=>void}) {
-  
+export default function AddOrder () {
+const router = useRouter();  
 
   const {order_submitted} = useAppSelector(state=>state.newOrder)
   
  
   return (
     <section className='md:w-1/4 flex flex-col items-start gap-3'>
-      <Button onClick={setAddTrip} variant={'outline'}>
-        <FiArrowLeft/>
-      </Button>
+      
       {
         !order_submitted && 
         <>
       <TripAreaMediumAndType/>
       <NewOrderForm/>
-      <Button variant={'outline'} onClick={setAddTrip} className="w-full max-w-sm h-14 ">
+      <Button variant={'outline'} onClick={()=>router.back()} className="w-full max-w-sm h-14 ">
         Cancel
       </Button>
         </>
       }
 
       {
-        order_submitted && <AddTripOutcome/>
+        order_submitted && <AddOrderOutcome/>
       }
         
     </section>

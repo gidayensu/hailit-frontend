@@ -1,6 +1,7 @@
 import { MdChevronRight } from "react-icons/md";
 import { RiMapPinLine } from "react-icons/ri";
-export default function SearchItem ({item}: {item:any}) {
+
+export default function SearchItem ({item}: {item:string}) {
     const formatedItem = splitLocationData(item);
     return (
         <div className="w-full grid grid-cols-8 cursor-pointer p-1 mt-1">

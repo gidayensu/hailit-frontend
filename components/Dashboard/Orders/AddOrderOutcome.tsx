@@ -8,11 +8,11 @@ import { MdContentCopy, } from "react-icons/md";
 //main components 
 
 //next+redux+helper function +react
-import { useAddTripOutcome } from "./hook/useAddTripOutcome";
+import { useAddOrderOutcome } from "./hook/useAddOrderOutcome";
 
 
-export default function AddTripOutcome() {
-  const {loading, trackTrip, handleBack, handleCopyTripId, order_success, trip_id } = useAddTripOutcome();
+export default function AddOrderOutcome() {
+  const {loading, trackTrip, handleBack, handleCopyTripId, order_success, trip_id } = useAddOrderOutcome();
 
   
   

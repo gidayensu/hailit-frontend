@@ -1,31 +1,42 @@
 'use client'
-import { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+import { TripStatus } from "@/components/Order/types/Types";
 import { useDeleteTripMutation, useGetDriverQuery, useGetRiderQuery, useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedDriverId, setSelectedRiderId, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { setActiveSection, setSelectedDriverId, setSelectedRiderId, setDispatcherRole, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
 import { useCallback, useEffect, useState } from "react";
 import { useDeleteDispatcher } from "./useDeleteDispatcher";
-//useDispatcherProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
+import { useRouter } from "next/navigation";
+import { UserTrip } from "../../hooks/useUserProfile";
+//useDispatcherProfile uses dispatcherRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
 //to have a 'go back' experience. 
-export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
+
+export type DispatcherRole = "Rider" | "Driver";
+
+export const useDispatcherProfile = ()=> {
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const {dispatcherRole, selectedDriverId, selectedRiderId } = useAppSelector(state=>state.dashboard)
+
+    const handleSetDispatcherRole = (dispatcherRole: DispatcherRole) => {
+
+        dispatch(setDispatcherRole(dispatcherRole))
+    }
     
-    const {selectedDriverId, selectedRiderId} = useAppSelector(state=>state.dashboard);
     const {data:driverData, isLoading:driverLoading, error:driverError} = useGetDriverQuery(selectedDriverId);
     const {data:riderData, isLoading:riderLoading, error:riderError} = useGetRiderQuery(selectedRiderId);
 
+    
         //dispathcerId is the id of the dispatcher in the rider/driver table
-    const dispatcherId = userRole === "Driver" ? driverData?.driver?.driver_id : riderData?.rider?.rider_id
+    const dispatcherId = dispatcherRole === "Driver" ? driverData?.driver?.driver_id : riderData?.rider?.rider_id
     
     const {
         handleDeleteDispatcher, 
-        driverDeleteError, 
-        driverDeleteLoading, 
-        riderDeleteError, 
-        riderDeleteLoading, 
-        riderDeleteSuccess, 
-        driverDeleteSuccess
-    } = useDeleteDispatcher({dispatcherId, userRole});
+        deleteError: dispatcherDeleteError,
+        deleteLoading: dispatcherDeleteLoading,
+        deleteSuccess: dispatcherDeleteSuccess
+    } = useDeleteDispatcher({dispatcherId, userRole: dispatcherRole});
     
     const driver = driverData?.driver;
     const rider = riderData?.rider
@@ -33,23 +44,21 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
     const roleMapping = {
         Driver: {
             dispatcherUserId: driverData?.driver?.user_id,
-            selectedDispatcher: {...driver, user_role: userRole},
+            selectedDispatcher: {...driver, user_role: dispatcherRole},
             dispatcherLoading: driverLoading,
             dispatcherError: driverError,
-            deleteLoading: driverDeleteLoading,
-            deleteError: driverDeleteError,
-            deleteSuccess: driverDeleteSuccess
+            
         },
         Rider: {
             dispatcherUserId: riderData?.rider?.user_id,
-            selectedDispatcher: {...rider, user_role: userRole},
+            selectedDispatcher: {...rider, user_role: dispatcherRole},
             dispatcherLoading: riderLoading,
             dispatcherError: riderError,
-            deleteLoading: riderDeleteLoading,
-            deleteError: riderDeleteError,
-            deleteSuccess: riderDeleteSuccess
+            
         }
     };
+
+    
     
     const {
       dispatcherError,
@@ -57,10 +66,8 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
       dispatcherUserId,
       selectedDispatcher,
       dispatcherLoading,
-      deleteLoading: dispatcherDeleteLoading,
-      deleteError: dispatcherDeleteError,
-      deleteSuccess: dispatcherDeleteSuccess,
-    } = roleMapping[userRole];
+
+    } = roleMapping[dispatcherRole];
     
     
     
@@ -75,13 +82,14 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
 
     const total_trip_count = dispatcherTrips?.total_trip_count;
 
-    const dispatch = useAppDispatch();
+    const allDispatcherTrips = dispatcherTrips?.dispatcher_trips;
     
     const {data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId);
     const handleTrackTrip = (tripId:string)=> {
         dispatch(setActiveSection('Track Order'))
-        dispatch (setTrackingOrder(true))
+        
         dispatch (setSelectedTripId(tripId))
+        router.push('/dashboard/track-order')
       }
     
     const trips = data?.trips
@@ -113,7 +121,7 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
     const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useDeleteTripMutation();
     
     const handleDeselect = useCallback( ()=> {
-        userRole === "Driver" ?   dispatch(setSelectedDriverId('')) : dispatch(setSelectedRiderId(''))
+        dispatcherRole === "Driver" ?   dispatch(setSelectedDriverId('')) : dispatch(setSelectedRiderId(''))
     }, [dispatch, setSelectedDriverId, setSelectedRiderId])
     
     const handleDeleteTrip = (tripId:string)=> {
@@ -142,29 +150,13 @@ export const useDispatcherProfile = (userRole: "Driver" | "Rider")=> {
       dispatcherDeleteError,
       dispatcherDeleteLoading, 
       dispatcherDeleteSuccess,
-      total_trip_count
+      total_trip_count,
+      handleSetDispatcherRole,
+      selectedDriverId, selectedRiderId,
+      allDispatcherTrips
     };
 }
 
-export interface UserTrip {
-    trip_id: string;
-    dispatcher_id: string;
-    trip_medium: "Motor" | "Car" | "Bicycle" | string;
-    trip_status: OrderStatus
-    package_value: string;
-    trip_area: string;
-    recipient_number: string;
-    sender_number: string;
-    package_type: string;
-    pickup_location: string;
-    drop_off_location: string;
-    additional_information: string;
-    trip_request_date: string;
-    trip_completion_date: string;
-    trip_cost: string;
-    payment_status: boolean;
-    payment_method: "Cash on Delivery" | "Mobile Money" | "Card" | string;
-  }
   
 interface dispatcherTrips {
     dispatcher_trips: UserTrip[],
