@@ -1,9 +1,10 @@
 
-import type { OrderStatus } from "@/components/Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+
+import { TripStatus } from "../types/Types";
 import { GoX } from "react-icons/go";
 import { GrFormCheckmark } from "react-icons/gr";
 
-export default function OrderStatusElement ({orderStatus, orderStage, currentOrderStage, children}: {orderStatus: OrderStatus, orderStage:number, currentOrderStage:number, children:React.ReactNode}) {
+export default function OrderStatusElement ({orderStatus, orderStage, currentOrderStage, children}: {orderStatus: TripStatus, orderStage:number, currentOrderStage:number, children:React.ReactNode}) {
     
     return (
       <div className="flex flex-col items-center justify-center w-1/4 gap-4 relative">

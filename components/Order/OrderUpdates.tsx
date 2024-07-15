@@ -1,10 +1,11 @@
 //ui + icons
-import type { OrderStatus } from "../Dashboard/TrackOrder/StatusSection/hook/useGetTrip";
+
+import { TripStatus } from "./types/Types";
 
 import Container from "../ui/container";
 import OrderStatusElement from "./TrackOrder/OrderStatusElement";
 
-export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{currentOrderStatus: OrderStatus, currentOrderStage: number}) {
+export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{currentOrderStatus: TripStatus, currentOrderStage: number}) {
 
 
   return (
