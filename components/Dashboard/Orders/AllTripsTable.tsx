@@ -1,6 +1,7 @@
 'use client'
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,14 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { extractShortDate, extractBeforeComma } from "@/lib/utils";
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
-import { Button } from "@/components/ui/button";
-import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
-import { useRouter } from "next/navigation";
-import DashboardTableItemLoader from "../DashboardTableItemLoader";
 
 export function AllTripsTable() {
   

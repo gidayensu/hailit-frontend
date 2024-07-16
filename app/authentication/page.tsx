@@ -4,6 +4,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { supabaseSession } from "@/lib/supabaseAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import BigLoader from "@/components/Shared/BigLoader";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
 
@@ -28,6 +29,9 @@ export default function Profile() {
         } else if (user_role === "Driver" || user_role === "Rider") {
           router.push('/dispatcher');
         }
+        return (<div className="flex items-center justify-center w-full">
+          <BigLoader/>
+        </div>)
       }
       
     };

@@ -108,7 +108,7 @@ const DashboardBottomNavElement = ({
         variant={path.startsWith(`/dashboard/${url}`) || (navTitle === 'Overview' && path === '/dashboard') ? "default" : "secondary"}
         className="border-none"
       >
-        <Icon className="h-5 w-5  " />
+        <Icon className="h-5 w-5"/>
       </Button>
       </Link>
       <p

@@ -67,11 +67,11 @@ export default function OrderList({
                 )}
               />
             </Link>
-            {tripLoading && (
+            {/* {tripLoading && (
               <span className="absolute flex items-center justify-center">
                 <Loader />
               </span>
-            )}
+            )} */}
           </div>
         ))}
       </div>

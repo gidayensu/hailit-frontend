@@ -64,7 +64,7 @@ export default function RootLayout({
       />
       <article
         className={`flex flex-col gap-4 w-full ${
-          dashMin ? "lg:ml-[70px] lg:w-[calc(100vw-70px)] transition-all duration-300" : "lg:ml-[170px] lg:w-[calc(100vw-170px)] transition-all duration-300"
+          dashMin ? "lg:ml-[70px] lg:w-[calc(100vw-70px)] transition-all duration-300" : "lg:ml-[200px] lg:w-[calc(100vw-200px)] transition-all duration-300"
         } px-6 py-4`}
         // style={{ width: '100%', maxWidth: `${dashMin ? "calc(100% - 70px)" : "calc(100% - 170px)"}` }}
       >

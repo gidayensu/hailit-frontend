@@ -62,7 +62,7 @@ export default function TrackOrderItem({trip, userId}: {trip:Trip, userId:string
         </TrackOrderContainer>
 
         <TrackOrderContainer headingText="Location and Timeline">
-        <Container className="w-full flex flex-col gap-2 max-h-80 h-64 rounded-xl p-4 "> 
+        <Container className="w-full flex flex-col gap-2  max-h-80 rounded-xl p-1 ">
           <OrderSummary
             trip = {trip}
           />

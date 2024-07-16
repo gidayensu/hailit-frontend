@@ -37,7 +37,7 @@ export default function DashboardSideBar({
       className={`hidden lg:flex flex-col fixed lg:h-[440px] ${
         dashMin
           ? "w-[60px] transition-all duration-300"
-          : "md:w-[150px] w-[60px] transition-all duration-300"
+          : "md:w-[180px] w-[60px] transition-all duration-300"
       } py-4  px-2  bg-primary-color h-[600px] text-white z-50  items-center justify-start rounded-xl mt-2 ml-4 mb-10`}
     >
       <div className="flex flex-col gap-1 ">
@@ -46,13 +46,13 @@ export default function DashboardSideBar({
           onClick={handleDashMin}
         >
           {dashMin && (
-            <TbLayoutSidebarRightCollapseFilled className="text-xl" />
+            <TbLayoutSidebarRightCollapseFilled className="text-2xl" />
           )}
 
           {!dashMin && (
             <div className="flex gap-2 transition-all duration-300">
               <p>Hailit</p>
-              <TbLayoutSidebarLeftCollapseFilled className="text-xl transition-all duration-300" />
+              <TbLayoutSidebarLeftCollapseFilled className="text-2xl transition-all duration-300" />
             </div>
           )}
         </div>
@@ -64,7 +64,7 @@ export default function DashboardSideBar({
           
           url="/"
         >
-          <TbLayoutDashboard className="text-xl" />
+          <TbLayoutDashboard className="text-2xl" />
         </DashboardSections>
 
         <DashboardSections
@@ -74,7 +74,7 @@ export default function DashboardSideBar({
           
           url="orders"
         >
-          <RiFileListLine className="text-xl" />
+          <RiFileListLine className="text-2xl" />
         </DashboardSections>
 
         <DashboardSections
@@ -84,7 +84,7 @@ export default function DashboardSideBar({
           
           url="track-order"
         >
-          <TbRoute className="text-xl" />
+          <TbRoute className="text-2xl" />
         </DashboardSections>
 
         <DashboardSections
@@ -94,7 +94,7 @@ export default function DashboardSideBar({
           
           url="users"
         >
-          <TbUser className="text-xl" />
+          <TbUser className="text-2xl" />
         </DashboardSections>
 
         <DashboardSections
@@ -104,7 +104,7 @@ export default function DashboardSideBar({
           
           url="dispatchers/riders"
         >
-          <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
+          <MdOutlineSportsMotorsports className="text-2xl -scale-x-100" />
         </DashboardSections>
 
         <DashboardSections
@@ -114,7 +114,7 @@ export default function DashboardSideBar({
           
           url="dispatchers/drivers"
         >
-          <RiSteering2Line className="text-xl -scale-x-100" />
+          <RiSteering2Line className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
@@ -123,7 +123,7 @@ export default function DashboardSideBar({
           
           url="vehicles"
         >
-          <RiMotorbikeFill className="text-xl -scale-x-100" />
+          <RiMotorbikeFill className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
@@ -132,7 +132,7 @@ export default function DashboardSideBar({
           
           url="analytics"
         >
-          <MdInsertChartOutlined className="text-xl -scale-x-100" />
+          <MdInsertChartOutlined className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
@@ -141,7 +141,7 @@ export default function DashboardSideBar({
           
           url="profile"
         >
-          <TbUserEdit className="text-xl " />
+          <TbUserEdit className="text-2xl " />
         </DashboardSections>
 
         <DashboardSections
@@ -150,7 +150,7 @@ export default function DashboardSideBar({
           onClickFunc={handleSignOut}
           url="#"
         >
-          <IoLogOutOutline className="text-xl " />
+          <IoLogOutOutline className="text-2xl " />
         </DashboardSections>
       </div>
 
@@ -161,7 +161,7 @@ export default function DashboardSideBar({
               onClickFunc={handleActiveSection}
               
             >
-              <TbUserEdit className="text-xl " />
+              <TbUserEdit className="text-2xl " />
             </DashboardSections>
 
             <DashboardSections
@@ -170,7 +170,7 @@ export default function DashboardSideBar({
               onClickFunc={handleSignOut}
               
             >
-              <IoLogOutOutline className="text-xl " />
+              <IoLogOutOutline className="text-2xl " />
             </DashboardSections>
           </div> */}
     </article>
