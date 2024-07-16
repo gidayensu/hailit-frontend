@@ -1,19 +1,21 @@
 import { Modal } from "@/components/Shared/Modal";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useDeleteUser } from "../hooks/useDeleteUser";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
-import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import Link from "next/link";
+import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import { Rating } from "./AllRidersTable";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
-
+import { useDeleteDispatcher } from "./hooks/useDeleteDispatcher";
 export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:Dispatcher, editDispatcher:()=>void}) {
   
+  const {dispatcherRole, dispatcherId} = useDispatcherProfile()
+  const { deleteError, deleteSuccess,  deleteLoading, handleDeleteDispatcher } = useDeleteDispatcher({dispatcherId, dispatcherRole});
   
-  const {handleDeleteDispatcher, dispatcherDeleteError, dispatcherDeleteLoading, dispatcherDeleteSuccess} = useDispatcherProfile()
 
+  
+        
     return (
       <Container className="flex gap-2 max-h-96 w-full rounded-xl flex-col items-center justify-start p-5">
         {!dispatcher && 
@@ -75,9 +77,9 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
               itemId={`${dispatcher?.first_name} ${dispatcher?.last_name}`}
               item={dispatcher?.user_role}
               deleteFn={handleDeleteDispatcher}
-              error={dispatcherDeleteError}
-              isSuccess={dispatcherDeleteSuccess}
-              loading={dispatcherDeleteLoading}
+              error={deleteError}
+              isSuccess={deleteSuccess}
+              loading={deleteLoading}
             />
           </Modal>
         </div>

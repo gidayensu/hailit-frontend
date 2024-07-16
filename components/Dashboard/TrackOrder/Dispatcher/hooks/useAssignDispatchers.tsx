@@ -1,8 +1,8 @@
 'use client'
 import { useGetAllDriversQuery, useGetAllRidersQuery, useUpdateTripMutation, usePrefetch } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setPreviousSelectedTripId } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
+import { useParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface AssignedDispatcher {
@@ -46,7 +46,10 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
         prefetchNext()
       }
     }, [ridersTotalPages, page, prefetchNext])
-    const { assignedDispatcherId, selectedTripId } = useAppSelector(state=>state.dashboard);
+    const { assignedDispatcherId } = useAppSelector(state=>state.dashboard);
+    const params = useParams();
+    
+    const selectedTripId = params.trip_id;
     const trip = useAppSelector(state=>state.trip);
     const {dispatcher} = trip;
 
@@ -75,21 +78,19 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
       
     }
     const handleAssignedDispatcher = useCallback( (dispatcherDetails: AssignedDispatcher)=> {
-      dispatch(setTrip({...trip, dispatcher: {
-        ...dispatcher, ...dispatcherDetails
-      }}))
-      updateTrip({
-          trip_id: selectedTripId,
-          tripDetails: {dispatcher_id: dispatcherDetails.dispatcher_id}
-          
+      dispatch(
+        setTrip({
+          ...trip,
+          dispatcher: {
+            ...dispatcher,
+            ...dispatcherDetails,
+          },
         })
-        
-
-          dispatch(setPreviousSelectedTripId([selectedTripId]))
-      
-
-        
-        
+      );
+      updateTrip({
+        trip_id: selectedTripId,
+        tripDetails: { dispatcher_id: dispatcherDetails.dispatcher_id },
+      });
     }, [])
     
     

@@ -10,7 +10,7 @@ import { FormProvider } from "react-hook-form";
 //main components
 import PackageTypes from "@/components/Order/NewDelivery/PackageTypes/PackageTypes";
 import TripAreaMediumAndType from "./TripAreaMediumAndType";
-
+import { useRouter } from "next/navigation";
 //redux + next + react + helper
 import { CalendarField } from "@/components/Form/FormField";
 import { useAppSelector } from "@/lib/store/hooks";
@@ -18,6 +18,7 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { useGetTrip } from "../StatusSection/hook/useGetTrip";
 import { useUpdateTrip } from "./hook/useUpdateTrip";
+import { useEffect } from "react";
 
 export default function EditTrip() {
   const {
@@ -26,7 +27,7 @@ export default function EditTrip() {
   } = useGetTrip();
   const {
     formMethods,
-    handleCancel,
+    
     handleSubmit,
     onDeliveryFormSubmit,
     packageTypeRef,
@@ -34,8 +35,14 @@ export default function EditTrip() {
     updateLoading,
     register,
   } = useUpdateTrip(trip)
+  const router = useRouter();
 
-  
+  useEffect(()=> {
+
+    if(!trip?.trip_id) {
+      router.push('/dashboard/track-order')
+    }
+  }, [trip, router])
 
   const {dropOffLocationName, pickUpLocationName} = useAppSelector(state=>state.map)
   
@@ -209,7 +216,7 @@ export default function EditTrip() {
           form="edit order"
           className="md:w-[180px] w-full h-14"
           disabled={updateLoading}
-          onClick={handleCancel}
+          onClick={()=>router.back()}
         >
           Cancel
         </Button>

@@ -2,41 +2,42 @@
 import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
-  setActiveSection,
-  setSelectedTripId,
-  setTrackingOrder,
   ActiveSection,
-  setSelectedRiderId,
-  setSelectedDriverId
+  setActiveSection,
+  setSelectedDriverId,
+  setSelectedRiderId
 } from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
-import { useParams } from "next/navigation";
-import { Trip } from "@/lib/store/slice/tripSlice";
+import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export const useGetTrip = () => {
   const inputRef = useRef<any>(null);
   const params = useParams();
+  const {trip_id} = params
+  const selectedTripId = trip_id;
+  
+  const [editingOrder, setEditingOrder] = useState<boolean>(false)
 
+  const handleEditingOrder = ()=> {
+    setEditingOrder(()=>!editingOrder)
+  }
   const router  = useRouter();
 
   const {
-    previousSelectedTripId,
-    selectedTripId,
-    trackingOrder,
-    editingOrder,
     tripStage,
     tripStatus,
   } = useAppSelector((state) => state.dashboard);
 
   const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(5000);
-  const { trip_id } = params;
   const trip = useAppSelector((state)=>state.trip)
-  const { data, isLoading, error } = useGetTripQuery(trip_id, {
+  
+  const { data, isLoading, error } = useGetTripQuery(selectedTripId, {
     pollingInterval: controlledPollingInterval,
     refetchOnFocus: true
   });
+
+  
 //control polling from running when there is an error
   useEffect(()=> {
     if(error || editingOrder) {
@@ -74,8 +75,8 @@ export const useGetTrip = () => {
   //track trip using form input via ref
   const handleTrackTrip = () => {
     const tripId = inputRef.current?.value;
-    dispatch(setTrackingOrder(true));
-    dispatch(setSelectedTripId(tripId));
+
+    
     router.push(`/dashboard/track-order/${tripId}`)
   };
 
@@ -96,11 +97,13 @@ export const useGetTrip = () => {
     dispatch(setActiveSection(section));
   };
 
+  console.log(`this renders`)
+
   return {
     tripStage,
     tripStatus,
     trip,
-    trackingOrder,
+    
     dispatcher,
     inputRef,
     error,
@@ -111,5 +114,6 @@ export const useGetTrip = () => {
     handleUsersOrTripsNav,
     handleViewDispatcher,
     editingOrder,
+    handleEditingOrder
   };
 };

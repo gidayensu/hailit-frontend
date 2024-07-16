@@ -1,10 +1,9 @@
 import { useDeleteDriverMutation, useDeleteRiderMutation } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setSelectedDriverId, setSelectedRiderId } from "@/lib/store/slice/dashboardSlice";
-
-export const useDeleteDispatcher = ({dispatcherId, userRole}:{dispatcherId:string, userRole: "Driver" | "Rider"})=> {
-    const dispatch = useAppDispatch();
-
+import { useRouter } from "next/navigation";
+import { DispatcherRole } from "./useDispatcherProfile";
+export const useDeleteDispatcher = ({dispatcherId, dispatcherRole}:{dispatcherId:string, dispatcherRole: DispatcherRole})=> {
+    
+    const router = useRouter();
     const [deleteDriver, { isSuccess:driverDeleteSuccess, isLoading: driverDeleteLoading, error:driverDeleteError }] = useDeleteDriverMutation();
     const [deleteRider, { isSuccess:riderDeleteSuccess, isLoading: riderDeleteLoading, error: riderDeleteError }] = useDeleteRiderMutation();
     
@@ -14,20 +13,17 @@ export const useDeleteDispatcher = ({dispatcherId, userRole}:{dispatcherId:strin
     const deleteError = riderDeleteError || driverDeleteError;
 
     const handleDeleteDispatcher = ()=> {
-        userRole === "Driver" 
-        ? deleteDriver(dispatcherId)
-        : deleteRider(dispatcherId)
+      dispatcherRole === "Rider"
+        ? deleteRider(dispatcherId)
+        : deleteDriver(dispatcherId);
     }   
     
 
     if (riderDeleteSuccess || driverDeleteSuccess) {
         setTimeout(() => {
-            if (riderDeleteSuccess) {
-                dispatch(setSelectedRiderId(''))
-            }
-            if (driverDeleteSuccess) {
-                dispatch(setSelectedDriverId(''))
-            }
+            const urlEndpoint = `${dispatcherRole.toLowerCase()}s`
+            router.push(`/dashboard/dispatchers/${urlEndpoint}`) 
+            
         }, 1000);
     }
     

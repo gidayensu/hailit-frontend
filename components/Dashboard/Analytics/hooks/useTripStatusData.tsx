@@ -21,6 +21,7 @@ export const useTripStatusData = ()=> {
         conditionalDataError: deliveredError,
       } = useAnalytics({trip_column: 'trip_status', trip_column_condition: 'Delivered'})
     
+      
       const {
         conditionalMonthsData: inTransit,
         conditionalDataLoading: inTransitLoading,
@@ -31,6 +32,7 @@ export const useTripStatusData = ()=> {
         conditionalDataLoading: bookedLoading,
         conditionalDataError: bookedError,
       } = useAnalytics({trip_column: 'trip_status', trip_column_condition: 'Booked'})
+
       const {
         conditionalMonthsData: pickedUp,
         conditionalDataLoading: pickedUpLoading,

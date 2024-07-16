@@ -1,50 +1,43 @@
 //ui + icons
 import { Modal } from "@/components/Shared/Modal";
+import Link from "next/link";
 import { Button } from "../../ui/button";
 import Container from "../../ui/container";
 import DeleteModalCard from "./DeleteModalCard";
 
-
 //custom hooks + react + helpers + redux
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setEditingOrder, setTrackingOrder, } from "@/lib/store/slice/dashboardSlice";
 import { extractShortDate } from "@/lib/utils";
 import { useDeleteTrip } from "../hooks/useDeleteTrip";
 import { useGetTrip } from "./StatusSection/hook/useGetTrip";
-import { useAppSelector } from "@/lib/store/hooks";
-import { Trip } from "@/lib/store/slice/tripSlice";
 //main components
+import { useEffect } from "react";
 import CustomerSection from "./CustomerSection";
 import DispatcherSection from "./Dispatcher/DispatcherSection";
 import PackageSection from "./PackageSection";
 import PaymentSection from "./PaymentSection";
 import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
-import { useEffect } from "react";
 
 //interface
 
-export default function TripDetail ({trip}: {trip:Trip}) {
-  const {selectedTripId} = useAppSelector(state=>state.dashboard)
-    const {handleDeleteTrip, isLoading, error, isSuccess} = useDeleteTrip(selectedTripId)
+export default function TripDetail () {
+  
+console.log('THIS ALSO RENDERS')
+  const {
+    trip,
+    selectedTripId
+  } = useGetTrip();
+    const {handleDeleteTrip, isLoading, error, isSuccess} = useDeleteTrip(`${selectedTripId}`)
 
-    const dispatch = useAppDispatch();
+    
     
     const dispatcher = trip?.dispatcher;
 
-    const handleEditTrip = ()=> {
     
-     dispatch(setEditingOrder(true));
-     dispatch(setTrackingOrder(false))
-
-    }
     useEffect(()=>  {
      window.scrollTo(0, 0);
     }, [trip.trip_id])
-    
-    // useEffect(()=>  {
-    //  window.scrollTo(0, 0);
-    // }, [trip.trip_id])
+
 
     return (
         <div className="space-y-3 md:mb-0 mb-24">
@@ -74,13 +67,17 @@ export default function TripDetail ({trip}: {trip:Trip}) {
 
 
               {/* EDIT */}
+              <Link className="flex items-center justify-center gap-2" href={'/dashboard/track-order/edit-order'}> 
+              
               <Button
-                className="flex items-center justify-center gap-2"
+                
                 variant={"outline"}
-                onClick={handleEditTrip}
+                
               >
                 <p>Edit Trip</p>
               </Button>
+              </Link>
+
               
                   {/* <EditTrip/> */}
               
@@ -107,7 +104,7 @@ export default function TripDetail ({trip}: {trip:Trip}) {
               <Container className="flex flex-col  w-full h-52 rounded-lg p-3 gap-2">
                 <StatusSection tripStage={trip?.trip_stage} tripStatus={trip?.trip_status} />
               </Container>
-              <Container className=" w-full h-72 rounded-lg p-6">
+              <Container className=" w-full md:h-72 h-80 rounded-lg p-3">
                 <PackageSection/>
               </Container>
             </div>

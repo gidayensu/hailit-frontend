@@ -11,7 +11,7 @@ import TripDetail from "./TripDetail";
 export default function  TrackOrder() {
   const {
     trip,
-    trackingOrder,
+    
     inputRef,
     isLoading,
     handleTrackTrip,
@@ -25,10 +25,10 @@ export default function  TrackOrder() {
     <main className="flex flex-col gap-5  md:h-full md:mb-0  ">
       {/* HEADER */}
       
-      {trackingOrder && !editingOrder && isLoading && !error  && <BigLoader />}
+      {!editingOrder && isLoading && !error  && <BigLoader />}
 
-      {trackingOrder &&  !editingOrder && !isLoading && trip &&   !error  && (
-        <TripDetail  trip={trip}/>
+      {!editingOrder && !isLoading && trip &&   !error  && (
+        <TripDetail  />
         )}
        {error && selectedTripId && (
         <>

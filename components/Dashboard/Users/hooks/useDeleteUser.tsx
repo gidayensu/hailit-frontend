@@ -1,9 +1,9 @@
-import { useAppDispatch } from "@/lib/store/hooks";
 import { useDeleteUserMutation } from "@/lib/store/apiSlice/hailitApi";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
-export const useDeleteUser = (userId:string)=> {
-    const dispatch = useAppDispatch();
+import { useRouter } from "next/navigation";
 
+export const useDeleteUser = (userId:string)=> {
+    
+    const router = useRouter();
     const [deleteUser, { isSuccess, isLoading, error }] = useDeleteUserMutation();
     
     const handleDeleteUser = ()=> {
@@ -13,7 +13,7 @@ export const useDeleteUser = (userId:string)=> {
 
     if(isSuccess) {
         setTimeout(()=> {
-            dispatch(setSelectedUserId(''))
+            router.push('/dashboard/users')
         }, 1000)
     }
     

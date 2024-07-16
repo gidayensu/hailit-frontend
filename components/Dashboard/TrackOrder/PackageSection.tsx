@@ -4,7 +4,7 @@ import Loader from "@/components/Shared/Loader";
 export default function PackageSection () {
     const {trip, isLoading} = useGetTrip();
     return (
-      <div className="flex flex-col  w-full   h-52 rounded-lg   ">
+      <div className="flex flex-col  w-full  rounded-lg  ">
         <h3 className="font-bold">PACKAGE</h3>
         <h3 className="text-[12px] text-slate-400 ">Details</h3>
         {isLoading &&
@@ -12,7 +12,7 @@ export default function PackageSection () {
           <Loader color="text-primary-color"/>
           </div>  
         }
-        <div className=" w-full   items-center gap-1.5">
+        <div className=" w-full items-center gap-1.5  ">
           <OrderSummary trip={trip} />
         </div>
       </div>

@@ -6,14 +6,8 @@ import { useGetTrip } from "./StatusSection/hook/useGetTrip";
 
 export default function TrackOrderFormDash() {
   const {
-    trip,
-    trackingOrder,
     inputRef,
-    isLoading,
     handleTrackTrip,
-    error,
-    editingOrder,
-    selectedTripId,
   } = useGetTrip();
 
   return (

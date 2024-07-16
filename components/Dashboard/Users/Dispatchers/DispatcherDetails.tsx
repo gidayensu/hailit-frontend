@@ -68,7 +68,7 @@ export default function DispatcherDetails() {
             
           )}
 
-          {!dispatcherLoading && (
+          {!dispatcherLoading && !editDispatcher && (
             <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
               <div className="w-full col-span-2 flex flex-col gap-2">
                 <DispatcherCard

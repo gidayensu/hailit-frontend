@@ -1,9 +1,9 @@
 "use client";
 import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setPreviousSelectedTripId, setTripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
+import {  setTripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
 import { TripStatus } from "../types/Types";
-
+import { useParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 
@@ -15,12 +15,15 @@ export const useStatusUpdate = ()=> {
     tripCommencementDate: null,
     tripCompletionDate: null,
   });
-
+  const params = useParams();
+  
+  const selectedTripId = params.trip_id;
+  
   const [loading, setIsLoading] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
-  const { selectedTripId, tripStatus, tripStage, } = useAppSelector(
+  const { tripStatus, tripStage, } = useAppSelector(
     (state) => state.dashboard
   );
 
@@ -66,7 +69,7 @@ export const useStatusUpdate = ()=> {
         tripCompletionDate: localTripStatus.tripCompletionDate
       })
     );
-    dispatch(setPreviousSelectedTripId([selectedTripId]))
+    
     setIsLoading(false);
   }
 

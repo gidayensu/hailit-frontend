@@ -29,7 +29,7 @@ export const useUserProfile = ()=> {
     const dispatch = useAppDispatch();
 
     const {data, isLoading, error } = useGetUserTripsQuery(selectedUserId);
-    const { handleTrackTrip} = useGetUserTrips(selectedUserId);
+    
     const trips = data?.trips
     
     useEffect(()=>{
@@ -61,7 +61,7 @@ export const useUserProfile = ()=> {
     }
     
     const selectedUser:User = user;
-    return {userTrips, customerTrips, handleDeleteTrip, error, deleteError, handleTrackTrip, selectedUser, isLoading, handleDeselect }
+    return {userTrips, customerTrips, handleDeleteTrip, error, deleteError, selectedUser, isLoading, handleDeselect }
 }
 
 export interface UserTrip {

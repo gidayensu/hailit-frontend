@@ -1,13 +1,10 @@
 'use client'
-import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
-import { MdArrowBack } from "react-icons/md";
+import { useState } from "react";
 import DashboardCard from "../DashboardCard";
 import DashboardUserCard from "./DashboardUserCard";
 import { useUserProfile } from "./hooks/useUserProfile";
 import NonDispatcherTripsTable from "./NonDispatcherTripsTable";
-import { UserRole } from "@/lib/store/slice/userSlice";
-import { useState } from "react";
 
 import EditUser from "./EditUser";
 //UserDetails accepts userRole to show details based on the userRole
@@ -15,7 +12,7 @@ import EditUser from "./EditUser";
 export default  function UserDetails () {
 const [editUser, setEditUser] = useState<boolean>(false);
 
-const {userTrips, selectedUser, error, deleteError, handleTrackTrip, handleDeselect } = useUserProfile();
+const {userTrips, selectedUser, error, deleteError, handleDeselect } = useUserProfile();
   const total_trip_count = userTrips?.total_trip_count
   
   

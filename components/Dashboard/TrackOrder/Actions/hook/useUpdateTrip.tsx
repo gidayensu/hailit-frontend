@@ -4,23 +4,21 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 
 //redux + next + react + helper
-import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-
+import { useParams } from 'next/navigation';
 //interface
-import { NewOrderSchema, OrderDetails, UpdateOrderDetails, UpdateOrderSchema } from '@/components/Form/FormTypes';
-import { setEditingOrder, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
-import { setTripMedium, setTripArea, setPackageType, setScheduled, resetDeliveryChoices, setTripType } from "@/lib/store/slice/deliveryChoicesSlice";
-import { useEffect } from "react";
-import { Trip } from '@/lib/store/slice/tripSlice';
-import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { UpdateOrderDetails, UpdateOrderSchema } from '@/components/Form/FormTypes';
+import { useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { resetDeliveryChoices, setPackageType, setScheduled, setTripArea, setTripMedium, setTripType } from "@/lib/store/slice/deliveryChoicesSlice";
 import { resetMapData } from '@/lib/store/slice/mapSlice';
+import { Trip } from '@/lib/store/slice/tripSlice';
+import { useEffect } from "react";
 
 export const useUpdateTrip = (trip:Trip)=> {
+  const params = useParams();
+  const selectedTripId = params.trip_id
 
   useEffect(() => {
     dispatch(setPackageType(trip?.package_type));
@@ -32,7 +30,7 @@ export const useUpdateTrip = (trip:Trip)=> {
     }
   }, [trip?.package_type, trip?.trip_type]);
 
-  const { selectedTripId } = useAppSelector(state=>state.dashboard)
+  
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
   
@@ -53,10 +51,7 @@ export const useUpdateTrip = (trip:Trip)=> {
   
 
   
-  const handleCancel = ()=> {
-    dispatch(setTrackingOrder(true))
-    dispatch(setEditingOrder(false))
-  }
+  
 
   //update trip
   const formMethods = useForm<UpdateOrderDetails>({
@@ -100,11 +95,11 @@ export const useUpdateTrip = (trip:Trip)=> {
   if(data) {
     dispatch(resetDeliveryChoices())
     dispatch(resetMapData())
-    dispatch(setTrackingOrder(true))
-    dispatch(setEditingOrder(false))
+    
+    
   }
 
-  return {formMethods, control, dispatch, handleCancel, handleSubmit, onDeliveryFormSubmit, packageTypeRef, trip_medium, trip_type, trip_area, package_type , updateLoading, isLoading, register}
+  return {formMethods, control, dispatch,  handleSubmit, onDeliveryFormSubmit, packageTypeRef, trip_medium, trip_type, trip_area, package_type , updateLoading, isLoading, register}
 
   
 }

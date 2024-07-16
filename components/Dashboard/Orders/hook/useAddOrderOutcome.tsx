@@ -11,16 +11,16 @@ import { copyToClipBoard } from "@/lib/utils";
 
 import {
   setActiveSection,
-  setSelectedTripId,
-  setTrackingOrder,
 } from "@/lib/store/slice/dashboardSlice";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function useAddOrderOutcome() {
   const [loading, setLoading] = useState<boolean>(false);
   const { trip_id, order_success } = useAppSelector((state) => state.newOrder);
 
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleCopyTripId = (tripId: string) => {
@@ -47,8 +47,8 @@ export function useAddOrderOutcome() {
 
   const trackTrip = () => {
     dispatch(setActiveSection("Track Order"));
-    dispatch(setTrackingOrder(true));
-    dispatch(setSelectedTripId(trip_id));
+    
+    router.push(`/dashboard/track-order/${trip_id}`)
 
     setLoading(true);
 

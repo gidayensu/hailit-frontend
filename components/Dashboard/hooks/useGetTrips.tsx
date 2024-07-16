@@ -1,10 +1,10 @@
-import { useGetAllTripsQuery, usePrefetch } from "@/lib/store/apiSlice/hailitApi";
+import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setActiveSection, setEditingOrder, setSelectedTripId, setTrackingOrder } from "@/lib/store/slice/dashboardSlice";
+import { setEditingOrder } from "@/lib/store/slice/dashboardSlice";
 import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { usePrefetchData } from "./usePrefetchData";
-import { useRouter } from "next/navigation";
 
 export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   const {tripsData, overviewData}  = useAppSelector(state => state.dashboardTables);
