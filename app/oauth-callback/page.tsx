@@ -5,10 +5,11 @@ import BigLoader from "@/components/Shared/BigLoader";
 import ErrorComponent from "@/components/Shared/ErrorComponent";
 import { userIdAndEmailFromSession } from "@/lib/supabaseAuth";
 import { useEffect, useState } from "react";
-import { supabaseSignOut } from "@/lib/supabaseAuth";
 
-//this is the callback for google sign in. If this url loads, then the user has already logged in (from supabase auth's end) and his data
-//data has to be fetched (from the backend end); 
+//This function serves as the callback for Google sign-in. 
+//Upon successful loading of this URL, it indicates that the user has already logged in via Supabase authentication. 
+//Subsequently, the user's data needs to be fetched from the backend.
+
 export default function OAuthCallBack (){ 
     const [attemptedSignUp, setAttemptedSignUp] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
