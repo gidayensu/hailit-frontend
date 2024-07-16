@@ -5,7 +5,7 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetUserTrips } from "../hooks/useGetUserTrips";
 import { Trip } from "@/lib/store/slice/tripSlice";
 export default function OrdersCard({userId}:{userId:string}) {
-  const  {data, isLoading, handleTrackTrip} = useGetUserTrips(userId);
+  const  {data, isLoading, } = useGetUserTrips(userId);
   
   return (
     <>
@@ -28,7 +28,7 @@ export default function OrdersCard({userId}:{userId:string}) {
                     {data?.trips?.customer_trips?.map((trip:Trip, index:number)=> 
                     <>
                       { index <= 2 &&
-                        <div onClick={()=>handleTrackTrip(trip.trip_id)} key={trip.trip_id}>
+                        <div  key={trip.trip_id}>
 
                           <OrderSummaryMin key={trip.trip_id} cost={trip.trip_cost} deliveryStatus={trip.trip_status} packageType={trip.package_type} tripId={trip.trip_id} tripRequestDate={extractDateWithDayFromDate(trip.trip_request_date)}/>
                         </div>
