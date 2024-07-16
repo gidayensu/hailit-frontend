@@ -82,7 +82,7 @@ export const useGetTrip = () => {
 
   //handle view rider/driver assigned to trip
   const handleViewDispatcher = ()=> {
-    console.log('TRIP MEDIUM:',trip?.trip_medium)
+    
     if(trip?.trip_medium === "Motor" ) {
       dispatch(setActiveSection('Riders'))
       dispatch(setSelectedRiderId(dispatcher?.dispatcher_id))
@@ -97,7 +97,7 @@ export const useGetTrip = () => {
     dispatch(setActiveSection(section));
   };
 
-  console.log(`this renders`)
+  
 
   return {
     tripStage,

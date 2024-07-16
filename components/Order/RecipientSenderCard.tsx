@@ -21,7 +21,8 @@ export default function RecipientSenderCard({
       </div>
       <div className="flex justify-center items-center gap-2">
       <Link href={ `tel:${phoneNumber}`} className="w-full">
-        <Button className=" bg-primary-medium h-8 w-32 rounded-md flex items-center justify-center text-slate-50 dark:text-secondary-dark text-[12px]">
+        <Button className=" bg-primary-medium h-8 w-32 rounded-md flex items-center justify-center text-slate-50 dark:text-secondary-dark text-[12px]"
+         variant={'outline'}>
           <p className=" "> Call {identity} </p>
         </Button>
         </Link>

@@ -22,7 +22,6 @@ import UserOtherTrips from "./UserOtherTripsSection";
 
 export default function TripDetail () {
   
-console.log('THIS ALSO RENDERS')
   const {
     trip,
     selectedTripId
