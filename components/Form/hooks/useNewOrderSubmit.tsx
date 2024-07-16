@@ -11,13 +11,16 @@ import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
+
+//hooks/custom hooks
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { usePathname } from 'next/navigation';
-
+import { calculateDistanceAndCost } from '@/lib/calculateDistanceAndCost';
 //interface
 
 import { NewOrderSchema, OrderDetails } from '../FormTypes';
+import {  resetMapData,  } from '@/lib/store/slice/mapSlice';
 
 export const useNewOrderSubmit = () => {
 
@@ -27,7 +30,15 @@ export const useNewOrderSubmit = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const path = usePathname();
-  
+  const {pickUpLocation, dropOffLocation} = useAppSelector(state=>state.map)
+
+
+  //calculate distance
+
+  const distanceAndCost = pickUpLocation && dropOffLocation && calculateDistanceAndCost({lat1:pickUpLocation[0], lon1:pickUpLocation[1], lat2: dropOffLocation[0], lon2: dropOffLocation[1] });
+
+
+
   const {package_type, trip_type, trip_area, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
   const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
@@ -45,6 +56,8 @@ export const useNewOrderSubmit = () => {
   
     setLoading(true);
 
+    
+
     if(!package_type) {
       scrollToSection(packageTypeRef)
       return (
@@ -52,16 +65,18 @@ export const useNewOrderSubmit = () => {
         
       )
     }
+    let tripArea = trip_area;
+    if(distanceAndCost && distanceAndCost?.distance > 100) {
+      tripArea = "Inter City"
+    }
+    const trip_cost = distanceAndCost?.cost;
     
-    const formDetails = {...data, package_type, trip_area, trip_type, trip_medium};
+    const formDetails = {...data, package_type, trip_area: tripArea, trip_type, trip_medium, trip_cost};
     addTrip(formDetails)
     
   }
   if(data && !isLoading && !error) {
     
-    //scroll to top if submission successful
-    
-    window.scrollTo(0, 0);
     const {trip} = data;
     dispatch(setNewOrder({
       order_success: true,
@@ -69,8 +84,14 @@ export const useNewOrderSubmit = () => {
       order_submitted: true,
       scheduled: false
     }))
+    
+    dispatch(resetMapData())
+    
+    
+    
     //redirect based on where the form is being used
     !path.startsWith('/dashboard') ? router.push('/order/new/success') : ''
+    
    
   }
 
@@ -85,5 +106,5 @@ export const useNewOrderSubmit = () => {
    
   }
 
-  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error}
+  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error, distanceAndCost}
 }

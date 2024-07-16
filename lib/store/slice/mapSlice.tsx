@@ -33,9 +33,17 @@ export const mapSlice = createSlice({
       state.pickUpLocation = action.payload
       
     },
+    setPickUpLocationName(state, action: PayloadAction<string>) {
+      state.pickUpLocationName = action.payload
+      
+    },
 
     setDropOffLocation(state, action: PayloadAction<UserLocation>) {
       state.dropOffLocation = action.payload
+      
+    },
+    setDropOffLocationName(state, action: PayloadAction<string>) {
+      state.dropOffLocationName = action.payload
       
     },
 
@@ -70,7 +78,8 @@ export const {
   resetMapData,
   setSearchCard,
   setDropOffLocation,
-
+  setPickUpLocationName,
+  setDropOffLocationName
 } = mapSlice.actions;
 
 
