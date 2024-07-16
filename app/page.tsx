@@ -1,57 +1,28 @@
 "use client";
-//next + react + redux
+//next + react + redux+custom hook
 
-import BigLoader from "@/components/Shared/BigLoader";
-import { redirect, useRouter } from "next/navigation";
-import { supabaseSession } from "@/lib/supabaseAuth";
-import { useEffect, useState } from "react";
+import { useHome } from "@/components/Home/hook/useHome";
 //main components
-import UserStats from "@/components/Home/UserStats";
 import DashboardTopNav from "@/components/Dashboard/Nav/DashboardTopNav";
-import SmallScreenTopNav from "@/components/Nav/SmallScreenTopNav";
+import OtherActions from "@/components/Home/OtherActions";
 import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
+import UserStats from "@/components/Home/UserStats";
+import SmallScreenTopNav from "@/components/Nav/SmallScreenTopNav";
 import OrderHistory from "@/components/Order/OrderHistory";
-import OtherActions from "@/components/Home/OtherActions";
-import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/lib/store/hooks";
 
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-  const path = usePathname();
+  const {path } = useHome();
   
-
-  
-  useEffect(() => {
-    const checkSession = async () => {
-      const session = await supabaseSession();
-      
-      if (!session) {
-        router.push('/authentication');
-      } else {
-        setLoading(false);
-      }
-    };
-    
-    checkSession();
-  }, [router]);
-  
-  //redirect users who are not customers
-  const {user_role} = useAppSelector(state=>state.user);
-  user_role && user_role !== "Customer" ? redirect('/authentication') : ''
-
-  if (loading) {
-    return <BigLoader/>
-  }
   return (
     <>
     {
       path.startsWith('/dashboard') && 
 
       <div className="md:hidden">
-        <DashboardTopNav />
+        {/* WHY IS THIS HERE? */}
+        <DashboardTopNav /> 
       </div>
     }
     {
