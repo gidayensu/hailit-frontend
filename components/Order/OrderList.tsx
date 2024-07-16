@@ -53,7 +53,7 @@ export default function OrderList({
               href={
                 path.startsWith("/dispatcher/trips")
                   ? `/dispatcher/trips/${trip?.trip_id}`
-                  : `track/${trip?.trip_id}`
+                  : `/track/${trip?.trip_id}`
               }
               className={`w-full relative `}
             >
