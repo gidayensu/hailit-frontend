@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/lib/store/hooks";
 import { supabaseSession } from "@/lib/supabaseAuth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BigLoader from "@/components/Shared/BigLoader";
 //main components
 import Authentication from "@/components/Profile/Authentication/Authentication";
@@ -14,7 +14,7 @@ export default function Profile() {
   //getting data from redux store
   const { authenticationState } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
-
+  const [sessionActive, setSessionActive] = useState<boolean>(false);
 
   useEffect(() => {
     
@@ -22,6 +22,7 @@ export default function Profile() {
       const session = await supabaseSession();
     
       if (authenticationState && session) {
+        setSessionActive(true)
         if (!onboard) {
           router.push("/onboarding");
         } else if (user_role === "Admin") {
@@ -33,6 +34,8 @@ export default function Profile() {
           <BigLoader/>
         </div>)
       }
+
+      
       
     };
     
@@ -44,7 +47,7 @@ export default function Profile() {
   return (
     <>
       <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
-        {!authenticationState && <Authentication />}
+        {(!authenticationState || !sessionActive) && <Authentication />}
         
       </main>
     </>

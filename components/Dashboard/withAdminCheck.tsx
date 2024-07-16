@@ -14,20 +14,20 @@ const withAdminCheck = <Q extends {}>(WrappedComponent: React.ComponentType<Q>) 
   const isAdmin = data?.admin;
     
 
-    if(error) {
-      return <ErrorComponent errorCode={500} errorMessage='Server Error Occurred'  url='/' /> // or Loading component or Unauthorized component
-    }
-
-    if(isLoading) {
-      return (
-        <div className='w-full flex items-center justify-center'>
+  
+  
+  if (!isAdmin && !isLoading && !error) {
+    return <ErrorComponent errorCode={403} errorMessage='Forbidden'  url='/' /> // or Loading component or Unauthorized component
+  }
+  if(isLoading) {
+    return (
+      <div className='w-full flex items-center justify-center'>
             <BigLoader/>
         </div>
       )
     }
-
-    if (!isAdmin && !isLoading && !error) {
-      return <ErrorComponent errorCode={404} errorMessage='Page Not Found'  url='/' /> // or Loading component or Unauthorized component
+    if(error) {
+      return <ErrorComponent errorCode={500} errorMessage='Server Error Occurred'  url='/' /> // or Loading component or Unauthorized component
     }
 
 
