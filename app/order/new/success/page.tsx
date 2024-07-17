@@ -6,7 +6,7 @@ import { MdContentCopy, MdInfoOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import deliveryAnimation from "@/public/animations/success-animation.json";
 import Loader from "@/components/Shared/Loader";
-import toast, { Toaster } from 'react-hot-toast';
+
 //main components 
 import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 
@@ -20,6 +20,7 @@ import { copyToClipBoard } from "@/lib/utils";
 
 export default function SuccessfulOrder() {
 const [loading, setLoading]  = useState<boolean>(false);
+const [copied, setCopied]  = useState<boolean>(false);
   const { trip_id, order_success } = useAppSelector(state=>state.newOrder)
   if(!order_success) {
     redirect('/order')
@@ -31,15 +32,12 @@ const [loading, setLoading]  = useState<boolean>(false);
     resetDeliveryChoices())
 
     const handleCopyTripId = (tripId:string)=> {
+      setCopied(true)
+      setTimeout(()=> {
+        setCopied(false)
+      }, 1000)
       copyToClipBoard(tripId)
-      toast.success(
       
-        <p className=" text-[13px]">
-
-          Trip ID: <b>  {tripId} </b> copied 
-        </p>
-      
-        )
     }
 
     const handleLoading = ()=> {
@@ -55,28 +53,30 @@ const [loading, setLoading]  = useState<boolean>(false);
         </p>
         <div className="w-full flex flex-col items-center justify-center">
           
+
         <p className=" text-center font-bold mb-2">
           Your Trip ID 
         </p>
         <div className="w-full flex items-center justify-center gap-4 cursor-pointer" onClick={()=>handleCopyTripId(trip_id)}>
 
-        <p className="text-sm text-center h-10 border p-2 border-green-500 w-2/4 rounded-md cursor-pointer">
-           <b>{trip_id} </b>
+        <p className={`text-sm text-center h-10 border p-2 border-green-500 ${copied ? 'bg-green-500 text-white scale-105' : 'scale-100'} w-2/4 rounded-md cursor-pointer  transition-all duration-200`
+
+
+}>
+           <b>{!copied ? trip_id : 'Copied!'} </b>
         </p>
         <span className="flex flex-col gap-2" >
         
         
         
         <MdContentCopy className="  text-xl hover:text-slate-600 dark:hover:text-slate-200"/>
-        <Toaster/>
+        
         </span>
         </div>
         <div className="w-full flex items-center justify-center mt-2">
           
           
-        <p className=" text-center font-semibold text-[12px] w-3/4 h-5 text-white bg-green-500 ">
-          Copy your Trip ID for tracking 
-        </p>
+        
         </div>
         </div>
       </div>
