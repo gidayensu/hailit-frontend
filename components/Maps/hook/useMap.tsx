@@ -36,7 +36,7 @@ export const useMap = (locationType: LocationType) => {
     pickUpLocationName,
   } = useAppSelector((state) => state.map);
 
-  const [userLocation, setUserLocation] = useState<UserLocation>([8.05462, -1.73066]); 
+  const [userLocation, setUserLocation] = useState<UserLocation>([5.5663846170585645, -0.23610680052490807  ]); 
 
   const [mapBoundaryChanged, setMapBoundaryChanged] =
     useState<MapBoundaryChange>(false);
