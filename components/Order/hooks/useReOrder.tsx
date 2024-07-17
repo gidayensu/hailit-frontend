@@ -10,18 +10,35 @@ import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
-
-export const useReOrder = (tripData: any) => {
+import { Trip } from "@/lib/store/slice/tripSlice";
+export const useReOrder = (tripData: Trip) => {
+  const {
+    trip_medium,
+    payment_method,
+    trip_cost,
+    pickup_location,
+    drop_off_location,
+    additional_information,
+    trip_area,
+    trip_type,
+    package_value,
+    package_type,
+    recipient_number,
+    sender_number,
+  } = tripData;
   const tripDetails: NewTrip = {
-    trip_medium: tripData.trip_medium,
-    package_type: tripData.package_type,
-    pickup_location: tripData.pickup_location,
-    drop_off_location: tripData.drop_off_location,
-    additional_information: tripData.additional_information,
-    trip_type: tripData.trip_type,
-    package_value: tripData.package_value,
-    sender_number: tripData.sender_number,
-    recipient_number: tripData.recipient_number,
+    trip_medium,
+    payment_method,
+    trip_cost,
+    pickup_location,
+    drop_off_location,
+    additional_information,
+    trip_area,
+    trip_type,
+    package_value,
+    package_type,
+    recipient_number,
+    sender_number,
   };
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();

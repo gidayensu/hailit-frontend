@@ -1,12 +1,11 @@
-import { extractDateWithDayFromDate } from "@/lib/utils";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import Loader from "../Shared/Loader";
 import { Trip } from "@/lib/store/slice/tripSlice";
-import OrderSummaryMin from "./OrderSummaryMin";
-import NoOrderHistory from "./NoOrderHistory";
+import { extractDateWithDayFromDate } from "@/lib/utils";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import NoOrderHistory from "./NoOrderHistory";
+import OrderSummaryMin from "./OrderSummaryMin";
 
 export default function OrderList({
   trips,
@@ -17,7 +16,7 @@ export default function OrderList({
   noDelivery: boolean;
   isDispatcher: boolean;
 }) {
-  const [tripLoading, setTripLoading] = useState<boolean>(false);
+  
   const [currentPage, setCurrentPage] = useState<number>(1);
   const tripsPerPage = 5; 
 
@@ -48,7 +47,7 @@ export default function OrderList({
         {currentTrips.map((trip: Trip) => (
           <div key={trip?.trip_id} className="w-full">
             <Link
-              onClick={() => setTripLoading(true)}
+              
               key={trip?.trip_id}
               href={
                 path.startsWith("/dispatcher/trips")

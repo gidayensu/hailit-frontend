@@ -150,6 +150,9 @@ export interface NewTrip {
     trip_type: string,
     package_value: string,
     sender_number: string,
+    trip_area: string,
     recipient_number: string,
+    trip_cost: string | number;
+    payment_method: string
 }
 

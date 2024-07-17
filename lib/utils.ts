@@ -55,7 +55,9 @@ export async function reverseMapSearch(
     }
 
     const data = await response.json();
-    
+    if(data.display_name === "Soul Buoy") {
+        data.display_name = ''
+    }
     
     return {
       latitude: data.lat,
