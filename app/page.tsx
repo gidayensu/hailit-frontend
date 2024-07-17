@@ -17,14 +17,7 @@ export default function Home() {
   
   return (
     <>
-    {
-      path.startsWith('/dashboard') && 
-
-      <div className="md:hidden">
-        {/* WHY IS THIS HERE? */}
-        <DashboardTopNav /> 
-      </div>
-    }
+    
     {
       !path.startsWith('/dashboard') && 
 
