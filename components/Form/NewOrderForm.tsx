@@ -11,7 +11,7 @@ import FormField from "./FormField";
 //main components
 import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoices/DeliveryChoicesBreadcrumb";
 import PackageTypes from "../Order/NewDelivery/PackageTypes/PackageTypes";
-
+import PaymentMethods from "../Order/PaymentMethods";
 //redux + next + react + helper
 import Link from "next/link";
 import { useState } from "react";
@@ -203,10 +203,22 @@ export default function NewOrderForm() {
           <Textarea className="h-32" {...register("additional_information")} />
           {
           distanceAndCost && 
+          <>
+          <div className=" grid w-full max-w-sm items-center gap-1.5 " >
+          <span className="flex items-start justify-start">
+            <h3 className=" text-[14px] font-bold ">Payment Method</h3>
+          </span>
+          <div className=" flex gap-[8px]  flex-wrap">
+          <PaymentMethods/>
+          </div>
+        </div>
+          
+          
+        
         <div className="w-full flex flex-col items-start justify-between h-[120px] rounded-md bg-[#c7ddf7] dark:bg-secondary-dark p-3 my-3">
         <div className="flex w-full items-start justify-between text-sm ">
           <div className="space-y-1">
-            <ul>Distance (in km)</ul>
+            <ul>Distance (km)</ul>
             <ul>Trip Cost</ul>
             <ul>Service Fee</ul>
           </div>
@@ -223,6 +235,7 @@ export default function NewOrderForm() {
           <p>GHS{distanceAndCost.cost}</p>
         </div>
       </div>
+          </>
         }
           
             <Button type="submit" className="w-full h-14" disabled = {loading}>

@@ -22,4 +22,6 @@ export type TripMedium = "Motor" | "Car" | "Truck";
 
 export type TripType = "Next Day" | "Same Day" | "Scheduled";
 
+export type PaymentMethod = "Cash on Delivery" | "MoMo on Delivery" | "Online"
+
   
