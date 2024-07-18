@@ -3,19 +3,47 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setTripArea, setTripType, setTripMedium } from "@/lib/store/slice/deliveryChoicesSlice";
 import { ItemsSelectorNoIcons } from "@/components/Shared/ItemsSelectorNoIcons";
 import { useCallback, useEffect } from "react";
+import { TripMedium, TripType, TripArea } from "@/components/Order/types/Types";
 
 
-type choiceType = "trip area" | "trip medium" | "trip type"
+
+
+interface ChoiceType {
+  choiceType: "trip area" | "trip medium" | "trip type"
+}
+
+interface TripMediumChoice extends ChoiceType {
+  choiceType: "trip medium"
+  userChoice: TripMedium
+}
+
+interface TripTypeChoice extends ChoiceType {
+  choiceType: "trip type"
+  userChoice: TripType
+}
+
+interface TripAreaChoice extends ChoiceType {
+  choiceType: "trip area"
+  userChoice: TripArea
+}
+
+type Choice = TripMediumChoice | TripTypeChoice | TripTypeChoice | TripAreaChoice
 
 export default function TripAreaMediumAndType () {
   const dispatch = useAppDispatch();
 
-  const handleTripChoices = useCallback((tripChoice:string, choiceType:string)=>{
-      choiceType === "trip area"
-        ? dispatch(setTripArea(tripChoice))
-        : choiceType === "trip medium"
-        ? dispatch(setTripMedium(tripChoice))
-        : dispatch(setTripType(tripChoice));
+ 
+
+  const handleTripChoices = useCallback((choice:Choice)=>{
+      const choiceType = choice.choiceType;
+      choiceType === "trip area" 
+      ? dispatch(setTripArea(choice.userChoice)) 
+      : choiceType === "trip medium" 
+      ? dispatch(setTripMedium(choice.userChoice)) :
+      choiceType === "trip type" 
+      ? dispatch(setTripType(choice.userChoice)) 
+      : ''
+
   }, [dispatch])
 
     const {trip_area, trip_type, trip_medium} = useAppSelector(state=>state.deliveryChoices)
@@ -28,21 +56,21 @@ export default function TripAreaMediumAndType () {
             {/* TRIP AREA SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
-                itemType="Accra"
-                selectedItemType={trip_area}
-                onClickFunc={() => {handleTripChoices("Accra", "trip area")}}
+                item="Accra"
+                selectedItem={trip_area}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip area", userChoice: "Accra"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Kumasi"
-                selectedItemType={trip_area}
-                onClickFunc={() => {handleTripChoices("Kumasi", "trip area")}}
+                item="Kumasi"
+                selectedItem={trip_area}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip area", userChoice: "Kumasi"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Inter City"
-                selectedItemType={trip_area}
-                onClickFunc={() => {handleTripChoices("Inter City", "trip area")}}
+                item="Inter City"
+                selectedItem={trip_area}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip area", userChoice: "Inter City"})}}
                 className=" w-24"
               />
             </div>            
@@ -53,21 +81,21 @@ export default function TripAreaMediumAndType () {
             {/* TRIP TYPES SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
-                itemType="Same Day"
-                selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Same Day", "trip type")}}
+                item="Same Day"
+                selectedItem={trip_type}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip type", userChoice: "Same Day"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Next Day"
-                selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Next Day", "trip type")}}
+                item="Next Day"
+                selectedItem={trip_type}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip type", userChoice: "Next Day"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Scheduled"
-                selectedItemType={trip_type}
-                onClickFunc={() => {handleTripChoices("Scheduled", "trip type")}}
+                item="Scheduled"
+                selectedItem={trip_type}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip type", userChoice: "Scheduled"})}}
                 className=" w-24"
               />
             </div>
@@ -78,21 +106,21 @@ export default function TripAreaMediumAndType () {
             {/* TRIP MEDIUM SECTION */}
             <div className="flex gap-2 w-full">
               <ItemsSelectorNoIcons
-                itemType="Car"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {handleTripChoices("Car", "trip medium")}}
+                item="Car"
+                selectedItem={trip_medium}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip medium", userChoice: "Car"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Motor"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {handleTripChoices("Motor", "trip medium")}}
+                item="Motor"
+                selectedItem={trip_medium}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip medium", userChoice: "Motor"})}}
                 className=" w-24"
               />
               <ItemsSelectorNoIcons
-                itemType="Truck"
-                selectedItemType={trip_medium}
-                onClickFunc={() => {handleTripChoices("Truck", "trip medium")}}
+                item="Truck"
+                selectedItem={trip_medium}
+                setSelectedItem={() => {handleTripChoices({choiceType: "trip medium", userChoice: "Truck"})}}
                 className=" w-24"
               />
             </div>
