@@ -18,7 +18,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
         <div className="flex flex-col justify-center items-center p-2 h-12">
           {path === "/dispatcher" && (
             <>
-              {/* <p className="text-[12px] text-slate-500">Order ID</p> */}
+              
               <h3 className="font-bold text-[14px] ">#{trip.trip_id}</h3>
             </>
           )}
@@ -70,12 +70,12 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
       <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10" />
 
       {/* Location */}
-      <div className="flex gap-2w-full p-1 justify-between items-start">
-        <section className="w-4/5">
+      <div className="flex gap-2 w-full p-1  items-start ">
+        <section className="w-full ">
           <div className="flex flex-col gap-10 justify-between">
             <div className="w-full">
-              <div className="w-full">
-                <div className="grid grid-cols-8 sm:flex items-start gap-1 w-full  ">
+              <div className="w-full grid grid-cols-5 md:grid-cols-9 justify-between ">
+                <div className="grid grid-cols-8 sm:flex items-start gap-1 w-full  md:col-span-7 col-span-3 ">
                   <HiLocationMarker className="col-span-1 text-xl text-amber-500" />
                   <span className="flex flex-col col-span-7 ">
                     <p className="text-sm font-semibold">Pickup Point</p>
@@ -84,38 +84,38 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
                     </p>
                   </span>
                 </div>
+                <div className="col-span-2  flex flex-col  ml-2">
+            <p className="text-sm font-semibold">Pickup date</p>
+            <p className="text-sm ">
+              {tripCommencementDate} <br /> ({tripCommencementTime})
+            </p>
+          </div>
               </div>
               <Separator
                 orientation="vertical"
                 className="ml-2 bg-slate-800 h-6 dark:bg-slate-100   "
               />
             </div>
+              <div className="grid  grid-cols-5 md:grid-cols-9 -mt-5 justify-between  ">
 
-            <div className="grid grid-cols-8 sm:flex items-start gap-1 w-full -mt-5  ">
+            <div className="grid grid-cols-8 sm:flex items-start gap-1 w-full  md:col-span-7 col-span-3  ">
               <HiLocationMarker className="col-span-1 text-xl text-green-500" />
               <span className="flex flex-col col-span-7 ">
                 <p className="text-sm font-semibold">Dropoff Point</p>
                 <p className="text-sm lg:w-64    ">{trip.drop_off_location}</p>
               </span>
             </div>
-          </div>
-        </section>
-
-        <section className="flex flex-col md:mr-5 gap-10 w-2/5 ">
-          <div>
-            <p className="text-sm font-semibold">Pickup date</p>
-            <p className="text-sm ">
-              {tripCommencementDate} <br /> ({tripCommencementTime})
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm font-semibold">Delivery date</p>
+            <div className="col-span-2  flex flex-col  ml-2  ">
+            <p className="text-sm font-semibold">Dropoff date</p>
             <p className="text-sm mb-2">
               {tripCompletionDate} <br /> ({tripCompletionTime})
             </p>
           </div>
+              </div>
+          </div>
         </section>
+
+      
       </div>
     </>
   );

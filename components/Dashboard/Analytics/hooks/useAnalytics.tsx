@@ -1,17 +1,14 @@
 import {
-  useGetTripCountsByMonthQuery,
-  useGetTripMonthsQuery,
-  useLazyGetTripMonthsQuery,
-  useGetTripRevenueByMonthQuery
-} from "@/lib/store/apiSlice/hailitApi";
-import {
   PackageType,
-  TripStatus,
   TripArea,
   TripMedium,
+  TripStatus,
   TripType,
 } from "@/components/Order/types/Types";
-import { useState } from "react";
+import {
+  useGetTripCountsByMonthQuery,
+  useGetTripMonthsQuery
+} from "@/lib/store/apiSlice/hailitApi";
 
 export type TripColumn =
   | "trip_status"

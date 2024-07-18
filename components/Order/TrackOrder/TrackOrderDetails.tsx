@@ -51,19 +51,7 @@ export default  function TrackOrderDetails() {
   if (error) {
     return (
       <ErrorComponent errorCode={500} errorMessage="Server Error Occurred" url="/"/>
-      // <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
-      //   <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-      //     <span className="text-4xl font-bold ">No trip is associated with ID {trip_id}</span>
-      //     <p className="text-md">
-      //       Check the trip ID and ensure that you are not missing a value and
-      //       search again
-      //     </p>
-      //   </TopSectionContainer>
-      //   <MiddleSectionContainer className="flex flex-col items-center justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-      //     <span className="text-5xl font-bold ">Error occurred</span>
-      //     <p className="text-lg font-bold"> </p>
-      //   </MiddleSectionContainer>
-      // </main>
+      
     );
   }
 
