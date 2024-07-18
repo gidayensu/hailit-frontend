@@ -8,8 +8,9 @@ import { RiMapPinRangeLine, RiTreasureMapFill } from "react-icons/ri";
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice";
 
 export default function PackageDestinationChoice() {
-  const { trip_area, handleDeliveryChoice } =
-    useDeliveryChoice("trip_area");
+  const { trip_area, trip_medium, trip_type, handleDeliveryChoice } =
+    useDeliveryChoice();
+    
   return (
     <>
       <DeliveryChoices
@@ -17,7 +18,10 @@ export default function PackageDestinationChoice() {
         deliveryOption={trip_area}
         
         MainIcon={BsFillPinMapFill}
-        elementOption="Accra"
+        choiceType={{
+          choice: "Accra",
+          choiceCategory: "trip_area"
+       }}
       >
         <p className="text-sm md:text-md text-center">Accra or Tema suburb</p>
       </DeliveryChoices>
@@ -28,7 +32,10 @@ export default function PackageDestinationChoice() {
           deliveryOption={trip_area}
           
           MainIcon={RiMapPinRangeLine}
-          elementOption="Kumasi"
+          choiceType={{
+            choice: "Kumasi",
+            choiceCategory: "trip_area"
+         }}
         >
           <p className="text-sm md:text-md text-center">Abuakwa, Ejisu, etc</p>
         </DeliveryChoices>
@@ -38,7 +45,11 @@ export default function PackageDestinationChoice() {
           deliveryOption={trip_area}
           
           MainIcon={RiTreasureMapFill}
-          elementOption="Inter city"
+          choiceType={{
+            choice: "Inter City",
+            choiceCategory: "trip_area"
+         }}
+         disabled= {trip_medium === "Motor" || trip_type === "Same Day"}
         >
           <p className="text-sm md:text-md text-center">Accra - Kumasi</p>
         </DeliveryChoices>

@@ -6,7 +6,7 @@ import { DeliveryChoices } from "./DeliveryChoice"
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice"
 
 export default function   DeliveryDayChoice () {
-    const {trip_type, handleDeliveryChoice} = useDeliveryChoice("delivery_day")
+    const {trip_type, trip_area, handleDeliveryChoice} = useDeliveryChoice()
 
     return(
         <>
@@ -15,8 +15,12 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiTimerFlashFill}
-                elementOption="Same Day"
+                choiceType={{
+                   choice: "Same Day",
+                   choiceCategory: "delivery_day"
+                }}
                 className="animate-in  zoom-in duration-50"
+                disabled= {trip_area === "Inter City"}
               >
                 <p className="text-[12px] md:text-lg text-center"> from <b>GHS 30</b></p>
               </DeliveryChoices>
@@ -26,7 +30,10 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiTimer2Fill}
-                elementOption="Next Day"
+                choiceType={{
+                  choice: "Next Day",
+                  choiceCategory: "delivery_day"
+               }}
                 className="animate-in zoom-in duration-150"
               >
                 <p className="text-[12px] md:text-lg text-center"> from <strong>GHS 20</strong>  </p>
@@ -38,8 +45,12 @@ export default function   DeliveryDayChoice () {
                 deliveryOption={trip_type}
                 
                 MainIcon={RiCalendarScheduleFill}
-                elementOption="Scheduled"
+                choiceType={{
+                  choice: "Scheduled",
+                  choiceCategory: "delivery_day"
+               }}
                 className="animate-in  zoom-in duration-300"
+                
               >
                 <p className="text-[12px] md:text-lg text-center">  from <strong>GHS 20</strong></p>
               </DeliveryChoices>
