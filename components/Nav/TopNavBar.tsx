@@ -8,7 +8,7 @@ import { ThemeToggle } from "../Theme/ThemeToggle";
 
 
 export function TopNavBar() {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
   
 
   //setting current theme. Not using useEffect result in hydration errors
@@ -66,10 +66,12 @@ export function TopNavBar() {
       </Link>
       <div className={iconsAndTextDivClass} >
         <span className={iconsAndTextSpanClass}>
-          <ThemeToggle />
-          <p className={iconTextClass}>
-            {theme === "light" ? "Dark mode" : "Light mode"}
-          </p>
+        <ThemeToggle> 
+
+<p className={iconTextClass}>
+  {theme === "light" || (systemTheme === "light" && theme === "light") ? "Dark mode" : "Light mode"}
+</p>
+</ThemeToggle>
         </span>
       </div>
       </>)

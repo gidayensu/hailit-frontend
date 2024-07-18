@@ -9,9 +9,9 @@ import {
   MdOutlineLightMode,
 } from "react-icons/md";
 
-export function ThemeToggle() {
+export function ThemeToggle({children}:{children?:React.ReactNode}) {
   
-  const { handleThemeChange, theme} = useSetTheme();
+  const { handleThemeChange, theme, systemTheme} = useSetTheme();
   
 
   
@@ -23,20 +23,24 @@ export function ThemeToggle() {
   
 
   return (
-    <span onClick={handleThemeChange}>
-      {theme !== "dark" && (
+    <div className="flex items-center justify-center gap-2" onClick={handleThemeChange}>
+
+    <span  >
+      {(theme === "light" || (systemTheme === "light" && theme==="light")) && (
         <>
           <MdOutlineDarkMode className={iconOutlineClass} />
           <MdDarkMode className={iconFillClass} />
         </>
       )}
 
-      {theme === "dark" && (
+      {(theme === "dark" || (systemTheme === "dark" && theme==="dark")) && (
         <>
           <MdOutlineLightMode className={iconOutlineClass} />
           <MdLightMode className={iconFillClass} />
         </>
       )}
     </span>
+    {children}
+    </div>
   );
 }

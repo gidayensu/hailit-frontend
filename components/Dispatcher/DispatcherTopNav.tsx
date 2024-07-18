@@ -8,7 +8,7 @@ import { ThemeToggle } from "../Theme/ThemeToggle";
 
 
 export function DispatcherTopNav() {
-  const {theme} = useSetTheme()
+  const {theme, systemTheme} = useSetTheme()
   
   
   const path = usePathname();
@@ -62,10 +62,12 @@ export function DispatcherTopNav() {
       </Link>
       <div className={iconsAndTextDivClass} >
         <span className={iconsAndTextSpanClass}>
-          <ThemeToggle />
+          <ThemeToggle> 
+
           <p className={iconTextClass}>
-            {theme === "light" ? "Dark mode" : "Light mode"}
+            {theme === "light" || (systemTheme === "light" && theme === "light") ? "Dark mode" : "Light mode"}
           </p>
+          </ThemeToggle>
         </span>
       </div>
       </>)
