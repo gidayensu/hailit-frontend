@@ -76,8 +76,6 @@ export default function OnboardingStages() {
                   <FiArrowLeft />
                 </Button>
                 
-                {/* This component does not render when the form is submitted hence it does not indicate loading state. setting disabled with the local state
-                prevents the form submission. Two buttons are used to create the same effect */}
                  
                  <Button
                   className="w-full"

@@ -57,7 +57,7 @@ export const useGetAllUsers = (page:number) => {
    
   
 
-  // console.log(sortByProperty(usersData, 'date_created'))
+
     //set users data 
     useEffect(()=> {
       
