@@ -16,6 +16,10 @@ const initialState:Trip = {
       recipient_number: "",
       trip_type: "",
       trip_id: "",
+      drop_lat: "",
+      drop_long: "",
+      pick_lat: "",
+      pick_long: "",
       payment_method: "",
       promo_code: "",
       dispatcher_id: "",
@@ -28,6 +32,7 @@ const initialState:Trip = {
       additional_information: "",
       sender_number: "",
       trip_area: "",
+      
       //dispatcher is structured to match both drivers and riders
       dispatcher: {
         rating_count: 0,
@@ -124,6 +129,12 @@ export interface Dispatcher {
     sender_number: string;
     trip_area: string;
     dispatcher: Dispatcher;
+    pick_lat: string,
+    pick_long: string,
+    drop_lat: string, 
+    drop_long: string,
+
+
   }
   
   export interface Vehicle {

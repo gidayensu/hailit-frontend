@@ -31,15 +31,24 @@ export const useNewOrderSubmit = () => {
   const dispatch = useAppDispatch();
   const path = usePathname();
   const {pickUpLocation, dropOffLocation} = useAppSelector(state=>state.map)
-
+  const [pick_lat, pick_long] = pickUpLocation ?? [0, 0];
+  const [drop_lat, drop_long] = dropOffLocation ?? [0, 0];
+  
 
   //calculate distance
 
-  const distanceAndCost = pickUpLocation && dropOffLocation && calculateDistanceAndCost({lat1:pickUpLocation[0], lon1:pickUpLocation[1], lat2: dropOffLocation[0], lon2: dropOffLocation[1] });
+  const distanceAndCost =
+    
+    calculateDistanceAndCost({
+      lat1: pick_lat,
+      lon1: pick_long,
+      lat2: drop_lat, 
+      lon2: drop_long,
+    });
 
 
 
-  const {package_type, trip_type, trip_area, trip_medium, scheduled } = useAppSelector(state=>state.deliveryChoices);
+  const {package_type, trip_type, trip_area, trip_medium, scheduled, payment_method } = useAppSelector(state=>state.deliveryChoices);
   const {  dropOffLocationName, pickUpLocationName } = useAppSelector(state=>state.map)
 
   const  [addTrip, { data, isLoading, error }] = useAddTripMutation();
@@ -71,7 +80,19 @@ export const useNewOrderSubmit = () => {
     }
     const trip_cost = distanceAndCost?.cost;
     
-    const formDetails = {...data, package_type, trip_area: tripArea, trip_type, trip_medium, trip_cost};
+    const formDetails = {
+      ...data,
+      package_type,
+      trip_area: tripArea,
+      trip_type,
+      trip_medium,
+      trip_cost,
+      payment_method,
+      pick_lat,
+      pick_long,
+      drop_lat,
+      drop_long
+    };
     addTrip(formDetails)
     
   }

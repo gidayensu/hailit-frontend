@@ -6,7 +6,7 @@ import { FaMapPin } from "react-icons/fa";
 import { Button } from "../ui/button";
 import SearchResults from "./SearchResults";
 import dynamic from 'next/dynamic'
-
+import { useSetTheme } from "../Dashboard/Nav/hook/useSetTheme";
 const MapModal = dynamic(() => import("./MapModal"), { ssr: false })
 
 import { LocationType, useMap } from "./hook/useMap";
@@ -37,7 +37,19 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     modalRef
   } = useMap(locationType);
 
+  const {theme} = useSetTheme();
+
   const [mapLoading, setMapLoading] = useState(true);
+
+  let MAP_ID = 'streets-v2';
+   theme === "dark" ? MAP_ID =  'streets-v2-dark' : '';
+
+   console.log({theme, MAP_ID})
+  const MAPTILER_ACCESS_TOKEN = 'cH018vwISkZA6x3z4RSw';
+
+  function mapTilerProvider (x:number, y:number, z:number, dpr:number|undefined) {
+    return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${dpr && dpr >= 2 ? '@2x' : ''}.png?key=${MAPTILER_ACCESS_TOKEN}`
+  }
 
   let location = dropOffLocation;
   if (locationType === "pickup") {
@@ -78,6 +90,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
                 animate={true}
                 onAnimationStart={() => setMapBoundaryChanged(true)}
                 onAnimationStop={() => setMapBoundaryChanged(false)}
+                provider = {mapTilerProvider}
                 // twoFingerDrag={true}
                 // twoFingerDragWarning="Move the map with two fingers. Tap to use the location"
                 onBoundsChanged={({ center, zoom }) => {
