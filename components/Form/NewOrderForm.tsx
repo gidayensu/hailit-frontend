@@ -26,6 +26,8 @@ export default function NewOrderForm() {
     onDeliveryFormSubmit,
     scheduled,
     packageTypeRef,
+    payment_method,
+    paymentMethodRef,
     package_type,
     pickUpLocationName,
     dropOffLocationName,
@@ -204,12 +206,17 @@ export default function NewOrderForm() {
           {
           distanceAndCost && 
           <>
-          <div className=" grid w-full max-w-sm items-center gap-1.5 " >
+          <div className=" grid w-full max-w-sm items-center gap-1.5 " ref={paymentMethodRef}>
           <span className="flex items-start justify-start">
             <h3 className=" text-[14px] font-bold ">Payment Method</h3>
           </span>
           <div className=" flex gap-[8px]  flex-wrap">
           <PaymentMethods/>
+          {!payment_method && (
+            <span className="text-red-500 text-[13px] text-left flex items-start justify-start ">
+              <p>Payment method not selected</p>
+            </span>
+          )}
           </div>
         </div>
           
@@ -232,7 +239,7 @@ export default function NewOrderForm() {
         <Separator className="dark:bg-slate-50 bg-secondary-dark" />
         <div className="flex w-full items-start justify-between text-sm font-bold mt-1">
           <p>Total</p>
-          <p>GHS{distanceAndCost.cost}</p>
+          <p className="dark:text-green-500">GHS {distanceAndCost.cost}</p>
         </div>
       </div>
           </>

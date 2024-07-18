@@ -50,7 +50,7 @@ export default function TrackOrderItem({
     });
 
     const distance = distanceAndCost?.distance ?? 0;
-
+    const tripOngoingStatus = ["Booked","Picked Up", "In Transit"]
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
@@ -74,7 +74,8 @@ export default function TrackOrderItem({
             currentOrderStatus={trip.trip_status}
           />
         </TrackOrderContainer>
-
+        {
+          tripOngoingStatus.includes(trip.trip_status) &&
         <TrackOrderContainer headingText="Courier">
           <DispatcherCard
             firstName={dispatcher.first_name}
@@ -84,6 +85,7 @@ export default function TrackOrderItem({
             vehicleNumber={dispatcher.vehicle?.plate_number}
           />
         </TrackOrderContainer>
+        }
 
         <TrackOrderContainer headingText="Location and Timeline">
           <Container className="w-full flex flex-col gap-2  max-h-80 rounded-xl p-1 ">
@@ -105,7 +107,7 @@ export default function TrackOrderItem({
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Status</p>
-                <p> {trip.payment_status ? "Paid" : "Not Paid"}</p>
+                <p className={`${trip.payment_status ? 'text-green-500': 'text-red-500'} `}> {trip.payment_status ? "Paid" : "Not Paid"}</p>
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Method</p>
@@ -162,14 +164,14 @@ export default function TrackOrderItem({
                             <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-red-200">
                               <RxCross2 className="text-red-500 text-2xl" />
                             </span>
-                            <h2 className="text-left text-md mb-2 animate-in slide-in-from-bottom duration-100">
+                            <h2 className="text-center text-md mb-2 animate-in slide-in-from-bottom duration-100">
                               You are attempting to <b>cancel trip  {trip.trip_id}. </b> <br/>
                               If your item has been picked up, it will be returned.
                             </h2>
                             <h3>
                               
                             </h3>
-                            <h3 className="text-left text-[16px] font-bold  text-red-500 animate-in slide-in-from-bottom duration-150">
+                            <h3 className="text-center text-[16px] font-bold  text-red-500 animate-in slide-in-from-bottom duration-150">
                               Cancelling is irreversible!
                             </h3>
                           </>

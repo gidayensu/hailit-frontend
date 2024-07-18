@@ -12,7 +12,7 @@ import { FiArrowLeft } from "react-icons/fi";
 //hook
 import { useOnboarding } from "@/components/Onboarding/hook/useOnboarding";
 import {  useState } from "react";
-import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
+import ErrorComponent from "../Shared/ErrorComponent";
 
 export default function OnboardingStages() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,19 +23,15 @@ export default function OnboardingStages() {
       setIsLoading(false);
     }, 3000);
   }
-  const {authenticationState, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, handleOnboardStage} = useOnboarding();
+
   
+  const {authenticationState, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, userOnboard, handleOnboardStage} = useOnboarding();
+    
   
   return (
     <>
-      {(!authenticationState || onboard) && (
-        <section className="flex flex-col items-center justify-center bg-slate-50 dark:bg-primary-dark min-h-screen gap-4">
-          <h2 className="font-bold text-2xl">Page Not Found</h2>
-          <Link href={"/"}>
-            
-            <Button>Return Home </Button>
-          </Link>
-        </section>
+      {(!authenticationState || userOnboard ) && (
+        <ErrorComponent errorCode={404} errorMessage="Page Not Found" url="/" />
       )}
       {authenticationState && !onboard && (
         <main className="flex flex-col  items-center w-full  p-5 md:justify-center bg-slate-50 mb-20 dark:bg-primary-dark">

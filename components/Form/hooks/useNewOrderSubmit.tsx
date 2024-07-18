@@ -26,6 +26,7 @@ export const useNewOrderSubmit = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
+  const paymentMethodRef = useRef<any>(null);
   
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -67,8 +68,8 @@ export const useNewOrderSubmit = () => {
 
     
 
-    if(!package_type) {
-      scrollToSection(packageTypeRef)
+    if(!package_type || !payment_method) {
+      !package_type? scrollToSection(packageTypeRef) : scrollToSection(paymentMethodRef)
       return (
         setLoading(false)
         
@@ -127,5 +128,5 @@ export const useNewOrderSubmit = () => {
    
   }
 
-  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error, distanceAndCost}
+  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, payment_method, paymentMethodRef, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error, distanceAndCost}
 }

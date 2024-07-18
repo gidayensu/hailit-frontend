@@ -21,7 +21,7 @@ export default function RecipientSenderCard({
       </div>
       <div className="flex justify-center items-center gap-2">
       <Link href={ `tel:${phoneNumber}`} className="w-full">
-        <Button className=" bg-primary-medium h-8 w-32 rounded-md flex items-center justify-center text-slate-50 dark:text-secondary-dark text-[12px]"
+        <Button className="  h-8 w-32 rounded-md flex items-center justify-center text-[12px]"
          variant={'outline'}>
           <p className=" "> Call {identity} </p>
         </Button>
@@ -29,7 +29,7 @@ export default function RecipientSenderCard({
         
         
         <Link href={`https://wa.me/${phoneNumber}`} className="w-full">
-        <div className=" bg-primary-medium dark:bg-slate-50 h-8 w-8 rounded-md flex items-center justify-center text-[16px] text-slate-50 dark:text-secondary-dark cursor-pointer">
+        <div className="  bg-green-600 dark:bg-slate-50 h-8 w-8 rounded-md flex items-center justify-center text-[16px] text-slate-50 dark:text-green-600 cursor-pointer">
           <FaWhatsapp />
         </div>
         </Link>
