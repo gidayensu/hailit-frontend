@@ -152,7 +152,12 @@ export interface NewTrip {
     sender_number: string,
     trip_area: string,
     recipient_number: string,
-    trip_cost: string | number;
+    trip_cost: string | number,
     payment_method: string
+    pick_lat: string,
+    pick_long: string,
+    drop_lat: string,
+    drop_long: string
+    
 }
 

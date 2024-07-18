@@ -12,11 +12,11 @@ import Loader from "../Shared/Loader";
 
 //main components
 import OrderSummaryMin from "./OrderSummaryMin";
-
+import { Trip } from "@/lib/store/slice/tripSlice";
 //hook
 import { useReOrder } from "./hooks/useReOrder";
 
-export function ReOrder({ tripData }: { tripData: any }) {
+export function ReOrder({ tripData }: { tripData: Trip }) {
   
   const {tripRequestDate, handleSubmit, loading} = useReOrder(tripData);
   

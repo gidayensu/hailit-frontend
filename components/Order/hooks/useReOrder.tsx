@@ -25,6 +25,10 @@ export const useReOrder = (tripData: Trip) => {
     package_type,
     recipient_number,
     sender_number,
+    pick_lat,
+    pick_long,
+    drop_lat,
+    drop_long
   } = tripData;
   const tripDetails: NewTrip = {
     trip_medium,
@@ -39,6 +43,11 @@ export const useReOrder = (tripData: Trip) => {
     package_type,
     recipient_number,
     sender_number,
+    drop_lat,
+    drop_long,
+    pick_lat,
+    pick_long
+
   };
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
