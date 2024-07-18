@@ -8,7 +8,7 @@ import TrackOrderContainer from "./TrackOrderContainer";
 //main components
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import TripMap from "../TripMap";
+import TripMap from "../../Maps/TripMap";
 //helpers + next
 import DispatcherCard from "@/components/Dispatcher/DispatcherCard";
 import CustomerHelp from "@/components/Profile/Settings/CustomerHelp";

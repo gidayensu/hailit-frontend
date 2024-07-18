@@ -1,5 +1,5 @@
 "use client";
-import { useLocationSearch } from "./hook/useLocationSearch";
+import { useLocationSearch } from "./hooks/useLocationSearch";
 export default function LocationSearch() {
 
   const {mapDataHandler, inputRef} = useLocationSearch();

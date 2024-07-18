@@ -55,8 +55,8 @@ export async function reverseMapSearch(
     }
 
     const data = await response.json();
-    if(data.display_name === "Soul Buoy") {
-        data.display_name = ''
+    if(data.display_name === "Soul Buoy") {//this happens when user does not allow location acces. The set name is the name of the default location
+        data.display_name = 'Kaneshie Market Complex, Dr. Busia Highway, Awudome Estates' 
     }
     
     return {

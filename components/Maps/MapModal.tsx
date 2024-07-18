@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { LegacyRef } from "react";
 import Image from "next/image";
 import current_location from '../../public/svg/current-location.svg'
-import { LocationType } from "./hook/useMap";
+import { LocationType } from "./hooks/useMap";
 
 export default function MapModal({modalRef, closeModal, handleSelectedLocation, loading, locationType}: {modalRef: undefined | LegacyRef<HTMLDialogElement>, closeModal: ()=>void, handleSelectedLocation: ()=>void, loading: boolean, locationType:LocationType }) {
 

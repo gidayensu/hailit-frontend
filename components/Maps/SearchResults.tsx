@@ -3,8 +3,8 @@ import { Separator } from "../ui/separator";
 
 import Loader from "../Shared/Loader";
 import SearchItem from "./SearchItem";
-import { useLocationSearch } from "./hook/useLocationSearch";
-import { LocationType } from "./hook/useMap";
+import { useLocationSearch } from "./hooks/useLocationSearch";
+import { LocationType } from "./hooks/useMap";
 
 export default function SearchResults({locationType}: {locationType:LocationType}) {
   

@@ -1,18 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import dynamic from 'next/dynamic';
 import { Map, Marker } from "pigeon-maps";
 import { FaMapPin } from "react-icons/fa";
 import { Button } from "../ui/button";
 import SearchResults from "./SearchResults";
-import dynamic from 'next/dynamic'
-import { useSetTheme } from "../Dashboard/Nav/hook/useSetTheme";
 const MapModal = dynamic(() => import("./MapModal"), { ssr: false })
 
-import { LocationType, useMap } from "./hook/useMap";
-import Loader from "../Shared/Loader";
-import LocationSearch from "./LocationSearch";
 import type { Point } from "pigeon-maps";
+import Loader from "../Shared/Loader";
+import { LocationType, useMap } from "./hooks/useMap";
+import LocationSearch from "./LocationSearch";
 
 export type UserLocation = Point | undefined;
 
@@ -36,12 +34,13 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     closeModal,
     modalRef,
     mapTilerProvider,
-    location,
-    mapLoading
+    mapLocationName,
+    mapLoading,
+    setUserLocation
   } = useMap(locationType);
 
   
-
+console.log({mapLocationName, userLocation})
   return (
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">
@@ -60,9 +59,9 @@ export default function MainMap({ locationType }: { locationType: LocationType }
             <>
               <Map
                 height={800}
-                center={location}
+                center={userLocation}
                 minZoom={1}
-                maxZoom={18}
+                maxZoom={24}
                 zoom={zoom}
                 touchEvents={true}
                 animate={true}
@@ -72,14 +71,14 @@ export default function MainMap({ locationType }: { locationType: LocationType }
                 // twoFingerDrag={true}
                 // twoFingerDragWarning="Move the map with two fingers. Tap to use the location"
                 onBoundsChanged={({ center, zoom }) => {
-                  locationType === "drop off" ? dispatch(setDropOffLocation(center)) : dispatch(setPickUpLocation(center));
+                  setUserLocation(center);
                   setZoom(zoom);
                 }}
                 onClick={openModal}
               >
               </Map>
               <Marker
-                anchor={location}
+                anchor={userLocation}
                 onMouseOver={() => setMapBoundaryChanged(true)}
                 onMouseOut={() => setMapBoundaryChanged(true)}
               >
@@ -90,7 +89,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
                         <div className="absolute flex items-center justify-center h-auto w-44 bg-white shadow-md text-center text-[10px] mb-36 lg:mt-30 xl:mt-32 md:mt-72 xl:mb-0 rounded-lg p-2">
                           <span className="flex flex-col gap-1 text-slate-800 text-[10px] font-bold">
                             <p className="line-clamp-2">
-                              {locationType === "drop off" ? dropOffLocationName : pickUpLocationName || "Location name could not be loaded"}
+                              { mapLocationName ?? "Location name could not be loaded"}
                             </p>
                             <Button
                               variant="empty"

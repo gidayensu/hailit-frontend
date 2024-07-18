@@ -1,10 +1,11 @@
 // mapSlice.tsx
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchPickUpLocationName, fetchDropOffLocationName } from "../actions";
+import {  fetchMapLocationName } from "../actions";
 import { UserLocation } from "@/components/Maps/MainMap";
 
 interface MapData {
   searchData: any,
+  mapLocationName: string,
   pickUpLocation: UserLocation, 
   pickUpLocationName: string,
   dropOffLocation: UserLocation, 
@@ -14,6 +15,7 @@ interface MapData {
 
 const initialState: MapData = {
   searchData: ['1', '2'],
+  mapLocationName: '',
   pickUpLocation: [0, 0],
   pickUpLocationName: '',
   dropOffLocationName: '',
@@ -37,6 +39,10 @@ export const mapSlice = createSlice({
       state.pickUpLocationName = action.payload
       
     },
+    setMapLocationName(state, action: PayloadAction<string>) {
+      state.mapLocationName = action.payload
+      
+    },
 
     setDropOffLocation(state, action: PayloadAction<UserLocation>) {
       state.dropOffLocation = action.payload
@@ -46,6 +52,7 @@ export const mapSlice = createSlice({
       state.dropOffLocationName = action.payload
       
     },
+    
 
     setSearchCard(state, action: PayloadAction<boolean>) {
       state.searchContainer = action.payload
@@ -61,13 +68,10 @@ export const mapSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPickUpLocationName.fulfilled, (state, action: PayloadAction<string>) => {
-        state.pickUpLocationName = action.payload;
+      
+      .addCase(fetchMapLocationName.fulfilled, (state, action: PayloadAction<string>) => {
         
-      })
-      .addCase(fetchDropOffLocationName.fulfilled, (state, action: PayloadAction<string>) => {
-        
-        state.dropOffLocationName = action.payload;
+        state.mapLocationName = action.payload;
       });
   },
 });
@@ -79,7 +83,8 @@ export const {
   setSearchCard,
   setDropOffLocation,
   setPickUpLocationName,
-  setDropOffLocationName
+  setDropOffLocationName,
+  setMapLocationName
 } = mapSlice.actions;
 
 
