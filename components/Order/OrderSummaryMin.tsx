@@ -59,9 +59,10 @@ export default function OrderSummaryMin({
     }
     break;
     case("Clothes"): {
-      deliveryTypeIcon = < IoArchive className="text-cyan-400 dark:text-cyan-500"/> 
+      deliveryTypeIcon = < IoShirt className="text-cyan-400 dark:text-cyan-500"/> 
       deliveryTypeIconBgClass = "bg-cyan-100 dark:bg-cyan-200"; 
     }
+    break;
     case("Others"): {
       deliveryTypeIcon = < PiPackageFill className="text-amber-400 dark:text-amber-500"/> 
       deliveryTypeIconBgClass = "bg-amber-100 dark:bg-amber-200"; 
