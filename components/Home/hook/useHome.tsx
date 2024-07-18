@@ -15,15 +15,16 @@ export function useHome() {
   const router = useRouter();
   const path = usePathname();
   
-  const {user_role} = useAppSelector(state=>state.user);
+  const {user_role, } = useAppSelector(state=>state.user);
+  const {authenticated} = useAppSelector(state=>state.auth)
 
   
   //redirect without session or user is not customer
   useEffect(() => {
     const checkSession = async () => {
+      
       const session = await supabaseSession();
-        
-      if (!session || user_role && user_role !== "Customer") {
+      if (!session || (user_role && user_role !== "Customer") || !authenticated) {
         router.push('/authentication');
       return (<div className="flex items-center justify-center w-full">
         <BigLoader/>
@@ -33,7 +34,7 @@ export function useHome() {
     };
     
     checkSession();
-  }, [router]);
+  }, [router, supabaseSession, authenticated, user_role, ]);
   
   
     return {path}
