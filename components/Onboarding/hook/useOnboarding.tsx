@@ -9,10 +9,12 @@ export const useOnboarding = ()=> {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { authenticationState } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { onboard, chosenRole, stageOne, stageTwo, stageThree, loading } =
     useAppSelector((state) => state.onBoarding);
+  
   const user = useAppSelector(state=>state.user)
+  const userOnboard = user?.onboard; //check user onboard status
   const handleOnboardStage = (
     stage: Stages
   ) => {
@@ -64,7 +66,7 @@ export const useOnboarding = ()=> {
   } 
   };
 
-  return {authenticationState, chosenRole,  stageOne, stageTwo, stageThree, onboard, loading, handleOnboardStage}
+  return {authenticated, chosenRole,  stageOne, stageTwo, stageThree, onboard, loading, userOnboard, handleOnboardStage}
 }
 
 export type Stages = "First" | "Second" | "Third" | "Complete"

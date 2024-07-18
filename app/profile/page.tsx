@@ -12,7 +12,7 @@ import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePage
 export default function Profile() {
   const router = useRouter();
   //getting data from redux store
-  const { authenticationState } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
 
 
@@ -21,11 +21,11 @@ export default function Profile() {
     const checkSession = async () => {
       const session = await supabaseSession();
 
-      if(!authenticationState || !session) {
+      if(!authenticated || !session) {
         router.push('/authentication')
       }
     
-      if (authenticationState && session) {
+      if (authenticated && session) {
         if (!onboard) {
           router.push("/onboarding");
         } else if (user_role === "Admin") {
@@ -39,14 +39,14 @@ export default function Profile() {
     
     checkSession();
 
-  }, [authenticationState, onboard, user_role, router]);
+  }, [authenticated, onboard, user_role, router]);
 
 
   return (
     <>
       <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
         
-        {authenticationState && user_role === "Customer" && (
+        {authenticated && user_role === "Customer" && (
           
             <ProfilePageDetails />
           

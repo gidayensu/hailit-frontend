@@ -25,15 +25,15 @@ export default function OnboardingStages() {
   }
 
   
-  const {authenticationState, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, userOnboard, handleOnboardStage} = useOnboarding();
+  const {authenticated, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, userOnboard, handleOnboardStage} = useOnboarding();
     
   
   return (
     <>
-      {(!authenticationState || userOnboard ) && (
+      {(!authenticated || userOnboard ) && (
         <ErrorComponent errorCode={404} errorMessage="Page Not Found" url="/" />
       )}
-      {authenticationState && !onboard && (
+      {authenticated && !onboard && (
         <main className="flex flex-col  items-center w-full  p-5 md:justify-center bg-slate-50 mb-20 dark:bg-primary-dark">
           {/* Onboarding stages 1 - 3 starts here */}
           <div className="flex items-center justify-center md:w-1/2">

@@ -12,7 +12,7 @@ import Authentication from "@/components/Profile/Authentication/Authentication";
 export default function Profile() {
   const router = useRouter();
   //getting data from redux store
-  const { authenticationState } = useAppSelector((state) => state.auth);
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
   const [sessionActive, setSessionActive] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ export default function Profile() {
     const checkSession = async () => {
       const session = await supabaseSession();
     
-      if (authenticationState && session) {
+      if (authenticated && session) {
         setSessionActive(true)
         if (!onboard) {
           router.push("/onboarding");
@@ -41,13 +41,13 @@ export default function Profile() {
     
     checkSession();
 
-  }, [authenticationState, onboard, user_role, router]);
+  }, [authenticated, onboard, user_role, router]);
 
 
   return (
     <>
       <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
-        {(!authenticationState || !sessionActive) && <Authentication />}
+        {(!authenticated || !sessionActive) && <Authentication />}
         
       </main>
     </>
