@@ -12,11 +12,15 @@ import {
   setPickUpLocation,
 } from "@/lib/store/slice/mapSlice";
 import { UserLocation } from "../MainMap";
+import { useSetTheme } from "@/components/Dashboard/Nav/hook/useSetTheme";
 
 type MapBoundaryChange = boolean;
 export type LocationType = "pickup" | "drop off";
 
 export const useMap = (locationType: LocationType) => {
+  
+  const [mapLoading, setMapLoading] = useState(true);
+  
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
   const modal = modalRef.current;
@@ -49,7 +53,7 @@ export const useMap = (locationType: LocationType) => {
     longitude: string | number
   ) => {
     const locationData = await reverseMapSearch(latitude, longitude);
-
+    
     const locationName = locationData?.displayName;
     
     let specificName: string | undefined = "";
@@ -133,6 +137,35 @@ export const useMap = (locationType: LocationType) => {
     router.back();
   };
 
+
+
+  const {theme, systemTheme} = useSetTheme();
+
+
+  let MAP_ID = 'streets-v2';
+  theme === "dark" || (systemTheme === "dark" && theme==="dark")  ? MAP_ID =  'streets-v2-dark' : '';
+
+   
+  const MAPTILER_ACCESS_TOKEN = 'cH018vwISkZA6x3z4RSw';
+
+  function mapTilerProvider (x:number, y:number, z:number, dpr:number|undefined) {
+    return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${dpr && dpr >= 2 ? '@2x' : ''}.png?key=${MAPTILER_ACCESS_TOKEN}`
+  }
+
+  let location = dropOffLocation;
+  if (locationType === "pickup") {
+    location = pickUpLocation;
+  }
+
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMapLoading(false);
+    }, 2000); 
+    return () => clearTimeout(timer);
+  }, []);
+
+
   return {
     handleSelectedLocation,
     locationNameData,
@@ -152,5 +185,8 @@ export const useMap = (locationType: LocationType) => {
     openModal,
     closeModal,
     modalRef,
+    mapTilerProvider,
+    location,
+    mapLoading
   };
 };

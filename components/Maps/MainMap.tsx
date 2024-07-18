@@ -34,35 +34,13 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     loading,
     openModal,
     closeModal,
-    modalRef
+    modalRef,
+    mapTilerProvider,
+    location,
+    mapLoading
   } = useMap(locationType);
 
-  const {theme} = useSetTheme();
-
-  const [mapLoading, setMapLoading] = useState(true);
-
-  let MAP_ID = 'streets-v2';
-   theme === "dark" ? MAP_ID =  'streets-v2-dark' : '';
-
-   console.log({theme, MAP_ID})
-  const MAPTILER_ACCESS_TOKEN = 'cH018vwISkZA6x3z4RSw';
-
-  function mapTilerProvider (x:number, y:number, z:number, dpr:number|undefined) {
-    return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${dpr && dpr >= 2 ? '@2x' : ''}.png?key=${MAPTILER_ACCESS_TOKEN}`
-  }
-
-  let location = dropOffLocation;
-  if (locationType === "pickup") {
-    location = pickUpLocation;
-  }
-
   
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMapLoading(false);
-    }, 2000); 
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="flex justify-center relative">
@@ -128,7 +106,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
                         </div>
                       )}
                     </div>
-                    <FaMapPin className="text-3xl text-slate-800 animate-bounce relative xl:mt-56 md:mt-72" />
+                    <FaMapPin className="text-3xl text-slate-800 dark:text-green-400 animate-bounce relative xl:mt-56 md:mt-72" />
                   </div>
                 </>
               </Marker>
