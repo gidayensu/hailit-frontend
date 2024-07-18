@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserRole } from "./userSlice";
-import { TripStatus, TripMedium,  } from "@/components/Order/types/Types";
+import { TripStatus, TripMedium, PackageType, TripType, TripStage, TripArea } from "@/components/Order/types/Types";
 const initialState:Trip = {
     
-      trip_stage: 0,
+      trip_stage: 1,
       trip_request_date: null,
       trip_commencement_date: null,
       trip_completion_date: null,
@@ -14,7 +14,7 @@ const initialState:Trip = {
       package_value: '', 
       rating_comment: "",
       recipient_number: "",
-      trip_type: "",
+      trip_type: "Next Day",
       trip_id: "",
       drop_lat: "",
       drop_long: "",
@@ -31,7 +31,7 @@ const initialState:Trip = {
       drop_off_location: "",
       additional_information: "",
       sender_number: "",
-      trip_area: "",
+      trip_area: "Accra",
       
       //dispatcher is structured to match both drivers and riders
       dispatcher: {
@@ -103,7 +103,7 @@ export interface Dispatcher {
   }
   
   export interface Trip {
-    trip_stage: number;
+    trip_stage: TripStage;
     trip_request_date: null | Date | string;
     trip_commencement_date: null | Date | string;
     trip_completion_date: null | Date | string;
@@ -114,7 +114,7 @@ export interface Dispatcher {
     package_value: string;
     rating_comment: string;
     recipient_number: string;
-    trip_type: string;
+    trip_type: TripType;
     trip_id: string;
     payment_method: string;
     promo_code: string;
@@ -122,12 +122,12 @@ export interface Dispatcher {
     customer_id: string;
     trip_medium: TripMedium;
     trip_status: TripStatus;
-    package_type: string;
+    package_type: PackageType;
     pickup_location: string;
     drop_off_location: string;
     additional_information: string;
     sender_number: string;
-    trip_area: string;
+    trip_area: TripArea;
     dispatcher: Dispatcher;
     pick_lat: string,
     pick_long: string,

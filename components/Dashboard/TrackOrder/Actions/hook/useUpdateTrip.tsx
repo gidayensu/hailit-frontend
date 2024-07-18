@@ -25,7 +25,7 @@ export const useUpdateTrip = (trip:Trip)=> {
     dispatch(setTripMedium(trip?.trip_medium));
     dispatch(setTripType(trip?.trip_type));
     dispatch(setTripArea(trip?.trip_area));
-    if (trip?.trip_type === "scheduled") {
+    if (trip?.trip_type === "Scheduled") {
       dispatch(setScheduled(true));
     }
   }, [trip?.package_type, trip?.trip_type]);
@@ -44,7 +44,7 @@ export const useUpdateTrip = (trip:Trip)=> {
       dispatch(setPackageType(trip?.package_type))
       dispatch(setTripMedium(trip?.trip_medium))
       dispatch(setTripArea(trip?.trip_area))
-      if(trip?.trip_type === "scheduled") {
+      if(trip?.trip_type === "Scheduled") {
           dispatch(setScheduled(true))
       }
   }, [trip?.package_type, trip?.trip_type])
