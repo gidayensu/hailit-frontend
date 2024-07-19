@@ -20,6 +20,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     handleSelectedLocation,
     setMapBoundaryChanged,
     zoom,
+    dispatch,
     setZoom,
     userLocation,
     mapBoundaryChanged,
@@ -40,7 +41,7 @@ console.log({mapLocationName, userLocation})
       <div className="absolute flex justify-center flex-col gap-3">
         <LocationSearch />
         <MapModal closeModal={closeModal} handleSelectedLocation={handleSelectedLocation} loading={loading} modalRef={modalRef} locationType={locationType} />
-        <SearchResults locationType={locationType} />
+        <SearchResults  />
       </div>
 
       <div className="relative w-full h-full">
@@ -55,7 +56,7 @@ console.log({mapLocationName, userLocation})
                 height={800}
                 center={userLocation}
                 minZoom={1}
-                maxZoom={24}
+                maxZoom={18}
                 zoom={zoom}
                 touchEvents={true}
                 animate={true}
@@ -65,7 +66,7 @@ console.log({mapLocationName, userLocation})
                 // twoFingerDrag={true}
                 // twoFingerDragWarning="Move the map with two fingers. Tap to use the location"
                 onBoundsChanged={({ center, zoom }) => {
-                  setUserLocation(center);
+                  dispatch(setUserLocation(center));
                   setZoom(zoom);
                 }}
                 onClick={openModal}

@@ -11,7 +11,7 @@ import { LocationType } from "./hooks/useMap";
 
 export default function MapModal({modalRef, closeModal, handleSelectedLocation, loading, locationType}: {modalRef: undefined | LegacyRef<HTMLDialogElement>, closeModal: ()=>void, handleSelectedLocation: ()=>void, loading: boolean, locationType:LocationType }) {
 
-  const {dropOffLocationName, pickUpLocationName}  = useAppSelector(state=>state.map);
+  const {mapLocationName}  = useAppSelector(state=>state.map);
   return (
     
       <dialog ref={modalRef} className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/4  rounded-2xl h-[360px]  p-4  backdrop:bg-secondary-dark backdrop:opacity-80">
@@ -37,7 +37,7 @@ export default function MapModal({modalRef, closeModal, handleSelectedLocation, 
         <div className="flex flex-col  gap-2 w-full">
           <div className="">
 
-          <h2 className="text-center leading-5 text-sm mb-2 animate-in slide-in-from-bottom duration-100">Set <b>{locationType === "drop off" ? dropOffLocationName : pickUpLocationName }</b> as your {locationType} location</h2>
+          <h2 className="text-center leading-5 text-sm mb-2 animate-in slide-in-from-bottom duration-100">Set <b>{mapLocationName }</b> as your {locationType} location</h2>
           <h3 className="text-center text-[12px] text-slate-500 animate-in slide-in-from-bottom duration-150">This is where your item will be {locationType === "drop off" ? 'delivered': 'picked up'}</h3>
           {/* <LoaderCircle className="animate-spin "/> */}
           </div>

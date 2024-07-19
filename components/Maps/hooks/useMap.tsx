@@ -7,6 +7,7 @@ import {
   setPickUpLocation,
   setPickUpLocationName,
   setMapLocationName,
+  setUserLocation
 } from "@/lib/store/slice/mapSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -21,9 +22,7 @@ export const useMap = (locationType: LocationType) => {
   //states
   const [zoom, setZoom] = useState(18);
   const [mapLoading, setMapLoading] = useState(true);
-  const [userLocation, setUserLocation] = useState<UserLocation>([
-    5.5663846170585645, -0.23610680052490807,
-  ]);
+  
 
   const [mapBoundaryChanged, setMapBoundaryChanged] =
     useState<MapBoundaryChange>(false);
@@ -38,6 +37,7 @@ export const useMap = (locationType: LocationType) => {
     pickUpLocation,
     pickUpLocationName,
     mapLocationName,
+    userLocation
   } = useAppSelector((state) => state.map);
 
   //custom hooks
@@ -56,26 +56,29 @@ export const useMap = (locationType: LocationType) => {
     modal?.close();
   };
 
+  
   //get the current location point of the user and determine the name of the user's location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         const { latitude, longitude } = coords;
-        setUserLocation([latitude, longitude]);
+        dispatch(setUserLocation([latitude, longitude]));
       },
       (error) => {
         console.error("Error getting location:", error.message);
       }
     );
 
-    if (locationType === "drop off" && dropOffLocation) {
-      setUserLocation(dropOffLocation);
-      setMapLocationName(dropOffLocationName);
+    if (locationType === "drop off" && dropOffLocation && dropOffLocationName ) {
+      
+      dispatch(setUserLocation(dropOffLocation))
+      dispatch(setMapLocationName(dropOffLocationName))
     }
 
-    if (locationType === "pickup" && pickUpLocation) {
-      setUserLocation(pickUpLocation);
-      setMapLocationName(pickUpLocationName);
+    if (locationType === "pickup" && pickUpLocation && pickUpLocationName) {
+      
+      dispatch(setUserLocation(pickUpLocation))
+      dispatch(setMapLocationName(pickUpLocationName))
     }
   }, [
     locationType,
@@ -152,3 +155,5 @@ export const useMap = (locationType: LocationType) => {
     setUserLocation,
   };
 };
+
+

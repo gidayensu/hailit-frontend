@@ -5,6 +5,7 @@ import { UserLocation } from "@/components/Maps/MainMap";
 
 interface MapData {
   searchData: any,
+  userLocation: UserLocation,
   mapLocationName: string,
   pickUpLocation: UserLocation, 
   pickUpLocationName: string,
@@ -17,6 +18,7 @@ const initialState: MapData = {
   searchData: ['1', '2'],
   mapLocationName: '',
   pickUpLocation: [0, 0],
+  userLocation: [5.5663846170585645, -0.23610680052490807],
   pickUpLocationName: '',
   dropOffLocationName: '',
   dropOffLocation: [0, 0],
@@ -31,6 +33,11 @@ export const mapSlice = createSlice({
       state.searchData = action.payload
     },
 
+    setUserLocation(state, action: PayloadAction<UserLocation>) {
+      state.userLocation = action.payload
+      
+    },
+    
     setPickUpLocation(state, action: PayloadAction<UserLocation>) {
       state.pickUpLocation = action.payload
       
@@ -81,6 +88,7 @@ export const {
   setPickUpLocation,
   resetMapData,
   setSearchCard,
+  setUserLocation,
   setDropOffLocation,
   setPickUpLocationName,
   setDropOffLocationName,

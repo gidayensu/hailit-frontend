@@ -3,6 +3,7 @@ import {
   setPickUpLocation,
   setSearchCard,
   setSearchData,
+  setUserLocation
 } from "@/lib/store/slice/mapSlice";
 import { fetchMapData } from "@/lib/utils";
 
@@ -14,7 +15,7 @@ import { LocationType } from "./useMap";
 
 import { useCallback, useRef, useState } from "react";
 
-export const useLocationSearch = (locationType?: LocationType) => {
+export const useLocationSearch = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { searchData, searchContainer } = useAppSelector((state) => state.map);
   const dispatch = useAppDispatch();
@@ -31,18 +32,15 @@ export const useLocationSearch = (locationType?: LocationType) => {
     dispatch(setSearchCard(true)); //TODO: CHANGE FROM GLOBAL TO LOCAL STATE
   }, [ setSearchCard, dispatch, setIsLoading, dispatch]);
 
-  const selectedSearchItemHandler = ({
-    locationName,
+  const handleSelectedLocation = ({
+    
     mapPoint,
   }: {
-    locationName: string;
+    
     mapPoint: UserLocation;
   }) => {
-    locationType === "pickup"
-      ? dispatch(setPickUpLocation(mapPoint))
-      : locationType === "drop off"
-      ? dispatch(setDropOffLocation(mapPoint))
-      : "";
+    dispatch(setUserLocation(mapPoint))
+    
     dispatch(setSearchCard(false));
   };
 
@@ -52,6 +50,6 @@ export const useLocationSearch = (locationType?: LocationType) => {
     isLoading,
     searchData,
     searchContainer,
-    selectedSearchItemHandler,
+    handleSelectedLocation,
   };
 };

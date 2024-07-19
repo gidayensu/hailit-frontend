@@ -2,8 +2,8 @@
 import { getSpecificName, reverseMapSearch } from "@/lib/utils";
 
 interface LocationProps {
-latitude: string | number,
-    longitude: string | number
+latitude:  number,
+    longitude:  number
 }
 export type LocationType = "pickup" | "drop off";
 
@@ -14,7 +14,7 @@ export const useGetLocationName = () => {
         longitude}:LocationProps
   ) => {
     const locationData = await reverseMapSearch(latitude, longitude);
-    
+    console.log({latitude, longitude})
     const locationName = locationData?.displayName;
     
     let specificName: string | undefined = "";
