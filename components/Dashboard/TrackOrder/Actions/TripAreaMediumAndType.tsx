@@ -27,7 +27,7 @@ interface TripAreaChoice extends ChoiceType {
   userChoice: TripArea
 }
 
-type Choice = TripMediumChoice | TripTypeChoice | TripTypeChoice | TripAreaChoice
+type Choice = TripMediumChoice | TripTypeChoice |  TripAreaChoice
 
 export default function TripAreaMediumAndType () {
   const dispatch = useAppDispatch();

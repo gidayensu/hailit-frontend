@@ -117,7 +117,6 @@ export type ValidFieldNames =
 | "pickup_location"
 | "sender_number"
 | "recipient_number"
-| "password"
 | "license_number"
 | "pickup_date"
 | "delivery_date"
