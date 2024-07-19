@@ -1,10 +1,10 @@
 'use client'
-import { usePrefetch, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { usePrefetch } from "@/lib/store/apiSlice/hailitApi";
+import { useAppSelector } from "@/lib/store/hooks";
 
 import { useGetAllVehiclesQuery, useUpdateDriverMutation, useUpdateRiderMutation } from "@/lib/store/apiSlice/hailitApi";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface DispatcherVehicle {
   vehicle_id: string | undefined,
@@ -27,8 +27,9 @@ export const useAssignVehicle = (dispatcher?:Dispatcher) => {
     const [assignVehicleLoading, setAssignVehicleLoading] = useState<boolean>(false);
 
     const [page, setPage] = useState<number>(1)
-    const dispatch = useAppDispatch();
+    
     const prefetchVehicles = usePrefetch('getAllVehicles')
+    const { selectedDriverId, selectedRiderId } = useAppSelector(state=>state.dashboard);
     
     const vehicleType = userRole === "Driver" ? "car" : "motor";
     const {data:vehiclesData, isLoading:vehiclesLoading, error:vehiclesError} = useGetAllVehiclesQuery(`vehicles?page=${page}&vehicle_type=${vehicleType}`); 
@@ -50,26 +51,27 @@ export const useAssignVehicle = (dispatcher?:Dispatcher) => {
     
     const totalPages = vehiclesData?.total_number_of_pages;
     
-
+    //prefetch data
     useEffect(() => {
       if (page !== totalPages) {
         prefetchNext()
       }
     }, [totalPages, page, prefetchNext])
 
-    const { selectedDriverId, selectedRiderId } = useAppSelector(state=>state.dashboard);
     
 
     
-
+    //pagination
     const handleNextPage = ()=> {
       page !== totalPages ? setPage(page + 1) : "";
     }
 
+  
     const handlePreviousPage = ()=> {
       page !== 1 ? setPage(page - 1) : "";
     }
-    
+  
+    //assign vehicle
     const handleAssignVehicle =  (vehicleDetails: DispatcherVehicle)=> {
       setAssignVehicleLoading(true)
       setAssignedVehicle((prevState)=>({...prevState, ...vehicleDetails}));
@@ -88,6 +90,21 @@ export const useAssignVehicle = (dispatcher?:Dispatcher) => {
     
     
     
-    return {vehicles, page, dispatcherContainerRef, totalPages, assignedVehicle, assignVehicleError, assignVehicleLoading, vehiclesLoading,   vehiclesError, dispatcher, handleAssignVehicle, handleNextPage, handlePreviousPage }
+    return {
+      vehicles,
+      page,
+      dispatcherContainerRef,
+      totalPages,
+      assignedVehicle,
+      assignVehicleError,
+      assignVehicleLoading,
+      assignVehicleSuccess,
+      vehiclesLoading,
+      vehiclesError,
+      dispatcher,
+      handleAssignVehicle,
+      handleNextPage,
+      handlePreviousPage,
+    };
     
 }
