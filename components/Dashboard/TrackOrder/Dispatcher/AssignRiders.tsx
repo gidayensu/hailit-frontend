@@ -1,5 +1,4 @@
 "use client";
-import Loader from "@/components/Shared/Loader";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -12,11 +11,7 @@ export default function Riders() {
   const {
     riders,
     ridersLoading,
-    updateData,
-    updateLoading,
     dispatcher,
-    assignedDispatcherId,
-    ridersError,
     handleAssignedDispatcher,
     handleNextPage, 
     handlePreviousPage,

@@ -1,4 +1,4 @@
-import { useGetCurrentMonthTripCountsQuery, useGetWeekTripCountQuery } from "@/lib/store/apiSlice/hailitApi"
+import { useGetCurrentMonthTripCountsQuery, useGetWeekTripCountQuery } from "@/lib/store/apiSlice/hailitApi";
 
 type Day = "Sunday"|"Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday"
 interface WeekStats {

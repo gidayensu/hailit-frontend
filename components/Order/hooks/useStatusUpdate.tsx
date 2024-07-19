@@ -1,11 +1,9 @@
 "use client";
-import {   useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import {  setTripStatus,TripStatusandStage} from "@/lib/store/slice/dashboardSlice";
-import { TripStatus } from "../types/Types";
+import { setTripStatus, TripStatusandStage } from "@/lib/store/slice/dashboardSlice";
 import { useParams } from "next/navigation";
 import { useCallback, useState } from "react";
-import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 
 export const useStatusUpdate = ()=> {
   

@@ -2,21 +2,15 @@
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 
 
 export default function SmallScreenTopNav() {
-  
-
-  const path = usePathname();
 
   const iconsAndTextDivClass =
     "flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md";
   const iconsAndTextSpanClass =
     "flex items-center justify-center gap-2 relative";
-
-  
 
   return (
     <nav
@@ -37,7 +31,7 @@ export default function SmallScreenTopNav() {
 
         <div className={`#{iconsAndTextDivClass} hidden md:block`}>
           <span className={iconsAndTextSpanClass}>
-            {/* <RiNotification3Line className="text-2xl"/> */}
+            
           </span>
         </div>
         <div

@@ -1,5 +1,5 @@
-import { useCallback, useEffect } from "react";
 import { usePrefetch } from "@/lib/store/apiSlice/hailitApi";
+import { useCallback, useEffect } from "react";
 const endpointNames = [
   "getAllTrips",
   "getTrip",

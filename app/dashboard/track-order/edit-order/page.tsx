@@ -1,13 +1,9 @@
-'use client'
+"use client";
 import EditTrip from "@/components/Dashboard/TrackOrder/Actions/EditTrip";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 
-const  EditOrderDashboard = ()=> {
+const EditOrderDashboard = () => {
+  return <EditTrip />;
+};
 
-  
-  return (
-    <EditTrip/>
-  );
-}
-
-export default withAdminCheck(EditOrderDashboard)
+export default withAdminCheck(EditOrderDashboard);

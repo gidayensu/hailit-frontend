@@ -1,29 +1,26 @@
 'use client'
-import { useRouter } from "next/navigation"
-import { useAppDispatch } from "@/lib/store/hooks"
-import { supabaseSignOut } from "@/lib/supabaseAuth"
-import { userLogout } from "@/lib/store/actions"
-import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
-import { PiMotorcycleFill } from "react-icons/pi";
-import { RiMotorbikeFill } from "react-icons/ri";
-import DashboardSections from "./DashboardSections"
 import { Separator } from "@/components/ui/separator"
-import { RiFileListLine, RiSteering2Line } from "react-icons/ri"
-import { IoLogOutOutline } from "react-icons/io5"
-import { MdOutlineSportsMotorsports } from "react-icons/md"
-import { MdInsertChartOutlined } from "react-icons/md";
+import { userLogout } from "@/lib/store/actions"
+import { useAppDispatch } from "@/lib/store/hooks"
 import { ActiveSection } from "@/lib/store/slice/dashboardSlice"
+import { supabaseSignOut } from "@/lib/supabaseAuth"
+import { useRouter } from "next/navigation"
+import { IoLogOutOutline } from "react-icons/io5"
+import { MdInsertChartOutlined, MdOutlineSportsMotorsports } from "react-icons/md"
+import { RiFileListLine, RiMotorbikeFill, RiSteering2Line } from "react-icons/ri"
+import { TbLayoutDashboard, TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled, TbRoute, TbUser, TbUserEdit } from "react-icons/tb"
+import DashboardSections from "./DashboardSections"
 
 export default function DashboardSideBar({
   dashMin,
   handleDashMin,
   handleActiveSection,
-  activeSection,
+  
 }: {
   dashMin: boolean;
   handleDashMin: () => void;
   handleActiveSection: (section: ActiveSection) => void;
-  activeSection: ActiveSection;
+  
 }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -154,25 +151,7 @@ export default function DashboardSideBar({
         </DashboardSections>
       </div>
 
-      {/* <div className="text-center w-full ml-2">
-            <DashboardSections
-              dashMin={dashMin}
-              sectionName="Profile"
-              onClickFunc={handleActiveSection}
-              
-            >
-              <TbUserEdit className="text-2xl " />
-            </DashboardSections>
-
-            <DashboardSections
-              dashMin={dashMin}
-              sectionName="Sign Out"
-              onClickFunc={handleSignOut}
-              
-            >
-              <IoLogOutOutline className="text-2xl " />
-            </DashboardSections>
-          </div> */}
+      
     </article>
   );
 }

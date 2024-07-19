@@ -1,6 +1,4 @@
 'use client'
-import { useState } from "react";
-import { FaStar, FaRegStar } from 'react-icons/fa'
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import {
   Table,
@@ -10,10 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import SkeletonTable from "../SkeletonTable";
+import { useState } from "react";
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
-import { useGetVehicles } from "./hook/useGetVehicles";
-import { Vehicle } from "./hook/useGetVehicles";
+import SkeletonTable from "../SkeletonTable";
+import { useGetVehicles, Vehicle } from "./hook/useGetVehicles";
 
 export function Vehicles() {
     

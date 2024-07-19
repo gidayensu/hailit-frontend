@@ -21,38 +21,37 @@ import { useUpdateTrip } from "./hook/useUpdateTrip";
 import { useEffect } from "react";
 
 export default function EditTrip() {
-  const {
-    trip,
-    
-  } = useGetTrip();
+  const { trip } = useGetTrip();
   const {
     formMethods,
-    
+
     handleSubmit,
     onDeliveryFormSubmit,
     packageTypeRef,
     package_type,
     updateLoading,
     register,
-  } = useUpdateTrip(trip)
+  } = useUpdateTrip(trip);
   const router = useRouter();
 
-  useEffect(()=> {
-
-    if(!trip?.trip_id) {
-      router.push('/dashboard/track-order')
+  useEffect(() => {
+    if (!trip?.trip_id) {
+      router.push("/dashboard/track-order");
     }
-  }, [trip, router])
+  }, [trip, router]);
 
-  const {dropOffLocationName, pickUpLocationName} = useAppSelector(state=>state.map)
-  
+  const { dropOffLocationName, pickUpLocationName } = useAppSelector(
+    (state) => state.map
+  );
+
   return (
     <main className=" bg-white dark:bg-secondary-dark p-6 rounded-xl flex flex-col">
       <h1 className="mb-2 text-2xl">
         Editing Trip: <b>{trip?.trip_id}</b>
       </h1>
       <h1 className="text-md mb-5">
-        Requested On: <b>{extractDateWithDayFromDate(trip?.trip_request_date)}</b>
+        Requested On:
+        <b>{extractDateWithDayFromDate(trip?.trip_request_date)}</b>
       </h1>
       <FormProvider {...formMethods}>
         <form
@@ -64,7 +63,7 @@ export default function EditTrip() {
             className="flex flex-col w-full max-w-sm  gap-1.5 "
             ref={packageTypeRef}
           >
-            <TripAreaMediumAndType/>
+            <TripAreaMediumAndType />
             <span className="text-left">
               <h3 className=" text-[14px] font-bold ">Package Type</h3>
             </span>
@@ -84,23 +83,22 @@ export default function EditTrip() {
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-[14px] font-bold">Pickup Date</h3>
-    
-      {/* <Controller
-        name="pickup_date"
-        control={control}
-        render={({ field }) => (
-          <SelectDate schedule={false} select = {field.value} onSelect = {field.onChange} />
-        )}
-      /> */}
-      <CalendarField name="pickup_date" datePurpose = "pickup" defaultValue={trip?.trip_commencement_date?.toString()}/>
-    
-                
+
+          
+                <CalendarField
+                  name="pickup_date"
+                  datePurpose="pickup"
+                  defaultValue={trip?.trip_commencement_date?.toString()}
+                />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
                 <h3 className=" text-[14px] font-bold">Delivery Date</h3>
-                
-      <CalendarField name="delivery_date" datePurpose= "delivery" defaultValue={trip?.trip_completion_date?.toString()}/>
-          
+
+                <CalendarField
+                  name="delivery_date"
+                  datePurpose="delivery"
+                  defaultValue={trip?.trip_completion_date?.toString()}
+                />
               </div>
             </div>
 
@@ -123,15 +121,21 @@ export default function EditTrip() {
                     placeholder="Enter location for pickup"
                     className="h-14"
                     name="pickup_location"
-                    
-                    defaultValue={pickUpLocationName ? pickUpLocationName : trip?.pickup_location}
+                    defaultValue={
+                      pickUpLocationName
+                        ? pickUpLocationName
+                        : trip?.pickup_location
+                    }
                   />
                 </div>
                 <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">
                   OR
                 </span>
                 <Link className="col-span-1" href={"/pickup-map"}>
-                  <Button variant={"outline"} className=" h-14 hover:none dark:hover:none">
+                  <Button
+                    variant={"outline"}
+                    className=" h-14 hover:none dark:hover:none"
+                  >
                     <FaMapMarkerAlt className="text-lg" />
                   </Button>
                 </Link>
@@ -146,14 +150,21 @@ export default function EditTrip() {
                     placeholder="Enter drop off location"
                     className="h-14"
                     name="drop_off_location"
-                    defaultValue={dropOffLocationName ? dropOffLocationName : trip?.drop_off_location}
+                    defaultValue={
+                      dropOffLocationName
+                        ? dropOffLocationName
+                        : trip?.drop_off_location
+                    }
                   />
                 </div>
                 <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">
                   OR
                 </span>
                 <Link className="col-span-1" href={"/drop-off-map"}>
-                  <Button variant={"outline"} className=" h-14 hover:none dark:hover:none">
+                  <Button
+                    variant={"outline"}
+                    className=" h-14 hover:none dark:hover:none"
+                  >
                     <FaMapMarkerAlt className="text-lg" />
                   </Button>
                 </Link>
@@ -192,12 +203,7 @@ export default function EditTrip() {
             </div>
           </div>
           <div className="w-full">
-            {/* <div className="grid w-full max-w-sm items-center gap-1.5">
-        <h3 className=" text-[14px] font-bold">
-          Upload Product Image (optional)
-        </h3>
-        <FormField id="picture" type="file" />
-      </div> */}
+            
           </div>
         </form>
       </FormProvider>
@@ -216,7 +222,7 @@ export default function EditTrip() {
           form="edit order"
           className="md:w-[180px] w-full h-14"
           disabled={updateLoading}
-          onClick={()=>router.back()}
+          onClick={() => router.back()}
         >
           Cancel
         </Button>

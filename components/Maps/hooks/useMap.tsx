@@ -4,14 +4,13 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   setDropOffLocation,
   setDropOffLocationName,
+  setMapLocationName,
   setPickUpLocation,
   setPickUpLocationName,
-  setMapLocationName,
   setUserLocation
 } from "@/lib/store/slice/mapSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { UserLocation } from "../MainMap";
 import { useGetLocationName } from "./useGetLocationName";
 import { useMapProvider } from "./useMapProvider";
 

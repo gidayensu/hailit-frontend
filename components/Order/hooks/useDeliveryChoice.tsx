@@ -39,9 +39,7 @@ export const useDeliveryChoice = () => {
         ''
         if (choiceCategory === "delivery_day") {
             choiceType.choice === "Scheduled" ? dispatch(setScheduled(true)) && dispatch(setTripType(choiceType.choice)): dispatch(setTripType(choiceType.choice))
-
         }
-        
     }
 
     const handleResetChoices = ()=> {

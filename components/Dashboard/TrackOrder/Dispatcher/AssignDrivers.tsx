@@ -1,27 +1,21 @@
 "use client";
-import Loader from "@/components/Shared/Loader";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-
 import { useAssignDispatchers } from "./hooks/useAssignDispatchers";
 
 export default function Drivers() {
   const {
     drivers,
     driversLoading,
-    updateData,
-    updateLoading,
     dispatcher,
-    assignedDispatcherId,
-    driversError,
     page,
     driversTotalPages,
     handleAssignedDispatcher,
     handleNextPage,
-    handlePreviousPage
+    handlePreviousPage,
   } = useAssignDispatchers("drivers");
 
   

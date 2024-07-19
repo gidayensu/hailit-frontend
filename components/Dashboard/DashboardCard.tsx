@@ -7,7 +7,7 @@ export default function DashboardCard ({title, subTitle, number, children}: {tit
             <div className="">
               <h3 className="font-semibold"> {title}</h3>
               <h3 className="text-[12px] text-slate-400 -mt-1">
-                {/* {subTitle} */}
+                {subTitle}
               </h3>
             </div>
           </div>

@@ -1,5 +1,5 @@
 'use client'
-import { useGetAllDriversQuery, useGetAllRidersQuery, useUpdateTripMutation, usePrefetch } from "@/lib/store/apiSlice/hailitApi";
+import { useGetAllDriversQuery, useGetAllRidersQuery, usePrefetch, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setTrip } from "@/lib/store/slice/tripSlice";
 import { useParams } from "next/navigation";
@@ -30,12 +30,10 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
   
     //fetching query based on trip medium
     
-    // const  [getAllDrivers, {data:driversData, isLoading:driversLoading, error:driversError}] = useLazyGetAllDriversQuery();
-    // const  [getAllRiders, {data:ridersData, isLoading:ridersLoading, error:ridersError}] = useLazyGetAllRidersQuery();
     const [updateTrip, {data:updateData, isLoading: updateLoading, error: updateError}] = useUpdateTripMutation();
     const {data:ridersData, isLoading:ridersLoading, error:ridersError} = useGetAllRidersQuery(`riders?page=${page}`); 
     const {data:driversData, isLoading:driversLoading, error:driversError} = useGetAllDriversQuery(`drivers?page=${page}`);
-    // role === "riders" ? getAllRiders('riders') : getAllDrivers('drivers');
+    
     const riders = ridersData?.riders; 
     const drivers = driversData?.drivers;
     const ridersTotalPages = ridersData?.total_number_of_pages;

@@ -1,9 +1,8 @@
 export type DeliveryOptions = "Express" | "Inter City" | "Custom" | "Movers" | "New Delivery" | "Track Order" |"";
 
-import { StaticImageData } from "next/image";
-import Container from "../ui/container";
-import  Image  from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Loader from "../Shared/Loader";
+import Container from "../ui/container";
 
 export const HomeOptions = ({
   image,

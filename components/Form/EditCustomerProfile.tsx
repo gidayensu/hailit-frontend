@@ -9,7 +9,6 @@ export default function EditCustomerProfile() {
     handleSubmit,
     onCustomerFormSubmit,
     email,
-    isError,
     chosenRole,
     first_name,
     last_name,

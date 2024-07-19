@@ -1,6 +1,4 @@
 import {
-  setDropOffLocation,
-  setPickUpLocation,
   setSearchCard,
   setSearchData,
   setUserLocation
@@ -11,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
 import { UserLocation } from "../MainMap";
 
-import { LocationType } from "./useMap";
 
 import { useCallback, useRef, useState } from "react";
 
@@ -23,7 +20,7 @@ export const useLocationSearch = () => {
 
   const mapDataHandler = useCallback(async (e: any) => {
     setIsLoading(true);
-    // const data: any = await fetchMapData(searchQuery?.target?.value);
+    
     const data: any = await fetchMapData(e.target.value);
     if (data) {
       dispatch(setSearchData(data));

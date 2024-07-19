@@ -8,7 +8,7 @@ export default function SkeletonTable({
   rows: number;
   cells: number;
 }) {
-  const skeletons = new Array(rows).fill(null); // Properly fill the array
+  const skeletons = new Array(rows).fill(null); 
   const tableCells = new Array(cells).fill(null);
   return (
     <>

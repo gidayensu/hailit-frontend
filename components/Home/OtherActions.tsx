@@ -1,10 +1,8 @@
 "use client";
 //images
-
-
 import parcel from "../../public/images/parcel.png";
 import track from "../../public/images/track.png";
-
+//components
 import { HomeOptions } from "./HomeOptions";
 import { useHomeOrder } from "./useHomeOrder";
 

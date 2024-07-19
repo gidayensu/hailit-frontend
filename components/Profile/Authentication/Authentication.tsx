@@ -33,9 +33,9 @@ export default function Authentication () {
           </div>
             
             <span className="text-xl font-semibold">Hello, Good {`${timeOfDay}`}! </span>
-            {/* <p className="text-center mt-8">
-              Login or Sign Up to Request for affordable <br /> and fast deliveries in Accra and Kumasi
-            </p> */}
+            <p className="text-center mt-8">
+              Login or Sign up to rRequest for affordable <br /> and fast deliveries in Accra and Kumasi
+            </p>
           </div>
           <div className=" flex flex-col items-center justify-center max-w-[400px] w-full md:p-0 p-6">
 {/* 

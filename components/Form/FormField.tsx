@@ -11,10 +11,7 @@ import { useEffect } from 'react';
     datePurpose,
 }) => { 
     
-    
-    
-    
-    const { register, formState } = useFormContext();
+    const {  formState } = useFormContext();
     return (<>
     <Controller
     name={name}

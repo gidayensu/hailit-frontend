@@ -2,20 +2,18 @@
 
 //hooks + helper function
 import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
-import { useStatusUpdate } from "@/components/Order/hooks/useStatusUpdate";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 
 //next +react+redux
 import { useGetTripQuery, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
-import { TripStatus, TripStage } from "@/components/Order/types/Types";
+import { TripStage, TripStatus } from "@/components/Order/types/Types";
 import {
-  setDispatcherTrip,
-  setDispatcherTripDetails,
+  setDispatcherTrip
 } from "@/lib/store/slice/dispatcherSlice";
 import { redirect, useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 //types
 import { TripStatusDBUpdate } from "@/lib/store/slice/dashboardSlice";
@@ -28,7 +26,7 @@ export const useUpdateDispatcherTrip = () => {
   const dispatch = useAppDispatch();
   const [
     updateTrip,
-    { data: updateData, isLoading: updateLoading, error: updateError },
+    { isLoading: updateLoading, error: updateError }, //check error
   ] =   useUpdateTripMutation();
   const {trip, tripId} = useAppSelector(state=>state.dispatcher)
   

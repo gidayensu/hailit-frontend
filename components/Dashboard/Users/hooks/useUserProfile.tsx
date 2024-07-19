@@ -1,11 +1,9 @@
 'use client'
-import { useDeleteTripMutation, useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
+import { PackageType, TripArea, TripMedium, TripStatus } from "@/components/Order/types/Types";
+import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
-import { UserRole } from "@/lib/store/slice/userSlice";
 import { useCallback, useEffect, useState } from "react";
-import { useGetUserTrips } from "../../hooks/useGetUserTrips";
-import { TripStatus, TripMedium, PackageType, TripArea } from "@/components/Order/types/Types";
 import { User } from "./useGetAllUsers";
 import { useGetUser } from "./useGetUser";
 
@@ -41,27 +39,19 @@ export const useUserProfile = ()=> {
                 total_trip_count: 0,
                 cancelled_trips:0
             })
-        }else {
+        } else {
 
             setUserTrips(trips)
         }
     }, [trips, error])
 
-    const [deleteTrip, {data:deleteData, error:deleteError, isLoading:deleteLoading}] = useDeleteTripMutation();
     
-    const handleDeselect = useCallback( ()=> {
-        
-        dispatch(setSelectedUserId(''))
-    }, [dispatch, setSelectedUserId])
     
-    const handleDeleteTrip = (tripId:string)=> {
-        deleteTrip(tripId)
-        const customerTrips = userTrips.customer_trips.filter(trip=>trip.trip_id !==tripId)
-        deleteData ? setUserTrips((prevTrips=>({...prevTrips, customer_trips: customerTrips}))) : deleteError
-    }
+    
+    
     
     const selectedUser:User = user;
-    return {userTrips, customerTrips, handleDeleteTrip, error, deleteError, selectedUser, isLoading, handleDeselect }
+    return {userTrips, customerTrips,  error,  selectedUser, isLoading,  }
 }
 
 export interface UserTrip {

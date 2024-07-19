@@ -12,7 +12,7 @@ export default function TripStatusChart () {
   const { theme } = useSetTheme();
 
   //cancelled trips && tripMonths, && totaltrips
-  const {delivered, cancelled, tripMonths, totalMonthsData, loading, error, pending} = useTripStatusData();
+  const {delivered, cancelled, tripMonths, totalMonthsData, loading, pending} = useTripStatusData();
   const statusOption: Highcharts.Options = {
     chart: {
       backgroundColor: theme==="dark" ? "#1E1E1E" : "white",

@@ -1,18 +1,13 @@
-'use client'
-import { useAppSelector } from "@/lib/store/hooks";
+"use client";
 
 //main components
-import TopSectionContainer from "@/components/Shared/TopSectionContainer";
-import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import EditCustomerProfile from "@/components/Form/EditCustomerProfile";
+import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
+import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 //ui components
 import { Button } from "@/components/ui/button";
-import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
-import Loader from "@/components/Shared/Loader";
-import { useState } from "react";
+
 export default function EditProfile() {
-  //redirect users who are not customers
-  const [loading, setLoading] = useState<boolean>(false)
   
   
 
@@ -28,8 +23,13 @@ export default function EditProfile() {
           <div className="w-full flex flex-col items-center justify-center gap-4">
             <EditCustomerProfile />
 
-            <Button type="submit" className="max-w-sm w-full h-14" form="customerProfileUpdate" >
-              {loading? <Loader/> : `Save`}
+            <Button
+              type="submit"
+              className="max-w-sm w-full h-14"
+              form="customerProfileUpdate"
+            >
+              Save
+              
             </Button>
           </div>
         </MiddleSectionContainer>

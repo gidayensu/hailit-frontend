@@ -1,11 +1,8 @@
 "use client";
 import { useLocationSearch } from "./hooks/useLocationSearch";
+
 export default function LocationSearch() {
-
   const {mapDataHandler, inputRef} = useLocationSearch();
-   
-
-
   return (
     <div className="flex items-center justify-center">
       <textarea

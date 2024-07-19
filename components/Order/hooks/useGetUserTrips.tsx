@@ -4,6 +4,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { TripStatus } from "../types/Types";
 import { useEffect, useState } from "react";
 import { Trip } from "@/lib/store/slice/tripSlice";
+
 export const useGetUserTrips = () => {
   const [pollingInt, setPollingInt] = useState<number>(500000);
   const { user_id, user_role } = useAppSelector((state) => state.user);

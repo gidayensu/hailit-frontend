@@ -22,7 +22,6 @@ export default function OrderList({
 
   const path = usePathname();
 
-  
   const indexOfLastTrip = currentPage * tripsPerPage;
   const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
   const currentTrips = trips.slice(indexOfFirstTrip, indexOfLastTrip);
@@ -66,11 +65,7 @@ export default function OrderList({
                 )}
               />
             </Link>
-            {/* {tripLoading && (
-              <span className="absolute flex items-center justify-center">
-                <Loader />
-              </span>
-            )} */}
+            
           </div>
         ))}
       </div>

@@ -1,14 +1,9 @@
-
-"use client"
+"use client";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 import AllUsersTable from "@/components/Dashboard/Users/AllUsersTable";
 
-const  AllUsers = ()=> {
+const AllUsers = () => {
+  return <AllUsersTable />;
+};
 
-  
-  return (
-    <AllUsersTable/>
-  );
-}
-
-export default withAdminCheck(AllUsers)
+export default withAdminCheck(AllUsers);

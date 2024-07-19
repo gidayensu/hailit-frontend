@@ -32,7 +32,7 @@ export const useDispatcherProfile = () => {
   const handleSetDispatcherRole = (dispatcherRole: DispatcherRole) => {
     dispatch(setDispatcherRole(dispatcherRole));
   };
-
+  
   const {
     data: driverData,
     isLoading: driverLoading,
@@ -43,7 +43,11 @@ export const useDispatcherProfile = () => {
     isLoading: riderLoading,
     error: riderError,
   } = useGetRiderQuery(selectedRiderId);
-
+  const [
+    deleteTrip,
+    { data: deleteData, error: deleteError, isLoading: deleteLoading },
+  ] = useDeleteTripMutation();
+  
   //dispathcerId is the id of the dispatcher in the rider/driver table
   const dispatcherId =
     dispatcherRole === "Driver"
@@ -57,7 +61,7 @@ export const useDispatcherProfile = () => {
   const driver = driverData?.driver;
   const rider = riderData?.rider;
 
-  const roleMapping = {
+  const dispatcherRoleMapping = {
     Driver: {
       dispatcherUserId: driverData?.driver?.user_id,
       selectedDispatcher: { ...driver, user_role: dispatcherRole },
@@ -74,11 +78,10 @@ export const useDispatcherProfile = () => {
 
   const {
     dispatcherError,
-    //dispatcherUserId is the user_id of the dispatcher in the users table
     dispatcherUserId,
     selectedDispatcher,
     dispatcherLoading,
-  } = roleMapping[dispatcherRole];
+  } = dispatcherRoleMapping[dispatcherRole];
 
   const [dispatcherTrips, setDispatcherTrips] = useState<DispatcherTrips>({
     current_trips: 0,
@@ -106,6 +109,7 @@ export const useDispatcherProfile = () => {
   const handleSelectedRiderId = (riderId: string) => {
     dispatch(setSelectedRiderId(riderId));
   };
+
   const handleSelectedDriverId = (driverId: string) => {
     dispatch(setSelectedDriverId(driverId));
   };
@@ -126,10 +130,6 @@ export const useDispatcherProfile = () => {
     }
   }, [trips, error, setDispatcherTrips]);
 
-  const [
-    deleteTrip,
-    { data: deleteData, error: deleteError, isLoading: deleteLoading },
-  ] = useDeleteTripMutation();
 
   const handleDeselect = useCallback(() => {
     dispatcherRole === "Driver"
@@ -166,7 +166,6 @@ export const useDispatcherProfile = () => {
     handleSelectedDriverId,
     dispatcherLoading,
     dispatcherId,
-    
     total_trip_count,
     handleSetDispatcherRole,
     selectedDriverId,

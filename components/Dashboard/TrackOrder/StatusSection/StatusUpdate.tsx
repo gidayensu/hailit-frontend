@@ -1,10 +1,10 @@
-import Loader from "@/components/Shared/Loader";
 import { IoMdCheckmark } from "react-icons/io";
-import { useStatusUpdate } from "../../../Order/hooks/useStatusUpdate";
+import { useDashboardTripUpdate } from "./hook/useDashboardTripUpdate";
 import { useGetTrip } from "./hook/useGetTrip";
-export default function StatusUpdate() {
 
-  const {trip, handleTripUpdate} = useGetTrip();
+export default function StatusUpdate() {
+  const {handleTripUpdate} = useDashboardTripUpdate();
+  const {trip,} = useGetTrip();
 
   return (
     <div className="w-44">

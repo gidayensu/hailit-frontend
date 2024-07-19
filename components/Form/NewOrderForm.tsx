@@ -1,7 +1,6 @@
 'use client'
 //ui + icons
 import { Textarea } from "@/components/ui/textarea";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import Loader from "../Shared/Loader";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
@@ -15,9 +14,9 @@ import PaymentMethods from "../Order/PaymentMethods";
 import { CalendarField } from "./FormField";
 //redux + next + react + helper
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useNewOrderSubmit } from "./hooks/useNewOrderSubmit";
-import { usePathname } from "next/navigation";
 
 export default function NewOrderForm() {
 
@@ -110,26 +109,7 @@ export default function NewOrderForm() {
             </span>
           )}
           </div>
-          {/* <div className="w-full grid grid-cols-8 items-start justify-center gap-1 ">
-            <div className="space-y-1 w-full col-span-6 ">
-            {
-              pickUpLocationName && 
-            <FormField
-              type="text"
-              placeholder="Enter location for pickup"
-              className="h-14"
-              name="pickup_location"
-              value={pickUpLocationName}
-            />
-            }
-            </div>
-            <span className="flex items-center justify-center mt-4 text-center col-span-1 text-[13px]">OR</span>
-            <Link className="col-span-1" href={"/pickup-map"} onClick={()=> setPickUpLoading(true)}>
-            <Button variant = {'outline'} className="hover:none dark:hover:none h-14">
-                {pickUpLoading ? <Loader color="text-primary-color"/> : <FaMapMarkerAlt className="text-lg" />}
-              </Button>
-            </Link>
-          </div> */}
+          
         </div>
         <div className="grid w-full max-w-sm items-start gap-1.5">
           <h3 className=" text-[14px] font-bold">Destination / Drop off</h3>

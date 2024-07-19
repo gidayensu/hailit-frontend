@@ -1,18 +1,16 @@
-import { Payments } from "../Shared/ItemsSelector";
 //icons
 
 import { BsPhone, BsPhoneFill } from "react-icons/bs";
 import { HiCash, HiOutlineCash } from "react-icons/hi";
-import { MdBookOnline, MdOutlineBookOnline } from "react-icons/md";
 
 
 //redux
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
 
+import { setPaymentMethod } from "@/lib/store/slice/deliveryChoicesSlice";
 import { ItemsSelector } from "../Shared/ItemsSelector";
 import { PaymentMethod } from "./types/Types";
-import { setPaymentMethod } from "@/lib/store/slice/deliveryChoicesSlice";
 
 
 export default function PaymentMethods () {
@@ -49,17 +47,7 @@ export default function PaymentMethods () {
             setSelectedItem={handlepaymentMethod}
             width="half"
           />
-          {/* <ItemsSelector
-            FillIcon={MdBookOnline}
-            LightIcon={MdOutlineBookOnline}
-            itemDetails = {{
-              itemCategory: "Payments",
-               item: "Online"}
-           }
-            selectedItem={payment_method}
-            setSelectedItem={handlepaymentMethod}
-            
-          /> */}
+          
           
         </div>
     )

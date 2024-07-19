@@ -1,6 +1,6 @@
 "use client";
 //ui components + icons
-import FirstStage from "@/components/Onboarding/FirstStage/FirstStage";
+import FirstStage from "@/components/Onboarding/FirstStage";
 import LastStage from "@/components/Onboarding/LastStage";
 import SecondStage from "@/components/Onboarding/SecondStage";
 import Loader from "@/components/Shared/Loader";
@@ -25,7 +25,17 @@ export default function OnboardingStages() {
   }
 
   
-  const {authenticated, chosenRole, stageOne, stageTwo, stageThree,  loading, onboard, userOnboard, handleOnboardStage} = useOnboarding();
+  const {
+    authenticated,
+    chosenRole,
+    stageOne,
+    stageTwo,
+    stageThree,
+    loading,
+    onboard,
+    userOnboard,
+    handleOnboardStage,
+  } = useOnboarding();
     
   
   return (

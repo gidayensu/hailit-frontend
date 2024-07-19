@@ -1,9 +1,9 @@
-import { Button } from "../ui/button"
-import Link from "next/link"
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { lightThemeClass, darkThemeClass, textClass, divClass } from "../Nav/BottomNavBar"
-import { LuHome, LuUser, LuPlus } from "react-icons/lu";
+import { LuHome, LuUser } from "react-icons/lu";
 import { TbPackages } from "react-icons/tb";
+import { darkThemeClass, divClass, lightThemeClass, textClass } from "../Nav/BottomNavBar";
+import { Button } from "../ui/button";
 
 export default function DispatcherBottomNav () {
     const path = usePathname();

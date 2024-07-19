@@ -13,15 +13,14 @@ import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
 
 //hooks/custom hooks
-import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
-import { usePathname } from 'next/navigation';
 import { calculateDistanceAndCost } from '@/lib/calculateDistanceAndCost';
+import { usePathname, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 //interface
 
-import { NewOrderSchema, OrderDetails } from '../FormTypes';
-import {  resetMapData,  } from '@/lib/store/slice/mapSlice';
 import { resetDeliveryChoices } from '@/lib/store/slice/deliveryChoicesSlice';
+import { resetMapData, } from '@/lib/store/slice/mapSlice';
+import { NewOrderSchema, OrderDetails } from '../FormTypes';
 
 export const useNewOrderSubmit = () => {
 
@@ -104,6 +103,7 @@ export const useNewOrderSubmit = () => {
       order_success: true,
       trip_id: trip.trip_id,
       order_submitted: true,
+      order_failed: false,
       scheduled: false
     }))
 
@@ -124,7 +124,8 @@ export const useNewOrderSubmit = () => {
       order_success: false,
       trip_id: '',
       order_submitted: true,
-      scheduled: false
+      scheduled: false,
+      order_failed: true,
     }))
     !path.startsWith('/dashboard') ? router.push('/order/new/failed'): ''
    

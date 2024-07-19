@@ -1,9 +1,9 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTripArea, setTripType, setTripMedium } from "@/lib/store/slice/deliveryChoicesSlice";
+import { TripArea, TripMedium, TripType } from "@/components/Order/types/Types";
 import { ItemsSelectorNoIcons } from "@/components/Shared/ItemsSelectorNoIcons";
-import { useCallback, useEffect } from "react";
-import { TripMedium, TripType, TripArea } from "@/components/Order/types/Types";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setTripArea, setTripMedium, setTripType } from "@/lib/store/slice/deliveryChoicesSlice";
+import { useCallback } from "react";
 
 
 

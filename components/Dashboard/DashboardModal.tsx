@@ -1,9 +1,8 @@
 //while shadcn's modal/dialog is mainly used, there are cases where auto-matic opening of the dialog is needed. This modal component is used in such situations.
 "use client";
-import { LoaderCircle } from "lucide-react";
-import { RxCross2 } from "react-icons/rx";
-import { MdOutlineError } from "react-icons/md";
 import { Button } from "@/components/ui/button";
+import { MdOutlineError } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 
 import { LegacyRef } from "react";
 import { PiCheckCircleFill } from "react-icons/pi";
@@ -53,7 +52,7 @@ export default function DashboardModal({
                 {info}!
               </h2>
 
-              {/* <LoaderCircle className="animate-spin "/> */}
+              
             </div>
             <div className="mt-4 w-full flex flex-col gap-2 items-center justify-center">
               <Button

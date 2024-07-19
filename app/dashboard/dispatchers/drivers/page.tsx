@@ -1,13 +1,9 @@
-'use client'
+"use client";
 import { AllDrivers } from "@/components/Dashboard/Users/Dispatchers/AllDriversTable";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 
-const  AllDriversDashboard = ()=> {
+const AllDriversDashboard = () => {
+  return <AllDrivers />;
+};
 
-  
-  return (
-    <AllDrivers/>
-  );
-}
-
-export default withAdminCheck(AllDriversDashboard)
+export default withAdminCheck(AllDriversDashboard);

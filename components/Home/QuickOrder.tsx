@@ -1,17 +1,9 @@
 "use client";
-import { useAppDispatch } from "@/lib/store/hooks";
-import {
-    setTripArea,
-    setTripMedium,
-    setTripType
-} from "@/lib/store/slice/deliveryChoicesSlice";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import movers from "../../public/images/bulk.png";
 import custom from "../../public/images/custom.png";
 import express from "../../public/images/express.png";
 import intercity from "../../public/images/intercity.png";
-import {  HomeOptions } from "./HomeOptions";
+import { HomeOptions } from "./HomeOptions";
 import { useHomeOrder } from "./useHomeOrder";
 
 export default function QuickOrder() {

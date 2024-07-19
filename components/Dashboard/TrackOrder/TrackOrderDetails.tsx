@@ -1,5 +1,5 @@
 "use client";
-//ui + icons
+
 //main components
 import TrackOrderForm from "@/components/Form/TrackOrderForm";
 import BigLoader from "../../Shared/BigLoader";
@@ -11,7 +11,6 @@ import TripDetail from "./TripDetail";
 export default function  TrackOrder() {
   const {
     trip,
-    
     inputRef,
     isLoading,
     handleTrackTrip,

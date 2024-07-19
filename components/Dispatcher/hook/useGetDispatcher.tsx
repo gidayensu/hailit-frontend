@@ -1,9 +1,8 @@
 "use client";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { useGetUserTrips } from "@/components/Order/hooks/useGetUserTrips";
-import { useEffect } from "react";
+import { DispatcherTrip, useGetUserTrips } from "@/components/Order/hooks/useGetUserTrips";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setDispatcherTripDetails, setDispatcherTripId } from "@/lib/store/slice/dispatcherSlice";
-import { DispatcherTrip } from "@/components/Order/hooks/useGetUserTrips";
+import { useEffect } from "react";
 
 export const useGetDispatcher = () => {
   const dispatch = useAppDispatch();

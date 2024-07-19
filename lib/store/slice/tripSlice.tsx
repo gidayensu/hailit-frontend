@@ -1,7 +1,6 @@
+import { PackageType, TripArea, TripMedium, TripStage, TripStatus, TripType } from "@/components/Order/types/Types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserRole } from "./userSlice";
 type DispatcherRole = "Rider" | "Driver"
-import { TripStatus, TripMedium, PackageType, TripType, TripStage, TripArea } from "@/components/Order/types/Types";
 const initialState:Trip = {
     
       trip_stage: 1,

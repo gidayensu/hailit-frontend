@@ -3,7 +3,6 @@
 import { BsFillPinMapFill } from "react-icons/bs";
 import { DeliveryChoices } from "./DeliveryChoice";
 
-import { FiCheck } from "react-icons/fi";
 import { RiMapPinRangeLine, RiTreasureMapFill } from "react-icons/ri";
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice";
 

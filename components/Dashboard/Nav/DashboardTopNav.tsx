@@ -9,24 +9,26 @@ import { useGetSearchResults } from "./hook/useGetSearchResults";
 import { useSetTheme } from "./hook/useSetTheme";
 
 export default function DashboardTopNav() {
-  
-  const {inputRef, debouncedSearch, searchContainerRef, trips, isLoading, error, openSearchContainer, handleSearchItemTrack} = useGetSearchResults();
-  const {handleThemeChange } = useSetTheme();
-  
-  const {last_name, first_name} = useAppSelector(state=>state.user)
-  
-  
+  const {
+    inputRef,
+    debouncedSearch,
+    searchContainerRef,
+    trips,
+    isLoading,
+    error,
+    openSearchContainer,
+    handleSearchItemTrack,
+  } = useGetSearchResults();
+  const { handleThemeChange } = useSetTheme();
 
-  
-  
+  const { last_name, first_name } = useAppSelector((state) => state.user);
+
   const path = usePathname();
 
   const iconsAndTextDivClass =
     "flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md";
   const iconsAndTextSpanClass =
     "flex items-center justify-center gap-2 relative";
-
-  
 
   return (
     <nav

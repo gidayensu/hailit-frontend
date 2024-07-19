@@ -23,7 +23,7 @@ export const useAssignVehicle = (dispatcher?:Dispatcher) => {
       vehicle_name: dispatcher?.vehicle?.vehicle_name,
     });
     
-    //manually setting assignVehicleLoading due to slow state change when rtk query's isLoading is used. Could be due to the logic for displaying the loader
+    //manually setting loading status for vehicle assingning due to slow state change when rtk query's isLoading is used. Could be due to the logic for displaying the loader
     const [assignVehicleLoading, setAssignVehicleLoading] = useState<boolean>(false);
 
     const [page, setPage] = useState<number>(1)

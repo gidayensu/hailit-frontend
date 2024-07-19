@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
 import { Trip } from "@/lib/store/slice/tripSlice";
+
 export const useReOrder = (tripData: Trip) => {
   const {
     trip_medium,
@@ -29,7 +30,8 @@ export const useReOrder = (tripData: Trip) => {
     pick_long,
     drop_lat,
     drop_long
-  } = tripData;
+  } = tripData ;
+
   const tripDetails: NewTrip = {
     trip_medium,
     payment_method,
@@ -49,6 +51,7 @@ export const useReOrder = (tripData: Trip) => {
     pick_long
 
   };
+
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useAppDispatch();

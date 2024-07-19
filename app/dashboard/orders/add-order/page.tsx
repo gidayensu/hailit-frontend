@@ -1,13 +1,8 @@
-
-"use client"
+"use client";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 import AddOrder from "@/components/Dashboard/Orders/AddOrder";
-const  TrackOrderDashboard = ()=> {
+const TrackOrderDashboard = () => {
+  return <AddOrder />;
+};
 
-  
-  return (
-    <AddOrder/>
-  );
-}
-
-export default withAdminCheck(TrackOrderDashboard)
+export default withAdminCheck(TrackOrderDashboard);

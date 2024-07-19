@@ -1,16 +1,15 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { extractDateWithDayFromDate, extractTimeFromDate, extractShortDate } from "@/lib/utils";
+import { Trip } from "@/lib/store/slice/tripSlice";
+import { extractDateWithDayFromDate, extractShortDate, extractTimeFromDate } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { HiLocationMarker } from "react-icons/hi";
-import { useAppSelector } from "@/lib/store/hooks";
-import { Trip } from "@/lib/store/slice/tripSlice";
 
 export default function OrderSummary({ trip }: { trip:Trip }) {
   const { tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip);
   
   const path = usePathname();
-  const tripStatus = trip?.trip_status.toUpperCase();
+  
   return (
     <>
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}

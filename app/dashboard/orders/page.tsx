@@ -1,13 +1,8 @@
-
-"use client"
+"use client";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 import { AllTripsTable } from "@/components/Dashboard/Orders/AllTripsTable";
-const  AllTrips = ()=> {
+const AllTrips = () => {
+  return <AllTripsTable />;
+};
 
-  
-  return (
-    <AllTripsTable/>
-  );
-}
-
-export default withAdminCheck(AllTrips)
+export default withAdminCheck(AllTrips);

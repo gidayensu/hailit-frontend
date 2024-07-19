@@ -36,7 +36,7 @@ export const useSignUp =  () => {
     });
 
     const handleRandomSignUp = () => {
-        const defaultNames = ['user', 'starter', 'gery', 'win', 'victory', 'saly', 'awesome', 'fun', 'interest', 'true', 'life', 'trainer', 'good' , 'great' , 'super' , 'ben', 'tina', 'nol', 'director', 'mikel', 'goodman', 'salute', 'critical', 'alumi', 'peri', 'eddie', 'selom'];
+        
         const randomName = defaultNames[Math.ceil(Math.random()*defaultNames.length-1)]
         const randomNumber = Math.ceil(Math.random() * 1000);
         const demoDetail =`${randomName}${randomNumber}@hailit.vercel.app`;
@@ -56,12 +56,11 @@ export const useSignUp =  () => {
     });
     const {
       handleSubmit,
-      formState: { errors },
-      setError,
+      
     } = formMethods;
   
     //form submission
-    //async is used to await supabaseSignUp
+    
     const onSignUpSubmit: SubmitHandler<Inputs> = async (userData) => {
       try {
         setIsLoading(true);
@@ -124,3 +123,32 @@ export const useSignUp =  () => {
   };
   
 
+  const defaultNames = [
+    "user",
+    "starter",
+    "gery",
+    "win",
+    "victory",
+    "saly",
+    "awesome",
+    "fun",
+    "interest",
+    "true",
+    "life",
+    "trainer",
+    "good",
+    "great",
+    "super",
+    "ben",
+    "tina",
+    "nol",
+    "director",
+    "mikel",
+    "goodman",
+    "salute",
+    "critical",
+    "alumi",
+    "peri",
+    "eddie",
+    "selom",
+  ];

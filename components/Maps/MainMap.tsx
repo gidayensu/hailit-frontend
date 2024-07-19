@@ -35,7 +35,6 @@ export default function MainMap({ locationType }: { locationType: LocationType }
   } = useMap(locationType);
 
   
-console.log({mapLocationName, userLocation})
   return (
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">

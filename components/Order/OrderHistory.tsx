@@ -5,25 +5,32 @@ import OrderList from "./OrderList";
 import { useGetUserTrips } from "./hooks/useGetUserTrips";
 import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
 
-
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<boolean>(true);
-  
-  
-  
-  
-  const { currentTrips, previousTrips, isLoading, error, noDelivery, user_role } = useGetUserTrips();
-  
-  const isDispatcher = user_role !== "Customer" ? true: false;
-  
+
+  const {
+    currentTrips,
+    previousTrips,
+    isLoading,
+    error,
+    noDelivery,
+    user_role,
+  } = useGetUserTrips();
+
+  const isDispatcher = user_role !== "Customer" ? true : false;
+
   return (
     <div className="flex flex-col md:4/6 w-5/6 mt-4 rounded-2xl gap-2 items-center justify-center">
-        <p className="text-md  md:w-4/6 w-full font-bold h-7 "> Your Deliveries </p> 
-      {
-        isLoading && <TripsLoadingSkeleton/>
-      }
+      <p className="text-md  md:w-4/6 w-full font-bold h-7 ">
+        {" "}
+        Your Deliveries{" "}
+      </p>
+      {isLoading && <TripsLoadingSkeleton />}
       {noDelivery && !isLoading && (
-        <NoOrderHistory noDeliveryMessage="Your Deliveries Will Appear Here!" isDispatcher={isDispatcher} />
+        <NoOrderHistory
+          noDeliveryMessage="Your Deliveries Will Appear Here!"
+          isDispatcher={isDispatcher}
+        />
       )}
 
       {(currentTrips.length > 0 || previousTrips.length > 0) && (
@@ -51,14 +58,21 @@ export default function OrderHistory() {
         </div>
       )}
       <div className="w-full md:w-4/6 flex items-center ">
-
-      {currentDeliveries && (<OrderList isDispatcher={user_role !== "Customer" ? true: false} noDelivery={noDelivery} trips={currentTrips}  />
-      )}
-      {!currentDeliveries && (<OrderList isDispatcher={user_role !== "Customer" ? true: false} noDelivery={noDelivery} trips={previousTrips}  />
-      )}
+        {currentDeliveries && (
+          <OrderList
+            isDispatcher={user_role !== "Customer" ? true : false}
+            noDelivery={noDelivery}
+            trips={currentTrips}
+          />
+        )}
+        {!currentDeliveries && (
+          <OrderList
+            isDispatcher={user_role !== "Customer" ? true : false}
+            noDelivery={noDelivery}
+            trips={previousTrips}
+          />
+        )}
       </div>
     </div>
-    
   );
 }
-

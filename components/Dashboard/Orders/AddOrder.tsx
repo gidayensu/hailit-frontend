@@ -2,10 +2,9 @@
 import NewOrderForm from "@/components/Form/NewOrderForm";
 import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/lib/store/hooks";
-import { FiArrowLeft } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 import TripAreaMediumAndType from "../TrackOrder/Actions/TripAreaMediumAndType";
 import AddOrderOutcome from "./AddOrderOutcome";
-import { useRouter } from "next/navigation";
 
 export default function AddOrder () {
 const router = useRouter();  

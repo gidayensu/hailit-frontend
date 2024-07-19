@@ -1,8 +1,7 @@
 // This is UI with minimal detail such as trip id, trip request data, delivery state, cost, and package type. 
 'use client'
-import { IoArchive, IoFastFood } from "react-icons/io5";
 import { IoDocumentText, IoShirt } from "react-icons/io5";
-import { MdLineWeight, MdOutlineLineWeight } from "react-icons/md";
+import { MdLineWeight } from "react-icons/md";
 
 import {
   PiMonitorFill,
@@ -10,9 +9,9 @@ import {
   PiWineFill,
 } from "react-icons/pi";
 
-import Container from "../ui/container";
 import { useState } from "react";
 import Loader from "../Shared/Loader";
+import Container from "../ui/container";
 
 export default function OrderSummaryMin({
   tripId,
@@ -83,7 +82,7 @@ export default function OrderSummaryMin({
         <Loader color="text-primary-color"/> 
       </div>
       }
-      {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
+      
       <Container className={`${className} flex  gap-3 justify-between  items-center h-16 rounded-xl p-2 ${loading ? 'opacity-20': ''}`}>
         <div className="flex gap-2">
 
