@@ -35,34 +35,14 @@ export const dashboardTablesSlice = createSlice({
     initialState,
     reducers: {
 
-        setOverviewData (state, action:PayloadAction<any>) {
-            state.overviewData = action.payload           
-            
-        },
+       
         setTableData (state, action:PayloadAction<SetData>) {
             const {table} = action.payload
             const {data} = action.payload;
             state[table] = data           
             
         },
-        setUsersData(state, action:PayloadAction<any>) {
-            state.usersData = action.payload
-        },
-        setTripsData (state, action:PayloadAction<any>) {
-            state.tripsData = action.payload           
-        },
-
-        setDriversData (state, action:PayloadAction<any>) {
-            state.driversData = action.payload           
-            
-        },
-        setRidersany (state, action:PayloadAction<any>) {
-            state.ridersData = action.payload           
-            
-        },
-        setVehiclesData (state, action:PayloadAction<any>) {
-            state.vehiclesData = action.payload
-        },
+        
 
         deleteFromData(state, action:PayloadAction<DeleteData>) {
             const {table} = action.payload
@@ -74,4 +54,7 @@ export const dashboardTablesSlice = createSlice({
     }
 })
 
-export const {setDriversData, setOverviewData, setRidersany, setTripsData, setUsersData, setVehiclesData, setTableData} = dashboardTablesSlice.actions
+export const {
+
+  setTableData,
+} = dashboardTablesSlice.actions;

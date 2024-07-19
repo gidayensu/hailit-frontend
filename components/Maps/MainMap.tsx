@@ -5,6 +5,7 @@ import { Map, Marker } from "pigeon-maps";
 import { FaMapPin } from "react-icons/fa";
 import { Button } from "../ui/button";
 import SearchResults from "./SearchResults";
+
 const MapModal = dynamic(() => import("./MapModal"), { ssr: false })
 
 import type { Point } from "pigeon-maps";
@@ -21,13 +22,6 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     zoom,
     setZoom,
     userLocation,
-    dropOffLocation,
-    dropOffLocationName,
-    setDropOffLocation,
-    pickUpLocation,
-    pickUpLocationName,
-    setPickUpLocation,
-    dispatch,
     mapBoundaryChanged,
     loading,
     openModal,

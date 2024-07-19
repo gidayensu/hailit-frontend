@@ -33,7 +33,6 @@ export interface DashboardDetails {
   selectedRiderId: string;
   selectedDriverId: string;
   dispatcherRole: DispatcherRole;
-
   editingOrder: boolean;
   assignedDispatcherId: string;
   tripStatus: string;
@@ -91,9 +90,7 @@ export const dashboardSlice = createSlice({
 
 export const {
   setActiveSection,
-
   setTripStatus,
-
   setEditingOrder,
   setSelectedUserId,
   setSelectedDriverId,

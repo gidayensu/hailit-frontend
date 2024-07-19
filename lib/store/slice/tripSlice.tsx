@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserRole } from "./userSlice";
+type DispatcherRole = "Rider" | "Driver"
 import { TripStatus, TripMedium, PackageType, TripType, TripStage, TripArea } from "@/components/Order/types/Types";
 const initialState:Trip = {
     
@@ -89,8 +90,7 @@ export interface Dispatcher {
     rating_count: number;
     cumulative_rating: number;
     user_id: string;
-    user_role:"Driver" | "Rider"; ///REVISIT
-    //distapcher_id was previously optional. If no bug is identified, will maintain it as required
+    user_role: DispatcherRole;
     dispatcher_id: string;
     license_number?: string;
     available?: boolean;
