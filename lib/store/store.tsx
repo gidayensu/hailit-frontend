@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage';
 import { supabaseAuthSlice } from './slice/authSlice';
 import { userSlice } from './slice/userSlice';
 import { onBoardingSlice } from './slice/onBoardingSlice';
-import { formSlice } from './slice/formSlice';
 import { deliveryChoiceSlice } from './slice/deliveryChoicesSlice';
 import { newOrderSlice } from './slice/newOrderSlice';
 import { hailitApi } from './apiSlice/hailitApi';
@@ -20,7 +19,6 @@ const appReducer = combineReducers({
   auth: supabaseAuthSlice.reducer,
   user: userSlice.reducer,
   onBoarding: onBoardingSlice.reducer,
-  form: formSlice.reducer,
   deliveryChoices: deliveryChoiceSlice.reducer,
   map: mapSlice.reducer,
   newOrder: newOrderSlice.reducer,
