@@ -10,7 +10,8 @@ let debounceTimeout: NodeJS.Timeout | null = null;
 export async function fetchMapData(
   searchQuery: string
 ): Promise<GeoData | null> {
-  const url = `https://nominatim.openstreetmap.org/search.php?street=${searchQuery}&country=Ghana&format=jsonv2`;
+  const url = `https://api.maptiler.com/geocoding/${searchQuery}.json?country=gh&proximity=ip&fuzzyMatch=true&limit=6&key=cH018vwISkZA6x3z4RSw`;
+  // const url = `https://nominatim.openstreetmap.org/search.php?street=${searchQuery}&country=Ghana&format=jsonv2`;
 
   // Debounce logic
   if (debounceTimeout) {
@@ -27,11 +28,9 @@ export async function fetchMapData(
         }
 
         const results = await response.json();
-        const returnedResults = results.filter(
-          (result: any) => result.display_name !== "Ghana"
-        );
+        console.log({results})
 
-        resolve(returnedResults);
+        resolve(results);
       } catch (error) {
         console.error("Error fetching map data:", error);
         resolve(null);
@@ -42,10 +41,11 @@ export async function fetchMapData(
 
 
 export async function reverseMapSearch(
-  lat: string | number,
-  lon: string | number
+  lat:  number,
+  lon:  number
 ): Promise<GeoData | null> {
-  const url = `https://nominatim.openstreetmap.org/reverse.php?lat=${lat}&lon=${lon}&zoom=18&format=jsonv2`;
+  const url = `https://api.maptiler.com/geocoding/${lon},${lat}.json?key=cH018vwISkZA6x3z4RSw&limit=1`
+  // const url = `https://nominatim.openstreetmap.org/reverse.php?lat=${lat}&lon=${lon}&zoom=18&format=jsonv2`;
 
   try {
     const response = await fetch(url);
@@ -55,14 +55,12 @@ export async function reverseMapSearch(
     }
 
     const data = await response.json();
-    if(data.display_name === "Soul Buoy") {//this happens when user does not allow location acces. The set name is the name of the default location
-        data.display_name = 'Kaneshie Market Complex, Dr. Busia Highway, Awudome Estates' 
-    }
+    const displayName = data?.features[0].place_name;
     
     return {
-      latitude: data.lat,
-      longitude: data.lon,
-      displayName: data.display_name,
+      latitude: lat,
+      longitude: lon,
+      displayName
     };
   } catch (err) {
     console.error(err);
