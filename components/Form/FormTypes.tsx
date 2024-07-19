@@ -10,7 +10,7 @@ export const NewOrderSchema: ZodType<OrderDetails> = z.object({
   package_value: z.optional(z.string().min(1, { message: "Package value should be GHS 1 or more" })),
   additional_information: z.optional(z.string()),
   schedule_date: z.optional(z.date({
-    required_error: "Pickup date is required.",
+    required_error: "Delivery date is required.",
   })),
   
   // delivery_date: z.date({
@@ -123,7 +123,8 @@ export type ValidFieldNames =
 | "pickup_date"
 | "delivery_date"
 | "calendar_schedule"
-| "confirm_password";
+| "confirm_password"
+| "schedule_date"
 
 export type FormFieldProps = {
     type?: string;

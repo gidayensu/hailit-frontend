@@ -21,6 +21,7 @@ import { calculateDistanceAndCost } from '@/lib/calculateDistanceAndCost';
 
 import { NewOrderSchema, OrderDetails } from '../FormTypes';
 import {  resetMapData,  } from '@/lib/store/slice/mapSlice';
+import { resetDeliveryChoices } from '@/lib/store/slice/deliveryChoicesSlice';
 
 export const useNewOrderSubmit = () => {
 
@@ -60,13 +61,12 @@ export const useNewOrderSubmit = () => {
   });
   const {register, handleSubmit, formState: {errors}, setError } = formMethods;
   
-  
+
+  //submit form
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data)=> {
     
   
     setLoading(true);
-
-    
 
     if(!package_type || !payment_method) {
       !package_type? scrollToSection(packageTypeRef) : scrollToSection(paymentMethodRef)
@@ -106,6 +106,8 @@ export const useNewOrderSubmit = () => {
       order_submitted: true,
       scheduled: false
     }))
+
+    dispatch(resetDeliveryChoices())
     
     dispatch(resetMapData())
     
@@ -128,5 +130,21 @@ export const useNewOrderSubmit = () => {
    
   }
 
-  return {formMethods, handleSubmit, onDeliveryFormSubmit, packageTypeRef, package_type, payment_method, paymentMethodRef, pickUpLocationName, dropOffLocationName, loading, register, scheduled, data, error, distanceAndCost}
+  return {
+    formMethods,
+    handleSubmit,
+    onDeliveryFormSubmit,
+    packageTypeRef,
+    package_type,
+    payment_method,
+    paymentMethodRef,
+    pickUpLocationName,
+    dropOffLocationName,
+    loading,
+    register,
+    scheduled,
+    data,
+    error,
+    distanceAndCost,
+  };
 }

@@ -12,6 +12,7 @@ import FormField from "./FormField";
 import DeliveryChoicesBreadcrumb from "../Order/NewDelivery/DeliveryChoices/DeliveryChoicesBreadcrumb";
 import PackageTypes from "../Order/NewDelivery/PackageTypes/PackageTypes";
 import PaymentMethods from "../Order/PaymentMethods";
+import { CalendarField } from "./FormField";
 //redux + next + react + helper
 import Link from "next/link";
 import { useState } from "react";
@@ -77,15 +78,8 @@ export default function NewOrderForm() {
             {
               scheduled &&
               <div className="grid w-full max-w-sm items-center gap-1.5">
-          <h3 className=" text-[14px] font-bold">Choose Delivery Date</h3>
-          <FormField
-            type="text"
-            placeholder="Enter number of sender"
-            className="h-14"
-            name="calendar_schedule"
-            calendar = {true}
-            schedule = {true }
-          />
+          <h3 className=" text-[14px] font-bold">Schedule Delivery </h3>
+          <CalendarField name="schedule_date" datePurpose= "delivery" />
         </div>
             }
         <div className="mt-4 grid w-full max-w-sm items-center gap-1.5">
