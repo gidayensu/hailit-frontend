@@ -12,7 +12,6 @@ export default function NewOrder() {
   user_role && user_role !== "Customer" ? redirect("/authentication") : "";
 
   return (
-    <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
         <TopSectionContainer className="flex flex-col items-center justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
           <span className="text-5xl font-bold ">Delivery Details</span>
@@ -23,6 +22,6 @@ export default function NewOrder() {
           <SendPackage />
         </MiddleSectionContainer>
       </main>
-    </>
+    
   );
 }

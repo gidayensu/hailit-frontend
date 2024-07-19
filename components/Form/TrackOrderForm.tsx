@@ -28,7 +28,6 @@ export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any,
   
   
     return (
-        <>
         <div className="flex flex-col w-full max-w-xl items-center space-x-2 justify-center mt-10 gap-3 ">
           {
             sameAsCurrent && <p className="text-red-500">
@@ -49,6 +48,6 @@ export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any,
         
         
       </div>
-           </>
+        
     )
 }

@@ -24,7 +24,6 @@ export default function NewOrder() {
   }
 
   return (
-    <>
       <main className="flex min-h-screen flex-col items-center gap-10 md:justify-center md:items-center">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
           <span className="text-5xl font-bold ">Package details</span>
@@ -37,6 +36,6 @@ export default function NewOrder() {
           </div>
         </MiddleSectionContainer>
       </main>
-    </>
+    
   );
 }

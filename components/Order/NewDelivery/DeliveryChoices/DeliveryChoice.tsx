@@ -28,7 +28,6 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
     handleDeliveryOption(choiceType);
   };
   return (
-    <>
       <div className="w-full" onClick={handleClick}>
         <Container
           className={`${className} flex flex-col  items-center justify-center w-full h-40 md:h-44  rounded-lg p-3 ${
@@ -71,6 +70,6 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
           </span>
         </Container>
       </div>
-    </>
+    
   );
 };

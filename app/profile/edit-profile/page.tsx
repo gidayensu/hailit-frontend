@@ -12,7 +12,6 @@ export default function EditProfile() {
   
 
   return (
-    <>
       <main className="flex min-h-screen flex-col items-center gap-10 ">
         <TopSectionContainer className="">
           <span className="text-5xl font-bold ">Edit Profile</span>
@@ -34,6 +33,6 @@ export default function EditProfile() {
           </div>
         </MiddleSectionContainer>
       </main>
-    </>
+    
   );
 }

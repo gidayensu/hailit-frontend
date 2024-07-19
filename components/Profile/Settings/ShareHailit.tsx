@@ -32,7 +32,6 @@ export default function ShareHailit() {
       )
   }
   return (
-    <>
       <div className="flex flex-col items-center justify-center w-full space-y-6 p-5 ">
         <div>
           <h3 className="font-bold text-2xl mb-2">Share Hailit!</h3>
@@ -85,6 +84,6 @@ export default function ShareHailit() {
           </div>
         </div>
       </div>
-    </>
+    
   );
 }

@@ -16,7 +16,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
               currentOrderStage={currentOrderStage}
               orderStage={1}
             >
-              <></>
+              
             </OrderStatusElement>
 
             <OrderStatusElement
@@ -24,7 +24,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
               currentOrderStage={currentOrderStage}
               orderStage={2}
             >
-              <></>
+              
             </OrderStatusElement>
 
             <OrderStatusElement
@@ -32,7 +32,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
               currentOrderStage={currentOrderStage}
               orderStage={3}
             >
-              <></>
+              
             </OrderStatusElement>
 
             {currentOrderStatus !== "Cancelled" && (
@@ -41,7 +41,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
                 currentOrderStage={currentOrderStage}
                 orderStage={4}
               >
-                <></>
+                
               </OrderStatusElement>
             )}
 
@@ -51,7 +51,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
                 currentOrderStage={currentOrderStage}
                 orderStage={0}
               >
-                <></>
+                
               </OrderStatusElement>
             )}
       </div>

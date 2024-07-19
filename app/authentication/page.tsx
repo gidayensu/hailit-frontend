@@ -40,10 +40,9 @@ export default function Profile() {
   }, [authenticated, onboard, user_role, router]);
 
   return (
-    <>
       <main className="flex min-h-screen flex-col md:justify-center  items-center gap-10 mb-32">
         {(!authenticated || !sessionActive) && <Authentication />}
       </main>
-    </>
+    
   );
 }
