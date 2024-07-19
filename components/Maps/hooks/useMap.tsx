@@ -147,7 +147,6 @@ export const useMap = (locationType: LocationType) => {
     closeModal,
     modalRef,
     mapTilerProvider,
-    location,
     mapLoading,
     mapLocationName,
     setUserLocation,
