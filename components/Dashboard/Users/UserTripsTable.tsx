@@ -50,8 +50,8 @@ export default function UserTripsTable({
     <Table>
       <TableHeader>
         <TableRow>
-          {tableHeadings.map((tableHeading, index) => (
-            <TableHead key={index}>{tableHeading}</TableHead>
+          {tableHeadings.map((tableHeading) => (
+            <TableHead key={tableHeading}>{tableHeading}</TableHead>
           ))}
         </TableRow>
       </TableHeader>

@@ -23,7 +23,7 @@ export default function SearchResults() {
                 if (data && index <= 3) {
                   return (
                     <span
-                      key={index}
+                      key={data.center}
                       className="flex flex-col gap-2 cursor-pointer hover:bg-gray-100 hover:rounded-xl"
                     >
                       {!data.place_name ? (

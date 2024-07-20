@@ -4,7 +4,7 @@ import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
-import { useGetUserTrips } from "../hooks/useGetUserTrips";
+import { useGetDashboardUserTrips } from "../hooks/useGetDashboardUserTrips";
 import { useRouter } from "next/navigation";
 
 export default function UserOtherTrips({
@@ -15,7 +15,7 @@ export default function UserOtherTrips({
   tripId: string
 }) {
   const router = useRouter();
-  const { isLoading, trips   } = useGetUserTrips(userId);
+  const { isLoading, trips   } = useGetDashboardUserTrips(userId);
    const handleTrackTrip = (tripId:string)=> {
       router.push(`/dashboard/track-order/${tripId}`)
 
@@ -48,7 +48,7 @@ export default function UserOtherTrips({
               {otherTrips?.length >0 && (
                 <>
                   {otherTrips.map((trip: Trip, index: number) => (
-                    <div key={index}>
+                    <div key={trip?.trip_id}>
                       {index <= 2 && (
                         <div key={trip?.trip_id} onClick={() => handleTrackTrip(trip?.trip_id)}>
                           <OrderSummaryMin

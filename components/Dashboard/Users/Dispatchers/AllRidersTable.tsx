@@ -51,7 +51,7 @@ export function AllRiders() {
           <TableRow >
           {
               tableHeadings.map((tableHeading, index)=>
-                <TableHead key={index}>{tableHeading}</TableHead>
+                <TableHead key={tableHeading}>{tableHeading}</TableHead>
               )
             }
           </TableRow>
@@ -123,13 +123,13 @@ export const Rating = ({ rating }: {rating: number }) => {
       {Array(fullStars)
         .fill('full stars')
         .map((_, index) => (
-          <FaStar key={index} className="text-amber-500"/>
+          <FaStar key={index * Math.random()} className="text-amber-500"/>
         ))}
       
       {Array(emptyStars)
         .fill('empty stars')
         .map((_, index) => (
-          <FaRegStar key={index} />
+          <FaRegStar key={index * Math.random()} />
         )) 
         }
     </div>

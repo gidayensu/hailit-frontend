@@ -114,7 +114,7 @@ export default function Pagination({
       {getPaginationButtons().map((page, index) => (
         <Button
           variant={"empty"}
-          key={index}
+          key={index * Math.random()}
           onClick={() => handlePageClick(page)}
           className={`${generalClass} ${
             currentPage === page ? activeClass : inActiveClass

@@ -91,7 +91,7 @@ export default function AllUsersTable() {
             {
               tableHeadings.map((tableHead, index)=> 
                 <TableHead 
-                  key={index}
+                  key={tableHead}
                   className={tableHead === "Onboard Status" || tableHead === "Trips" ? "flex items-center justify-center": ''}
                 
                 >
