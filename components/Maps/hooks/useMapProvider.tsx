@@ -6,7 +6,7 @@ export const useMapProvider = () => {
   const { theme, systemTheme } = useSetTheme();
 
   let MAP_ID = "streets-v2";
-  theme === "dark" || (systemTheme === "dark" && theme === "dark")
+  theme === "dark" || (systemTheme === "dark" && theme === "system")
     ? (MAP_ID = "streets-v2-dark")
     : "";
 

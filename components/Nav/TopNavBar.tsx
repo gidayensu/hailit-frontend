@@ -67,7 +67,7 @@ export function TopNavBar() {
               <ThemeToggle>
                 <p className={iconTextClass}>
                   {theme === "light" ||
-                  (systemTheme === "light" && theme === "light")
+                  (systemTheme === "light" && theme === "system")
                     ? "Dark mode"
                     : "Light mode"}
                 </p>

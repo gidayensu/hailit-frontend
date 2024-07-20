@@ -26,14 +26,14 @@ export function ThemeToggle({children}:{children?:React.ReactNode}) {
     <div className="flex items-center justify-center gap-2" onClick={handleThemeChange}>
 
     <span  >
-      {(theme === "light" || (systemTheme === "light" && theme==="light")) && (
+      {(theme === "light" || (systemTheme === "light" && theme==="system")) && (
         <>
           <MdOutlineDarkMode className={iconOutlineClass} />
           <MdDarkMode className={iconFillClass} />
         </>
       )}
 
-      {(theme === "dark" || (systemTheme === "dark" && theme==="dark")) && (
+      {(theme === "dark" || (systemTheme === "dark" && theme==="system")) && (
         <>
           <MdOutlineLightMode className={iconOutlineClass} />
           <MdLightMode className={iconFillClass} />
