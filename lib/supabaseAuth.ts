@@ -129,7 +129,7 @@ export const sessionBearerToken = async () => {
 
 
 
-export const supabaseSignOut = async () => {
+export const supabaseLogOut = async () => {
   try {
     await supabase.auth.signOut();
     window.location.reload();

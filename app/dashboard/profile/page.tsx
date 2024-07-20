@@ -4,13 +4,16 @@ import EditCustomerProfile from "@/components/Form/EditCustomerProfile";
 import { useCustomerProfile } from "@/components/Form/hooks/useCustomerProfile";
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
+import { useLogout } from "@/components/Shared/hooks/useLogout";
 
 const Profile = () => {
   const {
     isSuccess,
     isLoading: formLoading,
-    handleSignOut,
+    
   } = useCustomerProfile();
+
+  const { handleLogOut } = useLogout();
   return (
     <section className="flex flex-col justify-center items-center lg:items-start lg:justify-start  gap-4">
       <div className="max-w-sm w-full">
@@ -29,7 +32,7 @@ const Profile = () => {
       </span>
       <Button
         className="max-w-sm w-full h-14 lg:hidden"
-        onClick={handleSignOut}
+        onClick={handleLogOut}
       >
         Logout
       </Button>

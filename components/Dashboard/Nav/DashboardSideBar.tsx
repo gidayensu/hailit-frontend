@@ -1,10 +1,7 @@
 'use client'
+import { useLogout } from "@/components/Shared/hooks/useLogout"
 import { Separator } from "@/components/ui/separator"
-import { userLogout } from "@/lib/store/actions"
-import { useAppDispatch } from "@/lib/store/hooks"
 import { ActiveSection } from "@/lib/store/slice/dashboardSlice"
-import { supabaseSignOut } from "@/lib/supabaseAuth"
-import { useRouter } from "next/navigation"
 import { IoLogOutOutline } from "react-icons/io5"
 import { MdInsertChartOutlined, MdOutlineSportsMotorsports } from "react-icons/md"
 import { RiFileListLine, RiMotorbikeFill, RiSteering2Line } from "react-icons/ri"
@@ -22,13 +19,10 @@ export default function DashboardSideBar({
   handleActiveSection: (section: ActiveSection) => void;
   
 }) {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const handleSignOut = () => {
-    dispatch(userLogout());
-    supabaseSignOut();
-    router.push("/");
-  };
+  
+
+  const {handleLogOut} = useLogout();
+  
   return (
     <article
       className={`hidden lg:flex flex-col fixed lg:h-[440px] ${
@@ -144,7 +138,7 @@ export default function DashboardSideBar({
         <DashboardSections
           dashMin={dashMin}
           sectionName="Sign Out"
-          onClickFunc={handleSignOut}
+          onClickFunc={handleLogOut}
           url="#"
         >
           <IoLogOutOutline className="text-2xl " />

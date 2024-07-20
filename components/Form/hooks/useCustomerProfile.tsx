@@ -1,20 +1,18 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import { useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   CustomerDetails,
+  setLoading,
   setOnboardingStages,
 } from "@/lib/store/slice/onBoardingSlice";
 import { setUser } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User, UserSchema } from "../FormTypes";
-import { supabaseSignOut } from "@/lib/supabaseAuth";
-import { setLoading } from "@/lib/store/slice/onBoardingSlice";
-import { useRouter } from "next/navigation";
-import { userLogout } from "@/lib/store/actions";
+
 export const useCustomerProfile = () => {
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -33,12 +31,7 @@ export const useCustomerProfile = () => {
   const formMethods = useForm<User>({
     resolver: zodResolver(UserSchema),
   });
-  const {
-    
-    handleSubmit,
-    
-    
-  } = formMethods;
+  const {handleSubmit} = formMethods;
 
   const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (
     formData
@@ -73,7 +66,7 @@ export const useCustomerProfile = () => {
   };
 
   const user = data?.user;
-
+//update userslice with user details
   useEffect(() => {
     if (user) {
       dispatch(
@@ -87,6 +80,8 @@ export const useCustomerProfile = () => {
           onboard: user.onboard,
         })
       );
+
+      //update onboarding stage
       if (path.startsWith("/onboarding")) {
         dispatch(
           setOnboardingStages({
@@ -104,12 +99,8 @@ export const useCustomerProfile = () => {
     dispatch(setLoading(false));
   }
 
-  //log user out
-  const handleSignOut = () => {
-    supabaseSignOut();
-    dispatch(userLogout());
-    router.push("/");
-  };
+  
+  
 
   return {
     formMethods,
@@ -124,6 +115,5 @@ export const useCustomerProfile = () => {
     isLoading,
     isSuccess,
     error,
-    handleSignOut,
   };
 };

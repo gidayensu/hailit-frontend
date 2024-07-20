@@ -1,57 +1,45 @@
-import { userLogout } from "@/lib/store/actions";
+import { useLogout } from "@/components/Shared/hooks/useLogout";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useAppSelector } from "@/lib/store/hooks";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { IoIosHelpCircle, IoIosHelpCircleOutline } from "react-icons/io";
 import {
-  IoLogOut,
-  IoLogOutOutline,
   IoDocumentText,
   IoDocumentTextOutline,
+  IoLogOut,
+  IoLogOutOutline,
   IoShareSocial,
   IoShareSocialOutline,
 } from "react-icons/io5";
 import {
-  MdSportsMotorsports,
-  MdOutlineSportsMotorsports,
   MdFeedback,
-  MdOutlineFeedback,
+  MdOutlineFeedback
 } from "react-icons/md";
-import { PiUserCircleFill, PiUserCircle } from "react-icons/pi";
+import { PiUserCircle, PiUserCircleFill } from "react-icons/pi";
 import {
   RiFileListFill,
-  RiFileListLine,
-  RiLockPasswordFill,
-  RiLockPasswordLine,
+  RiFileListLine
 } from "react-icons/ri";
 import MiddleSectionContainer from "../../Shared/MiddleSectionContainer";
 import TopSectionContainer from "../../Shared/TopSectionContainer";
-import ChangePassword from "../Settings/ChangePassword";
 import CustomerHelp from "../Settings/CustomerHelp";
 import Feedback from "../Settings/Feedback";
 import PrivacyPolicy from "../Settings/PrivacyPolicy";
+import ShareHailit from "../Settings/ShareHailit";
 import { ProfileDialog } from "./ProfileDialog";
 import { ProfileNonDialogItem } from "./ProfileNonDialog";
-import ShareHailit from "../Settings/ShareHailit";
-import { setAuthState } from "@/lib/store/slice/authSlice";
-import { logUserOut } from "@/lib/store/slice/userSlice";
-import { supabaseSignOut } from "@/lib/supabaseAuth";
-import { useAppSelector, useAppDispatch } from "@/lib/store/hooks";
-import { usePathname } from "next/navigation";
-
 
 
 export default function ProfilePageDetails() {
   const path = usePathname();
-  const dispatch = useAppDispatch();
+  
   const { first_name, email, last_name } = useAppSelector(
     (state) => state.user
   );
 
   //signOut
-  const handleSignOut = () => {
-    dispatch(userLogout());
-    supabaseSignOut();
-  };
+  const {handleLogOut} = useLogout();
 
   const iconsAndTextMainContainerClass =
     "flex flex-col gap-2 md:w-96 md:text-3xl";
@@ -126,7 +114,7 @@ export default function ProfilePageDetails() {
             IconFill={IoLogOut}
             IconOutline={IoLogOutOutline}
           >
-            <p onClick={handleSignOut} className="text-sm">
+            <p onClick={handleLogOut} className="text-sm">
               Sign out
             </p>
           </ProfileNonDialogItem>
