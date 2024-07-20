@@ -17,6 +17,7 @@ import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
+import { Trip } from "@/lib/store/slice/tripSlice";
 
 export function AllTripsTable() {
   
@@ -53,7 +54,7 @@ export function AllTripsTable() {
 
           {error && <div> Error Occurred </div>}
           {data && tripsData &&
-            tripsData.map((trip: any) => (
+            tripsData.map((trip: TripsWithUser) => (
               <>
               { tripLoading && selectedTripId === trip.trip_id &&
 
@@ -137,3 +138,8 @@ const tableHeadings = [
   "Delivery Status",
   "View"
 ];
+
+export interface TripsWithUser extends Trip {
+  first_name: string;
+  last_name: string;
+}
