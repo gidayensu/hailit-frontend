@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DashboardTableItemLoader from "../../DashboardTableItemLoader";
 
+
 export function AllDrivers() {
     const {data:driversData, isLoading:loadingDrivers, error:errorDrivers} = useGetAllDriversQuery(`drivers`);
     const drivers = driversData?.drivers;
@@ -54,7 +55,7 @@ export function AllDrivers() {
             <TableBody>
               {loadingDrivers && <SkeletonTable rows={7} cells={8} />}
               {driversData &&
-                drivers.map((driver: any) => (
+                drivers.map((driver: Driver) => (
                   <>
                     {driverLoading && selectedDriverId === driver.driver_id && (
                       <DashboardTableItemLoader />
@@ -116,3 +117,20 @@ export function AllDrivers() {
     "Available"  
   ];
   
+
+  export interface Driver {
+    rating_count: number;
+    cumulative_rating: number;
+    user_id: string;
+    user_role: "Driver";
+    driver_id: string;
+    license_number?: string;
+    available?: boolean;
+    vehicle_id?: string;
+    first_name: string;
+    last_name: string;
+    email?: string;
+    phone_number?: string;
+    vehicle_name? : string;
+    plate_number?: string;
+  }

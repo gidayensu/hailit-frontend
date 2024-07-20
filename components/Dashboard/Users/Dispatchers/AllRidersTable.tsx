@@ -50,7 +50,7 @@ export function AllRiders() {
         <TableHeader>
           <TableRow >
           {
-              tableHeadings.map((tableHeading, index)=>
+              tableHeadings.map((tableHeading)=>
                 <TableHead key={tableHeading}>{tableHeading}</TableHead>
               )
             }
@@ -59,7 +59,7 @@ export function AllRiders() {
         <TableBody>
           {isLoading && <SkeletonTable rows={5} cells={8} />}
           {data &&
-            riders.map((rider: any) => (
+            riders.map((rider: Rider) => (
               <>
                 {riderLoading && selectedRiderId === rider.rider_id && (
                       <DashboardTableItemLoader />
@@ -137,3 +137,19 @@ export const Rating = ({ rating }: {rating: number }) => {
 };
 
 
+export interface Rider {
+  rating_count: number;
+  cumulative_rating: number;
+  user_id: string;
+  user_role: "Rider";
+  rider_id: string;
+  license_number?: string;
+  available?: boolean;
+  vehicle_id?: string;
+  first_name: string;
+  last_name: string;
+  email?: string;
+  phone_number?: string;
+  vehicle_name? : string;
+  plate_number?: string;
+}

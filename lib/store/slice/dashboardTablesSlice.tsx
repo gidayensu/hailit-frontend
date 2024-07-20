@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-//HAVE TO DEFINE TYPES FOR TRIPS, RIDERS, ETC. TO USE THEM HERE
 
-import { Trip } from "./tripSlice";
+import { Driver } from "@/components/Dashboard/Users/Dispatchers/AllDriversTable";
+import { Rider } from "@/components/Dashboard/Users/Dispatchers/AllRidersTable";
+import { Trip, TripsWithUser } from "./tripSlice";
+import { User } from "./userSlice";
+import { Vehicle } from "@/components/Dashboard/Vehicles/hook/useGetVehicles";
+
 type Table = "overviewData" | "usersData" | "tripsData" | "vehiclesData" | "ridersData" | "driversData";
 
-interface DeleteData {
-    table: Table,
-    dataId: string
+interface DashboardTables {
+    overviewData: Trip[], 
+    usersData: User[], 
+    tripsData: TripsWithUser[],
+    ridersData: Rider[], 
+    driversData: Driver[], 
+    vehiclesData: Vehicle[]
 }
 
-interface SetData {
-    table: Table,
-    data: any,
-}
-export interface DashboardTables {
-    overviewData: Trip[], 
-    usersData: any, 
-    tripsData: Trip[],
-    ridersData: any, 
-    driversData: any, 
-    vehiclesData: any
+interface SetData<T extends Table> {
+    table: T;
+    data: DashboardTables[T];
 }
 
 export const initialState: DashboardTables = {
@@ -30,31 +30,20 @@ export const initialState: DashboardTables = {
     driversData: [],
     vehiclesData: [],
 }
+
 export const dashboardTablesSlice = createSlice({
     name: 'dashboard tables',
     initialState,
     reducers: {
-
-       
-        setTableData (state, action:PayloadAction<SetData>) {
-            const {table} = action.payload
-            const {data} = action.payload;
-            state[table] = data           
-            
+        setTableData<T extends Table>(state: DashboardTables, action: PayloadAction<SetData<T>>) {
+            const { table, data } = action.payload;
+            state[table] = data;
         },
-        
-
-        deleteFromData(state, action:PayloadAction<DeleteData>) {
-            const {table} = action.payload
-            const {dataId} = action.payload
-            state[table] = state[table].filter((item:any) => item.id !== dataId);
-        }
-        
-        
     }
-})
+});
 
 export const {
-
-  setTableData,
+    setTableData,
 } = dashboardTablesSlice.actions;
+
+
