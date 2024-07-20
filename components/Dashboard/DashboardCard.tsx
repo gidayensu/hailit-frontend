@@ -1,6 +1,6 @@
 
 import Container from "../ui/container"
-export default function DashboardCard ({title, subTitle, number, children}: {title: string, subTitle?: string, number: number, children?:React.ReactNode}) {
+export default function DashboardCard ({title, subTitle, totalNumber, children}: {title: string, subTitle?: string, totalNumber: number, children?:React.ReactNode}) {
     return (
         <Container className="flex flex-col gap-2 w-full md:w-1/4 h-28 rounded-xl p-4  justify-between ">
           <div className="flex justify-between">
@@ -12,7 +12,7 @@ export default function DashboardCard ({title, subTitle, number, children}: {tit
             </div>
           </div>
           <div className="flex flex-col ">
-            <h2 className="text-2xl font-bold">{number}</h2>
+            <h2 className="text-2xl font-bold">{totalNumber}</h2>
             {children}
           </div>
         </Container>

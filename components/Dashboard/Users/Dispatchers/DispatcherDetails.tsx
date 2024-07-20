@@ -81,28 +81,28 @@ export default function DispatcherDetails() {
                 {total_trip_count > 0 && (
                   <section className="flex flex-col  md:flex-row gap-2 items-center md:justify-between">
                     <DashboardCard
-                      number={dispatcherTrips?.total_earnings || 0}
+                      totalNumber={dispatcherTrips?.total_earnings || 0}
                       title="Total Earnings"
                       subTitle="All deliveries made"
                     />
                     <div className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
                       <DashboardCard
-                        number={dispatcherTrips?.total_trip_count || 0}
+                        totalNumber={dispatcherTrips?.total_trip_count || 0}
                         title="Assigned Orders"
                         subTitle="All deliveries made"
                       />
                       <DashboardCard
-                        number={dispatcherTrips?.delivered_trips || 0}
+                        totalNumber={dispatcherTrips?.delivered_trips || 0}
                         title="Delivered"
                         subTitle="Successful deliveries"
                       />
                       <DashboardCard
-                        number={dispatcherTrips?.current_trips || 0}
+                        totalNumber={dispatcherTrips?.current_trips || 0}
                         title="Current"
                         subTitle="Pending deliveries"
                       />
                       <DashboardCard
-                        number={dispatcherTrips?.cancelled_trips || 0}
+                        totalNumber={dispatcherTrips?.cancelled_trips || 0}
                         title="Cancelled"
                         subTitle="Cancelled trips"
                       />

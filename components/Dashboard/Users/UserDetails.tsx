@@ -36,22 +36,22 @@ export default function UserDetails() {
               {total_trip_count > 0 && (
                 <section className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
                   <DashboardCard
-                    number={userTrips?.total_trip_count || 0}
+                    totalNumber={userTrips?.total_trip_count || 0}
                     title="Orders"
                     subTitle="All deliveries made"
                   />
                   <DashboardCard
-                    number={userTrips?.delivered_trips || 0}
+                    totalNumber={userTrips?.delivered_trips || 0}
                     title="Delivered"
                     subTitle="Successful deliveries"
                   />
                   <DashboardCard
-                    number={userTrips?.current_trips || 0}
+                    totalNumber={userTrips?.current_trips || 0}
                     title="Current"
                     subTitle="Pending deliveries"
                   />
                   <DashboardCard
-                    number={userTrips?.cancelled_trips || 0}
+                    totalNumber={userTrips?.cancelled_trips || 0}
                     title="Cancelled"
                     subTitle="Cancelled trips"
                   />
