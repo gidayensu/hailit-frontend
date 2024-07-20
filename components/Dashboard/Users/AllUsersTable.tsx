@@ -8,19 +8,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-
-import { extractShortDate } from "@/lib/utils";
-import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
-import SkeletonTable from "../SkeletonTable";
-import Link from "next/link";
+import { User } from "./hooks/useGetAllUsers";
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import { Button } from "@/components/ui/button";
+import { extractShortDate } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import { MdOutlineSportsMotorsports } from "react-icons/md";
 import { RiSteering2Line } from "react-icons/ri";
-import { useGetAllUsers } from "./hooks/useGetAllUsers";
-import { useRouter } from "next/navigation";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
+import SkeletonTable from "../SkeletonTable";
+import { useGetAllUsers } from "./hooks/useGetAllUsers";
 
 export default function AllUsersTable() {
   
@@ -89,7 +88,7 @@ export default function AllUsersTable() {
         <TableHeader>
           <TableRow>
             {
-              tableHeadings.map((tableHead, index)=> 
+              tableHeadings.map((tableHead)=> 
                 <TableHead 
                   key={tableHead}
                   className={tableHead === "Onboard Status" || tableHead === "Trips" ? "flex items-center justify-center": ''}
@@ -106,7 +105,7 @@ export default function AllUsersTable() {
         <TableBody>
           {isLoading && <SkeletonTable rows={7} cells={8} />}
           {data && usersData?.length && usersData &&
-            usersData.map((user: any) => (
+            usersData.map((user: User) => (
               <>
               {userLoading && selectedUserId === user.user_id && (
                       <DashboardTableItemLoader />

@@ -33,8 +33,7 @@ export  const FormField:React.FC<FormFieldProps> = ({
     name,
     className,
     defaultValue,
-    calendar,
-    children,
+    
     value,
     disabled,
     ...props

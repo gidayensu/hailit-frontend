@@ -23,7 +23,7 @@ export default function RootLayout({
   const [dashMin, setDashMin] = useState<boolean>(false);
   const { user_id } = useAppSelector((state) => state.user);
 
-  const { data, isLoading, error } = useGetAdminQuery(user_id);
+  const { data,  } = useGetAdminQuery(user_id);
 
   const isAdmin = data?.admin;
 
@@ -72,7 +72,7 @@ export default function RootLayout({
         </article>
       </main>
       <DashboardBottomNav
-        activeSection={activeSection}
+        
         setActiveSection={handleActiveSection}
       />
     </>

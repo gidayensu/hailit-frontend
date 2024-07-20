@@ -12,10 +12,10 @@ import { RiFileListLine } from "react-icons/ri";
 import { TbLayoutDashboard, TbUser } from "react-icons/tb";
 
 export function DashboardBottomNav({
-  activeSection,
+  
   setActiveSection,
 }: {
-  activeSection: ActiveSection;
+  
   setActiveSection: (section: ActiveSection) => void;
 }) {
   return (

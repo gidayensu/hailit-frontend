@@ -72,7 +72,7 @@ export const tripSlice = createSlice({
         setPaymentStatus (state, action:PayloadAction<boolean>) {
           state.payment_status = action.payload
         },
-        clearTrip (state, action:PayloadAction<Trip>) {
+        clearTrip () {
           return initialState;
         }
         
@@ -133,6 +133,8 @@ export interface Dispatcher {
     drop_lat: string, 
     drop_long: string,
 
+    
+
 
   }
   
@@ -145,4 +147,9 @@ export interface Dispatcher {
     insurance_details?: string,
     road_worthy?: string,
     available?: boolean
+}
+
+export interface TripsWithUser extends Trip {
+  first_name: string,
+  last_name: string
 }
