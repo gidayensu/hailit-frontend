@@ -2,8 +2,7 @@
 import { PackageType, TripArea, TripMedium, TripStatus } from "@/components/Order/types/Types";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "./useGetAllUsers";
 import { useGetUser } from "./useGetUser";
 

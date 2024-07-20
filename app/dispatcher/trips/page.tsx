@@ -5,7 +5,7 @@ import OrderHistory from "@/components/Order/OrderHistory";
 import { redirect } from "next/navigation";
 
 export default function Dispatcher() {
-  const { user_role, trips } = useGetDispatcher();
+  const { user_role } = useGetDispatcher();
 
   if (user_role === "Customer" || user_role === "Admin" || !user_role) {
     redirect("/authentication");

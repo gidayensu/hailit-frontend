@@ -21,7 +21,7 @@ export function DashboardBottomNav({
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 top-auto z-50 flex justify-center items-center p-4 h-20 shadow-2xl gap-3 md:gap-5 w-full bg-white dark:bg-secondary-dark font-medium">
       <DashboardBottomNavElement
-        activeSection={activeSection}
+  
         navTitle="Orders"
         setActiveSection={setActiveSection}
         Icon={RiFileListLine}
@@ -29,7 +29,7 @@ export function DashboardBottomNav({
       />
 
       <DashboardBottomNavElement
-        activeSection={activeSection}
+  
         navTitle="Users"
         setActiveSection={setActiveSection}
         Icon={LuUsers}
@@ -37,7 +37,7 @@ export function DashboardBottomNav({
       />
 
       <DashboardBottomNavElement
-        activeSection={activeSection}
+  
         navTitle="Overview"
         setActiveSection={setActiveSection}
         Icon={TbLayoutDashboard}
@@ -45,7 +45,7 @@ export function DashboardBottomNav({
       />
 
       <DashboardBottomNavElement
-        activeSection={activeSection}
+  
         navTitle="Analytics"
         setActiveSection={setActiveSection}
         Icon={MdInsertChartOutlined}
@@ -53,7 +53,7 @@ export function DashboardBottomNav({
       />
 
       <DashboardBottomNavElement
-        activeSection={activeSection}
+  
         navTitle="Profile"
         setActiveSection={setActiveSection}
         Icon={TbUser}
@@ -74,7 +74,7 @@ const DashboardBottomNavElement = ({
 
   Icon: IconType;
   setActiveSection: (activeSection: ActiveSection) => void;
-  activeSection: ActiveSection;
+  
   url: string;
 }) => {
   const path = usePathname();
