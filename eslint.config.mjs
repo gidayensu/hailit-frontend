@@ -14,6 +14,7 @@ export default [
   {
     rules: {
       "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-explicit-any": "off", // Disable the rule for `any`
     },
   },
   {
@@ -23,7 +24,7 @@ export default [
       },
     },
   },
-  // Add the following override to disable `react/prop-types` for TypeScript files
+  // Disable `react/prop-types` for TypeScript files
   {
     files: ["**/*.ts", "**/*.tsx"],
     rules: {
