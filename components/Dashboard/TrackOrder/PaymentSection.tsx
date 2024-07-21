@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useDashboardTripUpdate } from "./StatusSection/hook/useDashboardTripUpdate";
-import { useGetTrip } from "./StatusSection/hook/useGetTrip";
+import { useDashboardTripUpdate } from "./StatusSection/hooks/useDashboardTripUpdate";
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 
 export default function PaymentSection() {
   const {handleTripUpdate} = useDashboardTripUpdate();

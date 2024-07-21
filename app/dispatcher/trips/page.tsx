@@ -1,5 +1,6 @@
 "use client";
-import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
+
 import TripsStats from "@/components/Dispatcher/TripsStats";
 import OrderHistory from "@/components/Order/OrderHistory";
 import { redirect } from "next/navigation";

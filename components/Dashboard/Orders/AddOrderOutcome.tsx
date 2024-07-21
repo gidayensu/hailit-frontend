@@ -8,7 +8,7 @@ import { MdContentCopy } from "react-icons/md";
 //main components
 
 //next+redux+helper function +react
-import { useAddOrderOutcome } from "./hook/useAddOrderOutcome";
+import { useAddOrderOutcome } from "./hooks/useAddOrderOutcome";
 
 export default function AddOrderOutcome() {
   const {

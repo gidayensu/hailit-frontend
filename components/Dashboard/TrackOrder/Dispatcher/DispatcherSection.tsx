@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import Link from "next/link";
 import { LiaUserSlashSolid } from "react-icons/lia";
-import { useGetTrip } from "../StatusSection/hook/useGetTrip";
+import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
 import Drivers from "./AssignDrivers";
 import Riders from "./AssignRiders";
 

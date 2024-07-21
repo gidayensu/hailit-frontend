@@ -1,6 +1,6 @@
 import { IoMdCheckmark } from "react-icons/io";
-import { useDashboardTripUpdate } from "./hook/useDashboardTripUpdate";
-import { useGetTrip } from "./hook/useGetTrip";
+import { useDashboardTripUpdate } from "./hooks/useDashboardTripUpdate";
+import { useGetTrip } from "./hooks/useGetTrip";
 
 export default function StatusUpdate() {
   const {handleTripUpdate} = useDashboardTripUpdate();

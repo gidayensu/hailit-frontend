@@ -24,10 +24,12 @@ import {
 import { resetMapData } from "@/lib/store/slice/mapSlice";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export const useUpdateTrip = (trip: Trip) => {
   const params = useParams();
   const selectedTripId = params.trip_id;
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(setPackageType(trip?.package_type));
@@ -42,7 +44,7 @@ export const useUpdateTrip = (trip: Trip) => {
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const packageTypeRef = useRef<any>(null);
 
-  const [updateTrip, { data, isLoading, error }] = useUpdateTripMutation();
+  const [updateTrip, { data, isLoading,  }] = useUpdateTripMutation();
 
   const dispatch = useAppDispatch();
   const { trip_medium, trip_type, trip_area, package_type } = useAppSelector(
@@ -67,8 +69,8 @@ export const useUpdateTrip = (trip: Trip) => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
-    setError,
+    
+    
   } = formMethods;
 
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data) => {
@@ -113,6 +115,13 @@ export const useUpdateTrip = (trip: Trip) => {
     dispatch(resetDeliveryChoices());
     dispatch(resetMapData());
   }
+
+  //redirect
+  useEffect(() => {
+    if (!trip?.trip_id) {
+      router.push("/dashboard/track-order");
+    }
+  }, [trip, router]);
 
   return {
     formMethods,

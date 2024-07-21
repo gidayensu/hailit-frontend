@@ -1,6 +1,6 @@
 "use client";
 
-import { useSetTheme } from "../Dashboard/Nav/hook/useSetTheme";
+import { useSetTheme } from "../Dashboard/Nav/hooks/useSetTheme";
 
 import {
   MdDarkMode,

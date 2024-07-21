@@ -9,10 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { FaRegStar, FaStar } from 'react-icons/fa';
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../SkeletonTable";
-import { useGetVehicles, Vehicle } from "./hook/useGetVehicles";
+
+import { useGetVehicles, Vehicle } from "./hooks/useGetVehicles";
+
 
 export function Vehicles() {
     
@@ -36,7 +37,7 @@ export function Vehicles() {
         <TableHeader>
           <TableRow>
           {
-              tableHeadings.map((tableHeading, index)=>
+              tableHeadings.map((tableHeading, )=>
                 <TableHead key={tableHeading}>{tableHeading}</TableHead>
               )
             }
@@ -46,11 +47,11 @@ export function Vehicles() {
           {isLoading && <SkeletonTable rows={5} cells={8} />}
           {data &&
             vehicles.map((vehicle: Vehicle) => (
-              <TableRow key={vehicle.vehicle_id}>
+              <TableRow key={vehicle.vehicle_id} >
                 <TableCell>{vehicle.vehicle_name}</TableCell>
                 <TableCell>{vehicle.vehicle_type}</TableCell>
                 <TableCell>{vehicle.vehicle_model}</TableCell>
-                <TableCell>{vehicle.plate_number} </TableCell>                
+                <TableCell>{vehicle.plate_number}</TableCell>                
                 <TableCell> {vehicle.available ? (
                     <LuCheckCircle2 className="text-green-500 text-2xl" />
                     ) : (
@@ -76,30 +77,6 @@ const tableHeadings = [
   "Number Plate",
   "Available",
   "Actions"
-  
 ];
-
-
-const Rating = ({ rating }: {rating: number }) => {
-  const fullStars = Math.floor(rating);
-  const emptyStars = 5 - fullStars;
-
-  return (
-    <div className="flex gap-1 ">
-      {Array(fullStars)
-        .fill('full stars')
-        .map((_, index) => (
-          <FaStar key={index * Math.random()} className="text-amber-500"/>
-        ))}
-      
-      {Array(emptyStars)
-        .fill('empty stars')
-        .map((_, index) => (
-          <FaRegStar key={index * Math.random()} />
-        )) 
-        }
-    </div>
-  );
-};
 
 

@@ -1,5 +1,6 @@
 "use client";
-import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+
+import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
 import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
 
 import { redirect } from "next/navigation";

@@ -10,7 +10,7 @@ import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck
 import { FiArrowLeft } from "react-icons/fi";
 
 //hook
-import { useOnboarding } from "@/components/Onboarding/hook/useOnboarding";
+import { useOnboarding } from "@/components/Onboarding/hooks/useOnboarding";
 import {  useState } from "react";
 import ErrorComponent from "../Shared/ErrorComponent";
 

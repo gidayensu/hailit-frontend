@@ -3,7 +3,7 @@ import { reversePercentageDifference } from "@/lib/utils";
 import { RecentTripTable } from "./RecentTripTable";
 import StatsCard from "./StatsCard";
 import WeekLongTripsChart from "./WeekLongTripsChart";
-import { useTripsStats } from "./hook/useTripsStats";
+import { useTripsStats } from "./hooks/useTripsStats";
 export default function Overview() {
   const {currentMonthStats, isLoading, error, tripCounts, tripDays, weekError, weekLoading} = useTripsStats();
   const pendingPD = reversePercentageDifference(currentMonthStats?.pending_percentage_difference)

@@ -8,7 +8,7 @@ import DeleteModalCard from "./DeleteModalCard";
 //custom hooks + react + helpers + redux
 import { extractShortDate } from "@/lib/utils";
 import { useDeleteTrip } from "../hooks/useDeleteTrip";
-import { useGetTrip } from "./StatusSection/hook/useGetTrip";
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 //main components
 import { useEffect } from "react";
 import CustomerSection from "./CustomerSection";

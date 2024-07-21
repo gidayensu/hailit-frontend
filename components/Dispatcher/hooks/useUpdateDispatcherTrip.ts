@@ -1,7 +1,7 @@
 "use client";
 
 //hooks + helper function
-import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 
 //next +react+redux

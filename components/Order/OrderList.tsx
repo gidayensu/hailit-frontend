@@ -2,7 +2,7 @@ import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
 import { Button } from "../ui/button";
 import NoOrderHistory from "./NoOrderHistory";
 import OrderSummaryMin from "./OrderSummaryMin";
@@ -16,29 +16,18 @@ export default function OrderList({
   noDelivery: boolean;
   isDispatcher: boolean;
 }) {
+  const {nextPage, prevPage, currentTrips, tripsPerPage, currentPage,  indexOfLastTrip } = useClientTripsPagination({trips, tripsPerPage:5})
   
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const tripsPerPage = 5; 
+  
 
   const path = usePathname();
 
-  const indexOfLastTrip = currentPage * tripsPerPage;
-  const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
-  const currentTrips = trips.slice(indexOfFirstTrip, indexOfLastTrip);
+  
+  
+  
 
   
-  const nextPage = () => {
-    if (indexOfLastTrip < trips.length) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
   
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <div className="flex flex-col w-full mt-4 rounded-2xl items-center justify-center mb-4">

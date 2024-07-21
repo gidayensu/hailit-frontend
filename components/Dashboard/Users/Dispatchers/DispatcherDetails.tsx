@@ -1,15 +1,13 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MdArrowBack } from "react-icons/md";
+import { useState } from "react";
 import DashboardCard from "../../DashboardCard";
+import SkeletonTable from "../../SkeletonTable";
 import DispatcherCard from "./DispatcherCard";
+import DispatcherTripsTable from "./DispatcherTripsTable";
 import EditDispatcher from "./EditDispatcher";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-import SkeletonTable from "../../SkeletonTable";
-import { useState } from "react";
-import DispatcherTripsTable from "./DispatcherTripsTable";
 
 //DispatcherDetails accepts userRole (rider/driver) to show details based on the userRole
 

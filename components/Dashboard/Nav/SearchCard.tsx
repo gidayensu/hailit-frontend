@@ -43,7 +43,7 @@ const SearchCard = forwardRef<HTMLDivElement, SearchCardProps> (({trips, isLoadi
                         <p>{trip?.sender_number}</p>
                         <p>{trip?.trip_medium}</p>
                       </div>
-                      <span className={`h-5 flex items-center justify-center w-16 rounded-md border ${
+                      <span className={`h-5 flex items-center justify-center w-16 text-[12px] rounded-md border ${
                           trip?.trip_status === "Delivered"
                           ? "  bg-green-200  border-green-500 text-green-800"
                         : trip.trip_status === "Picked Up"

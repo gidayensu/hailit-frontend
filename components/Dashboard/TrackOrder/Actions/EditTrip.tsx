@@ -9,16 +9,16 @@ import FormField from "@/components/Form/FormField";
 import { FormProvider } from "react-hook-form";
 //main components
 import PackageTypes from "@/components/Order/NewDelivery/PackageTypes/PackageTypes";
-import TripAreaMediumAndType from "./TripAreaMediumAndType";
 import { useRouter } from "next/navigation";
+import TripAreaMediumAndType from "./TripAreaMediumAndType";
 //redux + next + react + helper
 import { CalendarField } from "@/components/Form/FormField";
 import { useAppSelector } from "@/lib/store/hooks";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
-import { useGetTrip } from "../StatusSection/hook/useGetTrip";
-import { useUpdateTrip } from "./hook/useUpdateTrip";
-import { useEffect } from "react";
+import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
+
+import { useUpdateTrip } from "./hooks/useUpdateTrip";
 
 export default function EditTrip() {
   const { trip } = useGetTrip();
@@ -32,13 +32,10 @@ export default function EditTrip() {
     updateLoading,
     register,
   } = useUpdateTrip(trip);
+  
   const router = useRouter();
 
-  useEffect(() => {
-    if (!trip?.trip_id) {
-      router.push("/dashboard/track-order");
-    }
-  }, [trip, router]);
+  
 
   const { dropOffLocationName, pickUpLocationName } = useAppSelector(
     (state) => state.map

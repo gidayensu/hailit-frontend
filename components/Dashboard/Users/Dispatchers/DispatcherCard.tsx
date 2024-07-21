@@ -58,15 +58,16 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
         </div>
 
         {/* Buttons for Edit or Delete */}
-        <div className="flex gap-2 mt-2">
-          <Button onClick={editDispatcher}> Edit {dispatcher?.user_role}</Button>
-
+        <div className="flex gap-2 mt-6 items-center">
+          <Button onClick={editDispatcher} variant={"empty"}
+                className="dark:text-slate-50    hover:text-primary-color dark:hover:text-primary-color "> Edit {dispatcher?.user_role} </Button>
+          <p>|</p>
           {/* Delete Modal */}
           <Modal
             dialogTriggerElement={
               <Button
                 variant={"empty"}
-                className="text-red-500 border border-red-500 hover:text-white hover:bg-red-500"
+                className="text-red-500  hover:text-red-700"
               >
                 Delete {dispatcher?.user_role}
               </Button>

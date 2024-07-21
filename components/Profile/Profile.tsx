@@ -1,6 +1,6 @@
 "use client";
 
-import { useProfile } from "@/components/Profile/hook/useProfile";
+import { useProfile } from "@/components/Profile/hooks/useProfile";
 import ProfilePageDetails from "@/components/Profile/OtherComponents/ProfilePageDetail";
 
 export default function Profile() {

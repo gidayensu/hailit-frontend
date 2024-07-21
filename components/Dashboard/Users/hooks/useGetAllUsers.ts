@@ -14,7 +14,6 @@ export interface User {
   last_name: string;
   email: string;
   phone_number: string;
-  // user_role had string type. Was probably done so to fix a bug. 
   user_role: UserRole; 
   onboard: boolean;
   date_updated: string;
@@ -29,8 +28,6 @@ export const useGetAllUsers = (page:number) => {
   const {selectedUserId} = useAppSelector(state=>state.dashboard)
   
   
-  // let endpoint = 'users';
-  // offset && limit ? endpoint = `users?limit=${limit}&offset=${offset}` : limit ? endpoint = `users?limit=${limit}` : ''
   const { data, isLoading, error } = useGetAllUsersQuery(`users?page=${page}`);
   
   
@@ -53,10 +50,6 @@ export const useGetAllUsers = (page:number) => {
     const handleRidersSection = ()=> {
       dispatch(setActiveSection("Riders"))
     }
-
-   
-  
-
 
     //set users data 
     useEffect(()=> {

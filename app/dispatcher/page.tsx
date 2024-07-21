@@ -1,6 +1,6 @@
 "use client";
 import DispatcherDetail from "@/components/Dispatcher/DispatcherDetail";
-import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
 import { redirect } from "next/navigation";
 
 export default function Dispatcher() {

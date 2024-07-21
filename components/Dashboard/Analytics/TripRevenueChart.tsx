@@ -1,5 +1,5 @@
 import * as Highcharts from "highcharts";
-import { useSetTheme } from "../Nav/hook/useSetTheme";
+import { useSetTheme } from "../Nav/hooks/useSetTheme";
 import ChartContainer from "./ChartContainer";
 import { useTripRevenue } from "./hooks/useTripRevenue";
 

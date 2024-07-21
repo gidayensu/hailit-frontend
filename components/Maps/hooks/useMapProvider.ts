@@ -1,6 +1,6 @@
 "use client";
 
-import { useSetTheme } from "@/components/Dashboard/Nav/hook/useSetTheme";
+import { useSetTheme } from "@/components/Dashboard/Nav/hooks/useSetTheme";
 
 export const useMapProvider = () => {
   const { theme, systemTheme } = useSetTheme();

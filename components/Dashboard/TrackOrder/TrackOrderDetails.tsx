@@ -5,7 +5,7 @@ import TrackOrderForm from "@/components/Form/TrackOrderForm";
 import BigLoader from "../../Shared/BigLoader";
 import EditTrip from "./Actions/EditTrip";
 //hook
-import { useGetTrip } from "./StatusSection/hook/useGetTrip";
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 import TripDetail from "./TripDetail";
 
 export default function  TrackOrder() {

@@ -2,7 +2,7 @@ import { StatsLoadingSkeleton } from "@/components/Order/skeletons/StatsLoadingS
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useRef } from "react";
-import { useSetTheme } from "../Nav/hook/useSetTheme";
+import { useSetTheme } from "../Nav/hooks/useSetTheme";
 
 // The wrapper exports only a default component that at the same time is a
 // namespace for the related Props interface (HighchartsReact.Props) and

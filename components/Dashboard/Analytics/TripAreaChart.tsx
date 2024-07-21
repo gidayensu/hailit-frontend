@@ -1,7 +1,6 @@
 import * as Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import { useRef } from "react";
-import { useSetTheme } from "../Nav/hook/useSetTheme";
+
+import { useSetTheme } from "../Nav/hooks/useSetTheme";
 import ChartContainer from "./ChartContainer";
 import { useTripAreaData } from "./hooks/useTripAreaData";
 
@@ -107,7 +106,7 @@ export default function TripAreaChart() {
       },
     },
   };
-  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  
 
   return <ChartContainer chartOptions={areaOption} loading={loading} />;
 }

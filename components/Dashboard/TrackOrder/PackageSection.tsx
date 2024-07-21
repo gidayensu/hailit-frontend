@@ -1,6 +1,6 @@
 import OrderSummary from "@/components/Order/OrderSummary";
 import Loader from "@/components/Shared/Loader";
-import { useGetTrip } from "./StatusSection/hook/useGetTrip";
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 
 export default function PackageSection () {
     const {trip, isLoading} = useGetTrip();

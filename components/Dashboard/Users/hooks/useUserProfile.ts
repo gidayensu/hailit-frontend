@@ -1,11 +1,11 @@
 'use client'
 import { PackageType, TripArea, TripMedium, TripStatus } from "@/components/Order/types/Types";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useState } from "react";
 import { User } from "./useGetAllUsers";
 import { useGetUser } from "./useGetUser";
-
+import { PaymentMethod } from "@/components/Order/types/Types";
 
 //useUserProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
@@ -23,7 +23,7 @@ export const useUserProfile = ()=> {
     });
 
     const customerTrips = userTrips?.customer_trips
-    const dispatch = useAppDispatch();
+    
 
     const {data, isLoading, error } = useGetUserTripsQuery(selectedUserId);
     
@@ -66,11 +66,11 @@ export interface UserTrip {
     pickup_location: string;
     drop_off_location: string;
     additional_information: string;
-    trip_request_date: string;
-    trip_completion_date: string;
+    trip_request_date: null | Date | string;
+    trip_completion_date: null | Date | string;
     trip_cost: string;
     payment_status: boolean;
-    payment_method: "Cash on Delivery" | "Mobile Money" | "Card" | string;
+    payment_method: PaymentMethod | '';
   }
   
 interface UserTrips {

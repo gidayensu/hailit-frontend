@@ -5,8 +5,10 @@ import { useAppSelector } from "@/lib/store/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchCard from "./SearchCard";
-import { useGetSearchResults } from "./hook/useGetSearchResults";
-import { useSetTheme } from "./hook/useSetTheme";
+
+import { useGetSearchResults } from "./hooks/useGetSearchResults";
+
+import { useSetTheme } from "./hooks/useSetTheme";
 
 export default function DashboardTopNav() {
   const {
