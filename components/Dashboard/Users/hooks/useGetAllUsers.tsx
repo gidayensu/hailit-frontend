@@ -7,7 +7,7 @@ import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboard
 import { usePrefetchData } from "../../hooks/usePrefetchData";
 import { UserRole } from "@/lib/store/slice/userSlice";
 
-type UserProps = "user_id" | "first_name" | "last_name" | "email" | "phone_number" | "user_role" | "onboard" | "date_updated" | "date_created" 
+
 export interface User {
   user_id: string;
   first_name: string;

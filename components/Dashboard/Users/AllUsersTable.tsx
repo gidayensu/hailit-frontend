@@ -105,7 +105,7 @@ export default function AllUsersTable() {
         <TableBody>
           {isLoading && <SkeletonTable rows={7} cells={8} />}
           {data && usersData?.length && usersData &&
-            usersData.map((user: User) => (
+            usersData.map(( user: User) => (
               <>
               {userLoading && selectedUserId === user.user_id && (
                       <DashboardTableItemLoader />
