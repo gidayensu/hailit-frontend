@@ -19,7 +19,7 @@ import { SignInForm, SignInSchema } from "@/components/Form/FormTypes";
 // supabase
 import { supabaseSignIn } from "@/lib/supabaseAuth";
 
-
+ 
 
 export const useLogin=()=> {
   const router = useRouter();
@@ -33,12 +33,12 @@ export const useLogin=()=> {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [loginDetail, setLoginDetail] = useState<string>('');
   
-  const googleSignIn:any = (OAuthUserId:string)=> getUser(OAuthUserId)
+  const googleSignIn = (OAuthUserId:string)=> getUser(OAuthUserId)
   // Form
   const formMethods = useForm<SignInForm>({
     resolver: zodResolver(SignInSchema)
   });
-  const { handleSubmit, setValue, formState: {errors}, setError } = formMethods;
+  const { handleSubmit,  } = formMethods;
 
 
   // sign in form submission

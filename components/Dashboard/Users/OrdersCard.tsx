@@ -2,10 +2,11 @@ import OrderSummaryMin from "@/components/Order/OrderSummaryMin";
 import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { extractDateWithDayFromDate } from "@/lib/utils";
-import { useGetUserTrips } from "../hooks/useGetUserTrips";
+import { useGetDashboardUserTrips } from "../hooks/useGetDashboardUserTrips";
 import { Trip } from "@/lib/store/slice/tripSlice";
+
 export default function OrdersCard({userId}:{userId:string}) {
-  const  {data, isLoading, } = useGetUserTrips(userId);
+  const  {data, isLoading, } = useGetDashboardUserTrips(userId);
   
   return (
     <>
