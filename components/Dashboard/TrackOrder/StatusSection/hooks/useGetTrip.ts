@@ -1,11 +1,6 @@
 "use client";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import {
-  setActiveSection,
-  setSelectedDriverId,
-  setSelectedRiderId,
-} from "@/lib/store/slice/dashboardSlice";
 import { setTrip } from "@/lib/store/slice/tripSlice";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +20,7 @@ export const useGetTrip = () => {
   const handleEditingOrder = () => {
     setEditingOrder(() => !editingOrder);
   };
+
 
   const { tripStage, tripStatus } = useAppSelector((state) => state.dashboard);
 
@@ -60,17 +56,7 @@ export const useGetTrip = () => {
     router.push(`/dashboard/track-order/${tripId}`);
   };
 
-  //handle view rider/driver assigned to trip
-  const handleViewDispatcher = () => {
-    if (trip?.trip_medium === "Motor") {
-      dispatch(setActiveSection("Riders"));
-      dispatch(setSelectedRiderId(dispatcher?.dispatcher_id));
-    } else {
-      dispatch(setActiveSection("Drivers"));
-      dispatch(setSelectedDriverId(dispatcher?.dispatcher_id));
-    }
-    router.push("/dashboard/dispatchers/dispatcher-details");
-  };
+  
 
   return {
     tripStage,
@@ -82,7 +68,7 @@ export const useGetTrip = () => {
     isLoading,
     selectedTripId,
     handleTrackTrip,
-    handleViewDispatcher,
+
     editingOrder,
     handleEditingOrder,
   };
