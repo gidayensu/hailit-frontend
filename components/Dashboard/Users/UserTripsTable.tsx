@@ -1,5 +1,7 @@
 "use client";
 import NoData from "@/components/Shared/NoData";
+import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import {
   Table,
@@ -9,21 +11,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
 import { UserTrip } from "./hooks/useUserProfile";
-import { Trip } from "@/lib/store/slice/tripSlice";
-import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
 export default function UserTripsTable({
   userTrips,
   error,
   isLoading,
 }: {
-  userTrips: Trip[];
+  userTrips: any;
   error: any;
   isLoading: boolean;
 }) {
