@@ -3,14 +3,16 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
 import BigLoader from "../Shared/BigLoader";
 import ErrorComponent from "../Shared/ErrorComponent";
-
+import { useRouter } from "next/navigation";
 const withAdminCheck = <Q extends {}>(
+  
   WrappedComponent: React.ComponentType<Q>
 ) => {
+  
   const WrapperComponent = (props: Q) => {
     const { user_id } = useAppSelector((state) => state.user);
     const { data, isLoading, error } = useGetAdminQuery(user_id);
-
+    const router = useRouter();
     const isAdmin = data?.admin;
 
     if (!isAdmin && !isLoading && !error) {
@@ -26,16 +28,12 @@ const withAdminCheck = <Q extends {}>(
       );
     }
     if (error) {
-      return (
-        <ErrorComponent
-          errorCode={500}
-          errorMessage="Server Error Occurred"
-          url="/"
-        />
-      ); // or Loading component or Unauthorized component
+      router.push('/authentication')
     }
+    if(isAdmin) {
 
-    return <WrappedComponent {...props} />;
+      return <WrappedComponent {...props} />;
+    }
   };
 
   return WrapperComponent;
