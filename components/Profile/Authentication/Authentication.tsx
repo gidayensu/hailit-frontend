@@ -64,7 +64,7 @@ export default function Authentication () {
             </>}
             
           </div>
-          <div className=" flex flex-col items-center justify-center max-w-[400px] w-full md:p-0">
+          <div className=" flex flex-col items-center justify-center max-w-[400px] w-5/6 md:p-0">
 {/* 
 
   LOGIN AS DIFFERENT USER TYPE
