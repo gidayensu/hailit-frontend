@@ -1,14 +1,5 @@
 'use client'
 //ui + icons
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { TabsContent } from "@/components/ui/tabs";
 import { FcGoogle } from "react-icons/fc";
 import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
@@ -19,11 +10,11 @@ import { Separator } from "../../ui/separator";
 import FormField from "@/components/Form/FormField";
 import { FormProvider } from "react-hook-form";
 
-import { useSignUp } from "./hooks/useSignUp";
-import Link from "next/link";
 import Container from "@/components/ui/container";
+import Link from "next/link";
+import { useSignUp } from "./hooks/useSignUp";
 
-export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
+export default function SignUp() {
   const {
     onSignUpSubmit,
     formMethods,
@@ -32,7 +23,6 @@ export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
     isLoading,
     googleSupabaseSignIn,
     demoSignUpDetail,
-    setDemoSignUpDetail,
     handleRandomSignUp
   } = useSignUp();
 
@@ -133,7 +123,7 @@ export default function SignUp({setSignUp} : {setSignUp?:()=>void}) {
           </Button>
           </Link>
         </div>
-        <span className="flex w-full text-sm mt-2"> <p>Have an account? </p> <p className="ml-2 font-semibold underline text-primary-color cursor-pointer hover:text-primary-shade" onClick={setSignUp}>  Login</p> </span>
+
       </Container>
     </div>
   );

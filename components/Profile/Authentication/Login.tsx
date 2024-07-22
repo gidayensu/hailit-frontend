@@ -1,12 +1,10 @@
 'use client'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { TabsContent } from "@/components/ui/tabs";
+import { googleSupabaseSignIn } from "@/lib/supabaseAuth";
 import { FcGoogle } from "react-icons/fc";
 import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
-import { googleSupabaseSignIn } from "@/lib/supabaseAuth";
 
 // next
 import Link from "next/link";
@@ -18,12 +16,12 @@ import FormField from "@/components/Form/FormField";
 import { FormProvider } from 'react-hook-form';
 
 
-import { useLogin } from "./hooks/useLogin";
 import Container from "@/components/ui/container";
+import { useLogin } from "./hooks/useLogin";
 // supabase
 
 
-export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
+export default function Login( ) {
   const  {handleSubmit, onSignInSubmit, dataFetchError, isLoading, formMethods, setLoginDetail, loginDetail } = useLogin();
     
   return (
@@ -130,16 +128,7 @@ export default function Login( {setSignUp} : {setSignUp?:()=>void}) {
                 Continue as Guest
               </Button>
             </Link>
-            <span className="flex w-full text-sm">
-              
-              <p>Don&apos;t have an account? </p>
-              <p
-                className="ml-2 font-semibold underline text-primary-color cursor-pointer hover:text-primary-shade"
-                onClick={setSignUp}
-              >
-                Register
-              </p>
-            </span>
+            
           </div>
         </Container>
       </div>
