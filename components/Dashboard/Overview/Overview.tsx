@@ -5,7 +5,7 @@ import StatsCard from "./StatsCard";
 import WeekLongTripsChart from "./WeekLongTripsChart";
 import { useTripsStats } from "./hooks/useTripsStats";
 export default function Overview() {
-  const {currentMonthStats, isLoading, error, tripCounts, tripDays, weekError, weekLoading} = useTripsStats();
+  const {currentMonthStats, isLoading, tripCounts, tripDays,  weekLoading} = useTripsStats();
   const pendingPD = reversePercentageDifference(currentMonthStats?.pending_percentage_difference)
   const cancelledPD = reversePercentageDifference(currentMonthStats?.cancelled_percentage_difference)
   
@@ -19,7 +19,7 @@ export default function Overview() {
           loading={isLoading}
           mainCount={currentMonthStats?.revenue_current_month || 0}
           percentageDifference={currentMonthStats?.revenue_percentage_difference || 0}
-          currency= {true}
+          
         />
         <div className="grid grid-cols-2 lg:flex  lg:flex-row  w-full gap-3">
 

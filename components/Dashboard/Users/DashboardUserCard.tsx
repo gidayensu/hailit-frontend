@@ -51,15 +51,15 @@ export default function DashboardUserCard ({selectedUser, editUser}: {selectedUs
         </div>
 
         {/* Buttons for Edit or Delete */}
-        <div className="flex gap-2 mt-2">
-          <Button onClick={editUser}> Edit {selectedUser?.user_role}</Button>
-
+        <div className="flex mt-6 items-center ">
+          <Button onClick={editUser} variant={'empty'} className="-mr-2 dark:text-slate-50    dark:hover:text-primary-color hover:text-primary-color"> Edit {selectedUser?.user_role} </Button>
+          <p>|</p>
           {/* Delete Modal */}
           <Modal
             dialogTriggerElement={
               <Button
                 variant={"empty"}
-                className="text-red-500 border border-red-500 hover:text-white hover:bg-red-500"
+                className="text-red-500  hover:text-red-700 -ml-2"
               >
                 Delete {selectedUser?.user_role}
               </Button>

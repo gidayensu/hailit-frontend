@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import Link from "next/link";
 import { LiaUserSlashSolid } from "react-icons/lia";
-import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
+import { useViewDispatcher } from "../StatusSection/hooks/useViewDispatcher";
 import Drivers from "./AssignDrivers";
 import Riders from "./AssignRiders";
-
 export const DEFAULT_DISPATCHER_ID = "ff-12-53";
 
 export default function DispatcherSection({
@@ -17,7 +16,8 @@ export default function DispatcherSection({
   dispatcher: Dispatcher;
   tripMedium: string;
 }) {
-  const { handleViewDispatcher } = useGetTrip();
+  const { handleViewDispatcher } = useViewDispatcher();
+
 
   return (
     <>
@@ -36,13 +36,12 @@ export default function DispatcherSection({
               variant={"empty"}
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
-              <>
                 <p>
                   {dispatcher.dispatcher_id === DEFAULT_DISPATCHER_ID
                     ? "Assign"
                     : "Change"}
                 </p>
-              </>
+              
             </Button>
           }
         >

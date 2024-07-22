@@ -86,13 +86,13 @@ export default function DispatcherDetails() {
                     <div className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
                       <DashboardCard
                         totalNumber={dispatcherTrips?.total_trip_count || 0}
-                        title="Assigned Orders"
+                        title="All Orders"
                         subTitle="All deliveries made"
                       />
                       <DashboardCard
                         totalNumber={dispatcherTrips?.delivered_trips || 0}
                         title="Delivered"
-                        subTitle="Successful deliveries"
+                        subTitle="Successful orders"
                       />
                       <DashboardCard
                         totalNumber={dispatcherTrips?.current_trips || 0}
@@ -114,9 +114,8 @@ export default function DispatcherDetails() {
                     </h2>
                   )}
 
-                  <Container className="rounded-xl flex justify-center items-center">
                     <DispatcherTripsTable  />
-                  </Container>
+                  
                 </section>
               </div>
             </main>

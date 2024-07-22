@@ -1,5 +1,5 @@
 "use client";
-import { useGetDispatcher } from "@/components/Dispatcher/hook/useGetDispatcher";
+import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
 import { MidSkeleton, TopSkeleton } from "@/components/Order/OrderSkeleton";
 import OrderSummary from "@/components/Order/OrderSummary";
 import OrderUpdates from "@/components/Order/OrderUpdates";
@@ -13,7 +13,7 @@ import Container from "@/components/ui/container";
 
 import { TripStatus, TripStage } from "../Order/types/Types";
 import { redirect } from "next/navigation";
-import { useUpdateDispatcherTrip } from "./hook/useUpdateDispatcherTrip";
+import { useUpdateDispatcherTrip } from "./hooks/useUpdateDispatcherTrip";
 
 export default function DispatcherTripDetail () {
     const {

@@ -7,7 +7,7 @@ export default function StatsCard({
   loading,
   mainCount,
   percentageDifference,
-  currency,
+  
   reversed,
 }: {
   title: string;
@@ -16,7 +16,7 @@ export default function StatsCard({
   mainCount: number;
   percentageDifference: number;
   reversed?: boolean;
-  currency?: boolean;
+  
 }) {
   return (
     <Container className="flex flex-col gap-2 w-full lg:w-1/4 h-32 rounded-xl p-4 justify-between items-start ">
@@ -26,7 +26,7 @@ export default function StatsCard({
             <h3 className="font-bold text-md "> {title}</h3>
           </span>
           <h3 className="text-[12px] text-slate-400 -mt-1">
-            {/* {subtitle} */}
+            {subtitle}
           </h3>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function StatsCard({
             >
               <p className="md:text-[12px] text-[10px] font-medium">
                 {reversed && percentageDifference > 1 ? "-" : ""}
-                {percentageDifference}% (last month)
+                {reversed ? -percentageDifference: percentageDifference }% (last month)
               </p>
               {percentageDifference > 1 ? (
                 <IoTrendingUp className="text-lg" />

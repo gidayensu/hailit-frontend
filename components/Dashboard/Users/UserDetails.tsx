@@ -1,5 +1,4 @@
 "use client";
-import Container from "@/components/ui/container";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DashboardCard from "../DashboardCard";
@@ -43,7 +42,7 @@ export default function UserDetails() {
                   <DashboardCard
                     totalNumber={userTrips?.delivered_trips || 0}
                     title="Delivered"
-                    subTitle="Successful deliveries"
+                    subTitle="Successful orders"
                   />
                   <DashboardCard
                     totalNumber={userTrips?.current_trips || 0}
@@ -64,9 +63,8 @@ export default function UserDetails() {
                   </h2>
                 )}
 
-                <Container className="rounded-xl flex justify-center items-center">
                   <NonDispatcherTripsTable />
-                </Container>
+                
               </section>
             </div>
           </main>

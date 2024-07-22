@@ -1,5 +1,6 @@
 "use client";
 import NoData from "@/components/Shared/NoData";
+import Container from "@/components/ui/container";
 import {
   Table,
   TableBody,
@@ -8,23 +9,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { Button } from "@/components/ui/button";
 import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
 import { UserTrip } from "./hooks/useUserProfile";
-
+import { Trip } from "@/lib/store/slice/tripSlice";
+import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
 export default function UserTripsTable({
   userTrips,
   error,
   isLoading,
 }: {
-  userTrips: UserTrip[];
+  userTrips: Trip[];
   error: any;
   isLoading: boolean;
 }) {
+  const {nextPage, prevPage, currentTrips, tripsPerPage, currentPage,  indexOfLastTrip } = useClientTripsPagination({trips: userTrips, tripsPerPage:5})
   const router = useRouter();
 
   const [tripLoading, setTripLoading] = useState<boolean>(false);
@@ -46,7 +49,10 @@ export default function UserTripsTable({
       </div>
     );
   }
+  //  <Container className="rounded-xl flex justify-center items-center">
   return (
+    <div className="flex flex-col w-full">
+    <Container className="w-full rounded-xl flex justify-center items-center flex-col">
     <Table>
       <TableHeader>
         <TableRow>
@@ -57,8 +63,8 @@ export default function UserTripsTable({
       </TableHeader>
       <TableBody>
         {isLoading && <SkeletonTable rows={6} cells={7} />}
-        {userTrips &&
-          userTrips.map((trip: UserTrip) => (
+        {currentTrips &&
+          currentTrips.map((trip: UserTrip) => (
             <>
               {tripLoading && selectedTripId === trip.trip_id && (
                 <DashboardTableItemLoader />
@@ -104,14 +110,14 @@ export default function UserTripsTable({
                   <div
                     className={`flex item-center justify-center border rounded-lg w-16  text-[11px] medium ${
                       trip.trip_status === "Delivered"
-                        ? "  bg-green-200  border-green-500 text-green-800"
+                        ? "bg-green-200  border-green-500 text-green-800"
                         : trip.trip_status === "Picked Up"
-                        ? "  bg-sky-200 border-sky-500 text-sky-800"
+                        ? "bg-sky-200 border-sky-500 text-sky-800"
                         : trip.trip_status === "In Transit"
-                        ? " bg-amber-200 border-amber-500 text-amber-800"
+                        ? "bg-amber-200 border-amber-500 text-amber-800"
                         : trip.trip_status === "Booked"
-                        ? " bg-slate-200 border-slate-500 text-slate-800"
-                        : " bg-red-200 text-red-800 border-red-500"
+                        ? "bg-slate-200 border-slate-500 text-slate-800"
+                        : "bg-red-200 text-red-800 border-red-500"
                     }`}
                   >
                     <p>{trip.trip_status}</p>
@@ -122,6 +128,32 @@ export default function UserTripsTable({
           ))}
       </TableBody>
     </Table>
+    </Container>
+    {userTrips?.length > tripsPerPage && (
+        <div className="w-full flex justify-end items-center gap-2 mt-4">
+            
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => prevPage()}
+              disabled={currentPage===1}
+            >
+              Previous
+            </Button>
+            <p>|</p>
+            <Button
+              variant={"empty"}
+              className="w-20 hover:text-primary-color"
+              onClick={() => nextPage()}
+              disabled={indexOfLastTrip >= userTrips?.length}
+            >
+              Next
+            </Button>
+          </div>
+        
+        
+      )}
+    </div>
   );
 }
 

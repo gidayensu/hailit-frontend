@@ -1,7 +1,7 @@
 import Container from "../ui/container";
 import { Separator } from "../ui/separator";
 import { useAppSelector } from "@/lib/store/hooks";
-import { useGetDispatcher } from "./hook/useGetDispatcher";
+import { useGetDispatcher } from "./hooks/useGetDispatcher";
 import Loader from "../Shared/Loader";
 
 export default function TripsStats() {

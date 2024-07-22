@@ -1,7 +1,7 @@
 "use client";
 //next + react + redux+custom hook
 
-import { useHome } from "@/components/Home/hook/useHome";
+import { useHome } from "./hooks/useHome";
 //main components
 import OtherActions from "@/components/Home/OtherActions";
 import QuickOrder from "@/components/Home/QuickOrder";

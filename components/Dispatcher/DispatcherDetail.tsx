@@ -4,7 +4,7 @@ import { DispatcherTrip } from "../Order/hooks/useGetUserTrips"
 import OrderSummary from "../Order/OrderSummary"
 import NoData from "../Shared/NoData"
 import Container from "../ui/container"
-import { useGetDispatcher } from "./hook/useGetDispatcher"
+import { useGetDispatcher } from "./hooks/useGetDispatcher"
 import TripsStats from "./TripsStats"
 
 export default function CourierDetail () {

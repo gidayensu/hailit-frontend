@@ -1,17 +1,16 @@
 "use client";
-import { GoCheck } from "react-icons/go";
-import { IoIosCheckmark } from "react-icons/io";
 import FormField from "@/components/Form/FormField";
-import MapModal from "@/components/Maps/MapModal";
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { UserRole } from "@/lib/store/slice/userSlice";
+import { useState } from "react";
 import { FormProvider } from "react-hook-form";
+import { GoCheck } from "react-icons/go";
+import DashboardModal from "../DashboardModal";
 import { useEditUser } from "./hooks/useEditUser";
 import { User } from "./hooks/useGetAllUsers";
-import DashboardModal from "../DashboardModal";
-import { useState } from "react";
-import { UserRole } from "@/lib/store/slice/userSlice";
+
 export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User, handleGoBack: ()=>void}) {
   
   const {
