@@ -1,9 +1,8 @@
 "use client";
 import {
-  useDeleteTripMutation,
   useGetDriverQuery,
   useGetRiderQuery,
-  useGetUserTripsQuery,
+  useGetUserTripsQuery
 } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
@@ -11,7 +10,6 @@ import {
   setDispatcherRole,
   setSelectedDriverId,
   setSelectedRiderId,
-  
 } from "@/lib/store/slice/dashboardSlice";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -32,21 +30,18 @@ export const useDispatcherProfile = () => {
   const handleSetDispatcherRole = (dispatcherRole: DispatcherRole) => {
     dispatch(setDispatcherRole(dispatcherRole));
   };
+  const {
+    data: riderData,
+    isLoading: riderLoading,
+    error: riderError,
+  } = useGetRiderQuery(selectedRiderId);
+  
   
   const {
     data: driverData,
     isLoading: driverLoading,
     error: driverError,
   } = useGetDriverQuery(selectedDriverId);
-  const {
-    data: riderData,
-    isLoading: riderLoading,
-    error: riderError,
-  } = useGetRiderQuery(selectedRiderId);
-  const [
-    deleteTrip,
-    { data: deleteData, error: deleteError, isLoading: deleteLoading },
-  ] = useDeleteTripMutation();
   
   //dispathcerId is the id of the dispatcher in the rider/driver table
   const dispatcherId =
@@ -137,25 +132,13 @@ export const useDispatcherProfile = () => {
       : dispatch(setSelectedRiderId(""));
   }, [dispatch, setSelectedDriverId, setSelectedRiderId]);
 
-  const handleDeleteTrip = (tripId: string) => {
-    deleteTrip(tripId);
-    const trips = dispatcherTrips.dispatcher_trips.filter(
-      (trip) => trip.trip_id !== tripId
-    );
-    deleteData
-      ? setDispatcherTrips((prevTrips) => ({
-          ...prevTrips,
-          dispatcher_trips: trips,
-        }))
-      : deleteError;
-  };
 
   return {
     dispatcherRole,
     dispatcherTrips,
-    handleDeleteTrip,
+    
     error,
-    deleteError,
+    
     dispatcherUserId,
     handleTrackTrip,
     selectedDispatcher,

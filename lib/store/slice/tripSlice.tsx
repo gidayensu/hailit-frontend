@@ -1,4 +1,5 @@
-import { PackageType, TripArea, TripMedium, TripStage, TripStatus, TripType } from "@/components/Order/types/Types";
+import { UserTrip } from "@/components/Dashboard/Users/hooks/useUserProfile";
+import { TripStage, TripType } from "@/components/Order/types/Types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type DispatcherRole = "Rider" | "Driver"
 const initialState:Trip = {
@@ -101,32 +102,17 @@ export interface Dispatcher {
     vehicle?: Vehicle
   }
   
-  export interface Trip {
+  export interface Trip extends UserTrip {
     trip_stage: TripStage;
-    trip_request_date: null | Date | string;
-    trip_commencement_date: null | Date | string;
-    trip_completion_date: null | Date | string;
-    trip_cost: string;
-    payment_status: boolean;
+    trip_commencement_date: null | Date | string;   
     dispatcher_rating: null | number;
     rated: boolean;
-    package_value: string;
     rating_comment: string;
-    recipient_number: string;
     trip_type: TripType;
     trip_id: string;
-    payment_method: string;
     promo_code: string;
     dispatcher_id: string;
     customer_id: string;
-    trip_medium: TripMedium;
-    trip_status: TripStatus;
-    package_type: PackageType;
-    pickup_location: string;
-    drop_off_location: string;
-    additional_information: string;
-    sender_number: string;
-    trip_area: TripArea;
     dispatcher: Dispatcher;
     pick_lat: string,
     pick_long: string,
