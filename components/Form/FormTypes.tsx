@@ -1,7 +1,6 @@
 import { z, ZodType } from 'zod';
 import { zPhone } from '../../lib/phoneValidation';
 
-
 export const NewOrderSchema: ZodType<OrderDetails> = z.object({
   pickup_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
   drop_off_location: z.string().min(2, { message: "Required and must be 2 or more letters" }), 
@@ -44,6 +43,14 @@ export const UserSchema: ZodType<User> = z.object({
   license_number: z.string().min(5, {message: "License number should be five letters or more"}).nullable().optional()
 })
 
+export const VehicleSchema: ZodType<Vehicle> = z.object({
+  vehicle_name: z.string().min(6,{message: "Vehicle name required "}), 
+  vehicle_model: z.string().min(5,{message: "Vehicle Model required"}), 
+  plate_number: z.string().min(5,{message: "Plate number required"}), 
+  insurance_details: z.string().min(5,{message: "Insurance details required"}), 
+  
+})
+
 export const SignInSchema: ZodType<SignInForm> = z.object({
   email: z.string().email({message: "Invalid email address"}),
   password: z.string().min(1, {message: "Enter password"})
@@ -80,6 +87,14 @@ export interface User {
   email?: string, 
   phone_number: string,
   license_number?: string | null | undefined
+}
+export interface Vehicle {
+  vehicle_name: string, 
+    vehicle_model: string, 
+    plate_number: string,
+    
+    insurance_details: string,
+    
 }
 
 export interface OrderDetails {
@@ -123,6 +138,11 @@ export type ValidFieldNames =
 | "calendar_schedule"
 | "confirm_password"
 | "schedule_date"
+| "vehicle_name"
+| "plate_number"
+| "vehicle_type"
+| "vehicle_model"
+| "insurance_details"
 
 export type FormFieldProps = {
     type?: string;

@@ -2,6 +2,7 @@ import ModalCard from "@/components/Shared/ModalCard";
 import { MdOutlineError } from "react-icons/md";
 import { PiCheckCircleFill } from "react-icons/pi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+
 export default function DeleteModalCard({
   itemId,
   item,
@@ -32,9 +33,9 @@ export default function DeleteModalCard({
               <RiDeleteBin6Line className="text-red-500 text-2xl" />
             </span>
             <h2 className="text-center text-lg mb-2 animate-in slide-in-from-bottom duration-100">
-              Permanently delete <b>{itemId} </b> ?
+              Permanently delete <br/>  <b> {item}: {itemId} </b> ?
             </h2>
-            <h3 className="text-center text-sm  text-red-500 animate-in slide-in-from-bottom duration-150">
+            <h3 className="text-center text-md font-bold text-red-500 animate-in slide-in-from-bottom duration-150">
               This is irreversible!
             </h3>
           </>

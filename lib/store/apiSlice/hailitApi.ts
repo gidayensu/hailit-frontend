@@ -5,23 +5,36 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // API endpoint for fetching data
 export const hailitApi = createApi({
-  
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
     // baseUrl: `http://localhost:4000/api/v1/`,
     baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
     prepareHeaders: async (headers) => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (session) {
         const accessToken = session.access_token;
-        headers.set("authorization", `Bearer ${accessToken}`)
-        
+        headers.set("authorization", `Bearer ${accessToken}`);
       }
 
       return headers;
     },
   }),
-  tagTypes: ['Trip', 'Trips', 'User Trips', 'Current Month Trip Counts', 'User', 'Users', 'All Riders', 'Rider', 'Driver', 'All Drivers'],
+  tagTypes: [
+    "Trip",
+    "Trips",
+    "User Trips",
+    "Current Month Trip Counts",
+    "User",
+    "Users",
+    "All Riders",
+    "Rider",
+    "Driver",
+    "All Drivers",
+    "Vehicle",
+    "All Vehicles"
+  ],
   endpoints: (builder) => ({
     // TRIPS
     getAllTrips: builder.query<any, string | string[]>({
@@ -29,21 +42,21 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
-      providesTags: ['Trips']
+      providesTags: ["Trips"],
     }),
     getTrip: builder.query<any, string | string[]>({
       query: (trip_id) => ({
         url: `trips/user-trip/${trip_id}`,
         method: "GET",
       }),
-      providesTags: ['Trip']
+      providesTags: ["Trip"],
     }),
     getUserTrips: builder.query<any, string | string[]>({
       query: (userId) => ({
         url: `trips/user-trips/${userId}`,
         method: "GET",
       }),
-      providesTags: ['User Trips']
+      providesTags: ["User Trips"],
     }),
     addTrip: builder.mutation<any, any>({
       query: (tripDetails) => ({
@@ -51,16 +64,21 @@ export const hailitApi = createApi({
         method: "POST",
         body: tripDetails,
       }),
-      invalidatesTags: ['Trip', 'User Trips', 'Current Month Trip Counts'],
+      invalidatesTags: ["Trip", "User Trips", "Current Month Trip Counts"],
     }),
 
     updateTrip: builder.mutation<any, any>({
-      query: ({ trip_id, tripDetails  }) => ({
+      query: ({ trip_id, tripDetails }) => ({
         url: `trips/user-trip/${trip_id}`,
         method: "PUT",
         body: tripDetails,
       }),
-      invalidatesTags: ['Trip', 'User Trips', 'Trips', 'Current Month Trip Counts']
+      invalidatesTags: [
+        "Trip",
+        "User Trips",
+        "Trips",
+        "Current Month Trip Counts",
+      ],
     }),
     rateTrip: builder.query<any, string | string[]>({
       query: (trip_id) => ({
@@ -74,14 +92,19 @@ export const hailitApi = createApi({
         url: `trips/user-trip/${trip_id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Trip', 'User Trips', 'Trips', 'Current Month Trip Counts']
+      invalidatesTags: [
+        "Trip",
+        "User Trips",
+        "Trips",
+        "Current Month Trip Counts",
+      ],
     }),
     getCurrentMonthTripCounts: builder.query({
       query: () => ({
         url: `trips/current-month-trip-count`,
         method: "GET",
       }),
-      providesTags: ['Current Month Trip Counts']
+      providesTags: ["Current Month Trip Counts"],
     }),
     getTripMonths: builder.query<any, string | string[]>({
       query: () => ({
@@ -94,30 +117,28 @@ export const hailitApi = createApi({
         url: `trips/current-week-trip-count`,
         method: "GET",
       }),
-      providesTags: ['Trip',]
+      providesTags: ["Trip"],
     }),
     getTripCountsByMonth: builder.query<any, string | string[]>({
       query: (endpoint) => ({
         url: `trips/trip-count-by-month?${endpoint}`,
         method: "GET",
       }),
-      providesTags: ['Trip',]
+      providesTags: ["Trip"],
     }),
     getTripRevenueByMonth: builder.query<any, string | string[]>({
       query: () => ({
         url: `trips/trips-revenue`,
         method: "GET",
       }),
-      providesTags: ['Trip',]
+      providesTags: ["Trip"],
     }),
     searchTrips: builder.query<any, string | string[]>({
-      query: (searchQuery)=> ({
+      query: (searchQuery) => ({
         url: `trips/search-trips?search=${searchQuery}`,
         method: "GET",
-      })
+      }),
     }),
-
-
 
     // USERS
     getAllUsers: builder.query<any, string | string[]>({
@@ -125,7 +146,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
-      providesTags: ['Users']
+      providesTags: ["Users"],
     }),
 
     getAdmin: builder.query<any, string | string[] | any>({
@@ -139,7 +160,7 @@ export const hailitApi = createApi({
         url: `users/${userId}`,
         method: "GET",
       }),
-      providesTags: ['User']
+      providesTags: ["User"],
     }),
 
     addUser: builder.query<any, any>({
@@ -156,8 +177,8 @@ export const hailitApi = createApi({
         method: "PUT",
         body: userDetails,
       }),
-      
-      invalidatesTags: ['Users', 'User',  ]
+
+      invalidatesTags: ["Users", "User"],
     }),
 
     deleteUser: builder.mutation<any, any>({
@@ -165,7 +186,7 @@ export const hailitApi = createApi({
         url: `users/${userId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['User', 'Users']
+      invalidatesTags: ["User", "Users"],
     }),
 
     //DRIVERS
@@ -174,7 +195,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
-      providesTags: ['All Drivers']
+      providesTags: ["All Drivers"],
     }),
 
     getDriver: builder.query<any, string | string[]>({
@@ -182,7 +203,7 @@ export const hailitApi = createApi({
         url: `drivers/${driverId}`,
         method: "GET",
       }),
-      providesTags: ['Driver']
+      providesTags: ["Driver"],
     }),
 
     updateDriver: builder.mutation<any, any>({
@@ -191,15 +212,15 @@ export const hailitApi = createApi({
         method: "PUT",
         body: driverDetails,
       }),
-      invalidatesTags: ['Driver', 'All Drivers']
+      invalidatesTags: ["Driver", "All Drivers"],
     }),
 
     deleteDriver: builder.mutation<any, any>({
-      query: (driverId ) => ({
+      query: (driverId) => ({
         url: `drivers/${driverId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Driver', 'All Drivers']
+      invalidatesTags: ["Driver", "All Drivers"],
     }),
     // RIDERS
     getAllRiders: builder.query<any, string | string[]>({
@@ -207,7 +228,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
-      providesTags: ['All Riders']
+      providesTags: ["All Riders"],
     }),
 
     getRider: builder.query<any, string | string[]>({
@@ -215,7 +236,7 @@ export const hailitApi = createApi({
         url: `riders/${riderId}`,
         method: "GET",
       }),
-      providesTags: ['Rider']
+      providesTags: ["Rider"],
     }),
 
     updateRider: builder.mutation<any, any>({
@@ -224,15 +245,15 @@ export const hailitApi = createApi({
         method: "PUT",
         body: riderDetails,
       }),
-      invalidatesTags: ['Rider', 'All Riders']
+      invalidatesTags: ["Rider", "All Riders"],
     }),
 
     deleteRider: builder.mutation<any, any>({
-      query: (riderId ) => ({
+      query: (riderId) => ({
         url: `riders/${riderId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Rider', 'All Riders']
+      invalidatesTags: ["Rider", "All Riders"],
     }),
 
     //VEHICLES
@@ -241,6 +262,7 @@ export const hailitApi = createApi({
         url: `${endpoint}`,
         method: "GET",
       }),
+      providesTags: ['All Vehicles']
     }),
 
     getVehicle: builder.query<any, string | string[]>({
@@ -248,29 +270,33 @@ export const hailitApi = createApi({
         url: `vehicles/${vehicleId}`,
         method: "GET",
       }),
+      providesTags: ['Vehicle']
     }),
 
-    addVehicle: builder.query<any, any>({
+    addVehicle: builder.mutation<any, any>({
       query: (vehicleDetails) => ({
         url: `vehicles/add`,
         method: "POST",
         body: vehicleDetails,
       }),
+      invalidatesTags: ['Vehicle', 'All Vehicles'  ]
     }),
 
-    updateVehicle: builder.query<any, any>({
+    updateVehicle: builder.mutation<any, any>({
       query: ({ vehicleId, vehicleDetails }) => ({
         url: `vehicles/${vehicleId}`,
         method: "PUT",
         body: vehicleDetails,
       }),
+      invalidatesTags: ['Vehicle', 'All Vehicles'  ]
     }),
 
-    deleteVehicle: builder.query<any, any>({
-      query: ({ vehicleId }) => ({
-        url: `${vehicleId}`,
+    deleteVehicle: builder.mutation<any, any>({
+      query: (vehicleId ) => ({
+        url: `vehicles/${vehicleId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ['Vehicle', 'All Vehicles'  ]
     }),
   }),
 });
@@ -326,9 +352,10 @@ export const {
   //VEHICLES
   useGetAllVehiclesQuery,
   useGetVehicleQuery,
-  useLazyAddVehicleQuery,
-  useLazyUpdateVehicleQuery, 
-  useLazyDeleteVehicleQuery,
+  useAddVehicleMutation,
+  useUpdateVehicleMutation,
+  useDeleteVehicleMutation
+  
   
 } = hailitApi;
 

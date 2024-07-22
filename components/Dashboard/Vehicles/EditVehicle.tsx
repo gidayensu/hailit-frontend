@@ -7,10 +7,11 @@ import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
 import DashboardModal from "@/components/Dashboard/DashboardModal";
-import { Vehicles } from "@/app/playground/page";
-import { useEditVehicle, VehicleType } from "../../../../components/Dashboard/Vehicles/hooks/useEditVehicle";
+import { VehicleType } from "./hooks/useGetVehicles";
+import { Vehicle } from "./hooks/useGetVehicles";
+import { useEditVehicle,  } from "./hooks/useEditVehicle";
 
-export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, handleGoBack: ()=>void}) {
+export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, handleGoBack: ()=>void}) {
   
   const {
     formMethods,
@@ -52,7 +53,7 @@ export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, hand
               placeholder="Vehicle Name"
               className="h-14 "
               name="vehicle_name"
-              defaultValue={""}
+              defaultValue={vehicle?.vehicle_name}
             />
           </div>
           <div className={inputAndLabeClass}>
@@ -62,11 +63,21 @@ export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, hand
               placeholder="Last Name"
               className="h-14"
               name="vehicle_model"
-              defaultValue={""}
+              defaultValue={vehicle.vehicle_model}
             />
           </div>
 
           
+          <div className={inputAndLabeClass}>
+            <h3 className={labelClass}>Insurance Number</h3>
+            <FormField
+              type="text"
+              placeholder="Plate Number"
+              className="h-14"
+              name="insurance_details"
+              defaultValue={vehicle?.insurance_details}
+            />
+          </div>
           <div className={inputAndLabeClass}>
             <h3 className={labelClass}>Plate Number</h3>
             <FormField
@@ -74,7 +85,7 @@ export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, hand
               placeholder="Plate Number"
               className="h-14"
               name="plate_number"
-              defaultValue={""}
+              defaultValue={vehicle?.plate_number}
             />
           </div>
           <div className={`${inputAndLabeClass} relative`}>
@@ -89,17 +100,17 @@ export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, hand
               <div className="flex flex-col gap-2 items-start justify-start absolute max-w-sm w-40 border rounded-xl max-h-24 text-sm p-2 border-slate-400 dark:border-opacity-20 z-10 bg-white mt-1 dark:bg-primary-dark cursor-pointer ">
                 <SelectVehicleType
                   handleVehicleSelection={handleSelectingUserRole}
-                  option="Car"
+                  option="car"
                   vehicleType={vehicleType}
                 />
                 <SelectVehicleType
                   handleVehicleSelection={handleSelectingUserRole}
-                  option="Motor"
+                  option="motor"
                   vehicleType={vehicleType}
                 />
                 <SelectVehicleType
                   handleVehicleSelection={handleSelectingUserRole}
-                  option="Truck"
+                  option="truck"
                   vehicleType={vehicleType}
                 />
                 
@@ -143,7 +154,7 @@ export default function EditUser({vehicle, handleGoBack}:{vehicle:Vehicles, hand
         isSuccess={isSuccess}
         error={error}
         modalRef={modalRef}
-        info={error ? "User not updated" : "User details saved"}
+        info={error ? "Vehicle not updated" : "Vehicle details saved"}
       />
     </>
   );

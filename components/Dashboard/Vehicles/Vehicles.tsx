@@ -11,12 +11,12 @@ import {
 import { useState } from "react";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import SkeletonTable from "../SkeletonTable";
-
+import { useGetVehicle } from "./hooks/useGetVehicle";
 import { useGetVehicles, Vehicle } from "./hooks/useGetVehicles";
 
 
 export function Vehicles() {
-    
+    const {handleSelectVehicle} = useGetVehicle()
   const [page, setPage] = useState<number> (1);
     const {data, vehicles, error, isLoading, total_number_of_pages} = useGetVehicles(page)
 
@@ -46,19 +46,19 @@ export function Vehicles() {
         <TableBody>
           {isLoading && <SkeletonTable rows={5} cells={8} />}
           {data &&
-            vehicles.map((vehicle: Vehicle) => (
-              <TableRow key={vehicle.vehicle_id} >
-                <TableCell>{vehicle.vehicle_name}</TableCell>
-                <TableCell>{vehicle.vehicle_type}</TableCell>
-                <TableCell>{vehicle.vehicle_model}</TableCell>
-                <TableCell>{vehicle.plate_number}</TableCell>                
-                <TableCell> {vehicle.available ? (
+            vehicles?.map((vehicle: Vehicle) => (
+              <TableRow key={vehicle?.vehicle_id} onClick={()=>handleSelectVehicle(vehicle?.vehicle_id)}>
+                <TableCell>{vehicle?.vehicle_name}</TableCell>
+                <TableCell>{vehicle?.vehicle_type}</TableCell>
+                <TableCell>{vehicle?.vehicle_model}</TableCell>
+                <TableCell>{vehicle?.plate_number}</TableCell>                
+                <TableCell> {vehicle?.available ? (
                     <LuCheckCircle2 className="text-green-500 text-2xl" />
                     ) : (
                         <LuXCircle className="text-red-500 text-2xl" />
                         )}</TableCell>
                 <TableCell>
-                    {vehicle.plate_number} 
+                    {vehicle?.plate_number} 
                 </TableCell>
               </TableRow>
             ))}
