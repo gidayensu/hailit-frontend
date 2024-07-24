@@ -28,7 +28,7 @@ export async function fetchMapData(
         }
 
         const results = await response.json();
-        console.log({results})
+        
 
         resolve(results);
       } catch (error) {
@@ -85,19 +85,18 @@ export const extractTimeFromDate = (dateString: string | Date | null): string | 
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
 
-export const checkTimeOfDay = () => {
+export const workPeriod = () => {
   const currentHour = new Date().getHours();
 
 
-  const morningStart = 0;   
-  const morningEnd = 11;    
-   
+  const dayStarts = 8;   
+  const dayEnds = 18;    
+   return false;
 
-  if (currentHour >= morningStart && currentHour <= morningEnd) {
-    return "Morning";
-  }  else {
-    return "Evening"; 
-  }
+  if (currentHour < dayStarts || currentHour > dayEnds) {
+    return false;
+  } 
+  return true; 
 };
 
 
@@ -145,7 +144,7 @@ export const scrollToSection = (sectionRef:React.RefObject<any>) => {
 
 
 export function splitLocationData(item:string) {
-  let parts = item.split(", ");
+  const parts = item.split(", ");
   return [parts[0] + ", " + parts[1], parts[parts.length - 1]];
 }
 

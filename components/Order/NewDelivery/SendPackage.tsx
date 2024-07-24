@@ -3,10 +3,10 @@
 import Loader from "../../Shared/Loader";
 import { Button } from "../../ui/button";
 //main components
+import SecondaryModal from "@/components/Shared/SecondaryModal";
 import DeliveryDayChoice from "./DeliveryChoices/DeliveryDayChoice";
 import DeliveryMediumChoice from "./DeliveryChoices/DeliveryMediumChoice";
 import PackageDestinationChoice from "./DeliveryChoices/PackageDestinationChoice";
-import SecondModal from "@/components/Shared/SecondaryModal";
 //redux + next + react + helper
 import { scrollToSection } from "@/lib/utils";
 import Link from "next/link";
@@ -26,14 +26,28 @@ export default function SendPackage() {
     destinationAreaRef,
     deliveryDayRef,
     closeSendPackageModal,
-    sendPackageModal
+    
+    sendPackageModalRef,
+
+    
   } = useSendPackage();
   
   
 
   return (
     <>
-    <SecondModal closeModal={closeSendPackageModal} modalRef={sendPackageModal} />
+    <SecondaryModal closeModal={closeSendPackageModal} note={true} modalRef={sendPackageModalRef} info={
+      <>
+      <p>
+          <b>Riders</b> and <b>Drivers</b> are not available at this time for pickup. <br/>
+          
+      </p>
+      <p className="mt-2">
+      Kindly <b className="dark:text-amber-300 ">schedule</b> your delivery and it will be picked up tomorrow. 
+      </p>
+      </>
+    }/>
+    
       <article
         ref={destinationAreaRef}
         

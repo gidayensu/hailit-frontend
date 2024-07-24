@@ -1,7 +1,9 @@
+'use client'
 import { useAppSelector } from "@/lib/store/hooks";
 import { scrollToSection } from "@/lib/utils";
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
+import { workPeriod } from "@/lib/utils"
 
 export const useSendPackage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -21,12 +23,12 @@ export const useSendPackage = () => {
   }
   const isEvening = true;
 
-  console.log({ sendPackageModal: sendPackageModalRef.current });
+  
   useEffect(() => {
-    if (isEvening) {
-      console.log({ isEvening }, "this is running");
+    if (!workPeriod()) {
+      
       if (sendPackageModalRef.current) {
-        console.log("THIS HAS RUN")
+        
         openSendPackageModal();
       }
     }
@@ -63,7 +65,22 @@ export const useSendPackage = () => {
       
         )
   }    
+  
 
-    return {handleLoading, handleMissingChoice, sendPackageModal, isLoading, closeSendPackageModal, trip_medium, trip_area, trip_type, deliveryMediumRef, destinationAreaRef, deliveryDayRef}
+    return {
+      handleLoading,
+      handleMissingChoice,
+      sendPackageModal,
+      isLoading,
+      closeSendPackageModal,
+      trip_medium,
+      trip_area,
+      trip_type,
+      deliveryMediumRef,
+      destinationAreaRef,
+      sendPackageModalRef,
+      deliveryDayRef,
+      isEvening
+    };
     
 }
