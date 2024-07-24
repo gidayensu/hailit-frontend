@@ -1,12 +1,11 @@
 //while shadcn's modal/dialog is mainly used, there are cases where auto-matic opening of the dialog is needed. This modal component is used in such situations.
 "use client";
-import { FiInfo } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { MdOutlineError } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
-
 import { LegacyRef } from "react";
+import { MdOutlineError } from "react-icons/md";
 import { PiCheckCircleFill } from "react-icons/pi";
+import { RxCross2 } from "react-icons/rx";
+import { TiWarning } from "react-icons/ti";
 
 export default function SecondaryModal({
   modalRef,  closeModal,
@@ -25,7 +24,7 @@ export default function SecondaryModal({
   return (
     <dialog
       ref={modalRef}
-      className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/4  rounded-2xl  max-h-96  p-4  backdrop:bg-secondary-dark backdrop:opacity-80 dark:bg-primary-dark"
+      className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/5  rounded-2xl  max-h-96  p-4  backdrop:bg-secondary-dark backdrop:opacity-80 dark:bg-primary-dark"
     >
       <div className="w-full flex items-end justify-end">
         <div
@@ -45,8 +44,8 @@ export default function SecondaryModal({
               </span>
             )}
             {note && (
-              <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-amber-200">
-                <FiInfo className="text-amber-600 text-2xl" />
+              <span className="mb-4 flex items-center justify-center  rounded-full">
+                <TiWarning className="text-amber-500 text-4xl" />
               </span>
             )}
             {error && (
@@ -55,9 +54,9 @@ export default function SecondaryModal({
               </span>
             )}
             <div className="">
-              <h2 className="text-center  text-sm mb-2 animate-in slide-in-from-bottom duration-100">
+              <p className="text-center  text-sm md:text-md mb-2 animate-in slide-in-from-bottom duration-100">
                 {info}
-              </h2>
+              </p>
 
               
             </div>
