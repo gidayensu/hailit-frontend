@@ -31,7 +31,7 @@ export const HomeOptions = ({
       )}
       {disabled &&
       
-      <div className="w-full bg-red-500 text-white h-6 flex items-center justify-center  text-sm">
+      <div className="w-full bg-red-500 text-white h-6 flex items-center justify-center  md:text-sm text-[12px]">
         <p>Not available</p>
       </div>
       }

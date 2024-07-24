@@ -11,9 +11,8 @@ import FormField from "@/components/Form/FormField";
 import { FormProvider } from "react-hook-form";
 
 import Container from "@/components/ui/container";
-import Link from "next/link";
+import GuestModal from "./GuestModal";
 import { useSignUp } from "./hooks/useSignUp";
-
 export default function SignUp() {
   const {
     onSignUpSubmit,
@@ -113,15 +112,7 @@ export default function SignUp() {
           >
             <FcGoogle className="text-2xl" /> Continue with Google
           </Button>
-          <Link href={'/order'} className="w-full">
-          <Button
-            variant="outline"
-            className="w-full border border-slate-300 h-12 flex gap-4"
-            
-          >
-            Continue as Guest
-          </Button>
-          </Link>
+          <GuestModal/>
         </div>
 
       </Container>
