@@ -5,7 +5,7 @@ import express from "../../public/images/express.png";
 import intercity from "../../public/images/intercity.png";
 import { HomeOptions } from "./HomeOptions";
 import { useHomeOrder } from "./hooks/useHomeOrder";
-
+import { workPeriod } from "@/lib/utils";
 export default function QuickOrder() {
   const {handleLoading, loading, selected} = useHomeOrder();
   return (
@@ -21,6 +21,7 @@ export default function QuickOrder() {
             handleLoading={handleLoading}
             selected={selected}
             loading={loading}
+            disabled = {!workPeriod()}
           />
           <HomeOptions
             image={intercity}

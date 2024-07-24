@@ -9,9 +9,10 @@ import TrackPackage from "@/components/Home/TrackPackage";
 import UserStats from "@/components/Home/UserStats";
 import SmallScreenTopNav from "@/components/Nav/SmallScreenTopNav";
 import OrderHistory from "@/components/Order/OrderHistory";
+import SecondaryModal from "../Shared/SecondaryModal";
 
 export default function Home() {
-  const { path } = useHome();
+  const { path, closeHomeModal, homeModalRef } = useHome();
 
   return (
     <>
@@ -21,6 +22,17 @@ export default function Home() {
         </div>
       )}
       <main className="flex flex-col items-center gap-3 justify-center bg-slate-50 dark:bg-primary-dark relative mb-20 ">
+        <SecondaryModal
+          closeModal={closeHomeModal}
+          modalRef={homeModalRef}
+          info={
+            <p>
+                Drivers and riders are <b> not available</b> at this time for <b>Express Delivery</b>
+            </p>
+            
+          }
+          note={true}
+        />
         <section className=" w-full flex items-center justify-center">
           <TrackPackage />
         </section>
