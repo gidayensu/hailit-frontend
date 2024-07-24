@@ -45,14 +45,15 @@ export const useMap = (locationType: LocationType) => {
 
 
   
-  //map modal for location selection confirmation
-  const modalRef = useRef<HTMLDialogElement | null>(null);
-  const modal = modalRef.current;
-  const openModal = () => {
-    modal?.showModal();
+  //map mapModal for location selection confirmation
+  const mapModalRef = useRef<HTMLDialogElement | null>(null);
+  const mapModal = mapModalRef.current;
+  
+  const openMapModal = () => {
+    mapModal?.showModal();
   };
-  const closeModal = () => {
-    modal?.close();
+  const closeMapModal = () => {
+    mapModal?.close();
   };
 
   
@@ -145,9 +146,9 @@ export const useMap = (locationType: LocationType) => {
     dispatch,
     mapBoundaryChanged,
     loading,
-    openModal,
-    closeModal,
-    modalRef,
+    openMapModal,
+    closeMapModal,
+    mapModalRef,
     mapTilerProvider,
     mapLoading,
     mapLocationName,

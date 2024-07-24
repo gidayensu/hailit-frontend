@@ -22,15 +22,15 @@ export const useEditVehicle = (vehicle: Vehicle) => {
   };
 
   
-  //DashboardModal ref
-  const modalRef = useRef<any>(null);
-  const modal = modalRef.current;
+  //SecondModal ref
+  const editVehicleModalRef = useRef<any>(null);
+  const vehicleModal = editVehicleModalRef.current;
 
-  const openModal = () => {
-    modal?.showModal();
+  const openEditVehicleModal = () => {
+    vehicleModal?.showModal();
   };
-  const closeModal = () => {
-    modal?.close();
+  const closeEditVehicleModal = () => {
+    vehicleModal?.close();
   };
 
   const [updateVehicle, { isSuccess, isLoading, error }] = useUpdateVehicleMutation();
@@ -67,7 +67,7 @@ export const useEditVehicle = (vehicle: Vehicle) => {
   };
 
   if(isSuccess || error) {
-    openModal();
+    openEditVehicleModal();
     
   }
 
@@ -80,8 +80,8 @@ export const useEditVehicle = (vehicle: Vehicle) => {
     error,
     available,
     handleAvailable,
-    modalRef,
-    closeModal,
+    editVehicleModalRef,    
+    closeEditVehicleModal,
     handleVehicleTypeSelection,
     vehicleType
   };

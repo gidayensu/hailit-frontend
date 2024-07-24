@@ -25,9 +25,9 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     userLocation,
     mapBoundaryChanged,
     loading,
-    openModal,
-    closeModal,
-    modalRef,
+    openMapModal,
+    closeMapModal,
+    mapModalRef,
     mapTilerProvider,
     mapLocationName,
     mapLoading,
@@ -39,7 +39,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
     <div className="flex justify-center relative">
       <div className="absolute flex justify-center flex-col gap-3">
         <LocationSearch />
-        <MapModal closeModal={closeModal} handleSelectedLocation={handleSelectedLocation} loading={loading} modalRef={modalRef} locationType={locationType} />
+        <MapModal closeModal={closeMapModal} handleSelectedLocation={handleSelectedLocation} loading={loading} modalRef={mapModalRef} locationType={locationType} />
         <SearchResults  />
       </div>
 
@@ -68,7 +68,7 @@ export default function MainMap({ locationType }: { locationType: LocationType }
                   dispatch(setUserLocation(center));
                   setZoom(zoom);
                 }}
-                onClick={openModal}
+                onClick={openMapModal}
               >
               </Map>
               <Marker
