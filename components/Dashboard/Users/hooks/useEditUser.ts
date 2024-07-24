@@ -1,14 +1,14 @@
 "use client";
 import { User, UserSchema } from "@/components/Form/FormTypes";
 import { useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { CustomerDetails } from "@/lib/store/slice/onBoardingSlice";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User as UserInterface } from "./useGetAllUsers";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 
 
 export const useEditUser = (user: UserInterface) => {
@@ -21,19 +21,20 @@ export const useEditUser = (user: UserInterface) => {
   };
 
   
-  //SecondModal ref
+  const [updateUser, { isSuccess, isLoading, error, reset }] = useUpdateUserMutation();
+  //SecondaryModal ref
   const edituserModalRef = useRef<any>(null);
   const userModal = edituserModalRef.current;
 
-  console.log({userModal})
+  
   const openUserModal = () => {
     userModal?.showModal();
   };
   const closeUserModal = () => {
     userModal?.close();
+    reset()
   };
 
-  const [updateUser, { isSuccess, isLoading, error }] = useUpdateUserMutation();
 
   
 
@@ -66,20 +67,23 @@ export const useEditUser = (user: UserInterface) => {
     }
   };
 
-  if(isSuccess || error) {
-    openUserModal();
-    // if user is changed from customer to a different role, that role will not have customerTrips. 
-    // There will be an error if the user clicks on the 'back arrrow'. Hence, the selectedUserId is set to empty string to return 
-    //the user to All Users table. 
-    
-    if(userRole !== "Customer") {
-      setTimeout(()=> {
+  
+if(isSuccess || error) {
+  openUserModal();
+  
+  
+  // if user is changed from customer to a different role, that role will not have customerTrips. 
+  // There will be an error if the user clicks on the 'back arrrow'. Hence, the selectedUserId is set to empty string to return 
+  //the user to All Users table. 
+  
+  if(userRole !== "Customer") {
+    setTimeout(()=> {
 
-        dispatch(setSelectedUserId(''))
-      }, 1000)
-    }
-
+      dispatch(setSelectedUserId(''))
+    }, 1000)
   }
+
+}
 
   return {
     formMethods,
