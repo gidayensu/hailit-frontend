@@ -1,5 +1,6 @@
 //while shadcn's modal/dialog is mainly used, there are cases where auto-matic opening of the dialog is needed. This modal component is used in such situations.
 "use client";
+import { FiInfo } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { MdOutlineError } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -12,22 +13,23 @@ export default function SecondaryModal({
   isSuccess,
   error,
   info,
+  note
 }: {
   modalRef: undefined | LegacyRef<HTMLDialogElement>;
   closeModal: () => void;
   isSuccess?: boolean;
   error?: any;
-  info?: string;
+  note?: boolean,
+  info?: string | React.ReactNode;
 }) {
-  console.log({modalRef})
   return (
     <dialog
       ref={modalRef}
-      className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/4  rounded-2xl h-52  p-4  backdrop:bg-secondary-dark backdrop:opacity-80 dark:bg-primary-dark"
+      className="animate-in zoom-in duration-100  ease-in-out  w-2/3 md:w-1/4  rounded-2xl  max-h-96  p-4  backdrop:bg-secondary-dark backdrop:opacity-80 dark:bg-primary-dark"
     >
       <div className="w-full flex items-end justify-end">
         <div
-          className="fontbold cursor-pointer  flex justify-center items-center h-6 w-6 rounded-full bg-red-200 text-red-400"
+          className="fontbold cursor-pointer  flex justify-center items-center h-6 w-6 rounded-full hover:dark:bg-secondary-dark dark:text-white text-secondary-dark"
           onClick={closeModal}
         >
           <RxCross2 />
@@ -42,14 +44,19 @@ export default function SecondaryModal({
                 <PiCheckCircleFill className="text-green-500 text-2xl" />
               </span>
             )}
+            {note && (
+              <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-amber-200">
+                <FiInfo className="text-amber-600 text-2xl" />
+              </span>
+            )}
             {error && (
               <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-red-200">
                 <MdOutlineError className="text-red-500 text-2xl" />
               </span>
             )}
             <div className="">
-              <h2 className="text-center leading-5 text-md mb-2 animate-in slide-in-from-bottom duration-100">
-                {info}!
+              <h2 className="text-center  text-sm mb-2 animate-in slide-in-from-bottom duration-100">
+                {info}
               </h2>
 
               

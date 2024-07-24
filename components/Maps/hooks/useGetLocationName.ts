@@ -10,7 +10,7 @@ export type LocationType = "pickup" | "drop off";
 export const useGetLocationName = () => {
   const locationNameData = async ({ latitude, longitude }: LocationProps) => {
     const locationData = await reverseMapSearch(latitude, longitude);
-    console.log({ latitude, longitude });
+    
     const locationName = locationData?.displayName;
 
     let specificName: string | undefined = "";
