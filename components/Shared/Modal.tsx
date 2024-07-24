@@ -1,8 +1,7 @@
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
-  DialogTrigger,
+  DialogTrigger
 } from "@/components/ui/dialog";
 
 

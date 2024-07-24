@@ -12,26 +12,25 @@ import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 
 
 export const useEditUser = (user: UserInterface) => {
-  const dispatch = useAppDispatch();
-
   const [userRole, setUserRole] = useState<UserRole>(user.user_role)
-  const [isError, setIsError] = useState<boolean>(false);
   const [onboard, setOnboard] = useState<boolean>(user.onboard);
+  const dispatch = useAppDispatch();
 
   const handleOnboard = () => {
     setOnboard(() => !onboard);
   };
 
   
-  //DashboardModal ref
-  const modalRef = useRef<any>(null);
-  const modal = modalRef.current;
+  //SecondModal ref
+  const edituserModalRef = useRef<any>(null);
+  const userModal = edituserModalRef.current;
 
-  const openModal = () => {
-    modal?.showModal();
+  console.log({userModal})
+  const openUserModal = () => {
+    userModal?.showModal();
   };
-  const closeModal = () => {
-    modal?.close();
+  const closeUserModal = () => {
+    userModal?.close();
   };
 
   const [updateUser, { isSuccess, isLoading, error }] = useUpdateUserMutation();
@@ -47,10 +46,10 @@ export const useEditUser = (user: UserInterface) => {
     resolver: zodResolver(UserSchema),
   });
   const {
-    register,
+    
     handleSubmit,
-    formState: { errors },
-    setError,
+    
+    
   } = formMethods;
 
   const onCustomerFormSubmit: SubmitHandler<CustomerDetails> = async (
@@ -61,14 +60,14 @@ export const useEditUser = (user: UserInterface) => {
 
       await updateUser({ userId: user.user_id, userDetails });
     } catch (err) {
-      setIsError(true);
+
 
       return { error: err };
     }
   };
 
   if(isSuccess || error) {
-    openModal();
+    openUserModal();
     // if user is changed from customer to a different role, that role will not have customerTrips. 
     // There will be an error if the user clicks on the 'back arrrow'. Hence, the selectedUserId is set to empty string to return 
     //the user to All Users table. 
@@ -91,9 +90,9 @@ export const useEditUser = (user: UserInterface) => {
     error,
     onboard,
     handleOnboard,
-    modalRef,
-    closeModal,
+    edituserModalRef,
+    closeUserModal,
     handleUserRoleSelection,
-    userRole
+    userRole,
   };
 };

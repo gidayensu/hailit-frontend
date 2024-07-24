@@ -1,13 +1,13 @@
 "use client";
+import Loader from "@/components/Shared/Loader";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAssignVehicle } from "./hooks/useAssignVehicle";
-import Loader from "@/components/Shared/Loader";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
-export default function AssignVehicle({dispatcher}:{dispatcher:Dispatcher}) {
+
+export default function AssignVehicle() {
   
   const {
     vehicles,
@@ -16,13 +16,12 @@ export default function AssignVehicle({dispatcher}:{dispatcher:Dispatcher}) {
     assignedVehicle,
     vehiclesLoading,
     assignVehicleLoading,
-    assignVehicleError,
-    vehiclesError,
+    dispatcher,
     totalPages,
     handleAssignVehicle,
     handleNextPage,
     handlePreviousPage,
-  } = useAssignVehicle(dispatcher);
+  } = useAssignVehicle();
   //matching vehicle - car = driver and motor = rider
   
   return (

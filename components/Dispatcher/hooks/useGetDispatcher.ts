@@ -13,15 +13,15 @@ export const useGetDispatcher = () => {
   
   const {
     trips,
-    currentTrips,
-    previousTrips,
-    currentTripsCount,
+    currentTrips: dispatcherCurrentTrips,
+    previousTrips: dispatcherPreviousTrips,
+    currentTripsCount: dispatcherCurrentTripsCount,
     isLoading
     
   } = useGetUserTrips();
 
 
-  const dispatcherDeliveredTripsCount = previousTrips.filter((trip: DispatcherTrip)=>trip.trip_status === "Delivered").length
+  const dispatcherDeliveredTripsCount = dispatcherPreviousTrips.filter((trip: DispatcherTrip)=>trip.trip_status === "Delivered").length
   const dispatcherEarnings = trips?.total_earnings
   
   useEffect(() => {
@@ -29,9 +29,9 @@ export const useGetDispatcher = () => {
     dispatch(
       setDispatcherTripDetails({
         ...dispatcher,
-        dispatcherCurrentTrips: currentTrips,
-        dispatcherPreviousTrips: previousTrips,
-        dispatcherCurrentTripsCount: currentTripsCount,
+        dispatcherCurrentTrips,
+        dispatcherPreviousTrips,
+        dispatcherCurrentTripsCount,
         dispatcherDeliveredTripsCount,
         dispatcherEarnings
       })
@@ -42,5 +42,17 @@ export const useGetDispatcher = () => {
   const handleDispatcherTripId = (tripId:string)=> {
     dispatch(setDispatcherTripId(tripId))
   }
-  return { email, first_name, last_name, trips, user_role, dispatcher, handleDispatcherTripId, isLoading };
+  return {
+    email,
+    first_name,
+    last_name,
+    trips,
+    user_role,
+    dispatcher,
+    dispatcherCurrentTripsCount,
+    dispatcherDeliveredTripsCount,
+    dispatcherEarnings,
+    handleDispatcherTripId,
+    isLoading,
+  };
 };

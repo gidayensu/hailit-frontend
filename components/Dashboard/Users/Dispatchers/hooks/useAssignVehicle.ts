@@ -3,8 +3,8 @@ import { usePrefetch } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
 
 import { useGetAllVehiclesQuery, useUpdateDriverMutation, useUpdateRiderMutation } from "@/lib/store/apiSlice/hailitApi";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatcherProfile } from "./useDispatcherProfile";
 
 interface DispatcherVehicle {
   vehicle_id: string | undefined,
@@ -12,11 +12,13 @@ interface DispatcherVehicle {
   vehicle_name: string | undefined;
 }
 
-export const useAssignVehicle = (dispatcher?:Dispatcher) => {
-    const userRole = dispatcher?.user_role
-    const dispatcherContainerRef = useRef<any>(null)
 
-    
+
+export const useAssignVehicle = () => {
+  const dispatcherContainerRef = useRef<any>(null)
+  const { selectedDispatcher:dispatcher } = useDispatcherProfile();
+
+  const userRole = dispatcher?.user_role
     const [assignedVehicle, setAssignedVehicle] = useState<DispatcherVehicle>({
       vehicle_id: dispatcher?.vehicle?.vehicle_id,
       plate_number: dispatcher?.vehicle?.plate_number,

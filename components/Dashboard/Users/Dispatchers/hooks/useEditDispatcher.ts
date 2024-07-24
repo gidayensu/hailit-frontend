@@ -1,16 +1,13 @@
 "use client";
 import { User, UserSchema } from "@/components/Form/FormTypes";
-import { useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
-import {  DispatcherDetails } from "@/lib/store/slice/onBoardingSlice";
-import { UserRole } from "@/lib/store/slice/userSlice";
+import { useUpdateDriverMutation, useUpdateRiderMutation, useUpdateUserMutation } from "@/lib/store/apiSlice/hailitApi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useUpdateRiderMutation, useUpdateDriverMutation } from "@/lib/store/apiSlice/hailitApi";
 
 export const useEditDispatcher = (dispatcher: any) => {
   
-  const [isError, setIsError] = useState<boolean>(false);
+
   const [available, setAvailable] = useState<boolean>(dispatcher?.available);
   const [vehicleId, setVehicleId] = useState<string>(dispatcher?.vehicle_id);
   
@@ -28,15 +25,16 @@ export const useEditDispatcher = (dispatcher: any) => {
   //   setVehicleId(dispatcher.vehicle_id)
   // }, [setAvailable, setVehicleId, dispatcher]);
 
-  //DashboardModal ref
-  const modalRef = useRef<any>(null);
-  const modal = modalRef.current;
+  //SecondModal ref
+  const editDispatcherModalRef = useRef<any>(null);
+  const editDispatcherModal = editDispatcherModalRef.current;
 
-  const openModal = useCallback( () => {
-    modal?.showModal();
-  }, [modal])
-  const closeModal = () => {
-    modal?.close();
+  const openDispatcherModal = useCallback( () => {
+    editDispatcherModal?.showModal();
+  }, [editDispatcherModal])
+
+  const closeDispatcherModal = () => {
+    editDispatcherModal?.close();
   };
 
   const [updateUser, { isSuccess, isLoading, error }] = useUpdateUserMutation();
@@ -48,10 +46,9 @@ export const useEditDispatcher = (dispatcher: any) => {
     resolver: zodResolver(UserSchema),
   });
   const {
-    register,
+    
     handleSubmit,
-    formState: { errors },
-    setError,
+    
   } = formMethods;
 
   const onDispatcherFormSubmit: SubmitHandler<User> = async (
@@ -72,7 +69,7 @@ export const useEditDispatcher = (dispatcher: any) => {
       
       
     } catch (err) {
-      setIsError(true);
+      
 
       return { error: err };
     }
@@ -81,10 +78,10 @@ export const useEditDispatcher = (dispatcher: any) => {
     useEffect(()=> {
 
       if(isSuccess || error) {
-        //the modal takes the isSuccess or Error as prop and display the appropriate message
-        openModal();
+        //the editDispatcherModal takes the isSuccess or Error as prop and display the appropriate message
+        openDispatcherModal();
       }
-    }, [isSuccess, error, openModal])
+    }, [isSuccess, error, openDispatcherModal])
 
   return {
     formMethods,
@@ -96,7 +93,13 @@ export const useEditDispatcher = (dispatcher: any) => {
     setAvailable,
     available,
     handleAvailable,
-    modalRef,
-    closeModal,
+    editDispatcherModalRef,
+    closeDispatcherModal,
+    vehicleId,
+    setVehicleId,
+    riderUpdated,
+    driverUpdated,
+    riderUpdateError,
+    driverUpdateError
   };
 };
