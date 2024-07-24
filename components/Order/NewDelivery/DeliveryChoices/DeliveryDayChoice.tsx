@@ -5,7 +5,7 @@ import { DeliveryChoices } from "./DeliveryChoice"
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice"
 
 export default function   DeliveryDayChoice () {
-    const {trip_type, trip_area, handleDeliveryChoice} = useDeliveryChoice()
+    const {trip_type, trip_area, trip_medium, handleDeliveryChoice} = useDeliveryChoice()
 
     return (
       <>
@@ -18,7 +18,7 @@ export default function   DeliveryDayChoice () {
             choiceCategory: "delivery_day",
           }}
           className="animate-in  zoom-in duration-50"
-          disabled={trip_area === "Inter City"}
+          disabled={trip_area === "Inter City" || trip_medium === "Truck"}
           
         >
           <p className="text-[12px] md:text-lg text-center">

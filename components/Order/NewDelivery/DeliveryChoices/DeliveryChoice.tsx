@@ -1,4 +1,3 @@
-import { FiCheck } from "react-icons/fi";
 import { IconType } from "react-icons/lib";
 import { ChoiceType } from "../../hooks/useDeliveryChoice";
 
@@ -32,9 +31,10 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
       <div className="w-full" onClick={handleClick}>
         <div
           className={`${className} flex flex-col  items-center border  bg-white  dark:border-opacity-20 dark:bg-secondary-dark dark:text-slate-100 overflow-hidden ${disabled || recommended ? 'justify-start ' : 'justify-center'}  w-full h-40 md:h-44  rounded-lg  ${
-            deliveryOption === choiceType.choice ||
-            (!deliveryOption && !disabled) 
+            deliveryOption === choiceType.choice  
               ? "border-primary-color  border-2 dark:border-white"
+              :  (!deliveryOption && !disabled)
+              ? ""
               : "text-secondary-dark  border-slate-300 dark:border-slate-100"
           } ${disabled ? "cursor-not-allowed" : "cursor-pointer"} `}
         >
@@ -56,29 +56,26 @@ export const DeliveryChoices: React.FC<ChoicesProps> = ({
 
           <MainIcon
             className={`text-3xl mb-2 ${
-              deliveryOption === choiceType.choice ||
-              (!deliveryOption && !disabled)
+              deliveryOption === choiceType.choice 
                 ? "text-primary-medium"
+                : !deliveryOption && !disabled 
+                ? '' 
                 : "text-[#413e3e] dark:text-slate-300"
             }`}
           />
+          <div className={`flex flex-col ${deliveryOption === choiceType.choice ? 'text-blue-600' : ''}`}>
+
           <p className="font-bold text-[12px] md:text-sm text-center">
             {choiceType.choice.toUpperCase()}
           </p>
+          <p >
+
           {children}
+          </p>
+          </div>
           </div>
 
-          <span
-            className={`flex items-center justify-center mt-1  border border-secondary-color md:h-8 md:w-8 h-6 w-6 rounded-full    ${
-              deliveryOption === choiceType.choice
-                ? "bg-secondary-color text-white"
-                : "hidden"
-            }`}
-          >
-            <FiCheck
-              className={`${deliveryOption !== choiceType.choice && "hidden"}`}
-            />
-          </span>
+          
         </div>
       </div>
     

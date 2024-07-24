@@ -8,7 +8,7 @@ import { DeliveryChoices } from "./DeliveryChoice";
 import { useDeliveryChoice } from "../../hooks/useDeliveryChoice";
 
 export default function DeliveryMediumChoice() {
-  const { trip_medium, trip_area, handleDeliveryChoice } = useDeliveryChoice();
+  const { trip_medium, trip_area, trip_type, handleDeliveryChoice } = useDeliveryChoice();
 
   return (
     <>
@@ -20,6 +20,7 @@ export default function DeliveryMediumChoice() {
           choice: "Truck",
           choiceCategory: "trip_medium",
         }}
+        disabled = {trip_type === "Same Day"}
       >
         <p className="text-sm md:text-md text-center">Large package</p>
       </DeliveryChoices>
@@ -33,6 +34,7 @@ export default function DeliveryMediumChoice() {
           choiceCategory: "trip_medium",
         }}
         disabled={trip_area === "Inter City"}
+        recommended= {trip_type === "Same Day"}
       >
         <p className="text-sm md:text-md text-center">Medium package</p>
       </DeliveryChoices>
