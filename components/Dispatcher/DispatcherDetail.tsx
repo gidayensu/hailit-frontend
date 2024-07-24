@@ -7,7 +7,7 @@ import Container from "../ui/container"
 import { useGetDispatcher } from "./hooks/useGetDispatcher"
 import TripsStats from "./TripsStats"
 
-export default function CourierDetail () {
+export default function DispatcherDetail () {
     const { handleDispatcherTripId, dispatcher} = useGetDispatcher();
     return (
       <main className="p-3 w-full flex flex-col items-center justify-center mb-20 md:mb-0">
