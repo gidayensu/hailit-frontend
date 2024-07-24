@@ -1,6 +1,6 @@
 "use client";
 //main components
-import SendPackage from "@/components/Home/SendPackage";
+import SendPackage from "@/components/Order/NewDelivery/SendPackage";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import { useAppSelector } from "@/lib/store/hooks";

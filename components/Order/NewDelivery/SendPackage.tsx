@@ -1,63 +1,39 @@
 'use client'
 //ui
-import { Button } from "../ui/button";
-import Loader from "../Shared/Loader";
-import { useRef } from "react";
+import Loader from "../../Shared/Loader";
+import { Button } from "../../ui/button";
 //main components
-import PackageDestinationChoice from "../Order/NewDelivery/DeliveryChoices/PackageDestinationChoice";
-import DeliveryDayChoice from "../Order/NewDelivery/DeliveryChoices/DeliveryDayChoice";
-import DeliveryMediumChoice from "../Order/NewDelivery/DeliveryChoices/DeliveryMediumChoice";
-
+import DeliveryDayChoice from "./DeliveryChoices/DeliveryDayChoice";
+import DeliveryMediumChoice from "./DeliveryChoices/DeliveryMediumChoice";
+import PackageDestinationChoice from "./DeliveryChoices/PackageDestinationChoice";
+import SecondModal from "@/components/Shared/SecondaryModal";
 //redux + next + react + helper
-import Link from "next/link";
-import { useAppSelector } from "@/lib/store/hooks";
-import toast, { Toaster } from 'react-hot-toast';
-import { useState } from "react";
 import { scrollToSection } from "@/lib/utils";
+import Link from "next/link";
+import { Toaster } from 'react-hot-toast';
+import { useSendPackage } from "./hooks/useSendPackage";
 
 export default function SendPackage() {
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const deliveryMediumRef = useRef<any> (null);
-  const destinationAreaRef = useRef<any> (null);
-  const deliveryDayRef = useRef<any> (null);
-
-  const {trip_medium, trip_area, trip_type} = useAppSelector(state=>state.deliveryChoices);
-
+  const {
+    handleLoading,
+    handleMissingChoice,
+    isLoading,
+    trip_medium,
+    trip_area,
+    trip_type,
+    deliveryMediumRef,
+    destinationAreaRef,
+    deliveryDayRef,
+    closeSendPackageModal,
+    sendPackageModal
+  } = useSendPackage();
   
   
-  let missingChoice = '';
-  !trip_area ? missingChoice = 'trip area' :  !trip_type ? missingChoice = 'delivery day' : !trip_medium ? missingChoice = 'delivery medium' : '';
-  
-  const handleLoading = ()=> {
-    setIsLoading(true)
-  }
-  const handleMissingChoice = ()=> {
-    let toastMessage = ''
-    if(missingChoice === 'delivery medium') {
-      toastMessage = "Delivery Medium"
-      scrollToSection(deliveryMediumRef)
-    }
 
-    if(missingChoice === 'trip area') {
-      toastMessage = "Destination Area"
-      scrollToSection(destinationAreaRef)
-    }
-
-    if(missingChoice === 'delivery day') {
-      toastMessage = "Delivery Day"
-      scrollToSection(deliveryDayRef)
-    }
-    
-    toast.error(
-        <p className=" text-[13px]">
-          <b>{toastMessage} </b> Not Selected
-        </p>
-      
-        )
-  }
   return (
     <>
+    <SecondModal closeModal={closeSendPackageModal} modalRef={sendPackageModal} />
       <article
         ref={destinationAreaRef}
         
@@ -115,6 +91,7 @@ export default function SendPackage() {
           
           </Link>
         }
+        
       </article>
     </>
   );
