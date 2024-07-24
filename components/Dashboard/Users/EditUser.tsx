@@ -7,7 +7,7 @@ import { UserRole } from "@/lib/store/slice/userSlice";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
-import DashboardModal from "../DashboardModal";
+import SecondModal from "../../Shared/SecondaryModal";
 import { useEditUser } from "./hooks/useEditUser";
 import { User } from "./hooks/useGetAllUsers";
 
@@ -22,8 +22,8 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
     error,
     onboard,
     handleOnboard,
-    modalRef,
-    closeModal,
+    edituserModalRef,
+    closeUserModal,
     handleUserRoleSelection,
     userRole
   } = useEditUser(selectedUser);
@@ -131,7 +131,7 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
       </form>
       <Button className="max-w-sm w-full" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
-    <DashboardModal closeModal={closeModal}  isSuccess={isSuccess} error = {error} modalRef={modalRef} info={error ? 'User not updated': 'User details saved'}/>
+    <SecondModal closeModal={closeUserModal}  isSuccess={isSuccess} error = {error} modalRef={edituserModalRef} info={error ? 'User not updated': 'User details saved'}/>
     </>
   );
 }

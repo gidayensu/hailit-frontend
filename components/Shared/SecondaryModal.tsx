@@ -7,19 +7,19 @@ import { RxCross2 } from "react-icons/rx";
 import { LegacyRef } from "react";
 import { PiCheckCircleFill } from "react-icons/pi";
 
-export default function DashboardModal({
-  modalRef,
-  closeModal,
+export default function SecondaryModal({
+  modalRef,  closeModal,
   isSuccess,
   error,
   info,
 }: {
   modalRef: undefined | LegacyRef<HTMLDialogElement>;
   closeModal: () => void;
-  isSuccess: boolean;
-  error: any;
-  info: string;
+  isSuccess?: boolean;
+  error?: any;
+  info?: string;
 }) {
+  console.log({modalRef})
   return (
     <dialog
       ref={modalRef}

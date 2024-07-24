@@ -1,16 +1,15 @@
 "use client";
 import FormField from "@/components/Form/FormField";
-import MapModal from "@/components/Maps/MapModal";
+
 import Loader from "@/components/Shared/Loader";
+import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { FormProvider } from "react-hook-form";
-import { useEditDispatcher } from "./hooks/useEditDispatcher";
-import AssignVehicle from "./AssignVehicle";
-import { Modal } from "@/components/Shared/Modal";
-import DashboardModal from "../../DashboardModal";
-import { useAssignVehicle } from "./hooks/useAssignVehicle";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
+import { FormProvider } from "react-hook-form";
+import SecondModal from "../../../Shared/SecondaryModal";
+import AssignVehicle from "./AssignVehicle";
+import { useEditDispatcher } from "./hooks/useEditDispatcher";
 
 export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Dispatcher, handleGoBack: ()=>void}) {
   
@@ -24,10 +23,9 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
     isSuccess,
     error,
     handleAvailable,
-    modalRef,
+    editDispatcherModalRef,
     available,
-    setAvailable,
-    closeModal,
+    closeDispatcherModal,
   } = useEditDispatcher(dispatcher);
   
   
@@ -50,7 +48,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
           <Modal dialogTriggerElement={
             <p className="text-[12px] h-12 w-32 flex items-center justify-center rounded-xl  bg-primary-color text-white font-normal"> Change Vehicle</p>
           }>
-            <AssignVehicle dispatcher={dispatcher} />
+            <AssignVehicle  />
           </Modal>
         </div>
       </div>
@@ -130,7 +128,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
       </form>
       <Button className="max-w-sm w-full border border-slate-400 dark:bg-secondary-dark dark:border-opacity-30" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
-    <DashboardModal closeModal={closeModal}  isSuccess={isSuccess} error = {error} modalRef={modalRef} info={`${dispatcher.user_role} ${error ? ' not updated': ' details saved'}`}/>
+    <SecondModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${dispatcher.user_role} ${error ? ' not updated': ' details saved'}`}/>
     </main>
   );
 }

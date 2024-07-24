@@ -6,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
-import DashboardModal from "@/components/Dashboard/DashboardModal";
+import SecondModal from "@/components/Shared/SecondaryModal";
 import { VehicleType } from "./hooks/useGetVehicles";
 import { Vehicle } from "./hooks/useGetVehicles";
 import { useEditVehicle,  } from "./hooks/useEditVehicle";
@@ -22,8 +22,8 @@ export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, ha
     error,
     available,
     handleAvailable,
-    modalRef,
-    closeModal,
+    editVehicleModalRef,
+    closeEditVehicleModal,
     handleVehicleTypeSelection,
     vehicleType
   } = useEditVehicle(vehicle);
@@ -149,11 +149,11 @@ export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, ha
           Cancel
         </Button>
       </FormProvider>
-      <DashboardModal
-        closeModal={closeModal}
+      <SecondModal
+        closeModal={closeEditVehicleModal}
         isSuccess={isSuccess}
         error={error}
-        modalRef={modalRef}
+        modalRef={editVehicleModalRef}
         info={error ? "Vehicle not updated" : "Vehicle details saved"}
       />
     </>
