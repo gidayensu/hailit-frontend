@@ -2,7 +2,6 @@
 
 import { AiFillCar } from "react-icons/ai";
 import { FaMotorcycle } from "react-icons/fa";
-import { FiCheck } from "react-icons/fi";
 import { RiCaravanFill } from "react-icons/ri";
 import { DeliveryChoices } from "./DeliveryChoice";
 
@@ -45,6 +44,7 @@ export default function DeliveryMediumChoice() {
           choice: "Car",
           choiceCategory: "trip_medium",
         }}
+        recommended= {trip_area === "Inter City"}
       >
         <p className="text-sm md:text-md text-center">Big package</p>
       </DeliveryChoices>

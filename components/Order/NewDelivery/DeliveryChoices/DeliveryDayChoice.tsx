@@ -1,5 +1,4 @@
 'use client'
-import { FiCheck } from "react-icons/fi"
 import { RiCalendarScheduleFill, RiTimer2Fill, RiTimerFlashFill } from "react-icons/ri"
 import { DeliveryChoices } from "./DeliveryChoice"
 
@@ -20,6 +19,7 @@ export default function   DeliveryDayChoice () {
           }}
           className="animate-in  zoom-in duration-50"
           disabled={trip_area === "Inter City"}
+          
         >
           <p className="text-[12px] md:text-lg text-center">
             
@@ -36,6 +36,7 @@ export default function   DeliveryDayChoice () {
             choiceCategory: "delivery_day",
           }}
           className="animate-in zoom-in duration-150"
+          recommended = {trip_area === "Accra" || trip_area === "Kumasi" }
         >
           <p className="text-[12px] md:text-lg text-center">
             
@@ -52,6 +53,7 @@ export default function   DeliveryDayChoice () {
             choiceCategory: "delivery_day",
           }}
           className="animate-in  zoom-in duration-300"
+          recommended= {trip_area === "Inter City"}
         >
           <p className="text-[12px] md:text-lg text-center">
             
