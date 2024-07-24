@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { setTripMedium, setTripArea, setTripType, resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { DeliveryOptions } from "./HomeOptions";
+import { DeliveryOptions } from "../HomeOptions";
 
 export const useHomeOrder = ()=> {
     const [loading, setLoading] = useState<boolean>(false);

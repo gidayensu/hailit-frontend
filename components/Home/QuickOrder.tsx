@@ -4,7 +4,7 @@ import custom from "../../public/images/custom.png";
 import express from "../../public/images/express.png";
 import intercity from "../../public/images/intercity.png";
 import { HomeOptions } from "./HomeOptions";
-import { useHomeOrder } from "./useHomeOrder";
+import { useHomeOrder } from "./hooks/useHomeOrder";
 
 export default function QuickOrder() {
   const {handleLoading, loading, selected} = useHomeOrder();
