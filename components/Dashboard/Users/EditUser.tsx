@@ -7,7 +7,7 @@ import { UserRole } from "@/lib/store/slice/userSlice";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
-import SecondModal from "../../Shared/SecondaryModal";
+import SecondaryModal from "../../Shared/SecondaryModal";
 import { useEditUser } from "./hooks/useEditUser";
 import { User } from "./hooks/useGetAllUsers";
 
@@ -131,7 +131,7 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
       </form>
       <Button className="max-w-sm w-full" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
-    <SecondModal closeModal={closeUserModal}  isSuccess={isSuccess} error = {error} modalRef={edituserModalRef} info={error ? 'User not updated': 'User details saved'}/>
+    <SecondaryModal closeModal={closeUserModal}  isSuccess={isSuccess} error = {error} modalRef={edituserModalRef} info={error ? 'User not updated': 'User details saved'}/>
     </>
   );
 }

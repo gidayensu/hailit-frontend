@@ -25,7 +25,7 @@ export const useEditDispatcher = (dispatcher: any) => {
   //   setVehicleId(dispatcher.vehicle_id)
   // }, [setAvailable, setVehicleId, dispatcher]);
 
-  //SecondModal ref
+  //SecondaryModal ref
   const editDispatcherModalRef = useRef<any>(null);
   const editDispatcherModal = editDispatcherModalRef.current;
 

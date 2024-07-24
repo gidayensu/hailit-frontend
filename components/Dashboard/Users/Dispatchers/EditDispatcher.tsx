@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import { FormProvider } from "react-hook-form";
-import SecondModal from "../../../Shared/SecondaryModal";
+import SecondaryModal from "../../../Shared/SecondaryModal";
 import AssignVehicle from "./AssignVehicle";
 import { useEditDispatcher } from "./hooks/useEditDispatcher";
 
@@ -128,7 +128,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
       </form>
       <Button className="max-w-sm w-full border border-slate-400 dark:bg-secondary-dark dark:border-opacity-30" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
-    <SecondModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${dispatcher.user_role} ${error ? ' not updated': ' details saved'}`}/>
+    <SecondaryModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${dispatcher.user_role} ${error ? ' not updated': ' details saved'}`}/>
     </main>
   );
 }

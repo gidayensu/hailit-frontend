@@ -22,7 +22,7 @@ export const useEditVehicle = (vehicle: Vehicle) => {
   };
 
   
-  //SecondModal ref
+  //SecondaryModal ref
   const editVehicleModalRef = useRef<any>(null);
   const vehicleModal = editVehicleModalRef.current;
 

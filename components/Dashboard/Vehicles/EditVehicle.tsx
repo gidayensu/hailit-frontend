@@ -6,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
-import SecondModal from "@/components/Shared/SecondaryModal";
+import SecondaryModal from "@/components/Shared/SecondaryModal";
 import { VehicleType } from "./hooks/useGetVehicles";
 import { Vehicle } from "./hooks/useGetVehicles";
 import { useEditVehicle,  } from "./hooks/useEditVehicle";
@@ -149,7 +149,7 @@ export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, ha
           Cancel
         </Button>
       </FormProvider>
-      <SecondModal
+      <SecondaryModal
         closeModal={closeEditVehicleModal}
         isSuccess={isSuccess}
         error={error}
