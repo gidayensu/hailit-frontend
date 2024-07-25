@@ -3,6 +3,7 @@
 
 import { useHome } from "./hooks/useHome";
 //main components
+import BigLoader from "../Shared/BigLoader";
 import OtherActions from "@/components/Home/OtherActions";
 import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
@@ -12,7 +13,13 @@ import OrderHistory from "@/components/Order/OrderHistory";
 import SecondaryModal from "../Shared/SecondaryModal";
 
 export default function Home() {
-  const { path, closeHomeModal, homeModalRef } = useHome();
+  const { path, closeHomeModal, homeModalRef, homeLoading } = useHome();
+
+  if(homeLoading) {
+    return (<div className="flex items-center justify-center w-full">
+      <BigLoader/>
+    </div>)
+  }
 
   return (
     <>

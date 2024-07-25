@@ -1,11 +1,10 @@
 "use client";
 //next + react + redux
 
-import BigLoader from "@/components/Shared/BigLoader";
 import { supabaseSession } from "@/lib/supabaseAuth";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
 import { workPeriod } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 //main components
 import { useAppSelector } from "@/lib/store/hooks";
 import { usePathname } from "next/navigation";
@@ -13,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 export function useHome() {
   const homeModalRef = useRef<any>(null);
-
+  const [homeLoading, setHomeLoading] = useState<boolean>(true);
   const router = useRouter();
   const path = usePathname();
   
@@ -25,7 +24,7 @@ export function useHome() {
   }
 
   const openHomeModal = ()=> {
-    homeModalRef?.current.showModal();
+    homeModalRef?.current?.showModal();
   }
   
   useEffect(()=>{
@@ -38,22 +37,24 @@ export function useHome() {
     const checkSession = async () => {
       
       const session = await supabaseSession();
+      
       if (!session || (user_role && user_role !== "Customer") || !authenticated) {
-        router.push('/authentication');
-      return (<div className="flex items-center justify-center w-full">
-        <BigLoader/>
-      </div>)
+        return router.push('/authentication');
       } 
 
+      setHomeLoading(false)
+      
     };
+
+
+    
     
     checkSession();
   }, [router, supabaseSession, authenticated, user_role, ]);
   
-  
 
     
-    return {path, closeHomeModal, homeModalRef}
+    return {path, closeHomeModal, homeModalRef, homeLoading}
  
   
 }
