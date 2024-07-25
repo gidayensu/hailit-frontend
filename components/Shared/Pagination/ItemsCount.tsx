@@ -15,7 +15,7 @@ export default function ItemsCount({
     <div className="w-full my-2">
       {page !== total_number_of_pages && (
         <p className="text-[12px]">
-          {item} {currentItemsCount * page - currentItemsCount + 1} to  {currentItemsCount * page} of {total_items}
+          {item} <b>{currentItemsCount * page - currentItemsCount + 1}</b> to  <b>{currentItemsCount * page}</b> of <b>{total_items}</b>
         </p>
       )}
       {page === total_number_of_pages && (
