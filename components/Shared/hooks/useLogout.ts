@@ -15,6 +15,7 @@ export const useLogout = () => {
   const handleLogOut = () => {
     supabaseLogOut();
     dispatch(userLogout());
+    localStorage.clear();
 
   };
 
