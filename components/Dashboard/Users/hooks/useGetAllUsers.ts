@@ -35,7 +35,7 @@ export const useGetAllUsers = (page:number) => {
   const total_number_of_pages = data?.total_number_of_pages
   const total_items = data?.total_items;
   //prefetch users data
-  const {handlePrefetchData} = usePrefetchData({endpoint: 'users', page, prefetchOption: 'getAllUsers', total_number_of_pages});
+  const {handlePrefetchData} = usePrefetchData({endpoint: 'users?', page, prefetchOption: 'getAllUsers', total_number_of_pages});
 
   useEffect(()=> {
     handlePrefetchData();

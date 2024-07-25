@@ -6,7 +6,7 @@ export function useGetAllRiders(page:number) {
   const riders = data?.riders;
   const total_number_of_pages = data?.total_number_of_pages;
   const total_items = data?.total_items;
-  const {handlePrefetchData} = usePrefetchData({page, endpoint: 'riders', prefetchOption: 'getAllRiders', total_number_of_pages})
+  const {handlePrefetchData} = usePrefetchData({page, endpoint: 'riders?', prefetchOption: 'getAllRiders', total_number_of_pages})
 
   useEffect(()=> {
     handlePrefetchData();
