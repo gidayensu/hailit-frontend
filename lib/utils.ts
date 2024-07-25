@@ -88,10 +88,9 @@ export const extractTimeFromDate = (dateString: string | Date | null): string | 
 export const workPeriod = () => {
   const currentHour = new Date().getHours();
 
-
-  const dayStarts = 8;   
+  const dayStarts = 7;   
   const dayEnds = 18;    
-   return false;
+   
 
   if (currentHour < dayStarts || currentHour > dayEnds) {
     return false;
