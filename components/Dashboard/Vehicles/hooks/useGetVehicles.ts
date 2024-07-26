@@ -17,7 +17,7 @@ export interface Vehicle {
 }
 
 
-export type VehicleColumns = typeof tableHeadings[number]
+
 
 export function useGetVehicles(page:number) {
   const {
@@ -76,7 +76,7 @@ const tableHeadings = [
   "Number Plate",
   "Available",
   
-] as const;
+] 
 
 
 
