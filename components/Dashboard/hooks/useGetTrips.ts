@@ -5,16 +5,26 @@ import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { usePrefetchData } from "./usePrefetchData";
-
+import { useSearchAndSort } from "./useSearchAndSort";
 
 export type TripsColumns = typeof tableHeadings[number]
 
-export const useGetTrips = ({page, table}: {page: number, table:string}) => {
-  const {tripsData, overviewData}  = useAppSelector(state => state.dashboardTables);
+type Table = "overview" | "trips"
+export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
+  const { overviewData}  = useAppSelector(state => state.dashboardTables);
   const [tripLoading, setTripLoading] = useState<boolean>(false);
   const [selectedTripId, setSelectedTripId] = useState<string>('');
   const router = useRouter();
   
+  const {
+    handleSort, 
+    sortDetails,
+    dataLoading: tripsLoading,
+    handleSearch:handleTripSearch,
+    searchRef: tripSearchRef,
+    endPoint,
+    setDataLoading: setTripsLoading,
+  } = useSearchAndSort({table: "Trips Table", columns: tableHeadings, endPoint: "trips?"});
   
   const dispatch = useAppDispatch();
   
@@ -28,8 +38,8 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   
   
   
-  const { data, isLoading, error } = useGetAllTripsQuery(`trips?page=${page}`, {
-    pollingInterval:3000,
+  const { data, isLoading, error, isSuccess } = useGetAllTripsQuery(`${endPoint}&page=${page}`, {
+    pollingInterval:5000,
     skipPollingIfUnfocused: true
   });
   
@@ -46,14 +56,36 @@ export const useGetTrips = ({page, table}: {page: number, table:string}) => {
   }, [handlePrefetchData])
   
   useEffect(() => {
-    if (table === "trips") {
-      dispatch(setTableData({table: "tripsData", data: trips}));
-    } else {
+    setTripsLoading(true)
+    
+    if(trips) {
+      setTripsLoading(false)
+
+    }
+    
+    if(table === "overview") {
       dispatch(setTableData({table: "overviewData", data: trips}));
     }
   }, [trips, table, dispatch]); 
 
-  return { total_number_of_pages, data, trips, tripsData, overviewData, handleTrackTrip, isLoading, error , total_items, selectedTripId, tripLoading};
+  return {
+    tripsLoading,
+    total_number_of_pages,
+    data,
+    trips,
+    overviewData,
+    handleTrackTrip,
+    isLoading,
+    error,
+    total_items,
+    selectedTripId,
+    tripLoading,
+    tripSearchRef,
+    sortDetails,
+    handleSort,
+    handleTripSearch,
+    isSuccess
+  };
 };
 
 

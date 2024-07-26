@@ -6,55 +6,71 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
+import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import { useGetTrips } from "../hooks/useGetTrips";
 import SkeletonTable from "../SkeletonTable";
-import { Trip } from "@/lib/store/slice/tripSlice";
-
+import SearchTable from "../TableComponents/SearchTable";
+import TablesHeadings from "../TableComponents/TablesHeadings";
+import { useAllTripsTable } from "./hooks/useAllTripsTable";
 export function AllTripsTable() {
   
-  const [tripLoading, setTripLoading] = useState<boolean>(false);
-  const [selectedTripId, setSelectedTripId] = useState<string>('');
-  const [page, setPage] = useState<number> (1);
-  const {data, tripsData, total_number_of_pages, isLoading, error, total_items}  = useGetTrips({ page, table:"trips"});
-  const router = useRouter();
-  const tripTrack = (tripId:string)=> {
-    setTripLoading(true);
-    setSelectedTripId(tripId)
-    router.push(`/dashboard/track-order/${tripId}`)
-  }
+  const { tripLoading, selectedTripId, tripTrack, page, setPage } =
+    useAllTripsTable();
+  
+  const {
+    tripsLoading,
+    total_number_of_pages,
+    
+    error,
+    total_items,
+    tripSearchRef,
+    isSuccess,
+    sortDetails,
+    trips,
+    handleSort,
+    handleTripSearch,}  = useGetTrips({ page, table:"trips"});
+
+
   return (
     <>
+    <div className="w-full flex items-end justify-between">
     <Link href={'/dashboard/orders/add-order'}>
     
-    <Button className="md:w-1/6 w-1/3" > Add order</Button>
+    <Button  > Add order</Button>
     </Link>
+
+    <SearchTable ref={tripSearchRef} handleSearch={handleTripSearch} isSuccess={isSuccess}/>
+    </div>
     <div className="flex flex-col max-w-fit   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       
       <Table>
         <TableHeader>
-          <TableRow>
-            {
-              tableHeadings.map((tableHeading)=>
-                <TableHead key={tableHeading}>{tableHeading}</TableHead>
-              )
-            }
-                      </TableRow>
+        <TablesHeadings handleSort={handleSort} sortDetails={sortDetails} tableHeadings={tableHeadings} sortableHeadings={sortableHeadings}/>
         </TableHeader>
+          {trips && trips.length === 0 &&
+          <div className=" w-full text-3xl font-bold flex flex-col items-center justify-center h-44">
+          <p >
+    
+            No trip matched your search
+          </p>
+        </div>
+          }
         <TableBody>
-          {isLoading && <SkeletonTable cells={14} rows={10} />}
-
-          {error && <div> Error Occurred </div>}
-          {data && tripsData &&
-            tripsData.map((trip: TripsWithUser) => (
+          {tripsLoading && !error && <SkeletonTable cells={13} rows={9} />}
+          {error && <div>
+        <p className="text-3xl font-bold flex flex-col items-center justify-center">
+  
+          Error occurred!
+        </p>
+      </div>}
+          {trips && !error && !tripsLoading &&
+            trips.map((trip: TripsWithUser) => (
               <>
               { tripLoading && selectedTripId === trip.trip_id &&
 
@@ -113,8 +129,8 @@ export function AllTripsTable() {
     </div>
       
     <div>{
-      tripsData && 
-      <ItemsCount currentItemsCount={tripsData.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
+      total_number_of_pages && 
+      <ItemsCount currentItemsCount={trips.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
     </div>
     <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips"/>
@@ -122,23 +138,25 @@ export function AllTripsTable() {
   );
 }
 
+const sortableHeadings = [
+ "Trip id",
+ "Ordered by",
+ "Booked On",
+ "Pickup",
+ "Pickup Contact",
+ "Drop off",
+ "Drop off Contact",
+ "Delivered On",
+ "Medium",
+ "Amount",
+ "Payment Status",
+ // "Payment Method",
+ "Delivery Status",
+]
 const tableHeadings = [
-  "Trip id",
-  "Ordered by",
-  "Booked On",
-  "Pickup",
-  "Pickup Contact",
-  "Drop off",
-  "Drop off Contact",
-  "Delivered On",
-  "Medium",
-  "Amount",
-  "Payment Status",
-  // "Payment Method",
-  "Delivery Status",
+ ...sortableHeadings,
   "View"
 ];
-
 export interface TripsWithUser extends Trip {
   first_name: string;
   last_name: string;

@@ -6,6 +6,7 @@ import { useEffect, useCallback } from "react";
 import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
 import { UserRole } from "@/lib/store/slice/userSlice";
+import { useSearchAndSort } from "../../hooks/useSearchAndSort";
 
 
 export interface User {
@@ -27,8 +28,17 @@ export const useGetAllUsers = (page:number) => {
   const { usersData,  } = useAppSelector(state=>state.dashboardTables)
   const {selectedUserId} = useAppSelector(state=>state.dashboard)
   
+  const {
+    handleSort, 
+    sortDetails,
+    dataLoading: usersLoading,
+    handleSearch:handleUserSearch,
+    searchRef: userSearchRef,
+    endPoint,
+    setDataLoading: setUsersLoading,
+  } = useSearchAndSort({table: "Users Table", columns: tableHeadings, endPoint: "users?"});
   
-  const { data, isLoading, error } = useGetAllUsersQuery(`users?page=${page}`);
+  const { data, isLoading, error, isSuccess } = useGetAllUsersQuery(`${endPoint}&page=${page}`);
   
   
   const users = data?.users;
@@ -53,9 +63,11 @@ export const useGetAllUsers = (page:number) => {
 
     //set users data 
     useEffect(()=> {
-      
-      
-      dispatch(setTableData({table: "usersData", data:users}))
+      setUsersLoading(true)
+      if(users) {
+        setUsersLoading(false)
+        dispatch(setTableData({table: "usersData", data:users}))
+      }
   }, [dispatch, users])  
 
 
@@ -64,5 +76,35 @@ export const useGetAllUsers = (page:number) => {
   
 }, [dispatch])
 
-  return { usersData, data, users, isLoading, error, total_number_of_pages, handleSetSelectedUser, handleRidersSection, handleDriversSection, total_items, selectedUserId  };
+  return {
+    usersData,
+    data,
+    handleSort,
+    sortDetails,
+    usersLoading,
+    users,
+    isLoading,
+    error,
+    total_number_of_pages,
+    handleSetSelectedUser,
+    handleRidersSection,
+    handleDriversSection,
+    total_items,
+    selectedUserId,
+    handleUserSearch,
+    userSearchRef,
+    isSuccess,
+
+
+  };
 };
+
+const tableHeadings = [
+  "First Name",
+  "Last Name",
+  "Email",
+  "Phone Number",
+  "User Role",
+  "Onboard Status",
+  "Date Joined",
+];

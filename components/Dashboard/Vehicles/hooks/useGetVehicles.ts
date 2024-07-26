@@ -1,4 +1,9 @@
+'use client'
 import { useGetAllVehiclesQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useEffect } from "react";
+import { usePrefetchData } from "../../hooks/usePrefetchData";
+import { useSearchAndSort } from "../../hooks/useSearchAndSort";
+
 export type VehicleType = "car" | "truck" | "motor"
 export interface Vehicle {
     vehicle_id: string,
@@ -11,11 +16,93 @@ export interface Vehicle {
     available: boolean
 }
 
+
+export type VehicleColumns = typeof tableHeadings[number]
+
 export function useGetVehicles(page:number) {
+  const {
+    handleSort, 
+    sortDetails,
+    dataLoading: vehiclesLoading,
+    handleSearch:handleVehicleSearch,
+    searchRef: vehicleSearchRef,
+    endPoint,
+    setDataLoading: setVehiclesLoading,
+  } = useSearchAndSort({table: "Vehicles Table", columns: tableHeadings, endPoint: "vehicles?"});
   
-  const { data, isLoading, error } = useGetAllVehiclesQuery(`vehicles?page=${page}`);
+  //prefetch vehicles data
+
+  const { data, isLoading, error, isSuccess } = useGetAllVehiclesQuery(`${endPoint}&page=${page}`);
   const vehicles = data?.vehicles;
   const total_number_of_pages = data?.total_number_of_pages;
   
-  return {data, vehicles, error, isLoading, total_number_of_pages}
+
+
+  useEffect(()=>{
+    setVehiclesLoading(true)
+
+    if(data) {
+      setVehiclesLoading(false)
+    }
+  }, [data, setVehiclesLoading])
+
+  const {handlePrefetchData} = usePrefetchData({endpoint: endPoint, page, prefetchOption: 'getAllVehicles', total_number_of_pages});
+
+    useEffect(()=> {
+      handlePrefetchData();
+    }, [handlePrefetchData])
+
+  return {
+    data,
+    vehicles,
+    error,
+    isLoading,
+    total_number_of_pages,
+    tableHeadings,
+    handleSort, 
+    sortDetails,
+    vehiclesLoading,
+    handleVehicleSearch,
+    isSuccess,
+    
+    vehicleSearchRef
+  };
 }
+
+const tableHeadings = [
+  "Name",
+  "Type",
+  "Model",
+  "Number Plate",
+  "Available",
+  
+] as const;
+
+
+
+
+
+
+
+
+
+// const vehicleSearchRef = useRef<any>(null);
+  //  const [searchQuery, setSearchQuery] = useState<string>('');
+  // // const { handleSort, sortDetails, setDataLoading: setVehiclesLoading, dataLoading:vehiclesLoading } = useSortTable({table: "Vehicles Table", columns: tableHeadings});
+  // let endPoint = `vehicles?`;
+  // if (sortDetails.column && sortDetails.sortDirection) {
+  //   endPoint+= `&sortColumn=${sortDetails.column}&sortDirection=${sortDetails.sortDirection}`
+  // }
+  // if(searchQuery) {
+  //   endPoint+=`&search=${searchQuery}`
+  // }
+
+
+  
+  // const handleVehicleSearch = ({reset}:{reset?:boolean})=> {
+  //   if(reset) {
+  //     vehicleSearchRef.current.value = ''
+  //   }
+  //   setSearchQuery(vehicleSearchRef?.current?.value)
+  // }
+  
