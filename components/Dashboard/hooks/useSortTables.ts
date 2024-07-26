@@ -8,7 +8,7 @@ interface SortDetails {
 
 export type TableTypes = "Trips Table" | "Vehicles Table" | "Riders Table" | "Drivers Table" | "Users Table"
 
-export function useSortTable({table, columns}:{table: TableTypes, columns: unknown}) {
+export function useSortTable({table, columns}:{table: TableTypes, columns: any}) {
 
   const getIniticalSortDetails = ()=> {
     const savedSortDetail = localStorage.getItem(table);
