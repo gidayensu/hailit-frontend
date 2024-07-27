@@ -69,13 +69,13 @@ export const useDispatcherProfile = () => {
   const dispatcherRoleMapping = {
     Driver: {
       dispatcherUserId: driverData?.driver?.user_id,
-      selectedDispatcher: { ...driver, user_role: dispatcherRole },
+      selectedDispatcher: driver && { ...driver, user_role: dispatcherRole },
       dispatcherLoading: driverLoading,
       dispatcherError: driverError,
     },
     Rider: {
       dispatcherUserId: riderData?.rider?.user_id,
-      selectedDispatcher: { ...rider, user_role: dispatcherRole },
+      selectedDispatcher: rider && { ...rider, user_role: dispatcherRole },
       dispatcherLoading: riderLoading,
       dispatcherError: riderError,
     },
