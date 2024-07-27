@@ -1,9 +1,9 @@
 "use client";
-import { Vehicles } from "@/components/Dashboard/Vehicles/Vehicles";
+import AllVehiclesTable from "@/components/Dashboard/Vehicles/AllVehiclesTable";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 
 const AllVehicles = () => {
-  return <Vehicles />;
+  return <AllVehiclesTable />;
 };
 
 export default withAdminCheck(AllVehicles);

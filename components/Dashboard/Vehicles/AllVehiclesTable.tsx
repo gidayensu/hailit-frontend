@@ -15,10 +15,11 @@ import TablesHeadings from "../TableComponents/TablesHeadings";
 
 import { useGetVehicle } from "./hooks/useGetVehicle";
 import { useGetVehicles, Vehicle } from "./hooks/useGetVehicles";
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 
 
 
-export function Vehicles() {
+export default function AllVehiclesTable() {
     const {handleSelectVehicle} = useGetVehicle()
   const [page, setPage] = useState<number> (1);
  
@@ -28,13 +29,14 @@ export function Vehicles() {
       vehicles,
       isSuccess,
       total_number_of_pages,
+      total_items,
       tableHeadings,
       handleSort,
       sortDetails,
-      
       vehiclesLoading,
       handleVehicleSearch,
       vehicleSearchRef,
+      isSearch
       
     } = useGetVehicles(page);
 
@@ -90,7 +92,12 @@ export function Vehicles() {
         </TableBody>
       </Table>
     </div>
-    <Pagination storageKey="Vehicles"  setPage={setPage} totalPages={total_number_of_pages}/>
+    <div className="flex md:flex-row flex-col">{
+      total_number_of_pages && 
+      <ItemsCount currentItemsCount={vehicles.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
+      }
+    <Pagination storageKey="Vehicles"  setPage={setPage} totalPages={total_number_of_pages} isSearch={isSearch} />
+    </div>
     </>
   );
 }
