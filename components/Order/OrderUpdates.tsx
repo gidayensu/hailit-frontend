@@ -1,19 +1,18 @@
 //ui + icons
 
-import { TripStatus } from "./types/Types";
 
 import Container from "../ui/container";
 import OrderStatusElement from "./TrackOrder/OrderStatusElement";
+import { useGetUserTrip } from "./hooks/useGetUserTrip";
 
-export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{currentOrderStatus: TripStatus, currentOrderStage: number}) {
-
+export default function OrderUpdates() {
+  const { trip } = useGetUserTrip();
 
   return (
     <Container className="w-full rounded-xl h-24 flex justify-center items-center  ">
       <div className="flex justify-center items-center w-full">
       <OrderStatusElement
               orderStatus="Booked"
-              currentOrderStage={currentOrderStage}
               orderStage={1}
             >
               
@@ -21,7 +20,7 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
 
             <OrderStatusElement
               orderStatus="Picked Up"
-              currentOrderStage={currentOrderStage}
+              
               orderStage={2}
             >
               
@@ -29,26 +28,25 @@ export default function OrderUpdates({currentOrderStatus, currentOrderStage}:{cu
 
             <OrderStatusElement
               orderStatus="In Transit"
-              currentOrderStage={currentOrderStage}
               orderStage={3}
             >
               
             </OrderStatusElement>
 
-            {currentOrderStatus !== "Cancelled" && (
+            {trip?.trip_status !== "Cancelled" && (
               <OrderStatusElement
                 orderStatus="Delivered"
-                currentOrderStage={currentOrderStage}
+                
                 orderStage={4}
               >
                 
               </OrderStatusElement>
             )}
 
-            {currentOrderStatus === "Cancelled" && (
+            {trip?.trip_status === "Cancelled" && (
               <OrderStatusElement
                 orderStatus="Cancelled"
-                currentOrderStage={currentOrderStage}
+                
                 orderStage={0}
               >
                 

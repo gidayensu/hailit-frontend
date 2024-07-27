@@ -4,7 +4,7 @@ import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { Trip } from "@/lib/store/slice/tripSlice";
 
 export const useGetUserTrip=()=> {
   const [controlledPollingInterval, setControlledPollingInterval] = useState<number>(5000);
@@ -29,7 +29,7 @@ export const useGetUserTrip=()=> {
   }, [error, setControlledPollingInterval])
     
   
-  const trip = data?.trip
+  const trip:Trip = data?.trip
   const dispatcher = trip?.dispatcher
   return {trip_id, user_id, data, isLoading, error, trip, dispatcher}
     

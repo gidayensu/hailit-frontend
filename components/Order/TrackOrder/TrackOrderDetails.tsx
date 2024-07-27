@@ -13,7 +13,7 @@ import { useGetUserTrip } from "../hooks/useGetUserTrip";
 
 export default  function TrackOrderDetails() {
   
-  const {trip_id, user_id, data, isLoading, error, trip } = useGetUserTrip();
+  const {trip_id, data, isLoading, error, trip } = useGetUserTrip();
      
 
   
@@ -57,5 +57,5 @@ export default  function TrackOrderDetails() {
 
   
   return (
-    <TrackOrderItem trip={trip} userId={user_id}/>  );
+    <TrackOrderItem/>  );
 }

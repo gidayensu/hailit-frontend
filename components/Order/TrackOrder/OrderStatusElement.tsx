@@ -3,9 +3,11 @@
 import { TripStatus } from "../types/Types";
 import { GoX } from "react-icons/go";
 import { GrFormCheckmark } from "react-icons/gr";
+import { useGetUserTrip } from "../hooks/useGetUserTrip";
 
-export default function OrderStatusElement ({orderStatus, orderStage, currentOrderStage, children}: {orderStatus: TripStatus, orderStage:number, currentOrderStage:number, children?:React.ReactNode}) {
-    
+export default function OrderStatusElement ({orderStatus, orderStage, children}: {orderStatus: TripStatus, orderStage:number,  children?:React.ReactNode}) {
+  const { trip } = useGetUserTrip();
+  const currentOrderStage = trip?.trip_stage
     return (
       <div className="flex flex-col items-center justify-center w-1/4 gap-4 relative">
         <div

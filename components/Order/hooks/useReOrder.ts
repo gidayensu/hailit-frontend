@@ -1,18 +1,19 @@
 "use client";
 
 //main components+helper function
-import { extractDateWithDayFromDate } from "@/lib/utils";
 import { NewTrip } from "@/components/Form/FormTypes";
+import { extractDateWithDayFromDate } from "@/lib/utils";
 
 //redux+next+react
-import { useState } from "react";
 import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
-import { Trip } from "@/lib/store/slice/tripSlice";
+import { useState } from "react";
+import { useGetUserTrip } from "./useGetUserTrip";
 
-export const useReOrder = (tripData: Trip) => {
+export const useReOrder = () => {
+  const { trip } = useGetUserTrip();
   const {
     trip_medium,
     payment_method,
@@ -30,7 +31,7 @@ export const useReOrder = (tripData: Trip) => {
     pick_long,
     drop_lat,
     drop_long
-  } = tripData ;
+  } = trip ;
 
   const tripDetails: NewTrip = {
     trip_medium,
@@ -80,5 +81,5 @@ export const useReOrder = (tripData: Trip) => {
   const date = new Date();
   const tripRequestDate = extractDateWithDayFromDate(date);
 
-  return { tripRequestDate, handleSubmit, loading };
+  return { tripRequestDate, handleSubmit, loading, trip };
 };

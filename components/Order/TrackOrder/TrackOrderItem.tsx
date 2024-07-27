@@ -15,42 +15,25 @@ import CustomerHelp from "@/components/Profile/Settings/CustomerHelp";
 import { Modal } from "@/components/Shared/Modal";
 import ModalCard from "@/components/Shared/ModalCard";
 import Container from "@/components/ui/container";
-import { Trip } from "@/lib/store/slice/tripSlice";
-import { extractDateWithDayFromDate } from "@/lib/utils";
 import OrderSummary from "../OrderSummary";
 import OrderUpdates from "../OrderUpdates";
 import { ReOrder } from "../ReOrder";
-import { useUpdateUserTrip } from "../hooks/useUpdateUserTrip";
-import { calculateDistanceAndCost } from "@/lib/calculateDistanceAndCost";
+import { useTrackOrderItem } from "./hooks/useTrackOrderItem";
 
-
-type LocationType = [number, number]
-export default function TrackOrderItem({
-  trip,
-  userId,
-}: {
-  trip: Trip;
-  userId: string;
-}) {
-  const dispatcher = trip?.dispatcher;
-  const isCustomer = userId === trip.customer_id;
-  const tripRequestDate = extractDateWithDayFromDate(trip?.trip_request_date);
-  const { handleTripUpdate, isLoading, isSuccess, error } = useUpdateUserTrip();
-  
-  const dropOffLocation: LocationType = [+trip?.drop_lat, +trip?.drop_long]
-  const pickUpLocation: LocationType = [+trip?.pick_lat, +trip?.pick_long]
-
-  const distanceAndCost =
+export default function TrackOrderItem() {
+  const {
+    trip,
     
-    calculateDistanceAndCost({
-      lat1: +trip?.pick_lat,
-      lon1: +trip?.pick_long,
-      lat2: +trip?.drop_lat, 
-      lon2: +trip?.drop_long,
-    });
+    tripOngoingStatus,
+    tripRequestDate,
+    isCustomer,
+    
+    handleTripUpdate,
+    tripUdpateLoading,
+    tripUdpateError,
+    tripUpdateSuccess,
+  } = useTrackOrderItem();
 
-    const distance = distanceAndCost?.distance ?? 0;
-    const tripOngoingStatus = ["Booked","Picked Up", "In Transit"]
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
@@ -69,31 +52,23 @@ export default function TrackOrderItem({
 
       <MiddleSectionContainer className="flex flex-col justify-start items-center space-y-2 p-5">
         <TrackOrderContainer headingText="Trip Status">
-          <OrderUpdates
-            currentOrderStage={trip.trip_stage}
-            currentOrderStatus={trip.trip_status}
-          />
+          <OrderUpdates/>
         </TrackOrderContainer>
         {
           tripOngoingStatus.includes(trip.trip_status) &&
         <TrackOrderContainer headingText="Courier">
-          <OrderDispatcherCard
-            firstName={dispatcher.first_name}
-            lastName={dispatcher.last_name}
-            phoneNumber={dispatcher.phone_number}
-            vehicleName={dispatcher.vehicle?.vehicle_name}
-            vehicleNumber={dispatcher.vehicle?.plate_number}
-          />
+          <OrderDispatcherCard />
         </TrackOrderContainer>
         }
 
         <TrackOrderContainer headingText="Location and Timeline">
           <Container className="w-full flex flex-col gap-2  max-h-80 rounded-xl p-1 ">
-            <OrderSummary trip={trip} />
+            {/* prop drilling is used because OrderSummary is used by other components */}
+            <OrderSummary trip={trip} /> 
           </Container>
           {trip?.drop_lat && isCustomer &&
 
-<TripMap dropOffLocation={dropOffLocation} pickUpLocation={pickUpLocation} distance={distance}/>
+            <TripMap />
 }
         </TrackOrderContainer>
 
@@ -119,7 +94,7 @@ export default function TrackOrderItem({
             {isCustomer && (
               <>
               
-                <ReOrder tripData={trip} />
+                <ReOrder/>
 
                 {(trip.trip_status === "Booked" ||
                   trip.trip_status === "Picked Up" ||
@@ -130,15 +105,15 @@ export default function TrackOrderItem({
                   >
                     <ModalCard
                       modalType="destructive"
-                      loading={isLoading}
+                      loading={tripUdpateLoading}
                       confirmFunc={() =>
                         handleTripUpdate({ trip_status: "Cancelled" })
                       }
-                      error={error}
-                      isSuccess={isSuccess}
+                      error={tripUdpateError}
+                      isSuccess={tripUpdateSuccess}
                     >
                       <div className="flex flex-col items-center justify-center">
-                        {error && (
+                        {tripUdpateError && (
                           <>
                             <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-red-200">
                               <MdOutlineError className="text-red-500 text-2xl" />
@@ -148,7 +123,7 @@ export default function TrackOrderItem({
                             </h2>
                           </>
                         )}
-                        {isSuccess && (
+                        {tripUpdateSuccess && (
                           <>
                             <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-green-200">
                               <PiCheckCircleFill className="text-green-500 text-2xl" />
@@ -159,7 +134,7 @@ export default function TrackOrderItem({
                           </>
                         )}
 
-                        {!error && !isSuccess && (
+                        {!tripUdpateError && !tripUpdateSuccess && (
                           <>
                             <span className="mb-4 flex items-center justify-center h-9 w-9 rounded-full bg-red-200">
                               <RxCross2 className="text-red-500 text-2xl" />

@@ -12,13 +12,13 @@ import Loader from "../Shared/Loader";
 
 //main components
 import OrderSummaryMin from "./OrderSummaryMin";
-import { Trip } from "@/lib/store/slice/tripSlice";
+
 //hook
 import { useReOrder } from "./hooks/useReOrder";
 
-export function ReOrder({ tripData }: { tripData: Trip }) {
+export function ReOrder() {
   
-  const {tripRequestDate, handleSubmit, loading} = useReOrder(tripData);
+  const {tripRequestDate, handleSubmit, loading, trip} = useReOrder();
   
   return (
     <Drawer>
@@ -37,9 +37,9 @@ export function ReOrder({ tripData }: { tripData: Trip }) {
               </span>
               <span className="text-sm">
                 <p className="line-clamp-1">
-                  <b>Pickup:</b> {tripData.pickup_location}
+                  <b>Pickup:</b> {trip?.pickup_location}
                 </p>
-                <p>{tripData.sender_number}</p>
+                <p>{trip?.sender_number}</p>
               </span>
             </div>
             <div className="flex flex-col justify-end items-start">
@@ -49,9 +49,9 @@ export function ReOrder({ tripData }: { tripData: Trip }) {
               <span className="text-sm">
                 <p className="line-clamp-1">
                   <b>To: </b>
-                  {tripData.drop_off_location}
+                  {trip?.drop_off_location}
                 </p>
-                <p>{tripData.recipient_number}</p>
+                <p>{trip?.recipient_number}</p>
               </span>
             </div>
           </div>
@@ -60,8 +60,8 @@ export function ReOrder({ tripData }: { tripData: Trip }) {
               tripId="#tripID"
               tripRequestDate={tripRequestDate}
               deliveryStatus="Booked"
-              packageType={tripData.package_type}
-              cost={tripData.trip_cost}
+              packageType={trip?.package_type}
+              cost={trip?.trip_cost}
             />
           </div>
           <DrawerFooter>
