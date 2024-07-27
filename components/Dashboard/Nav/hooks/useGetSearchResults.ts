@@ -1,7 +1,6 @@
 'use client'
 import { useLazySearchTripsQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { setActiveSection } from "@/lib/store/slice/dashboardSlice";
+
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { useCallback, useRef, useState } from "react";
 
@@ -10,12 +9,12 @@ import { useRouter } from "next/navigation";
 export const useGetSearchResults = () => {
     const [openSearchContainer, setOpenSearchContainer] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    
     const inputRef = useRef<any>(null);
     const searchContainerRef = useRef<any>(null);
     
     const router  = useRouter();
 
-    const dispatch = useAppDispatch();
 
     const [searchTrips, { data, error, isLoading: tripsLoading }] = useLazySearchTripsQuery();
 
@@ -56,7 +55,6 @@ export const useGetSearchResults = () => {
     // }, [data, tripsLoading]);
 
     const handleSearchItemTrack = (selectedTripId:string)=> {
-        dispatch(setActiveSection('Track Order'))
         setOpenSearchContainer(false)
         router.push(`/dashboard/track-order/${selectedTripId}`)
         inputRef.current.value = '';
