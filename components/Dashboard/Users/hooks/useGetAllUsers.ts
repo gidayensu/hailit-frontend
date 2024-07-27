@@ -1,15 +1,12 @@
 'use client'
 import { useGetAllUsersQuery } from "@/lib/store/apiSlice/hailitApi";
-import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
-import { UserRole } from "@/lib/store/slice/userSlice";
 import { useSearchAndSort } from "../../hooks/useSearchAndSort";
-
 
 export interface User {
   user_id: string;
@@ -36,18 +33,19 @@ export const useGetAllUsers = (page:number) => {
     dataLoading: usersLoading,
     handleSearch:handleUserSearch,
     searchRef: userSearchRef,
-    endPoint,
+    endpoint,
     setDataLoading: setUsersLoading,
-  } = useSearchAndSort({table: "Users Table", columns: tableHeadings, endPoint: "users?"});
+    isSearch
+  } = useSearchAndSort({table: "Users Table", columns: tableHeadings, endpoint: "users?"});
   
-  const { data, isLoading, error, isSuccess } = useGetAllUsersQuery(`${endPoint}&page=${page}`);
+  const { data, isLoading, error, isSuccess } = useGetAllUsersQuery(`${endpoint}&page=${page}`);
   
   
   const users = data?.users;
   const total_number_of_pages = data?.total_number_of_pages
   const total_items = data?.total_items;
   //prefetch users data
-  const {handlePrefetchData} = usePrefetchData({endpoint: 'users?', page, prefetchOption: 'getAllUsers', total_number_of_pages});
+  const {handlePrefetchData} = usePrefetchData({endpoint: endpoint, page, prefetchOption: 'getAllUsers', total_number_of_pages});
 
   useEffect(()=> {
     handlePrefetchData();
@@ -68,7 +66,7 @@ export const useGetAllUsers = (page:number) => {
       setUsersLoading(true)
       if(users) {
         setUsersLoading(false)
-        dispatch(setTableData({table: "usersData", data:users}))
+        
       }
   }, [dispatch, users])  
 
@@ -96,7 +94,7 @@ export const useGetAllUsers = (page:number) => {
     handleUserSearch,
     userSearchRef,
     isSuccess,
-
+    isSearch
 
   };
 };

@@ -26,31 +26,34 @@ export function useGetVehicles(page:number) {
     dataLoading: vehiclesLoading,
     handleSearch:handleVehicleSearch,
     searchRef: vehicleSearchRef,
-    endPoint,
+    endpoint,
     setDataLoading: setVehiclesLoading,
-  } = useSearchAndSort({table: "Vehicles Table", columns: tableHeadings, endPoint: "vehicles?"});
+    isSearch
+  } = useSearchAndSort({table: "Vehicles Table", columns: tableHeadings, endpoint: "vehicles?"});
   
   //prefetch vehicles data
 
-  const { data, isLoading, error, isSuccess } = useGetAllVehiclesQuery(`${endPoint}&page=${page}`);
+  const { data, isLoading, error, isSuccess, } = useGetAllVehiclesQuery(`${endpoint}&page=${page}`);
+  
   const vehicles = data?.vehicles;
   const total_number_of_pages = data?.total_number_of_pages;
-  
+  const total_items = data?.total_items;
 
 
   useEffect(()=>{
-    setVehiclesLoading(true)
+    
+    data && !isLoading? setVehiclesLoading(false) : setVehiclesLoading(true);
 
-    if(data) {
-      setVehiclesLoading(false)
-    }
   }, [data, setVehiclesLoading])
 
-  const {handlePrefetchData} = usePrefetchData({endpoint: endPoint, page, prefetchOption: 'getAllVehicles', total_number_of_pages});
+  const {handlePrefetchData} = usePrefetchData({endpoint: endpoint, page, prefetchOption: 'getAllVehicles', total_number_of_pages});
 
     useEffect(()=> {
       handlePrefetchData();
     }, [handlePrefetchData])
+
+  
+    
 
   return {
     data,
@@ -64,8 +67,9 @@ export function useGetVehicles(page:number) {
     vehiclesLoading,
     handleVehicleSearch,
     isSuccess,
-    
-    vehicleSearchRef
+    total_items,
+    vehicleSearchRef,
+    isSearch
   };
 }
 
@@ -89,12 +93,12 @@ const tableHeadings = [
 // const vehicleSearchRef = useRef<any>(null);
   //  const [searchQuery, setSearchQuery] = useState<string>('');
   // // const { handleSort, sortDetails, setDataLoading: setVehiclesLoading, dataLoading:vehiclesLoading } = useSortTable({table: "Vehicles Table", columns: tableHeadings});
-  // let endPoint = `vehicles?`;
+  // let endpoint = `vehicles?`;
   // if (sortDetails.column && sortDetails.sortDirection) {
-  //   endPoint+= `&sortColumn=${sortDetails.column}&sortDirection=${sortDetails.sortDirection}`
+  //   endpoint+= `&sortColumn=${sortDetails.column}&sortDirection=${sortDetails.sortDirection}`
   // }
   // if(searchQuery) {
-  //   endPoint+=`&search=${searchQuery}`
+  //   endpoint+=`&search=${searchQuery}`
   // }
 
 

@@ -10,6 +10,7 @@ import { useSearchAndSort } from "./useSearchAndSort";
 export type TripsColumns = typeof tableHeadings[number]
 
 type Table = "overview" | "trips"
+
 export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
   const { overviewData}  = useAppSelector(state => state.dashboardTables);
   const [tripLoading, setTripLoading] = useState<boolean>(false);
@@ -22,9 +23,10 @@ export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
     dataLoading: tripsLoading,
     handleSearch:handleTripSearch,
     searchRef: tripSearchRef,
-    endPoint,
+    endpoint,
     setDataLoading: setTripsLoading,
-  } = useSearchAndSort({table: "Trips Table", columns: tableHeadings, endPoint: "trips?"});
+    isSearch
+  } = useSearchAndSort({table: "Trips Table", columns: tableHeadings, endpoint: "trips?"});
   
   const dispatch = useAppDispatch();
   
@@ -38,7 +40,7 @@ export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
   
   
   
-  const { data, isLoading, error, isSuccess } = useGetAllTripsQuery(`${endPoint}&page=${page}`, {
+  const { data, isLoading, error, isSuccess } = useGetAllTripsQuery(`${endpoint}&page=${page}`, {
     pollingInterval:5000,
     skipPollingIfUnfocused: true
   });
@@ -47,7 +49,7 @@ export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
   const total_number_of_pages = data?.total_number_of_pages;
   const total_items = data?.total_items
 
-  const {handlePrefetchData} = usePrefetchData({endpoint: 'trips?', page, prefetchOption: 'getAllTrips', total_number_of_pages});
+  const {handlePrefetchData} = usePrefetchData({endpoint: endpoint, page, prefetchOption: 'getAllTrips', total_number_of_pages});
   
   //prefetch useEffect
 
@@ -83,6 +85,7 @@ export const useGetTrips = ({page, table}: {page: number, table:Table}) => {
     tripSearchRef,
     sortDetails,
     handleSort,
+    isSearch,
     handleTripSearch,
     isSuccess
   };

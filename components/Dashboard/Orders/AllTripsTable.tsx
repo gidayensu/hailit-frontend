@@ -18,15 +18,15 @@ import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
 import { useAllTripsTable } from "./hooks/useAllTripsTable";
+import { useState } from "react";
 export function AllTripsTable() {
   
-  const { tripLoading, selectedTripId, tripTrack, page, setPage } =
+  const { tripLoading, selectedTripId, tripTrack, } =
     useAllTripsTable();
-  
+    const [page, setPage] = useState<number> (1);
   const {
     tripsLoading,
     total_number_of_pages,
-    
     error,
     total_items,
     tripSearchRef,
@@ -34,15 +34,18 @@ export function AllTripsTable() {
     sortDetails,
     trips,
     handleSort,
-    handleTripSearch,}  = useGetTrips({ page, table:"trips"});
+    handleTripSearch,
+    isSearch
+  
+  }  = useGetTrips({ page, table:"trips"});
 
 
   return (
     <>
-    <div className="w-full flex items-end justify-between">
+    <div className="w-full flex items-end justify-between gap-2">
     <Link href={'/dashboard/orders/add-order'}>
     
-    <Button  > Add order</Button>
+    <Button  > New order</Button>
     </Link>
 
     <SearchTable ref={tripSearchRef} handleSearch={handleTripSearch} isSuccess={isSuccess}/>
@@ -84,7 +87,7 @@ export function AllTripsTable() {
                 </TableCell>
                 <TableCell className=" line-clamp-1">{extractBeforeComma(trip.pickup_location)}</TableCell>
                 <TableCell>{trip.sender_number}</TableCell>
-                <TableCell className="truncate">{extractBeforeComma(trip.drop_off_location)}</TableCell>
+                <TableCell className="truncate text-wrap">{extractBeforeComma(trip.drop_off_location)}</TableCell>
                 <TableCell>{trip.recipient_number}</TableCell>
                 <TableCell>
                   {trip.trip_completion_date
@@ -128,12 +131,12 @@ export function AllTripsTable() {
       </Table>
     </div>
       
-    <div>{
+    <div className="flex md:flex-row flex-col">{
       total_number_of_pages && 
       <ItemsCount currentItemsCount={trips.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
+    <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips" isSearch={isSearch}/>
     </div>
-    <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips"/>
     </>
   );
 }

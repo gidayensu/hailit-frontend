@@ -5,22 +5,26 @@ import { TableTypes } from "./useSortTables";
 
  type EndPoint = "vehicles?" | "users?" | "riders?" | "drivers?" | "trips?";
 
-export function useSearchAndSort({endPoint, columns, table}:{table:TableTypes,  endPoint:EndPoint, columns: any}) {
+export function useSearchAndSort({endpoint, columns, table}:{table:TableTypes,  endpoint:EndPoint, columns: any}) {
 
   const searchRef = useRef<any>(null);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
    const [searchQuery, setSearchQuery] = useState<string>('');
   const { handleSort, sortDetails, setDataLoading, dataLoading, } = useSortTable({table: table, columns: columns});
   
   if (sortDetails.column && sortDetails.sortDirection) {
-    endPoint+= `&sortColumn=${sortDetails.column}&sortDirection=${sortDetails.sortDirection}`
+    endpoint+= `&sortColumn=${sortDetails.column}&sortDirection=${sortDetails.sortDirection}`
   }
   if(searchQuery) {
-    endPoint+=`&search=${searchQuery}`
+    endpoint+=`&search=${searchQuery}`
   }
 
   const handleSearch = ({reset}:{reset?:boolean})=> {
     if(reset) {
       searchRef.current.value = ''
+      setIsSearch(false)
+    } else {
+      setIsSearch(true)
     }
     setSearchQuery(searchRef?.current?.value)
   }
@@ -31,8 +35,9 @@ export function useSearchAndSort({endPoint, columns, table}:{table:TableTypes,  
     dataLoading,
     handleSearch,
     searchRef,
-    endPoint,
-    setDataLoading
+    endpoint,
+    setDataLoading,
+    isSearch
   };
 }
 

@@ -28,10 +28,10 @@ export default function AllUsersTable() {
   
 
   const {
-    usersData,
     handleSort,
     sortDetails,
     usersLoading,
+    users,
     error,
     total_number_of_pages,
     handleSetSelectedUser,
@@ -42,6 +42,7 @@ export default function AllUsersTable() {
     handleUserSearch,
     userSearchRef,
     isSuccess,
+    isSearch
 
   } = useGetAllUsers(page);
   
@@ -113,9 +114,9 @@ export default function AllUsersTable() {
               </div>
             )}
             {
-              usersData?.length &&
-              usersData && !usersLoading &&
-              usersData.map((user: User) => (
+              users?.length &&
+              users && !usersLoading && !error &&
+              users.map((user: User) => (
                 <>
                   {userLoading && selectedUserId === user.user_id && (
                     <DashboardTableItemLoader />
@@ -132,12 +133,12 @@ export default function AllUsersTable() {
                     <TableCell>{user.first_name}</TableCell>
                     <TableCell>{user.last_name}</TableCell>
 
+                    <TableCell>{user.phone_number}</TableCell>
                     <TableCell>{user.email}</TableCell>
 
-                    <TableCell>{user.phone_number}</TableCell>
                     <TableCell>{user.user_role}</TableCell>
-                    <TableCell className="flex items-center justify-center">
-                      <div className={` text-white text-[12px]  rounded-full`}>
+                    <TableCell className="flex items-center justify-center ">
+                      <div className={` text-white text-[12px] rounded-full`}>
                         {user.onboard ? (
                           <LuCheckCircle2 className="text-green-500 text-2xl" />
                         ) : (
@@ -167,9 +168,9 @@ export default function AllUsersTable() {
           </TableBody>
         </Table>
       </div>
-      {usersData && (
+      {users && (
         <ItemsCount
-          currentItemsCount={usersData.length}
+          currentItemsCount={users.length}
           item="Users"
           page={page}
           total_items={total_items}
@@ -180,6 +181,7 @@ export default function AllUsersTable() {
         setPage={setPage}
         totalPages={total_number_of_pages}
         storageKey="AllUsers"
+        isSearch = {isSearch}
       />
     </>
   );
@@ -188,8 +190,8 @@ export default function AllUsersTable() {
 const tableHeadings = [
   "First Name",
   "Last Name",
-  "Email",
   "Phone Number",
+  "Email",
   "User Role",
   "Onboard Status",
   "Date Joined",
