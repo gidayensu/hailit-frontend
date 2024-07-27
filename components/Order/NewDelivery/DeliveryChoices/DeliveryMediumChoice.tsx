@@ -22,7 +22,7 @@ export default function DeliveryMediumChoice() {
         }}
         disabled = {trip_type === "Same Day"}
       >
-        <p className="text-sm md:text-md text-center">Large package</p>
+        <p className="text-[12px] md:text-md text-center">Large package</p>
       </DeliveryChoices>
 
       <DeliveryChoices
@@ -36,7 +36,7 @@ export default function DeliveryMediumChoice() {
         disabled={trip_area === "Inter City"}
         recommended= {trip_type === "Same Day"}
       >
-        <p className="text-sm md:text-md text-center">Medium package</p>
+        <p className="text-[12px] md:text-md text-center p-1">Medium package</p>
       </DeliveryChoices>
       <DeliveryChoices
         handleDeliveryOption={handleDeliveryChoice}
@@ -48,7 +48,7 @@ export default function DeliveryMediumChoice() {
         }}
         recommended= {trip_area === "Inter City"}
       >
-        <p className="text-sm md:text-md text-center">Big package</p>
+        <p className="text-[12px] md:text-md text-center">Big package</p>
       </DeliveryChoices>
     </>
   );

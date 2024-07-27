@@ -51,41 +51,50 @@ export default function SendPackage() {
       <article
         ref={destinationAreaRef}
         
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
+        className="mt-5 flex flex-col   md:w-3/6 w-5/6 rounded-2xl gap-3 "
         onClick={() => scrollToSection(deliveryDayRef)}
-      >
+      > 
         <h2 className="font-bold text-xl  mb-2">
           Select destination area
         </h2>
-        <section className="flex flex-col md:flex-row md:w-4/6 w-full items-center justify-center gap-2 md:items-center">
+        <div className="w-full flex items-center justify-start">
+
+        <section className="flex flex-col md:flex-row  w-full items-center justify-center gap-2 md:items-center ">
           <PackageDestinationChoice />
         </section>
+        </div>
       </article>
 
       <article
         ref={deliveryDayRef}
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
+        className="mt-5 flex flex-col md:w-3/6 w-5/6 rounded-2xl gap-3"
         onClick={() => scrollToSection(deliveryMediumRef)}
       >
         <h2 className="font-bold text-xl my-2">Select delivery day</h2>
-        <section className="flex w-full md:flex-row md:w-4/6 items-center justify-center gap-2 md:items-center">
+        <div className="w-full flex items-center justify-start">
+
+        <section className="flex w-full md:flex-row items-center justify-center gap-2 md:items-center">
           <DeliveryDayChoice />
         </section>
+        </div>
       </article>
 
       <article
         ref={deliveryMediumRef}
-        className="mt-5 flex flex-col items-center justify-center md:4/6 w-5/6 rounded-2xl gap-3"
-        // onClick={()=>scrollToSection("continue")}
+        className="mt-5 flex flex-col md:w-3/6 w-5/6 rounded-2xl gap-3 "
+        
       >
         <h2 className="font-bold text-xl  my-2">
           Select delivery medium
         </h2>
-        <section className="flex w-full md:flex-row md:w-4/6 items-center justify-center gap-2 md:items-center">
+        <div className="w-full flex items-center justify-start">
+
+        <section className="flex w-full md:flex-row items-center justify-center gap-2 md:items-center">
           <DeliveryMediumChoice />
         </section>
+        </div>
       </article>
-      <article className="flex items-center justify-center flex-col md:4/6 w-5/6" >
+      <article className="flex items-center justify-center flex-col md:w-3/6 w-5/6" >
         {
           (!trip_medium || !trip_area || !trip_type ) &&
           <>
@@ -98,8 +107,8 @@ export default function SendPackage() {
 
 {
           (trip_medium && trip_area && trip_type ) &&
-          <Link href={'/order/new'} className="w-full flex items-center justify-center" onClick={handleLoading}>
-          <Button className="md:w-4/6 w-full">
+          <Link href={'/order/new'} className="w-full flex items-center justify-center mt-2" onClick={handleLoading}>
+          <Button className=" w-full">
             {isLoading ? <Loader /> : 'Continue'}
           </Button>
           

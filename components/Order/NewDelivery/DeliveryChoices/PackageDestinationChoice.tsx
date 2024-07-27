@@ -12,6 +12,8 @@ export default function PackageDestinationChoice() {
     
   return (
     <>
+
+      <div className="w-full  flex gap-3 p-1">
       <DeliveryChoices
         handleDeliveryOption={handleDeliveryChoice}
         deliveryOption={trip_area}
@@ -22,10 +24,8 @@ export default function PackageDestinationChoice() {
           choiceCategory: "trip_area"
        }}
       >
-        <p className="text-sm md:text-md text-center">Accra or Tema suburb</p>
+        <p className="text-[12px] md:text-md text-center">Accra or Tema suburb</p>
       </DeliveryChoices>
-
-      <div className="w-full md:w-2/3 flex gap-3">
         <DeliveryChoices
           handleDeliveryOption={handleDeliveryChoice}
           deliveryOption={trip_area}
@@ -36,7 +36,7 @@ export default function PackageDestinationChoice() {
             choiceCategory: "trip_area"
          }}
         >
-          <p className="text-sm md:text-md text-center">Abuakwa, Ejisu, etc</p>
+          <p className="text-[12px] md:text-md text-center">Abuakwa, Ejisu, etc</p>
         </DeliveryChoices>
 
         <DeliveryChoices
@@ -50,7 +50,7 @@ export default function PackageDestinationChoice() {
          }}
          disabled= {trip_medium === "Motor" || trip_type === "Same Day"}
         >
-          <p className="text-sm md:text-md text-center">Accra - Kumasi</p>
+          <p className="text-[12px] md:text-md text-center">Accra - Kumasi</p>
         </DeliveryChoices>
       </div>
     </>
