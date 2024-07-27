@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 export const useGetTrip = () => {
   const router = useRouter();
   const inputRef = useRef<any>(null);
-  const [editingOrder, setEditingOrder] = useState<boolean>(false);
   const [controlledPollingInterval, setControlledPollingInterval] =
     useState<number>(5000);
 
@@ -17,9 +16,6 @@ export const useGetTrip = () => {
   const { trip_id } = params;
   const selectedTripId = trip_id;
 
-  const handleEditingOrder = () => {
-    setEditingOrder(() => !editingOrder);
-  };
 
 
   const { tripStage, tripStatus } = useAppSelector((state) => state.dashboard);
@@ -33,10 +29,10 @@ export const useGetTrip = () => {
 
   //control polling from running when there is an error
   useEffect(() => {
-    if (error || editingOrder) {
+    if (error ) {
       setControlledPollingInterval(0);
     }
-  }, [error, setControlledPollingInterval, editingOrder]);
+  }, [error, setControlledPollingInterval,]);
 
   const fetchedTrip = data?.trip;
   const dispatch = useAppDispatch();
@@ -69,7 +65,6 @@ export const useGetTrip = () => {
     selectedTripId,
     handleTrackTrip,
 
-    editingOrder,
-    handleEditingOrder,
+    
   };
 };

@@ -3,7 +3,6 @@
 //main components
 import TrackOrderForm from "@/components/Form/TrackOrderForm";
 import BigLoader from "../../Shared/BigLoader";
-import EditTrip from "./Actions/EditTrip";
 //hook
 import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 import TripDetail from "./TripDetail";
@@ -15,7 +14,6 @@ export default function  TrackOrder() {
     isLoading,
     handleTrackTrip,
     error,
-    editingOrder,
     selectedTripId
   } = useGetTrip();
   
@@ -24,9 +22,9 @@ export default function  TrackOrder() {
     <main className="flex flex-col gap-5  md:h-full md:mb-0  ">
       {/* HEADER */}
       
-      {!editingOrder && isLoading && !error  && <BigLoader />}
+      {isLoading && !error  && <BigLoader />}
 
-      {!editingOrder && !isLoading && trip &&   !error  && (
+      {!isLoading && trip &&   !error  && (
         <TripDetail  />
         )}
        {error && selectedTripId && (
@@ -41,7 +39,7 @@ export default function  TrackOrder() {
           <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
         </>
       )}
-      {editingOrder && <EditTrip />}
+      
     </main>
   );
 }
