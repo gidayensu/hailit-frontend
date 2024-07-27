@@ -1,15 +1,15 @@
 "use client";
 import FormField from "@/components/Form/FormField";
 import Loader from "@/components/Shared/Loader";
+import SecondaryModal from "@/components/Shared/SecondaryModal";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
-import SecondaryModal from "@/components/Shared/SecondaryModal";
-import { VehicleType } from "./hooks/useGetVehicles";
-import { Vehicle } from "./hooks/useGetVehicles";
-import { useEditVehicle,  } from "./hooks/useEditVehicle";
+import { useEditVehicle, } from "./hooks/useEditVehicle";
+
+import { VehicleType, Vehicle } from "./AllVehiclesTable";
 
 export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, handleGoBack: ()=>void}) {
   

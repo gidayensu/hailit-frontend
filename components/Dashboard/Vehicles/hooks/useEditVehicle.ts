@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Vehicle as VehicleFormDetails, VehicleSchema } from "@/components/Form/FormTypes";
-import { Vehicle, VehicleType } from "./useGetVehicles";
+import { VehicleType, Vehicle } from "../AllVehiclesTable";
+
 
 
 
