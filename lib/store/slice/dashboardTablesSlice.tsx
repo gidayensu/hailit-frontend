@@ -3,8 +3,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Driver } from "@/components/Dashboard/Users/Dispatchers/AllDriversTable";
 import { Rider } from "@/components/Dashboard/Users/Dispatchers/AllRidersTable";
 import { Trip, TripsWithUser } from "./tripSlice";
-import { User } from "@/components/Dashboard/Users/hooks/useGetAllUsers";
-import { Vehicle } from "@/components/Dashboard/Vehicles/hooks/useGetVehicles";
+import { User } from "@/components/Dashboard/Users/hooks/useUsersTable";
+import { Vehicle } from "@/components/Dashboard/Vehicles/AllVehiclesTable";
+
 
 type Table = "overviewData" | "usersData" | "tripsData" | "vehiclesData" | "ridersData" | "driversData";
 
