@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { User } from "./useGetAllUsers";
+import { User } from "./useUsersTable";
 export const useGetUser = (customerId:string)=> {
     const dispatch = useAppDispatch();
     const router = useRouter();

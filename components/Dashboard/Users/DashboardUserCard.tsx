@@ -3,7 +3,7 @@ import { useDeleteUser } from "./hooks/useDeleteUser";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import DeleteModalCard from "../TrackOrder/DeleteModalCard";
-import { User } from "./hooks/useGetAllUsers";
+import { User } from "./hooks/useUsersTable";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 export default function DashboardUserCard ({selectedUser, editUser}: {selectedUser:User, editUser:()=>void}) {

@@ -3,7 +3,7 @@ import { PackageType, TripArea, TripMedium, TripStatus } from "@/components/Orde
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useState } from "react";
-import { User } from "./useGetAllUsers";
+import { User } from "./useUsersTable";
 import { useGetUser } from "./useGetUser";
 import { PaymentMethod } from "@/components/Order/types/Types";
 

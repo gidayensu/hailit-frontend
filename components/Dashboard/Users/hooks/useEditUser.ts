@@ -8,7 +8,7 @@ import { UserRole } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { User as UserInterface } from "./useGetAllUsers";
+import { User as UserInterface } from "./useUsersTable";
 
 
 export const useEditUser = (user: UserInterface) => {

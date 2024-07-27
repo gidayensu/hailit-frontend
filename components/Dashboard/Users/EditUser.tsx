@@ -9,7 +9,7 @@ import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
 import SecondaryModal from "../../Shared/SecondaryModal";
 import { useEditUser } from "./hooks/useEditUser";
-import { User } from "./hooks/useGetAllUsers";
+import { User } from "./hooks/useUsersTable";
 
 export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User, handleGoBack: ()=>void}) {
   
