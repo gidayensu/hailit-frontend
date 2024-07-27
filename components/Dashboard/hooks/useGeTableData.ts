@@ -133,19 +133,32 @@ const USERS_TABLE_COLUMNS = [
   "Onboard Status",
   "Date Joined",
 ];
+
 const VEHICLES_TABLE_COLUMNS = [
   "Name",
   "Type",
   "Model",
   "Number Plate",
-  "Available",
-  
-] 
+  "Available",  
+]; 
+
+
+const DISPATCHER_TABLE_COLUMNS = [
+  "Full Name",
+  "Email",
+  "Phone Number",
+  "License Number",
+  "Rating",
+  "Vehicle Name",
+  "Vehicle Number",
+  "Available"  
+];
+
 const tableColumns = {
   [TableType.UsersTable]: USERS_TABLE_COLUMNS,
   [TableType.VehiclesTable]: VEHICLES_TABLE_COLUMNS,
-  [TableType.DriversTable]: VEHICLES_TABLE_COLUMNS,
-  [TableType.RidersTable]: VEHICLES_TABLE_COLUMNS,
+  [TableType.DriversTable]: DISPATCHER_TABLE_COLUMNS,
+  [TableType.RidersTable]: DISPATCHER_TABLE_COLUMNS,
   [TableType.TripsTable]: TRIPS_TABLE_COLUMNS,
   
 }

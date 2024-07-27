@@ -1,29 +1,45 @@
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
+import Pagination from "@/components/Shared/Pagination/Pagination";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import { useGetAllDriversQuery } from "@/lib/store/apiSlice/hailitApi";
-import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
-import SkeletonTable from "../../SkeletonTable";
-import { Rating } from "./AllRidersTable";
-import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import DashboardTableItemLoader from "../../DashboardTableItemLoader";
-
+import { TableType, useGetTableData } from "../../hooks/useGeTableData";
+import SkeletonTable from "../../SkeletonTable";
+import SearchTable from "../../TableComponents/SearchTable";
+import TablesHeadings from "../../TableComponents/TablesHeadings";
+import { Rating } from "./AllRidersTable";
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 
 export function AllDrivers() {
-    const {data:driversData, isLoading:loadingDrivers, error:errorDrivers} = useGetAllDriversQuery(`drivers`);
-    const drivers = driversData?.drivers;
+  const [page, setPage] = useState<number> (1);
+    
+    
     const {handleSelectedDriverId, handleSetDispatcherRole, selectedDriverId,} = useDispatcherProfile()
     
     const [driverLoading, setDriverLoading] = useState<boolean>(false);
+    const {
+      handleSort,
+      sortDetails,
+      dataLoading:driversLoading,
+      data,
+      error,
+      total_number_of_pages,
+      total_items,
+      handleSearch:handleDriversSearch,
+      searchRef:driverSearchRef,
+      isSuccess,
+      isSearch
+    } = useGetTableData({table:TableType.DriversTable, page});
     
+    const drivers = data?.drivers
 
     const router = useRouter();
 
@@ -32,29 +48,30 @@ export function AllDrivers() {
       setDriverLoading(true)
       handleSetDispatcherRole('Driver');
       router.push('/dashboard/dispatchers/dispatcher-details')
-
     }
 
-    if (errorDrivers) {
+    if (error) {
       return <div>
         <p className="text-3xl font-bold flex flex-col items-center justify-center"> Error occurred!</p>
         
       </div>
     }
+
     return (
       <>
+      <SearchTable
+        ref={driverSearchRef}
+        handleSearch={handleDriversSearch}
+        isSuccess={isSuccess}
+      />
         <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
           <Table>
             <TableHeader>
-              <TableRow>
-                {tableHeadings.map((tableHeading) => (
-                  <TableHead key={tableHeading}>{tableHeading}</TableHead>
-                ))}
-              </TableRow>
+              <TablesHeadings handleSort={handleSort} sortDetails={sortDetails} tableHeadings={tableHeadings} />
             </TableHeader>
             <TableBody>
-              {loadingDrivers && <SkeletonTable rows={7} cells={8} />}
-              {driversData &&
+              {driversLoading && <SkeletonTable rows={7} cells={8} />}
+              {drivers && !driversLoading &&
                 drivers.map((driver: Driver) => (
                   <>
                     {driverLoading && selectedDriverId === driver.driver_id && (
@@ -93,15 +110,25 @@ export function AllDrivers() {
             </TableBody>
           </Table>
         </div>
+        <div className="flex w-full justify-between gap-2 items-center">
+
         {drivers && (
           <ItemsCount
             currentItemsCount={drivers.length}
             item="Drivers"
             page={1}
-            total_items={drivers.length}
-            total_number_of_pages={1}
+            total_items={total_items}
+            total_number_of_pages={total_number_of_pages}
           />
+          
         )}
+        <Pagination
+        setPage={setPage}
+        totalPages={total_number_of_pages}
+        storageKey="AllUsers"
+        isSearch = {isSearch}
+      />
+        </div>
       </>
     );
   }

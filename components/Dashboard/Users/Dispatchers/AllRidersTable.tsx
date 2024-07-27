@@ -1,27 +1,42 @@
 'use client'
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
-import DashboardTableItemLoader from "../../DashboardTableItemLoader";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
+import DashboardTableItemLoader from "../../DashboardTableItemLoader";
+import { TableType, useGetTableData } from "../../hooks/useGeTableData";
 import SkeletonTable from "../../SkeletonTable";
+import SearchTable from "../../TableComponents/SearchTable";
+import TablesHeadings from "../../TableComponents/TablesHeadings";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-import { useGetAllRiders } from "./hooks/useGetAllRiders";
-import { useRouter } from "next/navigation";
 
 export function AllRiders() {
   const [page, setPage] = useState<number>(1);
-  const {data, riders, total_number_of_pages, error, isLoading, total_items} = useGetAllRiders(page);
+  
+  const {
+    handleSort,
+    sortDetails,
+    dataLoading:ridersLoading,
+    data,
+    error,
+    total_number_of_pages,
+    total_items,
+    handleSearch:handleRiderSearch,
+    searchRef:riderSearchRef,
+    isSuccess,
+    isSearch
+  } = useGetTableData({table:TableType.RidersTable, page});
 
+  const riders = data?.riders;
   const router =useRouter();
   const {handleSelectedRiderId, selectedRiderId, handleSetDispatcherRole} = useDispatcherProfile()
   const [riderLoading, setRiderLoading] = useState<boolean>(false);
@@ -45,20 +60,19 @@ export function AllRiders() {
   }
   return (
     <>
+    <SearchTable
+        ref={riderSearchRef}
+        handleSearch={handleRiderSearch}
+        isSuccess={isSuccess}
+      />
     <div className="flex flex-col w-full   gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       <Table>
         <TableHeader>
-          <TableRow >
-          {
-              tableHeadings.map((tableHeading)=>
-                <TableHead key={tableHeading}>{tableHeading}</TableHead>
-              )
-            }
-          </TableRow>
+        <TablesHeadings handleSort={handleSort} sortDetails={sortDetails} tableHeadings={tableHeadings} />
         </TableHeader>
         <TableBody>
-          {isLoading && <SkeletonTable rows={5} cells={8} />}
-          {data &&
+          {ridersLoading && <SkeletonTable rows={10} cells={8} />}
+          {riders && !ridersLoading && 
             riders.map((rider: Rider) => (
               <>
                 {riderLoading && selectedRiderId === rider.rider_id && (
@@ -91,12 +105,15 @@ export function AllRiders() {
         </TableBody>
       </Table>
     </div>
+    <div className="flex w-full justify-between gap-2 items-center">
+
     {
         riders && 
 
       <ItemsCount currentItemsCount={riders.length} item="Riders" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
-    <Pagination   setPage={setPage} totalPages={total_number_of_pages} storageKey="AllRiders"/>
+    <Pagination   setPage={setPage} totalPages={total_number_of_pages} storageKey="AllRiders" isSearch={isSearch}/>
+    </div>
     </>
   );
 }

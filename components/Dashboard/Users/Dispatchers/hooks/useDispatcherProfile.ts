@@ -1,8 +1,8 @@
 "use client";
 import {
-  useGetDriverQuery,
-  useGetRiderQuery,
-  useGetUserTripsQuery
+  useGetUserTripsQuery,
+  useLazyGetDriverQuery,
+  useLazyGetRiderQuery
 } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
@@ -29,20 +29,31 @@ export const useDispatcherProfile = () => {
   const handleSetDispatcherRole = (dispatcherRole: DispatcherRole) => {
     dispatch(setDispatcherRole(dispatcherRole));
   };
-  const {
+  const [ getRider, {
     data: riderData,
     isLoading: riderLoading,
     error: riderError,
-  } = useGetRiderQuery(selectedRiderId);
+  }] = useLazyGetRiderQuery();
   
   
-  const {
+  const [ getDriver, {
     data: driverData,
     isLoading: driverLoading,
     error: driverError,
-  } = useGetDriverQuery(selectedDriverId);
+  }] = useLazyGetDriverQuery();
   
   //dispathcerId is the id of the dispatcher in the rider/driver table
+  useEffect(()=> {
+
+    if(dispatcherRole === "Driver") {
+      getDriver(selectedDriverId)
+    } 
+  
+    if(dispatcherRole === "Rider") {
+      getRider(selectedRiderId)
+    }
+  }, [dispatcherRole, selectedRiderId, selectedDriverId, getDriver, getRider])
+
   const dispatcherId =
     dispatcherRole === "Driver"
       ? driverData?.driver?.driver_id
