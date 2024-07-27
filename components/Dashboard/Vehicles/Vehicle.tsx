@@ -10,7 +10,7 @@ import EditVehicle from "./EditVehicle";
 import Image from "next/image";
 import noImage from "../../../public/images/no-image.jpg";
 import { useDeleteVehicle } from "./hooks/useDeleteVehicle";
-import { VehicleType } from "./hooks/useGetVehicles";
+import { VehicleType } from "./AllVehiclesTable";
 import { useGetVehicle } from "./hooks/useGetVehicle";
 import { useState } from "react";
 

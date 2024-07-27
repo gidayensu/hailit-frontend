@@ -15,10 +15,11 @@ import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
 import { useGetVehicle } from "./hooks/useGetVehicle";
+import DashboardTableItemLoader from "../DashboardTableItemLoader";
 
 
 export default function AllVehiclesTable() {
-    const {handleSelectVehicle} = useGetVehicle()
+    const {handleSelectVehicle, selectedVehicleId, vehicleLoading} = useGetVehicle()
   const [page, setPage] = useState<number> (1);
  
   const {
@@ -74,6 +75,10 @@ export default function AllVehiclesTable() {
           }
           {!vehiclesLoading && !error &&
             vehicles?.map((vehicle: Vehicle) => (
+              <>
+              {vehicleLoading && selectedVehicleId === vehicle.vehicle_id && (
+                    <DashboardTableItemLoader />
+                  )}
               <TableRow key={vehicle?.vehicle_id} onClick={()=>handleSelectVehicle(vehicle?.vehicle_id)}>
                 <TableCell>{vehicle?.vehicle_name}</TableCell>
                 <TableCell>{vehicle?.vehicle_type}</TableCell>
@@ -86,6 +91,7 @@ export default function AllVehiclesTable() {
                         )}</TableCell>
                 
               </TableRow>
+              </>
             ))}
         </TableBody>
       </Table>
