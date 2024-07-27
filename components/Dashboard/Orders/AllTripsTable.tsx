@@ -12,33 +12,35 @@ import {
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
-import { useGetTrips } from "../hooks/useGetTrips";
+import { TableType, useGetTableData } from "../hooks/useGeTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
 import { useAllTripsTable } from "./hooks/useAllTripsTable";
-import { useState } from "react";
 export function AllTripsTable() {
   
   const { tripLoading, selectedTripId, tripTrack, } =
     useAllTripsTable();
     const [page, setPage] = useState<number> (1);
   const {
-    tripsLoading,
+    dataLoading:tripsLoading,
     total_number_of_pages,
     error,
+    data,
     total_items,
-    tripSearchRef,
+    searchRef:tripSearchRef,
     isSuccess,
     sortDetails,
-    trips,
+    
     handleSort,
-    handleTripSearch,
+    handleSearch:handleTripSearch,
     isSearch
   
-  }  = useGetTrips({ page, table:"trips"});
+  }  = useGetTableData({page, table:TableType.TripsTable});
 
+  const trips = data?.trips
 
   return (
     <>

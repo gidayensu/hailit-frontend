@@ -21,7 +21,7 @@ const endpointNames = [
   "getVehicle",
 ] as const;
 
-type EndpointNames = typeof endpointNames[number]
+export type EndpointNames = typeof endpointNames[number]
 
 
 export const usePrefetchData = ({page, prefetchOption, total_number_of_pages, endpoint}:{page:number, prefetchOption:EndpointNames, total_number_of_pages:number, endpoint:string}  ) => {

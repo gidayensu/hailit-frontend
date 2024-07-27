@@ -1,7 +1,6 @@
 'use client'
 import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,54 +8,40 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { useAppSelector } from "@/lib/store/hooks";
 import { extractShortDate } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
-import { MdOutlineSportsMotorsports } from "react-icons/md";
-import { RiSteering2Line } from "react-icons/ri";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
+import { TableType, useGetTableData } from "../hooks/useGeTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
-import { useGetAllUsers, User } from "./hooks/useGetAllUsers";
+import { User, useUsersTable } from "./hooks/useUsersTable";
 
 export default function AllUsersTable() {
-  
-  const [page, setPage] = useState<number> (1);
+  const {handleUserDetails,
+    page,
+    setPage,
+    userLoading} = useUsersTable();
 
   
-
+  const {selectedUserId} = useAppSelector(state=>state.dashboard)
   const {
     handleSort,
     sortDetails,
-    usersLoading,
-    users,
+    dataLoading:usersLoading,
+    data,
     error,
     total_number_of_pages,
-    handleSetSelectedUser,
-    handleRidersSection,
-    handleDriversSection,
     total_items,
-    selectedUserId,
-    handleUserSearch,
-    userSearchRef,
+    handleSearch:handleUserSearch,
+    searchRef:userSearchRef,
     isSuccess,
     isSearch
-
-  } = useGetAllUsers(page);
+    
+  } = useGetTableData({table:TableType.UsersTable, page});
   
-  const [userLoading, setUserLoading] = useState<boolean>(false);
-  
-  const router = useRouter();
-  const handleUserDetails = (userId:string)=> {
-    handleSetSelectedUser(userId)
-    setUserLoading(true)
-    router.push('/dashboard/users/user-details')
-  }
-
-
-
+  const users = data?.users;
   
 
   return (
@@ -66,43 +51,12 @@ export default function AllUsersTable() {
         handleSearch={handleUserSearch}
         isSuccess={isSuccess}
       />
-      <section className="lg:hidden flex gap-2">
-        <Button
-          variant={"empty"}
-          className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50 mb-5"
-          onClick={handleRidersSection}
-        >
-          <MdOutlineSportsMotorsports className="text-xl -scale-x-100" />
-          <p>Riders</p>
-        </Button>
-
-        <Button
-          variant={"empty"}
-          className="space-x-1 bg-black hover:bg-secondary-dark hover:dark:bg-white text-white  dark:border  dark:text-primary-dark dark:bg-slate-50"
-          onClick={handleDriversSection}
-        >
-          <RiSteering2Line className="text-xl " />
-          <p>Users</p>
-        </Button>
-      </section>
+      
       <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
         <Table className="w-full">
           <TableHeader>
           <TablesHeadings handleSort={handleSort} sortDetails={sortDetails} tableHeadings={tableHeadings} />
-            {/* <TableRow>
-              {tableHeadings.map((tableHead) => (
-                <TableHead
-                  key={tableHead}
-                  className={
-                    tableHead === "Onboard Status" || tableHead === "Trips"
-                      ? "flex items-center justify-center"
-                      : ""
-                  }
-                >
-                  {tableHead}
-                </TableHead>
-              ))}
-            </TableRow> */}
+            
           </TableHeader>
           <TableBody>
             {usersLoading && <SkeletonTable rows={7} cells={7} />}
@@ -149,19 +103,7 @@ export default function AllUsersTable() {
                     <TableCell className="w-[100px]">
                       {extractShortDate(user.date_created)}
                     </TableCell>
-
-                    {/* <TableCell className="flex items-center justify-center">
-                  {user.user_role != "Admin" && (
-                    <Modal
-                      className=""
-                      dialogTriggerElement={
-                        <span className="text-decoration: underline">view</span>
-                      }
-                    >
-                      <OrdersCard userId={user.user_id} />
-                    </Modal>
-                  )}
-                </TableCell> */}
+ 
                   </TableRow>
                 </>
               ))}
@@ -196,3 +138,4 @@ const tableHeadings = [
   "Onboard Status",
   "Date Joined",
 ];
+

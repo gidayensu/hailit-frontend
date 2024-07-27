@@ -2,10 +2,9 @@
 import { useRef, useState } from "react";
 import { useSortTable } from "./useSortTables";
 import { TableTypes } from "./useSortTables";
+export type QueryEndpoint = "vehicles?" | "users?" | "riders?" | "drivers?" | "trips?";
 
- type EndPoint = "vehicles?" | "users?" | "riders?" | "drivers?" | "trips?";
-
-export function useSearchAndSort({endpoint, columns, table}:{table:TableTypes,  endpoint:EndPoint, columns: any}) {
+export function useSearchAndSortWithEndpoint({endpoint, columns, table}:{table:TableTypes,  endpoint:QueryEndpoint, columns: any}) {
 
   const searchRef = useRef<any>(null);
   const [isSearch, setIsSearch] = useState<boolean>(false);

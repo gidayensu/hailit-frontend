@@ -1,4 +1,5 @@
 'use client'
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
 import Pagination from "@/components/Shared/Pagination/Pagination";
 import {
   Table,
@@ -9,36 +10,33 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
+import { TableType, useGetTableData } from "../hooks/useGeTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
-
 import { useGetVehicle } from "./hooks/useGetVehicle";
-import { useGetVehicles, Vehicle } from "./hooks/useGetVehicles";
-import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
-
 
 
 export default function AllVehiclesTable() {
     const {handleSelectVehicle} = useGetVehicle()
   const [page, setPage] = useState<number> (1);
  
-    const {
-      
-      error,
-      vehicles,
-      isSuccess,
-      total_number_of_pages,
-      total_items,
-      tableHeadings,
-      handleSort,
-      sortDetails,
-      vehiclesLoading,
-      handleVehicleSearch,
-      vehicleSearchRef,
-      isSearch
-      
-    } = useGetVehicles(page);
+  const {
+    dataLoading: vehiclesLoading,
+    total_number_of_pages,
+    data,
+    error,
+    total_items,
+    searchRef: vehicleSearchRef,
+    sortDetails,
+    handleSort,
+    isSearch,
+    handleSearch: handleVehicleSearch,
+    isSuccess
+  } = useGetTableData( {page, table:TableType.VehiclesTable})
+  
+  
+  const vehicles = data?.vehicles;
 
   if (error) {
     return (
@@ -109,3 +107,26 @@ export default function AllVehiclesTable() {
 
 
 
+
+const tableHeadings = [
+  "Name",
+  "Type",
+  "Model",
+  "Number Plate",
+  "Available",
+  
+] 
+
+
+
+export type VehicleType = "car" | "truck" | "motor"
+export interface Vehicle {
+    vehicle_id: string,
+    vehicle_name: string, 
+    vehicle_model: string, 
+    plate_number: string,
+    vehicle_type: VehicleType,
+    insurance_details: string,
+    road_worthy: string,
+    available: boolean
+}

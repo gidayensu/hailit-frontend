@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setSelectedVehicleId } from "@/lib/store/slice/dashboardSlice";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { Vehicle } from "./useGetVehicles";
+import { Vehicle } from "../AllVehiclesTable";
+
 export const useGetVehicle = ()=> {
 
     const dispatch = useAppDispatch();

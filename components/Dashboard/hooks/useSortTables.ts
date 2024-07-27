@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 
-interface SortDetails {
+export interface SortDetails {
   sortDirection: "DESC" | "ASC";
   column: string 
 }
 
 export type TableTypes = "Trips Table" | "Vehicles Table" | "Riders Table" | "Drivers Table" | "Users Table"
 
-export function useSortTable({table, columns}:{table: TableTypes, columns: any}) {
+export function useSortTable({table, columns}:{table: TableTypes, columns: string[]}) {
 
   const getIniticalSortDetails = ()=> {
     const savedSortDetail = localStorage.getItem(table);
