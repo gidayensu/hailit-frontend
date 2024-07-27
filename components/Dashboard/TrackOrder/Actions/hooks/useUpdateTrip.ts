@@ -5,8 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 //redux + next + react + helper
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { scrollToSection } from "@/lib/utils";
-import { useRef, useState } from "react";
-import { useParams } from "next/navigation";
+import { useRef } from "react";
 //interface
 import {
   UpdateOrderDetails,
@@ -14,21 +13,19 @@ import {
 } from "@/components/Form/FormTypes";
 import { useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import {
-  resetDeliveryChoices,
   setPackageType,
   setScheduled,
   setTripArea,
   setTripMedium,
-  setTripType,
+  setTripType
 } from "@/lib/store/slice/deliveryChoicesSlice";
-import { resetMapData } from "@/lib/store/slice/mapSlice";
 import { Trip } from "@/lib/store/slice/tripSlice";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export const useUpdateTrip = (trip: Trip) => {
-  const params = useParams();
-  const selectedTripId = params.trip_id;
+  
+  
   const router = useRouter();
 
   useEffect(() => {
@@ -41,10 +38,21 @@ export const useUpdateTrip = (trip: Trip) => {
     }
   }, [trip?.package_type, trip?.trip_type]);
 
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
+  
+  
   const packageTypeRef = useRef<any>(null);
-
-  const [updateTrip, { data, isLoading,  }] = useUpdateTripMutation();
+  const editTripModalRef = useRef<any>(null);
+  const tripModal = editTripModalRef.current;
+  
+  const [updateTrip, { data, isLoading, error,  reset, isSuccess}] = useUpdateTripMutation();
+  
+  const openTripModal = () => {
+    tripModal?.showModal();
+  };
+  const closeTripModal = () => {
+    tripModal?.close();
+    reset()
+  };
 
   const dispatch = useAppDispatch();
   const { trip_medium, trip_type, trip_area, package_type } = useAppSelector(
@@ -74,11 +82,11 @@ export const useUpdateTrip = (trip: Trip) => {
   } = formMethods;
 
   const onDeliveryFormSubmit: SubmitHandler<any> = async (data) => {
-    setUpdateLoading(true);
+    
 
     if (!package_type) {
-      scrollToSection(packageTypeRef);
-      return setUpdateLoading(false);
+      return scrollToSection(packageTypeRef);
+      
     }
     const trip_commencement_date = data.pickup_date;
     const trip_completion_date = data.delivery_date;
@@ -92,6 +100,7 @@ export const useUpdateTrip = (trip: Trip) => {
       trip_area,
       trip_medium,
     };
+
     //update trip status if date is selected
     trip_commencement_date
       ? (tripDetails = {
@@ -109,11 +118,13 @@ export const useUpdateTrip = (trip: Trip) => {
         })
       : "";
 
-    updateTrip({ trip_id: selectedTripId, tripDetails });
+    updateTrip({ trip_id: trip?.trip_id, tripDetails });
   };
-  if (data) {
-    dispatch(resetDeliveryChoices());
-    dispatch(resetMapData());
+
+  if (data || error) {
+    
+    openTripModal();
+    
   }
 
   //redirect
@@ -121,10 +132,13 @@ export const useUpdateTrip = (trip: Trip) => {
     if (!trip?.trip_id) {
       router.push("/dashboard/track-order");
     }
-  }, [trip, router]);
+
+    
+  }, [trip, router, ]);
 
   return {
     formMethods,
+    closeTripModal,
     control,
     dispatch,
     handleSubmit,
@@ -134,8 +148,11 @@ export const useUpdateTrip = (trip: Trip) => {
     trip_type,
     trip_area,
     package_type,
-    updateLoading,
+    
     isLoading,
     register,
+    editTripModalRef,
+    error,
+    isSuccess
   };
 };

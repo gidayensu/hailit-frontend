@@ -17,7 +17,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
-
+import SecondaryModal from "@/components/Shared/SecondaryModal";
 import { useUpdateTrip } from "./hooks/useUpdateTrip";
 
 export default function EditTrip() {
@@ -29,8 +29,12 @@ export default function EditTrip() {
     onDeliveryFormSubmit,
     packageTypeRef,
     package_type,
-    updateLoading,
+    isLoading,
     register,
+    closeTripModal,
+    error,
+    editTripModalRef,
+    isSuccess
   } = useUpdateTrip(trip);
   
   const router = useRouter();
@@ -42,6 +46,7 @@ export default function EditTrip() {
   );
 
   return (
+    <>
     <main className=" bg-white dark:bg-secondary-dark p-6 rounded-xl flex flex-col">
       <h1 className="mb-2 text-2xl">
         Editing Trip: <b>{trip?.trip_id}</b>
@@ -209,21 +214,23 @@ export default function EditTrip() {
           type="submit"
           form="edit order"
           className="md:w-[180px] w-full h-14"
-          disabled={updateLoading}
+          disabled={isLoading}
         >
-          {!updateLoading ? "Save" : <Loader />}
+          {!isLoading ? "Save" : <Loader />}
         </Button>
         <Button
           type="submit"
           variant={"outline"}
           form="edit order"
           className="md:w-[180px] w-full h-14"
-          disabled={updateLoading}
+          disabled={isLoading}
           onClick={() => router.back()}
         >
           Cancel
         </Button>
       </div>
     </main>
+    <SecondaryModal closeModal={closeTripModal}  isSuccess={isSuccess} error = {error} modalRef={editTripModalRef} info={error ? 'Trip not updated': 'Trip details saved'}/>
+    </>
   );
 }
