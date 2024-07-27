@@ -69,7 +69,7 @@ export const mapSlice = createSlice({
       state.searchContainer = false;
       state.searchData = ['1', '2'];
     },
-    resetMapData(state) {
+    resetMapData() {
       return initialState;
     }
   },
