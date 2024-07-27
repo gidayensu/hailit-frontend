@@ -34,7 +34,7 @@ export default function UserOtherTrips({
     <>
     
     <div className="flex flex-col gap-2">
-          <h3 className="font-bold">CLIENT RECENT TRIPS</h3>
+          <h3 className="font-bold">CUSTOMER RECENT TRIPS</h3>
       <div className="flex justify-between">
         
         <>

@@ -11,7 +11,7 @@ export default function CustomerSection ({customerId}: {customerId:string}) {
       <>
         <div className="flex justify-between">
           <div className="">
-            <h3 className="font-bold">CLIENT</h3>
+            <h3 className="font-bold">CUSTOMER</h3>
             <h3 className="text-[12px] text-slate-400 -mt-1">Details</h3>
           </div>
           <Button
