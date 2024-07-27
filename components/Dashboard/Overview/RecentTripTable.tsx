@@ -12,11 +12,11 @@ import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
+import { useGetRecentTrips } from "./hooks/useGetRecentTrips";
 
-import { useGetTrips } from "../hooks/useGetTrips";
 export function RecentTripTable() {
     
-  const {overviewData,  isLoading, error, handleTrackTrip, tripLoading, selectedTripId}  = useGetTrips({page: 1, table:"overview"});
+  const {trips,  isLoading, error, handleTrackTrip, tripLoading, selectedTripId}  = useGetRecentTrips();
   
     if (error) {
       return <div>
@@ -41,7 +41,7 @@ export function RecentTripTable() {
           {
             isLoading && <SkeletonTable rows={7} cells={9}/>
           }
-          {overviewData && overviewData.map((trip:Trip) => (
+          {trips && trips.map((trip:Trip) => (
             <>
             { tripLoading && selectedTripId === trip.trip_id &&
 
