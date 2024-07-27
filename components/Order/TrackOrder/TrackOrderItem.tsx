@@ -10,7 +10,7 @@ import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import TripMap from "../../Maps/TripMap";
 //helpers + next
-import DispatcherCard from "@/components/Dispatcher/DispatcherCard";
+import OrderDispatcherCard from "@/components/Dispatcher/OrderDispatcherCard";
 import CustomerHelp from "@/components/Profile/Settings/CustomerHelp";
 import { Modal } from "@/components/Shared/Modal";
 import ModalCard from "@/components/Shared/ModalCard";
@@ -77,7 +77,7 @@ export default function TrackOrderItem({
         {
           tripOngoingStatus.includes(trip.trip_status) &&
         <TrackOrderContainer headingText="Courier">
-          <DispatcherCard
+          <OrderDispatcherCard
             firstName={dispatcher.first_name}
             lastName={dispatcher.last_name}
             phoneNumber={dispatcher.phone_number}

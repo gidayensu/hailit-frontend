@@ -2,9 +2,9 @@ import Container from "../ui/container";
 import { LuPhone } from "react-icons/lu";
 import { UserAvatar } from "@/components/Shared/user-avatar";
 import { FaWhatsapp } from "react-icons/fa";
-import Link from "next/link";
+import Link from "next/link"; 
 
-export default function DispatcherCard({
+export default function OrderDispatcherCard({
   firstName,
   lastName,
   vehicleName,
