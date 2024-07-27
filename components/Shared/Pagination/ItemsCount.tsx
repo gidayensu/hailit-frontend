@@ -14,13 +14,13 @@ export default function ItemsCount({
   return (
     <div className="w-full my-2">
       {page !== total_number_of_pages && (
-        <p className="text-[12px]">
+        <p className="text-sm">
           {item} <b>{currentItemsCount * page - currentItemsCount + 1}</b> to  <b>{currentItemsCount * page}</b> of <b>{total_items}</b>
         </p>
       )}
       {page === total_number_of_pages && (
-        <p className="text-[12px]">
-          {item} {total_items - currentItemsCount + 1} to {total_items}  of {total_items}
+        <p className="text-sm">
+          {item} <b>{total_items - currentItemsCount + 1}</b> to <b>{total_items}</b>  of <b>{total_items}</b> 
         </p>
       )}
     </div>

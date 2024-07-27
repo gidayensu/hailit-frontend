@@ -1,11 +1,9 @@
 'use client'
 import {
-    TableHead,
-    TableRow
+  TableHead,
+  TableRow
 } from "@/components/ui/table";
-import { HiOutlineArrowNarrowDown, HiOutlineArrowNarrowUp } from "react-icons/hi";
-
-
+import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 export default function TablesHeadings({
   tableHeadings,
   sortDetails,
@@ -37,20 +35,20 @@ const handleColumnSort = (tableHeading:string)=> {
                   key={tableHeading}
                   onClick={() => handleColumnSort(tableHeading)}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center  gap-1 w-40">
                     {tableHeading}
                     { sortableHeadings.includes(tableHeading) &&
-                      <div className="flex items-center">
-                      <HiOutlineArrowNarrowUp
-                        className={`text-md ${
+                      <div className="flex items-center flex-col text-md">
+                      <BsCaretUpFill
+                        className={`${
                           sortDetails.column === tableHeading &&
                           sortDetails.sortDirection === "ASC"
                             ? "text-green-500"
                             : "text-black opacity-20 dark:text-slate-100"
                         }`}
                       />
-                      <HiOutlineArrowNarrowDown
-                        className={`text-md -ml-1 ${
+                      <BsCaretDownFill
+                        className={`${
                           sortDetails.column === tableHeading &&
                           sortDetails.sortDirection === "DESC"
                             ? "text-green-500"

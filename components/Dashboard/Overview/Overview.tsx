@@ -44,7 +44,7 @@ export default function Overview() {
         />
         <StatsCard
           title="Pending"
-          subtitle="Packages Not Delivered"
+          subtitle="Not Delivered"
           loading={isLoading}
           mainCount={currentMonthStats?.pending_current_month || 0}
           percentageDifference={pendingPD || 0}
