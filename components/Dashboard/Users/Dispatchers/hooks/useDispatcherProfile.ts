@@ -20,6 +20,7 @@ import { UserTrip } from "../../hooks/useUserProfile";
 export type DispatcherRole = "Rider" | "Driver";
 
 export const useDispatcherProfile = () => {
+  const [editDispatcher, setEditDispatcher] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { dispatcherRole, selectedDriverId, selectedRiderId } = useAppSelector(
@@ -143,12 +144,29 @@ export const useDispatcherProfile = () => {
   }, [dispatch, setSelectedDriverId, setSelectedRiderId]);
 
 
+
+  
+  
+
+  
+
+  const handleEditDispatcher = () => {
+    setEditDispatcher(() => !editDispatcher);
+  };
+  const handleGoBack = () => {
+    if (editDispatcher) {
+      handleEditDispatcher();
+    } else {
+      handleDeselect();
+    }
+  };
   return {
     dispatcherRole,
     dispatcherTrips,
-    
+    handleEditDispatcher,
+    editDispatcher,
     error,
-    
+    handleGoBack,
     dispatcherUserId,
     handleTrackTrip,
     selectedDispatcher,

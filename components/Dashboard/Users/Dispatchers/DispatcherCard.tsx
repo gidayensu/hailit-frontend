@@ -2,15 +2,14 @@ import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import Link from "next/link";
 import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import { Rating } from "./AllRidersTable";
-import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 import { useDeleteDispatcher } from "./hooks/useDeleteDispatcher";
-export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatcher:Dispatcher, editDispatcher:()=>void}) {
+import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
+export default function DispatcherCard () {
   
-  const {dispatcherRole, dispatcherId} = useDispatcherProfile()
+  const {dispatcherRole, dispatcherId, selectedDispatcher:dispatcher, handleEditDispatcher} = useDispatcherProfile()
   const { deleteError, deleteSuccess,  deleteLoading, handleDeleteDispatcher } = useDeleteDispatcher({dispatcherId, dispatcherRole});
   
 
@@ -59,7 +58,7 @@ export default function DispatcherCard ({dispatcher, editDispatcher}: {dispatche
 
         {/* Buttons for Edit or Delete */}
         <div className="flex gap-2 mt-6 items-center">
-          <Button onClick={editDispatcher} variant={"empty"}
+          <Button onClick={handleEditDispatcher} variant={"empty"}
                 className="dark:text-slate-50    hover:text-primary-color dark:hover:text-primary-color "> Edit {dispatcher?.user_role} </Button>
           <p>|</p>
           {/* Delete Modal */}

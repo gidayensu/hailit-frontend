@@ -1,7 +1,6 @@
 "use client";
 import Container from "@/components/ui/container";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
 import DashboardCard from "../../DashboardCard";
 import SkeletonTable from "../../SkeletonTable";
 import DispatcherCard from "./DispatcherCard";
@@ -12,32 +11,18 @@ import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 //DispatcherDetails accepts userRole (rider/driver) to show details based on the userRole
 
 export default function DispatcherDetails() {
-  const [editDispatcher, setEditDispatcher] = useState<boolean>(false);
-
+  
   const {
     dispatcherTrips,
     dispatcherError,
     selectedDispatcher,
-    handleDeselect,
-    
+    editDispatcher,
+    handleGoBack,
     dispatcherLoading,
     total_trip_count
   } = useDispatcherProfile();
-
   
-
   
-
-  const handleEditDispatcher = () => {
-    setEditDispatcher(() => !editDispatcher);
-  };
-  const handleGoBack = () => {
-    if (editDispatcher) {
-      handleEditDispatcher();
-    } else {
-      handleDeselect();
-    }
-  };
 
   return (
     <>
@@ -70,8 +55,7 @@ export default function DispatcherDetails() {
             <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
               <div className="w-full col-span-2 flex flex-col gap-2">
                 <DispatcherCard
-                  dispatcher={selectedDispatcher}
-                  editDispatcher={handleEditDispatcher}
+                  
                 />
               </div>
 
