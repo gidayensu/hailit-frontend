@@ -1,10 +1,10 @@
 'use client'
 import { useGetVehicleQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedVehicleId } from "@/lib/store/slice/dashboardSlice";
+import { setSelectedVehicleId } from "@/lib/store/slice/dashboardSlice";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { Vehicle } from "./useGetVehicles";
-import { useRouter } from "next/navigation";
 export const useGetVehicle = ()=> {
 
     const dispatch = useAppDispatch();
@@ -15,7 +15,6 @@ export const useGetVehicle = ()=> {
 
     const handleSelectVehicle= useCallback( (selectedVehicleId: string)=> {
         dispatch(setSelectedVehicleId(selectedVehicleId))
-        dispatch(setActiveSection("Vehicles"))
         router.push('/dashboard/vehicles/vehicle-details')
     }, [selectedVehicleId, dispatch])
 

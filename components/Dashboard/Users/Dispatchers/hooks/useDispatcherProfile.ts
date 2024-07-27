@@ -6,10 +6,9 @@ import {
 } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
-  setActiveSection,
   setDispatcherRole,
   setSelectedDriverId,
-  setSelectedRiderId,
+  setSelectedRiderId
 } from "@/lib/store/slice/dashboardSlice";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -93,7 +92,7 @@ export const useDispatcherProfile = () => {
 
   const { data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId);
   const handleTrackTrip = (tripId: string) => {
-    dispatch(setActiveSection("Track Order"));
+    
 
     
     router.push(`/dashboard/track-order/${tripId}`);

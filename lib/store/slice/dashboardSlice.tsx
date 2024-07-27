@@ -28,7 +28,6 @@ export interface TripStatusandStage {
 }
 
 export interface DashboardDetails {
-  activeSection: ActiveSection;
   selectedUserId: string;
   selectedRiderId: string;
   selectedDriverId: string;
@@ -45,7 +44,6 @@ export interface AssignedDispatcherDetails {
 }
 
 export const initialState: DashboardDetails = {
-  activeSection: "Overview",
   selectedUserId: "",
   selectedDriverId: "",
   selectedRiderId: "",
@@ -60,9 +58,7 @@ export const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    setActiveSection(state, action: PayloadAction<ActiveSection>) {
-      state.activeSection = action.payload;
-    },
+    
     setTripStatus(state, action: PayloadAction<TripStatusandStage>) {
       state.tripStage = action.payload.tripStage;
       state.tripStatus = action.payload.tripStatus;
@@ -93,7 +89,6 @@ export const dashboardSlice = createSlice({
 });
 
 export const {
-  setActiveSection,
   setTripStatus,
   setEditingOrder,
   setSelectedUserId,

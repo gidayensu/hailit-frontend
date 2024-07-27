@@ -9,9 +9,6 @@ import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { copyToClipBoard } from "@/lib/utils";
 
-import {
-  setActiveSection,
-} from "@/lib/store/slice/dashboardSlice";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -46,7 +43,7 @@ export function useAddOrderOutcome() {
   };
 
   const trackTrip = () => {
-    dispatch(setActiveSection("Track Order"));
+    
     
     router.push(`/dashboard/track-order/${trip_id}`)
 

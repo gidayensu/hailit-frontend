@@ -6,16 +6,16 @@ export default function DashboardSections({
     children,
     dashMin,
     sectionName,
-    
-    url,
     onClickFunc,
+    url,
+    
   }: {
     children: React.ReactNode;
     dashMin: boolean;
     sectionName: ActiveSection;
-    
+    onClickFunc?: ()=>void
     url:string
-    onClickFunc: (section: ActiveSection) => void;
+    
   }) {
 
     const path = usePathname();
@@ -24,7 +24,7 @@ export default function DashboardSections({
     return (
       <Link href={`/dashboard/${url}`}>
       <div
-        onClick={() => onClickFunc(sectionName)}
+        onClick={onClickFunc}
         className={`flex h-8 p-2  items-center w-full hover:text-primary-color hover:bg-white rounded-md text-[12px] ${
           dashMin ? "justify-center transition-all duration-300" : "md:justify-between justify-center transition-all duration-300"
         }  cursor-pointer ${

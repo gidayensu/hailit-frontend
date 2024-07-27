@@ -2,8 +2,10 @@
 import { useGetAllUsersQuery } from "@/lib/store/apiSlice/hailitApi";
 import { setTableData } from "@/lib/store/slice/dashboardTablesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { useEffect, useCallback } from "react";
-import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { UserRole } from "@/lib/store/slice/userSlice";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
 import { usePrefetchData } from "../../hooks/usePrefetchData";
 import { UserRole } from "@/lib/store/slice/userSlice";
 import { useSearchAndSort } from "../../hooks/useSearchAndSort";
@@ -27,7 +29,7 @@ export const useGetAllUsers = (page:number) => {
   const dispatch = useAppDispatch();
   const { usersData,  } = useAppSelector(state=>state.dashboardTables)
   const {selectedUserId} = useAppSelector(state=>state.dashboard)
-  
+  const router = useRouter();
   const {
     handleSort, 
     sortDetails,
@@ -55,10 +57,10 @@ export const useGetAllUsers = (page:number) => {
 
 
     const handleDriversSection = ()=> {
-      dispatch(setActiveSection("Drivers"))
+      router.push('/dashboard/drivers')
     }
     const handleRidersSection = ()=> {
-      dispatch(setActiveSection("Riders"))
+      router.push('/dashboard/riders')
     }
 
     //set users data 

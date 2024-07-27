@@ -1,7 +1,6 @@
 'use client'
 import { useLogout } from "@/components/Shared/hooks/useLogout"
 import { Separator } from "@/components/ui/separator"
-import { ActiveSection } from "@/lib/store/slice/dashboardSlice"
 import { IoLogOutOutline } from "react-icons/io5"
 import { MdInsertChartOutlined, MdOutlineSportsMotorsports } from "react-icons/md"
 import { RiFileListLine, RiMotorbikeFill, RiSteering2Line } from "react-icons/ri"
@@ -11,12 +10,12 @@ import DashboardSections from "./DashboardSections"
 export default function DashboardSideBar({
   dashMin,
   handleDashMin,
-  handleActiveSection,
+  
   
 }: {
   dashMin: boolean;
   handleDashMin: () => void;
-  handleActiveSection: (section: ActiveSection) => void;
+  
   
 }) {
   
@@ -51,7 +50,7 @@ export default function DashboardSideBar({
         <DashboardSections
           dashMin={dashMin}
           sectionName="Overview"
-          onClickFunc={handleActiveSection}
+          
           
           url="/"
         >
@@ -61,7 +60,7 @@ export default function DashboardSideBar({
         <DashboardSections
           dashMin={dashMin}
           sectionName="Orders"
-          onClickFunc={handleActiveSection}
+          
           
           url="orders"
         >
@@ -71,8 +70,6 @@ export default function DashboardSideBar({
         <DashboardSections
           dashMin={dashMin}
           sectionName="Track Order"
-          onClickFunc={handleActiveSection}
-          
           url="track-order"
         >
           <TbRoute className="text-2xl" />
@@ -80,9 +77,7 @@ export default function DashboardSideBar({
 
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Users"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Users"         
           url="users"
         >
           <TbUser className="text-2xl" />
@@ -90,9 +85,7 @@ export default function DashboardSideBar({
 
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Riders"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Riders"        
           url="dispatchers/riders"
         >
           <MdOutlineSportsMotorsports className="text-2xl -scale-x-100" />
@@ -100,36 +93,28 @@ export default function DashboardSideBar({
 
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Drivers"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Drivers"         
           url="dispatchers/drivers"
         >
           <RiSteering2Line className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Vehicles"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Vehicles"          
           url="vehicles"
         >
           <RiMotorbikeFill className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Analytics"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Analytics"          
           url="analytics"
         >
           <MdInsertChartOutlined className="text-2xl -scale-x-100" />
         </DashboardSections>
         <DashboardSections
           dashMin={dashMin}
-          sectionName="Profile"
-          onClickFunc={handleActiveSection}
-          
+          sectionName="Profile"        
           url="profile"
         >
           <TbUserEdit className="text-2xl " />

@@ -1,10 +1,10 @@
 'use client'
 import { useGetUserQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
-import { setActiveSection, setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { setSelectedUserId } from "@/lib/store/slice/dashboardSlice";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { User } from "./useGetAllUsers";
-import { useRouter } from "next/navigation";
 export const useGetUser = (customerId:string)=> {
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -13,7 +13,7 @@ export const useGetUser = (customerId:string)=> {
 
     const handleSelectUser= useCallback( ()=> {
         dispatch(setSelectedUserId(customerId))
-        dispatch(setActiveSection("Users"))
+        
         router.push('/dashboard/users/user-details')
     }, [customerId, dispatch])
     return {user, isLoading, error, handleSelectUser}
