@@ -111,13 +111,10 @@ export default function Login( ) {
               className="w-full border border-slate-300 h-12 flex gap-4"
               onClick={googleSupabaseSignIn}
             >
-              {isLoading ? (
-                <Loader color="#3b82f6" />
-              ) : (
                 <p className="flex items-center justify-center gap-2">
                   <FcGoogle className="text-2xl" /> Continue with Google
                 </p>
-              )}
+              
             </Button>
             <GuestModal/>
             
