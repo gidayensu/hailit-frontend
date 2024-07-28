@@ -1,15 +1,8 @@
-import { useGetTrip } from "@/components/Dashboard/TrackOrder/StatusSection/hooks/useGetTrip";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-export const useTrckOrderForm = ()=> {
-    const {
+export const useTrackOrderForm = ({inputRef, handleTrackOrder}: {inputRef: any, handleTrackOrder: ()=>void,})=> {
     
-        inputRef,
-        
-        handleTrackTrip,
-        
-      } = useGetTrip();
       const [isLoading, setIsLoading] = useState<boolean>(false);
       const [sameAsCurrent, setSameAsCurrent] = useState<boolean>(false);
       const params = useParams();
@@ -17,7 +10,7 @@ export const useTrckOrderForm = ()=> {
       
       const handleSubmit = ()=> {
         setIsLoading(true);
-        if(inputRef.current?.value === trip_id) {
+        if(inputRef?.current?.value === trip_id) {
           setSameAsCurrent(true)
           setIsLoading(false);
           
@@ -25,7 +18,7 @@ export const useTrckOrderForm = ()=> {
             setSameAsCurrent(false)
           }, 3000)
         } else {
-          handleTrackTrip()
+          handleTrackOrder()
         }
         
       }

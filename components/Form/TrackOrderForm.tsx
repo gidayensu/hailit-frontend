@@ -2,11 +2,12 @@
 import Loader from "@/components/Shared/Loader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useTrckOrderForm } from "./hooks/useTrackOrderForm"
+import { useTrackOrderForm } from "./hooks/useTrackOrderForm"
+import { LegacyRef } from "react"
 
 
-export default function TrackOrderForm () {
-  const {isLoading, sameAsCurrent, handleSubmit, inputRef, trip_id} = useTrckOrderForm()
+export default function TrackOrderForm ({inputRef, handleTrackOrder}: {inputRef: LegacyRef<HTMLInputElement>, handleTrackOrder: ()=>void,}) {
+  const {isLoading, sameAsCurrent, handleSubmit, trip_id} = useTrackOrderForm({inputRef, handleTrackOrder})
   
 
   

@@ -12,7 +12,7 @@ export default function TrackOrder() {
 
   return (
     <>
-      <TrackOrderForm onClickFunc={handleTrackTrip} inputRef={inputRef} />
+      <TrackOrderForm handleTrackOrder={handleTrackTrip} inputRef={inputRef} />
 
       <span className="flex items-start justify-start">
         <h3 className="font-bold  text-lg mt-4 -mb-1">Additional Tracking</h3>
