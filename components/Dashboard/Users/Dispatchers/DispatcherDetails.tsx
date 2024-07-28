@@ -17,7 +17,6 @@ export default function DispatcherDetails() {
     dispatcherError,
     selectedDispatcher,
     editDispatcher,
-    handleGoBack,
     dispatcherLoading,
     total_trip_count
   } = useDispatcherProfile();
@@ -108,10 +107,7 @@ export default function DispatcherDetails() {
       )}
 
       {editDispatcher && (
-        <EditDispatcher
-          dispatcher={selectedDispatcher}
-          handleGoBack={handleGoBack}
-        />
+        <EditDispatcher  />
       )}
     </>
   );
