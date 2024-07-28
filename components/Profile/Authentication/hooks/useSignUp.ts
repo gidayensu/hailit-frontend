@@ -9,7 +9,7 @@ import { setAuthState } from "@/lib/store/slice/authSlice";
 import { setUser } from "@/lib/store/slice/userSlice";
 
 //react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react-hook-forms
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,14 +17,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { SignUpForm, SignUpSchema } from "@/components/Form/FormTypes";
 //supabase
-import { supabaseSignUp, googleSupabaseSignIn } from "@/lib/supabaseAuth";
+import { supabaseSignUp, googleSupabaseSignIn, } from "@/lib/supabaseAuth";
 //types
 import type { Inputs } from "@/lib/supabaseAuth";
 
 
 
+
 export const useSignUp =  () => {
   const [demoSignUpDetail, setDemoSignUpDetail] = useState<string>('');
+  
     const router = useRouter();
     const dispatch = useAppDispatch();
   
@@ -76,19 +78,23 @@ export const useSignUp =  () => {
         }
   
         if (signUpData.user_id) {
+
           addUser({
             user_id: signUpData.user_id,
             email: signUpData.email,
           });
 
           if (addUserError) {
+            setIsLoading(false)
             return {
               error: "Error occurred",
               errorMessage: "Could not add user to database",
             };
           }
         }
-      } catch (err) {}
+      } catch (err) {
+        console.error(err)
+      }
     };
     if (signUpData) {
       const { user } = signUpData;
@@ -107,6 +113,16 @@ export const useSignUp =  () => {
       dispatch(setAuthState(true));
       onboard ? router.push("/") : router.push("/onboarding");
     }
+
+    useEffect(()=>{
+      if(addUserError) {
+        setIsLoading(false),
+        setDataFetchError({
+          error: true,
+          errorDescription: "Error occurred"
+        })
+      }
+    }, [addUserError])
 
     return {
       onSignUpSubmit,
