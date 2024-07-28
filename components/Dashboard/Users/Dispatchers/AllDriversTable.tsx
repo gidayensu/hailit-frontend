@@ -125,7 +125,7 @@ export function AllDrivers() {
         <Pagination
         setPage={setPage}
         totalPages={total_number_of_pages}
-        storageKey="AllUsers"
+        storageKey="AllDrivers"
         isSearch = {isSearch}
       />
         </div>
