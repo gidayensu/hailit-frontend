@@ -43,7 +43,6 @@ export default function CurrentSection () {
     : activeSection = "Dashboard"
     
     
-    console.log({path})
     return(<>
     {activeSection}
     </>)
