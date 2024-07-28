@@ -3,8 +3,12 @@ import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { extractShortDate } from "@/lib/utils";
 import { useGetUser } from "../Users/hooks/useGetUser";
-export default function CustomerSection ({customerId}: {customerId:string}) {
-    const {user, isLoading, error, handleSelectUser} = useGetUser(customerId)
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
+
+export default function CustomerSection () {
+    
+  const { trip, } = useGetTrip();
+    const {user, isLoading, error, handleSelectUser} = useGetUser(trip?.customer_id)
     
     
     return (

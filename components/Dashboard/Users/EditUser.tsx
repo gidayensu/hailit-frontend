@@ -9,10 +9,10 @@ import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
 import SecondaryModal from "../../Shared/SecondaryModal";
 import { useEditUser } from "./hooks/useEditUser";
-import { User } from "./hooks/useUsersTable";
+import { useRouter } from "next/navigation"; 
 
-export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User, handleGoBack: ()=>void}) {
-  
+export default function EditUser() {
+  const router = useRouter();
   const {
     formMethods,
     handleSubmit,
@@ -25,8 +25,9 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
     edituserModalRef,
     closeUserModal,
     handleUserRoleSelection,
-    userRole
-  } = useEditUser(selectedUser);
+    userRole,
+    selectedUser
+  } = useEditUser();
   
   const [selectingUserRole, setSelectingUserRole] = useState<boolean>(false);
   
@@ -129,7 +130,7 @@ export default function EditUser({selectedUser, handleGoBack}:{selectedUser:User
       <Button className="max-w-sm w-full" type="submit" form="edit user" disabled={isLoading}> {isLoading ? <Loader/> : 'Save'} </Button>
       
       </form>
-      <Button className="max-w-sm w-full" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
+      <Button className="max-w-sm w-full" variant={'empty'} onClick={()=>router.back()} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
     <SecondaryModal closeModal={closeUserModal}  isSuccess={isSuccess} error = {error} modalRef={edituserModalRef} info={error ? 'User not updated': 'User details saved'}/>
     </>

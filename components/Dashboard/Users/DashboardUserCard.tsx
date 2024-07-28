@@ -1,13 +1,14 @@
 import { Modal } from "@/components/Shared/Modal";
-import { useDeleteUser } from "./hooks/useDeleteUser";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
-import DeleteModalCard from "../TrackOrder/DeleteModalCard";
-import { User } from "./hooks/useUsersTable";
-import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-export default function DashboardUserCard ({selectedUser, editUser}: {selectedUser:User, editUser:()=>void}) {
-  
+import Link from "next/link";
+import DeleteModalCard from "../TrackOrder/DeleteModalCard";
+import { useDeleteUser } from "./hooks/useDeleteUser";
+import { useUserProfile } from "./hooks/useUserProfile";
+
+export default function DashboardUserCard () {
+  const {  selectedUser, handleEditUser } = useUserProfile();
   const { isLoading, error, isSuccess, handleDeleteUser } = useDeleteUser(selectedUser?.user_id);
 
     return (
@@ -52,7 +53,7 @@ export default function DashboardUserCard ({selectedUser, editUser}: {selectedUs
 
         {/* Buttons for Edit or Delete */}
         <div className="flex mt-6 items-center ">
-          <Button onClick={editUser} variant={'empty'} className="-mr-2 dark:text-slate-50    dark:hover:text-primary-color hover:text-primary-color"> Edit {selectedUser?.user_role} </Button>
+          <Button onClick={handleEditUser} variant={'empty'} className="-mr-2 dark:text-slate-50    dark:hover:text-primary-color hover:text-primary-color"> Edit {selectedUser?.user_role} </Button>
           <p>|</p>
           {/* Delete Modal */}
           <Modal

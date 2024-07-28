@@ -9,9 +9,9 @@ import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
 import { useEditVehicle, } from "./hooks/useEditVehicle";
 
-import { VehicleType, Vehicle } from "./AllVehiclesTable";
+import { VehicleType } from "./AllVehiclesTable";
 
-export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, handleGoBack: ()=>void}) {
+export default function EditVehicle({handleGoBack}:{ handleGoBack: ()=>void}) {
   
   const {
     formMethods,
@@ -25,8 +25,9 @@ export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, ha
     editVehicleModalRef,
     closeEditVehicleModal,
     handleVehicleTypeSelection,
-    vehicleType
-  } = useEditVehicle(vehicle);
+    vehicleType,
+    vehicle
+  } = useEditVehicle();
   
   const [selectingUserRole, setSelectingUserRole] = useState<boolean>(false);
   
@@ -63,7 +64,7 @@ export default function EditVehicle({vehicle, handleGoBack}:{vehicle:Vehicle, ha
               placeholder="Last Name"
               className="h-14"
               name="vehicle_model"
-              defaultValue={vehicle.vehicle_model}
+              defaultValue={vehicle?.vehicle_model}
             />
           </div>
 

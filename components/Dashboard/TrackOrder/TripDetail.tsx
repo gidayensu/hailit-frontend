@@ -21,7 +21,7 @@ import UserOtherTrips from "./UserOtherTripsSection";
 //interface
 
 export default function TripDetail() {
-  const { trip, selectedTripId, dispatcher } = useGetTrip();
+  const { trip, selectedTripId, } = useGetTrip();
   const { handleDeleteTrip, isLoading, error, isSuccess } = useDeleteTrip(
     `${selectedTripId}`
   );
@@ -90,10 +90,7 @@ export default function TripDetail() {
       <article className="flex flex-col lg:flex-row w-full gap-4">
         <div className="w-full lg:w-3/6 space-y-5">
           <Container className="flex flex-col  w-full h-52 rounded-lg p-3 gap-2">
-            <StatusSection
-              tripStage={trip?.trip_stage}
-              tripStatus={trip?.trip_status}
-            />
+            <StatusSection />
           </Container>
           <Container className=" w-full md:h-72 h-80 rounded-lg p-3">
             <PackageSection />
@@ -105,18 +102,15 @@ export default function TripDetail() {
             <PaymentSection />
           </Container>
           <Container className="flex flex-col  w-full h-72 rounded-lg p-3 gap-2">
-            <CustomerSection customerId={trip.customer_id} />
+            <CustomerSection />
           </Container>
         </div>
         <div className="w-full lg:w-2/6 space-y-5">
           <Container className="flex flex-col  w-full   h-52 rounded-lg p-3 gap-2">
-            <DispatcherSection
-              dispatcher={dispatcher}
-              tripMedium={trip.trip_medium}
-            />
+            <DispatcherSection />
           </Container>
           <Container className="flex flex-col  w-full   h-72 rounded-lg p-3 gap-2">
-            <UserOtherTrips userId={trip.customer_id} tripId={trip.trip_id} />
+            <UserOtherTrips />
           </Container>
         </div>
       </article>

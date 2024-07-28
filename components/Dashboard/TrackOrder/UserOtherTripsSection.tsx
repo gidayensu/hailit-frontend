@@ -4,20 +4,16 @@ import Loader from "@/components/Shared/Loader";
 import NoData from "@/components/Shared/NoData";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
-import { useGetDashboardUserTrips } from "../hooks/useGetDashboardUserTrips";
 import { useRouter } from "next/navigation";
+import { useGetDashboardUserTrips } from "../hooks/useGetDashboardUserTrips";
 
-export default function UserOtherTrips({
-  userId,
-  tripId,
-}: {
-  userId: string;
-  tripId: string
-}) {
+export default function UserOtherTrips() {
+
+  
   const router = useRouter();
-  const { isLoading, trips   } = useGetDashboardUserTrips(userId);
-   const handleTrackTrip = (tripId:string)=> {
-      router.push(`/dashboard/track-order/${tripId}`)
+  const { isLoading, trips, selectedTripId   } = useGetDashboardUserTrips();
+   const handleTrackTrip = (selectedTripId:string)=> {
+      router.push(`/dashboard/track-order/${selectedTripId}`)
 
    }
   
@@ -25,8 +21,8 @@ export default function UserOtherTrips({
   //however, when the trips are fetched, since they are fetched as dispatcher trips since the current user_role is rider/driver
   let otherTrips: Trip[] = [];
     trips?.dispatcher_trips 
-    ?  otherTrips = trips?.dispatcher_trips.filter((trip: Trip) => trip.trip_id !== tripId) 
-    : otherTrips = trips?.customer_trips.filter((trip: Trip) => trip.trip_id !== tripId)
+    ?  otherTrips = trips?.dispatcher_trips.filter((trip: Trip) => trip.trip_id !== selectedTripId) 
+    : otherTrips = trips?.customer_trips.filter((trip: Trip) => trip.trip_id !== selectedTripId)
   
   const noOrders = !otherTrips || otherTrips.length < 1;
 

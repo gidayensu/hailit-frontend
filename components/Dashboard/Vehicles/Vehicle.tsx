@@ -129,7 +129,7 @@ export default function Vehicle() {
   }
   if(editingVehicle) {
     return (
-      <EditVehicle vehicle={vehicle} handleGoBack= {()=>setEditingVehicle(false)}/>
+      <EditVehicle handleGoBack= {()=>setEditingVehicle(false)}/>
     )
   }
 }

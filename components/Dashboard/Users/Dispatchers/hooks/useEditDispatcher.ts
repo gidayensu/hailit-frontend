@@ -4,14 +4,15 @@ import { useUpdateDriverMutation, useUpdateRiderMutation, useUpdateUserMutation 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatcherProfile } from "./useDispatcherProfile";
 
-export const useEditDispatcher = (dispatcher: any) => {
-  
+export const useEditDispatcher = () => {
+  const { selectedDispatcher, handleGoBack } = useDispatcherProfile();
 
-  const [available, setAvailable] = useState<boolean>(dispatcher?.available);
-  const [vehicleId, setVehicleId] = useState<string>(dispatcher?.vehicle_id);
+  const [available, setAvailable] = useState<boolean>(selectedDispatcher?.available);
+  const [vehicleId, setVehicleId] = useState<string>(selectedDispatcher?.vehicle_id);
   
-  const userRole = dispatcher?.user_role;
+  const userRole = selectedDispatcher?.user_role;
   
   const [updateRider, {isSuccess: riderUpdated, error:riderUpdateError}] = useUpdateRiderMutation();
   const [updateDriver, {isSuccess: driverUpdated, error:driverUpdateError}] = useUpdateDriverMutation();
@@ -21,9 +22,9 @@ export const useEditDispatcher = (dispatcher: any) => {
   };
 
   // useEffect(() => {
-  //   setAvailable(dispatcher.available);
-  //   setVehicleId(dispatcher.vehicle_id)
-  // }, [setAvailable, setVehicleId, dispatcher]);
+  //   setAvailable(selectedDispatcher.available);
+  //   setVehicleId(selectedDispatcher.vehicle_id)
+  // }, [setAvailable, setVehicleId, selectedDispatcher]);
 
   //SecondaryModal ref
   const editDispatcherModalRef = useRef<any>(null);
@@ -58,13 +59,13 @@ export const useEditDispatcher = (dispatcher: any) => {
       const userDetails = { ...formData, userRole };
       
       const {license_number} = formData;
-      await updateUser({ userId: dispatcher.user_id, userDetails });
+      await updateUser({ userId: selectedDispatcher.user_id, userDetails });
 
       
       //update driver/rider-specific details
       userRole === "Rider" 
-      ? await updateRider({riderId: dispatcher?.rider_id, riderDetails: {available, license_number,}}) 
-      : await updateDriver({driverId: dispatcher?.driver_id, driverDetails: {available, license_number,}})
+      ? await updateRider({riderId: selectedDispatcher?.rider_id, riderDetails: {available, license_number,}}) 
+      : await updateDriver({driverId: selectedDispatcher?.driver_id, driverDetails: {available, license_number,}})
       
       
       
@@ -100,6 +101,8 @@ export const useEditDispatcher = (dispatcher: any) => {
     riderUpdated,
     driverUpdated,
     riderUpdateError,
-    driverUpdateError
+    driverUpdateError,
+    selectedDispatcher,
+    handleGoBack,
   };
 };

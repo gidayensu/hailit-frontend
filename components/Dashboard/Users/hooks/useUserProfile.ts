@@ -11,7 +11,9 @@ import { PaymentMethod } from "@/components/Order/types/Types";
 //router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
 //to have a 'go back' experience. 
 export const useUserProfile = ()=> {
-    
+    const [editUser, setEditUser] = useState<boolean>(false);
+  
+  
     const {selectedUserId} = useAppSelector(state=>state.dashboard);
     const {user} = useGetUser(selectedUserId)
     const [userTrips, setUserTrips] = useState<UserTrips>({
@@ -44,13 +46,12 @@ export const useUserProfile = ()=> {
         }
     }, [trips, error])
 
-    
-    
-    
-    
-    
     const selectedUser:User = user;
-    return {userTrips, customerTrips,  error,  selectedUser, isLoading,  }
+    
+    const handleEditUser = () => {
+        setEditUser(() => !editUser);
+      };
+    return {userTrips, customerTrips,  error,  selectedUser, isLoading, handleEditUser, editUser }
 }
 
 export interface UserTrip {

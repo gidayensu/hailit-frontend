@@ -8,12 +8,13 @@ import { UserRole } from "@/lib/store/slice/userSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { User as UserInterface } from "./useUsersTable";
+import { useUserProfile } from "./useUserProfile";
 
 
-export const useEditUser = (user: UserInterface) => {
-  const [userRole, setUserRole] = useState<UserRole>(user.user_role)
-  const [onboard, setOnboard] = useState<boolean>(user.onboard);
+export const useEditUser = () => {
+  const {  selectedUser } = useUserProfile();
+  const [userRole, setUserRole] = useState<UserRole>(selectedUser?.user_role)
+  const [onboard, setOnboard] = useState<boolean>(selectedUser?.onboard);
   const dispatch = useAppDispatch();
 
   const handleOnboard = () => {
@@ -59,7 +60,7 @@ export const useEditUser = (user: UserInterface) => {
     try {
       const userDetails = { ...formData, onboard, user_role: userRole };
 
-      await updateUser({ userId: user.user_id, userDetails });
+      await updateUser({ userId: selectedUser?.user_id, userDetails });
     } catch (err) {
 
 
@@ -98,5 +99,6 @@ if(isSuccess || error) {
     closeUserModal,
     handleUserRoleSelection,
     userRole,
+    selectedUser
   };
 };

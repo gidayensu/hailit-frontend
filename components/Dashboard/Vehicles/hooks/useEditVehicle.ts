@@ -1,22 +1,25 @@
 "use client";
 
 
+import { Vehicle as VehicleFormDetails, VehicleSchema } from "@/components/Form/FormTypes";
 import { useUpdateVehicleMutation } from "@/lib/store/apiSlice/hailitApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Vehicle as VehicleFormDetails, VehicleSchema } from "@/components/Form/FormTypes";
-import { VehicleType, Vehicle } from "../AllVehiclesTable";
+import { VehicleType } from "../AllVehiclesTable";
+import { useGetVehicle } from "./useGetVehicle";
 
 
 
-
-export const useEditVehicle = (vehicle: Vehicle) => {
+export const useEditVehicle = () => {
   
-
+  const {
+    vehicle,
+    
+  } = useGetVehicle();
   const [vehicleType, setVehicleType] = useState<VehicleType>(vehicle?.vehicle_type)
 //   const [isError, setIsError] = useState<boolean>(false);
-  const [available, setAvailable] = useState<boolean>(vehicle.available);
+  const [available, setAvailable] = useState<boolean>(vehicle?.available);
 
   const handleAvailable = () => {
     setAvailable(() => !available);
@@ -59,7 +62,7 @@ export const useEditVehicle = (vehicle: Vehicle) => {
     try {
       const vehicleDetails = { ...formData, available, vehicle_type: vehicleType };
 
-      await updateVehicle({ vehicleId: vehicle.vehicle_id, vehicleDetails });
+      await updateVehicle({ vehicleId: vehicle?.vehicle_id, vehicleDetails });
     } catch (err) {
       
 
@@ -84,6 +87,7 @@ export const useEditVehicle = (vehicle: Vehicle) => {
     editVehicleModalRef,    
     closeEditVehicleModal,
     handleVehicleTypeSelection,
-    vehicleType
+    vehicleType,
+    vehicle
   };
 };

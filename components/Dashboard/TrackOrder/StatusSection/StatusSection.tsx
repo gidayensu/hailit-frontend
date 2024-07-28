@@ -5,14 +5,12 @@ import { CiViewList } from "react-icons/ci";
 import { GoChecklist, GoX } from "react-icons/go";
 import { PiMotorcycleLight, PiPackageLight } from "react-icons/pi";
 import StatusUpdate from "./StatusUpdate";
+import { useGetTrip } from "./hooks/useGetTrip";
 
-export default function StatusSection({
-  tripStatus,
-  tripStage,
-}: {
-  tripStatus: string;
-  tripStage: number;
-}) {
+export default function StatusSection() {
+
+  const { trip, } = useGetTrip();
+  
   return (
     <>
       {/* order status */}
@@ -44,7 +42,7 @@ export default function StatusSection({
       <div className="flex">
         <OrderStatusElement
           orderStatus="Booked"
-          currentOrderStage={tripStage}
+
           orderStage={1}
         >
           <CiViewList className="text-3xl" />
@@ -52,7 +50,7 @@ export default function StatusSection({
 
         <OrderStatusElement
           orderStatus="Picked Up"
-          currentOrderStage={tripStage}
+          
           orderStage={2}
         >
           <PiPackageLight className="text-3xl" />
@@ -60,28 +58,28 @@ export default function StatusSection({
 
         <OrderStatusElement
           orderStatus="In Transit"
-          currentOrderStage={tripStage}
+          
           orderStage={3}
         >
           <PiMotorcycleLight className="text-3xl" />
         </OrderStatusElement>
 
-        {tripStatus !== "Cancelled" && (
+        {trip?.trip_status !== "Cancelled" && (
           <OrderStatusElement
             orderStatus="Delivered"
-            currentOrderStage={tripStage}
+          
             orderStage={4}
           >
             <GoChecklist
-              className={`text-3xl ${tripStage == 4 ? "text-green-500" : ""} `}
+              className={`text-3xl ${trip?.trip_stage == 4 ? "text-green-500" : ""} `}
             />
           </OrderStatusElement>
         )}
 
-        {tripStatus === "Cancelled" && (
+        {trip?.trip_status === "Cancelled" && (
           <OrderStatusElement
             orderStatus="Cancelled"
-            currentOrderStage={tripStage}
+          
             orderStage={0}
           >
             <GoX className="text-3xl text-red-500 dark:text-red-500" />

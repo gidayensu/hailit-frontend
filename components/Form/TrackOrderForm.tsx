@@ -2,28 +2,12 @@
 import Loader from "@/components/Shared/Loader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
-import { useParams } from "next/navigation";
-export default function TrackOrderForm ({inputRef, onClickFunc}: {inputRef: any, onClickFunc: ()=>void,}) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [sameAsCurrent, setSameAsCurrent] = useState<boolean>(false);
-  const params = useParams();
-  const {trip_id} = params;
+import { useTrckOrderForm } from "./hooks/useTrackOrderForm"
+
+
+export default function TrackOrderForm () {
+  const {isLoading, sameAsCurrent, handleSubmit, inputRef, trip_id} = useTrckOrderForm()
   
-  const handleSubmit = ()=> {
-    setIsLoading(true);
-    if(inputRef.current?.value === trip_id) {
-      setSameAsCurrent(true)
-      setIsLoading(false);
-      
-      setTimeout(()=> {
-        setSameAsCurrent(false)
-      }, 3000)
-    } else {
-      onClickFunc()
-    }
-    
-  }
 
   
   

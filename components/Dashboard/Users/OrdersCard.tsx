@@ -5,8 +5,8 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import { useGetDashboardUserTrips } from "../hooks/useGetDashboardUserTrips";
 import { Trip } from "@/lib/store/slice/tripSlice";
 
-export default function OrdersCard({userId}:{userId:string}) {
-  const  {data, isLoading, } = useGetDashboardUserTrips(userId);
+export default function OrdersCard() {
+  const  {data, isLoading, } = useGetDashboardUserTrips();
   
   return (
     <>

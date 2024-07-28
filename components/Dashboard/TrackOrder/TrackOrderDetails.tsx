@@ -10,9 +10,7 @@ import TripDetail from "./TripDetail";
 export default function  TrackOrder() {
   const {
     trip,
-    inputRef,
     isLoading,
-    handleTrackTrip,
     error,
     selectedTripId
   } = useGetTrip();
@@ -36,7 +34,7 @@ export default function  TrackOrder() {
             Check the trip ID and ensure that you are not missing a value and
             search again
           </p>
-          <TrackOrderForm inputRef={inputRef} onClickFunc={handleTrackTrip} />
+          <TrackOrderForm />
         </>
       )}
       

@@ -5,16 +5,15 @@ import Loader from "@/components/Shared/Loader";
 import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import { FormProvider } from "react-hook-form";
 import SecondaryModal from "../../../Shared/SecondaryModal";
 import AssignVehicle from "./AssignVehicle";
 import { useEditDispatcher } from "./hooks/useEditDispatcher";
 
-export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Dispatcher, handleGoBack: ()=>void}) {
+export default function EditDispatcher() {
+  
   
 
-  
   const {
     formMethods,
     handleSubmit,
@@ -26,7 +25,8 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
     editDispatcherModalRef,
     available,
     closeDispatcherModal,
-  } = useEditDispatcher(dispatcher);
+    selectedDispatcher, handleGoBack
+  } = useEditDispatcher();
   
   
   const inputAndLabeClass = "w-full max-w-sm items-center";
@@ -40,8 +40,8 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
           
           <div className="flex gap-3 text-sm font-semibold  w-full max-w-sm justify-between border rounded-xl h-14 items-center p-2 border-slate-400 dark:border-opacity-20">
             <span className="flex flex-col">
-            <p className="text-[12px]">{dispatcher.vehicle?.vehicle_name}</p>
-            <p className="text-[10px]">{dispatcher.vehicle?.plate_number}</p>
+            <p className="text-[12px]">{selectedDispatcher?.vehicle?.vehicle_name}</p>
+            <p className="text-[10px]">{selectedDispatcher?.vehicle?.plate_number}</p>
 
             </span>
           </div>
@@ -52,7 +52,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
           </Modal>
         </div>
       </div>
-      <h2 className="font-bold text-xl mt-6">{dispatcher?.user_role} Details</h2>
+      <h2 className="font-bold text-xl mt-6">{selectedDispatcher?.user_role} Details</h2>
     <FormProvider {...formMethods}>
       <form
         className="w-full flex flex-col items-start justify-start gap-3 "
@@ -66,7 +66,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
             placeholder="First Name"
             className="h-14 "
             name="first_name"
-            defaultValue={dispatcher?.first_name || ""}
+            defaultValue={selectedDispatcher?.first_name || ""}
           />
         </div>
         <div className={inputAndLabeClass}>
@@ -76,7 +76,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
             placeholder="Last Name"
             className="h-14"
             name="last_name"
-            defaultValue={dispatcher?.last_name || ''}
+            defaultValue={selectedDispatcher?.last_name || ''}
           />
         </div>
 
@@ -88,8 +88,8 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
             className="h-14"
             // defaultValue={email}
             name="email"
-            defaultValue={dispatcher?.email}
-            disabled={dispatcher?.email }
+            defaultValue={selectedDispatcher?.email}
+            disabled={selectedDispatcher?.email }
           />
         </div>
         <div className={inputAndLabeClass}>
@@ -99,7 +99,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
             placeholder="0240 000 000"
             className="h-14"
             name="phone_number"
-            defaultValue={dispatcher?.phone_number || ""}
+            defaultValue={selectedDispatcher?.phone_number || ""}
           />
         </div>
         
@@ -114,7 +114,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
               placeholder="License Number"
               className="h-14"
               name="license_number"
-              defaultValue={dispatcher?.license_number || ""}
+              defaultValue={selectedDispatcher?.license_number || ""}
               />
           </div>
         
@@ -128,7 +128,7 @@ export default function EditDispatcher({dispatcher, handleGoBack}:{dispatcher:Di
       </form>
       <Button className="max-w-sm w-full border border-slate-400 dark:bg-secondary-dark dark:border-opacity-30" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
-    <SecondaryModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${dispatcher.user_role} ${error ? ' not updated': ' details saved'}`}/>
+    <SecondaryModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${selectedDispatcher?.user_role} ${error ? ' not updated': ' details saved'}`}/>
     </main>
   );
 }

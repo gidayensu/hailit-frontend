@@ -1,21 +1,17 @@
 "use client";
 import { Modal } from "@/components/Shared/Modal";
 import { Button } from "@/components/ui/button";
-import { Dispatcher } from "@/lib/store/slice/tripSlice";
 import Link from "next/link";
 import { LiaUserSlashSolid } from "react-icons/lia";
+import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
 import { useViewDispatcher } from "../StatusSection/hooks/useViewDispatcher";
 import Drivers from "./AssignDrivers";
 import Riders from "./AssignRiders";
 export const DEFAULT_DISPATCHER_ID = "ff-12-53";
 
-export default function DispatcherSection({
-  dispatcher,
-  tripMedium,
-}: {
-  dispatcher: Dispatcher;
-  tripMedium: string;
-}) {
+export default function DispatcherSection() {
+  
+  const { trip, dispatcher } = useGetTrip();
   const { handleViewDispatcher } = useViewDispatcher();
 
 
@@ -24,7 +20,7 @@ export default function DispatcherSection({
       <div className="flex justify-between">
         <div className="">
           <h3 className="font-bold">
-            {tripMedium === "Motor" ? "RIDER" : "DRIVER"}
+            {trip?.trip_medium === "Motor" ? "RIDER" : "DRIVER"}
           </h3>
           <h3 className="text-[12px] text-slate-400 -mt-1">Details</h3>
         </div>
@@ -45,7 +41,7 @@ export default function DispatcherSection({
             </Button>
           }
         >
-          {tripMedium === "Motor" ? <Riders /> : <Drivers />}
+          {trip?.trip_medium === "Motor" ? <Riders /> : <Drivers />}
         </Modal>
       </div>
       {dispatcher.dispatcher_id === DEFAULT_DISPATCHER_ID ||
@@ -53,7 +49,7 @@ export default function DispatcherSection({
           <div className="flex flex-col gap-1 items-center justify-center font-medium">
             <LiaUserSlashSolid className="text-4xl opacity-40" />
             <p className="text-md">
-              No {tripMedium === "Motor" ? "Rider" : "Driver"} assigned
+              No {trip?.trip_medium === "Motor" ? "Rider" : "Driver"} assigned
             </p>
           </div>
         ))}
@@ -64,7 +60,7 @@ export default function DispatcherSection({
               <div className="space-y-1">
                 <ul>Name</ul>
                 <ul>Phone</ul>
-                <ul>{tripMedium === "Motor" ? "Motor" : "Car"}</ul>
+                <ul>{trip?.trip_medium === "Motor" ? "Motor" : "Car"}</ul>
                 <ul>Number Plate</ul>
               </div>
               <div className="space-y-1 text-right font-semibold">
