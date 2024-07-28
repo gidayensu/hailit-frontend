@@ -98,10 +98,7 @@ export default function DispatcherTripDetail () {
           )}
 
           <TrackOrderContainer headingText="Trip Status">
-            <OrderUpdates
-              currentOrderStage={trip?.trip_stage}
-              currentOrderStatus={trip?.trip_status}
-            />
+            <OrderUpdates />
           </TrackOrderContainer>
 
           <TrackOrderContainer headingText="Location and Timeline">
