@@ -48,7 +48,7 @@ export  const FormField:React.FC<FormFieldProps> = ({
     }, [defaultValue, name, setValue])
     return (<>
     
-        {/* will change it to shadcn input later after fixing why it is failing to register defaultValue */}
+        
     <Input
     type={type}
     
