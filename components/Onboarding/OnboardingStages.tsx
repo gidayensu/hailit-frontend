@@ -5,7 +5,6 @@ import LastStage from "@/components/Onboarding/LastStage";
 import SecondStage from "@/components/Onboarding/SecondStage";
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
 import { FiArrowLeft } from "react-icons/fi";
 
@@ -40,7 +39,7 @@ export default function OnboardingStages() {
   
   return (
     <>
-      {(!authenticated || userOnboard ) && (
+      {(!authenticated || (userOnboard && !stageThree && !stageOne && !stageTwo) ) && (
         <ErrorComponent errorCode={404} errorMessage="Page Not Found" url="/" />
       )}
       {authenticated && !onboard && (
