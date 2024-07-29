@@ -55,7 +55,6 @@ export default  function TrackOrderDetails() {
     );
   }
 
-  
   return (
     <TrackOrderItem/>  );
 }

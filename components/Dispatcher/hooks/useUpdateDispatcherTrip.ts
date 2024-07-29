@@ -26,11 +26,12 @@ export const useUpdateDispatcherTrip = () => {
   const dispatch = useAppDispatch();
   const [
     updateTrip,
-    { isLoading: updateLoading, error: updateError }, //check error
+    { isLoading: updateLoading, error: updateError }, 
   ] =   useUpdateTripMutation();
-  const {trip, tripId} = useAppSelector(state=>state.dispatcher)
+  const {trip,} = useAppSelector(state=>state.dispatcher)
   
   const dispatcher = useAppSelector((state) => state.dispatcher);
+  //get trip
   const { data, isLoading, error } = useGetTripQuery(trip_id);
   
   const tripData = data?.trip
@@ -104,6 +105,7 @@ export const useUpdateDispatcherTrip = () => {
     error,
     tripRequestDate,
     tripCommencementDate,
-    tripCompletionDate
+    tripCompletionDate,
+    updateError
   };
 };

@@ -17,6 +17,7 @@ import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
 import { UserTrip } from "./hooks/useUserProfile";
+
 export default function UserTripsTable({
   userTrips,
   error,

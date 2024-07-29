@@ -58,7 +58,7 @@ export const useNewOrderSubmit = () => {
   const formMethods = useForm<OrderDetails>({
     resolver: zodResolver(NewOrderSchema)
   });
-  const {register, handleSubmit, formState: {errors}, setError } = formMethods;
+  const {register, handleSubmit,  } = formMethods;
   
 
   //submit form

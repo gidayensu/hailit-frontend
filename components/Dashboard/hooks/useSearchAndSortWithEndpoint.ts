@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { useSortTable } from "./useSortTables";
 import { TableTypes } from "./useSortTables";
+
 export type QueryEndpoint = "vehicles?" | "users?" | "riders?" | "drivers?" | "trips?";
 
 export function useSearchAndSortWithEndpoint({endpoint, columns, table}:{table:TableTypes,  endpoint:QueryEndpoint, columns: any}) {

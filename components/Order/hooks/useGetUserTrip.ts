@@ -10,8 +10,6 @@ export const useGetUserTrip=()=> {
   const params = useParams();
   const { trip_id } = params;
   
-  
-  
   const { user_id} = useAppSelector(state=>state.user);
   const { data, isLoading, error } = useGetTripQuery(trip_id);
 
