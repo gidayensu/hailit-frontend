@@ -6,7 +6,7 @@ export interface SortDetails {
   column: string 
 }
 
-export type TableTypes = "Trips Table" | "Vehicles Table" | "Riders Table" | "Drivers Table" | "Users Table"
+export type TableTypes = "trips" | "vehicles" | "riders" | "drivers" | "users"
 
 export function useSortTable({table, columns}:{table: TableTypes, columns: string[]}) {
 
