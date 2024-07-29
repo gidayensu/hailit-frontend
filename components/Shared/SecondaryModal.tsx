@@ -67,7 +67,7 @@ export default function SecondaryModal({
                 onClick={closeModal}
               >
                 
-                Close
+                {note ? "Okay" : "Close"}
               </Button>
             </div>
           </div>
