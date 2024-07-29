@@ -7,8 +7,8 @@ export default function PaymentSection() {
   const {handleTripUpdate} = useDashboardTripUpdate();
   const {trip, } = useGetTrip()
   
-  let discount = 0;
-  let serviceFee = 0;
+  const discount = 0;
+  const serviceFee = 0;
 
   return (
     <>
