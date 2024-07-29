@@ -61,11 +61,7 @@ export const useAnalytics = (endpoint: EndPoint) => {
     isLoading: conditionalDataLoading,
     error: conditionalDataError,
   } = useGetTripCountsByMonthQuery(
-    `trip_column=${endpoint.trip_column}&${endpoint.trip_column}=${endpoint.trip_column_condition}`,
-    {
-      pollingInterval: 5000,
-      skipPollingIfUnfocused: true,
-    }
+    `trip_column=${endpoint.trip_column}&${endpoint.trip_column}=${endpoint.trip_column_condition}`
   );
 
   const conditionalMonthsData = conditionalMonths?.tripCounts;
@@ -74,7 +70,7 @@ export const useAnalytics = (endpoint: EndPoint) => {
     isLoading: totalMonthsDataLoading,
     error: totalMonthsDataError,
   } = useGetTripCountsByMonthQuery(``, {
-    pollingInterval: 5000,
+    pollingInterval: 10000,
     skipPollingIfUnfocused: true,
   });
 
