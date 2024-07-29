@@ -2,26 +2,25 @@
 //ui components + icons
 import FirstStage from "@/components/Onboarding/FirstStage";
 import LastStage from "@/components/Onboarding/LastStage";
+import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
 import SecondStage from "@/components/Onboarding/SecondStage";
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
-import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
 import { FiArrowLeft } from "react-icons/fi";
 
 //hook
 import { useOnboarding } from "@/components/Onboarding/hooks/useOnboarding";
-import {  useState } from "react";
 import ErrorComponent from "../Shared/ErrorComponent";
 
 export default function OnboardingStages() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleLoading = ()=> {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }
+  // const handleLoading = ()=> {
+  //   setIsLoading(true)
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 3000);
+  // }
 
   
   const {
@@ -92,7 +91,7 @@ export default function OnboardingStages() {
                   form="customerProfileUpdate"
                   type="submit"
                   disabled = {loading}
-                  onClick={handleLoading}
+                  // onClick={handleLoading}
                 >
                   {loading ? <Loader/> : 'Next'}
                 </Button>
