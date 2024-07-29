@@ -18,14 +18,14 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
           {path === "/dispatcher" && (
             <>
               
-              <h3 className="font-bold text-[14px] ">#{trip.trip_id}</h3>
+              <h3 className="font-bold text-[14px] ">#{trip?.trip_id}</h3>
             </>
           )}
 
           {(path.startsWith("/track") || path.startsWith("/dashboard")) && (
             <>
               <p className="text-sm text-slate-500">
-                {trip.trip_area.toUpperCase()}
+                {trip?.trip_area?.toUpperCase()}
               </p>
             </>
           )}
@@ -54,16 +54,16 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
           }
         <div
           className={`flex justify-center items-center  mr-7 text-sm font-bold w-20   ${
-            trip.trip_type === "Same Day"
+            trip?.trip_type === "Same Day"
               ? "  text-primary-color"
-              : trip.trip_type === "Next Day"
+              : trip?.trip_type === "Next Day"
               ? "  text-teal-500 "
-              : trip.trip_type === "Scheduled"
+              : trip?.trip_type === "Scheduled"
               ? "text-amber-600 dark:text-amber-500 "
               : " text-green-500"
           }  h-6 w-24 rounded-md`}
         >
-          <p>{trip.trip_type}</p>
+          <p>{trip?.trip_type}</p>
         </div>
       </section>
       <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10" />
@@ -79,7 +79,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
                   <span className="flex flex-col col-span-7 ">
                     <p className="text-sm font-semibold">Pickup Point</p>
                     <p className="text-sm  lg:w-64   ">
-                      {trip.pickup_location}
+                      {trip?.pickup_location}
                     </p>
                   </span>
                 </div>
@@ -101,7 +101,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
               <HiLocationMarker className="col-span-1 text-xl text-green-500" />
               <span className="flex flex-col col-span-7 ">
                 <p className="text-sm font-semibold">Dropoff Point</p>
-                <p className="text-sm lg:w-64    ">{trip.drop_off_location}</p>
+                <p className="text-sm lg:w-64    ">{trip?.drop_off_location}</p>
               </span>
             </div>
             <div className="col-span-2  flex flex-col  ml-2  ">

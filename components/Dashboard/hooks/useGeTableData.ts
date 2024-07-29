@@ -6,8 +6,7 @@ import { EndpointNames } from "./usePrefetchData";
 import { QueryEndpoint } from "./useSearchAndSortWithEndpoint";
 
 
-export const useGetTableData = ({page,  pollingInterval = 0, table, }:{page:number; table:TableType; pollingInterval?:number}) => {
-  
+export const useGetTableData = ({page,  table, }:{page:number; table:TableType; }) => {
   
   const {
     handleSort, 
@@ -20,15 +19,11 @@ export const useGetTableData = ({page,  pollingInterval = 0, table, }:{page:numb
     isSearch
   } = useSearchAndSortWithEndpoint({table, columns: tableColumns[table], endpoint: queryEndpoints[table]});
   
-  const { data, isLoading, error, isSuccess } = fetchQueries[table](`${endpoint}&page=${page}`, {
-    pollingInterval:pollingInterval,
-    skipPollingIfUnfocused: true
-  });
-  
+  const { data, isLoading, error, isSuccess } = fetchQueries[table](`${endpoint}&page=${page}`);
   
   const total_number_of_pages = data?.total_number_of_pages;
   const total_items = data?.total_items
-
+  const items =  data && data[table] 
   const {handlePrefetchData} = usePrefetchData({endpoint: endpoint, page, prefetchOption: prefetchEndpoints[table], total_number_of_pages});
   
   //prefetch useEffect
@@ -59,17 +54,19 @@ export const useGetTableData = ({page,  pollingInterval = 0, table, }:{page:numb
     handleSort,
     isSearch,
     handleSearch,
-    isSuccess
+    isSuccess,
+    items
   };
 };
 
 
+
 export enum TableType {
-  TripsTable = "Trips Table",
-  VehiclesTable = "Vehicles Table",
-  RidersTable = "Riders Table",
-  DriversTable = "Drivers Table",
-  UsersTable = "Users Table"
+  TripsTable = "trips",
+  VehiclesTable = "vehicles",
+  RidersTable = "riders",
+  DriversTable = "drivers",
+  UsersTable = "users"
 }
 
 
@@ -160,6 +157,5 @@ const tableColumns = {
   [TableType.DriversTable]: DISPATCHER_TABLE_COLUMNS,
   [TableType.RidersTable]: DISPATCHER_TABLE_COLUMNS,
   [TableType.TripsTable]: TRIPS_TABLE_COLUMNS,
-  
 }
 

@@ -1,14 +1,24 @@
 import { supabase } from "@/lib/supabaseAuth";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Trip } from "../slice/tripSlice";
+import {io} from 'socket.io-client';
 
+const baseUrl = `https://hailit-backend.onrender.com/api/v1/`;
 
+const socket = io('https://hailit-backend.onrender.com/', {
+  reconnection: true,
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  timeout: 20000,
+  transports: ['websocket', 'polling']
+});
 
-// API endpoint for fetching data
+// API endpoints for fetching data
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: `http://localhost:4000/api/v1/`,
-    baseUrl: `https://hailit-backend.onrender.com/api/v1/`,
+    baseUrl,
     prepareHeaders: async (headers) => {
       const {
         data: { session },
@@ -41,7 +51,60 @@ export const hailitApi = createApi({
       query: (endpoint) => ({
         url: `${endpoint}`,
         method: "GET",
-      }),
+      }),async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         
+         try {
+           await cacheDataLoaded;
+           socket.on('tripAdded', (addedTrip) => {
+             
+            updateCachedData((draft)=> {
+             draft.trips.pop();
+             draft.trips = [addedTrip, ...draft.trips]
+             draft.total_items = Number(draft.total_items) + 1;
+             
+            })
+          });
+           socket.on('tripUpdated', (tripUpdate) => {
+             updateCachedData((draft)=> {
+              const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === tripUpdate.trip_id);
+              if (index !==-1) {
+                draft.trips[index] = tripUpdate
+              }
+             })
+           });
+           socket.on('tripRated', (ratedTrip) => {
+             updateCachedData((draft)=> {
+              const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === ratedTrip.trip_id);
+              if (index !==-1) {
+                draft.trips[index] = ratedTrip
+              }
+             })
+           });
+           socket.on('tripDeleted', (trip_id) => {
+            console.log(trip_id)
+             updateCachedData((draft)=> {
+              const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === trip_id);
+              if (index !==-1) {
+                draft.trips = draft.trips.filter((trip:Trip)=>trip.trip_id !== trip_id) 
+              }
+             })
+           });
+           
+           
+         } catch {
+           console.log('')
+         }
+         await cacheEntryRemoved
+         socket.off('tripAdded');
+         socket.off('tripUpdated');
+         socket.off('tripDeleted');
+         socket.off('tripRated');
+        socket.close();
+       },
       providesTags: ["Trips"],
     }),
     getTrip: builder.query<any, string | string[]>({
@@ -49,6 +112,51 @@ export const hailitApi = createApi({
         url: `trips/user-trip/${trip_id}`,
         method: "GET",
       }),
+      async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         
+         try {
+           await cacheDataLoaded;
+           
+           socket.on('tripUpdated', (tripUpdate) => {
+            
+             updateCachedData((draft)=> {
+              
+              if (draft.trip.trip_id  ===tripUpdate.trip.trip_id) {
+                draft.trip = tripUpdate.trip
+              }
+             })
+           });
+           socket.on('tripRated', (ratedTrip) => {
+             updateCachedData((draft)=> {
+              if (draft.trip.trip_id  === ratedTrip.trip.trip_id) {
+                draft.trip = ratedTrip
+              }
+             })
+           });
+           socket.on('tripDeleted', (trip_id) => {
+             updateCachedData((draft)=> {
+              if (draft.trip.trip_id  === trip_id) {
+                draft.trip = []
+              }
+             })
+           });
+           
+           
+         } catch (err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         
+         socket.off('tripUpdated');
+         socket.off('tripDeleted');
+         socket.off('tripRated');
+        socket.close();
+       },
+      
       providesTags: ["Trip"],
     }),
     getUserTrips: builder.query<any, string | string[]>({
@@ -56,6 +164,107 @@ export const hailitApi = createApi({
         url: `trips/user-trips/${userId}`,
         method: "GET",
       }),
+      async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         
+         try {
+           await cacheDataLoaded;
+           
+           socket.on('tripAdded', (addedTrip) => {
+            
+            updateCachedData((draft)=> {
+              if(draft.trips.dispatcher_trips) {
+                draft.trips.dispatcher_trips = [addedTrip, ...(draft?.trips?.dispatcher_trips ?? [])];
+              }
+
+              if(draft.trips.customer_trips) {
+
+                draft.trips.customer_trips = [addedTrip, ...(draft.trips.customer_trips ?? [])];
+              }
+
+            
+             draft.trips.current_trips = Number(draft.trips.current_trips) + 1;
+             draft.trips.total_trip_count = Number(draft.trips.total_trip_count) + 1;
+             
+            })
+          });
+           socket.on('tripUpdated', (tripUpdate) => {
+             updateCachedData((draft)=> {
+               const { trip } = tripUpdate;
+               console.log(trip)
+               const updateTrip = (trips:Trip[], updatedTrip:Trip) => {
+                 const index = trips?.findIndex(
+                   (trip) => trip.trip_id === updatedTrip.trip_id
+                 );
+                 if (index !== -1) {
+                   trips[index] = updatedTrip;
+                 }
+               };
+
+               if (draft.trips.customer_trips) {
+                 updateTrip(draft.trips.customer_trips, trip);
+               }
+
+               if (draft.trips.dispatcher_trips) {
+                 updateTrip(draft.trips.dispatcher_trips, trip);
+               }
+
+               if (trip.trip_status === "Cancelled") {
+                 draft.trips.current_trips =
+                   Number(draft.trips.current_trips) - 1;
+                 draft.trips.cancelled_trips =
+                   Number(draft.trips.cancelled_trips) + 1;
+               }
+
+               if (trip.trip_status === "Delivered") {
+                 draft.trips.current_trips =
+                   Number(draft.trips.current_trips) - 1;
+                 draft.trips.delivered_trips =
+                   Number(draft.trips.delivered_trips) + 1;
+               }
+             }
+          )
+           });
+          
+           socket.on('tripDeleted', (trip_id) => {
+            
+             updateCachedData((draft)=> {
+
+              const removeTrip = (trips:Trip[], trip_id:string) => {
+                const index = trips?.findIndex((trip) => trip.trip_id === trip_id);
+                if (index !== -1) {
+                  return trips.filter((trip) => trip.trip_id !== trip_id);
+                }
+                return trips;
+              };
+              
+              if (draft.trips.customer_trips) {
+                draft.trips.customer_trips = removeTrip(draft.trips.customer_trips, trip_id);
+              }
+              
+              if (draft.trips.dispatcher_trips) {
+                draft.trips.dispatcher_trips = removeTrip(draft.trips.dispatcher_trips, trip_id);
+              }
+              
+              
+              
+             })
+           });
+           
+           
+         } catch(err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         socket.off('tripAdded');
+         socket.off('tripUpdated');
+         socket.off('tripDeleted');
+         
+        socket.close();
+       },
       providesTags: ["User Trips"],
     }),
     addTrip: builder.mutation<any, any>({
@@ -72,7 +281,7 @@ export const hailitApi = createApi({
         url: `trips/user-trip/${trip_id}`,
         method: "PUT",
         body: tripDetails,
-      }),
+      }), 
       invalidatesTags: [
         "Trip",
         "User Trips",

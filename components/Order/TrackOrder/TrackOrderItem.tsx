@@ -9,6 +9,7 @@ import TrackOrderContainer from "./TrackOrderContainer";
 import MiddleSectionContainer from "@/components/Shared/MiddleSectionContainer";
 import TopSectionContainer from "@/components/Shared/TopSectionContainer";
 import TripMap from "../../Maps/TripMap";
+import OrderIsDeleted from "./OrderIsDeletedModal";
 //helpers + next
 import OrderDispatcherCard from "@/components/Dispatcher/OrderDispatcherCard";
 import CustomerHelp from "@/components/Profile/Settings/CustomerHelp";
@@ -23,30 +24,30 @@ import { useTrackOrderItem } from "./hooks/useTrackOrderItem";
 export default function TrackOrderItem() {
   const {
     trip,
-    
     tripOngoingStatus,
     tripRequestDate,
     isCustomer,
-    
     handleTripUpdate,
     tripUdpateLoading,
     tripUdpateError,
     tripUpdateSuccess,
   } = useTrackOrderItem();
 
-
+  
   return (
+    <>
+    <OrderIsDeleted tripId={trip?.trip_id} />
     <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
       <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-        <span className="text-5xl font-bold">#{trip.trip_id}</span>
+        <span className="text-5xl font-bold">#{trip?.trip_id ?? "Trip deleted"}</span>
         <p className="text-md ">
-          <b>Package Type:</b> {trip.package_type}
+          <b>Package Type:</b> {trip?.package_type ?? "Trip deleted"}
         </p>
         <p className="text-md ">
-          <b>Request Date:</b> {tripRequestDate}
+          <b>Request Date:</b> {tripRequestDate ?? "Trip deleted"}
         </p>
         <p className="text-md ">
-          <b>Trip Medium:</b> {trip.trip_medium}
+          <b>Trip Medium:</b> {trip?.trip_medium ?? "Trip deleted"}
         </p>
       </TopSectionContainer>
 
@@ -55,7 +56,7 @@ export default function TrackOrderItem() {
           <OrderUpdates/>
         </TrackOrderContainer>
         {
-          tripOngoingStatus.includes(trip.trip_status) &&
+          tripOngoingStatus.includes(trip?.trip_status) &&
         <TrackOrderContainer headingText="Courier">
           <OrderDispatcherCard />
         </TrackOrderContainer>
@@ -78,15 +79,15 @@ export default function TrackOrderItem() {
             <div className="grid grid-cols-3  p-3 ">
               <span className="text-sm">
                 <p className=" font-bold">Amount</p>
-                <p> {trip.trip_cost}</p>
+                <p> {trip?.trip_cost ?? "Trip deleted"}</p>
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Status</p>
-                <p className={`${trip.payment_status ? 'text-green-500': 'text-red-500'} `}> {trip.payment_status ? "Paid" : "Not Paid"}</p>
+                <p className={`${trip?.payment_status ? 'text-green-500': 'text-red-500'} `}> {trip?.payment_status ? "Paid" : "Not Paid"}</p>
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Method</p>
-                <p> {trip.payment_method}</p>
+                <p> {trip?.payment_method ?? "Trip deleted"}</p>
               </span>
             </div>
           </Container>
@@ -96,9 +97,9 @@ export default function TrackOrderItem() {
               
                 <ReOrder/>
 
-                {(trip.trip_status === "Booked" ||
-                  trip.trip_status === "Picked Up" ||
-                  trip.trip_status === "In Transit") && (
+                {(trip?.trip_status === "Booked" ||
+                  trip?.trip_status === "Picked Up" ||
+                  trip?.trip_status === "In Transit") && (
                   <Modal
                     dialogTriggerElement="Cancel"
                     className="w-full  h-10 rounded-lg border border-red-500 hover:border-red-700 hover:text-red-700 bg-transparent text-red-500 dark:bg-transparent dark:text-red-500"
@@ -119,7 +120,7 @@ export default function TrackOrderItem() {
                               <MdOutlineError className="text-red-500 text-2xl" />
                             </span>
                             <h2 className="text-center text-lg mb-2 animate-in slide-in-from-bottom duration-100">
-                              Error occurred cancelling trip...
+                              Error occurred cancelling trip?...
                             </h2>
                           </>
                         )}
@@ -140,7 +141,7 @@ export default function TrackOrderItem() {
                               <RxCross2 className="text-red-500 text-2xl" />
                             </span>
                             <h2 className="text-center text-md mb-2 animate-in slide-in-from-bottom duration-100">
-                              You are attempting to <b>cancel trip  {trip.trip_id}. </b> <br/>
+                              You are attempting to <b>cancel trip  {trip?.trip_id}. </b> <br/>
                               If your item has been picked up, it will be returned.
                             </h2>
                             <h3>
@@ -173,5 +174,6 @@ export default function TrackOrderItem() {
         </div>
       </MiddleSectionContainer>
     </main>
+    </>
   );
 }

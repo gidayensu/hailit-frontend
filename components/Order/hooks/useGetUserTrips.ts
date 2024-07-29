@@ -1,17 +1,13 @@
 "use client";
 import { useGetUserTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
-import { TripStatus } from "../types/Types";
-import { useEffect, useState } from "react";
 import { Trip } from "@/lib/store/slice/tripSlice";
+import { TripStatus } from "../types/Types";
 
 export const useGetUserTrips = () => {
-  const [pollingInt, setPollingInt] = useState<number>(500000);
+  
   const { user_id, user_role } = useAppSelector((state) => state.user);
-  const { data, isLoading, error } = useGetUserTripsQuery(user_id, {
-    pollingInterval: pollingInt,
-    skipPollingIfUnfocused: true
-  });
+  const { data, isLoading, error } = useGetUserTripsQuery(user_id);
     
   let previousTrips = [];
   let currentTrips = [];
@@ -56,14 +52,7 @@ export const useGetUserTrips = () => {
         
       } 
 
-      //Not using useEffect result in infinite loop. Probably due to the condition being always true.
       
-      useEffect(()=> {
-        if(currentTrips?.length > 0 || previousTrips.length > 0) {
-
-            setPollingInt(3000)
-        }
-      }, [currentTrips, previousTrips, setPollingInt])
       
   
   

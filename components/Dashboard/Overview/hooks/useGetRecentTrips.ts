@@ -22,11 +22,7 @@ export const useGetRecentTrips = () => {
   );
 
   const { data, isLoading, error, isSuccess } = useGetAllTripsQuery(
-    `trips?&sortColumn=Booked%20On&sortDirection=DESC&page=1`,
-    {
-      pollingInterval: 5000,
-      skipPollingIfUnfocused: true,
-    }
+    `trips?&sortColumn=Booked%20On&sortDirection=DESC&page=1`
   );
 
   const trips = data?.trips;

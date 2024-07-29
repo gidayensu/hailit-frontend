@@ -3,13 +3,11 @@ import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setTrip } from "@/lib/store/slice/tripSlice";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const useGetTrip = () => {
   const router = useRouter();
   const inputRef = useRef<any>(null);
-  const [controlledPollingInterval, setControlledPollingInterval] =
-    useState<number>(5000);
 
   const params = useParams();
 
@@ -22,17 +20,7 @@ export const useGetTrip = () => {
 
   const trip = useAppSelector((state) => state.trip);
 
-  const { data, isLoading, error } = useGetTripQuery(selectedTripId, {
-    pollingInterval: controlledPollingInterval,
-    refetchOnFocus: true,
-  });
-
-  //control polling from running when there is an error
-  useEffect(() => {
-    if (error ) {
-      setControlledPollingInterval(0);
-    }
-  }, [error, setControlledPollingInterval,]);
+  const { data, isLoading, error } = useGetTripQuery(selectedTripId);
 
   const fetchedTrip = data?.trip;
   const dispatch = useAppDispatch();
@@ -64,7 +52,5 @@ export const useGetTrip = () => {
     isLoading,
     selectedTripId,
     handleTrackTrip,
-
-    
   };
 };
