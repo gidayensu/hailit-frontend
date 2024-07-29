@@ -53,7 +53,7 @@ export type EndPoint =
   | EndPointWithTripStatus
   | EndPointWithTripType;
 
-export const useAnalytics = (endpoint: EndPoint, fetchMonth?: boolean) => {
+export const useAnalytics = (endpoint: EndPoint) => {
 
   // const [fetchedMonths, setFetchedMonths] = useState<[]>([]);
   const {
