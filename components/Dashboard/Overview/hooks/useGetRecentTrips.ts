@@ -1,4 +1,4 @@
-import { useGetAllTripsQuery } from "@/lib/store/apiSlice/hailitApi";
+import { useGetMostRecentTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
@@ -21,7 +21,7 @@ export const useGetRecentTrips = () => {
     [dispatch]
   );
 
-  const { data, isLoading, error, isSuccess } = useGetAllTripsQuery(
+  const { data, isLoading, error, isSuccess } = useGetMostRecentTripsQuery(
     `trips?&sortColumn=Booked%20On&sortDirection=DESC&page=1`
   );
 

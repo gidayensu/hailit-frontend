@@ -74,7 +74,7 @@ export interface UserTrip {
     payment_method: PaymentMethod | '';
   }
   
-interface UserTrips {
+export interface UserTrips {
     customer_trips: UserTrip[],
     total_trip_count: number, 
     delivered_trips: number, 

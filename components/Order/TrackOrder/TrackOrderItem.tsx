@@ -39,15 +39,15 @@ export default function TrackOrderItem() {
     <OrderIsDeleted tripId={trip?.trip_id} />
     <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
       <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-        <span className="text-5xl font-bold">#{trip?.trip_id ?? "Trip deleted"}</span>
+        <span className="text-5xl font-bold">#{trip?.trip_id ?? "Trip not found"}</span>
         <p className="text-md ">
-          <b>Package Type:</b> {trip?.package_type ?? "Trip deleted"}
+          <b>Package Type:</b> {trip?.package_type ?? "Trip not found"}
         </p>
         <p className="text-md ">
-          <b>Request Date:</b> {tripRequestDate ?? "Trip deleted"}
+          <b>Request Date:</b> {tripRequestDate ?? "Trip not found"}
         </p>
         <p className="text-md ">
-          <b>Trip Medium:</b> {trip?.trip_medium ?? "Trip deleted"}
+          <b>Trip Medium:</b> {trip?.trip_medium ?? "Trip not found"}
         </p>
       </TopSectionContainer>
 
@@ -79,7 +79,7 @@ export default function TrackOrderItem() {
             <div className="grid grid-cols-3  p-3 ">
               <span className="text-sm">
                 <p className=" font-bold">Amount</p>
-                <p> {trip?.trip_cost ?? "Trip deleted"}</p>
+                <p> {trip?.trip_cost ?? "Trip not found"}</p>
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Status</p>
@@ -87,7 +87,7 @@ export default function TrackOrderItem() {
               </span>
               <span className="text-sm">
                 <p className=" font-bold">Method</p>
-                <p> {trip?.payment_method ?? "Trip deleted"}</p>
+                <p> {trip?.payment_method ?? "Trip not found"}</p>
               </span>
             </div>
           </Container>

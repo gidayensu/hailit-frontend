@@ -1,19 +1,41 @@
-import { supabase } from "@/lib/supabaseAuth";
+import { DispatcherTrips } from "@/components/Dashboard/Users/Dispatchers/hooks/useDispatcherProfile";
+import { UserTrips } from "@/components/Dashboard/Users/hooks/useUserProfile";
+import { supabase, userIdAndEmailFromSession } from "@/lib/supabaseAuth";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { io } from 'socket.io-client';
 import { Trip } from "../slice/tripSlice";
-import {io} from 'socket.io-client';
 
 const baseUrl = `https://hailit-backend.onrender.com/api/v1/`;
 
-const socket = io('https://hailit-backend.onrender.com/', {
-  reconnection: true,
-  reconnectionAttempts: Infinity,
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  timeout: 20000,
-  transports: ['websocket', 'polling']
-});
 
+
+let userNamespaceSocket:any;
+
+const initializeSocketIo = async () => {
+  const { user_id } = await userIdAndEmailFromSession();
+  if (user_id) {
+    userNamespaceSocket = io(`https://hailit-backend.onrender.com/user-${user_id}`, {
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 20000,
+      query: { user_id: user_id },
+      
+      transports: ['websocket', 'polling']
+    });
+
+    userNamespaceSocket.on('connect', () => {
+      console.log(`Connected with user ID: ${user_id}`);
+      
+    });
+
+    userNamespaceSocket.on('connect_error', (error:any) => {
+      console.error('Connection error:', error);
+    });
+  }
+};
+initializeSocketIo();
 // API endpoints for fetching data
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
@@ -51,59 +73,67 @@ export const hailitApi = createApi({
       query: (endpoint) => ({
         url: `${endpoint}`,
         method: "GET",
+      }),
+      providesTags: ["Trips"],
+    }),
+    getMostRecentTrips: builder.query<any, string | string[]>({
+      query: (endpoint) => ({
+        url: `${endpoint}`,
+        method: "GET",
       }),async onCacheEntryAdded(
         _, // arg
          {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
        ) {
          
-         
+        
+        
          try {
            await cacheDataLoaded;
-           socket.on('tripAdded', (addedTrip) => {
+           
+           userNamespaceSocket.on('tripAdded', (addedTrip:Trip) => {
              
             updateCachedData((draft)=> {
              draft.trips.pop();
-             draft.trips = [addedTrip, ...draft.trips]
-             draft.total_items = Number(draft.total_items) + 1;
-             
+              draft.trips = [addedTrip, ...draft.trips]
             })
           });
-           socket.on('tripUpdated', (tripUpdate) => {
+          userNamespaceSocket.on('tripUpdated', (tripUpdate:Trip) => {
              updateCachedData((draft)=> {
               const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === tripUpdate.trip_id);
               if (index !==-1) {
-                draft.trips[index] = tripUpdate
+                   draft.trips[index] = tripUpdate
               }
              })
            });
-           socket.on('tripRated', (ratedTrip) => {
+           userNamespaceSocket.on('tripRated', (ratedTrip:Trip) => {
              updateCachedData((draft)=> {
               const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === ratedTrip.trip_id);
               if (index !==-1) {
-                draft.trips[index] = ratedTrip
+                 draft.trips[index] = ratedTrip
               }
              })
            });
-           socket.on('tripDeleted', (trip_id) => {
-            console.log(trip_id)
+           userNamespaceSocket.on('tripDeleted', (trip_id:string) => {
+            
              updateCachedData((draft)=> {
               const index = draft.trips.findIndex((trip:Trip)=>trip.trip_id === trip_id);
               if (index !==-1) {
-                draft.trips = draft.trips.filter((trip:Trip)=>trip.trip_id !== trip_id) 
+                 draft.trips = draft.trips.filter((trip:Trip)=>trip.trip_id !== trip_id) 
               }
              })
            });
            
            
-         } catch {
-           console.log('')
+           
+         } catch (err) {
+           console.log(err)
          }
          await cacheEntryRemoved
-         socket.off('tripAdded');
-         socket.off('tripUpdated');
-         socket.off('tripDeleted');
-         socket.off('tripRated');
-        socket.close();
+         
+         userNamespaceSocket.off('updatedTrip');
+         userNamespaceSocket.off('deletedTrip');
+         userNamespaceSocket.off('ratedTrip');
+         userNamespaceSocket.close();
        },
       providesTags: ["Trips"],
     }),
@@ -116,28 +146,41 @@ export const hailitApi = createApi({
         _, // arg
          {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
        ) {
-         
-         
+
+
+        
          try {
            await cacheDataLoaded;
            
-           socket.on('tripUpdated', (tripUpdate) => {
-            
+           userNamespaceSocket.on('updatedTrip', (updatedTrip:Trip) => {
              updateCachedData((draft)=> {
-              
-              if (draft.trip.trip_id  ===tripUpdate.trip.trip_id) {
-                draft.trip = tripUpdate.trip
+              console.log({updatedTrip})
+              if (draft.trip.trip_id  ===updatedTrip.trip_id) {
+                draft.trip = updatedTrip
               }
              })
            });
-           socket.on('tripRated', (ratedTrip) => {
+           userNamespaceSocket.on('hi', (hi:string) => {
+             updateCachedData(()=> {
+              console.log({hi})
+             })
+           });
+          //  userNamespaceSocket.on('currentMonthTripsCount', (currentMonthTripsCount:any) => { 
+          //   updateCachedData(()=> {
+          //     console.log({currentMonthTripsCount})
+          //      return currentMonthTripsCount
+          //   })
+          // });
+           userNamespaceSocket.on('ratedTrip', (ratedTrip:Trip) => {
+            console.log({ratedTrip})
              updateCachedData((draft)=> {
-              if (draft.trip.trip_id  === ratedTrip.trip.trip_id) {
+              if (draft.trip.trip_id  === ratedTrip.trip_id) {
                 draft.trip = ratedTrip
               }
              })
            });
-           socket.on('tripDeleted', (trip_id) => {
+           userNamespaceSocket.on('deletedTrip', (trip_id:string) => {
+            console.log({trip_id})
              updateCachedData((draft)=> {
               if (draft.trip.trip_id  === trip_id) {
                 draft.trip = []
@@ -150,11 +193,10 @@ export const hailitApi = createApi({
            console.log(err)
          }
          await cacheEntryRemoved
-         
-         socket.off('tripUpdated');
-         socket.off('tripDeleted');
-         socket.off('tripRated');
-        socket.close();
+         userNamespaceSocket.off('updatedTrip');
+         userNamespaceSocket.off('deletedTrip');
+         userNamespaceSocket.off('ratedTrip');
+         userNamespaceSocket.close();
        },
       
       providesTags: ["Trip"],
@@ -168,102 +210,29 @@ export const hailitApi = createApi({
         _, // arg
          {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
        ) {
-         
-         
+        
          try {
            await cacheDataLoaded;
-           
-           socket.on('tripAdded', (addedTrip) => {
-            
+           userNamespaceSocket.on('customerTrips',  (customerTrips: UserTrips) => { 
             updateCachedData((draft)=> {
-              if(draft.trips.dispatcher_trips) {
-                draft.trips.dispatcher_trips = [addedTrip, ...(draft?.trips?.dispatcher_trips ?? [])];
-              }
-
-              if(draft.trips.customer_trips) {
-
-                draft.trips.customer_trips = [addedTrip, ...(draft.trips.customer_trips ?? [])];
-              }
-
-            
-             draft.trips.current_trips = Number(draft.trips.current_trips) + 1;
-             draft.trips.total_trip_count = Number(draft.trips.total_trip_count) + 1;
-             
+              if(draft.trips.customer_trips)
+                 draft.trips = customerTrips;
             })
           });
-           socket.on('tripUpdated', (tripUpdate) => {
-             updateCachedData((draft)=> {
-               const { trip } = tripUpdate;
-               console.log(trip)
-               const updateTrip = (trips:Trip[], updatedTrip:Trip) => {
-                 const index = trips?.findIndex(
-                   (trip) => trip.trip_id === updatedTrip.trip_id
-                 );
-                 if (index !== -1) {
-                   trips[index] = updatedTrip;
-                 }
-               };
-
-               if (draft.trips.customer_trips) {
-                 updateTrip(draft.trips.customer_trips, trip);
-               }
-
-               if (draft.trips.dispatcher_trips) {
-                 updateTrip(draft.trips.dispatcher_trips, trip);
-               }
-
-               if (trip.trip_status === "Cancelled") {
-                 draft.trips.current_trips =
-                   Number(draft.trips.current_trips) - 1;
-                 draft.trips.cancelled_trips =
-                   Number(draft.trips.cancelled_trips) + 1;
-               }
-
-               if (trip.trip_status === "Delivered") {
-                 draft.trips.current_trips =
-                   Number(draft.trips.current_trips) - 1;
-                 draft.trips.delivered_trips =
-                   Number(draft.trips.delivered_trips) + 1;
-               }
-             }
-          )
-           });
-          
-           socket.on('tripDeleted', (trip_id) => {
-            
-             updateCachedData((draft)=> {
-
-              const removeTrip = (trips:Trip[], trip_id:string) => {
-                const index = trips?.findIndex((trip) => trip.trip_id === trip_id);
-                if (index !== -1) {
-                  return trips.filter((trip) => trip.trip_id !== trip_id);
-                }
-                return trips;
-              };
-              
-              if (draft.trips.customer_trips) {
-                draft.trips.customer_trips = removeTrip(draft.trips.customer_trips, trip_id);
-              }
-              
-              if (draft.trips.dispatcher_trips) {
-                draft.trips.dispatcher_trips = removeTrip(draft.trips.dispatcher_trips, trip_id);
-              }
-              
-              
-              
-             })
-           });
-           
+          userNamespaceSocket.on('dispatcherTrips',  (dispatcherTrips: DispatcherTrips) => { 
+            updateCachedData((draft)=> {
+              if(draft.trips.dispatcher_trips)
+                 draft.trips = dispatcherTrips;
+            })
+          });
+ 
            
          } catch(err) {
            console.log(err)
          }
          await cacheEntryRemoved
-         socket.off('tripAdded');
-         socket.off('tripUpdated');
-         socket.off('tripDeleted');
-         
-        socket.close();
+         userNamespaceSocket.off('userTrips');
+         userNamespaceSocket.close();
        },
       providesTags: ["User Trips"],
     }),
@@ -313,6 +282,32 @@ export const hailitApi = createApi({
         url: `trips/current-month-trip-count`,
         method: "GET",
       }),
+      async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         try {
+           await cacheDataLoaded;
+           userNamespaceSocket.on('hi', (hi:string) => {
+             updateCachedData(()=> {
+              console.log({hi})
+             })
+           });
+           userNamespaceSocket.on('currentMonthTripsCount', (currentMonthTripsCount:any) => { 
+            updateCachedData(()=> {
+               return currentMonthTripsCount
+            })
+          });
+ 
+           
+         } catch(err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         userNamespaceSocket.off('currentMonthTripsCount');
+         userNamespaceSocket.close();
+       },
       providesTags: ["Current Month Trip Counts"],
     }),
     getTripMonths: builder.query<any, string | string[]>({
@@ -320,12 +315,63 @@ export const hailitApi = createApi({
         url: `trips/trip-months`,
         method: "GET",
       }),
+      async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         try {
+           await cacheDataLoaded;
+           userNamespaceSocket.on('hi', (hi:string) => {
+            updateCachedData(()=> {
+             console.log({hi})
+            })
+          });
+           userNamespaceSocket.on('tripMonths', (tripMonths: any) => { 
+            updateCachedData((draft)=> {
+               draft.tripMonths = tripMonths
+            })
+          });
+ 
+           
+         } catch(err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         userNamespaceSocket.off('tripMonths');
+          userNamespaceSocket.close();
+       },
     }),
     getWeekTripCount: builder.query<any, string | string[]>({
       query: () => ({
         url: `trips/current-week-trip-count`,
         method: "GET",
-      }),
+      }), async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         try {
+           await cacheDataLoaded;
+           userNamespaceSocket.on('hi', (hi:string) => {
+            updateCachedData(()=> {
+             console.log({hi})
+            })
+          });
+           userNamespaceSocket.on('currentWeekCount',  (currentWeekTrips:any) => { 
+            updateCachedData((draft)=> {
+                draft.currentWeekTrips = currentWeekTrips
+            })
+          });
+ 
+           
+         } catch(err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         userNamespaceSocket.off('currentWeekCount');
+          userNamespaceSocket.close();
+       },
       providesTags: ["Trip"],
     }),
     getTripCountsByMonth: builder.query<any, string | string[]>({
@@ -340,6 +386,32 @@ export const hailitApi = createApi({
         url: `trips/trips-revenue`,
         method: "GET",
       }),
+      async onCacheEntryAdded(
+        _, // arg
+         {updateCachedData, cacheDataLoaded, cacheEntryRemoved}
+       ) {
+         
+         try {
+           await cacheDataLoaded;
+           userNamespaceSocket.on('hi', (hi:string) => {
+            updateCachedData(()=> {
+             console.log({hi})
+            })
+          });
+           userNamespaceSocket.on('monthRevenue',  (monthRevenue:any) => { 
+            updateCachedData((draft)=> {
+                 draft.revenueData = monthRevenue
+            })
+          });
+ 
+           
+         } catch(err) {
+           console.log(err)
+         }
+         await cacheEntryRemoved
+         userNamespaceSocket.off('monthRevenue');
+          userNamespaceSocket.close();
+       },
       providesTags: ["Trip"],
     }),
     searchTrips: builder.query<any, string | string[]>({
@@ -525,6 +597,7 @@ export const {
   
   //TRIPS
   useGetAllTripsQuery,
+  useGetMostRecentTripsQuery,
   useGetTripQuery,
   useGetUserTripsQuery,
   useAddTripMutation,

@@ -9,7 +9,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
   const { tripCommencementDate, tripCompletionDate, tripCompletionTime, tripCommencementTime} = tripDates(trip);
   
   const path = usePathname();
-  
+  const tripNotFound = "Trip not found"; //displays if a user has opened a trip and the trip gets deleted. Displays with the trip is deleted modal
   return (
     <>
       {/* <div className="flex flex-col gap-3 bg-gradient-to-tl from-[#9da9ac25] from-1% via-white via-50% to-white border border-slate-300 h-56 rounded-2xl p-4 dark:bg-transparent"> */}
@@ -46,7 +46,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
               : " text-red-500 "
           }  h-6 w-24 rounded-md`}
         >
-          <p>{trip?.trip_status} </p>
+          <p>{trip?.trip_status ?? tripNotFound } </p>
         </div>
       
         <p>|</p>
@@ -63,7 +63,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
               : " text-green-500"
           }  h-6 w-24 rounded-md`}
         >
-          <p>{trip?.trip_type}</p>
+          <p>{trip?.trip_type ?? tripNotFound}</p>
         </div>
       </section>
       <Separator className="mb-2 dark:bg-slate-100 dark:opacity-10" />
@@ -79,7 +79,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
                   <span className="flex flex-col col-span-7 ">
                     <p className="text-sm font-semibold">Pickup Point</p>
                     <p className="text-sm  lg:w-64   ">
-                      {trip?.pickup_location}
+                      {trip?.pickup_location ?? tripNotFound}
                     </p>
                   </span>
                 </div>
@@ -101,7 +101,7 @@ export default function OrderSummary({ trip }: { trip:Trip }) {
               <HiLocationMarker className="col-span-1 text-xl text-green-500" />
               <span className="flex flex-col col-span-7 ">
                 <p className="text-sm font-semibold">Dropoff Point</p>
-                <p className="text-sm lg:w-64    ">{trip?.drop_off_location}</p>
+                <p className="text-sm lg:w-64    ">{trip?.drop_off_location ?? tripNotFound}</p>
               </span>
             </div>
             <div className="col-span-2  flex flex-col  ml-2  ">

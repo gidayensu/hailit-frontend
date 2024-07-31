@@ -13,9 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { UserTrip } from "../../hooks/useUserProfile";
-//useDispatcherProfile uses dispatcherRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
-//router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
-//to have a 'go back' experience.
+
 
 export type DispatcherRole = "Rider" | "Driver";
 
@@ -102,7 +100,11 @@ export const useDispatcherProfile = () => {
 
   const allDispatcherTrips = dispatcherTrips?.dispatcher_trips;
 
-  const { data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId);
+  //polling is used instead of websocket due to the difficulty in exposing dispatcherId to rtkquery slice to modify the cache
+  const { data, isLoading, error } = useGetUserTripsQuery(dispatcherUserId, {
+    pollingInterval: 0,
+    skipPollingIfUnfocused: true
+  });
   const handleTrackTrip = (tripId: string) => {
     
 
@@ -185,7 +187,7 @@ export const useDispatcherProfile = () => {
   };
 };
 
-interface DispatcherTrips {
+export interface DispatcherTrips {
   dispatcher_trips: UserTrip[];
   total_trip_count: number;
   delivered_trips: number;

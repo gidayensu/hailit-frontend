@@ -7,7 +7,7 @@ export default function OrderIsDeleted ({tripId}:{tripId:string}) {
         <SecondaryModal closeModal={closeIsDeletedModal} modalRef={orderIsDeletedRef} info = {
       
             <p className="mt-2 text-sm">
-            Order has been  <b className="text-red-500 ">deleted!</b>
+            Order could not be fetched or has been  <b className="text-red-500 ">deleted!</b>
             </p>
             
             

@@ -27,7 +27,10 @@ export default function DispatcherTripDetail () {
       tripRequestDate,
       
     } = useUpdateDispatcherTrip();
+
+
     
+    const tripNotFound = "Trip not found"; //displays if a user has opened a trip and the trip gets deleted. Displays with the trip is deleted modal
     
   const { user_role } = useGetDispatcher();
   if (user_role === "Customer" || !user_role) {
@@ -71,15 +74,15 @@ export default function DispatcherTripDetail () {
       <OrderIsDeleted tripId={trip?.trip_id} />
       <main className="flex min-h-screen flex-col items-center gap-10 mb-20">
         <TopSectionContainer className="flex flex-col items-start justify-center gap-2 w-full h-80 bg-slate-800  p-4 text-white ">
-          <span className="text-5xl font-bold">#{trip?.trip_id }</span>
+          <span className="text-5xl font-bold">#{trip?.trip_id ?? tripNotFound}</span>
           <p className="text-md ">
-            <b>Package Type:</b> {trip?.package_type } 
+            <b>Package Type:</b> {trip?.package_type ?? tripNotFound} 
           </p>
           <p className="text-md ">
-            <b>Request Date:</b> {tripRequestDate }
+            <b>Request Date:</b> {tripRequestDate ?? tripNotFound}
           </p>
           <p className="text-md ">
-            <b>Trip Medium:</b> {trip?.trip_medium }
+            <b>Trip Medium:</b> {trip?.trip_medium ?? tripNotFound}
           </p>
         </TopSectionContainer>
 
@@ -90,7 +93,7 @@ export default function DispatcherTripDetail () {
               <Button
                 variant={"outline"}
                 onClick={() =>
-                  handleDispatcherUpdateTrip(trip?.trip_id, updateStatus, updateStage)
+                  handleDispatcherUpdateTrip({tripId:trip?.trip_id, tripStatus:updateStatus, tripStage: updateStage, dispatcherId: trip?.dispatcher_id})
                   }
                 disabled = {updateLoading}
               >
@@ -116,17 +119,17 @@ export default function DispatcherTripDetail () {
               {/* SENDER */}
               <TrackOrderContainer headingText="Sender Location">
                 <RecipientSenderCard
-                  location={trip?.pickup_location }
+                  location={trip?.pickup_location ?? tripNotFound}
                   identity="Sender"
-                  phoneNumber={trip?.recipient_number }
+                  phoneNumber={trip?.recipient_number ?? tripNotFound}
                 />
               </TrackOrderContainer>
               {/* RECIPIENT */}
               <TrackOrderContainer headingText="Recipient Location">
                 <RecipientSenderCard
-                  location={trip?.drop_off_location }
+                  location={trip?.drop_off_location ?? tripNotFound}
                   identity="Recipient"
-                  phoneNumber={trip?.sender_number }
+                  phoneNumber={trip?.sender_number ?? tripNotFound}
                 />
               </TrackOrderContainer>
             </>
@@ -137,7 +140,7 @@ export default function DispatcherTripDetail () {
               <div className="grid grid-cols-3  p-3 ">
                 <span className="text-[13px]">
                   <p className=" font-bold">Amount</p>
-                  <p> {trip?.trip_cost } </p>
+                  <p> {trip?.trip_cost ?? tripNotFound} </p>
                 </span>
                 <span className="text-[13px]">
                   <p className=" font-bold">Status</p>
@@ -145,7 +148,7 @@ export default function DispatcherTripDetail () {
                 </span>
                 <span className="text-[13px]">
                   <p className=" font-bold">Method</p>
-                  <p> {trip?.payment_method }</p>
+                  <p> {trip?.payment_method ?? tripNotFound}</p>
                 </span>
               </div>
             </Container>

@@ -19,6 +19,7 @@ export interface TripStatusDBUpdate {
   trip_stage: TripStage;
   trip_commencement_date: null | Date;
   trip_completion_date: null | Date;
+  dispatcher_id?: string 
 }
 export interface TripStatusandStage {
   tripStatus: TripStatus;
