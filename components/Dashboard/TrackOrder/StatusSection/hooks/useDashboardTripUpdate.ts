@@ -1,7 +1,7 @@
 "use client";
 import { useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTrip, Trip } from "@/lib/store/slice/tripSlice";
+import { setTrip } from "@/lib/store/slice/tripSlice";
 import { useParams } from "next/navigation";
 import { useCallback } from "react";
 

@@ -21,6 +21,6 @@ export default function SearchItem ({item}: {item:string}) {
 
 
 function splitLocationData(item:string) {
-    let parts = item.split(", ");
+    const parts = item.split(", ");
     return [parts[0] + ", " + parts[1], parts[parts.length - 1]];
 }
