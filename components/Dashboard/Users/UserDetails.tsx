@@ -9,7 +9,7 @@ import NonDispatcherTripsTable from "./NonDispatcherTripsTable";
 
 export default function UserDetails() {
   
-  const { userTrips, selectedUser, editUser } = useUserProfile();
+  const { userTrips, selectedUser, editUser, handleEditUser,  } = useUserProfile();
   const total_trip_count = userTrips?.total_trip_count;
 
 
@@ -19,7 +19,7 @@ export default function UserDetails() {
         <>
           <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
             <div className="w-full col-span-2 flex flex-col gap-2">
-              <DashboardUserCard                
+              <DashboardUserCard handleEditUser={handleEditUser} selectedUser={selectedUser}               
               />
             </div>
 
@@ -64,7 +64,7 @@ export default function UserDetails() {
       )}
 
       {editUser && (
-        <EditUser />
+        <EditUser cancelEdit={handleEditUser} />
       )}
     </>
   );

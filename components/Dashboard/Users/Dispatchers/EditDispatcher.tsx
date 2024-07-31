@@ -10,7 +10,7 @@ import SecondaryModal from "../../../Shared/SecondaryModal";
 import AssignVehicle from "./AssignVehicle";
 import { useEditDispatcher } from "./hooks/useEditDispatcher";
 
-export default function EditDispatcher() {
+export default function EditDispatcher( {cancelEdit}: {cancelEdit: ()=>void}) {
   
   
 
@@ -25,7 +25,7 @@ export default function EditDispatcher() {
     editDispatcherModalRef,
     available,
     closeDispatcherModal,
-    selectedDispatcher, handleGoBack
+    selectedDispatcher, 
   } = useEditDispatcher();
   
   
@@ -126,7 +126,7 @@ export default function EditDispatcher() {
       <Button className="max-w-sm w-full" type="submit" form="edit user" disabled={isLoading}> {isLoading ? <Loader/> : 'Save'} </Button>
       
       </form>
-      <Button className="max-w-sm w-full border border-slate-400 dark:bg-secondary-dark dark:border-opacity-30" variant={'empty'} onClick={handleGoBack} disabled={isLoading}  > Cancel </Button>
+      <Button className="max-w-sm w-full border border-slate-400 dark:bg-secondary-dark dark:border-opacity-30" variant={'empty'} onClick={cancelEdit} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
     <SecondaryModal closeModal={closeDispatcherModal}  isSuccess={isSuccess} error = {error} modalRef={editDispatcherModalRef} info={`${selectedDispatcher?.user_role} ${error ? ' not updated': ' details saved'}`}/>
     </main>

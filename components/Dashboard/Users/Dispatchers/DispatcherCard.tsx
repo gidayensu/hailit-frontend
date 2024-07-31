@@ -7,9 +7,12 @@ import DeleteModalCard from "../../TrackOrder/DeleteModalCard";
 import { Rating } from "./AllRidersTable";
 import { useDeleteDispatcher } from "./hooks/useDeleteDispatcher";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
-export default function DispatcherCard () {
+
+export default function DispatcherCard ({handleEditDispatcher}:{
+  handleEditDispatcher: ()=>void
+}) {
   
-  const {dispatcherRole, dispatcherId, selectedDispatcher:dispatcher, handleEditDispatcher} = useDispatcherProfile()
+  const {dispatcherRole, dispatcherId, selectedDispatcher:dispatcher, } = useDispatcherProfile()
   const { deleteError, deleteSuccess,  deleteLoading, handleDeleteDispatcher } = useDeleteDispatcher({dispatcherId, dispatcherRole});
   
 

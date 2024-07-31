@@ -9,10 +9,11 @@ import { FormProvider } from "react-hook-form";
 import { GoCheck } from "react-icons/go";
 import SecondaryModal from "../../Shared/SecondaryModal";
 import { useEditUser } from "./hooks/useEditUser";
-import { useRouter } from "next/navigation"; 
 
-export default function EditUser() {
-  const router = useRouter();
+export default function EditUser({cancelEdit}:{cancelEdit:()=>void}) {
+  
+  
+  
   const {
     formMethods,
     handleSubmit,
@@ -130,7 +131,7 @@ export default function EditUser() {
       <Button className="max-w-sm w-full" type="submit" form="edit user" disabled={isLoading}> {isLoading ? <Loader/> : 'Save'} </Button>
       
       </form>
-      <Button className="max-w-sm w-full" variant={'empty'} onClick={()=>router.back()} disabled={isLoading}  > Cancel </Button>
+      <Button className="max-w-sm w-full" variant={'empty'} onClick={cancelEdit} disabled={isLoading}  > Cancel </Button>
     </FormProvider>
     <SecondaryModal closeModal={closeUserModal}  isSuccess={isSuccess} error = {error} modalRef={edituserModalRef} info={error ? 'User not updated': 'User details saved'}/>
     </>

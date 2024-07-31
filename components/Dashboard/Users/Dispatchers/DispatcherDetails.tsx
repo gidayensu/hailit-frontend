@@ -18,7 +18,8 @@ export default function DispatcherDetails() {
     selectedDispatcher,
     editDispatcher,
     dispatcherLoading,
-    total_trip_count
+    total_trip_count,
+    handleEditDispatcher
   } = useDispatcherProfile();
   
   
@@ -54,7 +55,7 @@ export default function DispatcherDetails() {
             <main className="md:grid md:grid-cols-8 flex flex-col  gap-2 w-full">
               <div className="w-full col-span-2 flex flex-col gap-2">
                 <DispatcherCard
-                  
+                  handleEditDispatcher={handleEditDispatcher}
                 />
               </div>
 
@@ -107,7 +108,7 @@ export default function DispatcherDetails() {
       )}
 
       {editDispatcher && (
-        <EditDispatcher  />
+        <EditDispatcher cancelEdit = {handleEditDispatcher} />
       )}
     </>
   );

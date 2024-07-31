@@ -5,10 +5,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import DeleteModalCard from "../TrackOrder/DeleteModalCard";
 import { useDeleteUser } from "./hooks/useDeleteUser";
-import { useUserProfile } from "./hooks/useUserProfile";
+import { User } from "./hooks/useUsersTable";
 
-export default function DashboardUserCard () {
-  const {  selectedUser, handleEditUser } = useUserProfile();
+export default function DashboardUserCard ({selectedUser, handleEditUser}:{selectedUser:User, handleEditUser: ()=>void}) {
+  
+  
   const { isLoading, error, isSuccess, handleDeleteUser } = useDeleteUser(selectedUser?.user_id);
 
     return (
@@ -52,7 +53,7 @@ export default function DashboardUserCard () {
         </div>
 
         {/* Buttons for Edit or Delete */}
-        <div className="flex mt-6 items-center ">
+        <div className="flex mt-6 items-center flex-wrap">
           <Button onClick={handleEditUser} variant={'empty'} className="-mr-2 dark:text-slate-50    dark:hover:text-primary-color hover:text-primary-color"> Edit {selectedUser?.user_role} </Button>
           <p>|</p>
           {/* Delete Modal */}
