@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { supabase } from "./supabaseAuth";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -62,6 +63,39 @@ export async function reverseMapSearch(
       longitude: lon,
       displayName
     };
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+export async function isAdmin(userId: string) {
+  const url = `http://localhost:4000/api/v1/users/admin/${userId}`;
+
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    let accessToken;
+    if (session) {
+      accessToken = session.access_token;
+    }
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      return false;
+      
+    }
+
+    const data = await response.json();
+    const admin = data?.admin;
+    console.log({ admin  });
+    return admin;
   } catch (err) {
     console.error(err);
     return null;

@@ -4,35 +4,37 @@ import { supabase, userIdAndEmailFromSession } from "@/lib/supabaseAuth";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { io } from 'socket.io-client';
 import { Trip } from "../slice/tripSlice";
+import { isAdmin } from "@/lib/utils";
 
-const baseUrl = `https://hailit-backend.onrender.com/api/v1/`;
-
-
+const baseUrl = `https://hailit-backend.onrender.com`;
 
 let userNamespaceSocket:any;
 
 const initializeSocketIo = async () => {
   const { user_id } = await userIdAndEmailFromSession();
+  const userIsAdmin = user_id && await isAdmin(user_id);
+  const url = userIsAdmin ? `${baseUrl}/admins` : baseUrl
+  
   if (user_id) {
-    userNamespaceSocket = io(`https://hailit-backend.onrender.com/user-${user_id}`, {
-      reconnection: true,
-      reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
-      timeout: 20000,
-      query: { user_id: user_id },
-      
-      transports: ['websocket', 'polling']
-    });
+  userNamespaceSocket = io(url, {
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    timeout: 20000,
+    query: { user_id },
+    
+    transports: ['websocket', 'polling']
+  });
 
-    userNamespaceSocket.on('connect', () => {
-      console.log(`Connected with user ID: ${user_id}`);
-      
-    });
+  userNamespaceSocket.on('connect', () => {
+    console.log(`${userIsAdmin ? 'Admin' : ''} Connected with User ID: ${user_id}`);
+    
+  });
 
-    userNamespaceSocket.on('connect_error', (error:any) => {
-      console.error('Connection error:', error);
-    });
+  userNamespaceSocket.on('connect_error', (error:any) => {
+    console.error('Connection error:', error);
+  });
   }
 };
 initializeSocketIo();
@@ -40,7 +42,7 @@ initializeSocketIo();
 export const hailitApi = createApi({
   reducerPath: "tripsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl,
+    baseUrl: `${baseUrl}/api/v1/`,
     prepareHeaders: async (headers) => {
       const {
         data: { session },
@@ -90,11 +92,12 @@ export const hailitApi = createApi({
           try {
             await cacheDataLoaded;
             
-            userNamespaceSocket.on('tripAdded', (addedTrip:Trip) => {
+            
+            userNamespaceSocket.on('tripAdded', (tripAdded:Trip) => {
               
              updateCachedData((draft)=> {
               draft.trips.pop();
-               draft.trips = [addedTrip, ...draft.trips]
+               draft.trips = [tripAdded, ...draft.trips]
              })
            });
            userNamespaceSocket.on('tripUpdated', (tripUpdate:Trip) => {
@@ -130,12 +133,14 @@ export const hailitApi = createApi({
           }
         }
         
-         await cacheEntryRemoved
-         
-         userNamespaceSocket.off('updatedTrip');
-         userNamespaceSocket.off('deletedTrip');
-         userNamespaceSocket.off('ratedTrip');
-         userNamespaceSocket.close();
+        if(userNamespaceSocket) {
+           await cacheEntryRemoved
+
+           userNamespaceSocket.off('tripUpdated');
+           userNamespaceSocket.off('tripDeleted');
+           userNamespaceSocket.off('ratedTrip');
+           userNamespaceSocket.close();
+         }
        },
       providesTags: ["Trips"],
     }),
@@ -154,35 +159,26 @@ export const hailitApi = createApi({
           try {
             await cacheDataLoaded;
             
-            userNamespaceSocket.on('updatedTrip', (updatedTrip:Trip) => {
+            userNamespaceSocket.on('tripUpdated', (tripUpdated:Trip) => {
               updateCachedData((draft)=> {
-               console.log({updatedTrip})
-               if (draft.trip.trip_id  ===updatedTrip.trip_id) {
-                 draft.trip = updatedTrip
+               
+               if (draft.trip.trip_id  ===tripUpdated.trip_id) {
+                 draft.trip = tripUpdated
                }
               })
             });
-            userNamespaceSocket.on('hi', (hi:string) => {
-              updateCachedData(()=> {
-               console.log({hi})
-              })
-            });
-           //  userNamespaceSocket.on('currentMonthTripsCount', (currentMonthTripsCount:any) => { 
-           //   updateCachedData(()=> {
-           //     console.log({currentMonthTripsCount})
-           //      return currentMonthTripsCount
-           //   })
-           // });
+            
+           
             userNamespaceSocket.on('ratedTrip', (ratedTrip:Trip) => {
-             console.log({ratedTrip})
+             
               updateCachedData((draft)=> {
                if (draft.trip.trip_id  === ratedTrip.trip_id) {
                  draft.trip = ratedTrip
                }
               })
             });
-            userNamespaceSocket.on('deletedTrip', (trip_id:string) => {
-             console.log({trip_id})
+            userNamespaceSocket.on('tripDeleted', (trip_id:string) => {
+             
               updateCachedData((draft)=> {
                if (draft.trip.trip_id  === trip_id) {
                  draft.trip = []
@@ -196,11 +192,14 @@ export const hailitApi = createApi({
           }
         }
         
-         await cacheEntryRemoved
-         userNamespaceSocket.off('updatedTrip');
-         userNamespaceSocket.off('deletedTrip');
-         userNamespaceSocket.off('ratedTrip');
-         userNamespaceSocket.close();
+        if(userNamespaceSocket) {
+           await cacheEntryRemoved
+
+           userNamespaceSocket.off('tripUpdated');
+           userNamespaceSocket.off('tripDeleted');
+           userNamespaceSocket.off('ratedTrip');
+           userNamespaceSocket.close();
+         }
        },
       
       providesTags: ["Trip"],
@@ -237,9 +236,12 @@ export const hailitApi = createApi({
             console.log(err)
           }
         }
-         await cacheEntryRemoved
-         userNamespaceSocket.off('userTrips');
-         userNamespaceSocket.close();
+        if(userNamespaceSocket) {
+           await cacheEntryRemoved
+          
+           userNamespaceSocket.off('userTrips');
+           userNamespaceSocket.close();
+         }
        },
       providesTags: ["User Trips"],
     }),
@@ -297,11 +299,7 @@ export const hailitApi = createApi({
 
            try {
              await cacheDataLoaded;
-             userNamespaceSocket.on('hi', (hi:string) => {
-               updateCachedData(()=> {
-                console.log({hi})
-               })
-             });
+             
              userNamespaceSocket.on('currentMonthTripsCount', (currentMonthTripsCount:any) => { 
               updateCachedData(()=> {
                  return currentMonthTripsCount
@@ -313,9 +311,12 @@ export const hailitApi = createApi({
              console.log(err)
            }
          }
-         await cacheEntryRemoved
-         userNamespaceSocket.off('currentMonthTripsCount');
-         userNamespaceSocket.close();
+         if(userNamespaceSocket) {
+           await cacheEntryRemoved
+          
+           userNamespaceSocket.off('currentMonthTripsCount');
+           userNamespaceSocket.close();
+         }
        },
       providesTags: ["Current Month Trip Counts"],
     }),
@@ -332,11 +333,7 @@ export const hailitApi = createApi({
           
           try {
             await cacheDataLoaded;
-            userNamespaceSocket.on('hi', (hi:string) => {
-             updateCachedData(()=> {
-              console.log({hi})
-             })
-           });
+          
             userNamespaceSocket.on('tripMonths', (tripMonths: any) => { 
              updateCachedData((draft)=> {
                 draft.tripMonths = tripMonths
@@ -348,9 +345,12 @@ export const hailitApi = createApi({
             console.log(err)
           }
         }
-         await cacheEntryRemoved
-         userNamespaceSocket.off('tripMonths');
-          userNamespaceSocket.close();
+        if(userNamespaceSocket) {
+          await cacheEntryRemoved
+          
+          userNamespaceSocket.off('tripMonths');
+           userNamespaceSocket.close();
+        }
        },
     }),
     getWeekTripCount: builder.query<any, string | string[]>({
@@ -365,11 +365,7 @@ export const hailitApi = createApi({
           
           try {
             await cacheDataLoaded;
-            userNamespaceSocket.on('hi', (hi:string) => {
-             updateCachedData(()=> {
-              console.log({hi})
-             })
-           });
+            
             userNamespaceSocket.on('currentWeekCount',  (currentWeekTrips:any) => { 
              updateCachedData((draft)=> {
                  draft.currentWeekTrips = currentWeekTrips
@@ -381,9 +377,12 @@ export const hailitApi = createApi({
             console.log(err)
           }
         }
-         await cacheEntryRemoved
-         userNamespaceSocket.off('currentWeekCount');
-          userNamespaceSocket.close();
+        if(userNamespaceSocket) {
+           await cacheEntryRemoved
+          
+           userNamespaceSocket.off('currentWeekCount');
+            userNamespaceSocket.close();
+         }
        },
       providesTags: ["Trip"],
     }),
@@ -407,11 +406,7 @@ export const hailitApi = createApi({
           
           try {
             await cacheDataLoaded;
-            userNamespaceSocket.on('hi', (hi:string) => {
-             updateCachedData(()=> {
-              console.log({hi})
-             })
-           });
+            
             userNamespaceSocket.on('monthRevenue',  (monthRevenue:any) => { 
              updateCachedData((draft)=> {
                   draft.revenueData = monthRevenue
@@ -423,9 +418,13 @@ export const hailitApi = createApi({
             console.log(err)
           }
         }
-         await cacheEntryRemoved
-         userNamespaceSocket.off('monthRevenue');
-          userNamespaceSocket.close();
+        
+        if(userNamespaceSocket) {
+           await cacheEntryRemoved
+          
+           userNamespaceSocket.off('monthRevenue');
+            userNamespaceSocket.close();
+         }
        },
       providesTags: ["Trip"],
     }),
@@ -655,4 +654,3 @@ export const {
   
   
 } = hailitApi;
-
