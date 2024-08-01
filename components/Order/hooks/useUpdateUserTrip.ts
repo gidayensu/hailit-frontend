@@ -13,7 +13,7 @@ export const useUpdateUserTrip = () => {
 
   const { trip_id } = params;
 
-  const [updateTrip, { isLoading, error, isSuccess }] = useUpdateTripMutation();
+  const [updateTrip, { isLoading, error, isSuccess, reset }] = useUpdateTripMutation();
 
   const handleTripUpdate = (tripDetails: any) => {
     try {
@@ -23,6 +23,11 @@ export const useUpdateUserTrip = () => {
       console.error("Failed to update trip:", error);
     }
   };
+
+  if(isSuccess) {
+    reset();
+  }
+
 
   return { handleTripUpdate, updateLoading, isLoading, error, isSuccess };
 };

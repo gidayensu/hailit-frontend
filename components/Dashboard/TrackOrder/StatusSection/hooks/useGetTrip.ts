@@ -1,9 +1,8 @@
 "use client";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTrip } from "@/lib/store/slice/tripSlice";
+import { useAppSelector } from "@/lib/store/hooks";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export const useGetTrip = () => {
   const router = useRouter();
@@ -18,19 +17,11 @@ export const useGetTrip = () => {
 
   const { tripStage, tripStatus } = useAppSelector((state) => state.dashboard);
 
-  const trip = useAppSelector((state) => state.trip);
 
   const { data, isLoading, error } = useGetTripQuery(selectedTripId);
 
-  const fetchedTrip = data?.trip;
-  const dispatch = useAppDispatch();
-
-  //dispatch fetched trip details to trip slice
-  useEffect(() => {
-    if (selectedTripId && fetchedTrip) {
-      dispatch(setTrip(fetchedTrip));
-    }
-  }, [selectedTripId, fetchedTrip, dispatch]);
+  const trip = data?.trip;
+  
 
   const dispatcher = trip?.dispatcher;
 

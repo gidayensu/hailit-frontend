@@ -1,7 +1,6 @@
 "use client";
-import { useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
+import { hailitApi, useUpdateTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { setTrip } from "@/lib/store/slice/tripSlice";
 import { useParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -19,7 +18,10 @@ export const useDashboardTripUpdate = () => {
   //TODO: move this to useUpdateTrip
   const handleTripUpdate = useCallback(async (key: string, tripDetails: any) => {
     try {
-      dispatch(setTrip({ ...trip, ...tripDetails }));
+      dispatch(hailitApi.util.updateQueryData('getTrip', trip_id, (tripData)=> {
+        const trip = tripData.trip
+        tripData.trip = {...trip, ...tripDetails}
+      }))
       await updateTrip({ trip_id: selectedTripId, tripDetails });
     } catch (error) {
       console.error("Failed to update trip:", error);

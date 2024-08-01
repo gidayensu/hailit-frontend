@@ -32,7 +32,7 @@ export default function DashboardUserCard ({selectedUser, handleEditUser}:{selec
           </p>
         </div>
         <div
-          className={`w-1/3 rounded-xl bg-green-200 border border-green-500 text-green-800 font-medium h-6 flex items-center justify-center text-[13px]`}
+          className={` max-w-2/3 px-1 rounded-xl bg-green-200 border border-green-500 text-green-800 font-medium h-6 flex items-center justify-center text-[13px]`}
         >
           {<p>{selectedUser?.user_role}</p>}
         </div>

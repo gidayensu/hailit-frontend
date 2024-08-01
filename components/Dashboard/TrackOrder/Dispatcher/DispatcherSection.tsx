@@ -14,6 +14,7 @@ export default function DispatcherSection() {
   const { trip, dispatcher } = useGetTrip();
   const { handleViewDispatcher } = useViewDispatcher();
 
+  
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function DispatcherSection() {
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
                 <p>
-                  {dispatcher.dispatcher_id === DEFAULT_DISPATCHER_ID
+                  {dispatcher?.dispatcher_id === DEFAULT_DISPATCHER_ID
                     ? "Assign"
                     : "Change"}
                 </p>
@@ -44,7 +45,7 @@ export default function DispatcherSection() {
           {trip?.trip_medium === "Motor" ? <Riders /> : <Drivers />}
         </Modal>
       </div>
-      {dispatcher.dispatcher_id === DEFAULT_DISPATCHER_ID ||
+      {dispatcher?.dispatcher_id === DEFAULT_DISPATCHER_ID ||
         (!dispatcher?.dispatcher_id && (
           <div className="flex flex-col gap-1 items-center justify-center font-medium">
             <LiaUserSlashSolid className="text-4xl opacity-40" />
@@ -67,7 +68,7 @@ export default function DispatcherSection() {
                 <ul onClick={handleViewDispatcher}>
                   <span className="underline hover:text-primary-color cursor-pointer">
                     
-                    {dispatcher.first_name} {dispatcher.last_name}
+                    {dispatcher?.first_name} {dispatcher?.last_name}
                   </span>
                 </ul>
 
@@ -84,10 +85,10 @@ export default function DispatcherSection() {
                   </span>
                 </ul>
                 <ul className="line-clamp-1">
-                  {dispatcher.vehicle?.vehicle_name}
+                  {dispatcher?.vehicle?.vehicle_name}
                 </ul>
                 <ul className="line-clamp-1">
-                  {dispatcher.vehicle?.plate_number}
+                  {dispatcher?.vehicle?.plate_number}
                 </ul>
               </div>
             </div>
