@@ -46,7 +46,7 @@ export default function StatsCard({
             >
               <p className="md:text-[12px] text-[10px] font-medium">
                 {reversed && percentageDifference > 1 ? "-" : ""}
-                {reversed ? -percentageDifference: percentageDifference }% (last month)
+                {reversed ?  percentageDifference: percentageDifference }% (last month)
               </p>
               {percentageDifference > 1 ? (
                 <IoTrendingUp className="text-lg" />
