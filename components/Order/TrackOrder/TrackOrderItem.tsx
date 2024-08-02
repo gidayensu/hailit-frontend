@@ -68,8 +68,10 @@ export default function TrackOrderItem() {
             <OrderSummary trip={trip} /> 
           </Container>
           {trip?.drop_lat && isCustomer &&
+          <div className=" rounded-xl w-full content-normal overflow-hidden flex items-center justify-center border border-slate-200 dark:border-opacity-20">
 
             <TripMap />
+          </div>
 }
         </TrackOrderContainer>
 

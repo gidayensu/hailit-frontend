@@ -17,8 +17,7 @@ import PackageSection from "./PackageSection";
 import PaymentSection from "./PaymentSection";
 import StatusSection from "./StatusSection/StatusSection";
 import UserOtherTrips from "./UserOtherTripsSection";
-
-//interface
+import MapSection from "./StatusSection/MapSection";
 
 export default function TripDetail() {
   const { trip, selectedTripId, } = useGetTrip();
@@ -114,6 +113,15 @@ export default function TripDetail() {
           </Container>
         </div>
       </article>
+      {trip?.drop_lat
+      &&
+      <>
+      
+      <article className="flex flex-col lg:flex-row w-full gap-4 h-96">
+        <MapSection/>
+      </article>
+      </>
+      }
     </div>
   );
 }

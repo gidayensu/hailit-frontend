@@ -11,15 +11,16 @@ export default function TripMap() {
     distance,
     dropOffLocation,
     pickUpLocation,
+    midPoint
   } = useTrackOrderItem();
   
   const { mapTilerProvider, zoom } = useTripMap({ distance });
+  
   return (
-    <div className=" rounded-xl w-full content-normal overflow-hidden flex items-center justify-center border border-slate-200 dark:border-opacity-20">
       <Map
         height={310}
         zoom={zoom}
-        center={dropOffLocation}
+        center={midPoint}
         mouseEvents={true}
         touchEvents={true}
         provider={mapTilerProvider}
@@ -38,6 +39,6 @@ export default function TripMap() {
         ></Marker>
         <ZoomControl />
       </Map>
-    </div>
+    
   );
 }

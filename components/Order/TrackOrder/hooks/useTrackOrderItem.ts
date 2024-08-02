@@ -17,6 +17,14 @@ export const useTrackOrderItem = ()=> {
   
   const dropOffLocation: LocationType = [+trip?.drop_lat, +trip?.drop_long]
   const pickUpLocation: LocationType = [+trip?.pick_lat, +trip?.pick_long]
+  
+  const [pickUpLat, pickUpLon] = pickUpLocation;
+  const [dropOffLat, dropOffLon] = dropOffLocation;
+
+const midPoint: LocationType = [
+    (pickUpLat + dropOffLat) / 2,  
+    (pickUpLon + dropOffLon) / 2   
+];
 
   const distanceAndCost =
     
@@ -31,6 +39,6 @@ export const useTrackOrderItem = ()=> {
     const tripOngoingStatus = ["Booked","Picked Up", "In Transit"]
 
     return {
-        trip, distance, tripOngoingStatus, tripRequestDate, isCustomer, dispatcher, dropOffLocation, pickUpLocation, handleTripUpdate, tripUdpateLoading, tripUdpateError, tripUpdateSuccess
+        trip, midPoint, distance, tripOngoingStatus, tripRequestDate, isCustomer, dispatcher, dropOffLocation, pickUpLocation, handleTripUpdate, tripUdpateLoading, tripUdpateError, tripUpdateSuccess
     }
 }
