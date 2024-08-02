@@ -14,7 +14,7 @@ import { extractBeforeComma, extractShortDate } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
-import { TableType, useGetTableData } from "../hooks/useGeTableData";
+import { TableType, useGetTableData } from "../hooks/useGetTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
@@ -31,14 +31,14 @@ export function AllTripsTable() {
     data,
     total_items,
     searchRef:tripSearchRef,
-    isSuccess,
+    status,
     sortDetails,
     
     handleSort,
     handleSearch:handleTripSearch,
     isSearch
   
-  }  = useGetTableData({page, table:TableType.TripsTable});
+  }  = useGetTableData({page, table:TableType.TripsTable, initialColumn: "Booked On", initialSortDirection:"DESC"});
 
   const trips = data?.trips
 
@@ -49,8 +49,10 @@ export function AllTripsTable() {
     
     <Button  > New order</Button>
     </Link>
+    <div className="w-full flex items-end justify-end">
 
-    <SearchTable ref={tripSearchRef} handleSearch={handleTripSearch} isSuccess={isSuccess}/>
+    <SearchTable ref={tripSearchRef} handleSearch={handleTripSearch} status={status}/>
+    </div>
     </div>
     <div className="flex flex-col max-w-fit   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       

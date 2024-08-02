@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import DashboardTableItemLoader from "../../DashboardTableItemLoader";
-import { TableType, useGetTableData } from "../../hooks/useGeTableData";
+import { TableType, useGetTableData } from "../../hooks/useGetTableData";
 import SkeletonTable from "../../SkeletonTable";
 import SearchTable from "../../TableComponents/SearchTable";
 import TablesHeadings from "../../TableComponents/TablesHeadings";
@@ -35,9 +35,10 @@ export function AllDrivers() {
       total_items,
       handleSearch:handleDriversSearch,
       searchRef:driverSearchRef,
-      isSuccess,
-      isSearch
-    } = useGetTableData({table:TableType.DriversTable, page});
+      status,
+      isSearch,
+      
+    } = useGetTableData({table:TableType.DriversTable, page, initialColumn:"Full Name"});
     
     const drivers = data?.drivers
 
@@ -59,11 +60,14 @@ export function AllDrivers() {
 
     return (
       <>
+      <div className="w-full flex items-end justify-end">
+
       <SearchTable
         ref={driverSearchRef}
         handleSearch={handleDriversSearch}
-        isSuccess={isSuccess}
+        status={status}
       />
+      </div>
         <div className="flex flex-col w-full   gap-2 p-4  rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
           <Table>
             <TableHeader>

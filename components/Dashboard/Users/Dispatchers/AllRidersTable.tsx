@@ -13,7 +13,7 @@ import { useState } from "react";
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import DashboardTableItemLoader from "../../DashboardTableItemLoader";
-import { TableType, useGetTableData } from "../../hooks/useGeTableData";
+import { TableType, useGetTableData } from "../../hooks/useGetTableData";
 import SkeletonTable from "../../SkeletonTable";
 import SearchTable from "../../TableComponents/SearchTable";
 import TablesHeadings from "../../TableComponents/TablesHeadings";
@@ -32,9 +32,9 @@ export function AllRiders() {
     total_items,
     handleSearch:handleRiderSearch,
     searchRef:riderSearchRef,
-    isSuccess,
+    status,
     isSearch
-  } = useGetTableData({table:TableType.RidersTable, page});
+  } = useGetTableData({table:TableType.RidersTable, page, initialColumn:"Full Name"});
 
   const riders = data?.riders;
   const router =useRouter();
@@ -60,11 +60,14 @@ export function AllRiders() {
   }
   return (
     <>
+    <div className="w-full flex items-end justify-end">
+
     <SearchTable
         ref={riderSearchRef}
         handleSearch={handleRiderSearch}
-        isSuccess={isSuccess}
+        status={status}
       />
+    </div>
     <div className="flex flex-col w-full   gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       <Table>
         <TableHeader>

@@ -12,7 +12,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import { extractShortDate } from "@/lib/utils";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
-import { TableType, useGetTableData } from "../hooks/useGeTableData";
+import { TableType, useGetTableData } from "../hooks/useGetTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
@@ -39,18 +39,21 @@ export default function AllUsersTable() {
     isSuccess,
     isSearch
     
-  } = useGetTableData({table:TableType.UsersTable, page});
+  } = useGetTableData({table:TableType.UsersTable, page, initialColumn:"First Name"});
   
   const users = data?.users;
   
 
   return (
     <>
+    <div className="w-full flex items-end justify-end">
+
       <SearchTable
         ref={userSearchRef}
         handleSearch={handleUserSearch}
         isSuccess={isSuccess}
       />
+    </div>
       
       <div className="flex flex-col w-full mb-4  gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
         <Table className="w-full">

@@ -8,13 +8,13 @@ export interface SortDetails {
 
 export type TableTypes = "trips" | "vehicles" | "riders" | "drivers" | "users"
 
-export function useSortTable({table, columns}:{table: TableTypes, columns: string[]}) {
+export function useSortTable({table,  initialColumn, initialSortDirection}:{table: TableTypes,  initialColumn:string, initialSortDirection?:string}) {
 
   const getIniticalSortDetails = ()=> {
     const savedSortDetail = localStorage.getItem(table);
     return savedSortDetail ? JSON.parse(savedSortDetail) : {
-      column: columns[0],
-    sortDirection: "ASC",
+      column: initialColumn,
+    sortDirection: initialSortDirection ?? "DESC",
     }
   }
 
@@ -27,7 +27,7 @@ export function useSortTable({table, columns}:{table: TableTypes, columns: strin
     setDataLoading(true)
     setSortDetails((prev) => ({
       column: selectedColumn,
-      sortDirection: prev.sortDirection === "ASC" ? "DESC" : "ASC",
+      sortDirection: selectedColumn === prev.column && prev.sortDirection === "ASC" ? "DESC" : "ASC",
     }));
   };
 

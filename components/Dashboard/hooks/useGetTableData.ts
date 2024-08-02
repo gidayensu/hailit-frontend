@@ -6,7 +6,7 @@ import { EndpointNames } from "./usePrefetchData";
 import { QueryEndpoint } from "./useSearchAndSortWithEndpoint";
 
 
-export const useGetTableData = ({page,  table, }:{page:number; table:TableType; }) => {
+export const useGetTableData = ({page,  table, initialColumn, initialSortDirection }:{page:number; table:TableType; initialColumn:string; initialSortDirection?:string }) => {
   
   const {
     handleSort, 
@@ -17,9 +17,9 @@ export const useGetTableData = ({page,  table, }:{page:number; table:TableType; 
     endpoint,
     setDataLoading,
     isSearch
-  } = useSearchAndSortWithEndpoint({table, columns: tableColumns[table], endpoint: queryEndpoints[table]});
+  } = useSearchAndSortWithEndpoint({table, initialColumn: initialColumn, initialSortDirection, endpoint: queryEndpoints[table]});
   
-  const { data, isLoading, error, isSuccess } = fetchQueries[table](`${endpoint}&page=${page}`);
+  const { data, isLoading, error, status } = fetchQueries[table](`${endpoint}&page=${page}`);
   
   const total_number_of_pages = data?.total_number_of_pages;
   const total_items = data?.total_items
@@ -54,7 +54,7 @@ export const useGetTableData = ({page,  table, }:{page:number; table:TableType; 
     handleSort,
     isSearch,
     handleSearch,
-    isSuccess,
+    status,
     items
   };
 };
@@ -105,57 +105,57 @@ const queryEndpoints: QueryEndPointNames = {
   [TableType.DriversTable]: "drivers?"
 }
 
-const TRIPS_TABLE_COLUMNS = [
-  "Trip id",
-  "Ordered by",
-  "Booked On",
-  "Pickup",
-  "Pickup Contact",
-  "Drop off",
-  "Drop off Contact",
-  "Delivered On",
-  "Medium",
-  "Amount",
-  "Payment Status",
-  // "Payment Method",
-  "Delivery Status",
-  "View"
- ]
-const USERS_TABLE_COLUMNS = [
-  "First Name",
-  "Last Name",
-  "Phone Number",
-  "Email",
-  "User Role",
-  "Onboard Status",
-  "Date Joined",
-];
+// const TRIPS_TABLE_COLUMNS = [
+//   "Trip id",
+//   "Ordered by",
+//   "Booked On",
+//   "Pickup",
+//   "Pickup Contact",
+//   "Drop off",
+//   "Drop off Contact",
+//   "Delivered On",
+//   "Medium",
+//   "Amount",
+//   "Payment Status",
+//   // "Payment Method",
+//   "Delivery Status",
+//   "View"
+//  ]
+// const USERS_TABLE_COLUMNS = [
+//   "First Name",
+//   "Last Name",
+//   "Phone Number",
+//   "Email",
+//   "User Role",
+//   "Onboard Status",
+//   "Date Joined",
+// ];
 
-const VEHICLES_TABLE_COLUMNS = [
-  "Name",
-  "Type",
-  "Model",
-  "Number Plate",
-  "Available",  
-]; 
+// const VEHICLES_TABLE_COLUMNS = [
+//   "Name",
+//   "Type",
+//   "Model",
+//   "Number Plate",
+//   "Available",  
+// ]; 
 
 
-const DISPATCHER_TABLE_COLUMNS = [
-  "Full Name",
-  "Email",
-  "Phone Number",
-  "License Number",
-  "Rating",
-  "Vehicle Name",
-  "Vehicle Number",
-  "Available"  
-];
+// const DISPATCHER_TABLE_COLUMNS = [
+//   "Full Name",
+//   "Email",
+//   "Phone Number",
+//   "License Number",
+//   "Rating",
+//   "Vehicle Name",
+//   "Vehicle Number",
+//   "Available"  
+// ];
 
-const tableColumns = {
-  [TableType.UsersTable]: USERS_TABLE_COLUMNS,
-  [TableType.VehiclesTable]: VEHICLES_TABLE_COLUMNS,
-  [TableType.DriversTable]: DISPATCHER_TABLE_COLUMNS,
-  [TableType.RidersTable]: DISPATCHER_TABLE_COLUMNS,
-  [TableType.TripsTable]: TRIPS_TABLE_COLUMNS,
-}
+// const tableColumns = {
+//   [TableType.UsersTable]: USERS_TABLE_COLUMNS,
+//   [TableType.VehiclesTable]: VEHICLES_TABLE_COLUMNS,
+//   [TableType.DriversTable]: DISPATCHER_TABLE_COLUMNS,
+//   [TableType.RidersTable]: DISPATCHER_TABLE_COLUMNS,
+//   [TableType.TripsTable]: TRIPS_TABLE_COLUMNS,
+// }
 

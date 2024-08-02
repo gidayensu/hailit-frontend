@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { LuCheckCircle2, LuXCircle } from "react-icons/lu";
-import { TableType, useGetTableData } from "../hooks/useGeTableData";
+import { TableType, useGetTableData } from "../hooks/useGetTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
@@ -33,8 +33,8 @@ export default function AllVehiclesTable() {
     handleSort,
     isSearch,
     handleSearch: handleVehicleSearch,
-    isSuccess
-  } = useGetTableData( {page, table:TableType.VehiclesTable})
+    status
+  } = useGetTableData( {page, table:TableType.VehiclesTable, initialColumn: "Name"})
   
   
   const vehicles = data?.vehicles;
@@ -55,7 +55,7 @@ export default function AllVehiclesTable() {
     <>
     <div className="w-full flex items-end justify-end">
 
-    <SearchTable ref={vehicleSearchRef} handleSearch={handleVehicleSearch} isSuccess={isSuccess}/>
+    <SearchTable ref={vehicleSearchRef} handleSearch={handleVehicleSearch} status={status}/>
     </div>
     <div className="flex flex-col w-full   gap-2 p-4 rounded-xl border border-slate-300 bg-white  dark:border-slate-100 dark:border-opacity-20 dark:bg-secondary-dark  dark:text-slate-100  cursor-pointer">
       <Table>
@@ -105,14 +105,6 @@ export default function AllVehiclesTable() {
     </>
   );
 }
-
-
-
-
-
-
-
-
 
 const tableHeadings = [
   "Name",
