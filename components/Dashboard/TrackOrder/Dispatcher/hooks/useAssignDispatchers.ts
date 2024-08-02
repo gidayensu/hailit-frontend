@@ -79,8 +79,9 @@ export const useAssignDispatchers = (role:"riders" | "drivers") => {
     }
     const handleAssignedDispatcher = useCallback( (dispatcherDetails: AssignedDispatcher)=> {
       dispatch(hailitApi.util.updateQueryData('getTrip', selectedTripId, (tripData)=> {
+        
         const trip = tripData.trip
-        tripData.trip = {...trip, dispatcher: dispatcherDetails}
+        tripData.trip = {...trip, dispatcher_id: dispatcherDetails.dispatcher_id, dispatcher: dispatcherDetails}
       }))
       updateTrip({
         trip_id: selectedTripId,

@@ -7,14 +7,13 @@ import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
 import { useViewDispatcher } from "../StatusSection/hooks/useViewDispatcher";
 import Drivers from "./AssignDrivers";
 import Riders from "./AssignRiders";
-export const DEFAULT_DISPATCHER_ID = "ff-12-53";
+
+
 
 export default function DispatcherSection() {
   
   const { trip, dispatcher } = useGetTrip();
   const { handleViewDispatcher } = useViewDispatcher();
-
-  
 
   return (
     <>
@@ -34,7 +33,7 @@ export default function DispatcherSection() {
               className="space-x-1 bg-primary-color hover:bg-primary-medium text-white  hover:dark:bg-slate-100 dark:text-secondary-dark dark:bg-white"
             >
                 <p>
-                  {dispatcher?.dispatcher_id === DEFAULT_DISPATCHER_ID
+                  {(trip?.dispatcher_id === DEFAULT_DISPATCHER_ID)
                     ? "Assign"
                     : "Change"}
                 </p>
@@ -97,3 +96,5 @@ export default function DispatcherSection() {
     </>
   );
 }
+
+const DEFAULT_DISPATCHER_ID = "ff-12-53";
