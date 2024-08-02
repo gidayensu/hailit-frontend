@@ -1,4 +1,4 @@
-import { Map, Marker } from "pigeon-maps";
+import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { useTripMap } from "./hooks/useTripMap";
 
 import type { Point } from "pigeon-maps";
@@ -19,10 +19,12 @@ export default function TripMap() {
       <Map
         height={310}
         zoom={zoom}
-        center={pickUpLocation}
+        center={dropOffLocation}
         mouseEvents={true}
         touchEvents={true}
         provider={mapTilerProvider}
+        twoFingerDrag = {true}
+        twoFingerDragWarning="Move the map with two fingers "
       >
         <Marker
           width={50}
@@ -34,6 +36,7 @@ export default function TripMap() {
           anchor={dropOffLocation}
           color={"hsl(135, 73%, 55%)"}
         ></Marker>
+        <ZoomControl />
       </Map>
     </div>
   );
