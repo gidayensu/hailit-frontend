@@ -5,14 +5,14 @@ import ChartContainer from "./ChartContainer";
 import { useTripMediumData } from "./hooks/useTripMediumData";
 
 export default function TripMediumChart() {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   const { motor, truck, car, tripMonths, totalMonthsData, loading,  } =
     useTripMediumData();
 
   const mediumOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme === "dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
     },
     title: { text: "Trip Medium " },
     xAxis: {

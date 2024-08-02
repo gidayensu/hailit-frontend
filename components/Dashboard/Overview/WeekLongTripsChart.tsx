@@ -21,11 +21,11 @@ export default function WeekLongTripsChart({
   categories: string[];
   data: string[];
 }) {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   const lineOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme === "dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
     },
     title: { text: "Current Week Trips" },
     xAxis: {

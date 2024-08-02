@@ -5,7 +5,7 @@ import ChartContainer from "./ChartContainer";
 import { useTripAreaData } from "./hooks/useTripAreaData";
 
 export default function TripAreaChart() {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   const {
     kumasi,
@@ -20,7 +20,7 @@ export default function TripAreaChart() {
 
   const areaOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme === "dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
     },
     title: { text: "Trip Area " },
     xAxis: {

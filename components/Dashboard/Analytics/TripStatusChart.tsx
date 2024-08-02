@@ -9,13 +9,13 @@ import { useTripStatusData } from './hooks/useTripStatusData';
 
 // { name: categories[0], y: data[0] },
 export default function TripStatusChart () {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   //cancelled trips && tripMonths, && totaltrips
   const {delivered, cancelled, tripMonths, totalMonthsData, loading, pending} = useTripStatusData();
   const statusOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme==="dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
       
       
     },

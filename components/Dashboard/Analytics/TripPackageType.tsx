@@ -4,7 +4,7 @@ import ChartContainer from "./ChartContainer";
 import { usePackageTypeData } from "./hooks/usePackageTypeData";
 
 export default function TripPackageType() {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   const {
     clothes,
@@ -19,7 +19,7 @@ export default function TripPackageType() {
 
   const packageOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme === "dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
     },
     title: { text: "Package Types " },
     xAxis: {

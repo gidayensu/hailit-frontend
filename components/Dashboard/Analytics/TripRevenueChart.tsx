@@ -4,14 +4,14 @@ import ChartContainer from "./ChartContainer";
 import { useTripRevenue } from "./hooks/useTripRevenue";
 
 export default function TripRevenueChart() {
-  const { theme } = useSetTheme();
+  const { theme, systemTheme } = useSetTheme();
 
   const { revenue, tripMonths, revenueLoading,  } =
     useTripRevenue();
 
   const revenueOption: Highcharts.Options = {
     chart: {
-      backgroundColor: theme === "dark" ? "#1E1E1E" : "white",
+      backgroundColor: theme === "dark" || (theme === "system" && systemTheme === "dark") ? "#1E1E1E" : "white",
     },
     title: { text: "Trip Revenue " },
     xAxis: {
