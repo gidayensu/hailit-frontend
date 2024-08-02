@@ -19,14 +19,23 @@ import {
   setTripMedium,
   setTripType
 } from "@/lib/store/slice/deliveryChoicesSlice";
-import { Trip } from "@/lib/store/slice/tripSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useGetTrip } from "../../StatusSection/hooks/useGetTrip";
 
-export const useUpdateTrip = (trip: Trip) => {
-  
-  
+export const useEditTrip = () => {
+  const { trip } = useGetTrip();
+  console.log({trip})
+
   const router = useRouter();
+  //redirect
+  useEffect(() => {
+    if (!trip) {
+      router.push("/dashboard/track-order");
+    }
+
+    
+  }, [trip, router, ]);
 
   useEffect(() => {
     dispatch(setPackageType(trip?.package_type));
@@ -127,14 +136,6 @@ export const useUpdateTrip = (trip: Trip) => {
     
   }
 
-  //redirect
-  useEffect(() => {
-    if (!trip?.trip_id) {
-      router.push("/dashboard/track-order");
-    }
-
-    
-  }, [trip, router, ]);
 
   return {
     formMethods,
@@ -148,7 +149,7 @@ export const useUpdateTrip = (trip: Trip) => {
     trip_type,
     trip_area,
     package_type,
-    
+    trip,
     isLoading,
     register,
     editTripModalRef,

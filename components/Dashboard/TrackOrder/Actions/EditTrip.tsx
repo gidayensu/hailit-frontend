@@ -12,19 +12,17 @@ import PackageTypes from "@/components/Order/NewDelivery/PackageTypes/PackageTyp
 import { useRouter } from "next/navigation";
 import TripAreaMediumAndType from "./TripAreaMediumAndType";
 //redux + next + react + helper
+import SecondaryModal from "@/components/Shared/SecondaryModal";
 import { CalendarField } from "@/components/Form/FormField";
 import { useAppSelector } from "@/lib/store/hooks";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
-import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
-import SecondaryModal from "@/components/Shared/SecondaryModal";
-import { useUpdateTrip } from "./hooks/useUpdateTrip";
-
+import { useEditTrip } from "./hooks/useEditTrip";
 export default function EditTrip() {
-  const { trip } = useGetTrip();
+  
   const {
     formMethods,
-
+    trip,
     handleSubmit,
     onDeliveryFormSubmit,
     packageTypeRef,
@@ -35,7 +33,7 @@ export default function EditTrip() {
     error,
     editTripModalRef,
     isSuccess
-  } = useUpdateTrip(trip);
+  } = useEditTrip();
   
   const router = useRouter();
 

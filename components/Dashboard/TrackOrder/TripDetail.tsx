@@ -57,7 +57,7 @@ export default function TripDetail() {
           {/* EDIT */}
           <Link
             className="flex items-center justify-center gap-2"
-            href={"/dashboard/track-order/edit-order"}
+            href={`/dashboard/track-order/edit-order/${selectedTripId}`}
           >
             <Button variant={"outline"}>
               <p>Edit Trip</p>
