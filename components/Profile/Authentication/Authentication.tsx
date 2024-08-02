@@ -36,7 +36,7 @@ export default function Authentication () {
           </div>
             {!signUp &&
             <>
-            <span className="text-3xl font-bold">Sign in to your account </span>
+            <span className="text-3xl font-bold">Log in to your account </span>
             <span className="flex w-full ">
               
               <p className="dark:text-gray-200 text-[14px]">Don&apos;t have an account? </p>
