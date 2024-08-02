@@ -2,7 +2,7 @@
 import { useLazySearchTripsQuery } from "@/lib/store/apiSlice/hailitApi";
 
 import { Trip } from "@/lib/store/slice/tripSlice";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -48,11 +48,6 @@ export const useGetSearchResults = () => {
         setIsLoading(false); 
     }
 
-    // useEffect(() => {
-    //     if (data && !tripsLoading) {
-    //         setIsLoading(false); 
-    //     }
-    // }, [data, tripsLoading]);
 
     const handleSearchItemTrack = (selectedTripId:string)=> {
         setOpenSearchContainer(false)
@@ -86,28 +81,37 @@ export const useGetSearchResults = () => {
             document.removeEventListener('keydown', handlePressEscape)
         }
     })
-    // useEffect(()=> {
-    //     const handleClickOutSide = (event: MouseEvent | KeyboardEvent)=> {
-    //         if(inputRef.current && !inputRef.current.contains(event.target) && searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-    //             setOpenSearchContainer(false)
+    useEffect(()=> {
+        const handleClickOutSide = (event: MouseEvent | KeyboardEvent)=> {
+            if(inputRef.current && !inputRef.current.contains(event.target) && searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+                setOpenSearchContainer(false)
                 
-    //         }
-    //     }
+            }
+        }
+        const handleClickInSide = (event: MouseEvent)=> {
+            
+            if((inputRef.current?.value !== '') && inputRef.current.contains(event.target)) {
+                setOpenSearchContainer(true)
+                
+            }
+        }
 
-    //     const handlePressEscape = (event: KeyboardEvent) => {
-    //         if(event.key === 'Escape') {
-    //             setOpenSearchContainer(false)
-    //             inputRef.current.value = '';
-    //         }
-    //     }
-    //     document.addEventListener('mousedown', handleClickOutSide)
-    //     document.addEventListener('keydown', handlePressEscape)
-    //     //event listener clean up
-    //     return ()=> {
-    //         document.removeEventListener('mousedown', handleClickOutSide)
-    //         document.removeEventListener('keydown', handlePressEscape)
-    //     }
-    // }, [inputRef])
+        const handlePressEscape = (event: KeyboardEvent) => {
+            if(event.key === 'Escape') {
+                setOpenSearchContainer(false)
+                inputRef.current.value = '';
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutSide)
+        document.addEventListener('mousedown', handleClickInSide)
+        document.addEventListener('keydown', handlePressEscape)
+        //event listener clean up
+        return ()=> {
+            document.removeEventListener('mousedown', handleClickOutSide)
+            document.removeEventListener('mousedown', handleClickInSide)
+            document.removeEventListener('keydown', handlePressEscape)
+        }
+    }, [inputRef])
     
     const trips:Trip[] = data?.trips
 
