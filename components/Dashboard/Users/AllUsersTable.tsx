@@ -36,7 +36,7 @@ export default function AllUsersTable() {
     total_items,
     handleSearch:handleUserSearch,
     searchRef:userSearchRef,
-    isSuccess,
+    status,
     isSearch
     
   } = useGetTableData({table:TableType.UsersTable, page, initialColumn:"First Name"});
@@ -51,7 +51,7 @@ export default function AllUsersTable() {
       <SearchTable
         ref={userSearchRef}
         handleSearch={handleUserSearch}
-        isSuccess={isSuccess}
+        status={status}
       />
     </div>
       
