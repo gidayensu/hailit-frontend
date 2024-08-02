@@ -28,11 +28,11 @@ export default function Pagination({
     "cursor-pointer flex items-center justify-center text-center text-[13px] w-12 h-8 rounded-md text-black";
 
   return (
-    <div className="flex items-center justify-center space-x-2">
+    <div className="flex items-center justify-center space-x-2  md:w-full">
       <Button
         variant={"empty"}
         onClick={handlePrevious}
-        className={`${generalClass} dark:text-white`}
+        className={`${generalClass} dark:text-white hidden md:block`}
       >
         <GrFormPrevious />
       </Button>
@@ -53,7 +53,7 @@ export default function Pagination({
       <Button
         variant={"empty"}
         onClick={handleNext}
-        className={`${generalClass} dark:text-white`}
+        className={`${generalClass} dark:text-white hidden md:block`}
       >
         <GrFormNext />
       </Button>
