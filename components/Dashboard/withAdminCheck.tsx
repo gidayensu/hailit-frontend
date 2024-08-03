@@ -4,12 +4,12 @@ import { useGetAdminQuery } from "@/lib/store/apiSlice/hailitApi";
 import BigLoader from "../Shared/BigLoader";
 import ErrorComponent from "../Shared/ErrorComponent";
 import { useRouter } from "next/navigation";
-const withAdminCheck = <Q extends {}>(
+const withAdminCheck = <T extends {}>(
   
-  WrappedComponent: React.ComponentType<Q>
+  WrappedComponent: React.ComponentType<T>
 ) => {
   
-  const WrapperComponent = (props: Q) => {
+  const WrapperComponent = (props: T) => {
     const { user_id } = useAppSelector((state) => state.user);
     const { data, isLoading, error } = useGetAdminQuery(user_id);
     const router = useRouter();

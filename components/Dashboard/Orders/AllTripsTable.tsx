@@ -1,7 +1,5 @@
 'use client'
-import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
-import Pagination from "@/components/Shared/Pagination/Pagination";
-import { Button } from "@/components/ui/button";
+//ui
 import {
   Table,
   TableBody,
@@ -9,16 +7,28 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Trip } from "@/lib/store/slice/tripSlice";
-import { extractBeforeComma, extractShortDate } from "@/lib/utils";
-import Link from "next/link";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+//main components
+import ItemsCount from "@/components/Shared/Pagination/ItemsCount";
+import Pagination from "@/components/Shared/Pagination/Pagination";
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
-import { TableType, useGetTableData } from "../hooks/useGetTableData";
 import SkeletonTable from "../SkeletonTable";
 import SearchTable from "../TableComponents/SearchTable";
 import TablesHeadings from "../TableComponents/TablesHeadings";
+
+//next+redux+react
+import { Trip } from "@/lib/store/slice/tripSlice";
+import { useState } from "react";
+import Link from "next/link";
+
+//helpers
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+
+//custom hooks
+import { TableType, useGetTableData } from "../hooks/useGetTableData";
 import { useAllTripsTable } from "./hooks/useAllTripsTable";
+
 export function AllTripsTable() {
   
   const { tripLoading, selectedTripId, tripTrack, } =

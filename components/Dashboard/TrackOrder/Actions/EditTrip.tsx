@@ -4,20 +4,26 @@ import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FaMapMarkerAlt } from "react-icons/fa";
+
 //react hook form
 import FormField from "@/components/Form/FormField";
 import { FormProvider } from "react-hook-form";
+
 //main components
 import PackageTypes from "@/components/Order/NewDelivery/PackageTypes/PackageTypes";
-import { useRouter } from "next/navigation";
-import TripAreaMediumAndType from "./TripAreaMediumAndType";
-//redux + next + react + helper
 import SecondaryModal from "@/components/Shared/SecondaryModal";
+import TripAreaMediumAndType from "./TripAreaMediumAndType";
 import { CalendarField } from "@/components/Form/FormField";
+
+//redux + next + react + helper
+import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/store/hooks";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
+
+//custom hook
 import { useEditTrip } from "./hooks/useEditTrip";
+
 export default function EditTrip() {
   
   const {
@@ -36,8 +42,6 @@ export default function EditTrip() {
   } = useEditTrip();
   
   const router = useRouter();
-
-  
 
   const { dropOffLocationName, pickUpLocationName } = useAppSelector(
     (state) => state.map

@@ -1,4 +1,5 @@
 'use client'
+//ui
 import {
   Table,
   TableBody,
@@ -8,10 +9,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Trip } from "@/lib/store/slice/tripSlice";
-import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+//main components
 import DashboardTableItemLoader from "../DashboardTableItemLoader";
 import SkeletonTable from "../SkeletonTable";
+
+//redux
+import { Trip } from "@/lib/store/slice/tripSlice";
+
+//helpers 
+import { extractBeforeComma, extractShortDate } from "@/lib/utils";
+
+
+//custom hook
 import { useGetRecentTrips } from "./hooks/useGetRecentTrips";
 
 export function RecentTripTable() {

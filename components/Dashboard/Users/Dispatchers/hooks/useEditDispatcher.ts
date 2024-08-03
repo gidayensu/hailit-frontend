@@ -21,11 +21,6 @@ export const useEditDispatcher = () => {
     setAvailable(() => !available);
   };
 
-  // useEffect(() => {
-  //   setAvailable(selectedDispatcher.available);
-  //   setVehicleId(selectedDispatcher.vehicle_id)
-  // }, [setAvailable, setVehicleId, selectedDispatcher]);
-
   //SecondaryModal ref
   const editDispatcherModalRef = useRef<any>(null);
   const editDispatcherModal = editDispatcherModalRef.current;

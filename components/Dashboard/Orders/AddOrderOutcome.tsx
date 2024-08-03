@@ -1,11 +1,12 @@
 "use client";
 //
 //icons + ui
-import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "react-hot-toast";
 import { MdContentCopy } from "react-icons/md";
+
 //main components
+import Loader from "@/components/Shared/Loader";
 
 //next+redux+helper function +react
 import { useAddOrderOutcome } from "./hooks/useAddOrderOutcome";

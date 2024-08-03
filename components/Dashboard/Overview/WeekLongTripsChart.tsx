@@ -9,7 +9,7 @@ import { useSetTheme } from "../Nav/hooks/useSetTheme";
 // RefObject interface (HighchartsReact.RefObject). All other interfaces
 // like Options come from the Highcharts module itself.
 
-// { name: categories[0], y: data[0] },
+
 export default function WeekLongTripsChart({
   props,
   categories,

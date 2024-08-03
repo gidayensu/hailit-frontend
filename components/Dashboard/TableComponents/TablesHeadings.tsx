@@ -4,6 +4,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
+
 export default function TablesHeadings({
   tableHeadings,
   sortDetails,

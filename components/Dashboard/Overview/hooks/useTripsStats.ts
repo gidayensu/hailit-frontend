@@ -1,10 +1,5 @@
 import { useGetCurrentMonthTripCountsQuery, useGetWeekTripCountQuery } from "@/lib/store/apiSlice/hailitApi";
 
-// type Day = "Sunday"|"Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday"
-// interface WeekStats {
-//   tripDays: Day[],
-//   currentWeekTrips: number[]
-// }
 
 interface CurrentMonthStats {
     total_trips_current_month: number;

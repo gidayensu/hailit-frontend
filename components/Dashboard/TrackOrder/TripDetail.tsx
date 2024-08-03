@@ -9,8 +9,9 @@ import DeleteModalCard from "./DeleteModalCard";
 import { extractShortDate } from "@/lib/utils";
 import { useDeleteTrip } from "../hooks/useDeleteTrip";
 import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
-//main components
 import { useEffect } from "react";
+
+//main components
 import CustomerSection from "./CustomerSection";
 import DispatcherSection from "./Dispatcher/DispatcherSection";
 import PackageSection from "./PackageSection";

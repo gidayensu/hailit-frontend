@@ -8,8 +8,6 @@ import DispatcherTripsTable from "./DispatcherTripsTable";
 import EditDispatcher from "./EditDispatcher";
 import { useDispatcherProfile } from "./hooks/useDispatcherProfile";
 
-//DispatcherDetails accepts userRole (rider/driver) to show details based on the userRole
-
 export default function DispatcherDetails() {
   
   const {

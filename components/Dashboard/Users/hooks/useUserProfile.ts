@@ -7,9 +7,7 @@ import { User } from "./useUsersTable";
 import { useGetUser } from "./useGetUser";
 import { PaymentMethod } from "@/components/Order/types/Types";
 
-//useUserProfile uses userRole to determine what to deselect (what to dispatch to go back to either all users/drivers/riders)
-//router.back() would have been best if pages were used to navigate the dashboard. Since only states are used, states have to be changed
-//to have a 'go back' experience. 
+
 export const useUserProfile = ()=> {
     const [editUser, setEditUser] = useState<boolean>(false);
   

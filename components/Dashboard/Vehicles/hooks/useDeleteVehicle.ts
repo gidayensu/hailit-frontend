@@ -1,6 +1,6 @@
 import { useDeleteVehicleMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
+
 export const useDeleteVehicle = ()=> {
     
     

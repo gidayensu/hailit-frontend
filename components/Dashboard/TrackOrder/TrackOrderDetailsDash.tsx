@@ -3,9 +3,10 @@
 //main components
 import TrackOrderForm from "@/components/Form/TrackOrderForm";
 import BigLoader from "../../Shared/BigLoader";
-//hook
-import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 import TripDetail from "./TripDetail";
+
+//custom hook
+import { useGetTrip } from "./StatusSection/hooks/useGetTrip";
 
 export default function  TrackOrder() {
   const {
