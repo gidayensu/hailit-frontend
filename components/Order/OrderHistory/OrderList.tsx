@@ -3,9 +3,9 @@ import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import NoOrderHistory from "./NoOrderHistory";
-import OrderSummaryMin from "./OrderSummaryMin";
+import OrderSummaryMin from "../OrderSummaryMin";
 
 export default function OrderList({
   trips,

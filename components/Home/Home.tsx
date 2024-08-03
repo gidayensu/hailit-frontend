@@ -9,7 +9,7 @@ import QuickOrder from "@/components/Home/QuickOrder";
 import TrackPackage from "@/components/Home/TrackPackage";
 import UserStats from "@/components/Home/UserStats";
 import SmallScreenTopNav from "@/components/Nav/SmallScreenTopNav";
-import OrderHistory from "@/components/Order/OrderHistory";
+import OrderHistory from "@/components/Order/OrderHistory/OrderHistory";
 import SecondaryModal from "../Shared/SecondaryModal";
 
 export default function Home() {

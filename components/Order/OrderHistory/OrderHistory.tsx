@@ -2,8 +2,8 @@
 import { useState } from "react";
 import NoOrderHistory from "./NoOrderHistory";
 import OrderList from "./OrderList";
-import { useGetUserTrips } from "./hooks/useGetUserTrips";
-import TripsLoadingSkeleton from "./skeletons/TripsLoadingSkeleton";
+import { useGetUserTrips } from "../hooks/useGetUserTrips";
+import TripsLoadingSkeleton from "../skeletons/TripsLoadingSkeleton";
 
 export default function OrderHistory() {
   const [currentDeliveries, setCurrentDeliveries] = useState<boolean>(true);
