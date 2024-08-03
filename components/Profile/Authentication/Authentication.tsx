@@ -5,7 +5,7 @@ import logoDark from '../../../public/images/logo-dark.png';
 import logo from '../../../public/images/logo.png';
 
 //main components
-import { useSetTheme } from "@/components/Dashboard/Nav/hooks/useSetTheme";
+import { useSetTheme } from "@/components/Theme/hooks/useSetTheme";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import Login from "./Login";

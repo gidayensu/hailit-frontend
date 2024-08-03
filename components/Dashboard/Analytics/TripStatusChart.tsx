@@ -1,5 +1,5 @@
 import * as Highcharts from 'highcharts';
-import { useSetTheme } from '../Nav/hooks/useSetTheme';
+import { useSetTheme } from '../../Theme/hooks/useSetTheme';
 import ChartContainer from './ChartContainer';
 import { useTripStatusData } from './hooks/useTripStatusData';
 // The wrapper exports only a default component that at the same time is a

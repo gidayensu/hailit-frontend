@@ -8,7 +8,7 @@ import SearchCard from "./SearchCard";
 
 import { useGetSearchResults } from "./hooks/useGetSearchResults";
 
-import { useSetTheme } from "./hooks/useSetTheme";
+import { useSetTheme } from "../../Theme/hooks/useSetTheme";
 
 export default function DashboardTopNav() {
   const {

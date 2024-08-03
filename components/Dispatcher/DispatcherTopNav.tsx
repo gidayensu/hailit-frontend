@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSetTheme } from "../Dashboard/Nav/hooks/useSetTheme";
+import { useSetTheme } from "../Theme/hooks/useSetTheme";
 import { ThemeToggle } from "../Theme/ThemeToggle";
 
 
