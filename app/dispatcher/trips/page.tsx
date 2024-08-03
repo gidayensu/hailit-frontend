@@ -2,7 +2,7 @@
 import { useGetDispatcher } from "@/components/Dispatcher/hooks/useGetDispatcher";
 
 import TripsStats from "@/components/Dispatcher/TripsStats";
-import OrderHistory from "@/components/Order/OrderHistory";
+import OrderHistory from "@/components/Order/OrderHistory/OrderHistory";
 import { redirect } from "next/navigation";
 
 export default function Dispatcher() {
