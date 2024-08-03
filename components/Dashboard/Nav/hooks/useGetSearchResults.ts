@@ -58,30 +58,7 @@ export const useGetSearchResults = () => {
 
     //close search container when user clicks outside the container
 
-    const handleClickOutSide = (event: MouseEvent | KeyboardEvent)=> {
-        if(inputRef.current && !inputRef.current.contains(event.target) && searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-            setOpenSearchContainer(false)
-            
-        }
-    }
-
-    const handlePressEscape = (event: KeyboardEvent) => {
-        if(event.key === 'Escape') {
-            setOpenSearchContainer(false)
-            inputRef.current.value = '';
-        }
-    }
-    (()=> {
-
-        document.addEventListener('mousedown', handleClickOutSide)
-        document.addEventListener('keydown', handlePressEscape)
-        //event listener clean up
-        return ()=> {
-            document.removeEventListener('mousedown', handleClickOutSide)
-            document.removeEventListener('keydown', handlePressEscape)
-        }
-    })
-    useEffect(()=> {
+        useEffect(()=> {
         const handleClickOutSide = (event: MouseEvent | KeyboardEvent)=> {
             if(inputRef.current && !inputRef.current.contains(event.target) && searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
                 setOpenSearchContainer(false)
