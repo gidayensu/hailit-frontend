@@ -1,6 +1,5 @@
 "use client";
 
-//next+redux+helper function +react
 import { resetDeliveryChoices } from "@/lib/store/slice/deliveryChoicesSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { copyToClipBoard } from "@/lib/utils";

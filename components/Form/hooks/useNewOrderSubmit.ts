@@ -1,25 +1,23 @@
 'use client'
 
-
 //react hook form
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 
 //redux + next + react + helper
 import { useAddTripMutation } from "@/lib/store/apiSlice/hailitApi";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { setNewOrder } from "@/lib/store/slice/newOrderSlice";
 import { scrollToSection } from "@/lib/utils";
+import { resetDeliveryChoices } from '@/lib/store/slice/deliveryChoicesSlice';
+import { resetMapData, } from '@/lib/store/slice/mapSlice';
 
 //hooks/custom hooks
 import { calculateDistanceAndCost } from '@/lib/calculateDistanceAndCost';
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-//interface
 
-import { resetDeliveryChoices } from '@/lib/store/slice/deliveryChoicesSlice';
-import { resetMapData, } from '@/lib/store/slice/mapSlice';
+//interface
 import { NewOrderSchema, OrderDetails } from '../FormTypes';
 
 export const useNewOrderSubmit = () => {

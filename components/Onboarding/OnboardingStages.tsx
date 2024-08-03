@@ -1,26 +1,21 @@
 "use client";
-//ui components + icons
-import FirstStage from "@/components/Onboarding/FirstStage";
-import LastStage from "@/components/Onboarding/LastStage";
-import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
-import SecondStage from "@/components/Onboarding/SecondStage";
+//ui + icons
 import Loader from "@/components/Shared/Loader";
 import { Button } from "@/components/ui/button";
 import { FiArrowLeft } from "react-icons/fi";
 
-//hook
-import { useOnboarding } from "@/components/Onboarding/hooks/useOnboarding";
+//main components
+import FirstStage from "@/components/Onboarding/FirstStage";
+import LastStage from "@/components/Onboarding/LastStage";
+import OnboardingStagesCheck from "@/components/Onboarding/OnboardingStagesCheck";
+import SecondStage from "@/components/Onboarding/SecondStage";
 import ErrorComponent from "../Shared/ErrorComponent";
 
-export default function OnboardingStages() {
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+//hook
+import { useOnboarding } from "@/components/Onboarding/hooks/useOnboarding";
 
-  // const handleLoading = ()=> {
-  //   setIsLoading(true)
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 3000);
-  // }
+export default function OnboardingStages() {
+  
 
   
   const {

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export const useProfile = () => {
   const router = useRouter();
-  //getting data from redux store
+  
   const { authenticated } = useAppSelector((state) => state.auth);
   const { onboard, user_role } = useAppSelector((state) => state.user);
 

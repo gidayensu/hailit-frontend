@@ -8,7 +8,7 @@ export default function Loader({ color }: { color?: string }) {
 export const InfinityLoader = () => {
   return <CgSpinner className="animate-spin text-primary-color text-4xl" />;
 };
-export const SmallLoader = ({ color }: { color?: string }) => {
+export const SmallLoader = () => {
   return (
     <CgSpinner className={`animate-spin text-white dark:text-primary-color text-xl`} />
   );

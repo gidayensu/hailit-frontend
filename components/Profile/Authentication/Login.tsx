@@ -6,18 +6,11 @@ import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Separator } from "../../ui/separator";
 import GuestModal from "./GuestModal";
-// next
-
-// react
-
-// react-hook-forms
 import FormField from "@/components/Form/FormField";
 import { FormProvider } from 'react-hook-form';
-
-
 import Container from "@/components/ui/container";
 import { useLogin } from "./hooks/useLogin";
-// supabase
+
 
 
 export default function Login( ) {

@@ -1,10 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import { RxCross2 } from "react-icons/rx";
-import { LoaderCircle } from "lucide-react";
-import Loader from "./Loader";
 import { Button } from "@/components/ui/button";
+import React from "react";
 import { DialogClose } from "../ui/dialog";
+import Loader from "./Loader";
 
 type Modal = "destructive" | "success";
 

@@ -1,6 +1,8 @@
-import NoData from "../Shared/NoData";
+
+import NoData from "@/components/Shared/NoData";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+
 
 export default function  NoOrderHistory  ({ noDeliveryMessage, isDispatcher }: { noDeliveryMessage: string, isDispatcher?: boolean }) {
   return (

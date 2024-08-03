@@ -1,11 +1,9 @@
 "use client";
-//next + react + redux
 
 import { supabaseSession } from "@/lib/supabaseAuth";
 import { workPeriod } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-//main components
 import { useAppSelector } from "@/lib/store/hooks";
 import { usePathname } from "next/navigation";
 
