@@ -1,15 +1,11 @@
-import HighchartsReact from "highcharts-react-official";
 import TripAreaChart from "./TripAreaChart";
 import TripMediumChart from "./TripMediumChart";
 import TripPackageType from "./TripPackageType";
 import TripRevenueChart from "./TripRevenueChart";
 import TripStatusChart from "./TripStatusChart";
-// The wrapper exports only a default component that at the same time is a
-// namespace for the related Props interface (HighchartsReact.Props) and
-// RefObject interface (HighchartsReact.RefObject). All other interfaces
-// like Options come from the Highcharts module itself.
 
-export default function AnalyticsSection(props: HighchartsReact.Props) {
+
+export default function AnalyticsSection() {
   return (
     <main className="w-full flex flex-col gap-5 mb-10">
       <div className="w-full">
