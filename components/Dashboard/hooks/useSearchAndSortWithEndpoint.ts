@@ -21,12 +21,14 @@ export function useSearchAndSortWithEndpoint({endpoint, initialColumn, table, in
 
   const handleSearch = ({reset}:{reset?:boolean})=> {
     if(reset) {
-      searchRef.current.value = ''
+      if(searchRef.current) {
+        searchRef.current.value = ''
+      }
       setIsSearch(false)
     } else {
       setIsSearch(true)
     }
-    setSearchQuery(searchRef?.current?.value)
+    setSearchQuery(searchRef?.current?.value || '')
   }
 
   return {
@@ -36,6 +38,8 @@ export function useSearchAndSortWithEndpoint({endpoint, initialColumn, table, in
     handleSearch,
     searchRef,
     endpoint,
+    searchQuery,
+    setSearchQuery,
     setDataLoading,
     isSearch
   };

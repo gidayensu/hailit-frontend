@@ -22,7 +22,7 @@ export const useGetRecentTrips = () => {
   );
 
   const { data, isLoading, error, isSuccess } = useGetMostRecentTripsQuery(
-    `trips?&sortColumn=Booked%20On&sortDirection=DESC&page=1`
+    `trips?&sortColumn=Booked%20On&sortDirection=DESC&itemsPerPage=7&page=1`
   );
 
   const trips = data?.trips;

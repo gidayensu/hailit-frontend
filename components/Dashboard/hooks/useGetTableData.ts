@@ -54,6 +54,7 @@ export const useGetTableData = ({page,  table, initialColumn, initialSortDirecti
     handleSort,
     isSearch,
     handleSearch,
+    setDataLoading,
     status,
     items
   };
