@@ -69,7 +69,7 @@ export async function reverseMapSearch(
   }
 }
 export async function isAdmin(userId: string) {
-  const url = `http://localhost:4000/api/v1/users/admin/${userId}`;
+  const url = `https://hailit-backend.onrender.com/api/v1/users/admin/${userId}`;
 
   try {
     const {
