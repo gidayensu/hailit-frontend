@@ -126,12 +126,14 @@ export function AllDrivers() {
           />
           
         )}
+        <div>
         <Pagination
         setPage={setPage}
         totalPages={total_number_of_pages}
         storageKey="AllDrivers"
         isSearch = {isSearch}
       />
+        </div>
         </div>
       </>
     );

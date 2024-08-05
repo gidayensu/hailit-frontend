@@ -100,7 +100,9 @@ export default function AllVehiclesTable() {
       total_number_of_pages && 
       <ItemsCount currentItemsCount={vehicles.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
-    <Pagination storageKey="Vehicles"  setPage={setPage} totalPages={total_number_of_pages} isSearch={isSearch} />
+      <div>
+          <Pagination storageKey="Vehicles"  setPage={setPage} totalPages={total_number_of_pages} isSearch={isSearch} />
+      </div>
     </div>
     </>
   );

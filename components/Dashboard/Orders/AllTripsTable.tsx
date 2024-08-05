@@ -145,11 +145,14 @@ export function AllTripsTable() {
       </Table>
     </div>
       
-    <div className="flex md:flex-row flex-col">{
+    <div className="flex md:flex-row justify-between flex-col w-full">{
       total_number_of_pages && 
       <ItemsCount currentItemsCount={trips.length} item="Trips" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
+      <div>
+
     <Pagination totalPages={total_number_of_pages} setPage={setPage}  storageKey="AllTrips" isSearch={isSearch}/>
+      </div>
     </div>
     </>
   );

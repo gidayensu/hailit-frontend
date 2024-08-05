@@ -115,7 +115,10 @@ export function AllRiders() {
 
       <ItemsCount currentItemsCount={riders.length} item="Riders" page={page} total_items={total_items} total_number_of_pages={total_number_of_pages} />
       }
+      <div>
+      
     <Pagination   setPage={setPage} totalPages={total_number_of_pages} storageKey="AllRiders" isSearch={isSearch}/>
+      </div>
     </div>
     </>
   );
