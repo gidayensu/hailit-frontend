@@ -63,28 +63,28 @@ export default function DispatcherDetails() {
                     <DashboardCard
                       totalNumber={dispatcherTrips?.total_earnings || 0}
                       title="Total Earnings"
-                      subTitle="All deliveries made"
+                      subTitle="Earnings from rides"
                     />
                     <div className="grid grid-cols-2 grid-rows-2 w-full md:flex   md:flex-row gap-2 items-center md:justify-between">
                       <DashboardCard
                         totalNumber={dispatcherTrips?.total_trip_count || 0}
                         title="All Orders"
-                        subTitle="All deliveries made"
+                        subTitle="Total trips"
                       />
                       <DashboardCard
                         totalNumber={dispatcherTrips?.delivered_trips || 0}
                         title="Delivered"
-                        subTitle="Successful orders"
+                        subTitle="Completed orders"
                       />
                       <DashboardCard
                         totalNumber={dispatcherTrips?.current_trips || 0}
                         title="Current"
-                        subTitle="Pending deliveries"
+                        subTitle="Active orders"
                       />
                       <DashboardCard
                         totalNumber={dispatcherTrips?.cancelled_trips || 0}
                         title="Cancelled"
-                        subTitle="Cancelled trips"
+                        subTitle="Orders not fulfilled"
                       />
                     </div>
                   </section>

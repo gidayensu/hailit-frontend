@@ -16,7 +16,7 @@ export default function Overview() {
       <div className="flex flex-col lg:flex-row  w-full gap-3">
       <StatsCard
           title="Revenue"
-          subtitle="This Month&lsquo;s Revenue"
+          subtitle="Total earnings"
           loading={isLoading}
           mainCount={currentMonthStats?.revenue_current_month || 0}
           percentageDifference={currentMonthStats?.revenue_percentage_difference || 0}
@@ -26,7 +26,7 @@ export default function Overview() {
 
         <StatsCard
           title="Orders"
-          subtitle="This Month&lsquo;s Orders"
+          subtitle="Total placed orders"
           loading={isLoading}
           mainCount={currentMonthStats?.total_trips_current_month || 0}
           percentageDifference={currentMonthStats?.total_trips_percentage_difference || 0}
@@ -37,7 +37,7 @@ export default function Overview() {
         
         <StatsCard
           title="Delivered"
-          subtitle="Delivered This Month"
+          subtitle="Successfully delivered"
           loading={isLoading}
           mainCount={currentMonthStats?.delivered_current_month || 0}
           percentageDifference={currentMonthStats?.delivered_percentage_difference || 0}
@@ -45,7 +45,7 @@ export default function Overview() {
         />
         <StatsCard
           title="Pending"
-          subtitle="Not Delivered"
+          subtitle="Awaiting fulfillment"
           loading={isLoading}
           mainCount={currentMonthStats?.pending_current_month || 0}
           percentageDifference={pendingPD || 0}
@@ -53,7 +53,7 @@ export default function Overview() {
         />
         <StatsCard
           title="Cancelled"
-          subtitle="Cancelled This Month"
+          subtitle="Orders not fulfilled"
           loading={isLoading}
           mainCount={currentMonthStats?.cancelled_current_month || 0} 
           percentageDifference={cancelledPD || 0}
