@@ -1,12 +1,5 @@
 'use client'
-import { ThemeToggle } from "../../Theme/ThemeToggle";
-//images
-import logoDark from '../../../public/images/logo-dark.png';
-import logo from '../../../public/images/logo.png';
-
-//main components
-import { useSetTheme } from "@/components/Theme/hooks/useSetTheme";
-import Image, { StaticImageData } from "next/image";
+import SmallScreenTopNav from "@/components/Nav/SmallScreenTopNav";
 import { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -14,26 +7,19 @@ import SignUp from "./SignUp";
 export default function Authentication () {
   const [signUp, setSignUp]  = useState<boolean>(false);
   
-  const {theme, systemTheme} = useSetTheme();
+  
 
   const handleSignUp = ()=> {
     setSignUp(()=>!signUp)
   }
-  const image:StaticImageData = theme === "dark" || (theme==="system" && systemTheme === "dark") ? logoDark :logo ;
+  
     
     return (
         <>
 
+          <SmallScreenTopNav/>
           <div className="flex flex-col items-center justify-center gap-2 md:mt-10">
-              <Image src={image} alt="logo" height={120}/>
-                
             
-            <div className="flex justify-between items-center p-2 font-bold group hover:bg-primary-color hover:text-white rounded-md cursor-pointer mt-5 mb-5 md:hidden border border-black dark:border-white">
-            <span className="flex items-center justify-center gap-2 relative">
-              <ThemeToggle />
-
-            </span>
-          </div>
             {!signUp &&
             <>
             <span className="text-3xl font-bold">Log in to your account </span>

@@ -14,7 +14,7 @@ export default function SmallScreenTopNav() {
 
   return (
     <nav
-      className={`flex  w-6/6 left-0 right-0 top-auto z-40 justify-center items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-primary-dark font-bold`}
+      className={`md:hidden flex  w-6/6 left-0 right-0 top-auto z-40 justify-center items-center p-4 md:h-20 h-16 shadow-md gap-10 w-full bg-white dark:bg-primary-dark font-bold`}
     >
       <section className="w-full text-2xl ml-10 cursor-pointer">
         <Link href={"/"}>
