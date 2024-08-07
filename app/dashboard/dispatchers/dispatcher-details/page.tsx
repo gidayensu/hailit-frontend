@@ -2,8 +2,8 @@
 import DispatcherDetails from "@/components/Dashboard/Users/Dispatchers/DispatcherDetails";
 import withAdminCheck from "@/components/Dashboard/withAdminCheck";
 
-const AllDriversDashboard = () => {
+const Dispatcher = () => {
   return <DispatcherDetails />;
 };
 
-export default withAdminCheck(AllDriversDashboard);
+export default withAdminCheck(Dispatcher);
