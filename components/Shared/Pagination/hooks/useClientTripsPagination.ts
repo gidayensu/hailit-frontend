@@ -5,7 +5,7 @@ export const useClientTripsPagination = ({trips, tripsPerPage}:{trips: Trip[] , 
     const [currentPage, setCurrentPage] = useState<number>(1);
   
   const indexOfLastTrip = currentPage * tripsPerPage;
-  const totalPages = trips?.length/tripsPerPage || 1;
+  const totalPages = Math.ceil(trips?.length/tripsPerPage) || 1;
   
   const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
   const currentTrips = trips?.slice(indexOfFirstTrip, indexOfLastTrip);
