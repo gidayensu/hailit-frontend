@@ -1,7 +1,7 @@
 "use client";
 import NoData from "@/components/Shared/NoData";
+import ClientTripsPagination from "@/components/Shared/Pagination/ClientTripsPagination";
 import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
-import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import {
   Table,
@@ -27,7 +27,7 @@ export default function UserTripsTable({
   error: any;
   isLoading: boolean;
 }) {
-  const {nextPage, prevPage, currentTrips, tripsPerPage, currentPage,  indexOfLastTrip } = useClientTripsPagination({trips: userTrips, tripsPerPage:5})
+  const {nextPage, prevPage, totalPages, currentTrips, tripsPerPage, currentPage, } = useClientTripsPagination({trips: userTrips, tripsPerPage:5})
   const router = useRouter();
 
   const [tripLoading, setTripLoading] = useState<boolean>(false);
@@ -130,26 +130,7 @@ export default function UserTripsTable({
     </Table>
     </Container>
     {userTrips?.length > tripsPerPage && (
-        <div className="w-full flex justify-end items-center gap-2 mt-4">
-            
-            <Button
-              variant={"empty"}
-              className="w-20 hover:text-primary-color"
-              onClick={() => prevPage()}
-              disabled={currentPage===1}
-            >
-              Previous
-            </Button>
-            <p>|</p>
-            <Button
-              variant={"empty"}
-              className="w-20 hover:text-primary-color"
-              onClick={() => nextPage()}
-              disabled={indexOfLastTrip >= userTrips?.length}
-            >
-              Next
-            </Button>
-          </div>
+        <ClientTripsPagination currentPage={currentPage} nextPage={nextPage} prevPage={prevPage} totalPages={totalPages}/>
         
         
       )}

@@ -1,11 +1,11 @@
+import ClientTripsPagination from "@/components/Shared/Pagination/ClientTripsPagination";
+import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
 import { Trip } from "@/lib/store/slice/tripSlice";
 import { extractDateWithDayFromDate } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useClientTripsPagination } from "@/components/Shared/Pagination/hooks/useClientTripsPagination";
-import { Button } from "../../ui/button";
-import NoOrderHistory from "./NoOrderHistory";
 import OrderSummaryMin from "../OrderSummaryMin";
+import NoOrderHistory from "./NoOrderHistory";
 
 export default function OrderList({
   trips,
@@ -16,7 +16,7 @@ export default function OrderList({
   noDelivery: boolean;
   isDispatcher: boolean;
 }) {
-  const {nextPage, prevPage, currentTrips, tripsPerPage, currentPage,  indexOfLastTrip } = useClientTripsPagination({trips, tripsPerPage:5})
+  const {nextPage, prevPage, currentTrips, tripsPerPage, currentPage,  totalPages } = useClientTripsPagination({trips, tripsPerPage:5})
   
   
 
@@ -67,27 +67,7 @@ export default function OrderList({
         )}
       </div>
       {trips.length > tripsPerPage && (
-        <div className="w-full flex justify-end items-center gap-2 mt-4">
-            
-            <Button
-              variant={"empty"}
-              className="w-20 hover:text-primary-color"
-              onClick={() => prevPage()}
-              disabled={currentPage===1}
-            >
-              Previous
-            </Button>
-            <p>|</p>
-            <Button
-              variant={"empty"}
-              className="w-20 hover:text-primary-color"
-              onClick={() => nextPage()}
-              disabled={indexOfLastTrip >= trips.length}
-            >
-              Next
-            </Button>
-          </div>
-        
+        <ClientTripsPagination currentPage={currentPage} nextPage={nextPage} prevPage={prevPage} totalPages={totalPages}/>        
         
       )}
     </div>
