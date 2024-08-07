@@ -7,14 +7,14 @@ import { useGetTrip } from "../StatusSection/hooks/useGetTrip";
 import { useViewDispatcher } from "../StatusSection/hooks/useViewDispatcher";
 import Drivers from "./AssignDrivers";
 import Riders from "./AssignRiders";
-
+import { useGetVehicle } from "../../Vehicles/hooks/useGetVehicle";
 
 
 export default function DispatcherSection() {
   
   const { trip, dispatcher } = useGetTrip();
   const { handleViewDispatcher } = useViewDispatcher();
-
+  const {handleSelectVehicle} = useGetVehicle();
   return (
     <>
       <div className="flex justify-between">
@@ -83,10 +83,10 @@ export default function DispatcherSection() {
                     </Link>
                   </span>
                 </ul>
-                <ul className="line-clamp-1">
+                <ul className="line-clamp-1 underline hover:text-primary-color cursor-pointer" onClick={()=>handleSelectVehicle(dispatcher?.vehicle_id)}>
                   {dispatcher?.vehicle?.vehicle_name}
                 </ul>
-                <ul className="line-clamp-1">
+                <ul className="line-clamp-1 underline hover:text-primary-color cursor-pointer" onClick={()=>handleSelectVehicle(dispatcher?.vehicle_id)}>
                   {dispatcher?.vehicle?.plate_number}
                 </ul>
               </div>

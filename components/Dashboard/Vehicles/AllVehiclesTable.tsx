@@ -79,7 +79,7 @@ export default function AllVehiclesTable() {
               {vehicleLoading && selectedVehicleId === vehicle.vehicle_id && (
                     <DashboardTableItemLoader />
                   )}
-              <TableRow key={vehicle?.vehicle_id} onClick={()=>handleSelectVehicle(vehicle?.vehicle_id)}>
+              <TableRow key={vehicle?.vehicle_id} onClick={()=>handleSelectVehicle(vehicle?.vehicle_id)} className={`${vehicleLoading ? 'opacity-30': ''}`}>
                 <TableCell>{vehicle?.vehicle_name}</TableCell>
                 <TableCell>{vehicle?.vehicle_type}</TableCell>
                 <TableCell>{vehicle?.vehicle_model}</TableCell>

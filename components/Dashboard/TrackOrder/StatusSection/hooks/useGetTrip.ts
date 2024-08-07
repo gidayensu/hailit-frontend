@@ -1,6 +1,7 @@
 "use client";
 import { useGetTripQuery } from "@/lib/store/apiSlice/hailitApi";
 import { useAppSelector } from "@/lib/store/hooks";
+import { Trip } from "@/lib/store/slice/tripSlice";
 import { useParams, useRouter } from "next/navigation";
 import { useRef } from "react";
 
@@ -20,7 +21,7 @@ export const useGetTrip = () => {
 
   const { data, isLoading, error } = useGetTripQuery(selectedTripId);
 
-  const trip = data?.trip;
+  const trip:Trip = data?.trip;
   
 
   const dispatcher = trip?.dispatcher;

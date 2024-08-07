@@ -94,7 +94,7 @@ export interface Dispatcher {
     dispatcher_id: string;
     license_number?: string;
     available?: boolean;
-    vehicle_id?: string;
+    vehicle_id: string;
     first_name: string;
     last_name: string;
     email?: string;
